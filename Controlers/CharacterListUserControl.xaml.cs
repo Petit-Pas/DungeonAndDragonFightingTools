@@ -29,12 +29,31 @@ namespace DDFight.Controlers
         private void AddCharacter(object sender, RoutedEventArgs e)
         {
             NewCharacterWindow character = new NewCharacterWindow();
+            NewCharacterDataContext context = new NewCharacterDataContext();
+            character.DataContext = context;
             character.ShowDialog();
+
+            context.FromRawToReal();
+
+            this.CharacterList.Items.Add(context);
         }
 
-        private void RemoveCharacter(object sender, RoutedEventArgs e)
+        private void RemoveCharacter_Click(object sender, RoutedEventArgs e)
         {
+            CharacterList.Items.Remove(CharacterList.SelectedItem);
+        }
 
+        private void CharacterList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            NewCharacterWindow character = new NewCharacterWindow();
+            NewCharacterDataContext context = (NewCharacterDataContext)CharacterList.SelectedItem;
+            context.FromRealToRaw();
+            character.DataContext = context;
+
+            character.ShowDialog();
+
+            context.FromRawToReal();
+            CharacterList.SelectedItem = context;
         }
     }
 }

@@ -19,29 +19,29 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Row="0" Grid.Column="0" Margin="10">
+        <TextBlock Grid.Row="0" Grid.Column="0" Margin="10, 5">
             Name
         </TextBlock>
-        <TextBox Grid.Row="0" Grid.Column="1" Margin="0, 10, 10, 10"/>
+        <TextBox x:Name="NameBox" Grid.Row="0" Grid.Column="1" Margin="0, 5, 10, 5" Text="{Binding Name}" KeyDown="NameBox_KeyDown" />
 
-        <TextBlock Grid.Row="1" Grid.Column="0" Margin="10">
+        <TextBlock Grid.Row="1" Grid.Column="0" Margin="10, 5">
             Initiative
         </TextBlock>
-        <TextBox Grid.Row="1" Grid.Column="1" Margin="0, 10, 10, 10"/>
+        <TextBox x:Name="InitiativeBox" Grid.Row="1" Grid.Column="1" Margin="0, 5, 10, 5" Text="{Binding raw_initiative}" KeyDown="InitiativeBox_KeyDown"/>
 
-        <TextBlock Grid.Row="2" Grid.Column="0" Margin="10">
+        <TextBlock Grid.Row="2" Grid.Column="0" Margin="10, 5">
             Armor class
         </TextBlock>
-        <TextBox Grid.Row="2" Grid.Column="1" Margin="0, 10, 10, 10"/>
+        <TextBox x:Name="CABox" Grid.Row="2" Grid.Column="1" Margin="0, 5, 10, 5" Text="{Binding raw_CA}" KeyDown="CABox_KeyDown"/>
 
-        <TextBlock Grid.Row="3" Grid.Column="0" Margin="10">
+        <TextBlock Grid.Row="3" Grid.Column="0" Margin="10, 5">
             Max HP
         </TextBlock>
-        <TextBox Grid.Row="3" Grid.Column="1" Margin="0, 10, 10, 10"/>
+        <TextBox x:Name="MaxHPBox" Grid.Row="3" Grid.Column="1" Margin="0, 5, 10, 5" Text="{Binding raw_max_hp}" KeyDown="MaxHPBox_KeyDown"/>
 
-        <TextBlock Grid.Row="4" Grid.Column="0" Margin="10">
+        <TextBlock Grid.Row="4" Grid.Column="0" Margin="5">
             Current HP
         </TextBlock>
-        <TextBox Grid.Row="4" Grid.Column="1" Margin="0, 10, 10, 10"/>
+        <TextBox x:Name="HPBox" Grid.Row="4" Grid.Column="1" Margin="0, 5, 10, 5" Text="{Binding raw_hp}" KeyDown="HPBox_KeyDown"/>
     </Grid>
 </Window>
