@@ -6,9 +6,29 @@
         xmlns:local="clr-namespace:DDFight.Windows"
         mc:Ignorable="d"
         xmlns:conv="clr-namespace:DDFight.Converters"
+        xmlns:validation="clr-namespace:DDFight.ValidationRules"
         Title="NewCharacterWindow" Height="350" Width="400">
     <Window.Resources>
         <conv:StringIntConverter x:Key="IntStringConverter"/>
+
+        <!-- https://docs.microsoft.com/en-us/dotnet/framework/wpf/data/how-to-implement-binding-validation -->
+        
+        <ControlTemplate x:Key="ValidationTemplate">
+            <DockPanel>
+                <TextBlock Foreground="Red" FontSize="20">!</TextBlock>
+                <AdornedElementPlaceholder/>
+            </DockPanel>
+        </ControlTemplate>
+
+        <Style x:Key="TextBoxInError" TargetType="{x:Type TextBox}">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip"
+              Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+                              Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -26,26 +46,43 @@
         <TextBlock Grid.Row="0" Grid.Column="0" Margin="10, 5">
             Name
         </TextBlock>
-        <TextBox x:Name="NameBox" Grid.Row="0" Grid.Column="1" Margin="0, 5, 10, 5" Text="{Binding Name}" KeyDown="NameBox_KeyDown" />
+        <TextBox x:Name="NameBox" Grid.Row="0" Grid.Column="1" Margin="0, 5, 10, 5"
+                 Text="{Binding Name}" 
+                 KeyDown="NameBox_KeyDown" />
 
         <TextBlock Grid.Row="1" Grid.Column="0" Margin="10, 5">
             Initiative
         </TextBlock>
-        <TextBox x:Name="InitiativeBox" Grid.Row="1" Grid.Column="1" Margin="0, 5, 10, 5" Text="{Binding Initiative, Converter={StaticResource IntStringConverter}}" KeyDown="InitiativeBox_KeyDown"/>
+        <TextBox x:Name="InitiativeBox" Grid.Row="1" Grid.Column="1" Margin="0, 5, 10, 5" Width="50"
+                 KeyDown="InitiativeBox_KeyDown">
+            <TextBox.Text>
+                <Binding Path="Initiative">
+                    <Binding.ValidationRules>
+                        <validation:PositiveIntRule />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
 
         <TextBlock Grid.Row="2" Grid.Column="0" Margin="10, 5">
             Armor class
         </TextBlock>
-        <TextBox x:Name="CABox" Grid.Row="2" Grid.Column="1" Margin="0, 5, 10, 5" Text="{Binding CA, Converter={StaticResource IntStringConverter}}" KeyDown="CABox_KeyDown"/>
+        <TextBox x:Name="CABox" Grid.Row="2" Grid.Column="1" Margin="0, 5, 10, 5" 
+                 Text="{Binding CA, Converter={StaticResource IntStringConverter}}" 
+                 KeyDown="CABox_KeyDown"/>
 
         <TextBlock Grid.Row="3" Grid.Column="0" Margin="10, 5">
             Max HP
         </TextBlock>
-        <TextBox x:Name="MaxHPBox" Grid.Row="3" Grid.Column="1" Margin="0, 5, 10, 5" Text="{Binding MaxHp, Converter={StaticResource IntStringConverter}}" KeyDown="MaxHPBox_KeyDown"/>
+        <TextBox x:Name="MaxHPBox" Grid.Row="3" Grid.Column="1" Margin="0, 5, 10, 5" 
+                 Text="{Binding MaxHp, Converter={StaticResource IntStringConverter}}" 
+                 KeyDown="MaxHPBox_KeyDown"/>
 
         <TextBlock Grid.Row="4" Grid.Column="0" Margin="5">
             Current HP
         </TextBlock>
-        <TextBox x:Name="HPBox" Grid.Row="4" Grid.Column="1" Margin="0, 5, 10, 5" Text="{Binding Hp, Converter={StaticResource IntStringConverter}}" KeyDown="HPBox_KeyDown"/>
+        <TextBox x:Name="HPBox" Grid.Row="4" Grid.Column="1" Margin="0, 5, 10, 5" 
+                 Text="{Binding Hp, Converter={StaticResource IntStringConverter}}" 
+                 KeyDown="HPBox_KeyDown"/>
     </Grid>
 </Window>
