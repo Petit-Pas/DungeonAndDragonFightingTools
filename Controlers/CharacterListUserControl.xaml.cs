@@ -1,4 +1,5 @@
-﻿using DDFight.Windows;
+﻿using DDFight.Tools;
+using DDFight.Windows;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -22,8 +23,6 @@ namespace DDFight.Controlers
             character.DataContext = context;
             character.ShowDialog();
 
-            context.FromRawToReal();
-
             this.CharacterList.Items.Add(context);
         }
 
@@ -36,12 +35,10 @@ namespace DDFight.Controlers
         {
             NewCharacterWindow character = new NewCharacterWindow();
             NewCharacterDataContext context = (NewCharacterDataContext)CharacterList.SelectedItem;
-            context.FromRealToRaw();
             character.DataContext = context;
 
             character.ShowDialog();
 
-            context.FromRawToReal();
             CharacterList.SelectedItem = context;
         }
     }

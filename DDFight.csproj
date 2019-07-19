@@ -54,7 +54,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Tools\MyConverter.cs" />
+    <Compile Include="Converters\StringIntConverter.cs" />
+    <Compile Include="Tools\Logger.cs" />
     <Compile Include="Windows\NewCharacterDataContext.cs" />
     <Compile Include="Windows\NewCharacterWindow.xaml.cs">
       <DependentUpon>NewCharacterWindow.xaml</DependentUpon>

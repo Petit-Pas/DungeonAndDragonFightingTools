@@ -5,7 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DDFight.Windows"
         mc:Ignorable="d"
+        xmlns:conv="clr-namespace:DDFight.Converters"
         Title="NewCharacterWindow" Height="350" Width="400">
+    <Window.Resources>
+        <conv:StringIntConverter x:Key="IntStringConverter"/>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -27,21 +31,21 @@
         <TextBlock Grid.Row="1" Grid.Column="0" Margin="10, 5">
             Initiative
         </TextBlock>
-        <TextBox x:Name="InitiativeBox" Grid.Row="1" Grid.Column="1" Margin="0, 5, 10, 5" Text="{Binding raw_initiative}" KeyDown="InitiativeBox_KeyDown"/>
+        <TextBox x:Name="InitiativeBox" Grid.Row="1" Grid.Column="1" Margin="0, 5, 10, 5" Text="{Binding Initiative, Converter={StaticResource IntStringConverter}}" KeyDown="InitiativeBox_KeyDown"/>
 
         <TextBlock Grid.Row="2" Grid.Column="0" Margin="10, 5">
             Armor class
         </TextBlock>
-        <TextBox x:Name="CABox" Grid.Row="2" Grid.Column="1" Margin="0, 5, 10, 5" Text="{Binding raw_CA}" KeyDown="CABox_KeyDown"/>
+        <TextBox x:Name="CABox" Grid.Row="2" Grid.Column="1" Margin="0, 5, 10, 5" Text="{Binding CA, Converter={StaticResource IntStringConverter}}" KeyDown="CABox_KeyDown"/>
 
         <TextBlock Grid.Row="3" Grid.Column="0" Margin="10, 5">
             Max HP
         </TextBlock>
-        <TextBox x:Name="MaxHPBox" Grid.Row="3" Grid.Column="1" Margin="0, 5, 10, 5" Text="{Binding raw_max_hp}" KeyDown="MaxHPBox_KeyDown"/>
+        <TextBox x:Name="MaxHPBox" Grid.Row="3" Grid.Column="1" Margin="0, 5, 10, 5" Text="{Binding MaxHp, Converter={StaticResource IntStringConverter}}" KeyDown="MaxHPBox_KeyDown"/>
 
         <TextBlock Grid.Row="4" Grid.Column="0" Margin="5">
             Current HP
         </TextBlock>
-        <TextBox x:Name="HPBox" Grid.Row="4" Grid.Column="1" Margin="0, 5, 10, 5" Text="{Binding raw_hp}" KeyDown="HPBox_KeyDown"/>
+        <TextBox x:Name="HPBox" Grid.Row="4" Grid.Column="1" Margin="0, 5, 10, 5" Text="{Binding Hp, Converter={StaticResource IntStringConverter}}" KeyDown="HPBox_KeyDown"/>
     </Grid>
 </Window>

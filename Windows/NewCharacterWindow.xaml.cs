@@ -20,7 +20,7 @@ namespace DDFight.Windows
         /// </summary>
         /// <param name="box"></param>
         /// <returns></returns>
-        private bool is_valid (TextBox box)
+        private bool is_valid(TextBox box)
         {
             return box.Text != null && box.Text != string.Empty;
         }
@@ -30,9 +30,9 @@ namespace DDFight.Windows
         /// </summary>
         /// <param name="current"></param>
         /// <param name="next"></param>
-        private void goto_next (TextBox current, TextBox next)
+        private void goto_next(TextBox current, TextBox next)
         {
-            if (is_valid (current))
+            if (is_valid(current))
             {
                 if (next != null)
                 {
