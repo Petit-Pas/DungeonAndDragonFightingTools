@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -13,6 +14,9 @@ namespace DDFight.Windows
         {
             InitializeComponent();
             NameBox.Focus();
+
+            InitiativeBox.KeyDown += InitiativeBox_KeyDown;
+
         }
 
         /// <summary>
@@ -51,15 +55,16 @@ namespace DDFight.Windows
         {
             if (e.Key == Key.Return)
             {
-                goto_next(NameBox, InitiativeBox);
+                //goto_next(NameBox, InitiativeBox);
             }
         }
 
         private void InitiativeBox_KeyDown(object sender, KeyEventArgs e)
         {
+            Console.WriteLine("hello");
             if (e.Key == Key.Return)
             {
-                goto_next(InitiativeBox, CABox);
+                //goto_next(InitiativeBox, CABox);
             }
         }
 
@@ -87,5 +92,10 @@ namespace DDFight.Windows
             }
         }
         #endregion
+
+        private void CABox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

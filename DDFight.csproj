@@ -54,14 +54,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controlers\InputBoxes\IntTextBox.xaml.cs">
+      <DependentUpon>IntTextBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\StringIntConverter.cs" />
     <Compile Include="Tools\Logger.cs" />
+    <Compile Include="ValidationRules\IntRule.cs" />
     <Compile Include="ValidationRules\PositiveIntRule.cs" />
     <Compile Include="Windows\NewCharacterDataContext.cs" />
     <Compile Include="Windows\NewCharacterWindow.xaml.cs">
       <DependentUpon>NewCharacterWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Controlers\CharacterListUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controlers\InputBoxes\IntTextBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

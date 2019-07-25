@@ -7,15 +7,16 @@
         mc:Ignorable="d"
         xmlns:conv="clr-namespace:DDFight.Converters"
         xmlns:validation="clr-namespace:DDFight.ValidationRules"
+        xmlns:input="clr-namespace:DDFight.Controlers.InputBoxes"
         Title="NewCharacterWindow" Height="350" Width="400">
     <Window.Resources>
-        <conv:StringIntConverter x:Key="IntStringConverter"/>
+        <conv:StringIntConverter x:Key="StringIntConverter"/>
 
         <!-- https://docs.microsoft.com/en-us/dotnet/framework/wpf/data/how-to-implement-binding-validation -->
         
         <ControlTemplate x:Key="ValidationTemplate">
             <DockPanel>
-                <TextBlock Foreground="Red" FontSize="20">!</TextBlock>
+                <TextBlock Foreground="Red" FontSize="20"></TextBlock>
                 <AdornedElementPlaceholder/>
             </DockPanel>
         </ControlTemplate>
@@ -50,11 +51,15 @@
                  Text="{Binding Name}" 
                  KeyDown="NameBox_KeyDown" />
 
-        <TextBlock Grid.Row="1" Grid.Column="0" Margin="10, 5">
+        <TextBlock Grid.Row="1" Grid.Column="0" Margin="10, 5" VerticalAlignment="Center">
             Initiative
         </TextBlock>
-        <TextBox x:Name="InitiativeBox" Grid.Row="1" Grid.Column="1" Margin="0, 5, 10, 5" Width="50"
-                 KeyDown="InitiativeBox_KeyDown">
+        <input:IntTextBox x:Name="InitiativeBox" Grid.Row="1" Grid.Column="1" Margin="0, 5, 10, 5" 
+            PropertyToBind="Initiative"/>
+
+        <!--TextBox x:Name="InitiativeBox" Grid.Row="1" Grid.Column="1" Margin="0, 5, 10, 5"
+                 KeyDown="InitiativeBox_KeyDown"
+                 Style="{StaticResource TextBoxInError}">
             <TextBox.Text>
                 <Binding Path="Initiative">
                     <Binding.ValidationRules>
@@ -62,27 +67,27 @@
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
-        </TextBox>
+        </TextBox -->
 
         <TextBlock Grid.Row="2" Grid.Column="0" Margin="10, 5">
             Armor class
         </TextBlock>
         <TextBox x:Name="CABox" Grid.Row="2" Grid.Column="1" Margin="0, 5, 10, 5" 
-                 Text="{Binding CA, Converter={StaticResource IntStringConverter}}" 
-                 KeyDown="CABox_KeyDown"/>
+                 Text="{Binding CA, Converter={StaticResource StringIntConverter}}" 
+                 KeyDown="CABox_KeyDown" TextChanged="CABox_TextChanged"/>
 
         <TextBlock Grid.Row="3" Grid.Column="0" Margin="10, 5">
             Max HP
         </TextBlock>
         <TextBox x:Name="MaxHPBox" Grid.Row="3" Grid.Column="1" Margin="0, 5, 10, 5" 
-                 Text="{Binding MaxHp, Converter={StaticResource IntStringConverter}}" 
+                 Text="{Binding MaxHp, Converter={StaticResource StringIntConverter}}" 
                  KeyDown="MaxHPBox_KeyDown"/>
 
-        <TextBlock Grid.Row="4" Grid.Column="0" Margin="5">
+        <TextBlock Grid.Row="4" Grid.Column="0" Margin="10, 5">
             Current HP
         </TextBlock>
         <TextBox x:Name="HPBox" Grid.Row="4" Grid.Column="1" Margin="0, 5, 10, 5" 
-                 Text="{Binding Hp, Converter={StaticResource IntStringConverter}}" 
+                 Text="{Binding Hp, Converter={StaticResource StringIntConverter}}" 
                  KeyDown="HPBox_KeyDown"/>
     </Grid>
 </Window>

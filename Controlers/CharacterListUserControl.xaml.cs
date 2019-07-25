@@ -21,8 +21,10 @@ namespace DDFight.Controlers
             NewCharacterWindow character = new NewCharacterWindow();
             NewCharacterDataContext context = new NewCharacterDataContext();
             character.DataContext = context;
+            context.Initiative = 15;
             character.ShowDialog();
 
+            System.Console.WriteLine("Initiative is now {0}", context.Initiative);
             this.CharacterList.Items.Add(context);
         }
 
