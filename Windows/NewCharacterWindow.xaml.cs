@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DDFight.Controlers.InputBoxes;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -16,6 +17,9 @@ namespace DDFight.Windows
             NameBox.Focus();
 
             InitiativeBox.KeyDown += InitiativeBox_KeyDown;
+            CABox.KeyDown += CABox_KeyDown;
+            MaxHPBox.KeyDown += MaxHPBox_KeyDown;
+            HPBox.KeyDown += HPBox_KeyDown;
 
         }
 
@@ -29,23 +33,50 @@ namespace DDFight.Windows
             return box.Text != null && box.Text != string.Empty;
         }
 
+        private void set_focus (TextBox box)
+        {
+            box.Focus();
+        }
+
+        private void set_focus (IntTextBox box)
+        {
+            box.IntBox.Focus();
+        }
+
+        private void set_focus (Control ctrl)
+        {
+            ctrl.Focus();
+        }
+
         /// <summary>
-        ///     Sets the focus on the next element of the list if the current is valid
+        ///     Sets the focus on the next element
         /// </summary>
         /// <param name="current"></param>
         /// <param name="next"></param>
-        private void goto_next(TextBox current, TextBox next)
+        private void goto_next(Control current, Control next)
         {
-            if (is_valid(current))
+            if (next != null)
             {
-                if (next != null)
+                switch (next)
                 {
-                    next.Focus();
+                    case IntTextBox box:
+                        set_focus(box);
+                        break;
+                    case TextBox box:
+                        set_focus(box);
+                        break;
+                    default:
+                        Console.WriteLine("ERROR: unimplemented type in NewCharacterWindow.xaml.cs: {0}", next.GetType ());
+                        break;
                 }
-                else
-                {
-                    Close();
-                }
+
+                if (next.GetType ().ToString () == "IntTextBox")
+
+                next.Focus();
+            }
+            else
+            {
+                Close();
             }
         }
 
@@ -55,16 +86,15 @@ namespace DDFight.Windows
         {
             if (e.Key == Key.Return)
             {
-                //goto_next(NameBox, InitiativeBox);
+                goto_next(NameBox, InitiativeBox);
             }
         }
 
         private void InitiativeBox_KeyDown(object sender, KeyEventArgs e)
         {
-            Console.WriteLine("hello");
             if (e.Key == Key.Return)
             {
-                //goto_next(InitiativeBox, CABox);
+                goto_next(InitiativeBox, CABox);
             }
         }
 
@@ -92,10 +122,5 @@ namespace DDFight.Windows
             }
         }
         #endregion
-
-        private void CABox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
     }
 }

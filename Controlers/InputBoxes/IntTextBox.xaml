@@ -31,15 +31,8 @@
         </Style>
     </UserControl.Resources>
     <Grid>
-        <TextBox x:Name="IntBox" Grid.Row="1" Grid.Column="1" Margin="0, 5, 10, 5"
-                 Style="{StaticResource TextBoxInError}">
-            <TextBox.Text>
-                <Binding Path="{no idea what to put here }">
-                    <Binding.ValidationRules>
-                        <validation:IntRule />
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
+        <TextBox 
+            x:Name="IntBox" 
+            Style="{StaticResource TextBoxInError}" />
     </Grid>
 </UserControl>

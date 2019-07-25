@@ -54,40 +54,29 @@
         <TextBlock Grid.Row="1" Grid.Column="0" Margin="10, 5" VerticalAlignment="Center">
             Initiative
         </TextBlock>
-        <input:IntTextBox x:Name="InitiativeBox" Grid.Row="1" Grid.Column="1" Margin="0, 5, 10, 5" 
-            PropertyToBind="Initiative"/>
-
-        <!--TextBox x:Name="InitiativeBox" Grid.Row="1" Grid.Column="1" Margin="0, 5, 10, 5"
-                 KeyDown="InitiativeBox_KeyDown"
-                 Style="{StaticResource TextBoxInError}">
-            <TextBox.Text>
-                <Binding Path="Initiative">
-                    <Binding.ValidationRules>
-                        <validation:PositiveIntRule />
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox -->
+        <input:IntTextBox x:Name="InitiativeBox" 
+                          Grid.Row="1" Grid.Column="1" Margin="0, 5, 10, 5" 
+                          PropertyPath="Initiative"/>
 
         <TextBlock Grid.Row="2" Grid.Column="0" Margin="10, 5">
             Armor class
         </TextBlock>
-        <TextBox x:Name="CABox" Grid.Row="2" Grid.Column="1" Margin="0, 5, 10, 5" 
-                 Text="{Binding CA, Converter={StaticResource StringIntConverter}}" 
-                 KeyDown="CABox_KeyDown" TextChanged="CABox_TextChanged"/>
+        <input:IntTextBox x:Name="CABox" 
+                          Grid.Row="2" Grid.Column="1" Margin="0, 5, 10, 5" 
+                          PropertyPath="CA"/>
 
         <TextBlock Grid.Row="3" Grid.Column="0" Margin="10, 5">
             Max HP
         </TextBlock>
-        <TextBox x:Name="MaxHPBox" Grid.Row="3" Grid.Column="1" Margin="0, 5, 10, 5" 
-                 Text="{Binding MaxHp, Converter={StaticResource StringIntConverter}}" 
-                 KeyDown="MaxHPBox_KeyDown"/>
+        <input:IntTextBox x:Name="MaxHPBox" 
+                          Grid.Row="3" Grid.Column="1" Margin="0, 5, 10, 5" 
+                          PropertyPath="MaxHp"/>
 
         <TextBlock Grid.Row="4" Grid.Column="0" Margin="10, 5">
             Current HP
         </TextBlock>
-        <TextBox x:Name="HPBox" Grid.Row="4" Grid.Column="1" Margin="0, 5, 10, 5" 
-                 Text="{Binding Hp, Converter={StaticResource StringIntConverter}}" 
-                 KeyDown="HPBox_KeyDown"/>
+        <input:IntTextBox x:Name="HPBox" 
+                          Grid.Row="4" Grid.Column="1" Margin="0, 5, 10, 5"
+                          PropertyPath="Hp"/>
     </Grid>
 </Window>
