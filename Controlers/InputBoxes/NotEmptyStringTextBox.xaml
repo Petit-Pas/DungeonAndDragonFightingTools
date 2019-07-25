@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="DDFight.Controlers.InputBoxes.IntTextBox"
+﻿<UserControl x:Class="DDFight.Controlers.InputBoxes.NotEmptyStringTextBox"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -29,7 +29,7 @@
     </UserControl.Resources>
     <Grid>
         <TextBox 
-            x:Name="IntBox" 
+            x:Name="StringBox" 
             Style="{StaticResource TextBoxInError}" />
     </Grid>
 </UserControl>

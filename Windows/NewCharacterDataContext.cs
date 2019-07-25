@@ -2,8 +2,6 @@
 //  * ERTMS Solutions
 //  ***********************************************************************************/
 
-using DDFight.Tools;
-using System;
 
 namespace DDFight.Windows
 {

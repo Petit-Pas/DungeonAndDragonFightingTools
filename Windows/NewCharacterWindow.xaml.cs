@@ -16,6 +16,7 @@ namespace DDFight.Windows
             InitializeComponent();
             NameBox.Focus();
 
+            NameBox.KeyDown += NameBox_KeyDown;
             InitiativeBox.KeyDown += InitiativeBox_KeyDown;
             CABox.KeyDown += CABox_KeyDown;
             MaxHPBox.KeyDown += MaxHPBox_KeyDown;
@@ -28,9 +29,28 @@ namespace DDFight.Windows
         /// </summary>
         /// <param name="box"></param>
         /// <returns></returns>
-        private bool is_valid(TextBox box)
+        private bool is_valid(Control ctrl)
         {
-            return box.Text != null && box.Text != string.Empty;
+            switch (ctrl)
+            {
+                case IntTextBox box:
+                    return box.IsValid();
+                case TextBox box:
+                    return box.Text != null && box.Text != string.Empty;
+                case NotEmptyStringTextBox box:
+                    return box.IsValid();
+                default:
+                    Console.WriteLine("ERROR: unimplemented type in NewCharacterWindow.xaml.cs: {0}", ctrl.GetType());
+                    return false;
+            }
+        }
+
+        private void set_focus (NotEmptyStringTextBox box)
+        {
+            if (box.IsValid ())
+            {
+                box.SetFocus();
+            }
         }
 
         private void set_focus (TextBox box)
@@ -40,12 +60,10 @@ namespace DDFight.Windows
 
         private void set_focus (IntTextBox box)
         {
-            box.IntBox.Focus();
-        }
-
-        private void set_focus (Control ctrl)
-        {
-            ctrl.Focus();
+            if (box.IsValid ())
+            {
+                box.IntBox.Focus();
+            }
         }
 
         /// <summary>
@@ -57,17 +75,23 @@ namespace DDFight.Windows
         {
             if (next != null)
             {
-                switch (next)
+                if (is_valid(current))
                 {
-                    case IntTextBox box:
-                        set_focus(box);
-                        break;
-                    case TextBox box:
-                        set_focus(box);
-                        break;
-                    default:
-                        Console.WriteLine("ERROR: unimplemented type in NewCharacterWindow.xaml.cs: {0}", next.GetType ());
-                        break;
+                    switch (next)
+                    {
+                        case IntTextBox box:
+                            set_focus(box);
+                            break;
+                        case TextBox box:
+                            set_focus(box);
+                            break;
+                        case NotEmptyStringTextBox box:
+                            set_focus(box);
+                            break;
+                        default:
+                            Console.WriteLine("ERROR: unimplemented type in NewCharacterWindow.xaml.cs: {0}", next.GetType());
+                            break;
+                    }
                 }
 
                 if (next.GetType ().ToString () == "IntTextBox")
