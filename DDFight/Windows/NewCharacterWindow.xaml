@@ -1,0 +1,82 @@
+﻿<Window x:Class="DDFight.Windows.NewCharacterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DDFight.Windows"
+        mc:Ignorable="d"
+        xmlns:conv="clr-namespace:DDFight.Converters"
+        xmlns:validation="clr-namespace:DDFight.ValidationRules"
+        xmlns:input="clr-namespace:DDFight.Controlers.InputBoxes"
+        Title="NewCharacterWindow" Height="350" Width="400">
+    <Window.Resources>
+        <conv:StringIntConverter x:Key="StringIntConverter"/>
+
+        <!-- https://docs.microsoft.com/en-us/dotnet/framework/wpf/data/how-to-implement-binding-validation -->
+        
+        <ControlTemplate x:Key="ValidationTemplate">
+            <DockPanel>
+                <TextBlock Foreground="Red" FontSize="20"></TextBlock>
+                <AdornedElementPlaceholder/>
+            </DockPanel>
+        </ControlTemplate>
+
+        <Style x:Key="TextBoxInError" TargetType="{x:Type TextBox}">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip"
+              Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+                              Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Margin="10, 5">
+            Name
+        </TextBlock>
+        <input:NotEmptyStringTextBox x:Name="NameBox" 
+                                     Grid.Row="0" Grid.Column="1" Margin="0, 5, 10, 5"
+                                     PropertyPath="Name"/>
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Margin="10, 5" VerticalAlignment="Center">
+            Initiative
+        </TextBlock>
+        <input:IntTextBox x:Name="InitiativeBox" 
+                          Grid.Row="1" Grid.Column="1" Margin="0, 5, 10, 5" 
+                          PropertyPath="Initiative"/>
+
+        <TextBlock Grid.Row="2" Grid.Column="0" Margin="10, 5">
+            Armor class
+        </TextBlock>
+        <input:IntTextBox x:Name="CABox" 
+                          Grid.Row="2" Grid.Column="1" Margin="0, 5, 10, 5" 
+                          PropertyPath="CA"/>
+
+        <TextBlock Grid.Row="3" Grid.Column="0" Margin="10, 5">
+            Max HP
+        </TextBlock>
+        <input:IntTextBox x:Name="MaxHPBox" 
+                          Grid.Row="3" Grid.Column="1" Margin="0, 5, 10, 5" 
+                          PropertyPath="MaxHp"/>
+
+        <TextBlock Grid.Row="4" Grid.Column="0" Margin="10, 5">
+            Current HP
+        </TextBlock>
+        <input:IntTextBox x:Name="HPBox" 
+                          Grid.Row="4" Grid.Column="1" Margin="0, 5, 10, 5"
+                          PropertyPath="Hp"/>
+    </Grid>
+</Window>

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.705
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDFight", "DDFight.csproj", "{1C1DB3C2-0DB0-40D2-A950-0F4083D1EC03}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDFight", "DDFight\DDFight.csproj", "{1C1DB3C2-0DB0-40D2-A950-0F4083D1EC03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SandBox", "..\SandBox\SandBox.csproj", "{23E4798D-10DE-41F9-B5EC-72F2634DF188}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SandBox", "SandBox\SandBox.csproj", "{23E4798D-10DE-41F9-B5EC-72F2634DF188}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
