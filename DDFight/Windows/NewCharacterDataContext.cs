@@ -1,9 +1,4 @@
-﻿// /***********************************************************************************
-//  * ERTMS Solutions
-//  ***********************************************************************************/
-
-
-namespace DDFight.Windows
+﻿namespace DDFight.Windows
 {
     public class NewCharacterDataContext
     {
