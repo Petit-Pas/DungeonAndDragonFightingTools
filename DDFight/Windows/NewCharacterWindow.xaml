@@ -54,21 +54,21 @@
         <TextBlock Grid.Row="1" Grid.Column="0" Margin="10, 5" VerticalAlignment="Center">
             Initiative
         </TextBlock>
-        <input:IntTextBox x:Name="InitiativeBox" 
+        <input:PositiveIntTextBox x:Name="InitiativeBox" 
                           Grid.Row="1" Grid.Column="1" Margin="0, 5, 10, 5" 
                           PropertyPath="Initiative"/>
 
         <TextBlock Grid.Row="2" Grid.Column="0" Margin="10, 5">
             Armor class
         </TextBlock>
-        <input:IntTextBox x:Name="CABox" 
+        <input:PositiveIntTextBox x:Name="CABox" 
                           Grid.Row="2" Grid.Column="1" Margin="0, 5, 10, 5" 
                           PropertyPath="CA"/>
 
         <TextBlock Grid.Row="3" Grid.Column="0" Margin="10, 5">
             Max HP
         </TextBlock>
-        <input:IntTextBox x:Name="MaxHPBox" 
+        <input:PositiveIntTextBox x:Name="MaxHPBox" 
                           Grid.Row="3" Grid.Column="1" Margin="0, 5, 10, 5" 
                           PropertyPath="MaxHp"/>
 
