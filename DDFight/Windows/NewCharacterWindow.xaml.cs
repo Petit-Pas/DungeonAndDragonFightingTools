@@ -6,6 +6,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
+//TODO center the window at spawn
+
 namespace DDFight.Windows
 {
     /// <summary>
@@ -38,7 +40,52 @@ namespace DDFight.Windows
 
             foreach (UserControl ctrl in parameters)
             {
-                ctrl.KeyDown += Generic_KeyDown;
+                ctrl.PreviewKeyDown += Ctrl_PreviewKeyDown;
+            }
+        }
+
+        /// <summary>
+        ///     Generic Key handler to handle the navigation and switch focus between elements
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Ctrl_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            // goes to next element, validate form if at last element AND they are all valids
+            if (e.Key == Key.Return)
+            {
+                for (int i = 0; i != parameters.Count; i += 1)
+                {
+                    if (parameters[i] == sender)
+                    {
+                        focus_next((Control)sender, i + 1 != parameters.Count ? parameters[i + 1] : null);
+                        e.Handled = true;
+                    }
+                }
+            }
+
+            // goes to the next element, first if last was focused
+            if (e.Key == Key.Down)
+            {
+                for (int i = 0; i != parameters.Count; i += 1)
+                {
+                    if (parameters[i] == sender)
+                    {
+                        focus_next((Control)sender, i + 1 != parameters.Count ? parameters[i + 1] : parameters[0]);
+                    }
+                }
+            }
+
+            // goes to the previous element, last if first was focused
+            if (e.Key == Key.Up)
+            {
+                for (int i = 0; i != parameters.Count; i += 1)
+                {
+                    if (parameters[i] == sender)
+                    {
+                        focus_next((Control)sender, i - 1 >= 0 ? parameters[i - 1] : parameters[parameters.Count - 1]);
+                    }
+                }
             }
         }
 
@@ -109,25 +156,6 @@ namespace DDFight.Windows
                 if (are_all_valids())
                 {
                     Close();
-                }
-            }
-        }
-
-        /// <summary>
-        ///     Generic Key handler to handle the return key and switch focus between elements
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Generic_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Return)
-            {
-                for (int i = 0; i != parameters.Count; i += 1)
-                {
-                    if (parameters[i] == sender)
-                    {
-                        focus_next((Control)sender, i + 1 != parameters.Count ? parameters[i + 1] : null);
-                    }
                 }
             }
         }
