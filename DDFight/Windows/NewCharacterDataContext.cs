@@ -9,11 +9,11 @@ namespace DDFight.Windows
     {
         public string Name { get; set; }
 
-        public int CA { get; set; }
+        public uint CA { get; set; }
 
-        public int Initiative { get; set; }
+        public uint Initiative { get; set; }
 
-        public int MaxHp { get; set; }
+        public uint MaxHp { get; set; }
 
         public int Hp { get; set; }
 

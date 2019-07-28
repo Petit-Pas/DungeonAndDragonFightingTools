@@ -1,5 +1,7 @@
 ﻿using DDFight.Controlers.InputBoxes;
+using DDFight.Tools;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -7,21 +9,37 @@ using System.Windows.Input;
 namespace DDFight.Windows
 {
     /// <summary>
-    /// Interaction logic for NewCharacterWindow.xaml
+    ///     Interaction logic for NewCharacterWindow.xaml
     /// </summary>
     public partial class NewCharacterWindow : Window
     {
+        /// <summary>
+        ///     contains a list of the parameters IN THE RIGHT ORDER
+        /// </summary>
+        private List<UserControl> parameters = new List<UserControl>();
+
+        /// <summary>
+        ///     Ctor
+        /// </summary>
         public NewCharacterWindow()
         {
             InitializeComponent();
-            NameBox.Focus();
 
-            NameBox.KeyDown += NameBox_KeyDown;
-            InitiativeBox.KeyDown += InitiativeBox_KeyDown;
-            CABox.KeyDown += CABox_KeyDown;
-            MaxHPBox.KeyDown += MaxHPBox_KeyDown;
-            HPBox.KeyDown += HPBox_KeyDown;
+            // add every parameter to the list IN THE RIGHT ORDER
+            // The order is important, as the control will jump from one to another in that order when pressing the Enter key
+            parameters.Add(NameBox);
+            parameters.Add(InitiativeBox);
+            parameters.Add(CABox);
+            parameters.Add(MaxHPBox);
+            parameters.Add(HPBox);
 
+
+            NameBox.SetFocus();
+
+            foreach (UserControl ctrl in parameters)
+            {
+                ctrl.KeyDown += Generic_KeyDown;
+            }
         }
 
         /// <summary>
@@ -33,37 +51,35 @@ namespace DDFight.Windows
         {
             switch (ctrl)
             {
-                case IntTextBox box:
-                    return box.IsValid();
-                case TextBox box:
-                    return box.Text != null && box.Text != string.Empty;
-                case NotEmptyStringTextBox box:
+                case IIsValidable box:
                     return box.IsValid();
                 default:
-                    Console.WriteLine("ERROR: unimplemented type in NewCharacterWindow.xaml.cs: {0}", ctrl.GetType());
+                    Console.WriteLine("ERROR: unimplemented type for IsValid in NewCharacterWindow.xaml.cs: {0}", ctrl.GetType());
                     return false;
             }
         }
 
-        private void set_focus (NotEmptyStringTextBox box)
+        /// <summary>
+        ///     checks if all parameters are corrects
+        /// </summary>
+        /// <returns></returns>
+        private bool are_all_valids ()
         {
-            if (box.IsValid ())
+            foreach (Control ctrl in parameters)
             {
-                box.SetFocus();
+                switch (ctrl)
+                {
+                    case IIsValidable _ctrl:
+                        if (_ctrl.IsValid () == false)
+                        {
+                            return false;
+                        }
+                        break;
+                    default:
+                        break;
+                }
             }
-        }
-
-        private void set_focus (TextBox box)
-        {
-            box.Focus();
-        }
-
-        private void set_focus (IntTextBox box)
-        {
-            if (box.IsValid ())
-            {
-                box.IntBox.Focus();
-            }
+            return true;
         }
 
         /// <summary>
@@ -71,7 +87,7 @@ namespace DDFight.Windows
         /// </summary>
         /// <param name="current"></param>
         /// <param name="next"></param>
-        private void goto_next(Control current, Control next)
+        private void focus_next(Control current, Control next)
         {
             if (next != null)
             {
@@ -79,72 +95,41 @@ namespace DDFight.Windows
                 {
                     switch (next)
                     {
-                        case IntTextBox box:
-                            set_focus(box);
-                            break;
-                        case TextBox box:
-                            set_focus(box);
-                            break;
-                        case NotEmptyStringTextBox box:
-                            set_focus(box);
+                        case IIsFocusable box:
+                            box.SetFocus();
                             break;
                         default:
-                            Console.WriteLine("ERROR: unimplemented type in NewCharacterWindow.xaml.cs: {0}", next.GetType());
+                            Console.WriteLine("ERROR: unimplemented type for Focus in NewCharacterWindow.xaml.cs: {0}", next.GetType());
                             break;
                     }
                 }
-
-                if (next.GetType ().ToString () == "IntTextBox")
-
-                next.Focus();
             }
             else
             {
-                Close();
+                if (are_all_valids())
+                {
+                    Close();
+                }
             }
         }
 
-        #region key handlers for each textbox
-
-        private void NameBox_KeyDown(object sender, KeyEventArgs e)
+        /// <summary>
+        ///     Generic Key handler to handle the return key and switch focus between elements
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Generic_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Return)
             {
-                goto_next(NameBox, InitiativeBox);
+                for (int i = 0; i != parameters.Count; i += 1)
+                {
+                    if (parameters[i] == sender)
+                    {
+                        focus_next((Control)sender, i + 1 != parameters.Count ? parameters[i + 1] : null);
+                    }
+                }
             }
         }
-
-        private void InitiativeBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Return)
-            {
-                goto_next(InitiativeBox, CABox);
-            }
-        }
-
-        private void CABox_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Return)
-            {
-                goto_next(CABox, MaxHPBox);
-            }
-        }
-
-        private void MaxHPBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Return)
-            {
-                goto_next(MaxHPBox, HPBox);
-            }
-        }
-
-        private void HPBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Return)
-            {
-                goto_next(HPBox, null);
-            }
-        }
-        #endregion
     }
 }

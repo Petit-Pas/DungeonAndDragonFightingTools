@@ -1,4 +1,5 @@
-﻿using DDFight.ValidationRules;
+﻿using DDFight.Tools;
+using DDFight.ValidationRules;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,7 +10,7 @@ namespace DDFight.Controlers.InputBoxes
     /// <summary>
     /// Logique d'interaction pour NotEmptyStringTextBox.xaml
     /// </summary>
-    public partial class NotEmptyStringTextBox : UserControl
+    public partial class NotEmptyStringTextBox : UserControl, IIsFocusable, IIsValidable
     {
         public NotEmptyStringTextBox()
         {
@@ -42,6 +43,7 @@ namespace DDFight.Controlers.InputBoxes
             };
 
             ctl.StringBox.SetBinding(TextBox.TextProperty, binding);
+            
         }
 
         public bool IsValid()

@@ -1,4 +1,5 @@
-﻿using DDFight.ValidationRules;
+﻿using DDFight.Tools;
+using DDFight.ValidationRules;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,7 +10,7 @@ namespace DDFight.Controlers.InputBoxes
     /// <summary>
     /// Logique d'interaction pour IntTextBox.xaml
     /// </summary>
-    public partial class IntTextBox : UserControl
+    public partial class IntTextBox : UserControl, IIsFocusable, IIsValidable
     {
         public IntTextBox()
         {
