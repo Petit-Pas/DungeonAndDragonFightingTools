@@ -64,13 +64,16 @@
       <DependentUpon>PositiveIntBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\StringIntConverter.cs" />
+    <Compile Include="Game\GameDataContext.cs" />
     <Compile Include="Tools\IIsFocusable.cs" />
     <Compile Include="Tools\IIsValidable.cs" />
     <Compile Include="Tools\Logger.cs" />
+    <Compile Include="Tools\Save\CharactersList.cs" />
+    <Compile Include="Tools\Save\SaveManager.cs" />
     <Compile Include="ValidationRules\IntRule.cs" />
     <Compile Include="ValidationRules\NotEmptyStringRule.cs" />
     <Compile Include="ValidationRules\PositiveIntRule.cs" />
-    <Compile Include="Windows\NewCharacterDataContext.cs" />
+    <Compile Include="Game\CharacterDataContext.cs" />
     <Compile Include="Windows\NewCharacterWindow.xaml.cs">
       <DependentUpon>NewCharacterWindow.xaml</DependentUpon>
     </Compile>

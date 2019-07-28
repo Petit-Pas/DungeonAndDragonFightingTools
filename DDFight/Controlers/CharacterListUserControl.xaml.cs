@@ -1,4 +1,6 @@
-﻿using DDFight.Windows;
+﻿using DDFight.Game;
+using DDFight.Tools.Save;
+using DDFight.Windows;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -10,21 +12,28 @@ namespace DDFight.Controlers
     /// </summary>
     public partial class CharacterListUserControl : UserControl
     {
+        private GameDataContext data_context;
+
         public CharacterListUserControl()
         {
             InitializeComponent();
+            data_context = (GameDataContext)this.DataContext;
+
+            foreach (CharacterDataContext character in data_context.CharacterList?.Characters)
+            {
+                this.CharacterList.Items.Add(character);
+            }
         }
 
         private void AddCharacter(object sender, RoutedEventArgs e)
         {
-            NewCharacterWindow character = new NewCharacterWindow();
-            NewCharacterDataContext context = new NewCharacterDataContext();
-            character.DataContext = context;
-            context.Initiative = 15;
-            character.ShowDialog();
+            NewCharacterWindow window = new NewCharacterWindow();
+            CharacterDataContext context = new CharacterDataContext();
+            window.DataContext = context;
+            window.ShowDialog();
 
-            System.Console.WriteLine("Initiative is now {0}", context.Initiative);
             this.CharacterList.Items.Add(context);
+            data_context.CharacterList.AddCharacter(context);
         }
 
         private void RemoveCharacter_Click(object sender, RoutedEventArgs e)
@@ -35,7 +44,7 @@ namespace DDFight.Controlers
         private void CharacterList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             NewCharacterWindow character = new NewCharacterWindow();
-            NewCharacterDataContext context = (NewCharacterDataContext)CharacterList.SelectedItem;
+            CharacterDataContext context = (CharacterDataContext)CharacterList.SelectedItem;
             character.DataContext = context;
 
             character.ShowDialog();

@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using DDFight.Game;
+using DDFight.Tools.Save;
+using System.Windows;
 
 namespace DDFight
 {
@@ -9,6 +11,15 @@ namespace DDFight
     {
         public MainWindow()
         {
+            SaveManager.Init();
+
+            GameDataContext context = new GameDataContext
+            {
+                CharacterList = SaveManager.LoadPlayers(),
+            };
+
+            DataContext = context;
+
             InitializeComponent();
         }
     }
