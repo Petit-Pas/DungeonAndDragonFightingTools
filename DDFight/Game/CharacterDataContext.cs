@@ -1,8 +1,9 @@
-﻿using System.Xml.Serialization;
+﻿using DDFight.Tools;
+using System.Xml.Serialization;
 
 namespace DDFight.Game
 {
-    public class CharacterDataContext
+    public class CharacterDataContext : IClonable
     {
         [XmlAttribute]
         public string Name { get => _name; set => _name = value; }
@@ -24,5 +25,15 @@ namespace DDFight.Game
         public int Hp { get => _hp; set => _hp = value; }
         private int _hp = 0;
 
+        public IClonable Clone()
+        {
+            return new CharacterDataContext
+            {
+                Name = (string)this.Name.Clone(),
+                CA = this.CA,
+                Hp = this.Hp,
+                MaxHp = this.MaxHp,
+            };
+        }
     }
 }

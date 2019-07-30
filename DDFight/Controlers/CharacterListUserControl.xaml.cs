@@ -50,20 +50,48 @@ namespace DDFight.Controlers
             }
         }
 
+        #region Add
+
+        /// <summary>
+        ///     add a new character
+        /// </summary>
+        private void add_character(CharacterDataContext character)
+        {
+            this.CharacterList.Items.Add(character);
+            data_context.CharacterList.AddCharacter(character);
+
+        }
+
         /// <summary>
         ///     handler for the Add character button
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void AddCharacter(object sender, RoutedEventArgs e)
+        private void AddCharacter_Button_Click(object sender, RoutedEventArgs e)
         {
-            NewCharacterWindow window = new NewCharacterWindow();
             CharacterDataContext character = new CharacterDataContext();
-            window.DataContext = character;
-            window.ShowDialog();
 
-            this.CharacterList.Items.Add(character);
-            data_context.CharacterList.AddCharacter(character);
+            add_character(character);
+        }
+
+        private void DuplicateCharacter_MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            CharacterDataContext character = (CharacterDataContext)CharacterList.SelectedItem;
+            CharacterDataContext new_character = (CharacterDataContext)character.Clone();
+
+            new_character.Name = new_character.Name + " - Copie";
+
+            add_character(new_character);
+        }
+
+        #endregion
+
+        #region Delete
+
+        private void delete_character(CharacterDataContext character)
+        {
+            data_context.CharacterList.RemoveCharacter(character);
+            CharacterList.Items.Remove(character);
         }
 
         /// <summary>
@@ -71,10 +99,29 @@ namespace DDFight.Controlers
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void RemoveCharacter_Click(object sender, RoutedEventArgs e)
+        private void RemoveCharacter_Button_Click(object sender, RoutedEventArgs e)
         {
-            data_context.CharacterList.RemoveCharacter((CharacterDataContext)CharacterList.SelectedItem);
-            CharacterList.Items.Remove(CharacterList.SelectedItem);
+            delete_character((CharacterDataContext)CharacterList.SelectedItem);
+        }
+
+        private void DeleteCharacter_MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            delete_character((CharacterDataContext)CharacterList.SelectedItem);
+        }
+
+        #endregion
+
+        #region edit
+
+        private void update_character(CharacterDataContext character)
+        {
+            NewCharacterWindow window = new NewCharacterWindow();
+            window.DataContext = character;
+
+            window.ShowDialog();
+
+            CharacterList.SelectedItem = character;
+            data_context.CharacterList.Save();
         }
 
         /// <summary>
@@ -84,14 +131,19 @@ namespace DDFight.Controlers
         /// <param name="e"></param>
         private void CharacterList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            NewCharacterWindow character = new NewCharacterWindow();
-            CharacterDataContext context = (CharacterDataContext)CharacterList.SelectedItem;
-            character.DataContext = context;
-
-            character.ShowDialog();
-
-            CharacterList.SelectedItem = context;
-            data_context.CharacterList.Save();
+            update_character((CharacterDataContext)CharacterList.SelectedItem);
         }
+
+        /// <summary>
+        ///     Hendler for Edit selection on menu Item
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void EditCharacter_MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            update_character((CharacterDataContext)CharacterList.SelectedItem);
+        }
+
+        #endregion
     }
 }
