@@ -14,8 +14,8 @@
         <TextBlock Margin="10, 0">
             Dungeon and Dragons Fight Simulator
         </TextBlock>
-        <!--Border Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" Grid.Row="1" Margin="10">
-        </Border-->
-        <ctrl:CharacterListUserControl x:Name="CharacterListControl" Grid.Row="1"/>
+        <Border Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" Grid.Row="1" Margin="10">
+            <ctrl:CharacterListUserControl x:Name="CharacterListControl" Grid.Row="1"/>
+        </Border>
     </Grid>
 </Window>

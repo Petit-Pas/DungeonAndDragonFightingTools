@@ -13,7 +13,7 @@
         <conv:StringIntConverter x:Key="StringIntConverter"/>
 
         <!-- https://docs.microsoft.com/en-us/dotnet/framework/wpf/data/how-to-implement-binding-validation -->
-        
+
         <ControlTemplate x:Key="ValidationTemplate">
             <DockPanel>
                 <TextBlock Foreground="Red" FontSize="20"></TextBlock>
@@ -50,13 +50,6 @@
         <input:NotEmptyStringTextBox x:Name="NameBox" 
                                      Grid.Row="0" Grid.Column="1" Margin="0, 5, 10, 5"
                                      PropertyPath="Name"/>
-
-        <TextBlock Grid.Row="1" Grid.Column="0" Margin="10, 5" VerticalAlignment="Center">
-            Initiative
-        </TextBlock>
-        <input:PositiveIntTextBox x:Name="InitiativeBox" 
-                          Grid.Row="1" Grid.Column="1" Margin="0, 5, 10, 5" 
-                          PropertyPath="Initiative"/>
 
         <TextBlock Grid.Row="2" Grid.Column="0" Margin="10, 5">
             Armor class

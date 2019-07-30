@@ -17,6 +17,6 @@ namespace DDFight.Game
         /// <summary>
         ///     The list of existing character
         /// </summary>
-        public CharactersList CharacterList;
+        public CharactersList CharacterList = new CharactersList();
     }
 }

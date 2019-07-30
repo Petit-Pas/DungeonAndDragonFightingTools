@@ -1,0 +1,3 @@
+﻿Add context menu on character List
+
+Add deletion when pushing delete key on character List

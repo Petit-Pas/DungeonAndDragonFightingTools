@@ -28,9 +28,8 @@ namespace DDFight.Windows
             InitializeComponent();
 
             // add every parameter to the list IN THE RIGHT ORDER
-            // The order is important, as the control will jump from one to another in that order when pressing the Enter key
+            // The order is important, as the control will jump from one to another in that order when pressing the Enter key (or the arrow keys now)
             parameters.Add(NameBox);
-            parameters.Add(InitiativeBox);
             parameters.Add(CABox);
             parameters.Add(MaxHPBox);
             parameters.Add(HPBox);
@@ -110,14 +109,14 @@ namespace DDFight.Windows
         ///     checks if all parameters are corrects
         /// </summary>
         /// <returns></returns>
-        private bool are_all_valids ()
+        private bool are_all_valids()
         {
             foreach (Control ctrl in parameters)
             {
                 switch (ctrl)
                 {
                     case IIsValidable _ctrl:
-                        if (_ctrl.IsValid () == false)
+                        if (_ctrl.IsValid() == false)
                         {
                             return false;
                         }
