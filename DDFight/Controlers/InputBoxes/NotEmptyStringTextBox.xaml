@@ -30,6 +30,7 @@
     <Grid>
         <TextBox 
             x:Name="StringBox" 
-            Style="{StaticResource TextBoxInError}" />
+            Style="{StaticResource TextBoxInError}" 
+            KeyDown="StringBox_KeyDown"/>
     </Grid>
 </UserControl>

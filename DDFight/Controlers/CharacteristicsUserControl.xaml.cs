@@ -25,5 +25,15 @@ namespace DDFight.Controlers
         {
             InitializeComponent();
         }
+
+        private void CheckBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                System.Windows.Input.KeyEventArgs args = new System.Windows.Input.KeyEventArgs(Keyboard.PrimaryDevice, Keyboard.PrimaryDevice.ActiveSource, 0, Key.Tab);
+                args.RoutedEvent = Keyboard.KeyDownEvent;
+                InputManager.Current.ProcessInput(args);
+            }
+        }
     }
 }

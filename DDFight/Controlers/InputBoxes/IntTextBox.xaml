@@ -30,6 +30,6 @@
     <Grid>
         <TextBox 
             x:Name="IntBox" 
-            Style="{StaticResource TextBoxInError}" />
+            Style="{StaticResource TextBoxInError}" KeyDown="IntBox_KeyDown" />
     </Grid>
 </UserControl>

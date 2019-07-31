@@ -4,6 +4,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Input;
 
 namespace DDFight.Controlers.InputBoxes
 {
@@ -54,6 +55,16 @@ namespace DDFight.Controlers.InputBoxes
         public void SetFocus()
         {
             StringBox.Focus();
+        }
+
+        private void StringBox_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                System.Windows.Input.KeyEventArgs args = new System.Windows.Input.KeyEventArgs(Keyboard.PrimaryDevice, Keyboard.PrimaryDevice.ActiveSource, 0, Key.Tab);
+                args.RoutedEvent = Keyboard.KeyDownEvent;
+                InputManager.Current.ProcessInput(args);
+            }
         }
     }
 }

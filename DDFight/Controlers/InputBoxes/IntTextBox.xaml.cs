@@ -4,6 +4,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Input;
 
 namespace DDFight.Controlers.InputBoxes
 {
@@ -45,14 +46,24 @@ namespace DDFight.Controlers.InputBoxes
             ctl.IntBox.SetBinding(TextBox.TextProperty, binding);
         }
 
-        public bool IsValid ()
+        public bool IsValid()
         {
-            return !Validation.GetHasError (IntBox);
+            return !Validation.GetHasError(IntBox);
         }
 
-        public void SetFocus ()
+        public void SetFocus()
         {
             IntBox.Focus();
+        }
+
+        private void IntBox_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                System.Windows.Input.KeyEventArgs args = new System.Windows.Input.KeyEventArgs(Keyboard.PrimaryDevice, Keyboard.PrimaryDevice.ActiveSource, 0, Key.Tab);
+                args.RoutedEvent = Keyboard.KeyDownEvent;
+                InputManager.Current.ProcessInput(args);
+            }
         }
     }
 }
