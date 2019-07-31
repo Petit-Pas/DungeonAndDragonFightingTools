@@ -71,10 +71,7 @@ namespace DDFight.Controlers
         {
             CharacterDataContext character = new CharacterDataContext();
 
-            if (character.Validated)
-            {
-                add_character(character);
-            }
+            add_character(character);
         }
 
         private void DuplicateCharacter_MenuItem_Click(object sender, RoutedEventArgs e)
