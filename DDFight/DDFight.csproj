@@ -54,6 +54,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controlers\CharacteristicsUserControl.xaml.cs">
+      <DependentUpon>CharacteristicsUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controlers\InputBoxes\IntTextBox.xaml.cs">
       <DependentUpon>IntTextBox.xaml</DependentUpon>
     </Compile>
@@ -64,6 +67,8 @@
       <DependentUpon>PositiveIntBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\StringIntConverter.cs" />
+    <Compile Include="Game\Characteristics\CharacteristicDataContext.cs" />
+    <Compile Include="Game\Characteristics\CharacteristicsDataContext.cs" />
     <Compile Include="Game\GameDataContext.cs" />
     <Compile Include="Tools\IClonable.cs" />
     <Compile Include="Tools\IIsFocusable.cs" />
@@ -79,6 +84,10 @@
       <DependentUpon>NewCharacterWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Controlers\CharacterListUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controlers\CharacteristicsUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

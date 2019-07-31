@@ -1,12 +1,11 @@
 ﻿using DDFight.Controlers.InputBoxes;
+using DDFight.Game;
 using DDFight.Tools;
 using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-
-//TODO center the window at spawn
 
 namespace DDFight.Windows
 {
@@ -18,7 +17,9 @@ namespace DDFight.Windows
         /// <summary>
         ///     contains a list of the parameters IN THE RIGHT ORDER
         /// </summary>
-        private List<UserControl> parameters = new List<UserControl>();
+        private List<UserControl> controls = new List<UserControl>();
+
+        private CharacterDataContext data_context { get => (CharacterDataContext)DataContext; }
 
         /// <summary>
         ///     Ctor
@@ -27,65 +28,13 @@ namespace DDFight.Windows
         {
             InitializeComponent();
 
-            // add every parameter to the list IN THE RIGHT ORDER
-            // The order is important, as the control will jump from one to another in that order when pressing the Enter key (or the arrow keys now)
-            parameters.Add(NameBox);
-            parameters.Add(CABox);
-            parameters.Add(MaxHPBox);
-            parameters.Add(HPBox);
+            controls.Add(NameBoxUserControl);
+            controls.Add(CABoxUserControl);
+            controls.Add(MaxHPBoxUserControl);
+            controls.Add(HPBoxUserControl);
+            controls.Add(CharacteristicsUserControl);
 
-
-            NameBox.SetFocus();
-
-            foreach (UserControl ctrl in parameters)
-            {
-                ctrl.PreviewKeyDown += Ctrl_PreviewKeyDown;
-            }
-        }
-
-        /// <summary>
-        ///     Generic Key handler to handle the navigation and switch focus between elements
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Ctrl_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-            // goes to next element, validate form if at last element AND they are all valids
-            if (e.Key == Key.Return)
-            {
-                for (int i = 0; i != parameters.Count; i += 1)
-                {
-                    if (parameters[i] == sender)
-                    {
-                        focus_next((Control)sender, i + 1 != parameters.Count ? parameters[i + 1] : null);
-                        e.Handled = true;
-                    }
-                }
-            }
-
-            // goes to the next element, first if last was focused
-            if (e.Key == Key.Down)
-            {
-                for (int i = 0; i != parameters.Count; i += 1)
-                {
-                    if (parameters[i] == sender)
-                    {
-                        focus_next((Control)sender, i + 1 != parameters.Count ? parameters[i + 1] : parameters[0]);
-                    }
-                }
-            }
-
-            // goes to the previous element, last if first was focused
-            if (e.Key == Key.Up)
-            {
-                for (int i = 0; i != parameters.Count; i += 1)
-                {
-                    if (parameters[i] == sender)
-                    {
-                        focus_next((Control)sender, i - 1 >= 0 ? parameters[i - 1] : parameters[parameters.Count - 1]);
-                    }
-                }
-            }
+            NameBoxUserControl.SetFocus();
         }
 
         /// <summary>
@@ -111,7 +60,7 @@ namespace DDFight.Windows
         /// <returns></returns>
         private bool are_all_valids()
         {
-            foreach (Control ctrl in parameters)
+            foreach (Control ctrl in controls)
             {
                 switch (ctrl)
                 {
@@ -128,35 +77,16 @@ namespace DDFight.Windows
             return true;
         }
 
-        /// <summary>
-        ///     Sets the focus on the next element
-        /// </summary>
-        /// <param name="current"></param>
-        /// <param name="next"></param>
-        private void focus_next(Control current, Control next)
+        private void ValidateButton_Click(object sender, RoutedEventArgs e)
         {
-            if (next != null)
-            {
-                if (is_valid(current))
-                {
-                    switch (next)
-                    {
-                        case IIsFocusable box:
-                            box.SetFocus();
-                            break;
-                        default:
-                            Console.WriteLine("ERROR: unimplemented type for Focus in NewCharacterWindow.xaml.cs: {0}", next.GetType());
-                            break;
-                    }
-                }
-            }
-            else
-            {
-                if (are_all_valids())
-                {
-                    Close();
-                }
-            }
+            data_context.Validated = true;
+            Close();
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            data_context.Validated = false;
+            Close();
         }
     }
 }

@@ -43,7 +43,7 @@ namespace DDFight.Controlers.InputBoxes
             };
 
             ctl.StringBox.SetBinding(TextBox.TextProperty, binding);
-            
+
         }
 
         public bool IsValid()

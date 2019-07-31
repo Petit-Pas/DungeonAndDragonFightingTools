@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace DDFight.Game
 {
     /// <summary>
-    ///     This class is intended to contain all the generic (ans mostly saved) informations:
+    ///     This class is intended to contain all the generic (and saved) informations:
     ///         - players
     ///         - ennemies schemes
     /// </summary>

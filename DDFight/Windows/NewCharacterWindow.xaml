@@ -8,31 +8,12 @@
         xmlns:conv="clr-namespace:DDFight.Converters"
         xmlns:validation="clr-namespace:DDFight.ValidationRules"
         xmlns:input="clr-namespace:DDFight.Controlers.InputBoxes"
-        Title="NewCharacterWindow" Height="350" Width="400">
-    <Window.Resources>
-        <conv:StringIntConverter x:Key="StringIntConverter"/>
-
-        <!-- https://docs.microsoft.com/en-us/dotnet/framework/wpf/data/how-to-implement-binding-validation -->
-
-        <ControlTemplate x:Key="ValidationTemplate">
-            <DockPanel>
-                <TextBlock Foreground="Red" FontSize="20"></TextBlock>
-                <AdornedElementPlaceholder/>
-            </DockPanel>
-        </ControlTemplate>
-
-        <Style x:Key="TextBoxInError" TargetType="{x:Type TextBox}">
-            <Style.Triggers>
-                <Trigger Property="Validation.HasError" Value="true">
-                    <Setter Property="ToolTip"
-              Value="{Binding RelativeSource={x:Static RelativeSource.Self},
-                              Path=(Validation.Errors)[0].ErrorContent}"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-    </Window.Resources>
+        xmlns:controlers="clr-namespace:DDFight.Controlers"
+        Title="NewCharacterWindow" Height="550" Width="400">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -47,29 +28,49 @@
         <TextBlock Grid.Row="0" Grid.Column="0" Margin="10, 5">
             Name
         </TextBlock>
-        <input:NotEmptyStringTextBox x:Name="NameBox" 
+        <input:NotEmptyStringTextBox x:Name="NameBoxUserControl" 
                                      Grid.Row="0" Grid.Column="1" Margin="0, 5, 10, 5"
                                      PropertyPath="Name"/>
 
         <TextBlock Grid.Row="2" Grid.Column="0" Margin="10, 5">
             Armor class
         </TextBlock>
-        <input:PositiveIntTextBox x:Name="CABox" 
+        <input:PositiveIntTextBox x:Name="CABoxUserControl" 
                           Grid.Row="2" Grid.Column="1" Margin="0, 5, 10, 5" 
                           PropertyPath="CA"/>
 
         <TextBlock Grid.Row="3" Grid.Column="0" Margin="10, 5">
             Max HP
         </TextBlock>
-        <input:PositiveIntTextBox x:Name="MaxHPBox" 
+        <input:PositiveIntTextBox x:Name="MaxHPBoxUserControl" 
                           Grid.Row="3" Grid.Column="1" Margin="0, 5, 10, 5" 
                           PropertyPath="MaxHp"/>
 
         <TextBlock Grid.Row="4" Grid.Column="0" Margin="10, 5">
             Current HP
         </TextBlock>
-        <input:IntTextBox x:Name="HPBox" 
+        <input:IntTextBox x:Name="HPBoxUserControl" 
                           Grid.Row="4" Grid.Column="1" Margin="0, 5, 10, 5"
                           PropertyPath="Hp"/>
+
+        <controlers:CharacteristicsUserControl x:Name="CharacteristicsUserControl" Grid.Row="5" Grid.ColumnSpan="2" />
+
+        <Grid x:Name="ButtonsGrid" Grid.Row="6" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" 
+                    MaxWidth="100"
+                    Click="ValidateButton_Click">
+                Validate
+            </Button>
+            <Button Grid.Column="1"
+                    MaxWidth="100"
+                    Click="CancelButton_Click">
+                Cancel
+            </Button>
+        </Grid>
+
     </Grid>
 </Window>

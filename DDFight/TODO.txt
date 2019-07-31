@@ -1,3 +1,11 @@
-﻿Add context menu on character List
+﻿Remplacer nom de charactéritique par une enum
 
-Add deletion when pushing delete key on character List
+Fenetres centrées at spawn
+
+Changer nom des fenetres
+
+Griser bouton validate sur la NEwCharacterWindow when all are valids != true  ==> INotifyPropertyChanged ? ==> Good to learn how to use it
+
+Faire passer les méthodes telles que "edit character" dans le CharacterUserControl
+
+PV Temporaires

@@ -71,7 +71,10 @@ namespace DDFight.Controlers
         {
             CharacterDataContext character = new CharacterDataContext();
 
-            add_character(character);
+            if (character.Validated)
+            {
+                add_character(character);
+            }
         }
 
         private void DuplicateCharacter_MenuItem_Click(object sender, RoutedEventArgs e)
@@ -111,17 +114,22 @@ namespace DDFight.Controlers
 
         #endregion
 
-        #region edit
+        #region Edit
 
-        private void update_character(CharacterDataContext character)
+        private void update_character(CharacterDataContext to_update)
         {
             NewCharacterWindow window = new NewCharacterWindow();
-            window.DataContext = character;
+            CharacterDataContext temporary = (CharacterDataContext)to_update.Clone();
+            window.DataContext = temporary;
 
             window.ShowDialog();
 
-            CharacterList.SelectedItem = character;
-            data_context.CharacterList.Save();
+            if (temporary.Validated == true)
+            {
+                this.CharacterList.Items[this.CharacterList.SelectedIndex] = temporary;
+                data_context.CharacterList.Replace(to_update, temporary);
+                data_context.CharacterList.Save();
+            }
         }
 
         /// <summary>
