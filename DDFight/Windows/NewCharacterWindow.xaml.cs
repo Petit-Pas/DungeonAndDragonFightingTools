@@ -46,7 +46,7 @@ namespace DDFight.Windows
         {
             switch (ctrl)
             {
-                case IIsValidable box:
+                case IValidable box:
                     return box.IsValid();
                 default:
                     Console.WriteLine("ERROR: unimplemented type for IsValid in NewCharacterWindow.xaml.cs: {0}", ctrl.GetType());
@@ -64,7 +64,7 @@ namespace DDFight.Windows
             {
                 switch (ctrl)
                 {
-                    case IIsValidable _ctrl:
+                    case IValidable _ctrl:
                         if (_ctrl.IsValid() == false)
                         {
                             return false;

@@ -10,7 +10,7 @@ namespace DDFight.Controlers.InputBoxes
     /// <summary>
     /// Logique d'interaction pour NotEmptyStringTextBox.xaml
     /// </summary>
-    public partial class NotEmptyStringTextBox : UserControl, IIsFocusable, IIsValidable
+    public partial class NotEmptyStringTextBox : UserControl, IFocusable, IValidable
     {
         public NotEmptyStringTextBox()
         {

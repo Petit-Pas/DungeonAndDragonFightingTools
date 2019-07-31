@@ -10,7 +10,7 @@ namespace DDFight.Controlers.InputBoxes
     /// <summary>
     /// Logique d'interaction pour PositiveIntTextBox.xaml
     /// </summary>
-    public partial class PositiveIntTextBox : UserControl, IIsFocusable, IIsValidable
+    public partial class PositiveIntTextBox : UserControl, IFocusable, IValidable
     {
         public PositiveIntTextBox()
         {

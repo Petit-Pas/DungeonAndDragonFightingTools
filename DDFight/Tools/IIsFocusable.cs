@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DDFight.Tools
 {
-    interface IIsFocusable
+    interface IFocusable
     {
         void SetFocus();
     }

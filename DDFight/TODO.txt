@@ -2,10 +2,6 @@
 
 Fenetres centrées at spawn
 
-Add character button broken
-
-Changer nom des fenetres
-
 Griser bouton validate sur la NEwCharacterWindow when all are valids != true  ==> INotifyPropertyChanged ? ==> Good to learn how to use it
 
 Faire passer les méthodes telles que "edit character" dans le CharacterUserControl
@@ -13,3 +9,5 @@ Faire passer les méthodes telles que "edit character" dans le CharacterUserCont
 PV Temporaires
 
 rename NewCharacterWindow en EditCharacterWindow
+
+dans clone interface, ajouter une méthode qui permet de cloner un autre object en this.
