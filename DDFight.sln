@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDFight", "DDFight\DDFight.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SandBox", "SandBox\SandBox.csproj", "{23E4798D-10DE-41F9-B5EC-72F2634DF188}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "DDFightInstaller", "DDFightInstaller\DDFightInstaller.vdproj", "{5F33B852-665D-40CA-9812-573CEE34ED9C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,8 @@ Global
 		{23E4798D-10DE-41F9-B5EC-72F2634DF188}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23E4798D-10DE-41F9-B5EC-72F2634DF188}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23E4798D-10DE-41F9-B5EC-72F2634DF188}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F33B852-665D-40CA-9812-573CEE34ED9C}.Debug|Any CPU.ActiveCfg = Debug
+		{5F33B852-665D-40CA-9812-573CEE34ED9C}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

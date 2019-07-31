@@ -9,7 +9,7 @@
         xmlns:validation="clr-namespace:DDFight.ValidationRules"
         xmlns:input="clr-namespace:DDFight.Controlers.InputBoxes"
         xmlns:controlers="clr-namespace:DDFight.Controlers"
-        Title="NewCharacterWindow" Height="550" Width="400">
+        Title="Edit Character" Height="550" Width="400">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
