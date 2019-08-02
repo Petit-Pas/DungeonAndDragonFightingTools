@@ -60,17 +60,16 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" 
+            <Button x:Name="ValidateButton" Grid.Column="0" 
                     MaxWidth="100"
                     Click="ValidateButton_Click">
                 Validate
             </Button>
-            <Button Grid.Column="1"
+            <Button x:Name="CancelButton" Grid.Column="1"
                     MaxWidth="100"
                     Click="CancelButton_Click">
                 Cancel
             </Button>
         </Grid>
-
     </Grid>
 </Window>

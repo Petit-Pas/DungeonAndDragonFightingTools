@@ -47,38 +47,38 @@
             <TextBlock Grid.Row="2" Grid.Column="0" Text="{Binding Path=Characteristics.Strength.Name}"/>
             <CheckBox Grid.Row="2" Grid.Column="1" IsChecked="{Binding Path=Characteristics.Strength.Mastery}"
                       KeyDown="CheckBox_KeyDown"/>
-            <input:IntTextBox Grid.Row="2" Grid.Column="2"
+            <input:IntTextBox x:Name="StrengthBox" Grid.Row="2" Grid.Column="2"
                               PropertyPath="Characteristics.Strength.Modifier"/>
 
             <TextBlock Grid.Row="3" Grid.Column="0" Text="{Binding Path=Characteristics.Dexterity.Name}"/>
             <CheckBox Grid.Row="3" Grid.Column="1" IsChecked="{Binding Path=Characteristics.Dexterity.Mastery}" 
                       KeyDown="CheckBox_KeyDown"/>
-            <input:IntTextBox Grid.Row="3" Grid.Column="2"
+            <input:IntTextBox x:Name="DexterityBox" Grid.Row="3" Grid.Column="2"
                               PropertyPath="Characteristics.Dexterity.Modifier"/>
 
 
             <TextBlock Grid.Row="4" Grid.Column="0" Text="{Binding Path=Characteristics.Constitution.Name}" />
             <CheckBox Grid.Row="4" Grid.Column="1" IsChecked="{Binding Path=Characteristics.Constitution.Mastery}"
                       KeyDown="CheckBox_KeyDown"/>
-            <input:IntTextBox Grid.Row="4" Grid.Column="2"
+            <input:IntTextBox x:Name="ConstitutionBox" Grid.Row="4" Grid.Column="2"
                               PropertyPath="Characteristics.Constitution.Modifier"/>
 
             <TextBlock Grid.Row="5" Grid.Column="0" Text="{Binding Path=Characteristics.Intelligence.Name}"/>
             <CheckBox Grid.Row="5" Grid.Column="1" IsChecked="{Binding Path=Characteristics.Intelligence.Mastery}"
                       KeyDown="CheckBox_KeyDown"/>
-            <input:IntTextBox Grid.Row="5" Grid.Column="2"
+            <input:IntTextBox x:Name="IntelligenceBox" Grid.Row="5" Grid.Column="2"
                               PropertyPath="Characteristics.Intelligence.Modifier"/>
 
             <TextBlock Grid.Row="6" Grid.Column="0" Text="{Binding Path=Characteristics.Wisdom.Name}"/>
             <CheckBox Grid.Row="6" Grid.Column="1" IsChecked="{Binding Path=Characteristics.Wisdom.Mastery}"
                       KeyDown="CheckBox_KeyDown"/>
-            <input:IntTextBox Grid.Row="6" Grid.Column="2"
+            <input:IntTextBox x:Name="WisdomBox" Grid.Row="6" Grid.Column="2"
                               PropertyPath="Characteristics.Wisdom.Modifier"/>
 
             <TextBlock Grid.Row="7" Grid.Column="0" Text="{Binding Path=Characteristics.Charisma.Name}"/>
             <CheckBox Grid.Row="7" Grid.Column="1" IsChecked="{Binding Path=Characteristics.Charisma.Mastery}"
                       KeyDown="CheckBox_KeyDown"/>
-            <input:IntTextBox Grid.Row="7" Grid.Column="2"
+            <input:IntTextBox x:Name="CharismaBox" Grid.Row="7" Grid.Column="2"
                               PropertyPath="Characteristics.Charisma.Modifier"/>
         </Grid>
     </GroupBox>

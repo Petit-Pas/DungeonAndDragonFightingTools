@@ -75,7 +75,8 @@
     <Compile Include="Game\GameDataContext.cs" />
     <Compile Include="Tools\IClonable.cs" />
     <Compile Include="Tools\IIsFocusable.cs" />
-    <Compile Include="Tools\IIsValidable.cs" />
+    <Compile Include="ValidationRules\IIsValidable.cs" />
+    <Compile Include="Tools\INotifyPropertyChangedSub.cs" />
     <Compile Include="Tools\Logger.cs" />
     <Compile Include="Tools\Save\CharactersList.cs" />
     <Compile Include="Tools\Save\SaveManager.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="ValidationRules\NotEmptyStringRule.cs" />
     <Compile Include="ValidationRules\PositiveIntRule.cs" />
     <Compile Include="Game\CharacterDataContext.cs" />
+    <Compile Include="ValidationRules\ValidationRuleEventHandler.cs" />
     <Compile Include="Windows\NewCharacterWindow.xaml.cs">
       <DependentUpon>NewCharacterWindow.xaml</DependentUpon>
     </Compile>
@@ -160,6 +162,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="MainIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="WhenAddingProperty.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

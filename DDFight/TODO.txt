@@ -1,13 +1,17 @@
-﻿Remplacer nom de charactéritique par une enum
+﻿Add IsValid interface in CharacteristicsUserControl
 
-Fenetres centrées at spawn
+Switch characteristics "names" to enum values
+
+New windows should spawn in center of parent window
 
 Griser bouton validate sur la NEwCharacterWindow when all are valids != true  ==> INotifyPropertyChanged ? ==> Good to learn how to use it
 
-Faire passer les méthodes telles que "edit character" dans le CharacterUserControl
+Methods like "Edit Character" (see in NewCharacterWindow.xaml.cs) should be embedded in the CharacterUserControl class for more portable code
 
-PV Temporaires
+Think about a way to implement temporary Hps properly
 
-rename NewCharacterWindow en EditCharacterWindow
+rename NewCharacterWindow by EditCharacterWindow
 
-dans clone interface, ajouter une méthode qui permet de cloner un autre object en this.
+In IClonable interface, add a method that replace "this" by the given object
+
+Check for // HERE comments 

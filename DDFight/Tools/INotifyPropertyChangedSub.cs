@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DDFight.Tools
 {
-    interface IValidable
+    interface INotifyPropertyChangedSub
     {
-        bool IsValid();
+        void PropertyChangedSubscript(PropertyChangedEventHandler handler);
     }
 }

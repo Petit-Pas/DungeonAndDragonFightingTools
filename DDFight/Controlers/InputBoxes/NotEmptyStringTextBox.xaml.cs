@@ -47,10 +47,19 @@ namespace DDFight.Controlers.InputBoxes
 
         }
 
+        #region IIsValidable
+        
+        /// <summary>
+        ///     Tells wether the validation Rule is in error or not 
+        ///     /!\ The input event triggers before the check, so we can't just check the Error by hand after each input
+        /// </summary>
+        /// <returns></returns>
         public bool IsValid()
         {
             return !Validation.GetHasError(StringBox);
         }
+
+        #endregion
 
         public void SetFocus()
         {

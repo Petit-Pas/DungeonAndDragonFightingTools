@@ -1,8 +1,11 @@
 ﻿using DDFight.Controlers.InputBoxes;
 using DDFight.Game;
 using DDFight.Tools;
+using DDFight.ValidationRules;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -35,6 +38,17 @@ namespace DDFight.Windows
             controls.Add(CharacteristicsUserControl);
 
             NameBoxUserControl.SetFocus();
+
+            Loaded += OnControlLoaded;
+        }
+
+        /// <summary>
+        ///     when the cntrol is loaded, and the DataContext accessible
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnControlLoaded(object sender, RoutedEventArgs e)
+        {
         }
 
         /// <summary>
@@ -77,12 +91,29 @@ namespace DDFight.Windows
             return true;
         }
 
+        /// <summary>
+        ///     Handler for the click event on the validate button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ValidateButton_Click(object sender, RoutedEventArgs e)
         {
-            data_context.Validated = true;
-            Close();
+            if (!are_all_valids())
+            {
+                MessageBox.Show("At least one of the parameters is wrong, cannot validate", "Cannot validate");
+            }
+            else
+            {
+                data_context.Validated = true;
+                Close();
+            }
         }
 
+        /// <summary>
+        ///     Handler for the click event on the Cancel button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             data_context.Validated = false;

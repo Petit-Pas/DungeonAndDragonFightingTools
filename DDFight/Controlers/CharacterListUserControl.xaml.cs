@@ -136,7 +136,10 @@ namespace DDFight.Controlers
         /// <param name="e"></param>
         private void CharacterList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            update_character((CharacterDataContext)CharacterList.SelectedItem);
+            if (CharacterList.SelectedItem != null)
+            {
+                update_character((CharacterDataContext)CharacterList.SelectedItem);
+            }
         }
 
         /// <summary>
