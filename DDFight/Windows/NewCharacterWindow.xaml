@@ -9,7 +9,8 @@
         xmlns:validation="clr-namespace:DDFight.ValidationRules"
         xmlns:input="clr-namespace:DDFight.Controlers.InputBoxes"
         xmlns:controlers="clr-namespace:DDFight.Controlers"
-        Title="Edit Character" Height="550" Width="400">
+        Title="Edit Character" Height="550" Width="400"
+        WindowStartupLocation="CenterOwner">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -31,6 +32,13 @@
         <input:NotEmptyStringTextBox x:Name="NameBoxUserControl" 
                                      Grid.Row="0" Grid.Column="1" Margin="0, 5, 10, 5"
                                      PropertyPath="Name"/>
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Margin="10, 5">
+            Level
+        </TextBlock>
+        <input:NotEmptyStringTextBox x:Name="LevelBoxUserControl" 
+                                     Grid.Row="1" Grid.Column="1" Margin="0, 5, 10, 5"
+                                     PropertyPath="Level"/>
 
         <TextBlock Grid.Row="2" Grid.Column="0" Margin="10, 5">
             Armor class

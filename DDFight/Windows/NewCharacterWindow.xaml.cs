@@ -33,9 +33,11 @@ namespace DDFight.Windows
             InitializeComponent();
 
             controls.Add(NameBoxUserControl);
+            controls.Add(LevelBoxUserControl);
             controls.Add(CABoxUserControl);
             controls.Add(MaxHPBoxUserControl);
             controls.Add(HPBoxUserControl);
+
             controls.Add(CharacteristicsUserControl);
 
             NameBoxUserControl.SetFocus();
@@ -50,23 +52,6 @@ namespace DDFight.Windows
         /// <param name="e"></param>
         private void OnControlLoaded(object sender, RoutedEventArgs e)
         {
-        }
-
-        /// <summary>
-        ///     Checks that the given textob isn't empty
-        /// </summary>
-        /// <param name="box"></param>
-        /// <returns></returns>
-        private bool is_valid(Control ctrl)
-        {
-            switch (ctrl)
-            {
-                case IValidable box:
-                    return box.IsValid();
-                default:
-                    Console.WriteLine("ERROR: unimplemented type for IsValid in NewCharacterWindow.xaml.cs: {0}", ctrl.GetType());
-                    return false;
-            }
         }
 
         /// <summary>
@@ -86,6 +71,7 @@ namespace DDFight.Windows
                         }
                         break;
                     default:
+                        Console.WriteLine("Warning: unimplemented type for IsValid in NewCharacterWindow.xaml.cs: {0}", ctrl.GetType());
                         break;
                 }
             }

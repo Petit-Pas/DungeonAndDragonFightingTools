@@ -115,7 +115,10 @@ namespace DDFight.Controlers
 
         private void update_character(CharacterDataContext to_update)
         {
-            NewCharacterWindow window = new NewCharacterWindow();
+            NewCharacterWindow window = new NewCharacterWindow
+            {
+                Owner = Window.GetWindow(this),
+            };
             CharacterDataContext temporary = (CharacterDataContext)to_update.Clone();
             window.DataContext = temporary;
 

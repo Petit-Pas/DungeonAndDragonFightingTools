@@ -38,6 +38,24 @@ namespace DDFight.Game
         private string _name = "Name";
 
         /// <summary>
+        ///     Level of the Character
+        /// </summary>
+        [XmlAttribute]
+        public uint Level
+        {
+            get => _level;
+            set
+            {
+                if (value != _level)
+                {
+                    _level = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        private uint _level = 1;
+
+        /// <summary>
         ///     Armor Class
         /// </summary>
         [XmlAttribute]
@@ -169,6 +187,7 @@ namespace DDFight.Game
             return new CharacterDataContext
             {
                 Name = (string)this.Name.Clone(),
+                Level = this.Level,
                 CA = this.CA,
                 Hp = this.Hp,
                 MaxHp = this.MaxHp,

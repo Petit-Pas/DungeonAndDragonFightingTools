@@ -1,4 +1,5 @@
 ﻿using DDFight.Game;
+using DDFight.ValidationRules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,11 +20,41 @@ namespace DDFight.Controlers
     /// <summary>
     /// Interaction logic for CharacteristicsUserControl.xaml
     /// </summary>
-    public partial class CharacteristicsUserControl : UserControl
+    public partial class CharacteristicsUserControl : UserControl, IValidable
     {
+        private List<UserControl> controls = new List<UserControl>();
+
         public CharacteristicsUserControl()
         {
             InitializeComponent();
+
+            controls.Add(StrengthBox);
+            controls.Add(DexterityBox);
+            controls.Add(ConstitutionBox);
+            controls.Add(IntelligenceBox);
+            controls.Add(WisdomBox);
+            controls.Add(CharismaBox);
+            controls.Add(MasteryBonusBox);
+        }
+
+        public bool IsValid()
+        {
+            foreach (Control ctrl in controls)
+            {
+                switch (ctrl)
+                {
+                    case IValidable _ctrl:
+                        if (_ctrl.IsValid() == false)
+                        {
+                            return false;
+                        }
+                        break;
+                    default:
+                        Console.WriteLine("Warning: unimplemented type for IsValid in CharacteristicsUserControl.xaml.cs: {0}", ctrl.GetType());
+                        break;
+                }
+            }
+            return true;
         }
 
         private void CheckBox_KeyDown(object sender, KeyEventArgs e)

@@ -22,6 +22,23 @@ namespace DDFight.Game.Characteristics
         #region characteristics
 
         /// <summary>
+        ///     The amount to add to mastered characteristics
+        /// </summary>
+        public uint MasteryBonus
+        {
+            get => _masteryBonus;
+            set
+            {
+                if (_masteryBonus != value)
+                {
+                    _masteryBonus = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        private uint _masteryBonus = 0;
+
+        /// <summary>
         ///     Strength
         /// </summary>
         public CharacteristicDataContext Strength
@@ -180,6 +197,8 @@ namespace DDFight.Game.Characteristics
                 Intelligence = (CharacteristicDataContext)this._intelligence.Clone(),
                 Strength = (CharacteristicDataContext)this._strength.Clone(),
                 Wisdom = (CharacteristicDataContext)this._wisdom.Clone(),
+
+                MasteryBonus = this._masteryBonus,
             };
         }
 

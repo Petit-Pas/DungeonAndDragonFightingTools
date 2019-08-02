@@ -76,8 +76,8 @@
     <Compile Include="Game\GameDataContext.cs" />
     <Compile Include="Resources\ResourceManager.cs" />
     <Compile Include="Tools\IClonable.cs" />
-    <Compile Include="Tools\IIsFocusable.cs" />
-    <Compile Include="ValidationRules\IIsValidable.cs" />
+    <Compile Include="Tools\IFocusable.cs" />
+    <Compile Include="ValidationRules\IValidable.cs" />
     <Compile Include="Tools\INotifyPropertyChangedSub.cs" />
     <Compile Include="Tools\Logger.cs" />
     <Compile Include="Tools\Save\CharactersList.cs" />
