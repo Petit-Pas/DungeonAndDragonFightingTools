@@ -1,10 +1,6 @@
-﻿Add IsValid interface in CharacteristicsUserControl
+﻿Change EditCharacterWindow to make it reusable for anything (Generic / inheritance, wtv)
 
 Switch characteristics "names" to enum values
-
-New windows should spawn in center of parent window
-
-Griser bouton validate sur la NEwCharacterWindow when all are valids != true  ==> INotifyPropertyChanged ? ==> Good to learn how to use it
 
 Methods like "Edit Character" (see in NewCharacterWindow.xaml.cs) should be embedded in the CharacterUserControl class for more portable code
 

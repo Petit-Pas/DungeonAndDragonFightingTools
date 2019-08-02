@@ -1,0 +1,48 @@
+﻿<Window x:Class="DDFight.Windows.AskYesNoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DDFight.Windows"
+        mc:Ignorable="d"
+        Title="Are you sure?" Height="250" Width="350"
+        WindowStartupLocation="CenterOwner"
+        KeyDown="Window_KeyDown">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type local:AskYesNoDataContext}">
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.ColumnSpan="5" Grid.Column="0" Grid.Row="0" Margin="20, 10" VerticalAlignment="Center">
+            <TextBlock Text="{Binding Message, UpdateSourceTrigger=PropertyChanged}"
+                       TextWrapping="Wrap"
+                       TextAlignment="Center">
+            </TextBlock>
+        </StackPanel>
+        <Button Grid.Column="1" Grid.Row="1" Width="70" Height="30" Margin="0, 15" Click="ClickYes">
+            <StackPanel>
+                <TextBlock>
+                    Yes
+                </TextBlock>
+            </StackPanel>
+        </Button>
+        <Button Grid.Column="3" Grid.Row="1" Width="70" Height="30" Margin="0, 15" Click="ClickNo">
+            <StackPanel>
+                <TextBlock>
+                    No
+                </TextBlock>
+            </StackPanel>
+        </Button>
+    </Grid>
+</Window>

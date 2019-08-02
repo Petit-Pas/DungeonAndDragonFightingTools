@@ -115,7 +115,7 @@ namespace DDFight.Controlers
 
         private void update_character(CharacterDataContext to_update)
         {
-            NewCharacterWindow window = new NewCharacterWindow
+            EditCharacterWindow window = new EditCharacterWindow
             {
                 Owner = Window.GetWindow(this),
             };

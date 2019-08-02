@@ -1,4 +1,4 @@
-﻿<Window x:Class="DDFight.Windows.NewCharacterWindow"
+﻿<Window x:Class="DDFight.Windows.EditCharacterWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -10,7 +10,8 @@
         xmlns:input="clr-namespace:DDFight.Controlers.InputBoxes"
         xmlns:controlers="clr-namespace:DDFight.Controlers"
         Title="Edit Character" Height="550" Width="400"
-        WindowStartupLocation="CenterOwner">
+        WindowStartupLocation="CenterOwner"
+        Closing="Window_Closing">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

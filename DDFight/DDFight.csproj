@@ -87,8 +87,12 @@
     <Compile Include="ValidationRules\PositiveIntRule.cs" />
     <Compile Include="Game\CharacterDataContext.cs" />
     <Compile Include="ValidationRules\ValidationRuleEventHandler.cs" />
-    <Compile Include="Windows\NewCharacterWindow.xaml.cs">
-      <DependentUpon>NewCharacterWindow.xaml</DependentUpon>
+    <Compile Include="Windows\AskYesNoDataContext.cs" />
+    <Compile Include="Windows\AskYesNoWindow.xaml.cs">
+      <DependentUpon>AskYesNoWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\EditCharacterWindow.xaml.cs">
+      <DependentUpon>EditCharacterWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\StatusMessageWindow.xaml.cs">
       <DependentUpon>StatusMessageWindow.xaml</DependentUpon>
@@ -129,7 +133,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Windows\NewCharacterWindow.xaml">
+    <Page Include="Windows\AskYesNoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\EditCharacterWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
