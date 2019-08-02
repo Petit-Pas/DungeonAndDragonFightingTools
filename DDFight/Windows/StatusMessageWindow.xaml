@@ -1,0 +1,43 @@
+﻿<Window x:Class="DDFight.Windows.StatusMessageWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DDFight.Windows"
+        mc:Ignorable="d"
+        Title="Status" Height="200" Width="350"
+        KeyDown="Window_KeyDown"
+        WindowStartupLocation="CenterOwner">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="60" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0"
+                   Margin="10"
+                   Text="{Binding Message}"
+                   TextAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="14"
+                   TextWrapping="Wrap">
+        </TextBlock>
+        <Image Grid.Row="0" Grid.Column="1"
+               Source="{Binding Icon}"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Center"
+               Margin="10"/>
+        <Button HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                Click="Button_Click"
+                Width="70"
+                Height="30">
+            Ok
+        </Button>
+    </Grid>
+</Window>

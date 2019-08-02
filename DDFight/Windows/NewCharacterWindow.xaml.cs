@@ -1,5 +1,6 @@
 ﻿using DDFight.Controlers.InputBoxes;
 using DDFight.Game;
+using DDFight.Resources;
 using DDFight.Tools;
 using DDFight.ValidationRules;
 using System;
@@ -100,7 +101,19 @@ namespace DDFight.Windows
         {
             if (!are_all_valids())
             {
-                MessageBox.Show("At least one of the parameters is wrong, cannot validate", "Cannot validate");
+                StatusMessageWindowDataContext context = new StatusMessageWindowDataContext
+                {
+                    Message = "At least one of the parameters is wrong",
+                    Icon = ResourceManager.BmUnchecked(),
+                };
+                StatusMessageWindow message = new StatusMessageWindow
+                {
+                    Title = "Cannot validate",
+                    DataContext = context,
+                    Owner = this,
+                };
+
+                message.ShowDialog();
             }
             else
             {

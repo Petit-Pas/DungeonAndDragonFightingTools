@@ -39,6 +39,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -73,6 +74,7 @@
     <Compile Include="Game\Characteristics\CharacteristicDataContext.cs" />
     <Compile Include="Game\Characteristics\CharacteristicsDataContext.cs" />
     <Compile Include="Game\GameDataContext.cs" />
+    <Compile Include="Resources\ResourceManager.cs" />
     <Compile Include="Tools\IClonable.cs" />
     <Compile Include="Tools\IIsFocusable.cs" />
     <Compile Include="ValidationRules\IIsValidable.cs" />
@@ -88,6 +90,10 @@
     <Compile Include="Windows\NewCharacterWindow.xaml.cs">
       <DependentUpon>NewCharacterWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\StatusMessageWindow.xaml.cs">
+      <DependentUpon>StatusMessageWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\StatusMessageWindowDataContext.cs" />
     <Page Include="Controlers\CharacterListUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -124,6 +130,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Windows\NewCharacterWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\StatusMessageWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -165,6 +175,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="WhenAddingProperty.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\checked.png" />
+    <Resource Include="Resources\unchecked.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
