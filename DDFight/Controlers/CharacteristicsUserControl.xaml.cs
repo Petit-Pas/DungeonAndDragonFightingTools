@@ -22,9 +22,19 @@ namespace DDFight.Controlers
     /// </summary>
     public partial class CharacteristicsUserControl : UserControl, IValidable
     {
+        private List<UserControl> controls = new List<UserControl>();
+
         public CharacteristicsUserControl()
         {
             InitializeComponent();
+
+            controls.Add(StrengthBox);
+            controls.Add(DexterityBox);
+            controls.Add(ConstitutionBox);
+            controls.Add(IntelligenceBox);
+            controls.Add(WisdomBox);
+            controls.Add(CharismaBox);
+            controls.Add(MasteryBonusBox);
         }
 
         public bool IsValid()
