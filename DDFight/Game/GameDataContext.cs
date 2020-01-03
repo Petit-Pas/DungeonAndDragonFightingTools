@@ -18,5 +18,10 @@ namespace DDFight.Game
         ///     The list of existing character
         /// </summary>
         public CharactersList CharacterList = new CharactersList();
+
+        /// <summary>
+        ///     The list of all possible ennemies encountered
+        /// </summary>
+        public MonstersList MonsterList = new MonstersList();
     }
 }

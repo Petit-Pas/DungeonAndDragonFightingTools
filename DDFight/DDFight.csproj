@@ -70,13 +70,18 @@
     <Compile Include="Controlers\InputBoxes\PositiveIntBox.xaml.cs">
       <DependentUpon>PositiveIntBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controlers\MonsterListUserControl.xaml.cs">
+      <DependentUpon>MonsterListUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\StringIntConverter.cs" />
     <Compile Include="Game\Characteristics\CharacteristicDataContext.cs" />
     <Compile Include="Game\Characteristics\CharacteristicsDataContext.cs" />
+    <Compile Include="Game\MonsterDataContext.cs" />
     <Compile Include="Game\GameDataContext.cs" />
     <Compile Include="Resources\ResourceManager.cs" />
     <Compile Include="Tools\IClonable.cs" />
     <Compile Include="Tools\IFocusable.cs" />
+    <Compile Include="Tools\Save\MonstersList.cs" />
     <Compile Include="ValidationRules\IValidable.cs" />
     <Compile Include="Tools\INotifyPropertyChangedSub.cs" />
     <Compile Include="Tools\Logger.cs" />
@@ -93,6 +98,9 @@
     </Compile>
     <Compile Include="Windows\EditCharacterWindow.xaml.cs">
       <DependentUpon>EditCharacterWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\EditMonsterWindow.xaml.cs">
+      <DependentUpon>EditMonsterWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\StatusMessageWindow.xaml.cs">
       <DependentUpon>StatusMessageWindow.xaml</DependentUpon>
@@ -118,6 +126,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controlers\MonsterListUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -138,6 +150,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\EditCharacterWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\EditMonsterWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

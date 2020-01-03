@@ -16,6 +16,7 @@ namespace DDFight
             GameDataContext context = new GameDataContext
             {
                 CharacterList = SaveManager.LoadPlayers(),
+                MonsterList = SaveManager.LoadMonsters(),
             };
 
             DataContext = context;

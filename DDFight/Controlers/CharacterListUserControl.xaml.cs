@@ -43,6 +43,7 @@ namespace DDFight.Controlers
         {
             if (data_context.CharacterList != null)
             {
+                this.CharacterList.Items.Clear();
                 foreach (CharacterDataContext character in data_context.CharacterList?.Characters)
                 {
                     this.CharacterList.Items.Add(character);
