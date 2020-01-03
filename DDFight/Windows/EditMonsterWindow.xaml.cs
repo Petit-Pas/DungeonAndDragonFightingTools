@@ -76,7 +76,7 @@ namespace DDFight.Windows
                         }
                         break;
                     default:
-                        Console.WriteLine("Warning: unimplemented type for IsValid in NewCharacterWindow.xaml.cs: {0}", ctrl.GetType());
+                        Console.WriteLine("Warning: unimplemented type for IsValid in NewMonsterWindow.xaml.cs: {0}", ctrl.GetType());
                         break;
                 }
             }
