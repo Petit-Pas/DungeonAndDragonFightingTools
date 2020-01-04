@@ -10,7 +10,7 @@ using System.Xml.Serialization;
 
 namespace DDFight.Game.Characteristics
 {
-    public class PlayableEntity : IClonable, INotifyPropertyChanged /*, INotifyPropertyChangedSub*/
+    public class PlayableEntity : ICloneable, INotifyPropertyChanged /*, INotifyPropertyChangedSub*/
     {
         public PlayableEntity() 
         {
@@ -180,11 +180,10 @@ namespace DDFight.Game.Characteristics
         ///     Method to clone a character (Deep Copy)
         /// </summary>
         /// <returns></returns>
-        public virtual IClonable Clone()
+        public virtual object Clone()
         {
             return new PlayableEntity(this);
         }
-
         #endregion
     }
 }

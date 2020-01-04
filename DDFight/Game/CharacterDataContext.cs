@@ -11,7 +11,7 @@ namespace DDFight.Game
     /// <summary>
     ///     Represents a Character for D&D (not to confound with Monsters)
     /// </summary>
-    public class CharacterDataContext : PlayableEntity, IClonable, INotifyPropertyChanged /*, INotifyPropertyChangedSub*/
+    public class CharacterDataContext : PlayableEntity /*, INotifyPropertyChangedSub*/
     {
         public CharacterDataContext() : base()
         {
@@ -71,7 +71,7 @@ namespace DDFight.Game
             Level = to_copy.Level;
         }
 
-        public override IClonable Clone()
+        public override object Clone()
         {
             return new CharacterDataContext(this);
         }

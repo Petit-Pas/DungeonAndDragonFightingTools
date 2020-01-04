@@ -11,7 +11,7 @@ using System.Xml.Serialization;
 
 namespace DDFight.Game
 {
-    public class MonsterDataContext : PlayableEntity, IClonable
+    public class MonsterDataContext : PlayableEntity
     {
         public MonsterDataContext()
         {
@@ -64,12 +64,12 @@ namespace DDFight.Game
             Level = to_copy.Level;
         }
 
-        #region IClonable
+        #region ICloneable
         /// <summary>
         ///     Method to clone a character (Deep Copy)
         /// </summary>
         /// <returns></returns>
-        public override IClonable Clone()
+        public override object Clone()
         {
             return new MonsterDataContext(this);
         }
