@@ -16,7 +16,7 @@ namespace DDFight.Game.Characteristics
     /// <summary>
     ///     Contains all the characteristic of a character
     /// </summary>
-    public class CharacteristicsDataContext : ICloneable, INotifyPropertyChanged, INotifyPropertyChangedSub
+    public class CharacteristicsDataContext : ICloneable, INotifyPropertyChanged  /*, INotifyPropertyChangedSub*/
     {
 
         #region characteristics
@@ -143,7 +143,7 @@ namespace DDFight.Game.Characteristics
         #endregion
 
         #region INotifyPropertyChangedSub
-
+        /*
         /// <summary>
         ///     Subscribes the given event handler to this + all nested classes' PropertyChanged events
         /// </summary>
@@ -158,7 +158,7 @@ namespace DDFight.Game.Characteristics
             Wisdom.PropertyChangedSubscript(handler);
             Charisma.PropertyChangedSubscript(handler);
         }
-
+        */
         #endregion
 
         #region INotifyPropertyChanged

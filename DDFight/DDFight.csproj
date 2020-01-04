@@ -76,6 +76,7 @@
     <Compile Include="Converters\StringIntConverter.cs" />
     <Compile Include="Game\Characteristics\CharacteristicDataContext.cs" />
     <Compile Include="Game\Characteristics\CharacteristicsDataContext.cs" />
+    <Compile Include="Game\Characteristics\PlayableEntity.cs" />
     <Compile Include="Game\MonsterDataContext.cs" />
     <Compile Include="Game\GameDataContext.cs" />
     <Compile Include="Resources\ResourceManager.cs" />
