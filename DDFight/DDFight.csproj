@@ -80,7 +80,6 @@
     <Compile Include="Game\MonsterDataContext.cs" />
     <Compile Include="Game\GameDataContext.cs" />
     <Compile Include="Resources\ResourceManager.cs" />
-    <Compile Include="Tools\IClonable.cs" />
     <Compile Include="Tools\IFocusable.cs" />
     <Compile Include="Tools\Save\MonstersList.cs" />
     <Compile Include="ValidationRules\IValidable.cs" />

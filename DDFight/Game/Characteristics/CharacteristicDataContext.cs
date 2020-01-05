@@ -123,7 +123,7 @@ namespace DDFight.Game.Characteristics
         }
         #endregion
 
-        #region IClonable
+        #region ICloneable
 
         /// <summary>
         ///     Processes Deep copy on the item

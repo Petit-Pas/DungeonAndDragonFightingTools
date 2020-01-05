@@ -91,26 +91,6 @@ namespace DDFight.Game.Characteristics
         private int _hp = 0;
 
 
-        //TODO move into characteristics ? 
-        /// <summary>
-        ///     The mastery Bonus to apply on mastered Characteristics
-        /// </summary>
-        [XmlAttribute]
-        public uint MasteryBonus
-        {
-            get => _masteryBonus;
-            set
-            {
-                if (value != _masteryBonus)
-                {
-                    _masteryBonus = value;
-                    NotifyPropertyChanged();
-                }
-            }
-        }
-        private uint _masteryBonus = 0;
-
-
         /// <summary>
         ///     The characteristics of the character
         /// </summary>
