@@ -17,7 +17,7 @@ namespace DDFight.Game.DamageAffinity
     public enum DamageTypeEnum
     {
         Acid,
-        Bludgeonning,
+        Bludgeoning,
         Cold,
         Fire,
         Force,
