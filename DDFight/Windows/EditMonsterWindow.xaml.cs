@@ -4,17 +4,9 @@ using DDFight.ValidationRules;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+
 
 namespace DDFight.Windows
 {
@@ -24,7 +16,7 @@ namespace DDFight.Windows
     public partial class EditMonsterWindow : Window
     {
         /// <summary>
-        ///     contains a list of the parameters IN THE RIGHT ORDER
+        ///     contains a list of the parameters
         /// </summary>
         private List<UserControl> controls = new List<UserControl>();
 
@@ -37,15 +29,15 @@ namespace DDFight.Windows
         {
             InitializeComponent();
 
-            controls.Add(NameBoxUserControl);
-            controls.Add(LevelBoxUserControl);
-            controls.Add(CABoxUserControl);
-            controls.Add(MaxHPBoxUserControl);
-            controls.Add(HPBoxUserControl);
+            controls.Add(MainInfo.NameBoxUserControl);
+            controls.Add(MainInfo.LevelBoxUserControl);
+            controls.Add(MainInfo.CABoxUserControl);
+            controls.Add(MainInfo.MaxHPBoxUserControl);
+            controls.Add(MainInfo.HPBoxUserControl);
 
-            controls.Add(CharacteristicsUserControl);
+            controls.Add(MainInfo.CharacteristicsUserControl);
 
-            NameBoxUserControl.SetFocus();
+            //MainInfo.NameBoxUserControl.SetFocus();
 
             Loaded += OnControlLoaded;
         }

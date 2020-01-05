@@ -32,15 +32,15 @@ namespace DDFight.Windows
         {
             InitializeComponent();
 
-            controls.Add(NameBoxUserControl);
-            controls.Add(LevelBoxUserControl);
-            controls.Add(CABoxUserControl);
-            controls.Add(MaxHPBoxUserControl);
-            controls.Add(HPBoxUserControl);
+            controls.Add(MainInfo.NameBoxUserControl);
+            controls.Add(MainInfo.LevelBoxUserControl);
+            controls.Add(MainInfo.CABoxUserControl);
+            controls.Add(MainInfo.MaxHPBoxUserControl);
+            controls.Add(MainInfo.HPBoxUserControl);
 
-            controls.Add(CharacteristicsUserControl);
+            controls.Add(MainInfo.CharacteristicsUserControl);
 
-            NameBoxUserControl.SetFocus();
+            MainInfo.NameBoxUserControl.SetFocus();
 
             Loaded += OnControlLoaded;
         }
@@ -52,7 +52,6 @@ namespace DDFight.Windows
         /// <param name="e"></param>
         private void OnControlLoaded(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("COCHON: " + data_context.Characteristics.MasteryBonus);
         }
 
         /// <summary>

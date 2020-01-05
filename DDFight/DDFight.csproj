@@ -61,6 +61,9 @@
     <Compile Include="Controlers\CharacteristicsUserControl.xaml.cs">
       <DependentUpon>CharacteristicsUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controlers\Characters\CharacterMainInfoUserControl.xaml.cs">
+      <DependentUpon>CharacterMainInfoUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controlers\InputBoxes\IntTextBox.xaml.cs">
       <DependentUpon>IntTextBox.xaml</DependentUpon>
     </Compile>
@@ -70,8 +73,11 @@
     <Compile Include="Controlers\InputBoxes\PositiveIntBox.xaml.cs">
       <DependentUpon>PositiveIntBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controlers\MonsterListUserControl.xaml.cs">
+    <Compile Include="Controlers\Monsters\MonsterListUserControl.xaml.cs">
       <DependentUpon>MonsterListUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controlers\Monsters\MonsterMainInfoUserControl.xaml.cs">
+      <DependentUpon>MonsterMainInfoUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\StringIntConverter.cs" />
     <Compile Include="Game\Characteristics\CharacteristicDataContext.cs" />
@@ -109,11 +115,15 @@
       <DependentUpon>StatusMessageWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\StatusMessageWindowDataContext.cs" />
-    <Page Include="Controlers\CharacterListUserControl.xaml">
+    <Page Include="Controlers\Characters\CharacterListUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controlers\CharacteristicsUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controlers\Characters\CharacterMainInfoUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -129,7 +139,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controlers\MonsterListUserControl.xaml">
+    <Page Include="Controlers\Monsters\MonsterListUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controlers\Monsters\MonsterMainInfoUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -141,7 +155,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controlers\CharacterListUserControl.xaml.cs">
+    <Compile Include="Controlers\Characters\CharacterListUserControl.xaml.cs">
       <DependentUpon>CharacterListUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">

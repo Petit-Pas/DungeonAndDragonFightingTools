@@ -13,4 +13,21 @@ namespace DDFight.Game.DamageAffinity
         Immuned,
         Weak,
     }
+
+    public enum DamageTypeEnum
+    {
+        Acid,
+        Bludgeonning,
+        Cold,
+        Fire,
+        Force,
+        Lightning,
+        Necrotic,
+        Piercing,
+        Poison,
+        Psychic,
+        Radiant,
+        Slashing,
+        Thunder,
+    }
 }

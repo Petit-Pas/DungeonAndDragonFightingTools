@@ -83,7 +83,6 @@ namespace DDFight.Tools.Save
             {
                 Logger.Log(String.Format("Unknown error while trying to load the characters file: {0}, {1}", e.Message, e.StackTrace));
             }
-            Console.WriteLine("COCHON load: " + result.Characters[0].Characteristics.MasteryBonus);
             return result;
         }
 
