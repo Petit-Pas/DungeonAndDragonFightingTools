@@ -6,6 +6,7 @@
              xmlns:input="clr-namespace:DDFight.Controlers.InputBoxes"
              xmlns:controlers="clr-namespace:DDFight.Controlers"
              xmlns:local="clr-namespace:DDFight.Controlers.Characters"
+             xmlns:characteristics="clr-namespace:DDFight.Controlers.Game.Characteristics"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -93,7 +94,7 @@
                             PropertyPath="Hp"/>
 
         </Grid>
-        <controlers:CharacteristicsUserControl 
+        <characteristics:EditableCharacteristicsList 
                         x:Name="CharacteristicsUserControl"
                         Grid.Row="2"/>
     </Grid>

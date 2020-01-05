@@ -64,6 +64,9 @@
     <Compile Include="Controlers\Characters\CharacterMainInfoUserControl.xaml.cs">
       <DependentUpon>CharacterMainInfoUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controlers\Game\Characteristics\EditableCharacteristicsList.xaml.cs">
+      <DependentUpon>EditableCharacteristicsList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controlers\InputBoxes\IntTextBox.xaml.cs">
       <DependentUpon>IntTextBox.xaml</DependentUpon>
     </Compile>
@@ -82,6 +85,7 @@
     <Compile Include="Converters\StringIntConverter.cs" />
     <Compile Include="Game\Characteristics\CharacteristicDataContext.cs" />
     <Compile Include="Game\Characteristics\CharacteristicsDataContext.cs" />
+    <Compile Include="Game\Characteristics\CharacteristicsEnum.cs" />
     <Compile Include="Game\DamageAffinity\DamageAffinityEnum.cs" />
     <Compile Include="Game\DamageAffinity\DamageTypeAffinitiesDataContext.cs" />
     <Compile Include="Game\DamageAffinity\DamageTypeAffinityDataContext.cs" />
@@ -124,6 +128,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controlers\Characters\CharacterMainInfoUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controlers\Game\Characteristics\EditableCharacteristicsList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

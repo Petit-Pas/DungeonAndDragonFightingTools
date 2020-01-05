@@ -22,9 +22,36 @@ namespace DDFight.Game.Characteristics
 
         public CharacteristicsDataContext()
         {
+            if (!GlobalVariables.Loading)
+                initCharacteristicsList();
+        }
+
+        private void initCharacteristicsList()
+        {
+            _characteristicsList = new List<CharacteristicDataContext>();
+            _characteristicsList.Add(new CharacteristicDataContext(CharacteristicsEnum.Strength));
+            _characteristicsList.Add(new CharacteristicDataContext(CharacteristicsEnum.Dexterity));
+            _characteristicsList.Add(new CharacteristicDataContext(CharacteristicsEnum.Constitution));
+            _characteristicsList.Add(new CharacteristicDataContext(CharacteristicsEnum.Intelligence));
+            _characteristicsList.Add(new CharacteristicDataContext(CharacteristicsEnum.Wisdom));
+            _characteristicsList.Add(new CharacteristicDataContext(CharacteristicsEnum.Charisma));
         }
 
         #region characteristics
+
+        public List<CharacteristicDataContext> CharacteristicsList
+        {
+            get {
+                return _characteristicsList;
+            } 
+            set 
+            {
+                Console.WriteLine("COCHON set list, " + value.Count);
+                _characteristicsList = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private List<CharacteristicDataContext> _characteristicsList = null;
 
         [XmlAttribute]
         /// <summary>
@@ -43,108 +70,6 @@ namespace DDFight.Game.Characteristics
             }
         }
         private uint _masteryBonus = 0;
-
-        /// <summary>
-        ///     Strength
-        /// </summary>
-        public CharacteristicDataContext Strength
-        {
-            get => _strength;
-            set
-            {
-                if (_strength != value)
-                {
-                    _strength = value;
-                    NotifyPropertyChanged();
-                }
-            }
-        }
-        private CharacteristicDataContext _strength = new CharacteristicDataContext("Strength");
-
-        /// <summary>
-        ///     Dexterity
-        /// </summary>
-        public CharacteristicDataContext Dexterity
-        {
-            get => _dexterity;
-            set
-            {
-                if (_dexterity != value)
-                {
-                    _dexterity = value;
-                    NotifyPropertyChanged();
-                }
-            }
-        }
-        private CharacteristicDataContext _dexterity = new CharacteristicDataContext("Dexterity");
-
-        /// <summary>
-        ///     Constitution
-        /// </summary>
-        public CharacteristicDataContext Constitution
-        {
-            get => _constitution;
-            set
-            {
-                if (_constitution != value)
-                {
-                    _constitution = value;
-                    NotifyPropertyChanged();
-                }
-            }
-        }
-        private CharacteristicDataContext _constitution = new CharacteristicDataContext("Constitution");
-
-        /// <summary>
-        ///     Intelligence
-        /// </summary>
-        public CharacteristicDataContext Intelligence
-        {
-            get => _intelligence;
-            set
-            {
-                if (_intelligence != value)
-                {
-                    _intelligence = value;
-                    NotifyPropertyChanged();
-                }
-            }
-        }
-        private CharacteristicDataContext _intelligence = new CharacteristicDataContext("Intelligence");
-
-        /// <summary>
-        ///     Wisdom
-        /// </summary>
-        public CharacteristicDataContext Wisdom
-        {
-            get => _wisdom;
-            set
-            {
-                if (_wisdom != value)
-                {
-                    _wisdom = value;
-                    NotifyPropertyChanged();
-                }
-            }
-        }
-        private CharacteristicDataContext _wisdom = new CharacteristicDataContext("Wisdom");
-
-        /// <summary>
-        ///     Charisma
-        /// </summary>
-        public CharacteristicDataContext Charisma
-        {
-            get => _charisma;
-            set
-            {
-                if (_charisma != value)
-                {
-                    _charisma = value;
-                    NotifyPropertyChanged();
-                }
-            }
-        }
-        private CharacteristicDataContext _charisma = new CharacteristicDataContext("Charisma");
 
         #endregion
 
@@ -189,16 +114,22 @@ namespace DDFight.Game.Characteristics
 
         #region ICloneable
 
+
         public CharacteristicsDataContext(CharacteristicsDataContext to_copy)
         {
-            Charisma = (CharacteristicDataContext)to_copy._charisma.Clone();
+            Console.WriteLine("COCHON copy constructor");
+
+            /*Charisma = (CharacteristicDataContext)to_copy._charisma.Clone();
             Constitution = (CharacteristicDataContext)to_copy._constitution.Clone();
             Dexterity = (CharacteristicDataContext)to_copy._dexterity.Clone();
             Intelligence = (CharacteristicDataContext)to_copy._intelligence.Clone();
             Strength = (CharacteristicDataContext)to_copy._strength.Clone();
-            Wisdom = (CharacteristicDataContext)to_copy._wisdom.Clone();
+            Wisdom = (CharacteristicDataContext)to_copy._wisdom.Clone();*/
 
             MasteryBonus = to_copy.MasteryBonus;
+            Console.WriteLine("COCHON: " + to_copy.CharacteristicsList.Count);
+            CharacteristicsList = (List<CharacteristicDataContext>)to_copy.CharacteristicsList.Clone();
+            Console.WriteLine("COCHON: " + CharacteristicsList[0].Name + " " + CharacteristicsList[0].Modifier);
         }
 
         /// <summary>
@@ -211,5 +142,13 @@ namespace DDFight.Game.Characteristics
         }
 
         #endregion
+    }
+
+    static class Extensions
+    {
+        public static IList<T> Clone<T>(this IList<T> listToClone) where T : ICloneable
+        {
+            return listToClone.Select(item => (T)item.Clone()).ToList();
+        }
     }
 }

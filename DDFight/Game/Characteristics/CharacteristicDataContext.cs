@@ -26,10 +26,9 @@ namespace DDFight.Game.Characteristics
         /// <summary>
         ///     Ctor
         /// </summary>
-        /// <param name="given_name"></param>
-        public CharacteristicDataContext(string given_name)
+        public CharacteristicDataContext(CharacteristicsEnum name)
         {
-            _name = given_name;
+            _name = name;
         }
 
         #region CharacteristicsProperties
@@ -38,7 +37,7 @@ namespace DDFight.Game.Characteristics
         ///     Ex: strength, wisdow, etc...
         /// </summary>
         [XmlAttribute]
-        public string Name
+        public CharacteristicsEnum Name
         {
             get => _name;
             set
@@ -50,7 +49,7 @@ namespace DDFight.Game.Characteristics
                 }
             }
         }
-        private string _name;
+        private CharacteristicsEnum _name;
 
         /// <summary>
         ///     Says if we need to add the mastery bonus to the Modifier
@@ -129,7 +128,7 @@ namespace DDFight.Game.Characteristics
         {
             Mastery = to_copy.Mastery;
             Modifier = to_copy.Modifier;
-            Name = (string)to_copy.Name.Clone();
+            Name = to_copy.Name;
         }
 
         /// <summary>
