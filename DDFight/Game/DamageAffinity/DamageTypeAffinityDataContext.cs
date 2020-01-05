@@ -15,27 +15,27 @@ namespace DDFight.Game.DamageAffinity
         {
         }
 
-        public DamageTypeAffinityDataContext(string name)
+        public DamageTypeAffinityDataContext(DamageTypeEnum type)
         {
-            _name = name;
+            _type = type;
         }
 
         #region Properties
 
         [XmlAttribute]
-        public string Name
+        public DamageTypeEnum Type
         {
-            get => _name;
+            get => _type;
             set
             {
-                if (_name != value)
+                if (_type != value)
                 {
-                    _name = value;
+                    _type = value;
                     NotifyPropertyChanged();
                 }
             }
         }
-        private string _name;
+        private DamageTypeEnum _type;
 
         [XmlAttribute]
         public DamageAffinityEnum Affinity
@@ -78,7 +78,7 @@ namespace DDFight.Game.DamageAffinity
 
         protected DamageTypeAffinityDataContext(DamageTypeAffinityDataContext to_copy)
         {
-            Name = (string)to_copy.Name.Clone();
+            Type = to_copy.Type;
             Affinity = to_copy.Affinity;
         }
 

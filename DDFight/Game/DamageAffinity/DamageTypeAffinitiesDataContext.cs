@@ -28,7 +28,7 @@ namespace DDFight.Game.DamageAffinity
                 }
             }
         }
-        private DamageTypeAffinityDataContext _acid = new DamageTypeAffinityDataContext("Acid");
+        private DamageTypeAffinityDataContext _acid = new DamageTypeAffinityDataContext(DamageTypeEnum.Acid);
 
 
         public DamageTypeAffinityDataContext Bludgeoning
@@ -43,7 +43,7 @@ namespace DDFight.Game.DamageAffinity
                 }
             }
         }
-        private DamageTypeAffinityDataContext _bludgeoning = new DamageTypeAffinityDataContext("Bludgeoning");
+        private DamageTypeAffinityDataContext _bludgeoning = new DamageTypeAffinityDataContext(DamageTypeEnum.Bludgeoning);
 
 
         public DamageTypeAffinityDataContext Cold
@@ -58,7 +58,7 @@ namespace DDFight.Game.DamageAffinity
                 }
             }
         }
-        private DamageTypeAffinityDataContext _cold = new DamageTypeAffinityDataContext("Cold");
+        private DamageTypeAffinityDataContext _cold = new DamageTypeAffinityDataContext(DamageTypeEnum.Cold);
 
 
         public DamageTypeAffinityDataContext Fire
@@ -73,7 +73,7 @@ namespace DDFight.Game.DamageAffinity
                 }
             }
         }
-        private DamageTypeAffinityDataContext _fire = new DamageTypeAffinityDataContext("Fire");
+        private DamageTypeAffinityDataContext _fire = new DamageTypeAffinityDataContext(DamageTypeEnum.Fire);
 
 
         public DamageTypeAffinityDataContext Force
@@ -88,7 +88,7 @@ namespace DDFight.Game.DamageAffinity
                 }
             }
         }
-        private DamageTypeAffinityDataContext _force = new DamageTypeAffinityDataContext("Force");
+        private DamageTypeAffinityDataContext _force = new DamageTypeAffinityDataContext(DamageTypeEnum.Force);
 
 
         public DamageTypeAffinityDataContext Lightning
@@ -103,7 +103,7 @@ namespace DDFight.Game.DamageAffinity
                 }
             }
         }
-        private DamageTypeAffinityDataContext _lightning = new DamageTypeAffinityDataContext("Lightning");
+        private DamageTypeAffinityDataContext _lightning = new DamageTypeAffinityDataContext(DamageTypeEnum.Lightning);
 
 
         public DamageTypeAffinityDataContext Necrotic
@@ -118,7 +118,7 @@ namespace DDFight.Game.DamageAffinity
                 }
             }
         }
-        private DamageTypeAffinityDataContext _necrotic = new DamageTypeAffinityDataContext("Necrotic");
+        private DamageTypeAffinityDataContext _necrotic = new DamageTypeAffinityDataContext(DamageTypeEnum.Necrotic);
 
 
         public DamageTypeAffinityDataContext Piercing
@@ -133,7 +133,7 @@ namespace DDFight.Game.DamageAffinity
                 }
             }
         }
-        private DamageTypeAffinityDataContext _piercing = new DamageTypeAffinityDataContext("Piercing");
+        private DamageTypeAffinityDataContext _piercing = new DamageTypeAffinityDataContext(DamageTypeEnum.Piercing);
 
 
         public DamageTypeAffinityDataContext Poison
@@ -148,7 +148,7 @@ namespace DDFight.Game.DamageAffinity
                 }
             }
         }
-        private DamageTypeAffinityDataContext _poison = new DamageTypeAffinityDataContext("Poison");
+        private DamageTypeAffinityDataContext _poison = new DamageTypeAffinityDataContext(DamageTypeEnum.Poison);
 
 
         public DamageTypeAffinityDataContext Psychic
@@ -163,7 +163,7 @@ namespace DDFight.Game.DamageAffinity
                 }
             }
         }
-        private DamageTypeAffinityDataContext _psychic = new DamageTypeAffinityDataContext("Psychic");
+        private DamageTypeAffinityDataContext _psychic = new DamageTypeAffinityDataContext(DamageTypeEnum.Psychic);
 
 
         public DamageTypeAffinityDataContext Radiant
@@ -178,7 +178,7 @@ namespace DDFight.Game.DamageAffinity
                 }
             }
         }
-        private DamageTypeAffinityDataContext _radiant = new DamageTypeAffinityDataContext("Radiant");
+        private DamageTypeAffinityDataContext _radiant = new DamageTypeAffinityDataContext(DamageTypeEnum.Radiant);
 
 
         public DamageTypeAffinityDataContext Slashing
@@ -193,7 +193,7 @@ namespace DDFight.Game.DamageAffinity
                 }
             }
         }
-        private DamageTypeAffinityDataContext _slashing = new DamageTypeAffinityDataContext("Slashing");
+        private DamageTypeAffinityDataContext _slashing = new DamageTypeAffinityDataContext(DamageTypeEnum.Slashing);
 
 
         public DamageTypeAffinityDataContext Thunder
@@ -208,7 +208,7 @@ namespace DDFight.Game.DamageAffinity
                 }
             }
         }
-        private DamageTypeAffinityDataContext _thunder = new DamageTypeAffinityDataContext("Thunder");
+        private DamageTypeAffinityDataContext _thunder = new DamageTypeAffinityDataContext(DamageTypeEnum.Thunder);
 
 
         #endregion
