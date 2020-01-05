@@ -10,6 +10,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace DDFight.Game.Characteristics
 {
@@ -19,8 +20,13 @@ namespace DDFight.Game.Characteristics
     public class CharacteristicsDataContext : ICloneable, INotifyPropertyChanged  /*, INotifyPropertyChangedSub*/
     {
 
+        public CharacteristicsDataContext()
+        {
+        }
+
         #region characteristics
 
+        [XmlAttribute]
         /// <summary>
         ///     The amount to add to mastered characteristics
         /// </summary>
@@ -181,7 +187,19 @@ namespace DDFight.Game.Characteristics
         }
         #endregion
 
-        #region IClonable
+        #region ICloneable
+
+        public CharacteristicsDataContext(CharacteristicsDataContext to_copy)
+        {
+            Charisma = (CharacteristicDataContext)to_copy._charisma.Clone();
+            Constitution = (CharacteristicDataContext)to_copy._constitution.Clone();
+            Dexterity = (CharacteristicDataContext)to_copy._dexterity.Clone();
+            Intelligence = (CharacteristicDataContext)to_copy._intelligence.Clone();
+            Strength = (CharacteristicDataContext)to_copy._strength.Clone();
+            Wisdom = (CharacteristicDataContext)to_copy._wisdom.Clone();
+
+            MasteryBonus = to_copy.MasteryBonus;
+        }
 
         /// <summary>
         ///     Process Deep copy on the item
@@ -189,17 +207,7 @@ namespace DDFight.Game.Characteristics
         /// <returns></returns>
         public object Clone()
         {
-            return new CharacteristicsDataContext
-            {
-                Charisma = (CharacteristicDataContext)this._charisma.Clone(),
-                Constitution = (CharacteristicDataContext)this._constitution.Clone(),
-                Dexterity = (CharacteristicDataContext)this._dexterity.Clone(),
-                Intelligence = (CharacteristicDataContext)this._intelligence.Clone(),
-                Strength = (CharacteristicDataContext)this._strength.Clone(),
-                Wisdom = (CharacteristicDataContext)this._wisdom.Clone(),
-
-                MasteryBonus = this._masteryBonus,
-            };
+            return new CharacteristicsDataContext(this);
         }
 
         #endregion

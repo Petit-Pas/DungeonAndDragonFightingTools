@@ -125,18 +125,20 @@ namespace DDFight.Game.Characteristics
 
         #region ICloneable
 
+        protected CharacteristicDataContext(CharacteristicDataContext to_copy)
+        {
+            Mastery = to_copy.Mastery;
+            Modifier = to_copy.Modifier;
+            Name = (string)to_copy.Name.Clone();
+        }
+
         /// <summary>
         ///     Processes Deep copy on the item
         /// </summary>
         /// <returns></returns>
         public object Clone()
         {
-            return new CharacteristicDataContext
-            {
-                Mastery = this.Mastery,
-                Modifier = this.Modifier,
-                Name = (string)this.Name.Clone(),
-            };
+            return new CharacteristicDataContext(this);
         }
 
         #endregion

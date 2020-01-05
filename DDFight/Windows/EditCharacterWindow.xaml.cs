@@ -52,6 +52,7 @@ namespace DDFight.Windows
         /// <param name="e"></param>
         private void OnControlLoaded(object sender, RoutedEventArgs e)
         {
+            Console.WriteLine("COCHON: " + data_context.Characteristics.MasteryBonus);
         }
 
         /// <summary>

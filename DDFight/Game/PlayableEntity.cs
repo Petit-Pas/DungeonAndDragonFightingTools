@@ -1,4 +1,6 @@
-﻿using DDFight.Tools;
+﻿using DDFight.Game.Characteristics;
+using DDFight.Game.DamageAffinity;
+using DDFight.Tools;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace DDFight.Game.Characteristics
+namespace DDFight.Game
 {
     public class PlayableEntity : ICloneable, INotifyPropertyChanged /*, INotifyPropertyChangedSub*/
     {
@@ -105,6 +107,17 @@ namespace DDFight.Game.Characteristics
         }
         private CharacteristicsDataContext _characteristics = new CharacteristicsDataContext();
 
+        public DamageTypeAffinitiesDataContext DamageAffinities
+        {
+            get => _damageAffinities;
+            set
+            {
+                _damageAffinities = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private DamageTypeAffinitiesDataContext _damageAffinities = new DamageTypeAffinitiesDataContext();
+
         #endregion
 
         #region INotifyPropertyChangedSub
@@ -154,6 +167,7 @@ namespace DDFight.Game.Characteristics
             Hp = to_copy.Hp;
             MaxHp = to_copy.MaxHp;
             Characteristics = (CharacteristicsDataContext)to_copy.Characteristics.Clone();
+            DamageAffinities = (DamageTypeAffinitiesDataContext)to_copy.DamageAffinities.Clone();
         }
 
         /// <summary>

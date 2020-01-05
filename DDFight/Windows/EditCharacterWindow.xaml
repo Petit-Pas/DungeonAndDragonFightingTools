@@ -9,7 +9,7 @@
         xmlns:validation="clr-namespace:DDFight.ValidationRules"
         xmlns:input="clr-namespace:DDFight.Controlers.InputBoxes"
         xmlns:controlers="clr-namespace:DDFight.Controlers"
-        Title="Edit Character" Height="550" Width="400"
+        Title="Edit Character" Height="500" Width="400"
         WindowStartupLocation="CenterOwner"
         Closing="Window_Closing">
     <Grid>
