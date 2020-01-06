@@ -28,13 +28,15 @@ namespace DDFight.Game.Characteristics
 
         private void initCharacteristicsList()
         {
-            _characteristicsList = new List<CharacteristicDataContext>();
-            _characteristicsList.Add(new CharacteristicDataContext(CharacteristicsEnum.Strength));
-            _characteristicsList.Add(new CharacteristicDataContext(CharacteristicsEnum.Dexterity));
-            _characteristicsList.Add(new CharacteristicDataContext(CharacteristicsEnum.Constitution));
-            _characteristicsList.Add(new CharacteristicDataContext(CharacteristicsEnum.Intelligence));
-            _characteristicsList.Add(new CharacteristicDataContext(CharacteristicsEnum.Wisdom));
-            _characteristicsList.Add(new CharacteristicDataContext(CharacteristicsEnum.Charisma));
+            _characteristicsList = new List<CharacteristicDataContext>
+            {
+                new CharacteristicDataContext(CharacteristicsEnum.Strength),
+                new CharacteristicDataContext(CharacteristicsEnum.Dexterity),
+                new CharacteristicDataContext(CharacteristicsEnum.Constitution),
+                new CharacteristicDataContext(CharacteristicsEnum.Intelligence),
+                new CharacteristicDataContext(CharacteristicsEnum.Wisdom),
+                new CharacteristicDataContext(CharacteristicsEnum.Charisma)
+            };
         }
 
         #region characteristics
@@ -46,7 +48,6 @@ namespace DDFight.Game.Characteristics
             } 
             set 
             {
-                Console.WriteLine("COCHON set list, " + value.Count);
                 _characteristicsList = value;
                 NotifyPropertyChanged();
             }
@@ -142,13 +143,5 @@ namespace DDFight.Game.Characteristics
         }
 
         #endregion
-    }
-
-    static class Extensions
-    {
-        public static IList<T> Clone<T>(this IList<T> listToClone) where T : ICloneable
-        {
-            return listToClone.Select(item => (T)item.Clone()).ToList();
-        }
     }
 }
