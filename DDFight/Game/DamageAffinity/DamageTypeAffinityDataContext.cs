@@ -52,6 +52,76 @@ namespace DDFight.Game.DamageAffinity
         }
         private DamageAffinityEnum _affinity;
 
+        [XmlIgnore]
+        public bool IsWeak
+        {
+            get => Affinity == DamageAffinityEnum.Weak;
+            set {
+                if (value == true)
+                {
+                    Affinity = DamageAffinityEnum.Weak;
+                    IsNeutral = false;
+                    IsResistant = false;
+                    IsImmune = false;
+                }
+                NotifyPropertyChanged();
+            }
+        }
+
+        [XmlIgnore]
+        public bool IsNeutral
+        {
+            get => Affinity == DamageAffinityEnum.Neutral;
+            set
+            {
+                if (value == true)
+                {
+                    Affinity = DamageAffinityEnum.Neutral;
+                    IsWeak = false;
+                    IsResistant = false;
+                    IsImmune = false;
+                }
+                NotifyPropertyChanged();
+            }
+
+        }
+
+        [XmlIgnore]
+        public bool IsResistant
+        {
+            get => Affinity == DamageAffinityEnum.Resistant;
+            set
+            {
+                if (value == true)
+                {
+                    Affinity = DamageAffinityEnum.Resistant;
+                    IsWeak = false;
+                    IsNeutral = false;
+                    IsImmune = false;
+                }
+                NotifyPropertyChanged();
+            }
+
+        }
+
+        [XmlIgnore]
+        public bool IsImmune
+        {
+            get => Affinity == DamageAffinityEnum.Immune;
+            set
+            {
+                if (value == true)
+                {
+                    Affinity = DamageAffinityEnum.Immune;
+                    IsWeak = false;
+                    IsNeutral = false;
+                    IsResistant = false;
+                }
+                NotifyPropertyChanged();
+            }
+
+        }
+
         #endregion
 
         #region INotifyPropertyChanged

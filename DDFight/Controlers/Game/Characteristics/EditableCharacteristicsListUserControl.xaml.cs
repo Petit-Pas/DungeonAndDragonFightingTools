@@ -22,8 +22,8 @@ namespace DDFight.Controlers.Game.Characteristics
     /// </summary>
     public partial class EditableCharacteristicsListUserControl : UserControl
     {
-        private CharacterDataContext _dataContext {
-            get => (CharacterDataContext)this.DataContext;
+        private PlayableEntity _dataContext {
+            get => (PlayableEntity)this.DataContext;
         }
         public EditableCharacteristicsListUserControl()
         {

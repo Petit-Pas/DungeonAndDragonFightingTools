@@ -10,7 +10,7 @@ namespace DDFight.Game.DamageAffinity
     {
         Neutral,
         Resistant,
-        Immuned,
+        Immune,
         Weak,
     }
 

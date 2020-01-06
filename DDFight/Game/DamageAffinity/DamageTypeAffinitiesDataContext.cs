@@ -10,7 +10,7 @@ namespace DDFight.Game.DamageAffinity
 {
     public class DamageTypeAffinitiesDataContext : ICloneable, INotifyPropertyChanged
     {
-        public DamageTypeAffinitiesDataContext() 
+        public DamageTypeAffinitiesDataContext()
         {
             if (!GlobalVariables.Loading)
                 initAffinities();
@@ -34,6 +34,11 @@ namespace DDFight.Game.DamageAffinity
                 new DamageTypeAffinityDataContext(DamageTypeEnum.Slashing),
                 new DamageTypeAffinityDataContext(DamageTypeEnum.Thunder)
             };
+        }
+
+        public DamageTypeAffinityDataContext GetAffinity(DamageTypeEnum type)
+        {
+            return DamageTypeAffinityList.First(x => x.Type == type);
         }
 
         #region affinities
@@ -76,6 +81,7 @@ namespace DDFight.Game.DamageAffinity
 
         protected DamageTypeAffinitiesDataContext(DamageTypeAffinitiesDataContext to_copy)
         {
+            ;
             DamageTypeAffinityList = (List<DamageTypeAffinityDataContext>)to_copy.DamageTypeAffinityList.Clone();
         }
 

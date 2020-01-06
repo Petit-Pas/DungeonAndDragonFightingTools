@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DDFight.Windows"
+        xmlns:damageaffinity="clr-namespace:DDFight.Controlers.Game.DamageAffinity"
         mc:Ignorable="d"
         xmlns:monsters_controls="clr-namespace:DDFight.Controlers.Monsters"
         Title="Edit Monster Window" Height="550" Width="400"
@@ -20,6 +21,10 @@
             <TabItem Header="Main">
                 <monsters_controls:MonsterMainInfoUserControl 
                     x:Name="MainInfo"/>
+            </TabItem>
+            <TabItem Header="Affinities">
+                <damageaffinity:EditableDamageAffinityListUserControl 
+                    x:Name="DamageAffinities"/>
             </TabItem>
         </TabControl>
         <Grid 
