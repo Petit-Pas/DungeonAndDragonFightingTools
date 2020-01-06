@@ -83,13 +83,18 @@
       <DependentUpon>MonsterMainInfoUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\StringIntConverter.cs" />
+    <Compile Include="Converters\StringToDiceRollConverter.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="Game\Aggression\Aggression.cs" />
+    <Compile Include="Game\Aggression\Attacks\AttackTemplate.cs" />
     <Compile Include="Game\Characteristics\CharacteristicDataContext.cs" />
     <Compile Include="Game\Characteristics\CharacteristicsDataContext.cs" />
     <Compile Include="Game\Characteristics\CharacteristicsEnum.cs" />
     <Compile Include="Game\DamageAffinity\DamageAffinityEnum.cs" />
     <Compile Include="Game\DamageAffinity\DamageTypeAffinitiesDataContext.cs" />
     <Compile Include="Game\DamageAffinity\DamageTypeAffinityDataContext.cs" />
+    <Compile Include="Game\Dices\DiceRoll.cs" />
+    <Compile Include="Game\Dices\Dices.cs" />
     <Compile Include="Game\PlayableEntity.cs" />
     <Compile Include="Game\MonsterDataContext.cs" />
     <Compile Include="Game\GameDataContext.cs" />
@@ -229,6 +234,9 @@
   <ItemGroup>
     <Resource Include="Resources\checked.png" />
     <Resource Include="Resources\unchecked.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Game\Aggression\Spells\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -12,5 +12,11 @@ namespace DDFight
         {
             return listToClone.Select(item => (T)item.Clone()).ToList();
         }
+
+        public static IList<uint> Clone(this IList<uint> listToClone)
+        {
+            return listToClone.Select(item => item).ToList();
+        }
+
     }
 }

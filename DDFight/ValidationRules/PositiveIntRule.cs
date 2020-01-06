@@ -10,6 +10,7 @@ namespace DDFight.ValidationRules
         {
             bool valid = false;
             int checked_value = 0;
+            Console.WriteLine("COCHON checking validation Rule for uint: " + (string)value);
             try
             {
                 checked_value = Int32.Parse((string)value);

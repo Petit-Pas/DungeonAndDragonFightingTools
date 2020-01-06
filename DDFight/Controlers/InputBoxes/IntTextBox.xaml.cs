@@ -9,7 +9,7 @@ using System.Windows.Input;
 namespace DDFight.Controlers.InputBoxes
 {
     /// <summary>
-    /// Logique d'interaction pour IntTextBox.xaml
+    ///     Logique d'interaction pour IntTextBox.xaml
     /// </summary>
     public partial class IntTextBox : UserControl, IFocusable, IValidable
     {
