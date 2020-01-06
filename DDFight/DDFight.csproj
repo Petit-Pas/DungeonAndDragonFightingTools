@@ -64,6 +64,9 @@
     <Compile Include="Controlers\Game\Characteristics\EditableCharacteristicsListUserControl.xaml.cs">
       <DependentUpon>EditableCharacteristicsListUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controlers\Game\DamageAffinity\EditableDamageAffinityListUserControl.xaml.cs">
+      <DependentUpon>EditableDamageAffinityListUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controlers\InputBoxes\IntTextBox.xaml.cs">
       <DependentUpon>IntTextBox.xaml</DependentUpon>
     </Compile>
@@ -80,6 +83,7 @@
       <DependentUpon>MonsterMainInfoUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\StringIntConverter.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="Game\Characteristics\CharacteristicDataContext.cs" />
     <Compile Include="Game\Characteristics\CharacteristicsDataContext.cs" />
     <Compile Include="Game\Characteristics\CharacteristicsEnum.cs" />
@@ -125,6 +129,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controlers\Game\Characteristics\EditableCharacteristicsListUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controlers\Game\DamageAffinity\EditableDamageAffinityListUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
