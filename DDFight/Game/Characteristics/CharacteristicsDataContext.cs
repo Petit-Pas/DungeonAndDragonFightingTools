@@ -46,7 +46,6 @@ namespace DDFight.Game.Characteristics
             } 
             set 
             {
-                Console.WriteLine("COCHON set list, " + value.Count);
                 _characteristicsList = value;
                 NotifyPropertyChanged();
             }
@@ -117,19 +116,8 @@ namespace DDFight.Game.Characteristics
 
         public CharacteristicsDataContext(CharacteristicsDataContext to_copy)
         {
-            Console.WriteLine("COCHON copy constructor");
-
-            /*Charisma = (CharacteristicDataContext)to_copy._charisma.Clone();
-            Constitution = (CharacteristicDataContext)to_copy._constitution.Clone();
-            Dexterity = (CharacteristicDataContext)to_copy._dexterity.Clone();
-            Intelligence = (CharacteristicDataContext)to_copy._intelligence.Clone();
-            Strength = (CharacteristicDataContext)to_copy._strength.Clone();
-            Wisdom = (CharacteristicDataContext)to_copy._wisdom.Clone();*/
-
             MasteryBonus = to_copy.MasteryBonus;
-            Console.WriteLine("COCHON: " + to_copy.CharacteristicsList.Count);
             CharacteristicsList = (List<CharacteristicDataContext>)to_copy.CharacteristicsList.Clone();
-            Console.WriteLine("COCHON: " + CharacteristicsList[0].Name + " " + CharacteristicsList[0].Modifier);
         }
 
         /// <summary>

@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:input="clr-namespace:DDFight.Controlers.InputBoxes"
              xmlns:controlers="clr-namespace:DDFight.Controlers"
+             xmlns:characteristics="clr-namespace:DDFight.Controlers.Game.Characteristics"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -92,7 +93,7 @@
                                 PropertyPath="Hp"/>
 
         </Grid>
-        <controlers:CharacteristicsUserControl 
+        <characteristics:EditableCharacteristicsListUserControl 
                             x:Name="CharacteristicsUserControl"
                             Grid.Row="2"/>
     </Grid>

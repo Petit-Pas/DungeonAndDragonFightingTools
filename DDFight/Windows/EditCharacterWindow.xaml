@@ -20,9 +20,6 @@
                 <characters_controls:CharacterMainInfoUserControl 
                     x:Name="MainInfo"/>
             </TabItem>
-            <TabItem>
-                <characteristics_controls:EditableCharacteristicsList />
-            </TabItem>
         </TabControl>
         <Grid 
             x:Name="ButtonsGrid" 

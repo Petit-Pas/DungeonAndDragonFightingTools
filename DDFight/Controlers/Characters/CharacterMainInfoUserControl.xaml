@@ -94,7 +94,7 @@
                             PropertyPath="Hp"/>
 
         </Grid>
-        <characteristics:EditableCharacteristicsList 
+        <characteristics:EditableCharacteristicsListUserControl
                         x:Name="CharacteristicsUserControl"
                         Grid.Row="2"/>
     </Grid>

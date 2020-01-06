@@ -20,12 +20,12 @@ namespace DDFight.Controlers.Game.Characteristics
     /// <summary>
     /// Logique d'interaction pour EditableCharacteristicsList.xaml
     /// </summary>
-    public partial class EditableCharacteristicsList : UserControl
+    public partial class EditableCharacteristicsListUserControl : UserControl
     {
         private CharacterDataContext _dataContext {
             get => (CharacterDataContext)this.DataContext;
         }
-        public EditableCharacteristicsList()
+        public EditableCharacteristicsListUserControl()
         {
             InitializeComponent();
             Loaded += EditableCharacteristicsList_Loaded;
