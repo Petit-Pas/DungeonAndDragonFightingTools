@@ -27,7 +27,6 @@
                     x:Name="DamageAffinities"/>
             </TabItem>
             <TabItem Header="Test">
-                <dices:DiceRollUserControl />
             </TabItem>
         </TabControl>
         <Grid 
