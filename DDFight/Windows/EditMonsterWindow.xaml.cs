@@ -29,13 +29,7 @@ namespace DDFight.Windows
         {
             InitializeComponent();
 
-            controls.Add(MainInfo.NameBoxUserControl);
-            controls.Add(MainInfo.LevelBoxUserControl);
-            controls.Add(MainInfo.CABoxUserControl);
-            controls.Add(MainInfo.MaxHPBoxUserControl);
-            controls.Add(MainInfo.HPBoxUserControl);
-
-            controls.Add(MainInfo.CharacteristicsUserControl);
+            controls.Add(MainInfo);
 
             //MainInfo.NameBoxUserControl.SetFocus();
 

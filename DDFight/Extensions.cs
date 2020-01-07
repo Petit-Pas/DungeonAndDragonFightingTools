@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace DDFight
 {
@@ -16,6 +19,29 @@ namespace DDFight
         public static IList<uint> Clone(this IList<uint> listToClone)
         {
             return listToClone.Select(item => item).ToList();
+        }
+
+
+        public static List<T> GetChildrenOfType<T>(this ItemsControl depObj)
+            where T : DependencyObject
+        {
+            var result = new List<T>();
+            if (depObj == null) return null;
+            var queue = new Queue<DependencyObject>();
+            queue.Enqueue(depObj);
+            while (queue.Count > 0)
+            {
+                var currentElement = queue.Dequeue();
+                var childrenCount = VisualTreeHelper.GetChildrenCount(currentElement);
+                for (var i = 0; i < childrenCount; i++)
+                {
+                    var child = VisualTreeHelper.GetChild(currentElement, i);
+                    if (child is T)
+                        result.Add(child as T);
+                    queue.Enqueue(child);
+                }
+            }
+            return result;
         }
 
     }

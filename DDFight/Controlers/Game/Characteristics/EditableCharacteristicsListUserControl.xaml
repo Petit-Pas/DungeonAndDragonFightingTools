@@ -91,6 +91,7 @@
                                 IsChecked="{Binding Mastery}">
                             </CheckBox>
                             <input:IntTextBox
+                                x:Name="ModifierBox"
                                 Grid.Row="0" Grid.Column="2"
                                 PropertyPath="Modifier">
                             </input:IntTextBox>

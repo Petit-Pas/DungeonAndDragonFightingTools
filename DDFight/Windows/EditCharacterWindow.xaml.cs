@@ -19,7 +19,7 @@ namespace DDFight.Windows
     public partial class EditCharacterWindow : Window
     {
         /// <summary>
-        ///     contains a list of the parameters IN THE RIGHT ORDER
+        ///     contains a list of the controls
         /// </summary>
         private List<UserControl> controls = new List<UserControl>();
 
@@ -32,13 +32,7 @@ namespace DDFight.Windows
         {
             InitializeComponent();
 
-            controls.Add(MainInfo.NameBoxUserControl);
-            controls.Add(MainInfo.LevelBoxUserControl);
-            controls.Add(MainInfo.CABoxUserControl);
-            controls.Add(MainInfo.MaxHPBoxUserControl);
-            controls.Add(MainInfo.HPBoxUserControl);
-
-            controls.Add(MainInfo.CharacteristicsUserControl);
+            controls.Add(MainInfo);
 
             MainInfo.NameBoxUserControl.SetFocus();
 
