@@ -44,12 +44,9 @@ namespace DDFight.Game.Dices
                     }
                     indexD = format.IndexOf('d');
                 }
-                Console.WriteLine("COCHON: here");
-                int lastIndex = format.IndexOf('+');
-                if (lastIndex != -1)
+                if (format.Length != 0)
                 {
-                    string modifier = format.Substring(1);
-                    Modifier = Int32.Parse(modifier);
+                    Modifier = Int32.Parse(format);
                 }
             }
             catch (Exception)
@@ -80,7 +77,9 @@ namespace DDFight.Game.Dices
             }
             if (Modifier != 0)
             {
-                format = format + "+" + Modifier.ToString();
+                if (format != "")
+                    format += '+';
+                format = format + Modifier.ToString();
             }
             return format;
         }

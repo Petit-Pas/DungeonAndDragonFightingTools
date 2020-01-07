@@ -104,6 +104,7 @@
     <Compile Include="Resources\ResourceManager.cs" />
     <Compile Include="Tools\IFocusable.cs" />
     <Compile Include="Tools\Save\MonstersList.cs" />
+    <Compile Include="ValidationRules\DiceRollRule.cs" />
     <Compile Include="ValidationRules\IValidable.cs" />
     <Compile Include="Tools\INotifyPropertyChangedSub.cs" />
     <Compile Include="Tools\Logger.cs" />

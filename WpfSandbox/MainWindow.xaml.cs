@@ -1,52 +1,51 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// // Copyright (c) Microsoft. All rights reserved.
+// // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-namespace WpfSandbox
+namespace BindValidation
 {
     /// <summary>
-    /// Logique d'interaction pour MainWindow.xaml
+    ///     Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainDataContext _DataContext = new MainDataContext ();
-
         public MainWindow()
         {
             InitializeComponent();
 
-            MainDataContext test = new MainDataContext();
-            MainDataContext tes2 = new MainDataContext();
-
-            Console.WriteLine(test == tes2);
-
-            test.Embedded.EmbeddedInt += 1;
-
-            Console.WriteLine(test == tes2);
-
-            this.DataContext = _DataContext;
+            Loaded += MainWindow_Loaded;
         }
 
-        private void Button1_Click(object sender, RoutedEventArgs e)
+        MyDataSource dataSource = new MyDataSource { Age = 24, Age2 = 242, Age3 = 243 };
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            _DataContext.MainInt += 1;
+            DataContext = dataSource;
         }
 
-        private void Button2_Click(object sender, RoutedEventArgs e)
+        private void UseCustomHandler(object sender, RoutedEventArgs e)
         {
-            _DataContext.Embedded.EmbeddedInt += 1;
+            return;
+            /*var myBindingExpression = textBox3.GetBindingExpression(TextBox.TextProperty);
+            var myBinding = myBindingExpression.ParentBinding;
+            myBinding.UpdateSourceExceptionFilter = ReturnExceptionHandler;
+            myBindingExpression.UpdateSource();*/
         }
 
+        private void DisableCustomHandler(object sender, RoutedEventArgs e)
+        {
+            return;
+            // textBox3 is an instance of a TextBox
+            // the TextProperty is the data-bound dependency property
+            /*var myBinding = BindingOperations.GetBinding(textBox3, TextBox.TextProperty);
+            myBinding.UpdateSourceExceptionFilter -= ReturnExceptionHandler;
+            BindingOperations.GetBindingExpression(textBox3, TextBox.TextProperty).UpdateSource();*/
+        }
+
+        private object ReturnExceptionHandler(object bindingExpression, Exception exception) => "This is from the UpdateSourceExceptionFilterCallBack.";
     }
 }

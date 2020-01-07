@@ -5,20 +5,57 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DDFight.Controlers.Game.Dices"
              xmlns:converters="clr-namespace:DDFight.Converters"
+             xmlns:attacks="clr-namespace:DDFight.Game.Aggression.Attacks"
+             xmlns:validationrules="clr-namespace:DDFight.ValidationRules"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <converters:StringToDiceRollConverter x:Key="StringToDiceRollConverterKey" />
+        <ControlTemplate x:Key="ValidationTemplate">
+            <DockPanel>
+                <TextBlock Foreground="Red" FontSize="20" >!</TextBlock>
+                <AdornedElementPlaceholder/>
+            </DockPanel>
+        </ControlTemplate>
+
+        <Style x:Key="TextBoxInError" TargetType="{x:Type TextBox}">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip"
+                            Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+                                Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
     </UserControl.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <TextBox Grid.Row="0"
-            Text="{Binding Path=Damage, Converter={StaticResource StringToDiceRollConverterKey}}"
-            />
-        <Button Click="Button_Click" Grid.Row="1">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        
+        <TextBox x:Name="textBox1"
+                 Grid.Row="0" Style="{StaticResource TextBoxInError}">
+                 <!-- <Textbox ErrorTemplate="{StaticResource ValidationTemplate}" -->
+                 <!-- Needed if you want to override default ValidationTemplate -->
+            <TextBox.Text>
+                <Binding Path="Damage" 
+                         UpdateSourceTrigger="PropertyChanged" 
+                         Converter="{StaticResource StringToDiceRollConverterKey}">
+                    <!-- Update SourceTrigger : trigger Validation rule && Binding at each input using given Converter -->
+                    <Binding.ValidationRules>
+                        <validationrules:DiceRollRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <Button Click="Button_Click" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
             Check
         </Button>
     </Grid>
