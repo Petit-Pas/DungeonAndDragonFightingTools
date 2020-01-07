@@ -13,6 +13,8 @@ namespace DDFight.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            Console.WriteLine("in Convert with received: " + value.GetType().ToString());
+            Console.WriteLine("should output: " + value.ToString());
             return value.ToString();
         }
 

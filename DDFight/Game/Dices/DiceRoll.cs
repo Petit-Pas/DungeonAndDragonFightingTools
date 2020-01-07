@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DDFight.Tools;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -21,7 +22,40 @@ namespace DDFight.Game.Dices
 
         public DiceRoll(string format)
         {
-            //TODO implement
+            DicesList = new List<Dices>();
+            try
+            {
+                int indexD = format.IndexOf('d');
+                while (indexD != -1)
+                {
+                    Console.WriteLine("loop");
+                    int indexP = format.IndexOf('+');
+                    string subFormat;
+                    if (indexP != -1)
+                    {
+                        subFormat = format.Substring(0, indexP);
+                        format = format.Substring(indexP + 1);
+                        DicesList.Add(new Dices(subFormat));
+                    }
+                    else
+                    {
+                        DicesList.Add(new Dices(format));
+                        format = "";
+                    }
+                    indexD = format.IndexOf('d');
+                }
+                Console.WriteLine("COCHON: here");
+                int lastIndex = format.IndexOf('+');
+                if (lastIndex != -1)
+                {
+                    string modifier = format.Substring(1);
+                    Modifier = Int32.Parse(modifier);
+                }
+            }
+            catch (Exception)
+            {
+                Logger.Log("WARNING: wrong format for constructor format in DiceRoll(string): " + format);
+            }
         }
 
         private void init()
@@ -33,15 +67,21 @@ namespace DDFight.Game.Dices
         {
             string format = "";
 
-            foreach (Dices d in DicesList)
+            if (DicesList != null)
             {
-                format = format + d.ToString() + "+";
+                foreach (Dices d in DicesList)
+                {
+                    format = format + d.ToString() + "+";
+                }
             }
             if (format.Length != 0)
             {
                 format = format.Substring(0, format.Length - 1);
             }
-            format = format + Modifier.ToString();
+            if (Modifier != 0)
+            {
+                format = format + "+" + Modifier.ToString();
+            }
             return format;
         }
 

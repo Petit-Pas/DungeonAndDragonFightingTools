@@ -67,6 +67,9 @@
     <Compile Include="Controlers\Game\DamageAffinity\EditableDamageAffinityListUserControl.xaml.cs">
       <DependentUpon>EditableDamageAffinityListUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controlers\Game\Dices\DiceRollUserControl.xaml.cs">
+      <DependentUpon>DiceRollUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controlers\InputBoxes\IntTextBox.xaml.cs">
       <DependentUpon>IntTextBox.xaml</DependentUpon>
     </Compile>
@@ -138,6 +141,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controlers\Game\DamageAffinity\EditableDamageAffinityListUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controlers\Game\Dices\DiceRollUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

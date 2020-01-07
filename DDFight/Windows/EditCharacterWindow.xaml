@@ -8,6 +8,7 @@
         xmlns:characters_controls="clr-namespace:DDFight.Controlers.Characters"
         xmlns:characteristics_controls="clr-namespace:DDFight.Controlers.Game.Characteristics"
         xmlns:damageaffinity="clr-namespace:DDFight.Controlers.Game.DamageAffinity"
+        xmlns:dices="clr-namespace:DDFight.Controlers.Game.Dices"
         Title="Edit Character" Height="600" Width="400"
         WindowStartupLocation="CenterOwner"
         Closing="Window_Closing">
@@ -24,6 +25,9 @@
             <TabItem Header="Affinities">
                 <damageaffinity:EditableDamageAffinityListUserControl 
                     x:Name="DamageAffinities"/>
+            </TabItem>
+            <TabItem Header="Test">
+                <dices:DiceRollUserControl />
             </TabItem>
         </TabControl>
         <Grid 
