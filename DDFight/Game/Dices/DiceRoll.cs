@@ -28,7 +28,6 @@ namespace DDFight.Game.Dices
                 int indexD = format.IndexOf('d');
                 while (indexD != -1)
                 {
-                    Console.WriteLine("loop");
                     int indexP = format.IndexOf('+');
                     string subFormat;
                     if (indexP != -1)
@@ -142,7 +141,7 @@ namespace DDFight.Game.Dices
 
         public object Clone()
         {
-            return new DiceRoll();
+            return new DiceRoll(this);
         }
 
         #endregion

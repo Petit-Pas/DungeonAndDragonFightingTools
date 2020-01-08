@@ -8,35 +8,29 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DDFight.Game.Aggression.Attacks
+namespace DDFight.Game.Aggression
 {
-    public class AttackTemplate : Aggression, ICloneable, INotifyPropertyChanged
+    /// <summary>
+    ///     Represents a possible damage, example: 1d6+2 of Fire Damage
+    ///     Default Values : 1d4 of Force Damage
+    /// </summary>
+    public class DamageTemplate : ICloneable, INotifyPropertyChanged
     {
-        public AttackTemplate()
-        {
+        public DamageTemplate() 
+        { 
         }
 
-        public int AttackBonus
+        public DamageTemplate(string damageFormat, DamageTypeEnum damageType)
         {
-            get => _attackBonus;
-            set
-            {
-                _attackBonus = value;
-                NotifyPropertyChanged();
-            }
+            Damage = new DiceRoll(damageFormat);
+            DamageType = damageType;
         }
-        private int _attackBonus = 0;
 
-        public DamageAffinityEnum DamageType
-        {
-            get => _damageType;
-            set {
-                _damageType = value;
-                NotifyPropertyChanged();
-            }
-        }
-        private DamageAffinityEnum _damageType;
-
+        #region Properties
+            
+        /// <summary>
+        ///     The dices to throw
+        /// </summary>
         public DiceRoll Damage
         {
             get => _damage;
@@ -45,8 +39,19 @@ namespace DDFight.Game.Aggression.Attacks
                 NotifyPropertyChanged();
             }
         }
-        private DiceRoll _damage;
+        private DiceRoll _damage = new DiceRoll("1d4");
 
+        public DamageTypeEnum DamageType
+        {
+            get => _damageType;
+            set {
+                _damageType = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private DamageTypeEnum _damageType = DamageTypeEnum.Force;
+
+        #endregion
 
         #region INotifyPropertyChanged
 
@@ -68,18 +73,17 @@ namespace DDFight.Game.Aggression.Attacks
         }
         #endregion
 
-        #region ICloneable
+        #region ICloneable 
 
-        protected AttackTemplate(AttackTemplate to_copy)
+        protected DamageTemplate(DamageTemplate to_copy)
         {
-            AttackBonus = to_copy.AttackBonus;
-            DamageType = to_copy.DamageType;
             Damage = (DiceRoll)to_copy.Damage.Clone();
+            DamageType = to_copy.DamageType;
         }
 
         public object Clone()
         {
-            return new AttackTemplate(this);
+            return new DamageTemplate(this);
         }
 
         #endregion

@@ -27,6 +27,7 @@
                     x:Name="DamageAffinities"/>
             </TabItem>
             <TabItem Header="Test">
+                <Button Click="TestButton_Click">Test</Button>
             </TabItem>
         </TabControl>
         <Grid 

@@ -1,5 +1,4 @@
-﻿using DDFight.Game.Aggression.Attacks;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -7,11 +6,11 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DDFight.Game.Aggression
+namespace DDFight.Game.Aggression.Attacks
 {
-    public class Aggression : ICloneable, INotifyPropertyChanged
+    public abstract class AAttackTemplate : INotifyPropertyChanged, ICloneable
     {
-        Aggression()
+        public AAttackTemplate()
         {
         }
 
@@ -25,17 +24,6 @@ namespace DDFight.Game.Aggression
             }
         }
         private string _name;
-
-        public List<AAttackTemplate> AttackTemplatesList
-        {
-            get => _attackTemplatesList;
-            set
-            {
-                _attackTemplatesList = value;
-                NotifyPropertyChanged();
-            }
-        }
-        private List<AAttackTemplate> _attackTemplatesList = new List<AAttackTemplate>();
 
         #region INotifyPropertyChanged
 
@@ -59,17 +47,15 @@ namespace DDFight.Game.Aggression
 
         #region ICloneable
 
-        protected Aggression(Aggression to_copy)
+        protected AAttackTemplate(AAttackTemplate to_copy)
         {
-            AttackTemplatesList = (List<AAttackTemplate>)to_copy.AttackTemplatesList.Clone();
             Name = (string)to_copy.Name.Clone();
         }
 
         public object Clone()
         {
-            return new Aggression(this);
+            throw new MissingMethodException("Cannot clone an instance of AAttackTemplate");
         }
-
         #endregion
     }
 }
