@@ -18,7 +18,9 @@
             <RowDefinition Height="Auto" /> <!-- TabControl -->
             <RowDefinition Height="*"/>  <!-- Button's Grid -->
         </Grid.RowDefinitions>
-        <TabControl Grid.Row="0" Grid.ColumnSpan="2">
+        <TabControl 
+            Grid.Row="0" Grid.ColumnSpan="2"
+            Background="{StaticResource LightestGray}">
             <TabItem Header="Main">
                 <characters_controls:CharacterMainInfoUserControl 
                     x:Name="MainInfo"/>

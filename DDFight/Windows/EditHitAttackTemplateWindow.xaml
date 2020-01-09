@@ -9,55 +9,47 @@
         Title="EditAAttackTemplate" Height="400" Width="400"
         WindowStartupLocation="CenterOwner"
         Closing="Window_Closing">
-    <GroupBox
-        Margin="2,3">
-        <GroupBox.Header>
-            <TextBlock
-                FontSize="15" FontWeight="SemiBold">
-                An attack, made with a weapon, claws, tails, etc...
-            </TextBlock>
-        </GroupBox.Header>
-        <Grid>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <!-- Editor -->
+            <RowDefinition  Height="*"/>
+            <!-- buttons -->
+        </Grid.RowDefinitions>
+        <attacks:EditableHitAttackTemplateUserControl 
+            x:Name="AttacksListUserControl"
+            Grid.Row="0"/>
+        <Grid
+            x:Name="ButtonsGrid"
+            Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <!-- Editor -->
-                <RowDefinition  Height="*"/>
-                <!-- buttons -->
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <attacks:EditableHitAttackTemplateUserControl 
-                x:Name="AttacksListUserControl"
-                Grid.Row="0"/>
-            <Grid
-                x:Name="ButtonsGrid"
-                Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Button 
-                    x:Name="ValidateButton" 
-                    Grid.Column="0" Grid.Row="0"
-                    VerticalAlignment="Bottom"
-                    Margin="20"
-                    MaxWidth="100" MinHeight="40"
-                    Click="ValidateButton_Click"
-                    FontSize="17" FontWeight="SemiBold">
-                    Validate
-                </Button>
-                <Button 
-                    x:Name="CancelButton" 
-                    Grid.Column="1" Grid.Row="0"
-                    VerticalAlignment="Bottom"
-                    Margin="20"
-                    MaxWidth="100" MinHeight="40"
-                    Click="CancelButton_Click"
-                    FontSize="17" FontWeight="SemiBold">
-                    Cancel
-                </Button>
-            </Grid>
+            <Button 
+                x:Name="ValidateButton" 
+                Grid.Column="0" Grid.Row="0"
+                VerticalAlignment="Bottom"
+                Margin="20"
+                MaxWidth="100" MinHeight="40"
+                Click="ValidateButton_Click"
+                FontSize="17" FontWeight="SemiBold">
+                Validate
+            </Button>
+            <Button 
+                x:Name="CancelButton" 
+                Grid.Column="1" Grid.Row="0"
+                VerticalAlignment="Bottom"
+                Margin="20"
+                MaxWidth="100" MinHeight="40"
+                Click="CancelButton_Click"
+                FontSize="17" FontWeight="SemiBold">
+                Cancel
+            </Button>
         </Grid>
-    </GroupBox>
+    </Grid>
 </Window>

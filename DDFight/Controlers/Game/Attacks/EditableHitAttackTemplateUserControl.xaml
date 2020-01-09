@@ -9,109 +9,129 @@
              xmlns:damageaffinity="clr-namespace:DDFight.Controlers.Game.DamageAffinity"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid
-        Margin="5, 10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <!-- Name -->
-            <RowDefinition Height="Auto" />
-            <!-- Amount of Hits -->
-            <RowDefinition Height="Auto" />
-            <!-- Bonus to Hits -->
-            <RowDefinition Height="Auto" />
-            <!-- Damage List -->
-            <RowDefinition Height="Auto" />
-            <!-- Add Damage Button -->
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+    <UserControl.Resources>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="{StaticResource Light}"/>
+        </Style>
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="Foreground" Value="{StaticResource Light}"/>
+        </Style>
+    </UserControl.Resources>
+    <GroupBox
+        Margin="2,3"
+        BorderBrush="{StaticResource LightestGray}">
+        <GroupBox.Header>
+            <TextBlock
+                FontSize="15" FontWeight="SemiBold">
+                An attack, made with a weapon, claws, tails, etc...
+            </TextBlock>
+        </GroupBox.Header>
+        <Grid
+            Margin="5, 10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <!-- Name -->
+                <RowDefinition Height="Auto" />
+                <!-- Amount of Hits -->
+                <RowDefinition Height="Auto" />
+                <!-- Bonus to Hits -->
+                <RowDefinition Height="Auto" />
+                <!-- Damage List -->
+                <RowDefinition Height="Auto" />
+                <!-- Add Damage Button -->
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-        <Label
-            Grid.Row="0" Grid.Column="0"
-            Content="Name"/>
-        <inputboxes:NotEmptyStringTextBox 
-            x:Name="NameTextBox"
-            Grid.Row="0" Grid.Column="1"
-            MaxHeight="20"
-            PropertyPath="Name" />
+            <Label
+                Grid.Row="0" Grid.Column="0"
+                Content="Name"/>
+            <inputboxes:NotEmptyStringTextBox 
+                x:Name="NameTextBox"
+                Grid.Row="0" Grid.Column="1"
+                MaxHeight="20"
+                PropertyPath="Name" />
 
-        <Label
-            Grid.Row="1" Grid.Column="0"
-            Content="Amount of Hits"/>
-        <inputboxes:PositiveIntTextBox
-            x:Name="HitAmountTextBox"
-            Grid.Row="1" Grid.Column="1"
-            MaxHeight="20"
-            PropertyPath="HitAmount"/>
+            <Label
+                Grid.Row="1" Grid.Column="0"
+                Content="Amount of Hits"/>
+            <inputboxes:PositiveIntTextBox
+                x:Name="HitAmountTextBox"
+                Grid.Row="1" Grid.Column="1"
+                MaxHeight="20"
+                PropertyPath="HitAmount"/>
 
-        <Label
-            Grid.Row="2" Grid.Column="0"
-            Content="Bonus to Hits"/>
-        <inputboxes:PositiveIntTextBox
-            x:Name="HitBonusTextBox"
-            Grid.Row="2" Grid.Column="1"
-            MaxHeight="20"
-            PropertyPath="HitBonus"/>
+            <Label
+                Grid.Row="2" Grid.Column="0"
+                Content="Bonus to Hits"/>
+            <inputboxes:PositiveIntTextBox
+                x:Name="HitBonusTextBox"
+                Grid.Row="2" Grid.Column="1"
+                MaxHeight="20"
+                PropertyPath="HitBonus"/>
 
-        <GroupBox 
-            Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2">
-            <GroupBox.Header>
-                <TextBlock
-                    FontSize="15"
-                    FontWeight="SemiBold">
-                    Damages Types
-                </TextBlock>
-            </GroupBox.Header>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <ItemsControl 
-                    x:Name="DamageListView"
-                    Grid.Row="0"
-                    Focusable="False">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Grid
-                                Margin="0,5">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="100" />
-                                    <ColumnDefinition SharedSizeGroup="DamageColumn" />
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <damageaffinity:DamageAffinityDropdownListUserControl 
-                                    Grid.Row="0" Grid.Column="0"
-                                    PropertyPath="DamageType">
-                                </damageaffinity:DamageAffinityDropdownListUserControl>
-                                <dices:EditableDiceRollUserControl
-                                    x:Name="DamageTextBox"
-                                    Grid.Row="0" Grid.Column="1"
-                                    Margin="10,0"
-                                    PropertyPath="Damage"/>
-                                <Button 
-                                    Grid.Row="0" Grid.Column="2"
-                                    Click="RemoveDamage_Button_Click">
-                                    Remove
-                                </Button>
-                            </Grid>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-                <Button 
-                    Grid.Row="1"
-                    Click="AddDamage_Button_Click" FontWeight="SemiBold">
-                    Add Damage
-                </Button>
-            </Grid>
-        </GroupBox>
-    </Grid>
+            <GroupBox 
+                Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2">
+                <GroupBox.Header>
+                    <TextBlock
+                        FontSize="15"
+                        FontWeight="SemiBold">
+                        Damages Types
+                    </TextBlock>
+                </GroupBox.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <ItemsControl 
+                        x:Name="DamageListView"
+                        Grid.Row="0"
+                        Focusable="False">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid
+                                    Margin="0,5">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100" />
+                                        <ColumnDefinition SharedSizeGroup="*" />
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <damageaffinity:DamageAffinityDropdownListUserControl 
+                                        Grid.Row="0" Grid.Column="0"
+                                        PropertyPath="DamageType">
+                                    </damageaffinity:DamageAffinityDropdownListUserControl>
+                                    <dices:EditableDiceRollUserControl
+                                        x:Name="DamageTextBox"
+                                        Grid.Row="0" Grid.Column="1"
+                                        Margin="10,0"
+                                        PropertyPath="Damage"/>
+                                    <Button 
+                                        Grid.Row="0" Grid.Column="2"
+                                        Click="RemoveDamage_Button_Click">
+                                        Remove
+                                    </Button>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <Button 
+                        Grid.Row="1"
+                        Margin="0,5"
+                        Click="AddDamage_Button_Click" 
+                        FontWeight="SemiBold">
+                        Add Damage
+                    </Button>
+                </Grid>
+            </GroupBox>
+        </Grid>
+    </GroupBox>
 </UserControl>

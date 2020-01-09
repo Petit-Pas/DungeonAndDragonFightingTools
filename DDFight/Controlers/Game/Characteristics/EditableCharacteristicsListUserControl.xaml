@@ -7,10 +7,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Grid.IsSharedSizeScope="True">
     <UserControl.Resources>
-        <Style TargetType="CheckBox">
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-        </Style>
         <Style TargetType="input:IntTextBox">
             <Setter Property="Margin" Value="5,3"></Setter>
         </Style>
@@ -19,13 +15,17 @@
         </Style>
         <Style TargetType="TextBlock">
             <Setter Property="Margin" Value="5,3" />
+            <Setter Property="Foreground" Value="{StaticResource Light}"/>
         </Style>
     </UserControl.Resources>
 
     <GroupBox
-        Margin="0, 5, 0, 0">
+        BorderBrush="{StaticResource LightestGray}"
+        Margin="0, 5, 0, 0"
+        Padding="0,10,0,0">
         <GroupBox.Header>
             <TextBlock
+                Background="{StaticResource LightestGray}"
                 FontSize="15"
                 FontWeight="SemiBold">
                 Bonus to Characteristics
@@ -58,7 +58,8 @@
                     <!-- Separator -->
                 </Grid.RowDefinitions>
                 <TextBlock 
-                    Grid.Row="0" Grid.Column="0">
+                    Grid.Row="0" Grid.Column="0"
+                    Foreground="{StaticResource Light}">
                     Mastery Bonus
                 </TextBlock>
                 <input:PositiveIntTextBox 
@@ -89,6 +90,7 @@
                             </Grid.ColumnDefinitions>
                             <TextBlock 
                                 Grid.Row="0" Grid.Column="0"
+                                Foreground="{StaticResource Light}"
                                 Text="{Binding Name}">
                             </TextBlock>
                             <CheckBox 

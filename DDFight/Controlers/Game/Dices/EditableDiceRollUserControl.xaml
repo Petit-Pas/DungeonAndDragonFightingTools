@@ -32,6 +32,9 @@
 
     <Grid>
         <TextBox x:Name="textBox" 
+                 Foreground="{StaticResource Light}"
+                 Background="{StaticResource LightestGray}"
+                 BorderThickness="2"
                  Style="{StaticResource TextBoxInError}"
                  KeyDown="textBox_KeyDown"/>
     </Grid>

@@ -29,8 +29,11 @@
     </UserControl.Resources>
     <Grid>
         <TextBox 
+            Background="{StaticResource LightestGray}"
+            Foreground="{StaticResource Light}"
             x:Name="StringBox" 
             Style="{StaticResource TextBoxInError}" 
+            BorderThickness="2"
             KeyDown="StringBox_KeyDown"/>
     </Grid>
 </UserControl>

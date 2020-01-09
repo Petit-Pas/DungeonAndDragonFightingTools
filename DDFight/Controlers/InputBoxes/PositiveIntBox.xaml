@@ -17,7 +17,7 @@
 
         <Style x:Key="TextBoxInError" TargetType="{x:Type TextBox}">
             <Style.Triggers>
-                <Trigger Property="Validation.HasError" Value="true">
+                <Trigger Property="Validation.HasError" Value="True">
                     <Setter Property="ToolTip"
                             Value="{Binding RelativeSource={x:Static RelativeSource.Self},
                             Path=(Validation.Errors)[0].ErrorContent}"/>
@@ -27,8 +27,11 @@
     </UserControl.Resources>
     <Grid>
         <TextBox 
+            Background="{StaticResource LightestGray}"
+            Foreground="{StaticResource Light}"
             x:Name="IntBox" 
             Style="{StaticResource TextBoxInError}" 
-            KeyDown="IntBox_KeyDown"/>
+            KeyDown="IntBox_KeyDown"
+            BorderThickness="2"/>
     </Grid>
 </UserControl>
