@@ -7,6 +7,7 @@
         xmlns:damageaffinity="clr-namespace:DDFight.Controlers.Game.DamageAffinity"
         mc:Ignorable="d"
         xmlns:monsters_controls="clr-namespace:DDFight.Controlers.Monsters"
+        xmlns:attacks="clr-namespace:DDFight.Controlers.Game.Attacks"
         Title="Edit Monster Window" Height="550" Width="400"
         WindowStartupLocation="CenterOwner"
         Closing="Window_Closing">
@@ -25,6 +26,10 @@
             <TabItem Header="Affinities">
                 <damageaffinity:EditableDamageAffinityListUserControl 
                     x:Name="DamageAffinities"/>
+            </TabItem>
+            <TabItem Header="Attacks">
+                <attacks:EditableListHitAttackTemplate
+                    x:Name="HitAttacks"/>
             </TabItem>
         </TabControl>
         <Grid 
