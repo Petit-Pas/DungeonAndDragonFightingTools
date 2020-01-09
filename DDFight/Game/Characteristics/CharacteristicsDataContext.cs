@@ -22,7 +22,7 @@ namespace DDFight.Game.Characteristics
 
         public CharacteristicsDataContext()
         {
-            if (!GlobalVariables.Loading)
+            if (!Global.Loading)
                 initCharacteristicsList();
         }
 

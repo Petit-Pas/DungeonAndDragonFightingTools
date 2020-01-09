@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace DDFight.Game.Aggression.Attacks
 {
@@ -14,6 +15,7 @@ namespace DDFight.Game.Aggression.Attacks
         {
         }
 
+        [XmlAttribute]
         public string Name
         {
             get => _name;
@@ -23,7 +25,7 @@ namespace DDFight.Game.Aggression.Attacks
                 NotifyPropertyChanged();
             }
         }
-        private string _name;
+        private string _name = "Name";
 
         #region INotifyPropertyChanged
 

@@ -1,60 +1,47 @@
-﻿using DDFight.Controlers.InputBoxes;
-using DDFight.Game;
-using DDFight.Game.Aggression;
+﻿using DDFight.Controlers.Game.Attacks;
 using DDFight.Game.Aggression.Attacks;
-using DDFight.Game.DamageAffinity;
 using DDFight.Resources;
-using DDFight.Tools;
 using DDFight.ValidationRules;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Threading;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace DDFight.Windows
 {
     /// <summary>
-    ///     Interaction logic for NewCharacterWindow.xaml
+    /// Interaction logic for EditAAttackTemplate.xaml
     /// </summary>
-    public partial class EditCharacterWindow : Window
+    public partial class EditHitAttackTemplateWindow : Window
     {
-        /// <summary>
-        ///     contains a list of the controls
-        /// </summary>
         private List<UserControl> controls = new List<UserControl>();
 
-        private CharacterDataContext data_context { get => (CharacterDataContext)DataContext; }
+        private HitAttackTemplate data_context
+        {
+            get => (HitAttackTemplate)DataContext;
+        }
 
-        /// <summary>
-        ///     Ctor
-        /// </summary>
-        public EditCharacterWindow()
+        public EditHitAttackTemplateWindow()
         {
             InitializeComponent();
 
-            controls.Add(MainInfo);
-
-            MainInfo.NameBoxUserControl.SetFocus();
-
-            Loaded += OnControlLoaded;
+            controls.Add(AttacksListUserControl);
+            Loaded += EditHitAttackTemplateWindow_Loaded;
         }
 
-        /// <summary>
-        ///     when the cntrol is loaded, and the DataContext accessible
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void OnControlLoaded(object sender, RoutedEventArgs e)
+        private void EditHitAttackTemplateWindow_Loaded(object sender, RoutedEventArgs e)
         {
         }
 
-        /// <summary>
-        ///     checks if all parameters are corrects
-        /// </summary>
-        /// <returns></returns>
         private bool are_all_valids()
         {
             foreach (Control ctrl in controls)
@@ -123,7 +110,8 @@ namespace DDFight.Windows
             Close();
         }
 
-        private void Window_Closing(object sender, CancelEventArgs e)
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (!self_close)
             {
@@ -166,27 +154,6 @@ namespace DDFight.Windows
                     }
                 }
             }
-        }
-
-        private void TestButton_Click(object sender, RoutedEventArgs e)
-        {
-            EditHitAttackTemplateWindow window = new EditHitAttackTemplateWindow
-            {
-                Owner = Window.GetWindow(this),
-            };
-            HitAttackTemplate dc = new HitAttackTemplate();
-            dc.Name = "Name";
-            dc.DamageList.Add(new DamageTemplate("1d4+2", DamageTypeEnum.Slashing));
-            dc.DamageList.Add(new DamageTemplate("2d6+3", DamageTypeEnum.Fire));
-            window.DataContext = dc;
-
-            window.ShowDialog();
-
-            Console.WriteLine(dc.Name);
-            Console.WriteLine(dc.HitAmount);
-            Console.WriteLine(dc.HitBonus);
-            Console.WriteLine(dc.DamageList.ToString());
-            Console.WriteLine(dc.DamageList[0].DamageType);
         }
     }
 }

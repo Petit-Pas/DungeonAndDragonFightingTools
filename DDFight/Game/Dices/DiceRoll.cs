@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace DDFight.Game.Dices
 {
@@ -16,7 +17,7 @@ namespace DDFight.Game.Dices
     {
         public DiceRoll() 
         {
-            if (!GlobalVariables.Loading)
+            if (!Global.Loading)
                 init();
         }
 
@@ -97,6 +98,7 @@ namespace DDFight.Game.Dices
         }
         private List<Dices> _dicesList = null;
 
+        [XmlAttribute]
         /// <summary>
         ///     Modifier to add to the result of the dices
         /// </summary>

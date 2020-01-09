@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace DDFight.Game.Aggression
 {
@@ -41,6 +42,7 @@ namespace DDFight.Game.Aggression
         }
         private DiceRoll _damage = new DiceRoll("1d4");
 
+        [XmlAttribute]
         public DamageTypeEnum DamageType
         {
             get => _damageType;

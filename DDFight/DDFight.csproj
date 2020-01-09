@@ -64,6 +64,9 @@
     <Compile Include="Controlers\Game\Attacks\EditableHitAttackTemplateUserControl.xaml.cs">
       <DependentUpon>EditableHitAttackTemplateUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controlers\Game\Attacks\EditableListHitAttackTemplate.xaml.cs">
+      <DependentUpon>EditableListHitAttackTemplate.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controlers\Game\Characteristics\EditableCharacteristicsListUserControl.xaml.cs">
       <DependentUpon>EditableCharacteristicsListUserControl.xaml</DependentUpon>
     </Compile>
@@ -127,8 +130,8 @@
     <Compile Include="Windows\AskYesNoWindow.xaml.cs">
       <DependentUpon>AskYesNoWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\EditAAttackTemplateWindow.xaml.cs">
-      <DependentUpon>EditAAttackTemplateWindow.xaml</DependentUpon>
+    <Compile Include="Windows\EditHitAttackTemplateWindow.xaml.cs">
+      <DependentUpon>EditHitAttackTemplateWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\EditCharacterWindow.xaml.cs">
       <DependentUpon>EditCharacterWindow.xaml</DependentUpon>
@@ -149,6 +152,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controlers\Game\Attacks\EditableHitAttackTemplateUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controlers\Game\Attacks\EditableListHitAttackTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -207,7 +214,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\EditAAttackTemplateWindow.xaml">
+    <Page Include="Windows\EditHitAttackTemplateWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

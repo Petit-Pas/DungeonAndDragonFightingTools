@@ -6,8 +6,4 @@ Methods like "Edit Character" (see in NewCharacterWindow.xaml.cs) should be embe
 
 Think about a way to implement temporary Hps properly
 
-rename NewCharacterWindow by EditCharacterWindow
-
-In IClonable interface, add a method that replace "this" by the given object
-
 Check for // HERE comments 

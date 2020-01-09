@@ -1,4 +1,5 @@
-﻿using DDFight.Game.Characteristics;
+﻿using DDFight.Game.Aggression.Attacks;
+using DDFight.Game.Characteristics;
 using DDFight.Game.DamageAffinity;
 using DDFight.Tools;
 using System;
@@ -118,6 +119,17 @@ namespace DDFight.Game
         }
         private DamageTypeAffinitiesDataContext _damageAffinities = new DamageTypeAffinitiesDataContext();
 
+        public List<HitAttackTemplate> HitAttacks
+        {
+            get => _hitAttacks;
+            set
+            {
+                _hitAttacks = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private List<HitAttackTemplate> _hitAttacks;
+
         #endregion
 
         #region INotifyPropertyChangedSub
@@ -168,6 +180,7 @@ namespace DDFight.Game
             MaxHp = to_copy.MaxHp;
             Characteristics = (CharacteristicsDataContext)to_copy.Characteristics.Clone();
             DamageAffinities = (DamageTypeAffinitiesDataContext)to_copy.DamageAffinities.Clone();
+            HitAttacks = (List<HitAttackTemplate>)to_copy.HitAttacks.Clone();
         }
 
         /// <summary>

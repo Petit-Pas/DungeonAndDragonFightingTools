@@ -1,0 +1,52 @@
+﻿<Window x:Class="DDFight.Windows.EditHitAttackTemplateWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DDFight.Windows"
+        xmlns:attacks="clr-namespace:DDFight.Controlers.Game.Attacks"
+        mc:Ignorable="d"
+        Title="EditAAttackTemplate" Height="400" Width="400"
+        WindowStartupLocation="CenterOwner"
+        Closing="Window_Closing">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <!-- Editor -->
+            <RowDefinition  Height="*"/>
+            <!-- buttons -->
+        </Grid.RowDefinitions>
+        <attacks:EditableHitAttackTemplateUserControl 
+            x:Name="AttacksListUserControl"
+            Grid.Row="0"/>
+        <Grid
+            x:Name="ButtonsGrid"
+            Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Button 
+                x:Name="ValidateButton" 
+                Grid.Column="0" Grid.Row="0"
+                VerticalAlignment="Bottom"
+                Margin="20"
+                MaxWidth="100" MinHeight="40"
+                Click="ValidateButton_Click">
+                Validate
+            </Button>
+            <Button 
+                x:Name="CancelButton" 
+                Grid.Column="1" Grid.Row="0"
+                VerticalAlignment="Bottom"
+                Margin="20"
+                MaxWidth="100" MinHeight="40"
+                Click="CancelButton_Click">
+                Cancel
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

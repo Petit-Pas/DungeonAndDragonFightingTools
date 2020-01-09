@@ -21,7 +21,7 @@
             <RowDefinition Height="Auto" />
             <!-- Damage List -->
             <RowDefinition Height="Auto" />
-            <!-- Test -->
+            <!-- Add Damage Button -->
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -32,6 +32,7 @@
             Grid.Row="0" Grid.Column="0"
             Content="Name"/>
         <inputboxes:NotEmptyStringTextBox 
+            x:Name="NameTextBox"
             Grid.Row="0" Grid.Column="1"
             MaxHeight="20"
             PropertyPath="Name" />
@@ -40,6 +41,7 @@
             Grid.Row="1" Grid.Column="0"
             Content="Amount of Hits"/>
         <inputboxes:PositiveIntTextBox
+            x:Name="HitAmountTextBox"
             Grid.Row="1" Grid.Column="1"
             MaxHeight="20"
             PropertyPath="HitAmount"/>
@@ -48,6 +50,7 @@
             Grid.Row="2" Grid.Column="0"
             Content="Bonus to Hits"/>
         <inputboxes:PositiveIntTextBox
+            x:Name="HitBonusTextBox"
             Grid.Row="2" Grid.Column="1"
             MaxHeight="20"
             PropertyPath="HitBonus"/>

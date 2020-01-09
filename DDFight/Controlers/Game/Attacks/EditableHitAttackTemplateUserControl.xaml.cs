@@ -1,4 +1,5 @@
-﻿using DDFight.Game.Aggression;
+﻿using DDFight.Controlers.Game.Dices;
+using DDFight.Game.Aggression;
 using DDFight.Game.Aggression.Attacks;
 using DDFight.Game.DamageAffinity;
 using DDFight.ValidationRules;
@@ -24,6 +25,8 @@ namespace DDFight.Controlers.Game.Attacks
     /// </summary>
     public partial class EditableHitAttackTemplateUserControl : UserControl, IValidable
     {
+        private List<UserControl> controls = new List<UserControl>();
+
         private HitAttackTemplate _dataContext
         {
             get => (HitAttackTemplate)this.DataContext;
@@ -34,11 +37,55 @@ namespace DDFight.Controlers.Game.Attacks
             InitializeComponent();
 
             Loaded += EditableHitAttackTemplate_Loaded;
+            controls.Add(NameTextBox);
+            controls.Add(HitAmountTextBox);
+            controls.Add(HitBonusTextBox);
         }
+
 
         private void EditableHitAttackTemplate_Loaded(object sender, RoutedEventArgs e)
         {
             refresh_damage_list();
+        }
+
+        public static T FindVisualChild<T>(DependencyObject depObj) where T : DependencyObject
+        {
+            if (depObj != null)
+            {
+                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
+                {
+                    DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
+                    if (child != null && child is T)
+                    {
+                        return (T)child;
+                    }
+
+                    T childItem = FindVisualChild<T>(child);
+                    if (childItem != null) return childItem;
+                }
+            }
+            return null;
+        }
+
+
+        private bool are_all_valids()
+        {
+            foreach (Control ctrl in controls)
+            {
+                switch (ctrl)
+                {
+                    case IValidable _ctrl:
+                        if (_ctrl.IsValid() == false)
+                        {
+                            return false;
+                        }
+                        break;
+                    default:
+                        Console.WriteLine("Warning: unimplemented type for IsValid in EditableHitAttackTemplateUserControl.xaml.cs: {0}", ctrl.GetType());
+                        break;
+                }
+            }
+            return true;
         }
 
         private void refresh_damage_list()
@@ -74,7 +121,7 @@ namespace DDFight.Controlers.Game.Attacks
 
         public bool IsValid()
         {
-            return true;
+            return are_all_valids();
         }
     }
 }

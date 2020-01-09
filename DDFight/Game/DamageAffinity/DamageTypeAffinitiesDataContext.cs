@@ -12,7 +12,7 @@ namespace DDFight.Game.DamageAffinity
     {
         public DamageTypeAffinitiesDataContext()
         {
-            if (!GlobalVariables.Loading)
+            if (!Global.Loading)
                 initAffinities();
         }
 

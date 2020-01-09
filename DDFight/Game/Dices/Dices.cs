@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace DDFight.Game.Dices
 {
@@ -37,7 +38,7 @@ namespace DDFight.Game.Dices
             return DiceAmount.ToString() + "d" + DiceValue.ToString();
         }
 
-
+        [XmlAttribute]
         public int DiceValue
         {
             get => _diceValue;
@@ -51,7 +52,8 @@ namespace DDFight.Game.Dices
             }
         }
         private int _diceValue = 1;
-
+        
+        [XmlAttribute]
         public int DiceAmount
         {
             get => _diceAmount;

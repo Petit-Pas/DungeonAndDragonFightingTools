@@ -9,13 +9,14 @@
         xmlns:characteristics_controls="clr-namespace:DDFight.Controlers.Game.Characteristics"
         xmlns:damageaffinity="clr-namespace:DDFight.Controlers.Game.DamageAffinity"
         xmlns:dices="clr-namespace:DDFight.Controlers.Game.Dices"
+        xmlns:attacks="clr-namespace:DDFight.Controlers.Game.Attacks"
         Title="Edit Character" Height="600" Width="400"
         WindowStartupLocation="CenterOwner"
         Closing="Window_Closing">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" /> <!-- TabControl -->
-            <RowDefinition Height="Auto"/>  <!-- Button's Grid -->
+            <RowDefinition Height="*"/>  <!-- Button's Grid -->
         </Grid.RowDefinitions>
         <TabControl Grid.Row="0" Grid.ColumnSpan="2">
             <TabItem Header="Main">
@@ -26,7 +27,10 @@
                 <damageaffinity:EditableDamageAffinityListUserControl 
                     x:Name="DamageAffinities"/>
             </TabItem>
-            <TabItem Header="Test">
+            <TabItem Header="Attacks">
+                <attacks:EditableListHitAttackTemplate />
+            </TabItem>
+            <TabItem Header="test">
                 <Button Click="TestButton_Click">Test</Button>
             </TabItem>
         </TabControl>
@@ -38,9 +42,14 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
             <Button 
                 x:Name="ValidateButton" 
                 Grid.Column="0" Grid.Row="1"
+                Margin="20"
+                VerticalAlignment="Bottom"
                 MaxWidth="100" MinHeight="40"
                 Click="ValidateButton_Click">
                 Validate
@@ -48,6 +57,8 @@
             <Button 
                 x:Name="CancelButton" 
                 Grid.Column="1" Grid.Row="1"
+                Margin="20"
+                VerticalAlignment="Bottom"
                 MaxWidth="100" MinHeight="40"
                 Click="CancelButton_Click">
                 Cancel

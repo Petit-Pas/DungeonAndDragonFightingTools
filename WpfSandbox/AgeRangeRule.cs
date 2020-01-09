@@ -14,7 +14,6 @@ namespace BindValidation
 
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            Console.WriteLine("COCHON: in validate AgeRangeRule");
             var age = 0;
 
             try

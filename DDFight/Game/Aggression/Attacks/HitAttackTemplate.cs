@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace DDFight.Game.Aggression.Attacks
 {
@@ -16,10 +17,14 @@ namespace DDFight.Game.Aggression.Attacks
     /// </summary>
     public class HitAttackTemplate : AAttackTemplate, ICloneable, INotifyPropertyChanged
     {
-        public HitAttackTemplate()
+        public HitAttackTemplate() : base()
         {
         }
 
+        [XmlIgnore]
+        public bool Validated;
+
+        [XmlAttribute]
         /// <summary>
         ///     Amount of hit (1 target per hit, a target can be focused more than once)
         /// </summary>
@@ -34,6 +39,7 @@ namespace DDFight.Game.Aggression.Attacks
         }
         private int _hitAmount;
 
+        [XmlAttribute]
         /// <summary>
         ///     Bonus to hit on the d20 throw to know wehter the attack hits or not
         /// </summary>

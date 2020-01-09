@@ -4,7 +4,7 @@ using System.Windows;
 
 namespace DDFight
 {
-    public class GlobalVariables
+    public class Global
     {
         /// <summary>
         ///     required for any constructor that builds a list in an item that can be saved
@@ -12,6 +12,14 @@ namespace DDFight
         ///     Loading == false ==> you really asked for a new instance of whatever the class you did instantiate and you can then initialize its lists.
         /// </summary>
         public static bool Loading = true;
+
+        public static GameDataContext Context = new GameDataContext();
+
+        public static void Save ()
+        {
+            Context.CharacterList.Save();
+            Context.MonsterList.Save();
+        }
     }
 
     /// <summary>
@@ -23,15 +31,12 @@ namespace DDFight
         {
             SaveManager.Init();
 
-            GameDataContext context = new GameDataContext
-            {
-                CharacterList = SaveManager.LoadPlayers(),
-                MonsterList = SaveManager.LoadMonsters(),
-            };
+            Global.Context.CharacterList = SaveManager.LoadPlayers();
+            Global.Context.MonsterList = SaveManager.LoadMonsters();
 
-            GlobalVariables.Loading = false;
+            Global.Loading = false;
 
-            DataContext = context;
+            DataContext = Global.Context;
 
             InitializeComponent();
         }
