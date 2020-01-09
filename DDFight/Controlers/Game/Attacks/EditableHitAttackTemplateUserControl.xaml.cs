@@ -25,8 +25,6 @@ namespace DDFight.Controlers.Game.Attacks
     /// </summary>
     public partial class EditableHitAttackTemplateUserControl : UserControl, IValidable
     {
-        private List<UserControl> controls = new List<UserControl>();
-
         private HitAttackTemplate _dataContext
         {
             get => (HitAttackTemplate)this.DataContext;
@@ -37,9 +35,6 @@ namespace DDFight.Controlers.Game.Attacks
             InitializeComponent();
 
             Loaded += EditableHitAttackTemplate_Loaded;
-            controls.Add(NameTextBox);
-            controls.Add(HitAmountTextBox);
-            controls.Add(HitBonusTextBox);
         }
 
 
@@ -70,7 +65,7 @@ namespace DDFight.Controlers.Game.Attacks
 
         private bool are_all_valids()
         {
-            foreach (Control ctrl in controls)
+            foreach (Control ctrl in this.FindAllChildren<IValidable>())
             {
                 switch (ctrl)
                 {

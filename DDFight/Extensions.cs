@@ -11,6 +11,21 @@ namespace DDFight
 {
     public static class Extensions
     {
+        public static List<FrameworkElement> FindAllChildren<T>(this FrameworkElement element) 
+        {
+            List<FrameworkElement> found_here = new List<FrameworkElement>();
+
+            for (int i = 0; i != VisualTreeHelper.GetChildrenCount(element); i += 1)
+            {
+                var child = VisualTreeHelper.GetChild(element, i) as FrameworkElement;
+                if (child is T)
+                    found_here.Add(child);
+                else
+                    found_here.AddRange(child.FindAllChildren<T>());
+            }
+            return found_here;
+        }
+
         public static IList<T> Clone<T>(this IList<T> listToClone) where T : ICloneable
         {
             return listToClone.Select(item => (T)item.Clone()).ToList();
