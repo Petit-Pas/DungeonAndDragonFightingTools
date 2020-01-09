@@ -56,8 +56,14 @@
             PropertyPath="HitBonus"/>
 
         <GroupBox 
-            Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2"
-            Header="Damage">
+            Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2">
+            <GroupBox.Header>
+                <TextBlock
+                    FontSize="15"
+                    FontWeight="SemiBold">
+                    Damages Types
+                </TextBlock>
+            </GroupBox.Header>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition />
@@ -102,7 +108,7 @@
                 </ItemsControl>
                 <Button 
                     Grid.Row="1"
-                    Click="AddDamage_Button_Click">
+                    Click="AddDamage_Button_Click" FontWeight="SemiBold">
                     Add Damage
                 </Button>
             </Grid>
