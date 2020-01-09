@@ -6,41 +6,63 @@
              xmlns:local="clr-namespace:DDFight.Controlers.Game.Attacks"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid x:Name="AttacksGrid">
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
+    <GroupBox
+        Margin="0, 5, 0, 0">
+        <GroupBox.Header>
+            <TextBlock
+                FontSize="15"
+                FontWeight="SemiBold">
+                Attacks with weapons, claws, tails, etc...</TextBlock>
+        </GroupBox.Header>
+        <Grid 
+            ShowGridLines="False"
+            x:Name="AttacksGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
         
-        <ListBox 
+            <ListBox 
+                Margin="5,10, 5, 5"
                 x:Name="AttacksList"
                 Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
                 DisplayMemberPath="Name"
                 MouseDoubleClick="AttackList_MouseDoubleClick">
 
-            <ListBox.Resources>
-                <ContextMenu x:Key="CMenu">
-                    <MenuItem Header="Edit" Click="EditAttack_MenuItem_Click"/>
-                    <MenuItem Header="Duplicate" Click="DuplicateAttack_MenuItem_Click"/>
-                    <Separator/>
-                    <MenuItem Header="Delete" Click="DeleteAttack_MenuItem_Click"/>
-                </ContextMenu>
-            </ListBox.Resources>
-            <ListBox.ItemContainerStyle>
-                <Style TargetType="ListBoxItem">
-                    <Setter Property="ContextMenu" Value="{StaticResource CMenu}"/>
-                </Style>
-            </ListBox.ItemContainerStyle>
-        </ListBox>
-        <Button Grid.Row="1" Grid.Column="0" Margin="10" Click="AddAttack_Button_Click">
-            Add Attack
-        </Button>
-        <Button Grid.Row="1" Grid.Column="1" Margin="10" Click="RemoveAttack_Button_Click">
-            Remove
-        </Button>
-    </Grid>
+                <ListBox.Resources>
+                    <ContextMenu x:Key="CMenu">
+                        <MenuItem Header="Edit" Click="EditAttack_MenuItem_Click"/>
+                        <MenuItem Header="Duplicate" Click="DuplicateAttack_MenuItem_Click"/>
+                        <Separator/>
+                        <MenuItem Header="Delete" Click="DeleteAttack_MenuItem_Click"/>
+                    </ContextMenu>
+                </ListBox.Resources>
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="ContextMenu" Value="{StaticResource CMenu}"/>
+                        <Setter Property="BorderBrush" Value="LightGray"/>
+                        <Setter Property="Margin" Value="1"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+            </ListBox>
+            <Button 
+                Grid.Row="1" Grid.Column="0" 
+                Margin="5, 10, 10, 10" 
+                Click="AddAttack_Button_Click"
+                FontWeight="SemiBold">
+                Add Attack
+            </Button>
+            <Button 
+                Grid.Row="1" Grid.Column="1" 
+                Margin="10, 10, 5, 10" 
+                Click="RemoveAttack_Button_Click"
+                FontWeight="SemiBold">
+                Remove
+            </Button>
+        </Grid>
+    </GroupBox>
 </UserControl>

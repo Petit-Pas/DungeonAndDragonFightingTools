@@ -19,113 +19,123 @@
             <Setter Property="HorizontalAlignment" Value="Center"/>
         </Style>
     </UserControl.Resources>
-    <Grid
-        Margin="10">
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <!-- Header -->
-            <RowDefinition/>
-            <!-- Separator -->
-            <RowDefinition/>
-            <!-- ItemsControl for array -->
-        </Grid.RowDefinitions>
+    <GroupBox
+        Margin="0, 5, 0, 0">
+        <GroupBox.Header>
+            <TextBlock
+                FontSize="15"
+                FontWeight="SemiBold">
+                Character's relation to any kind of damage
+            </TextBlock>
+        </GroupBox.Header>
         <Grid
-            Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition SharedSizeGroup="FirstColumn"/>
-                <!-- Damage Type -->
-                <ColumnDefinition SharedSizeGroup="CheckBoxColumn"/>
-                <!-- Weak -->
-                <ColumnDefinition SharedSizeGroup="CheckBoxColumn"/>
-                <!-- Normal -->
-                <ColumnDefinition SharedSizeGroup="CheckBoxColumn"/>
-                <!-- Resistant -->
-                <ColumnDefinition SharedSizeGroup="CheckBoxColumn"/>
-                <!-- Immuned -->
-            </Grid.ColumnDefinitions>
-            <TextBlock 
-                Grid.Column="0"
-                Margin="5,0,10,0"
-                Text="Damage Type"
+            Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <!-- Header -->
+                <RowDefinition/>
+                <!-- Separator -->
+                <RowDefinition/>
+                <!-- ItemsControl for array -->
+            </Grid.RowDefinitions>
+            <Grid
+                Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition SharedSizeGroup="FirstColumn"/>
+                    <!-- Damage Type -->
+                    <ColumnDefinition SharedSizeGroup="CheckBoxColumn"/>
+                    <!-- Weak -->
+                    <ColumnDefinition SharedSizeGroup="CheckBoxColumn"/>
+                    <!-- Normal -->
+                    <ColumnDefinition SharedSizeGroup="CheckBoxColumn"/>
+                    <!-- Resistant -->
+                    <ColumnDefinition SharedSizeGroup="CheckBoxColumn"/>
+                    <!-- Immuned -->
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Grid.Column="0"
+                    Margin="5,0,10,0"
+                    Text="Damage Type"
+                    />
+                <TextBlock 
+                    Grid.Column="1"
+                    Style="{StaticResource GridHeaders}"
+                    HorizontalAlignment="Center"
+                    Text="Weak"
+                    />
+                <TextBlock 
+                    Grid.Column="2"
+                    Style="{StaticResource GridHeaders}"
+                    HorizontalAlignment="Center"
+                    Text="Neutral"
+                    />
+                <TextBlock 
+                    Grid.Column="3"
+                    Style="{StaticResource GridHeaders}"
+                    HorizontalAlignment="Center"
+                    Text="Resistant"
+                    />
+                <TextBlock 
+                    Grid.Column="4"
+                    Style="{StaticResource GridHeaders}"
+                    HorizontalAlignment="Center"
+                    Text="Immune"
+                    />
+            </Grid>
+            <Separator 
+                Grid.Row="1"
                 />
-            <TextBlock 
-                Grid.Column="1"
-                Style="{StaticResource GridHeaders}"
-                HorizontalAlignment="Center"
-                Text="Weak"
-                />
-            <TextBlock 
-                Grid.Column="2"
-                Style="{StaticResource GridHeaders}"
-                HorizontalAlignment="Center"
-                Text="Neutral"
-                />
-            <TextBlock 
-                Grid.Column="3"
-                Style="{StaticResource GridHeaders}"
-                HorizontalAlignment="Center"
-                Text="Resistant"
-                />
-            <TextBlock 
-                Grid.Column="4"
-                Style="{StaticResource GridHeaders}"
-                HorizontalAlignment="Center"
-                Text="Immune"
-                />
+            <ItemsControl 
+                x:Name="DamageTypeAffinityListView" 
+                Grid.Row="2"
+                Focusable="False">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <!-- Data -->
+                                <RowDefinition/>
+                                <!-- Separator -->
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition SharedSizeGroup="FirstColumn"/>
+                                <!-- Damage Type -->
+                                <ColumnDefinition SharedSizeGroup="CheckBoxColumn"/>
+                                <!-- Weak -->
+                                <ColumnDefinition SharedSizeGroup="CheckBoxColumn"/>
+                                <!-- Normal -->
+                                <ColumnDefinition SharedSizeGroup="CheckBoxColumn"/>
+                                <!-- Resistant -->
+                                <ColumnDefinition SharedSizeGroup="CheckBoxColumn"/>
+                                <!-- Immuned -->
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Style="{StaticResource DamageTypeName}"
+                                Grid.Row="0" Grid.Column="0"
+                                Text="{Binding Type}">
+                            </TextBlock>
+                            <CheckBox 
+                                Grid.Row="0" Grid.Column="1"
+                                IsChecked="{Binding IsWeak}">
+                            </CheckBox>
+                            <CheckBox 
+                                Grid.Row="0" Grid.Column="2"
+                                IsChecked="{Binding IsNeutral}">
+                            </CheckBox>
+                            <CheckBox 
+                                Grid.Row="0" Grid.Column="3"
+                                IsChecked="{Binding IsResistant}">
+                            </CheckBox>
+                            <CheckBox 
+                                Grid.Row="0" Grid.Column="4"
+                                IsChecked="{Binding IsImmune}">
+                            </CheckBox>
+                            <Separator
+                                Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Margin="-1"/>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </Grid>
-        <Separator 
-            Grid.Row="1"
-            />
-        <ItemsControl 
-            x:Name="DamageTypeAffinityListView" 
-            Grid.Row="2"
-            Focusable="False">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <!-- Data -->
-                            <RowDefinition/>
-                            <!-- Separator -->
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition SharedSizeGroup="FirstColumn"/>
-                            <!-- Damage Type -->
-                            <ColumnDefinition SharedSizeGroup="CheckBoxColumn"/>
-                            <!-- Weak -->
-                            <ColumnDefinition SharedSizeGroup="CheckBoxColumn"/>
-                            <!-- Normal -->
-                            <ColumnDefinition SharedSizeGroup="CheckBoxColumn"/>
-                            <!-- Resistant -->
-                            <ColumnDefinition SharedSizeGroup="CheckBoxColumn"/>
-                            <!-- Immuned -->
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Style="{StaticResource DamageTypeName}"
-                            Grid.Row="0" Grid.Column="0"
-                            Text="{Binding Type}">
-                        </TextBlock>
-                        <CheckBox 
-                            Grid.Row="0" Grid.Column="1"
-                            IsChecked="{Binding IsWeak}">
-                        </CheckBox>
-                        <CheckBox 
-                            Grid.Row="0" Grid.Column="2"
-                            IsChecked="{Binding IsNeutral}">
-                        </CheckBox>
-                        <CheckBox 
-                            Grid.Row="0" Grid.Column="3"
-                            IsChecked="{Binding IsResistant}">
-                        </CheckBox>
-                        <CheckBox 
-                            Grid.Row="0" Grid.Column="4"
-                            IsChecked="{Binding IsImmune}">
-                        </CheckBox>
-                        <Separator
-                            Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Margin="-1"/>
-                    </Grid>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-    </Grid>
+    </GroupBox>
 </UserControl>

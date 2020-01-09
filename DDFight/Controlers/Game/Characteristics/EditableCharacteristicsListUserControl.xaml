@@ -21,11 +21,17 @@
             <Setter Property="Margin" Value="5,3" />
         </Style>
     </UserControl.Resources>
-    
-    <GroupBox 
-        Header="Characteristics"
-        Margin="10" Width="Auto">
-        
+
+    <GroupBox
+        Margin="0, 5, 0, 0">
+        <GroupBox.Header>
+            <TextBlock
+                FontSize="15"
+                FontWeight="SemiBold">
+                Bonus to Characteristics
+            </TextBlock>
+        </GroupBox.Header>
+
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />

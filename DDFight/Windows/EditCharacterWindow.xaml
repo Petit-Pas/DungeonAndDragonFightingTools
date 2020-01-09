@@ -51,7 +51,9 @@
                 Margin="20"
                 VerticalAlignment="Bottom"
                 MaxWidth="100" MinHeight="40"
-                Click="ValidateButton_Click">
+                Click="ValidateButton_Click"
+                FontWeight="SemiBold"
+                FontSize="17">
                 Validate
             </Button>
             <Button 
@@ -60,7 +62,9 @@
                 Margin="20"
                 VerticalAlignment="Bottom"
                 MaxWidth="100" MinHeight="40"
-                Click="CancelButton_Click">
+                Click="CancelButton_Click"
+                FontWeight="SemiBold"
+                FontSize="17">
                 Cancel
             </Button>
         </Grid>

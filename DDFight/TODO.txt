@@ -7,3 +7,7 @@ Methods like "Edit Character" (see in NewCharacterWindow.xaml.cs) should be embe
 Think about a way to implement temporary Hps properly
 
 Check for // HERE comments 
+
+add possibility to use SUPPR key on a list element
+
+add new --> double click --> crashes somehow

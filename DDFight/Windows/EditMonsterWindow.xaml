@@ -15,7 +15,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <!-- TabControl -->
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
             <!-- Button's Grid -->
         </Grid.RowDefinitions>
         <TabControl Grid.Row="0" Grid.ColumnSpan="2">
@@ -44,14 +44,22 @@
                 x:Name="ValidateButton" 
                 Grid.Column="0" Grid.Row="1"
                 MaxWidth="100" MinHeight="40"
-                Click="ValidateButton_Click">
+                Margin="20"
+                VerticalAlignment="Bottom"
+                Click="ValidateButton_Click"
+                FontWeight="SemiBold"
+                FontSize="17">
                 Validate
             </Button>
             <Button 
                 x:Name="CancelButton" 
                 Grid.Column="1" Grid.Row="1"
                 MaxWidth="100" MinHeight="40"
-                Click="CancelButton_Click">
+                Margin="20"
+                VerticalAlignment="Bottom"
+                Click="CancelButton_Click"                
+                FontWeight="SemiBold"
+                FontSize="17">
                 Cancel
             </Button>
         </Grid>
