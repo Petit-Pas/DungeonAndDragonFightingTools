@@ -26,10 +26,6 @@ namespace DDFight.Controlers.Game.Characteristics
     /// </summary>
     public partial class EditableCharacteristicsListUserControl : UserControl, IValidable
     {
-        /// <summary>
-        ///     contains a list of the controls
-        /// </summary>
-        private List<UserControl> controls = new List<UserControl>();
 
         private PlayableEntity _dataContext {
             get => (PlayableEntity)this.DataContext;
@@ -38,8 +34,6 @@ namespace DDFight.Controlers.Game.Characteristics
         {
             InitializeComponent();
             Loaded += EditableCharacteristicsList_Loaded;
-
-            controls.Add(MasteryBonusBox);
         }
 
         private void EditableCharacteristicsList_Loaded(object sender, RoutedEventArgs e)
@@ -51,33 +45,10 @@ namespace DDFight.Controlers.Game.Characteristics
             }
             CharacteristicsListView.ItemsSource = items;
         }
-
-        private bool hasAlreadyBeenCalled = false;
-
+        
         public bool IsValid()
         {
-            if (!hasAlreadyBeenCalled)
-            {
-                List<IntTextBox> list = CharacteristicsListView.GetChildrenOfType<IntTextBox>();
-                controls.AddRange(list);
-                hasAlreadyBeenCalled = true;
-            }
-            foreach (Control ctrl in controls)
-            {
-                switch (ctrl)
-                {
-                    case IValidable _ctrl:
-                        if (_ctrl.IsValid() == false)
-                        {
-                            return false;
-                        }
-                        break;
-                    default:
-                        Console.WriteLine("Warning: unimplemented type for IsValid in EditableCharacteristicsListUserControl.xaml.cs: {0}", ctrl.GetType());
-                        break;
-                }
-            }
-            return true;
+            return this.AreAllChildrenValid();
         }
     }
 }

@@ -21,41 +21,15 @@ namespace DDFight.Controlers.Characters
     /// </summary>
     public partial class CharacterMainInfoUserControl : UserControl, IValidable
     {
-        /// <summary>
-        ///     contains a list of the controls
-        /// </summary>
-        private List<UserControl> controls = new List<UserControl>();
-
+        
         public CharacterMainInfoUserControl()
         {
             InitializeComponent();
-
-            controls.Add(NameBoxUserControl);
-            controls.Add(LevelBoxUserControl);
-            controls.Add(CABoxUserControl);
-            controls.Add(MaxHPBoxUserControl);
-            controls.Add(HPBoxUserControl);
-            controls.Add(CharacteristicsUserControl);
         }
 
         public bool IsValid()
         {
-            foreach (Control ctrl in controls)
-            {
-                switch (ctrl)
-                {
-                    case IValidable _ctrl:
-                        if (_ctrl.IsValid() == false)
-                        {
-                            return false;
-                        }
-                        break;
-                    default:
-                        Console.WriteLine("Warning: unimplemented type for IsValid in CharacterMainInfoUserControl.xaml.cs: {0}", ctrl.GetType());
-                        break;
-                }
-            }
-            return true;
+            return this.AreAllChildrenValid();
         }
     }
 }

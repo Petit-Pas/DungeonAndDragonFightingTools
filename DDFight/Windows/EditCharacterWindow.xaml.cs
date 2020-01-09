@@ -21,11 +21,6 @@ namespace DDFight.Windows
     /// </summary>
     public partial class EditCharacterWindow : Window
     {
-        /// <summary>
-        ///     contains a list of the controls
-        /// </summary>
-        private List<UserControl> controls = new List<UserControl>();
-
         private CharacterDataContext data_context { get => (CharacterDataContext)DataContext; }
 
         /// <summary>
@@ -34,8 +29,6 @@ namespace DDFight.Windows
         public EditCharacterWindow()
         {
             InitializeComponent();
-
-            controls.Add(MainInfo);
 
             MainInfo.NameBoxUserControl.SetFocus();
 
@@ -52,30 +45,6 @@ namespace DDFight.Windows
         }
 
         /// <summary>
-        ///     checks if all parameters are corrects
-        /// </summary>
-        /// <returns></returns>
-        private bool are_all_valids()
-        {
-            foreach (Control ctrl in controls)
-            {
-                switch (ctrl)
-                {
-                    case IValidable _ctrl:
-                        if (_ctrl.IsValid() == false)
-                        {
-                            return false;
-                        }
-                        break;
-                    default:
-                        Console.WriteLine("Warning: unimplemented type for IsValid in NewCharacterWindow.xaml.cs: {0}", ctrl.GetType());
-                        break;
-                }
-            }
-            return true;
-        }
-
-        /// <summary>
         ///     Sets to true if the window close itself (not the red X button)
         /// </summary>
         private bool self_close = false;
@@ -87,7 +56,7 @@ namespace DDFight.Windows
         /// <param name="e"></param>
         private void ValidateButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!are_all_valids())
+            if (!this.AreAllChildrenValid())
             {
                 StatusMessageWindowDataContext context = new StatusMessageWindowDataContext
                 {
@@ -129,7 +98,7 @@ namespace DDFight.Windows
             {
                 // user exited the window manually
 
-                if (!are_all_valids())
+                if (!this.AreAllChildrenValid())
                 {
                     AskYesNoDataContext context = new AskYesNoDataContext
                     {

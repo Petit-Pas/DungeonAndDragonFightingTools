@@ -43,46 +43,6 @@ namespace DDFight.Controlers.Game.Attacks
             refresh_damage_list();
         }
 
-        public static T FindVisualChild<T>(DependencyObject depObj) where T : DependencyObject
-        {
-            if (depObj != null)
-            {
-                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
-                {
-                    DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
-                    if (child != null && child is T)
-                    {
-                        return (T)child;
-                    }
-
-                    T childItem = FindVisualChild<T>(child);
-                    if (childItem != null) return childItem;
-                }
-            }
-            return null;
-        }
-
-
-        private bool are_all_valids()
-        {
-            foreach (Control ctrl in this.FindAllChildren<IValidable>())
-            {
-                switch (ctrl)
-                {
-                    case IValidable _ctrl:
-                        if (_ctrl.IsValid() == false)
-                        {
-                            return false;
-                        }
-                        break;
-                    default:
-                        Console.WriteLine("Warning: unimplemented type for IsValid in EditableHitAttackTemplateUserControl.xaml.cs: {0}", ctrl.GetType());
-                        break;
-                }
-            }
-            return true;
-        }
-
         private void refresh_damage_list()
         {
             List<DamageTemplate> list = new List<DamageTemplate>();
@@ -116,7 +76,7 @@ namespace DDFight.Controlers.Game.Attacks
 
         public bool IsValid()
         {
-            return are_all_valids();
+            return this.AreAllChildrenValid();
         }
     }
 }

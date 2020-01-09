@@ -15,10 +15,6 @@ namespace DDFight.Windows
     /// </summary>
     public partial class EditMonsterWindow : Window
     {
-        /// <summary>
-        ///     contains a list of the parameters
-        /// </summary>
-        private List<UserControl> controls = new List<UserControl>();
 
         private MonsterDataContext data_context { get => (MonsterDataContext)DataContext; }
 
@@ -28,10 +24,6 @@ namespace DDFight.Windows
         public EditMonsterWindow()
         {
             InitializeComponent();
-
-            controls.Add(MainInfo);
-
-            //MainInfo.NameBoxUserControl.SetFocus();
 
             Loaded += OnControlLoaded;
         }
@@ -46,30 +38,6 @@ namespace DDFight.Windows
         }
 
         /// <summary>
-        ///     checks if all parameters are corrects
-        /// </summary>
-        /// <returns></returns>
-        private bool are_all_valids()
-        {
-            foreach (Control ctrl in controls)
-            {
-                switch (ctrl)
-                {
-                    case IValidable _ctrl:
-                        if (_ctrl.IsValid() == false)
-                        {
-                            return false;
-                        }
-                        break;
-                    default:
-                        Console.WriteLine("Warning: unimplemented type for IsValid in NewMonsterWindow.xaml.cs: {0}", ctrl.GetType());
-                        break;
-                }
-            }
-            return true;
-        }
-
-        /// <summary>
         ///     Sets to true if the window close itself (not the red X button)
         /// </summary>
         private bool self_close = false;
@@ -81,7 +49,7 @@ namespace DDFight.Windows
         /// <param name="e"></param>
         private void ValidateButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!are_all_valids())
+            if (!this.AreAllChildrenValid())
             {
                 StatusMessageWindowDataContext context = new StatusMessageWindowDataContext
                 {

@@ -23,8 +23,7 @@ namespace DDFight.Windows
     /// </summary>
     public partial class EditHitAttackTemplateWindow : Window
     {
-        private List<UserControl> controls = new List<UserControl>();
-
+    
         private HitAttackTemplate data_context
         {
             get => (HitAttackTemplate)DataContext;
@@ -34,32 +33,11 @@ namespace DDFight.Windows
         {
             InitializeComponent();
 
-            controls.Add(AttacksListUserControl);
             Loaded += EditHitAttackTemplateWindow_Loaded;
         }
 
         private void EditHitAttackTemplateWindow_Loaded(object sender, RoutedEventArgs e)
         {
-        }
-
-        private bool are_all_valids()
-        {
-            foreach (Control ctrl in controls)
-            {
-                switch (ctrl)
-                {
-                    case IValidable _ctrl:
-                        if (_ctrl.IsValid() == false)
-                        {
-                            return false;
-                        }
-                        break;
-                    default:
-                        Console.WriteLine("Warning: unimplemented type for IsValid in NewCharacterWindow.xaml.cs: {0}", ctrl.GetType());
-                        break;
-                }
-            }
-            return true;
         }
 
         /// <summary>
@@ -74,7 +52,7 @@ namespace DDFight.Windows
         /// <param name="e"></param>
         private void ValidateButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!are_all_valids())
+            if (!this.AreAllChildrenValid())
             {
                 StatusMessageWindowDataContext context = new StatusMessageWindowDataContext
                 {
@@ -117,7 +95,7 @@ namespace DDFight.Windows
             {
                 // user exited the window manually
 
-                if (!are_all_valids())
+                if (!this.AreAllChildrenValid())
                 {
                     AskYesNoDataContext context = new AskYesNoDataContext
                     {

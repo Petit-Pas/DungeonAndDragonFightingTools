@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DDFight.ValidationRules;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,20 @@ namespace DDFight
 {
     public static class Extensions
     {
+        public static bool AreAllChildrenValid(this FrameworkElement element)
+        {
+            foreach (Control ctrl in element.FindAllChildren<IValidable>())
+            {
+                IValidable test = ctrl as IValidable;
+                if (test != null)
+                    if (test.IsValid() == false)
+                    {
+                        return false;
+                    }
+            }
+            return true;
+        }
+
         public static List<FrameworkElement> FindAllChildren<T>(this FrameworkElement element) 
         {
             List<FrameworkElement> found_here = new List<FrameworkElement>();
