@@ -91,7 +91,7 @@ namespace DDFight.Windows
             {
                 // user exited the window manually
 
-                if (!are_all_valids())
+                if (!this.AreAllChildrenValid())
                 {
                     AskYesNoDataContext context = new AskYesNoDataContext
                     {
