@@ -8,6 +8,11 @@
              xmlns:characteristics="clr-namespace:DDFight.Controlers.Game.Characteristics"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource Light}"/>
+        </Style>
+    </UserControl.Resources>
     <GroupBox
         Margin="0,5,0,0">
         <GroupBox.Header>

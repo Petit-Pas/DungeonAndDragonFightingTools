@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         xmlns:monsters_controls="clr-namespace:DDFight.Controlers.Monsters"
         xmlns:attacks="clr-namespace:DDFight.Controlers.Game.Attacks"
-        Title="Edit Monster Window" Height="550" Width="400"
+        Title="Edit Monster Window" Height="600" Width="400"
         WindowStartupLocation="CenterOwner"
         Closing="Window_Closing">
     <Grid>
@@ -18,7 +18,9 @@
             <RowDefinition Height="*"/>
             <!-- Button's Grid -->
         </Grid.RowDefinitions>
-        <TabControl Grid.Row="0" Grid.ColumnSpan="2">
+        <TabControl 
+            Grid.Row="0" Grid.ColumnSpan="2"
+            Background="{StaticResource LightestGray}">
             <TabItem Header="Main">
                 <monsters_controls:MonsterMainInfoUserControl 
                     x:Name="MainInfo"/>
