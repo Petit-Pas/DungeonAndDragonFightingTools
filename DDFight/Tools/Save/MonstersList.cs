@@ -1,6 +1,7 @@
 ﻿using DDFight.Game;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ namespace DDFight.Tools.Save
         /// <summary>
         ///     The list of Monsters
         /// </summary>
-        public List<MonsterDataContext> Monsters = new List<MonsterDataContext>();
+        public ObservableCollection<MonsterDataContext> Monsters = new ObservableCollection<MonsterDataContext>();
 
         /// <summary>
         ///     Method to add and save a Monster

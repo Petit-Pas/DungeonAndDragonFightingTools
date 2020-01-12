@@ -50,14 +50,7 @@ namespace DDFight.Controlers
         /// <param name="e"></param>
         private void MonsterListUserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            if (data_context.MonsterList != null)
-            {
-                this.MonsterList.Items.Clear();
-                foreach (MonsterDataContext Monster in data_context.MonsterList?.Monsters)
-                {
-                    this.MonsterList.Items.Add(Monster);
-                }
-            }
+            MonsterList.ItemsSource = data_context.MonsterList.Monsters;
         }
 
         #region Add
@@ -67,7 +60,6 @@ namespace DDFight.Controlers
         /// </summary>
         private void add_Monster(MonsterDataContext Monster)
         {
-            this.MonsterList.Items.Add(Monster);
             data_context.MonsterList.AddMonster(Monster);
 
         }
@@ -101,7 +93,6 @@ namespace DDFight.Controlers
         private void delete_Monster(MonsterDataContext Monster)
         {
             data_context.MonsterList.RemoveMonster(Monster);
-            MonsterList.Items.Remove(Monster);
         }
 
         /// <summary>
@@ -136,7 +127,6 @@ namespace DDFight.Controlers
 
             if (temporary.Validated == true)
             {
-                this.MonsterList.Items[this.MonsterList.SelectedIndex] = temporary;
                 data_context.MonsterList.Replace(to_update, temporary);
                 data_context.MonsterList.Save();
             }

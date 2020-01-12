@@ -10,4 +10,4 @@ Check for // HERE comments
 
 add possibility to use SUPPR key on a list element
 
-add new --> double click --> crashes somehow
+main window --> add new --> double click --> crashes somehow /// does not crash when duplicating 

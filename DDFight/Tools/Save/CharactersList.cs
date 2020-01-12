@@ -1,6 +1,7 @@
 ﻿using DDFight.Game;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Xml.Serialization;
@@ -15,7 +16,7 @@ namespace DDFight.Tools.Save
         /// <summary>
         ///     The list of characters
         /// </summary>
-        public List<CharacterDataContext> Characters = new List<CharacterDataContext>();
+        public ObservableCollection<CharacterDataContext> Characters = new ObservableCollection<CharacterDataContext>();
 
         #region INotifyPropertyChanged
 

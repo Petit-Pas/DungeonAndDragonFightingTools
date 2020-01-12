@@ -44,14 +44,7 @@ namespace DDFight.Controlers
         /// <param name="e"></param>
         private void CharacterListUserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            if (data_context.CharacterList != null)
-            {
-                this.CharacterList.Items.Clear();
-                foreach (CharacterDataContext character in data_context.CharacterList?.Characters)
-                {
-                    this.CharacterList.Items.Add(character);
-                }
-            }
+            CharacterList.ItemsSource = data_context.CharacterList.Characters;
         }
 
         #region Add
@@ -61,7 +54,6 @@ namespace DDFight.Controlers
         /// </summary>
         private void add_character(CharacterDataContext character)
         {
-            this.CharacterList.Items.Add(character);
             data_context.CharacterList.AddCharacter(character);
 
         }
@@ -95,7 +87,6 @@ namespace DDFight.Controlers
         private void delete_character(CharacterDataContext character)
         {
             data_context.CharacterList.RemoveCharacter(character);
-            CharacterList.Items.Remove(character);
         }
 
         /// <summary>
@@ -130,7 +121,6 @@ namespace DDFight.Controlers
 
             if (temporary.Validated == true)
             {
-                this.CharacterList.Items[this.CharacterList.SelectedIndex] = temporary;
                 data_context.CharacterList.Replace(to_update, temporary);
                 data_context.CharacterList.Save();
             }
