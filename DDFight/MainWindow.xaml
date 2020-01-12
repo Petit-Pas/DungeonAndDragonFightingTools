@@ -15,16 +15,14 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <TabControl Grid.Row="1">
+        <TabControl 
+            Grid.Row="1"
+            Background="{StaticResource LightestGray}">
             <TabItem Header="Characters">
-                <Border Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" Grid.Row="1" Margin="10">
-                    <ctrl:CharacterListUserControl x:Name="CharacterListControl" Grid.Row="1"/>
-                </Border>
+                <ctrl:CharacterListUserControl x:Name="CharacterListControl" Grid.Row="1"/>
             </TabItem>
             <TabItem Header="Monsters">
-                <Border Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" Grid.Row="1" Margin="10">
-                    <ctrl:MonsterListUserControl x:Name="MonsterListControl" Grid.Row="1"/>
-                </Border>
+                <ctrl:MonsterListUserControl x:Name="MonsterListControl" Grid.Row="1"/>
             </TabItem>
         </TabControl>
     </Grid>

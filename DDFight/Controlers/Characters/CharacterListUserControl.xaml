@@ -6,69 +6,76 @@
              xmlns:local="clr-namespace:DDFight.Controlers.Characters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid 
-        x:Name="CharactersGrid" 
-        Margin="10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
-        <TextBlock 
-            Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
-            Margin="0, 0, 0, 10"
-            FontSize="15"
-            FontWeight="SemiBold">
-            Characters' List
-        </TextBlock>
-        <Grid Grid.Row="1" MinWidth="200">
+    <GroupBox
+        Foreground="{StaticResource Light}">
+        <GroupBox.Header>
+            <TextBlock
+                FontSize="15"
+                FontWeight="SemiBold"
+                Foreground="{StaticResource Light}">
+                Characters' list
+            </TextBlock>
+        </GroupBox.Header>
+        <Grid 
+            Background="{StaticResource LightestGray}"
+            x:Name="CharactersGrid" 
+            Margin="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="40"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <ListBox 
-                x:Name="CharacterList" 
-                Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
-                DisplayMemberPath="Name"
-                MouseDoubleClick="CharacterList_MouseDoubleClick">
+            <Grid Grid.Row="0" MinWidth="200">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <ListBox 
+                    Background="{StaticResource Gray}"
+                    x:Name="CharacterList" 
+                    Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
+                    DisplayMemberPath="Name"
+                    MouseDoubleClick="CharacterList_MouseDoubleClick">
 
-                <ListBox.Resources>
-                    <ContextMenu x:Key="CMenu">
-                        <MenuItem Header="Edit" Click="EditCharacter_MenuItem_Click"/>
-                        <MenuItem Header="Duplicate" Click="DuplicateCharacter_MenuItem_Click"/>
-                        <Separator/>
-                        <MenuItem Header="Delete" Click="DeleteCharacter_MenuItem_Click"/>
-                    </ContextMenu>
-                </ListBox.Resources>
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem">
-                        <Setter Property="ContextMenu" Value="{StaticResource CMenu}"/>
-                        <Setter Property="BorderBrush" Value="LightGray"/>
-                        <Setter Property="Margin" Value="1"/>
-                    </Style>
-                </ListBox.ItemContainerStyle>
-            </ListBox>
-            <Button 
-                Grid.Row="1" Grid.Column="0" 
-                Margin="0, 10, 10, 10" 
-                Click="AddCharacter_Button_Click"
-                FontWeight="SemiBold">
-                Add Character
-            </Button>
-            <Button 
-                Grid.Row="1" Grid.Column="1" 
-                Margin="10, 10, 0, 10" 
-                Click="RemoveCharacter_Button_Click"
-                FontWeight="SemiBold">
-                Remove
-            </Button>
+                    <ListBox.Resources>
+                        <ContextMenu x:Key="CMenu">
+                            <MenuItem Header="Edit" Click="EditCharacter_MenuItem_Click"/>
+                            <MenuItem Header="Duplicate" Click="DuplicateCharacter_MenuItem_Click"/>
+                            <Separator/>
+                            <MenuItem Header="Delete" Click="DeleteCharacter_MenuItem_Click"/>
+                        </ContextMenu>
+                    </ListBox.Resources>
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="ContextMenu" Value="{StaticResource CMenu}"/>
+                            <Setter Property="BorderBrush" Value="{StaticResource Light}"/>
+                            <Setter Property="Margin" Value="3"/>
+                            <Setter Property="Foreground" Value="{StaticResource Light}"/>
+                            <Setter Property="BorderThickness" Value="2"/>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+                <Button 
+                    Grid.Row="1" Grid.Column="0" 
+                    Margin="0, 10, 10, 10" 
+                    Click="AddCharacter_Button_Click"
+                    FontWeight="SemiBold">
+                    Add Character
+                </Button>
+                <Button 
+                    Grid.Row="1" Grid.Column="1" 
+                    Margin="10, 10, 0, 10" 
+                    Click="RemoveCharacter_Button_Click"
+                    FontWeight="SemiBold">
+                    Remove
+                </Button>
+            </Grid>
         </Grid>
-    </Grid>
+    </GroupBox>
 </UserControl>

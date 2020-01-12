@@ -27,7 +27,8 @@
         <StackPanel Grid.ColumnSpan="5" Grid.Column="0" Grid.Row="0" Margin="20, 10" VerticalAlignment="Center">
             <TextBlock Text="{Binding Message, UpdateSourceTrigger=PropertyChanged}"
                        TextWrapping="Wrap"
-                       TextAlignment="Center">
+                       TextAlignment="Center"
+                       Foreground="{StaticResource Light}">
             </TextBlock>
         </StackPanel>
         <Button Grid.Column="1" Grid.Row="1" Width="70" Height="30" Margin="0, 15" Click="ClickYes">

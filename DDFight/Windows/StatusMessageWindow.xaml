@@ -23,7 +23,8 @@
                    TextAlignment="Center"
                    VerticalAlignment="Center"
                    FontSize="14"
-                   TextWrapping="Wrap">
+                   TextWrapping="Wrap"
+                   Foreground="{StaticResource Light}">
         </TextBlock>
         <Image Grid.Row="0" Grid.Column="1"
                Source="{Binding Icon}"
