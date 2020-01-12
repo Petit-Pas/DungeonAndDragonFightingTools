@@ -94,6 +94,9 @@
     <Compile Include="Controlers\Monsters\MonsterMainInfoUserControl.xaml.cs">
       <DependentUpon>MonsterMainInfoUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controlers\PrepareFightCharacterList.xaml.cs">
+      <DependentUpon>PrepareFightCharacterList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\StringIntConverter.cs" />
     <Compile Include="Converters\StringToDiceRollConverter.cs" />
     <Compile Include="Extensions.cs" />
@@ -192,6 +195,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controlers\Monsters\MonsterMainInfoUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controlers\PrepareFightCharacterList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

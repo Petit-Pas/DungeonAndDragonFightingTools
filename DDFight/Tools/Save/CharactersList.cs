@@ -1,6 +1,8 @@
 ﻿using DDFight.Game;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Xml.Serialization;
 
 namespace DDFight.Tools.Save
@@ -8,12 +10,32 @@ namespace DDFight.Tools.Save
     /// <summary>
     ///     represents the list of the saved characters
     /// </summary>
-    public class CharactersList
+    public class CharactersList : INotifyPropertyChanged
     {
         /// <summary>
         ///     The list of characters
         /// </summary>
         public List<CharacterDataContext> Characters = new List<CharacterDataContext>();
+
+        #region INotifyPropertyChanged
+
+        /// <summary>
+        ///     PropertyChanged EventHandler
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+        #endregion
 
         /// <summary>
         ///     Method to add and save a character
@@ -22,6 +44,7 @@ namespace DDFight.Tools.Save
         public void AddCharacter(CharacterDataContext character)
         {
             Characters.Add(character);
+            NotifyPropertyChanged("Characters");
             Save();
         }
 
@@ -32,6 +55,7 @@ namespace DDFight.Tools.Save
         public void RemoveCharacter(CharacterDataContext character)
         {
             Characters.Remove(character);
+            NotifyPropertyChanged("Characters");
             Save();
         }
 
@@ -58,6 +82,7 @@ namespace DDFight.Tools.Save
                     break;
                 }
             }
+            NotifyPropertyChanged("Characters");
             Save();
         }
     }

@@ -13,6 +13,7 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <TabControl 
@@ -25,5 +26,17 @@
                 <ctrl:MonsterListUserControl x:Name="MonsterListControl" Grid.Row="1"/>
             </TabItem>
         </TabControl>
+
+        <ctrl:PrepareFightCharacterList 
+           Grid.Column="1"/>
+
+        <Button
+            MaxHeight="100"
+            MaxWidth="200"
+            Grid.Column="2"
+            FontSize="22"
+            FontWeight="Bold">
+            Fight
+        </Button>
     </Grid>
 </Window>

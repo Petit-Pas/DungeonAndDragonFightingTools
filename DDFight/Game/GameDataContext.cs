@@ -1,9 +1,11 @@
 ﻿using DDFight.Tools.Save;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace DDFight.Game
 {
@@ -23,5 +25,11 @@ namespace DDFight.Game
         ///     The list of all possible ennemies encountered
         /// </summary>
         public MonstersList MonsterList = new MonstersList();
+
+        /// <summary>
+        ///     The list of the entities that shall fight when the Fight button is pressed
+        /// </summary>
+        [XmlIgnore]
+        public ObservableCollection<PlayableEntity> FightingCharacters = new ObservableCollection<PlayableEntity>();
     }
 }

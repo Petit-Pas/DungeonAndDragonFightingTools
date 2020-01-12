@@ -2,6 +2,9 @@
 using DDFight.Tools.Save;
 using DDFight.Windows;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -157,5 +160,28 @@ namespace DDFight.Controlers
         }
 
         #endregion
+
+        #region AddToFight
+
+        private void AddToFight_MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            ObservableCollection<PlayableEntity> list = data_context.FightingCharacters;
+
+            if (list.Count != 0)
+            {
+                if (list.Single(x => x.Name == ((CharacterDataContext)CharacterList.SelectedItem).Name) == null)
+                    data_context.FightingCharacters.Add((CharacterDataContext)CharacterList.SelectedItem);
+            }
+            else
+            {
+                data_context.FightingCharacters.Add((CharacterDataContext)CharacterList.SelectedItem);
+            }
+
+        }
+
+        #endregion
+
+
+
     }
 }
