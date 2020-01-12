@@ -181,7 +181,7 @@ namespace DDFight.Game
             MaxHp = to_copy.MaxHp;
             Characteristics = (CharacteristicsDataContext)to_copy.Characteristics.Clone();
             DamageAffinities = (DamageTypeAffinitiesDataContext)to_copy.DamageAffinities.Clone();
-            HitAttacks = new ObservableCollection<HitAttackTemplate> (to_copy.HitAttacks.Clone());
+            HitAttacks = to_copy.HitAttacks.Clone();
         }
 
         /// <summary>
