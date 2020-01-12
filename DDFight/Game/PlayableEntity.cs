@@ -37,6 +37,24 @@ namespace DDFight.Game
         }
         private string _name = "Name";
 
+        /// <summary>
+        ///     Only used for monsters when they are duplicates in fight, Name will be the same, while DisplayName will be unique
+        /// </summary>
+        [XmlAttribute]
+        public virtual string DisplayName
+        {
+            get => _displayName;
+            set
+            {
+                if (value != _displayName)
+                {
+                    _displayName = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        private string _displayName = "DisplayName";
+
 
         /// <summary>
         ///     Armor Class

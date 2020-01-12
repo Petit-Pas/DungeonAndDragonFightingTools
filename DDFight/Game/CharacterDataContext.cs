@@ -43,6 +43,11 @@ namespace DDFight.Game
         }
         private uint _level = 1;
 
+        public override string DisplayName
+        {
+            get => Name;
+        }
+
         #endregion
 
         #region INotifyPropertyChangedSub

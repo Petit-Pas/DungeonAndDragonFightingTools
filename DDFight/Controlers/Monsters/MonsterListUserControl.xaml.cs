@@ -156,5 +156,24 @@ namespace DDFight.Controlers
         }
 
         #endregion
+
+        #region AddToFight
+
+        private void AddToFight_MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            IEnumerable<PlayableEntity> list = data_context.FightingCharacters.Where(x => x.Name == ((MonsterDataContext)MonsterList.SelectedItem).Name);
+
+
+            PlayableEntity tmp = (PlayableEntity)(((MonsterDataContext)MonsterList.SelectedItem).Clone());
+            tmp.DisplayName = tmp.Name + " - " + list.Count().ToString();
+
+
+            data_context.FightingCharacters.Add(tmp);
+
+            //if (data_context.FightingCharacters.SingleOrDefault(x => x.Name == ((CharacterDataContext)CharacterList.SelectedItem).Name) == null)
+            //    data_context.FightingCharacters.Add((CharacterDataContext)CharacterList.SelectedItem);
+        }
+
+        #endregion
     }
 }

@@ -1,4 +1,5 @@
 ﻿using DDFight.Game;
+using DDFight.Tools;
 using DDFight.Tools.Save;
 using DDFight.Windows;
 using System;
@@ -155,23 +156,17 @@ namespace DDFight.Controlers
 
         private void AddToFight_MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            ObservableCollection<PlayableEntity> list = data_context.FightingCharacters;
-
-            if (list.Count != 0)
+            try
             {
-                if (list.Single(x => x.Name == ((CharacterDataContext)CharacterList.SelectedItem).Name) == null)
+                if (data_context.FightingCharacters.SingleOrDefault(x => x.Name == ((CharacterDataContext)CharacterList.SelectedItem).Name) == null)
                     data_context.FightingCharacters.Add((CharacterDataContext)CharacterList.SelectedItem);
             }
-            else
+            catch (Exception err)
             {
-                data_context.FightingCharacters.Add((CharacterDataContext)CharacterList.SelectedItem);
+                Console.WriteLine("ERROR: caught an exception while trying to add a character to the fighting list: " + err.Message);
+                Logger.Log("ERROR: caught an exception while trying to add a character to the fighting list: " + err.Message);
             }
-
         }
-
         #endregion
-
-
-
     }
 }

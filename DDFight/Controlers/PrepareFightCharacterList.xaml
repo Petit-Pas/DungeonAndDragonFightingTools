@@ -20,7 +20,7 @@
         <Grid>
             <ListBox 
                 x:Name="CharactersList"
-                DisplayMemberPath="Name"
+                DisplayMemberPath="DisplayName"
                 Background="{StaticResource Gray}">
                 <ListBox.Resources>
                 </ListBox.Resources>
