@@ -142,5 +142,11 @@ namespace DDFight.Controlers.Game.Attacks
         }
 
         #endregion
+
+        private void AttacksList_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Delete)
+                this.DeleteAttack_MenuItem_Click(sender, null);
+        }
     }
 }

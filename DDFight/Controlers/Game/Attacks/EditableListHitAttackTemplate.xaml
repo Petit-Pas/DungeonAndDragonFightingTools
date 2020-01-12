@@ -34,7 +34,8 @@
                 x:Name="AttacksList"
                 Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
                 DisplayMemberPath="Name"
-                MouseDoubleClick="AttackList_MouseDoubleClick">
+                MouseDoubleClick="AttackList_MouseDoubleClick"
+                KeyDown="AttacksList_KeyDown">
 
                 <ListBox.Resources>
                     <ContextMenu x:Key="CMenu">

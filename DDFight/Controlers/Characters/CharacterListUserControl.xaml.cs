@@ -168,5 +168,11 @@ namespace DDFight.Controlers
             }
         }
         #endregion
+
+        private void CharacterList_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Delete)
+                this.DeleteCharacter_MenuItem_Click(sender, null);
+        }
     }
 }
