@@ -4,6 +4,7 @@ using DDFight.Game.DamageAffinity;
 using DDFight.Tools;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -119,7 +120,7 @@ namespace DDFight.Game
         }
         private DamageTypeAffinitiesDataContext _damageAffinities = new DamageTypeAffinitiesDataContext();
 
-        public List<HitAttackTemplate> HitAttacks
+        public ObservableCollection<HitAttackTemplate> HitAttacks
         {
             get => _hitAttacks;
             set
@@ -128,7 +129,7 @@ namespace DDFight.Game
                 NotifyPropertyChanged();
             }
         }
-        private List<HitAttackTemplate> _hitAttacks;
+        private ObservableCollection<HitAttackTemplate> _hitAttacks = new ObservableCollection<HitAttackTemplate>();
 
         #endregion
 
@@ -180,7 +181,7 @@ namespace DDFight.Game
             MaxHp = to_copy.MaxHp;
             Characteristics = (CharacteristicsDataContext)to_copy.Characteristics.Clone();
             DamageAffinities = (DamageTypeAffinitiesDataContext)to_copy.DamageAffinities.Clone();
-            HitAttacks = (List<HitAttackTemplate>)to_copy.HitAttacks.Clone();
+            HitAttacks = new ObservableCollection<HitAttackTemplate> (to_copy.HitAttacks.Clone());
         }
 
         /// <summary>

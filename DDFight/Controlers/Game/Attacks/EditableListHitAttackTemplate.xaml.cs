@@ -36,14 +36,7 @@ namespace DDFight.Controlers.Game.Attacks
 
         private void EditableListHitAttackTemplate_Loaded(object sender, RoutedEventArgs e)
         {
-            if (data_context.HitAttacks != null)
-            {
-                this.AttacksList.Items.Clear();
-                foreach (HitAttackTemplate atk in data_context.HitAttacks)
-                {
-                    this.AttacksList.Items.Add(atk);
-                }
-            }
+            AttacksList.ItemsSource = data_context.HitAttacks;
         }
 
         #region Add
@@ -53,7 +46,6 @@ namespace DDFight.Controlers.Game.Attacks
         /// </summary>
         private void add_attack(HitAttackTemplate atk)
         {
-            this.AttacksList.Items.Add(atk);
             data_context.HitAttacks.Add(atk);
 
         }
@@ -87,7 +79,6 @@ namespace DDFight.Controlers.Game.Attacks
         private void delete_attack(HitAttackTemplate atk)
         {
             data_context.HitAttacks.Remove(atk);
-            AttacksList.Items.Remove(atk);
         }
 
         /// <summary>
@@ -123,7 +114,6 @@ namespace DDFight.Controlers.Game.Attacks
             if (temporary.Validated == true)
             {
                 int index = this.AttacksList.SelectedIndex;
-                this.AttacksList.Items[index] = temporary;
                 data_context.HitAttacks[index] = temporary;
             }
         }
