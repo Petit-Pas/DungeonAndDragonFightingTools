@@ -20,8 +20,8 @@
             ShowGridLines="False"
             x:Name="AttacksGrid">
             <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -33,6 +33,7 @@
                 Margin="5,10, 5, 5"
                 x:Name="AttacksList"
                 Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
+                DisplayMemberPath="Name"
                 MouseDoubleClick="AttackList_MouseDoubleClick">
 
                 <ListBox.Resources>
@@ -52,23 +53,6 @@
                         <Setter Property="BorderThickness" Value="2"/>
                     </Style>
                 </ListBox.ItemContainerStyle>
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition SharedSizeGroup="1stColumn"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock 
-                                Grid.Column="0"
-                                Text="{Binding Name}"/>
-                            <Button 
-                                Grid.Column="1">
-                                X
-                            </Button>
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
             </ListBox>
             <Button 
                 Grid.Row="1" Grid.Column="0" 
