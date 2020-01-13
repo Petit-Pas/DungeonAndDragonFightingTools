@@ -21,18 +21,24 @@
             <ListBox 
                 x:Name="CharactersList"
                 DisplayMemberPath="DisplayName"
-                Background="{StaticResource Gray}">
+                Background="{StaticResource Gray}"
+                KeyDown="CharactersList_KeyDown">
                 <ListBox.Resources>
+                    <ContextMenu x:Key="CMenu">
+                        <MenuItem Header="Duplicate" Click="DuplicateFighter_MenuItem_Click"/>
+                        <Separator/>
+                        <MenuItem Header="Delete" Click="DeleteFighter_MenuItem_Click"/>
+                    </ContextMenu>
                 </ListBox.Resources>
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
+                        <Setter Property="ContextMenu" Value="{StaticResource CMenu}"/>
                         <Setter Property="BorderBrush" Value="{StaticResource Light}"/>
                         <Setter Property="Margin" Value="3"/>
                         <Setter Property="Foreground" Value="{StaticResource Light}"/>
                         <Setter Property="BorderThickness" Value="2"/>
                     </Style>
                 </ListBox.ItemContainerStyle>
-
             </ListBox>
         </Grid>
         
