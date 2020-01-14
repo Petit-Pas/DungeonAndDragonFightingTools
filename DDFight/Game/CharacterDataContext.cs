@@ -66,6 +66,11 @@ namespace DDFight.Game
 
         #endregion
 
+        private void init_copy(CharacterDataContext to_copy)
+        {
+            Level = to_copy.Level;
+        }
+
         #region IClonable
 
         /// <summary>
@@ -74,7 +79,7 @@ namespace DDFight.Game
         /// <param name=""></param>
         protected CharacterDataContext(CharacterDataContext to_copy) : base(to_copy)
         {
-            Level = to_copy.Level;
+            init_copy(to_copy);
         }
 
         public override object Clone()
@@ -83,5 +88,11 @@ namespace DDFight.Game
         }
 
         #endregion
+
+        public override void CopyAssign (object _to_copy)
+        {
+            base.CopyAssign(_to_copy);
+            init_copy((CharacterDataContext)_to_copy);
+        }
     }
 }

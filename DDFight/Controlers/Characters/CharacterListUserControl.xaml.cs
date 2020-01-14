@@ -122,7 +122,7 @@ namespace DDFight.Controlers
 
             if (temporary.Validated == true)
             {
-                data_context.CharacterList.Replace(to_update, temporary);
+                to_update.CopyAssign(temporary);
                 data_context.CharacterList.Save();
             }
         }
@@ -159,7 +159,10 @@ namespace DDFight.Controlers
             try
             {
                 if (data_context.FightingCharacters.SingleOrDefault(x => x.Name == ((CharacterDataContext)CharacterList.SelectedItem).Name) == null)
-                    data_context.FightingCharacters.Add((CharacterDataContext)CharacterList.SelectedItem);
+                {
+                    CharacterDataContext _new = (CharacterDataContext)CharacterList.SelectedItem;
+                    data_context.FightingCharacters.Add(_new);
+                }
             }
             catch (Exception err)
             {
@@ -173,6 +176,14 @@ namespace DDFight.Controlers
         {
             if (e.Key == Key.Delete)
                 this.DeleteCharacter_MenuItem_Click(sender, null);
+        }
+
+        protected override void OnMouseMove(MouseEventArgs e)
+        {
+            base.OnMouseMove(e);
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+            }
         }
     }
 }

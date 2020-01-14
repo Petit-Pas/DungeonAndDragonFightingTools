@@ -8,4 +8,4 @@ Think about a way to implement temporary Hps properly
 
 Check for // HERE comments 
 
-
+in prepare fight : duplicate element, erase first, duplicate remaining, you now have 2 with same ids :/

@@ -1,5 +1,6 @@
 ﻿using DDFight.Game;
 using DDFight.Tools.Save;
+using System;
 using System.Windows;
 
 namespace DDFight
@@ -39,6 +40,10 @@ namespace DDFight
             DataContext = Global.Context;
 
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
         }
     }
 }

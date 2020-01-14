@@ -35,7 +35,8 @@
             MaxWidth="200"
             Grid.Column="2"
             FontSize="22"
-            FontWeight="Bold">
+            FontWeight="Bold"
+            Click="Button_Click">
             Fight
         </Button>
     </Grid>

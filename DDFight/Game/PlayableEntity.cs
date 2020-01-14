@@ -14,7 +14,7 @@ using System.Xml.Serialization;
 
 namespace DDFight.Game
 {
-    public class PlayableEntity : ICloneable, INotifyPropertyChanged /*, INotifyPropertyChangedSub*/
+    public class PlayableEntity : ICloneable, INotifyPropertyChanged, ICopyAssignable /*, INotifyPropertyChangedSub*/
     {
         public PlayableEntity() 
         {
@@ -185,13 +185,10 @@ namespace DDFight.Game
         }
         #endregion
 
-        #region IClonable
-
         /// <summary>
-        ///     copy contructor, required for the Clone method to work properly with derived classes
+        ///     this method is required to completely initialize an instance of this by copying another object
         /// </summary>
-        /// <param name=""></param>
-        protected PlayableEntity(PlayableEntity to_copy)
+        private void init_copy(PlayableEntity to_copy)
         {
             Name = (string)to_copy.Name.Clone();
             CA = to_copy.CA;
@@ -202,6 +199,17 @@ namespace DDFight.Game
             HitAttacks = to_copy.HitAttacks.Clone();
         }
 
+        #region IClonable
+
+        /// <summary>
+        ///     copy contructor, required for the Clone method to work properly with derived classes
+        /// </summary>
+        /// <param name=""></param>
+        protected PlayableEntity(PlayableEntity to_copy)
+        {
+           init_copy(to_copy);
+        }
+
         /// <summary>
         ///     Method to clone a character (Deep Copy)
         /// </summary>
@@ -209,6 +217,16 @@ namespace DDFight.Game
         public virtual object Clone()
         {
             return new PlayableEntity(this);
+        }
+
+        /// <summary>
+        ///     reinitialize this object by copying the received one
+        /// </summary>
+        /// <param name="_to_copy"></param>
+        public virtual void CopyAssign(object _to_copy)
+        {
+            PlayableEntity to_copy = (PlayableEntity)_to_copy;
+            init_copy(to_copy);
         }
         #endregion
     }
