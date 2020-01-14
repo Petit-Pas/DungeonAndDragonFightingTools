@@ -88,8 +88,8 @@
     <Compile Include="Controlers\InputBoxes\PositiveIntBox.xaml.cs">
       <DependentUpon>PositiveIntBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controlers\Monsters\MonsterListUserControl.xaml.cs">
-      <DependentUpon>MonsterListUserControl.xaml</DependentUpon>
+    <Compile Include="Controlers\Monsters\EditableMonsterListUserControl.xaml.cs">
+      <DependentUpon>EditableMonsterListUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controlers\Monsters\MonsterMainInfoUserControl.xaml.cs">
       <DependentUpon>MonsterMainInfoUserControl.xaml</DependentUpon>
@@ -147,7 +147,7 @@
       <DependentUpon>StatusMessageWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\StatusMessageWindowDataContext.cs" />
-    <Page Include="Controlers\Characters\CharacterListUserControl.xaml">
+    <Page Include="Controlers\Characters\EditableCharacterListUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -191,7 +191,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controlers\Monsters\MonsterListUserControl.xaml">
+    <Page Include="Controlers\Monsters\EditableMonsterListUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -211,8 +211,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controlers\Characters\CharacterListUserControl.xaml.cs">
-      <DependentUpon>CharacterListUserControl.xaml</DependentUpon>
+    <Compile Include="Controlers\Characters\EditableCharacterListUserControl.xaml.cs">
+      <DependentUpon>EditableCharacterListUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

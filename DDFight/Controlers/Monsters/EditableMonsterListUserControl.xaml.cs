@@ -20,7 +20,7 @@ namespace DDFight.Controlers
     /// <summary>
     /// Interaction logic for MonsterListUserControl.xaml
     /// </summary>
-    public partial class MonsterListUserControl : UserControl
+    public partial class EditableMonsterListUserControl : UserControl
     {
         /// <summary>
         ///     Getter for a casted DataContext
@@ -36,7 +36,7 @@ namespace DDFight.Controlers
         /// <summary>
         ///     Ctor
         /// </summary>
-        public MonsterListUserControl()
+        public EditableMonsterListUserControl()
         {
             Loaded += MonsterListUserControl_Loaded;
 
@@ -174,6 +174,8 @@ namespace DDFight.Controlers
         {
             if (e.Key == Key.Delete)
                 this.DeleteMonster_MenuItem_Click(sender, null);
+            if (e.Key == Key.Right)
+                AddToFight_MenuItem_Click(sender, null);
         }
     }
 }

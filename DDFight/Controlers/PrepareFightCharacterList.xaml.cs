@@ -82,6 +82,8 @@ namespace DDFight.Controlers
         {
             if (e.Key == Key.Delete)
                 this.DeleteFighter_MenuItem_Click(sender, null);
+            if (e.Key == Key.Left)
+                delete_fighter((PlayableEntity)CharactersList.SelectedItem);
         }
     }
 }

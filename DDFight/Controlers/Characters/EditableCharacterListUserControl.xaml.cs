@@ -15,7 +15,7 @@ namespace DDFight.Controlers
     /// <summary>
     /// Interaction logic for CharacterListUserControl.xaml
     /// </summary>
-    public partial class CharacterListUserControl : UserControl
+    public partial class EditableCharacterListUserControl : UserControl
     {
         /// <summary>
         ///     Getter for a casted DataContext
@@ -31,7 +31,7 @@ namespace DDFight.Controlers
         /// <summary>
         ///     Ctor
         /// </summary>
-        public CharacterListUserControl()
+        public EditableCharacterListUserControl()
         {
             Loaded += CharacterListUserControl_Loaded;
 
@@ -176,14 +176,8 @@ namespace DDFight.Controlers
         {
             if (e.Key == Key.Delete)
                 this.DeleteCharacter_MenuItem_Click(sender, null);
-        }
-
-        protected override void OnMouseMove(MouseEventArgs e)
-        {
-            base.OnMouseMove(e);
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-            }
+            if (e.Key == Key.Right)
+                AddToFight_MenuItem_Click(sender, null);
         }
     }
 }
