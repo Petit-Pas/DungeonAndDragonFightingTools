@@ -57,7 +57,14 @@ namespace DDFight.Controlers
                 IEnumerable<PlayableEntity> list = data_context.FightingCharacters.Where(x => x.Name == ((MonsterDataContext)CharactersList.SelectedItem).Name);
                 PlayableEntity new_fighter = (PlayableEntity)(((MonsterDataContext)CharactersList.SelectedItem).Clone());
 
-                new_fighter.DisplayName = new_fighter.Name + " - " + list.Count().ToString();
+                int i = 0;
+                for (; i < list.Count(); i++)
+                {
+                    string tmp = new_fighter.Name + " - " + i;
+                    if (list.ElementAt(i).DisplayName != tmp)
+                        break;
+                }
+                new_fighter.DisplayName = new_fighter.Name + " - " + i;
                 add_fighter(new_fighter);
             }
         }
