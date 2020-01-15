@@ -1,4 +1,5 @@
-﻿using DDFight.ValidationRules;
+﻿using DDFight.Game;
+using DDFight.ValidationRules;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -40,6 +41,31 @@ namespace DDFight
                     found_here.AddRange(child.FindAllChildren<T>());
             }
             return found_here;
+        }
+
+        public static void Test(this FrameworkElement element, string filter)
+        {
+            for (int i = 0; i != VisualTreeHelper.GetChildrenCount(element); i += 1)
+            {
+                FrameworkElement child = VisualTreeHelper.GetChild(element, i) as FrameworkElement;
+                if (child != null)
+                {
+                    if (child is ListBoxItem)
+                    {
+                        child.Visibility = Visibility.Visible;
+                        if (filter != "")
+                        {
+                            PlayableEntity ctx = (PlayableEntity)child.DataContext;
+                            if (!ctx.Name.ToLower().Contains(filter.ToLower()))
+                                child.Visibility = Visibility.Collapsed;
+                        }
+                    }
+                    else
+                    {
+                        child.Test(filter);
+                    }
+                }
+            }
         }
 
         public static IList<T> Clone<T>(this IList<T> listToClone) where T : ICloneable

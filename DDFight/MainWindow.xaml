@@ -28,7 +28,8 @@
         </TabControl>
 
         <ctrl:PrepareFightCharacterList 
-           Grid.Column="1"/>
+            Margin="10, 10, 0, 3"
+            Grid.Column="1"/>
 
         <Button
             MaxHeight="100"

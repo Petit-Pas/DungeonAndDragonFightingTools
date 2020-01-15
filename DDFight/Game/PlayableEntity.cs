@@ -151,6 +151,46 @@ namespace DDFight.Game
 
         #endregion
 
+        #region Fight
+
+        /// <summary>
+        ///     The initiative rolled for a given fight
+        /// </summary>
+        [XmlIgnore]
+        public uint Initiative
+        {
+            get => _initiative;
+            set
+            {
+                if (_initiative != value)
+                {
+                    _initiative = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        private uint _initiative;
+
+        /// <summary>
+        ///     The turn for a given fight
+        /// </summary>
+        [XmlIgnore]
+        public uint TurnOrder
+        {
+            get => _turnOrder;
+            set
+            {
+                if (_turnOrder != value)
+                {
+                    _turnOrder = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        private uint _turnOrder;
+
+        #endregion
+
         #region INotifyPropertyChangedSub
         /*
         /// <summary>

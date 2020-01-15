@@ -34,8 +34,24 @@ namespace DDFight.Controlers
         public EditableCharacterListUserControl()
         {
             Loaded += CharacterListUserControl_Loaded;
-
             InitializeComponent();
+            FilterTextBox.GotFocus += FilterTextBox_GotFocus;
+            FilterTextBox.LostFocus += FilterTextBox_LostFocus;
+            FilterTextBox.Text = filterPlaceHolder;
+        }
+
+        private string filterPlaceHolder = "Filter...";
+
+        private void FilterTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(FilterTextBox.Text))
+                FilterTextBox.Text = filterPlaceHolder;
+        }
+
+        private void FilterTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (FilterTextBox.Text == filterPlaceHolder)
+                FilterTextBox.Text = "";
         }
 
         /// <summary>
@@ -178,6 +194,11 @@ namespace DDFight.Controlers
                 this.DeleteCharacter_MenuItem_Click(sender, null);
             if (e.Key == Key.Right)
                 AddToFight_MenuItem_Click(sender, null);
+        }
+
+        private void FilterTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            CharacterList.Test(FilterTextBox.Text);
         }
     }
 }
