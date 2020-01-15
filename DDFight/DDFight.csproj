@@ -143,6 +143,9 @@
     <Compile Include="Windows\EditMonsterWindow.xaml.cs">
       <DependentUpon>EditMonsterWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\RollInitiativeWindow.xaml.cs">
+      <DependentUpon>RollInitiativeWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\StatusMessageWindow.xaml.cs">
       <DependentUpon>StatusMessageWindow.xaml</DependentUpon>
     </Compile>
@@ -231,6 +234,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\EditMonsterWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\RollInitiativeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,5 +1,6 @@
 ﻿using DDFight.Game;
 using DDFight.Tools.Save;
+using DDFight.Windows;
 using System;
 using System.Windows;
 
@@ -44,6 +45,11 @@ namespace DDFight
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            RollInitiativeWindow window = new RollInitiativeWindow();
+            window.DataContext = Global.Context.FightingCharacters;
+            window.Owner = this;
+
+            window.ShowDialog();
         }
     }
 }

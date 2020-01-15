@@ -178,6 +178,8 @@ namespace DDFight.Controlers
 
         private void AddToFight_MenuItem_Click(object sender, RoutedEventArgs e)
         {
+            if (MonsterList.SelectedItem == null)
+                return;
             IEnumerable<PlayableEntity> list = data_context.FightingCharacters.Where(x => x.Name == ((MonsterDataContext)MonsterList.SelectedItem).Name);
             PlayableEntity new_fighter = (PlayableEntity)(((MonsterDataContext)MonsterList.SelectedItem).Clone());
 
