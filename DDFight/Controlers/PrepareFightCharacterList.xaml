@@ -20,7 +20,22 @@
 
         <Grid
             Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBox
+                Grid.Row="0"
+                Grid.Column="0"
+                x:Name="FilterTextBox"
+                KeyUp="FilterTextBox_KeyUp"
+                Background="{StaticResource Gray}"
+                Foreground="{StaticResource Light}"
+                Margin="5" />
+
             <ListBox 
+                Grid.Row="1"
                 x:Name="CharactersList"
                 DisplayMemberPath="DisplayName"
                 Background="{StaticResource Gray}"

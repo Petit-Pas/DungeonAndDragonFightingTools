@@ -35,9 +35,7 @@
                 KeyUp="FilterTextBox_KeyUp"
                 Background="{StaticResource Gray}"
                 Foreground="{StaticResource Light}"
-                Margin="5">
-                
-            </TextBox>
+                Margin="5" />
             
             <Grid Grid.Row="1" MinWidth="200">
                 <Grid.RowDefinitions>

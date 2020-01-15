@@ -19,14 +19,23 @@
         <Grid x:Name="MonstersGrid" Margin="10"
           Background="{StaticResource LightestGray}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            
-            <Grid Grid.Row="0" MinWidth="200">
+
+            <TextBox
+                Grid.Row="0"
+                Grid.Column="0"
+                x:Name="FilterTextBox"
+                KeyUp="FilterTextBox_KeyUp"
+                Background="{StaticResource Gray}"
+                Foreground="{StaticResource Light}"
+                Margin="5" />
+
+            <Grid Grid.Row="1" MinWidth="200">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="40"/>

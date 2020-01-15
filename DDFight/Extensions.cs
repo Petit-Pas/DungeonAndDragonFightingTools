@@ -43,7 +43,7 @@ namespace DDFight
             return found_here;
         }
 
-        public static void Test(this FrameworkElement element, string filter)
+        public static void FilterPlayableEntityListBox(this FrameworkElement element, string filter)
         {
             for (int i = 0; i != VisualTreeHelper.GetChildrenCount(element); i += 1)
             {
@@ -62,7 +62,7 @@ namespace DDFight
                     }
                     else
                     {
-                        child.Test(filter);
+                        child.FilterPlayableEntityListBox(filter);
                     }
                 }
             }

@@ -198,7 +198,7 @@ namespace DDFight.Controlers
 
         private void FilterTextBox_KeyUp(object sender, KeyEventArgs e)
         {
-            CharacterList.Test(FilterTextBox.Text);
+            CharacterList.FilterPlayableEntityListBox(FilterTextBox.Text);
         }
     }
 }
