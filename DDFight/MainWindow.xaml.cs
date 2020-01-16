@@ -38,9 +38,16 @@ namespace DDFight
 
             Global.Loading = false;
 
+            Global.Context.FightingCharacters.CollectionChanged += FightingCharacters_CollectionChanged;
+
             DataContext = Global.Context;
 
             InitializeComponent();
+        }
+
+        private void FightingCharacters_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            FightButton.IsEnabled = Global.Context.FightingCharacters.Count >= 2;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

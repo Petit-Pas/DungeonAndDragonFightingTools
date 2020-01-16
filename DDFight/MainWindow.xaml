@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ctrl="clr-namespace:DDFight.Controlers"
         mc:Ignorable="d"
-        Title="Dungeons &amp; Dragons Fighting Tool" Height="450" Width="800">
+        Title="Dungeons &amp; Dragons Fighting Tool" Height="450" Width="800"
+        x:Name="Window">
     <Grid
         Margin="0, 5, 0, 0">
         <Grid.RowDefinitions>
@@ -32,12 +33,14 @@
             Grid.Column="1"/>
 
         <Button
+            x:Name="FightButton"
             MaxHeight="100"
             MaxWidth="200"
             Grid.Column="2"
             FontSize="22"
             FontWeight="Bold"
-            Click="Button_Click">
+            Click="Button_Click"
+            IsEnabled="False">
             Fight
         </Button>
     </Grid>
