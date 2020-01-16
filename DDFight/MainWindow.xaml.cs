@@ -1,6 +1,7 @@
 ﻿using DDFight.Game;
 using DDFight.Tools.Save;
 using DDFight.Windows;
+using DDFight.Windows.FightWindows;
 using System;
 using System.Windows;
 
@@ -60,7 +61,10 @@ namespace DDFight
 
             if (window.Cancelled == false)
             {
-                Console.WriteLine("should start Fight");
+                MainFightWindow fightWindow = new MainFightWindow();
+                fightWindow.DataContext = Global.Context.FightingCharacters;
+                fightWindow.WindowState = WindowState.Maximized;
+                fightWindow.ShowDialog();
             }
 
         }
