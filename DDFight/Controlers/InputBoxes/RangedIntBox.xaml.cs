@@ -105,7 +105,6 @@ namespace DDFight.Controlers.InputBoxes
         {
             var ctl = d as RangedIntBox;
 
-            Console.WriteLine("COCHON: " + ctl.Max + " " + ctl.Min);
             var binding = new Binding(ctl.PropertyPath)
             {
                 ValidationRules = { new RangedIntRule { Max=ctl.PropertyMax, Min=ctl.PropertyMin} },

@@ -50,13 +50,19 @@ namespace DDFight
             FightButton.IsEnabled = Global.Context.FightingCharacters.Count >= 2;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void FightButton_Click(object sender, RoutedEventArgs e)
         {
             RollInitiativeWindow window = new RollInitiativeWindow();
             window.DataContext = Global.Context.FightingCharacters;
             window.Owner = this;
 
             window.ShowDialog();
+
+            if (window.Cancelled == false)
+            {
+                Console.WriteLine("should start Fight");
+            }
+
         }
     }
 }

@@ -36,7 +36,7 @@
                     TextWrapping="Wrap"
                     >
                         When you press on the Roll button, 
-                        all the not entered or invalid results will be 
+                        all the results aqual to 0 will be 
                         automatically rolled between 1 and 20
                 </TextBlock>
             </StackPanel>
@@ -47,6 +47,7 @@
             HorizontalAlignment="Center"
             >
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <GroupBox
@@ -94,6 +95,19 @@
                     </ItemsControl>
                 </ScrollViewer>
             </GroupBox>
+            <Button
+                Grid.Row="0" Grid.Column="1"
+                MinWidth="100"
+                Height="40"
+                Margin="10"
+                Background="{StaticResource Light}"
+                Foreground="{StaticResource LightestGray}"
+                FontSize="15"
+                FontWeight="SemiBold"
+                Click="RollButton_Click">
+                Roll
+            </Button>
+
         </Grid>
         <Button
             Grid.Row="2"
@@ -102,8 +116,9 @@
             Background="{StaticResource Light}"
             Foreground="{StaticResource LightestGray}"
             FontSize="15"
-            FontWeight="SemiBold">
-                Roll
+            FontWeight="SemiBold"
+            Click="LaunchFightButton_Click">
+                Launch Fight
         </Button>
     </Grid>
 </Window>

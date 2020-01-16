@@ -1,4 +1,6 @@
 ﻿using DDFight.Game;
+using DDFight.Game.Dices;
+using DDFight.Resources;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -21,6 +23,13 @@ namespace DDFight.Windows
     /// </summary>
     public partial class RollInitiativeWindow : Window
     {
+        public bool Cancelled = true;
+
+        private ObservableCollection<PlayableEntity> data_context
+        {
+            get => (ObservableCollection<PlayableEntity>)DataContext;
+        }
+
         public RollInitiativeWindow()
         {
             InitializeComponent();
@@ -29,7 +38,61 @@ namespace DDFight.Windows
 
         private void RollInitiativeWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            CharactersItemsControl.ItemsSource = (ObservableCollection<PlayableEntity>)DataContext;
+            foreach (PlayableEntity entity in data_context)
+            {
+                entity.Initiative = 0;
+            }
+            CharactersItemsControl.ItemsSource = data_context;
+        }
+
+        private void RollButton_Click(object sender, RoutedEventArgs e)
+        {
+            DiceRoll roll = new DiceRoll("1d20");
+            if (!this.AreAllChildrenValid())
+            {
+                StatusMessageWindow message = new StatusMessageWindow();
+                StatusMessageWindowDataContext dc = new StatusMessageWindowDataContext();
+                dc.Message = "At least one of the value is invalid";
+                dc.Icon = ResourceManager.BmUnchecked();
+
+                message.DataContext = dc;
+                message.Owner = this;
+                message.ShowDialog();
+            }
+            else
+            {
+                foreach (PlayableEntity entity in data_context)
+                {
+                    if (entity.Initiative == 0)
+                        entity.Initiative = (uint)roll.Roll();
+                }
+            }
+        }
+
+        private void LaunchFightButton_Click(object sender, RoutedEventArgs e)
+        {
+            DiceRoll roll = new DiceRoll("1d20");
+            if (!this.AreAllChildrenValid())
+            {
+                StatusMessageWindow message = new StatusMessageWindow();
+                StatusMessageWindowDataContext dc = new StatusMessageWindowDataContext();
+                dc.Message = "At least one of the value is invalid";
+                dc.Icon = ResourceManager.BmUnchecked();
+
+                message.DataContext = dc;
+                message.Owner = this;
+                message.ShowDialog();
+            }
+            else
+            {
+                foreach (PlayableEntity entity in data_context)
+                {
+                    if (entity.Initiative == 0)
+                        entity.Initiative = (uint)roll.Roll();
+                }
+                this.Cancelled = false;
+                this.Close();
+            }
         }
     }
 }
