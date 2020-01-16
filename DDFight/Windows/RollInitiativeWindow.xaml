@@ -35,7 +35,9 @@
                     FontWeight="SemiBold"
                     TextWrapping="Wrap"
                     >
-                        When you press on the Roll button, all the not entered or invalid results will be automatically rolled between 0 and 20
+                        When you press on the Roll button, 
+                        all the not entered or invalid results will be 
+                        automatically rolled between 1 and 20
                 </TextBlock>
             </StackPanel>
         </Grid>
@@ -77,7 +79,9 @@
                                         Margin="10, 2"
                                         Text="{Binding DisplayName}" 
                                         Foreground="{StaticResource Light}"/>
-                                    <inputboxes:PositiveIntTextBox
+                                    <inputboxes:RangedIntBox
+                                        PropertyMin="0"
+                                        PropertyMax="20"
                                         PropertyPath="Initiative"
                                         Grid.Column="1"
                                         Grid.Row="0"

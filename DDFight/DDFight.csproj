@@ -88,6 +88,9 @@
     <Compile Include="Controlers\InputBoxes\PositiveIntBox.xaml.cs">
       <DependentUpon>PositiveIntBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controlers\InputBoxes\RangedIntBox.xaml.cs">
+      <DependentUpon>RangedIntBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controlers\Monsters\EditableMonsterListUserControl.xaml.cs">
       <DependentUpon>EditableMonsterListUserControl.xaml</DependentUpon>
     </Compile>
@@ -129,6 +132,7 @@
     <Compile Include="ValidationRules\NotEmptyStringRule.cs" />
     <Compile Include="ValidationRules\PositiveIntRule.cs" />
     <Compile Include="Game\CharacterDataContext.cs" />
+    <Compile Include="ValidationRules\RangedIntRule.cs" />
     <Compile Include="ValidationRules\ValidationRuleEventHandler.cs" />
     <Compile Include="Windows\AskYesNoDataContext.cs" />
     <Compile Include="Windows\AskYesNoWindow.xaml.cs">
@@ -191,6 +195,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controlers\InputBoxes\PositiveIntBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controlers\InputBoxes\RangedIntBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

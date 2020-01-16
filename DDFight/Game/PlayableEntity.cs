@@ -169,7 +169,7 @@ namespace DDFight.Game
                 }
             }
         }
-        private uint _initiative;
+        private uint _initiative = 0;
 
         /// <summary>
         ///     The turn for a given fight
