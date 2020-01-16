@@ -12,6 +12,8 @@ namespace DDFight.Game.Dices
 {
     public class Dices : ICloneable, INotifyPropertyChanged
     {
+        static private Random rand = new Random();
+
         public Dices()
         {
         }
@@ -37,6 +39,8 @@ namespace DDFight.Game.Dices
         {
             return DiceAmount.ToString() + "d" + DiceValue.ToString();
         }
+
+        #region Properties
 
         [XmlAttribute]
         public int DiceValue
@@ -67,6 +71,19 @@ namespace DDFight.Game.Dices
             }
         }
         private int _diceAmount = 1;
+
+        #endregion
+
+        public int Roll()
+        {
+            int result = 0;
+
+            for (int i = 0; i != DiceAmount; i++)
+            {
+                result += rand.Next(1, DiceValue + 1);
+            }
+            return result;
+        }
 
         #region INotifyPropertyChanged
 

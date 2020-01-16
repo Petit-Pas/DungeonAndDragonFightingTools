@@ -21,6 +21,10 @@ namespace DDFight.Game.Dices
                 init();
         }
 
+        /// <summary>
+        ///     Initializes a DiceRoll from an input string (ex: 2d4+1d6+3)
+        /// </summary>
+        /// <param name="format"></param>
         public DiceRoll(string format)
         {
             DicesList = new List<Dices>();
@@ -60,6 +64,10 @@ namespace DDFight.Game.Dices
             DicesList = new List<Dices>();
         }
 
+        /// <summary>
+        ///     Converts this object to a string (opposite so ctor(string))
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             string format = "";
@@ -83,6 +91,19 @@ namespace DDFight.Game.Dices
             }
             return format;
         }
+
+        public int Roll()
+        {
+            int result = Modifier;
+
+            foreach(Dices dice in DicesList)
+            {
+                result += dice.Roll();
+            }
+            return result;
+        }
+
+        #region Properties 
 
         /// <summary>
         ///     the dices to throw
@@ -112,6 +133,8 @@ namespace DDFight.Game.Dices
             }
         }
         private int _modifier;
+
+        #endregion
 
         #region INotifyPropertyChanged
 
