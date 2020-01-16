@@ -4,6 +4,7 @@ using DDFight.Windows;
 using DDFight.Windows.FightWindows;
 using System;
 using System.Windows;
+using System.Windows.Documents;
 
 namespace DDFight
 {
@@ -61,9 +62,19 @@ namespace DDFight
 
             if (window.Cancelled == false)
             {
+                Paragraph par = new Paragraph();
+                par.Inlines.Add(new Run("toto\r\n"));
+                par.Inlines.Add(new Run("toto\r\n"));
+                par.Inlines.Add(new Run("toto\r\n"));
+                par.Inlines.Add(new Run("toto\r\n"));
+                par.Inlines.Add(new Run("toto\r\n"));
+                par.Inlines.Add(new Run("toto\r\n"));
+                Global.Context.UserLogs.Blocks.Add(par);
+
                 MainFightWindow fightWindow = new MainFightWindow();
                 fightWindow.DataContext = Global.Context.FightingCharacters;
                 fightWindow.ShowDialog();
+                Global.Context.UserLogs = new FlowDocument();
             }
 
         }

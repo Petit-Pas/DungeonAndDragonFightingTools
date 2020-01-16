@@ -49,26 +49,6 @@ namespace DDFight.Controlers.InputBoxes
         }
         #endregion
 
-        public int Min
-        {
-            get => _min;
-            set { 
-                _min = value; 
-                NotifyPropertyChanged(); 
-            }
-        }
-        private int _min;
-
-        public int Max
-        {
-            get => _max;
-            set { 
-                _max = value;
-                NotifyPropertyChanged();
-            }
-        }
-        private int _max;
-
         public int PropertyMax
         {
             get { return (int)GetValue(PropertyMaxProperty); }

@@ -4,11 +4,21 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DDFight.Windows.FightWindows"
+        xmlns:controlers="clr-namespace:DDFight.Controlers"
         mc:Ignorable="d"
         Title="Main Fight Window" Height="1080" Width="1920"
         Background="{StaticResource LightestGray}"
-        WindowState="Maximized">
+        WindowState="Maximized"
+        Closed="Window_Closed">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <controlers:ConsoleUserControl 
+            x:Name="ConsoleControl"
+            Grid.Row="1"/>
+
     </Grid>
 </Window>

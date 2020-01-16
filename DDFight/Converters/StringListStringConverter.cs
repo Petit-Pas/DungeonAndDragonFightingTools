@@ -8,7 +8,7 @@ using System.Windows.Data;
 
 namespace DDFight.Converters
 {
-    public class ListStringStringConverter : IValueConverter
+    public class StringListStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

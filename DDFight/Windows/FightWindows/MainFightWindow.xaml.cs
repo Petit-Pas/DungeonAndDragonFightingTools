@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DDFight.Controlers.InputBoxes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,11 @@ namespace DDFight.Windows.FightWindows
         public MainFightWindow()
         {
             InitializeComponent();
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            ConsoleControl.RichTextBoxControl.ClearValue(BindableRichTextBox.DocumentProperty);
         }
     }
 }

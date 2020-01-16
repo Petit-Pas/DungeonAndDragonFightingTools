@@ -1,3 +1,0 @@
-﻿What to do when Adding a new Property to ANY CLASS (basically just check ALL interfaces region and see if you should enhance one now)
-	=> If it is a base type, check the IClonable region
-	=> If it is a Nested Class, check the IClonable AND the INotifyPropertyChangedSub regions

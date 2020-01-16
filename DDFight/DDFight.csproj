@@ -61,6 +61,9 @@
     <Compile Include="Controlers\Characters\CharacterMainInfoUserControl.xaml.cs">
       <DependentUpon>CharacterMainInfoUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controlers\ConsoleUserControl.xaml.cs">
+      <DependentUpon>ConsoleUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controlers\Game\Attacks\EditableHitAttackTemplateUserControl.xaml.cs">
       <DependentUpon>EditableHitAttackTemplateUserControl.xaml</DependentUpon>
     </Compile>
@@ -78,6 +81,9 @@
     </Compile>
     <Compile Include="Controlers\Game\Dices\EditableDiceRollUserControl.xaml.cs">
       <DependentUpon>EditableDiceRollUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controlers\InputBoxes\BindableRichTextBox.xaml.cs">
+      <DependentUpon>BindableRichTextBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controlers\InputBoxes\IntTextBox.xaml.cs">
       <DependentUpon>IntTextBox.xaml</DependentUpon>
@@ -100,7 +106,7 @@
     <Compile Include="Controlers\PrepareFightCharacterList.xaml.cs">
       <DependentUpon>PrepareFightCharacterList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converters\ListStringStringConverter.cs" />
+    <Compile Include="Converters\StringListStringConverter.cs" />
     <Compile Include="Converters\StringIntConverter.cs" />
     <Compile Include="Converters\StringToDiceRollConverter.cs" />
     <Compile Include="Extensions.cs" />
@@ -166,6 +172,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controlers\ConsoleUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controlers\Game\Attacks\EditableHitAttackTemplateUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -187,6 +197,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controlers\Game\Dices\EditableDiceRollUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controlers\InputBoxes\BindableRichTextBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -296,9 +310,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="MainIcon.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="WhenAddingProperty.txt" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\checked.png" />

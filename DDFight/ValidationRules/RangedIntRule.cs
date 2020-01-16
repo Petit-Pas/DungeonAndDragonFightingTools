@@ -26,7 +26,7 @@ namespace DDFight.ValidationRules
                 if (((string)value).Length > 0)
                     nb = Int32.Parse((String)value);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return new ValidationResult(false, $"Please enter a number in the range: {Min}-{Max}.");
             }
