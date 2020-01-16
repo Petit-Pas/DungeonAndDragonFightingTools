@@ -100,6 +100,7 @@
     <Compile Include="Controlers\PrepareFightCharacterList.xaml.cs">
       <DependentUpon>PrepareFightCharacterList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\ListStringStringConverter.cs" />
     <Compile Include="Converters\StringIntConverter.cs" />
     <Compile Include="Converters\StringToDiceRollConverter.cs" />
     <Compile Include="Extensions.cs" />
