@@ -63,7 +63,6 @@ namespace DDFight
             {
                 MainFightWindow fightWindow = new MainFightWindow();
                 fightWindow.DataContext = Global.Context.FightingCharacters;
-                fightWindow.WindowState = WindowState.Maximized;
                 fightWindow.ShowDialog();
             }
 

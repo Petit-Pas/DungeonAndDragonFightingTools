@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:DDFight.Windows.FightWindows"
         mc:Ignorable="d"
         Title="Main Fight Window" Height="1080" Width="1920"
-        Background="{StaticResource LightestGray}">
+        Background="{StaticResource LightestGray}"
+        WindowState="Maximized">
     <Grid>
         
     </Grid>
