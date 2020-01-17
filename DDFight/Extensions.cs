@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Media;
 
 namespace DDFight
@@ -103,6 +104,18 @@ namespace DDFight
                     queue.Enqueue(child);
                 }
             }
+            return result;
+        }
+
+        public static Run BuildRun(string text, Brush color, int fontSize, FontWeight fontWeight)
+        {
+            Run result = new Run();
+
+            result.Text = text;
+            result.Foreground = color;
+            result.FontSize = fontSize;
+            result.FontWeight = fontWeight;
+
             return result;
         }
 
