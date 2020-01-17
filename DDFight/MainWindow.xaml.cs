@@ -62,6 +62,7 @@ namespace DDFight
 
             if (window.Cancelled == false)
             {
+                Global.Context.UserLogs = new FlowDocument();
                 Paragraph par = new Paragraph();
                 par.Inlines.Add(new Run("toto\r\n"));
                 par.Inlines.Add(new Run("toto\r\n"));
@@ -74,7 +75,7 @@ namespace DDFight
                 MainFightWindow fightWindow = new MainFightWindow();
                 fightWindow.DataContext = Global.Context.FightingCharacters;
                 fightWindow.ShowDialog();
-                Global.Context.UserLogs = new FlowDocument();
+
             }
 
         }

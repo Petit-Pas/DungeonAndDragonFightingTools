@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,26 +16,22 @@ using System.Windows.Shapes;
 
 namespace DDFight.Controlers.InputBoxes
 {
+
     /// <summary>
     /// Logique d'interaction pour BindableRichTextBox.xaml
     /// </summary>
     public partial class BindableRichTextBox : RichTextBox
     {
-        public BindableRichTextBox()
-        {
-            InitializeComponent();
-        }
-
         public static readonly DependencyProperty DocumentProperty =
-       DependencyProperty.Register("Document", typeof(FlowDocument),
-       typeof(BindableRichTextBox), new FrameworkPropertyMetadata
-       (null, new PropertyChangedCallback(OnDocumentChanged)));
+            DependencyProperty.Register("Document", typeof(FlowDocument),
+            typeof(BindableRichTextBox), new FrameworkPropertyMetadata
+            (null, new PropertyChangedCallback(OnDocumentChanged)));
 
-        public FlowDocument Document
+        public new FlowDocument Document
         {
             get
             {
-                return (FlowDocument)GetValue(DocumentProperty);
+                return (FlowDocument)this.GetValue(DocumentProperty);
             }
 
             set

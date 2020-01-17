@@ -25,8 +25,19 @@ namespace DDFight.Windows.FightWindows
             InitializeComponent();
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Paragraph par = new Paragraph();
+            Run tmp = new Run("toto");
+            par.Inlines.Add(tmp);
+            Global.Context.UserLogs.Blocks.Add(par);
+
+            Console.WriteLine("COCHON: UserLogs now has n paragraophs: " + Global.Context.UserLogs.Blocks.Count());
+        }
+
         private void Window_Closed(object sender, EventArgs e)
         {
+            ConsoleControl.RichTextBoxControl.ClearValue(BindableRichTextBox.DocumentProperty);
         }
     }
 }
