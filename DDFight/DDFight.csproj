@@ -38,6 +38,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
@@ -63,6 +64,9 @@
     </Compile>
     <Compile Include="Controlers\ConsoleUserControl.xaml.cs">
       <DependentUpon>ConsoleUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controlers\FightingCharacterListUserControl.xaml.cs">
+      <DependentUpon>FightingCharacterListUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controlers\Game\Attacks\EditableHitAttackTemplateUserControl.xaml.cs">
       <DependentUpon>EditableHitAttackTemplateUserControl.xaml</DependentUpon>
@@ -173,6 +177,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controlers\ConsoleUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controlers\FightingCharacterListUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

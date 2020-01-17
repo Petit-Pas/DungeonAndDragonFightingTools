@@ -13,12 +13,21 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <controlers:FightingCharacterListUserControl 
+            Grid.Row="0" Grid.Column="0"
+            />
 
         <controlers:ConsoleUserControl 
             x:Name="ConsoleControl"
-            Grid.Row="1"/>
+            Grid.Row="0" Grid.Column="1"
+            Margin="5"
+            />
 
     </Grid>
 </Window>

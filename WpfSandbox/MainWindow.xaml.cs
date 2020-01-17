@@ -2,6 +2,7 @@
 // // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -20,11 +21,69 @@ namespace BindValidation
             Loaded += MainWindow_Loaded;
         }
 
-        MyDataSource dataSource = new MyDataSource { Age = 24, Age2 = 242, Age3 = 243 };
+        List<MyDataSource> list = new List<MyDataSource>();
+
+
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            DataContext = dataSource;
+            list.Add(new MyDataSource("ADE"));
+            list.Add(new MyDataSource("1BCDE"));
+            list.Add(new MyDataSource("2ABCDE"));
+            list.Add(new MyDataSource("3"));
+            list.Add(new MyDataSource("4dfshfABCDE"));
+            list.Add(new MyDataSource("5ABCDE"));
+            list.Add(new MyDataSource("6ABCDE"));
+            list.Add(new MyDataSource("7ABCDE"));
+            list.Add(new MyDataSource("8ABCDE"));
+            list.Add(new MyDataSource("9ABCDE")); list.Add(new MyDataSource("ABCDE"));
+            list.Add(new MyDataSource("1ABCDE"));
+            list.Add(new MyDataSource("2ABCDE"));
+            list.Add(new MyDataSource("3ABCDE"));
+            list.Add(new MyDataSource("4ABCDE"));
+            list.Add(new MyDataSource("5ABCDE"));
+            list.Add(new MyDataSource("6ABCDE"));
+            list.Add(new MyDataSource("7ABCDE"));
+            list.Add(new MyDataSource("8ABCDE"));
+            list.Add(new MyDataSource("9ABCDE")); list.Add(new MyDataSource("ABCDE"));
+            list.Add(new MyDataSource("1ABCDE"));
+            list.Add(new MyDataSource("2ABCDE"));
+            list.Add(new MyDataSource("3ABCDE"));
+            list.Add(new MyDataSource("4ABCDE"));
+            list.Add(new MyDataSource("5ABCDE"));
+            list.Add(new MyDataSource("6ABCDE"));
+            list.Add(new MyDataSource("7ABCDE"));
+            list.Add(new MyDataSource("8ABCDE"));
+            list.Add(new MyDataSource("9ABCDE")); list.Add(new MyDataSource("ABCDE"));
+            list.Add(new MyDataSource("1ABCDE"));
+            list.Add(new MyDataSource("2ABCDE"));
+            list.Add(new MyDataSource("3ABCDE"));
+            list.Add(new MyDataSource("4ABCDE"));
+            list.Add(new MyDataSource("5ABCDE"));
+            list.Add(new MyDataSource("6ABCDE"));
+            list.Add(new MyDataSource("7ABCDE"));
+            list.Add(new MyDataSource("8ABCDE"));
+            list.Add(new MyDataSource("9ABCDE")); list.Add(new MyDataSource("ABCDE"));
+            list.Add(new MyDataSource("1ABCDE"));
+            list.Add(new MyDataSource("2ABCDE"));
+            list.Add(new MyDataSource("3ABCDE"));
+            list.Add(new MyDataSource("4ABCDE"));
+            list.Add(new MyDataSource("5ABCDE"));
+            list.Add(new MyDataSource("6ABCDE"));
+            list.Add(new MyDataSource("7ABCDE"));
+            list.Add(new MyDataSource("8ABCDE"));
+            list.Add(new MyDataSource("9ABCDE")); list.Add(new MyDataSource("ABCDE"));
+            list.Add(new MyDataSource("1ABCDE"));
+            list.Add(new MyDataSource("2ABCDE"));
+            list.Add(new MyDataSource("3ABCDE"));
+            list.Add(new MyDataSource("4ABCDE"));
+            list.Add(new MyDataSource("5ABCDE"));
+            list.Add(new MyDataSource("6ABCDE"));
+            list.Add(new MyDataSource("7ABCDE"));
+            list.Add(new MyDataSource("8ABCDE"));
+            list.Add(new MyDataSource("9ABCDE"));
+
+            itemControl.ItemsSource = list;
         }
 
         private void UseCustomHandler(object sender, RoutedEventArgs e)

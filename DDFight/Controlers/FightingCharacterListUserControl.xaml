@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="DDFight.Controlers.FightingCharacterListUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DDFight.Controlers"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <GroupBox
+        Background="{StaticResource Gray}"
+        Foreground="{StaticResource Light}">
+        <GroupBox.Header>
+            <TextBlock 
+                Foreground="{StaticResource Light}"
+                FontSize="15"
+                FontWeight="SemiBold">
+                Fighters
+            </TextBlock>
+        </GroupBox.Header>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <ItemsControl x:Name="FightersControl" Grid.IsSharedSizeScope="True"
+                          Background="{StaticResource LightestGray}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition SharedSizeGroup="ColumnSize" />
+                            </Grid.ColumnDefinitions>
+
+                            <Grid 
+                                Grid.Column="0" Grid.Row="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Button Content="{Binding DisplayName}" FontSize="22" Margin="10" Padding="5" Grid.Column="0" Grid.Row="0"/>
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </ScrollViewer>
+    </GroupBox>
+</UserControl>

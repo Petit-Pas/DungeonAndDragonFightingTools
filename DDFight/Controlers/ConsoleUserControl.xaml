@@ -14,7 +14,6 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <GroupBox Grid.Column="0">
             <GroupBox.Header>
@@ -33,10 +32,5 @@
                 />
 
         </GroupBox>
-        <Button
-            Grid.Column="1"
-            Click="Button_Click">
-            Toto
-        </Button>
     </Grid>
 </UserControl>

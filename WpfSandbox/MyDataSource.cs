@@ -5,14 +5,16 @@ namespace BindValidation
 {
     public class MyDataSource
     {
-        public MyDataSource()
+        public MyDataSource(string text)
         {
-            Age = 0;
-            Age2 = 0;
+            Text = text;
         }
 
-        public int Age { get; set; }
-        public int Age2 { get; set; }
-        public int Age3 { get; set; }
+        private string _text;
+        public string Text
+        {
+            get => _text;
+            set => _text = value;
+        }
     }
 }

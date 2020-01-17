@@ -16,26 +16,19 @@ using System.Windows.Shapes;
 namespace DDFight.Controlers
 {
     /// <summary>
-    /// Logique d'interaction pour Console.xaml
+    /// Interaction logic for FightingCharacterListUserControl.xaml
     /// </summary>
-    public partial class ConsoleUserControl : UserControl
+    public partial class FightingCharacterListUserControl : UserControl
     {
-
-        public ConsoleUserControl()
+        public FightingCharacterListUserControl()
         {
             InitializeComponent();
-            DataContext = Global.Context;
-            RichTextBoxControl.TextChanged += RichTextBoxControl_TextChanged;
-            RichTextBoxControl.ScrollToEnd();
-
-            /*Paragraph par = new Paragraph();
-            par.Inlines.Add(test);*/
-
+            Loaded += FightingCharacterListUserControl_Loaded;
         }
 
-        private void RichTextBoxControl_TextChanged(object sender, TextChangedEventArgs e)
+        private void FightingCharacterListUserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            RichTextBoxControl.ScrollToEnd();
+            FightersControl.ItemsSource = Global.Context.FightingCharacters;
         }
     }
 }
