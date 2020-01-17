@@ -26,9 +26,10 @@
             </GroupBox.Header>
             <input:BindableRichTextBox 
                 x:Name="RichTextBoxControl"
-                Focusable="False"
+                IsReadOnly="True"
                 Document="{Binding UserLogs}" 
                 VirtualizingStackPanel.VirtualizationMode="Standard"
+                Background="{StaticResource LightestGray}"
                 />
 
         </GroupBox>

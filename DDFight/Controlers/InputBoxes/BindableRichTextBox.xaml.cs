@@ -46,11 +46,9 @@ namespace DDFight.Controlers.InputBoxes
         public static void OnDocumentChanged(DependencyObject obj,
             DependencyPropertyChangedEventArgs args)
         {
-            Console.WriteLine("detects change");
             RichTextBox rtb = (RichTextBox)obj;
             if (args.NewValue != null)
                 rtb.Document = (FlowDocument)args.NewValue;
-            rtb.ScrollToEnd();
         }
     }
-}
+}   

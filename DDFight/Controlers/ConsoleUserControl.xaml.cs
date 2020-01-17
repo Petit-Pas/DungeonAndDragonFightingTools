@@ -26,39 +26,54 @@ namespace DDFight.Controlers
 
             InitializeComponent();
             DataContext = Global.Context;
-
-            /*FlowDocument doc = new FlowDocument();
-
-            for (int i = 0; i != 20; i += 1)
-            {
-                Paragraph par = new Paragraph();
-                par.Inlines.Add(new Run("test1\r\n"));
-                par.Inlines.Add(new Run("test2\r\n"));
-                par.Inlines.Add(new Run("test3\r\n"));
-                par.Inlines.Add(new Run("test4\r\n"));
-                par.Inlines.Add(new Run("test5\r\n"));
-                par.Inlines.Add(new Run("test6\r\n"));
-
-                doc.Blocks.Add(par);
-            }
-
-            RichTextBoxControl.Document = doc;*/
-
+            RichTextBoxControl.TextChanged += RichTextBoxControl_TextChanged;
             RichTextBoxControl.ScrollToEnd();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            Run test = new Run("TEST");
+            test.FontSize = 22;
+
+            //test.Foreground = Application.Current.Resources.; //Application.Current.Resources["Light"];
+
+            test.Foreground = (Brush)this.FindResource("Light");
+            test.FontWeight = FontWeights.SemiBold;
+            //test.FontWeight.
+
+            //test.Foreground = new 
+
+            //test.Foreground = StaticResourceExtension;
             Paragraph par = new Paragraph();
+            par.Inlines.Add(test);
+
+
             par.Inlines.Add(new Run("toto\r\n"));
             par.Inlines.Add(new Run("toto\r\n"));
             par.Inlines.Add(new Run("toto\r\n"));
             par.Inlines.Add(new Run("toto\r\n"));
             par.Inlines.Add(new Run("toto\r\n"));
-            par.Inlines.Add(new Run("toto\r\n"));
+            par.Inlines.Add(new Run("toto " + Global.Context.UserLogs.Blocks.Count() + "\r\n"));
             Global.Context.UserLogs.Blocks.Add(par);
 
+
             Console.WriteLine("logs is now:" + Global.Context.UserLogs.Blocks.Count());
+
+            //Global.Context.UserLogs.
+
+
+
+        }
+
+        private void RichTextBoxControl_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            RichTextBoxControl.ScrollToEnd();
+        }
+
+        private void RichTextBoxControl_SourceUpdated(object sender, DataTransferEventArgs e)
+        {
+            Console.WriteLine("COCHON: alo?");
+            RichTextBoxControl.ScrollToEnd();
         }
     }
 }

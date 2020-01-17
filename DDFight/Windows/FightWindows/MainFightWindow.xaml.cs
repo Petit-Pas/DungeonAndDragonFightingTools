@@ -27,7 +27,6 @@ namespace DDFight.Windows.FightWindows
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            ConsoleControl.RichTextBoxControl.ClearValue(BindableRichTextBox.DocumentProperty);
         }
     }
 }
