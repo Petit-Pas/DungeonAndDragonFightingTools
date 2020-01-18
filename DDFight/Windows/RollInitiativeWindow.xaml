@@ -83,7 +83,7 @@
                                     <inputboxes:RangedIntBox
                                         PropertyMin="0"
                                         PropertyMax="20"
-                                        PropertyPath="Initiative"
+                                        PropertyPath="InitiativeRoll"
                                         Grid.Column="1"
                                         Grid.Row="0"
                                         Margin="2"/>

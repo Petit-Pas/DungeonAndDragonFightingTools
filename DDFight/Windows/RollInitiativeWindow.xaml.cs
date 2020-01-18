@@ -1,5 +1,6 @@
 ﻿using DDFight.Game;
 using DDFight.Game.Dices;
+using DDFight.Game.Fight;
 using DDFight.Resources;
 using System;
 using System.Collections.Generic;
@@ -25,9 +26,9 @@ namespace DDFight.Windows
     {
         public bool Cancelled = true;
 
-        private ObservableCollection<PlayableEntity> data_context
+        private FightingCharactersDataContext data_context
         {
-            get => (ObservableCollection<PlayableEntity>)DataContext;
+            get => (FightingCharactersDataContext)DataContext;
         }
 
         public RollInitiativeWindow()
@@ -38,11 +39,11 @@ namespace DDFight.Windows
 
         private void RollInitiativeWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            foreach (PlayableEntity entity in data_context)
+            foreach (PlayableEntity entity in data_context.Fighters)
             {
-                entity.Initiative = 0;
+                entity.InitiativeRoll = 0;
             }
-            CharactersItemsControl.ItemsSource = data_context;
+            CharactersItemsControl.ItemsSource = data_context.Fighters;
         }
 
         private void RollButton_Click(object sender, RoutedEventArgs e)
@@ -61,10 +62,10 @@ namespace DDFight.Windows
             }
             else
             {
-                foreach (PlayableEntity entity in data_context)
+                foreach (PlayableEntity entity in data_context.Fighters)
                 {
-                    if (entity.Initiative == 0)
-                        entity.Initiative = (uint)roll.Roll();
+                    if (entity.InitiativeRoll == 0)
+                        entity.InitiativeRoll = (uint)roll.Roll();
                 }
             }
         }
@@ -85,10 +86,10 @@ namespace DDFight.Windows
             }
             else
             {
-                foreach (PlayableEntity entity in data_context)
+                foreach (PlayableEntity entity in data_context.Fighters)
                 {
-                    if (entity.Initiative == 0)
-                        entity.Initiative = (uint)roll.Roll();
+                    if (entity.InitiativeRoll == 0)
+                        entity.InitiativeRoll = (uint)roll.Roll();
                 }
                 this.Cancelled = false;
                 this.Close();

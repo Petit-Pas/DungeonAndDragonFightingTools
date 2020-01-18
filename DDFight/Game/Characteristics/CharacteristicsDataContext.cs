@@ -41,6 +41,11 @@ namespace DDFight.Game.Characteristics
 
         #region characteristics
 
+        public int GetCharacteristicModifier(CharacteristicsEnum type)
+        {
+            return CharacteristicsList.First(x => x.Name == CharacteristicsEnum.Dexterity).Modifier;
+        }
+
         public List<CharacteristicDataContext> CharacteristicsList
         {
             get {

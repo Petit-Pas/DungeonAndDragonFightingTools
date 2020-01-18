@@ -180,7 +180,7 @@ namespace DDFight.Controlers
         {
             if (MonsterList.SelectedItem == null)
                 return;
-            IEnumerable<PlayableEntity> list = data_context.FightingCharacters.Where(x => x.Name == ((MonsterDataContext)MonsterList.SelectedItem).Name);
+            IEnumerable<PlayableEntity> list = data_context.FightersList.Fighters.Where(x => x.Name == ((MonsterDataContext)MonsterList.SelectedItem).Name);
             PlayableEntity new_fighter = (PlayableEntity)(((MonsterDataContext)MonsterList.SelectedItem).Clone());
 
             int i = 0;
@@ -191,7 +191,7 @@ namespace DDFight.Controlers
                     break;
             }
             new_fighter.DisplayName = new_fighter.Name + " - " + i;
-            data_context.FightingCharacters.Add(new_fighter);
+            data_context.FightersList.Fighters.Add(new_fighter);
         }
 
         #endregion

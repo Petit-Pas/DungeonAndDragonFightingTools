@@ -1,4 +1,7 @@
 ﻿using DDFight.Controlers.InputBoxes;
+using DDFight.Game;
+using DDFight.Game.Characteristics;
+using DDFight.Game.Fight;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,19 +23,28 @@ namespace DDFight.Windows.FightWindows
     /// </summary>
     public partial class MainFightWindow : Window
     {
+        private FightingCharactersDataContext data_context
+        {
+            get => (FightingCharactersDataContext)DataContext;
+        }
         public MainFightWindow()
         {
             InitializeComponent();
+            Loaded += MainFightWindow_Loaded;
+        }
+
+        private void MainFightWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            data_context.SetTurnOrders();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Paragraph par = new Paragraph();
-            Run tmp = new Run("toto");
-            par.Inlines.Add(tmp);
-            Global.Context.UserLogs.Blocks.Add(par);
-
-            Console.WriteLine("COCHON: UserLogs now has n paragraophs: " + Global.Context.UserLogs.Blocks.Count());
+            Global.Context.FightersList.SetTurnOrders();
+            foreach (PlayableEntity tmp in this.CharactersControl.FightersControl.ItemsSource)
+            {
+                Console.WriteLine(tmp.DisplayName + " " + (tmp.InitiativeRoll + tmp.Characteristics.GetCharacteristicModifier(CharacteristicsEnum.Dexterity)));
+            }
         }
 
         private void Window_Closed(object sender, EventArgs e)

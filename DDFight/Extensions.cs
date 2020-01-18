@@ -15,6 +15,18 @@ namespace DDFight
 {
     public static class Extensions
     {
+        public static void Sort<T>(this ObservableCollection<T> collection, Comparison<T> comparison)
+        {
+            var sortableList = new List<T>(collection);
+            sortableList.Sort(comparison);
+
+            for (int i = 0; i < sortableList.Count; i++)
+            {
+                collection.Move(collection.IndexOf(sortableList[i]), i);
+            }
+        }
+
+
         public static bool AreAllChildrenValid(this FrameworkElement element)
         {
             foreach (Control ctrl in element.FindAllChildren<IValidable>())

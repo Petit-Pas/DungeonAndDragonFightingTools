@@ -174,10 +174,10 @@ namespace DDFight.Controlers
         {
             try
             {
-                if (data_context.FightingCharacters.SingleOrDefault(x => x.Name == ((CharacterDataContext)CharacterList.SelectedItem).Name) == null)
+                if (data_context.FightersList.Fighters.SingleOrDefault(x => x.Name == ((CharacterDataContext)CharacterList.SelectedItem).Name) == null)
                 {
                     CharacterDataContext _new = (CharacterDataContext)CharacterList.SelectedItem;
-                    data_context.FightingCharacters.Add(_new);
+                    data_context.FightersList.Fighters.Add(_new);
                 }
             }
             catch (Exception err)

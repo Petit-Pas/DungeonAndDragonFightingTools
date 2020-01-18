@@ -126,6 +126,7 @@
     <Compile Include="Game\DamageAffinity\DamageTypeAffinityDataContext.cs" />
     <Compile Include="Game\Dices\DiceRoll.cs" />
     <Compile Include="Game\Dices\Dices.cs" />
+    <Compile Include="Game\Fight\FightingCharactersDataContext.cs" />
     <Compile Include="Game\PlayableEntity.cs" />
     <Compile Include="Game\MonsterDataContext.cs" />
     <Compile Include="Game\GameDataContext.cs" />

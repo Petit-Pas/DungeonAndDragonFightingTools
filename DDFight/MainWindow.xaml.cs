@@ -40,7 +40,7 @@ namespace DDFight
 
             Global.Loading = false;
 
-            Global.Context.FightingCharacters.CollectionChanged += FightingCharacters_CollectionChanged;
+            Global.Context.FightersList.Fighters.CollectionChanged += FightingCharacters_CollectionChanged;
 
             DataContext = Global.Context;
 
@@ -49,13 +49,13 @@ namespace DDFight
 
         private void FightingCharacters_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            FightButton.IsEnabled = Global.Context.FightingCharacters.Count >= 2;
+            FightButton.IsEnabled = Global.Context.FightersList.Fighters.Count >= 2;
         }
 
         private void FightButton_Click(object sender, RoutedEventArgs e)
         {
             RollInitiativeWindow window = new RollInitiativeWindow();
-            window.DataContext = Global.Context.FightingCharacters;
+            window.DataContext = Global.Context.FightersList;
             window.Owner = this;
 
             window.ShowDialog();
@@ -73,7 +73,7 @@ namespace DDFight
                 Global.Context.UserLogs.Blocks.Add(par);
 
                 MainFightWindow fightWindow = new MainFightWindow();
-                fightWindow.DataContext = Global.Context.FightingCharacters;
+                fightWindow.DataContext = Global.Context.FightersList;
                 fightWindow.ShowDialog();
 
             }

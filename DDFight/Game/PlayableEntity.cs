@@ -155,21 +155,22 @@ namespace DDFight.Game
 
         /// <summary>
         ///     The initiative rolled for a given fight
+        ///     Does not take dexterity into account
         /// </summary>
         [XmlIgnore]
-        public uint Initiative
+        public uint InitiativeRoll
         {
-            get => _initiative;
+            get => _initiativeRoll;
             set
             {
-                if (_initiative != value)
+                if (_initiativeRoll != value)
                 {
-                    _initiative = value;
+                    _initiativeRoll = value;
                     NotifyPropertyChanged();
                 }
             }
         }
-        private uint _initiative = 0;
+        private uint _initiativeRoll = 0;
 
         /// <summary>
         ///     The turn for a given fight

@@ -1,4 +1,5 @@
-﻿using DDFight.Tools.Save;
+﻿using DDFight.Game.Fight;
+using DDFight.Tools.Save;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -68,6 +69,7 @@ namespace DDFight.Game
         ///     The list of the entities that shall fight when the Fight button is pressed
         /// </summary>
         [XmlIgnore]
-        public ObservableCollection<PlayableEntity> FightingCharacters = new ObservableCollection<PlayableEntity>();
+        public FightingCharactersDataContext FightersList = new FightingCharactersDataContext();
+
     }
 }

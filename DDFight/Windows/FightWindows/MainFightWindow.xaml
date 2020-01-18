@@ -25,6 +25,7 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <controlers:FightingCharacterListUserControl 
+                x:Name="CharactersControl"
             Grid.Row="0" 
             />
             <Button Grid.Row="1" Click="Button_Click">Test</Button>
