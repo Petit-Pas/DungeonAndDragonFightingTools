@@ -40,6 +40,9 @@ namespace DDFight.Tools.Save
         /// </summary>
         public void Save()
         {
+            Monsters.Sort((x, y) => {
+                return x.Name.CompareTo(y.Name);
+            });
             SaveManager.SaveMonsters(this);
         }
 

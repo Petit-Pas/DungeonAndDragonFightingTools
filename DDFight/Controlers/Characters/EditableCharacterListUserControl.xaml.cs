@@ -72,7 +72,6 @@ namespace DDFight.Controlers
         private void add_character(CharacterDataContext character)
         {
             data_context.CharacterList.AddCharacter(character);
-
         }
 
         /// <summary>
@@ -139,6 +138,7 @@ namespace DDFight.Controlers
             if (temporary.Validated == true)
             {
                 to_update.CopyAssign(temporary);
+
                 data_context.CharacterList.Save();
             }
         }
@@ -172,19 +172,8 @@ namespace DDFight.Controlers
 
         private void AddToFight_MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                if (data_context.FightersList.Fighters.SingleOrDefault(x => x.Name == ((CharacterDataContext)CharacterList.SelectedItem).Name) == null)
-                {
-                    CharacterDataContext _new = (CharacterDataContext)CharacterList.SelectedItem;
-                    data_context.FightersList.Fighters.Add(_new);
-                }
-            }
-            catch (Exception err)
-            {
-                Console.WriteLine("ERROR: caught an exception while trying to add a character to the fighting list: " + err.Message);
-                Logger.Log("ERROR: caught an exception while trying to add a character to the fighting list: " + err.Message);
-            }
+            if (CharacterList.SelectedItem != null)
+                data_context.FightersList.AddCharacter((CharacterDataContext)CharacterList.SelectedItem);
         }
         #endregion
 

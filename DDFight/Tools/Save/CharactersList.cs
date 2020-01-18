@@ -65,6 +65,9 @@ namespace DDFight.Tools.Save
         /// </summary>
         public void Save()
         {
+            Characters.Sort((x, y) => {
+                return x.Name.CompareTo(y.Name);
+            });
             SaveManager.SavePlayers(this);
         }
 
