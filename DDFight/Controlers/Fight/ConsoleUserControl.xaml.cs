@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DDFight.Controlers
+namespace DDFight.Controlers.Fight
 {
     /// <summary>
     /// Logique d'interaction pour Console.xaml

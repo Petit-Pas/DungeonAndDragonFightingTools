@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DDFight.Windows.FightWindows"
         xmlns:controlers="clr-namespace:DDFight.Controlers"
+        xmlns:fight="clr-namespace:DDFight.Controlers.Fight"
         mc:Ignorable="d"
         Title="Main Fight Window" Height="1080" Width="1920"
         Background="{StaticResource LightestGray}"
@@ -24,14 +25,14 @@
                 <RowDefinition Height="3*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <controlers:FightingCharacterListUserControl 
+            <fight:FightingCharacterListUserControl 
                 x:Name="CharactersControl"
             Grid.Row="0" 
             />
             <Button Grid.Row="1" Click="Button_Click">Test</Button>
         </Grid>
 
-        <controlers:ConsoleUserControl 
+        <fight:ConsoleUserControl 
             x:Name="ConsoleControl"
             Grid.Row="0" Grid.Column="1"
             Margin="5"

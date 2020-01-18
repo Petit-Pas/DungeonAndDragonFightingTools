@@ -62,10 +62,10 @@
     <Compile Include="Controlers\Characters\CharacterMainInfoUserControl.xaml.cs">
       <DependentUpon>CharacterMainInfoUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controlers\ConsoleUserControl.xaml.cs">
+    <Compile Include="Controlers\Fight\ConsoleUserControl.xaml.cs">
       <DependentUpon>ConsoleUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controlers\FightingCharacterListUserControl.xaml.cs">
+    <Compile Include="Controlers\Fight\FightingCharacterListUserControl.xaml.cs">
       <DependentUpon>FightingCharacterListUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controlers\Game\Attacks\EditableHitAttackTemplateUserControl.xaml.cs">
@@ -177,11 +177,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controlers\ConsoleUserControl.xaml">
+    <Page Include="Controlers\Fight\ConsoleUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controlers\FightingCharacterListUserControl.xaml">
+    <Page Include="Controlers\Fight\FightingCharacterListUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
