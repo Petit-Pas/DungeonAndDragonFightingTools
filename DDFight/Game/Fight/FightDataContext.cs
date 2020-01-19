@@ -5,11 +5,18 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace DDFight.Game.Fight
 {
     public class FightDataContext : INotifyPropertyChanged
     {
+        /// <summary>
+        ///     The list of the entities that shall fight when the Fight button is pressed
+        /// </summary>
+        [XmlIgnore]
+        public FightingCharactersDataContext FightersList = new FightingCharactersDataContext();
+
         /// <summary>
         ///     Counts the amount of rounds of a fight
         /// </summary>
@@ -38,6 +45,20 @@ namespace DDFight.Game.Fight
         }
         public uint _turnIndex = 0;
 
+        public void NextTurn()
+        {
+            uint newTurn = TurnIndex + 1;
+            if (newTurn >= FightersList.Fighters.Count())
+            {
+                TurnIndex = 0;
+                RoundCount += 1;
+            }
+            else
+            {
+                TurnIndex = newTurn;
+            }
+        }
+
         #region INotifyPropertyChanged
 
         /// <summary>
@@ -57,6 +78,13 @@ namespace DDFight.Game.Fight
             }
         }
         #endregion
+
+        public void Reset()
+        {
+            TurnIndex = 0;
+            RoundCount = 0;
+            FightersList.Fighters.Clear();
+        }
 
     }
 }

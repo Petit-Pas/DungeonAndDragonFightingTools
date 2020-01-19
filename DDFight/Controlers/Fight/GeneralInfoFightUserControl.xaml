@@ -6,6 +6,13 @@
              xmlns:local="clr-namespace:DDFight.Controlers.Fight"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style x:Key="TurnInfo" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource Light}" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Margin" Value="4" />
+        </Style>
+    </UserControl.Resources>
     <GroupBox
         Foreground="{StaticResource LightestGray}">
         <GroupBox.Header>
@@ -27,23 +34,35 @@
                 Grid.Row="0">
                 <!-- Turn Info Grid -->
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <TextBlock
                     Grid.Column="0" Grid.Row="0"
-                    Foreground="{StaticResource Light}">
+                    Style="{StaticResource ResourceKey=TurnInfo}">
                     Round n°: 
                 </TextBlock>
                 <TextBlock
                     Grid.Column="1" Grid.Row="0" 
-                    Foreground="{StaticResource Light}"
+                    Style="{StaticResource ResourceKey=TurnInfo}"
                     DataContext="{Binding Path=FightContext}"
                     Text="{Binding Path=RoundCount}"/>
+
+                <TextBlock
+                    Grid.Row="1" Grid.Column="0"
+                    Style="{StaticResource ResourceKey=TurnInfo}"
+                    Text="Turn of:"/>
+                <TextBlock
+                    x:Name="CharactersTurnTextBox"
+                    Grid.Row="1" Grid.Column="1"
+                    Style="{StaticResource ResourceKey=TurnInfo}"
+                    Text="DEFAULT"/>
+
 
             </Grid>
             

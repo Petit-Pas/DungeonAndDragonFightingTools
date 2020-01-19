@@ -23,6 +23,30 @@ namespace DDFight.Controlers.Fight
         public GeneralInfoFightUserControl()
         {
             InitializeComponent();
+            Loaded += GeneralInfoFightUserControl_Loaded;
+        }
+
+        private void setCharactersTurnName()
+        {
+            CharactersTurnTextBox.Text = Global.Context.FightContext.FightersList.Fighters.ElementAt((int)Global.Context.FightContext.TurnIndex).DisplayName;
+        }
+
+        private void GeneralInfoFightUserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            Global.Context.FightContext.PropertyChanged += FightContext_PropertyChanged;
+            setCharactersTurnName();
+        }
+
+        private void FightContext_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case "TurnIndex":
+                    setCharactersTurnName();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

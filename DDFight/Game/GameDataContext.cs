@@ -65,12 +65,6 @@ namespace DDFight.Game
         }
         private FlowDocument _userLogs = new FlowDocument ();
 
-        /// <summary>
-        ///     The list of the entities that shall fight when the Fight button is pressed
-        /// </summary>
-        [XmlIgnore]
-        public FightingCharactersDataContext FightersList = new FightingCharactersDataContext();
-
         [XmlIgnore]
         public FightDataContext FightContext
         {
@@ -81,7 +75,7 @@ namespace DDFight.Game
                 NotifyPropertyChanged();
             }
         }
-        private FightDataContext _fightContext;
+        private FightDataContext _fightContext = new FightDataContext();
 
     }
 }

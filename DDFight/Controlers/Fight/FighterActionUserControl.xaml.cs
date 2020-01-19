@@ -16,19 +16,18 @@ using System.Windows.Shapes;
 namespace DDFight.Controlers.Fight
 {
     /// <summary>
-    /// Interaction logic for FightingCharacterListUserControl.xaml
+    /// Logique d'interaction pour FighterActionUserControl.xaml
     /// </summary>
-    public partial class FightingCharacterListUserControl : UserControl
+    public partial class FighterActionUserControl : UserControl
     {
-        public FightingCharacterListUserControl()
+        public FighterActionUserControl()
         {
             InitializeComponent();
-            Loaded += FightingCharacterListUserControl_Loaded;
         }
 
-        private void FightingCharacterListUserControl_Loaded(object sender, RoutedEventArgs e)
+        private void NextTurn_Button_Click(object sender, RoutedEventArgs e)
         {
-            FightersControl.ItemsSource = Global.Context.FightContext.FightersList.Fighters;
+            Global.Context.FightContext.NextTurn();
         }
     }
 }

@@ -30,9 +30,9 @@
             Grid.Row="0" Grid.Column="1"
             Margin="5"
             />
-        <Button 
+        <fight:FighterActionUserControl 
             Grid.Row="1" Grid.Column="0"
-            Click="Button_Click">Test</Button>
+            Margin="5, 0, 5, 5"/>
         <fight:GeneralInfoFightUserControl
             x:Name="GeneralInfoControl"
             Grid.Row="1" Grid.Column="1"

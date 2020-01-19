@@ -173,7 +173,7 @@ namespace DDFight.Controlers
         private void AddToFight_MenuItem_Click(object sender, RoutedEventArgs e)
         {
             if (CharacterList.SelectedItem != null)
-                data_context.FightersList.AddCharacter((CharacterDataContext)CharacterList.SelectedItem);
+                data_context.FightContext.FightersList.AddCharacter((CharacterDataContext)CharacterList.SelectedItem);
         }
         #endregion
 

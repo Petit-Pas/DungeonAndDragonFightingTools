@@ -52,7 +52,7 @@ namespace DDFight.Controlers
 
         private void PrepareFightCharacterList_Loaded(object sender, RoutedEventArgs e)
         {
-            CharactersList.ItemsSource = data_context.FightersList.Fighters;
+            CharactersList.ItemsSource = data_context.FightContext.FightersList.Fighters;
         }
 
         #region Add
@@ -62,7 +62,7 @@ namespace DDFight.Controlers
         /// </summary>
         private void add_fighter(PlayableEntity fighter)
         {
-            data_context.FightersList.Fighters.Add(fighter);
+            data_context.FightContext.FightersList.Fighters.Add(fighter);
 
         }
 
@@ -71,7 +71,7 @@ namespace DDFight.Controlers
             PlayableEntity fighter = (PlayableEntity)CharactersList.SelectedItem;
             if (fighter is MonsterDataContext)
             {
-                IEnumerable<PlayableEntity> list = data_context.FightersList.Fighters.Where(x => x.Name == ((MonsterDataContext)CharactersList.SelectedItem).Name);
+                IEnumerable<PlayableEntity> list = data_context.FightContext.FightersList.Fighters.Where(x => x.Name == ((MonsterDataContext)CharactersList.SelectedItem).Name);
                 PlayableEntity new_fighter = (PlayableEntity)(((MonsterDataContext)CharactersList.SelectedItem).Clone());
 
                 int i = 0;
@@ -92,7 +92,7 @@ namespace DDFight.Controlers
 
         private void delete_fighter(PlayableEntity entity)
         {
-            data_context.FightersList.Fighters.Remove(entity);
+            data_context.FightContext.FightersList.Fighters.Remove(entity);
         }
 
         private void DeleteFighter_MenuItem_Click(object sender, RoutedEventArgs e)

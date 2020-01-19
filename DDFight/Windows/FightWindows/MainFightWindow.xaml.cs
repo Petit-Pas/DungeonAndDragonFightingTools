@@ -30,7 +30,7 @@ namespace DDFight.Windows.FightWindows
 
         private FightingCharactersDataContext fighters
         {
-            get => data_context.FightersList;
+            get => data_context.FightContext.FightersList;
         }
 
         public MainFightWindow()
@@ -47,7 +47,7 @@ namespace DDFight.Windows.FightWindows
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            foreach (PlayableEntity tmp in Global.Context.FightersList.Fighters)
+            foreach (PlayableEntity tmp in Global.Context.FightContext.FightersList.Fighters)
             {
                 tmp.HasAction = !tmp.HasAction;
             }

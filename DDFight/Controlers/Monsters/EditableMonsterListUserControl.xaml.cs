@@ -180,7 +180,7 @@ namespace DDFight.Controlers
         {
             if (MonsterList.SelectedItem == null)
                 return;
-            data_context.FightersList.AddMonster((MonsterDataContext)MonsterList.SelectedItem);
+            data_context.FightContext.FightersList.AddMonster((MonsterDataContext)MonsterList.SelectedItem);
         }
 
         #endregion

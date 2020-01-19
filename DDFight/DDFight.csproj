@@ -65,6 +65,9 @@
     <Compile Include="Controlers\Fight\ConsoleUserControl.xaml.cs">
       <DependentUpon>ConsoleUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controlers\Fight\FighterActionUserControl.xaml.cs">
+      <DependentUpon>FighterActionUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controlers\Fight\FightingCharacterListUserControl.xaml.cs">
       <DependentUpon>FightingCharacterListUserControl.xaml</DependentUpon>
     </Compile>
@@ -188,6 +191,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controlers\Fight\ConsoleUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controlers\Fight\FighterActionUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
