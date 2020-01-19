@@ -71,6 +71,9 @@
     <Compile Include="Controlers\Fight\FightingCharacterTileUserControl.xaml.cs">
       <DependentUpon>FightingCharacterTileUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controlers\Fight\GeneralInfoFightUserControl.xaml.cs">
+      <DependentUpon>GeneralInfoFightUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controlers\Game\Attacks\EditableHitAttackTemplateUserControl.xaml.cs">
       <DependentUpon>EditableHitAttackTemplateUserControl.xaml</DependentUpon>
     </Compile>
@@ -132,6 +135,7 @@
     <Compile Include="Game\DamageAffinity\DamageTypeAffinityDataContext.cs" />
     <Compile Include="Game\Dices\DiceRoll.cs" />
     <Compile Include="Game\Dices\Dices.cs" />
+    <Compile Include="Game\Fight\FightDataContext.cs" />
     <Compile Include="Game\Fight\FightingCharactersDataContext.cs" />
     <Compile Include="Game\PlayableEntity.cs" />
     <Compile Include="Game\MonsterDataContext.cs" />
@@ -192,6 +196,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controlers\Fight\FightingCharacterTileUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controlers\Fight\GeneralInfoFightUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

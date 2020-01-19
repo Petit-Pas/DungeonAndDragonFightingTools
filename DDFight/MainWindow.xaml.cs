@@ -1,4 +1,5 @@
 ﻿using DDFight.Game;
+using DDFight.Game.Fight;
 using DDFight.Tools.Save;
 using DDFight.Windows;
 using DDFight.Windows.FightWindows;
@@ -73,8 +74,11 @@ namespace DDFight
                 par.Inlines.Add(new Run("toto\r\n"));
                 Global.Context.UserLogs.Blocks.Add(par);
 
+                Global.Context.FightContext = new FightDataContext();
                 MainFightWindow fightWindow = new MainFightWindow();
-                fightWindow.DataContext = Global.Context.FightersList;
+                fightWindow.DataContext = Global.Context;
+                fightWindow.Owner = this;
+                fightWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 fightWindow.ShowDialog();
 
             }

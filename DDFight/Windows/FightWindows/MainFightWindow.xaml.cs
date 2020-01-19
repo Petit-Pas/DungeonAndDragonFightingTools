@@ -23,10 +23,16 @@ namespace DDFight.Windows.FightWindows
     /// </summary>
     public partial class MainFightWindow : Window
     {
-        private FightingCharactersDataContext data_context
+        private GameDataContext data_context
         {
-            get => (FightingCharactersDataContext)DataContext;
+            get => (GameDataContext)DataContext;
         }
+
+        private FightingCharactersDataContext fighters
+        {
+            get => data_context.FightersList;
+        }
+
         public MainFightWindow()
         {
             InitializeComponent();
@@ -35,7 +41,8 @@ namespace DDFight.Windows.FightWindows
 
         private void MainFightWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            data_context.SetTurnOrders();
+            fighters.SetTurnOrders();
+            GeneralInfoControl.DataContext = Global.Context;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

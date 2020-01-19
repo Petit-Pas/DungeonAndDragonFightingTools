@@ -29,7 +29,8 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <TextBlock 
@@ -68,9 +69,42 @@
                     Content="B" />
 
             </Grid>
-            
-            
 
+            <Grid
+                Margin="10,0"
+                Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                <!-- HP Grid -->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <TextBlock 
+                    Grid.Column="0"
+                    Margin="3, 0"
+                    FontSize="15"
+                    Text="{Binding Hp}"/>
+                <TextBlock 
+                    Grid.Column="1"
+                    Margin="3, 0"
+                    FontSize="15"
+                    Text="/"/>
+                <TextBlock 
+                    Grid.Column="2"
+                    Margin="3, 0"
+                    FontSize="15"
+                    Text="{Binding MaxHp}"/>
+                <TextBlock 
+                    Grid.Column="3"
+                    Margin="3, 0"
+                    FontSize="15"
+                    Text="Hps"/>
+            </Grid>
         </Grid>
         </GroupBox>
 </UserControl>

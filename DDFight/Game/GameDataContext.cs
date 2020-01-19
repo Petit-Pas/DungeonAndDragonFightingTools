@@ -71,5 +71,17 @@ namespace DDFight.Game
         [XmlIgnore]
         public FightingCharactersDataContext FightersList = new FightingCharactersDataContext();
 
+        [XmlIgnore]
+        public FightDataContext FightContext
+        {
+            get => _fightContext;
+            set
+            {
+                _fightContext = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private FightDataContext _fightContext;
+
     }
 }
