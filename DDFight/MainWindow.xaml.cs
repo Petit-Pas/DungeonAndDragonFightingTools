@@ -64,6 +64,8 @@ namespace DDFight
 
             if (window.Cancelled == false)
             {
+                Global.Context.FightContext.FightersList.SetTurnOrders();
+
                 Global.Context.UserLogs = new FlowDocument();
                 Paragraph par = new Paragraph();
                 par.Inlines.Add(new Run("toto\r\n"));

@@ -56,6 +56,22 @@ namespace DDFight
             return found_here;
         }
 
+        public static FrameworkElement GetFirstChildByName(this FrameworkElement element, string name)
+        {
+            Console.WriteLine("amount of children: " + VisualTreeHelper.GetChildrenCount(element));
+            for (int i = 0; i != VisualTreeHelper.GetChildrenCount(element); i += 1)
+            {
+                var child = VisualTreeHelper.GetChild(element, i) as FrameworkElement;
+                Console.WriteLine(child.GetType().ToString() + child.Name);
+                if (child.Name == name)
+                    return child;
+                FrameworkElement tmp = child.GetFirstChildByName(name);
+                if (tmp != null)
+                    return tmp;
+            }
+            return null;
+        }
+
         public static void FilterPlayableEntityListBox(this FrameworkElement element, string filter)
         {
             for (int i = 0; i != VisualTreeHelper.GetChildrenCount(element); i += 1)

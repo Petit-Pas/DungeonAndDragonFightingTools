@@ -37,7 +37,7 @@ namespace DDFight.Game.Fight
         /// <summary>
         ///     Counts the amount of turn in 1 round
         /// </summary>
-        public uint TurnIndex
+        public int TurnIndex
         {
             get => _turnIndex;
             set
@@ -46,16 +46,21 @@ namespace DDFight.Game.Fight
                 NotifyPropertyChanged();
             }
         }
-        public uint _turnIndex = 0;
+        public int _turnIndex = -1;
 
         public void NextTurn()
         {
-            Global.Context.FightContext.FightersList.Fighters.ElementAt((int)TurnIndex).EndTurn();
-            OnEndTurn(new EndTurnEventArgs() {
-                Character = Global.Context.FightContext.FightersList.Fighters.ElementAt((int)TurnIndex),
-                CharacterIndex = (int)TurnIndex,
-            });
-            uint newTurn = TurnIndex + 1;
+            if (TurnIndex != -1)
+            {
+                // 1st turn of first round
+                Global.Context.FightContext.FightersList.Fighters.ElementAt((int)TurnIndex).EndTurn();
+                OnEndTurn(new EndTurnEventArgs()
+                {
+                    Character = Global.Context.FightContext.FightersList.Fighters.ElementAt((int)TurnIndex),
+                    CharacterIndex = (int)TurnIndex,
+                });
+            }
+            int newTurn = TurnIndex + 1;
             if (newTurn >= FightersList.Fighters.Count())
             {
                 TurnIndex = 0;
@@ -66,6 +71,7 @@ namespace DDFight.Game.Fight
                 TurnIndex = newTurn;
             }
             PlayableEntity tmp = Global.Context.FightContext.FightersList.Fighters.ElementAt((int)TurnIndex);
+            Console.WriteLine("COCHON start turn");
             tmp.StartNewTurn();
             OnStartNewTurn(new StartNewTurnEventArgs() 
             { 
@@ -118,7 +124,7 @@ namespace DDFight.Game.Fight
 
         public void Reset()
         {
-            TurnIndex = 0;
+            TurnIndex = -1;
             RoundCount = 0;
             FightersList.Fighters.Clear();
         }

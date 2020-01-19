@@ -16,7 +16,7 @@
         </Style>
     </UserControl.Resources>
     <GroupBox 
-        x:Name="GroupBoxControl"
+        x:Name="CharacterTileGroupBoxControl"
         Header="" 
         Padding="10"
         Background="{StaticResource Gray}"

@@ -41,8 +41,8 @@ namespace DDFight.Windows.FightWindows
 
         private void MainFightWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            fighters.SetTurnOrders();
             GeneralInfoControl.DataContext = Global.Context;
+            Global.Context.FightContext.NextTurn();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

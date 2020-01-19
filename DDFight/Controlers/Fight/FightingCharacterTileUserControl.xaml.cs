@@ -40,12 +40,12 @@ namespace DDFight.Controlers.Fight
 
         private void Data_context_TurnEnded(object sender, DDFight.Game.Fight.FightEvents.EndTurnEventArgs args)
         {
-            GroupBoxControl.Background = (Brush)Application.Current.Resources["Gray"];
+            CharacterTileGroupBoxControl.Background = (Brush)Application.Current.Resources["Gray"];
         }
 
         private void Data_context_NewTurnStarted(object sender, DDFight.Game.Fight.FightEvents.StartNewTurnEventArgs args)
         {
-            GroupBoxControl.Background = (Brush)Application.Current.Resources["Indigo"];
+            CharacterTileGroupBoxControl.Background = (Brush)Application.Current.Resources["Indigo"];
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
