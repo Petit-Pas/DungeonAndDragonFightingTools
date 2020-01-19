@@ -36,6 +36,7 @@ namespace DDFight.Controlers.Fight
                 ContentPresenter uiElement = (ContentPresenter)FightersControl.ItemContainerGenerator.ContainerFromIndex(0);
                 GroupBox gb = (GroupBox)uiElement.GetFirstChildByName("CharacterTileGroupBoxControl");
                 gb.Background = (Brush)Application.Current.Resources["Indigo"];
+                gb.BorderThickness = new Thickness(2);
             }
         }
 
