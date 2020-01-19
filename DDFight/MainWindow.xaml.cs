@@ -82,6 +82,7 @@ namespace DDFight
                 fightWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 fightWindow.ShowDialog();
 
+                fightWindow.UnregisterAll();
                 Global.Context.FightContext.Reset();
             }
 

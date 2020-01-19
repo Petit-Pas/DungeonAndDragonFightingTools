@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DDFight.Tools;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,14 +19,15 @@ namespace DDFight.Controlers.Fight
     /// <summary>
     /// Interaction logic for FightingCharacterListUserControl.xaml
     /// </summary>
-    public partial class FightingCharacterListUserControl : UserControl
+    public partial class FightingCharacterListUserControl : UserControl, IEventUnregisterable
     {
         public FightingCharacterListUserControl()
         {
             InitializeComponent();
             Loaded += FightingCharacterListUserControl_Loaded;
-            FightersControl.LayoutUpdated += FightersControl_LayoutUpdated; ;
+            FightersControl.LayoutUpdated += FightersControl_LayoutUpdated;
         }
+
 
         private void FightersControl_LayoutUpdated(object sender, EventArgs e)
         {
@@ -42,5 +44,9 @@ namespace DDFight.Controlers.Fight
             FightersControl.ItemsSource = Global.Context.FightContext.FightersList.Fighters;
         }
 
+        public void UnregisterToAll()
+        {
+            FightersControl.LayoutUpdated -= FightersControl_LayoutUpdated;
+        }
     }
 }

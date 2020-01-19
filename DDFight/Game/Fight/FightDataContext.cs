@@ -71,7 +71,6 @@ namespace DDFight.Game.Fight
                 TurnIndex = newTurn;
             }
             PlayableEntity tmp = Global.Context.FightContext.FightersList.Fighters.ElementAt((int)TurnIndex);
-            Console.WriteLine("COCHON start turn");
             tmp.StartNewTurn();
             OnStartNewTurn(new StartNewTurnEventArgs() 
             { 

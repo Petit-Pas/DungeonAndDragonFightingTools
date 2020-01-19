@@ -1,4 +1,5 @@
 ﻿using DDFight.Game;
+using DDFight.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace DDFight.Controlers.Fight
     /// <summary>
     /// Logique d'interaction pour FightingCharacterTileDataContext.xaml
     /// </summary>
-    public partial class FightingCharacterTileUserControl : UserControl
+    public partial class FightingCharacterTileUserControl : UserControl, IEventUnregisterable
     {
         public PlayableEntity data_context
         {
@@ -56,6 +57,12 @@ namespace DDFight.Controlers.Fight
         private void MainControl_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             Console.WriteLine("in mouse up event");
+        }
+
+        public void UnregisterToAll()
+        {
+            data_context.NewTurnStarted -= Data_context_NewTurnStarted;
+            data_context.TurnEnded -= Data_context_TurnEnded;
         }
     }
 }

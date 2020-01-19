@@ -1,4 +1,5 @@
 ﻿using DDFight.Game.Fight.FightEvents;
+using DDFight.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace DDFight.Controlers.Fight
     /// <summary>
     /// Logique d'interaction pour GeneralInfoFightUserControl.xaml
     /// </summary>
-    public partial class GeneralInfoFightUserControl : UserControl
+    public partial class GeneralInfoFightUserControl : UserControl, IEventUnregisterable
     {
         public GeneralInfoFightUserControl()
         {
@@ -41,6 +42,11 @@ namespace DDFight.Controlers.Fight
         private void FightContext_NewTurnStarted(object sender, StartNewTurnEventArgs args)
         {
             CharactersTurnTextBox.Text = args.Character.DisplayName;
+        }
+
+        public void UnregisterToAll()
+        {
+            Global.Context.FightContext.NewTurnStarted -= FightContext_NewTurnStarted;
         }
     }
 }

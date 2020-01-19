@@ -1,4 +1,5 @@
 ﻿using DDFight.Game;
+using DDFight.Tools;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,7 +22,7 @@ namespace DDFight.Controlers.InputBoxes
     /// <summary>
     /// Logique d'interaction pour BooleanButton.xaml
     /// </summary>
-    public partial class BooleanButton : Button
+    public partial class BooleanButton : Button, IEventUnregisterable
     {     
         public string PropertyPath
         {
@@ -47,13 +48,11 @@ namespace DDFight.Controlers.InputBoxes
             }
         }
 
-        public BooleanButton()
+        public BooleanButton() : base()
         {
             InitializeComponent();
             Loaded += BooleanButton_Loaded;
         }
-
-
 
         private void BooleanButton_Loaded(object sender, RoutedEventArgs e)
         {
@@ -82,6 +81,12 @@ namespace DDFight.Controlers.InputBoxes
         private void ButtonControl_Click(object sender, RoutedEventArgs e)
         {
             _propertyValue = !_propertyValue;
+        }
+
+        public void UnregisterToAll()
+        {
+            INotifyPropertyChanged dc = DataContext as INotifyPropertyChanged;
+            dc.PropertyChanged -= DataContext_PropertyChanged;
         }
     }
 }

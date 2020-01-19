@@ -1,4 +1,5 @@
 ﻿using DDFight.Game;
+using DDFight.Tools;
 using DDFight.ValidationRules;
 using System;
 using System.Collections.Generic;
@@ -41,6 +42,21 @@ namespace DDFight
             return true;
         }
 
+        public static void UnregisterAll(this FrameworkElement element)
+        {
+            if (element == null)
+                return;
+            for (int i = 0; i != VisualTreeHelper.GetChildrenCount(element); i += 1)
+            {
+                var child = VisualTreeHelper.GetChild(element, i) as FrameworkElement;
+                if (child is IEventUnregisterable)
+                {
+                    ((IEventUnregisterable)child).UnregisterToAll();
+                }
+                child.UnregisterAll();
+            }
+        }
+
         public static List<FrameworkElement> FindAllChildren<T>(this FrameworkElement element) 
         {
             List<FrameworkElement> found_here = new List<FrameworkElement>();
@@ -58,11 +74,9 @@ namespace DDFight
 
         public static FrameworkElement GetFirstChildByName(this FrameworkElement element, string name)
         {
-            Console.WriteLine("amount of children: " + VisualTreeHelper.GetChildrenCount(element));
             for (int i = 0; i != VisualTreeHelper.GetChildrenCount(element); i += 1)
             {
                 var child = VisualTreeHelper.GetChild(element, i) as FrameworkElement;
-                Console.WriteLine(child.GetType().ToString() + child.Name);
                 if (child.Name == name)
                     return child;
                 FrameworkElement tmp = child.GetFirstChildByName(name);
