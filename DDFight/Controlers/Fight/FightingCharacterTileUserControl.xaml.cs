@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DDFight.Game;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,12 +21,33 @@ namespace DDFight.Controlers.Fight
     /// </summary>
     public partial class FightingCharacterTileUserControl : UserControl
     {
+        public PlayableEntity data_context
+        {
+            get => (PlayableEntity)DataContext;
+        }
+
         public FightingCharacterTileUserControl()
         {
             InitializeComponent();
+            Loaded += FightingCharacterTileUserControl_Loaded;
         }
 
-       
+        private void FightingCharacterTileUserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            data_context.NewTurnStarted += Data_context_NewTurnStarted;
+            data_context.TurnEnded += Data_context_TurnEnded;
+        }
+
+        private void Data_context_TurnEnded(object sender, DDFight.Game.Fight.FightEvents.EndTurnEventArgs args)
+        {
+            GroupBoxControl.Background = (Brush)Application.Current.Resources["Gray"];
+        }
+
+        private void Data_context_NewTurnStarted(object sender, DDFight.Game.Fight.FightEvents.StartNewTurnEventArgs args)
+        {
+            GroupBoxControl.Background = (Brush)Application.Current.Resources["Indigo"];
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Console.WriteLine("in button click");

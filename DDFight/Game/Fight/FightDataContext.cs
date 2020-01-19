@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DDFight.Game.Fight.FightEvents;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -31,6 +32,8 @@ namespace DDFight.Game.Fight
         }
         private uint _roundCount = 0;
 
+        #region Turn
+
         /// <summary>
         ///     Counts the amount of turn in 1 round
         /// </summary>
@@ -47,6 +50,11 @@ namespace DDFight.Game.Fight
 
         public void NextTurn()
         {
+            Global.Context.FightContext.FightersList.Fighters.ElementAt((int)TurnIndex).EndTurn();
+            OnEndTurn(new EndTurnEventArgs() {
+                Character = Global.Context.FightContext.FightersList.Fighters.ElementAt((int)TurnIndex),
+                CharacterIndex = (int)TurnIndex,
+            });
             uint newTurn = TurnIndex + 1;
             if (newTurn >= FightersList.Fighters.Count())
             {
@@ -57,7 +65,36 @@ namespace DDFight.Game.Fight
             {
                 TurnIndex = newTurn;
             }
+            PlayableEntity tmp = Global.Context.FightContext.FightersList.Fighters.ElementAt((int)TurnIndex);
+            tmp.StartNewTurn();
+            OnStartNewTurn(new StartNewTurnEventArgs() 
+            { 
+                Character = tmp,  
+                CharacterIndex = (int)TurnIndex,
+            });
         }
+
+        public void OnStartNewTurn(StartNewTurnEventArgs args)
+        {
+            if (NewTurnStarted != null)
+            {
+                NewTurnStarted(this, args);
+            }
+        }
+        
+        public event StartNewTurnEventHandler NewTurnStarted;
+
+        public void OnEndTurn(EndTurnEventArgs args)
+        {
+            if (TurnEnded != null)
+            {
+                TurnEnded(this, args);
+            }
+        }
+        
+        public event EndTurnEventHandler TurnEnded;
+
+        #endregion
 
         #region INotifyPropertyChanged
 

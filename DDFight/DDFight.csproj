@@ -139,6 +139,8 @@
     <Compile Include="Game\Dices\DiceRoll.cs" />
     <Compile Include="Game\Dices\Dices.cs" />
     <Compile Include="Game\Fight\FightDataContext.cs" />
+    <Compile Include="Game\Fight\FightEvents\EndTurnEventArgs.cs" />
+    <Compile Include="Game\Fight\FightEvents\StartNewTurnEventArgs.cs" />
     <Compile Include="Game\Fight\FightingCharactersDataContext.cs" />
     <Compile Include="Game\PlayableEntity.cs" />
     <Compile Include="Game\MonsterDataContext.cs" />

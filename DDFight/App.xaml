@@ -10,8 +10,8 @@
     <Application.Resources>
         <SolidColorBrush x:Key="LightestGray" Color="#2e2e2e" />
         <SolidColorBrush x:Key="Gray" Color="#202020" />
-
         <SolidColorBrush x:Key="Light" Color="#fbf2d4" />
+        <SolidColorBrush x:Key="Indigo" Color="#4B0082" />
 
         <Style x:Key="WindowStyle" TargetType="Window">
             <Setter Property="Background" Value="{StaticResource LightestGray}" />

@@ -16,14 +16,14 @@
         </Style>
     </UserControl.Resources>
     <GroupBox 
+        x:Name="GroupBoxControl"
         Header="" 
         Padding="10"
         Background="{StaticResource Gray}"
         BorderThickness="0"
         MouseLeftButtonUp="MainControl_MouseLeftButtonUp">
         <Grid
-            Margin="10, 0"
-            Background="{StaticResource Gray}">
+            Margin="10, 0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto" />

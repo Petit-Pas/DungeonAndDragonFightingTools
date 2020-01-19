@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DDFight.Game.Fight.FightEvents;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,20 +34,13 @@ namespace DDFight.Controlers.Fight
 
         private void GeneralInfoFightUserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            Global.Context.FightContext.PropertyChanged += FightContext_PropertyChanged;
+            Global.Context.FightContext.NewTurnStarted += FightContext_NewTurnStarted;
             setCharactersTurnName();
         }
 
-        private void FightContext_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void FightContext_NewTurnStarted(object sender, StartNewTurnEventArgs args)
         {
-            switch (e.PropertyName)
-            {
-                case "TurnIndex":
-                    setCharactersTurnName();
-                    break;
-                default:
-                    break;
-            }
+            CharactersTurnTextBox.Text = args.Character.DisplayName;
         }
     }
 }

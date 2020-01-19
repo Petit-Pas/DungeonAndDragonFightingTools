@@ -1,6 +1,7 @@
 ﻿using DDFight.Game.Aggression.Attacks;
 using DDFight.Game.Characteristics;
 using DDFight.Game.DamageAffinity;
+using DDFight.Game.Fight.FightEvents;
 using DDFight.Tools;
 using System;
 using System.Collections.Generic;
@@ -234,6 +235,47 @@ namespace DDFight.Game
             }
         }
         private uint _turnOrder;
+
+        public void StartNewTurn()
+        {
+            HasAction = true;
+            HasReaction = true;
+            HasBonusAction = true;
+            OnStartNewTurn(new StartNewTurnEventArgs()
+            {
+                Character = this,
+                CharacterIndex = Global.Context.FightContext.FightersList.Fighters.IndexOf(this),
+            });
+        }
+
+        public void OnStartNewTurn(StartNewTurnEventArgs args)
+        {
+            if (NewTurnStarted != null)
+            {
+                NewTurnStarted(this, args);
+            }
+        }
+
+        public event StartNewTurnEventHandler NewTurnStarted;
+
+        public void EndTurn()
+        {
+            OnEndTurn(new EndTurnEventArgs()
+            {
+                Character = this,
+                CharacterIndex = Global.Context.FightContext.FightersList.Fighters.IndexOf(this),
+            });
+        }
+
+        public void OnEndTurn(EndTurnEventArgs args)
+        {
+            if (TurnEnded != null)
+            {
+                TurnEnded(this, args);
+            }
+        }
+
+        public event EndTurnEventHandler TurnEnded;
 
         #endregion
 
