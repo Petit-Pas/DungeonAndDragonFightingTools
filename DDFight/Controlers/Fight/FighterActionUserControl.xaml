@@ -17,9 +17,23 @@
             </TextBlock>
         </GroupBox.Header>
         <Grid>
-            <Button Click="NextTurn_Button_Click">
-                Next Turn
-            </Button>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <TextBlock 
+                x:Name="CurrentCharacterName"
+                Grid.Row="0" Grid.Column="0"
+                Foreground="{StaticResource Light}"
+                Text="{Binding DisplayName}" />
+            <Button 
+                x:Name="NextTurnButton"
+                Grid.Row="0" Grid.Column="1"
+                Click="NextTurn_Button_Click"
+                Content="Next Turn"/>
         </Grid>
     </GroupBox>
 </UserControl>

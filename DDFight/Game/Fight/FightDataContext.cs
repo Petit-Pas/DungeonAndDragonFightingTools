@@ -103,12 +103,34 @@ namespace DDFight.Game.Fight
 
         public void OnSelectedCharacter(SelectedCharacterEventArgs args)
         {
+            CurrentlySelected = args.Character;
             if (CharacterSelected != null)
             {
                 CharacterSelected(this, args);
             }
         }
         public event SelectedCharacterEventHandler CharacterSelected;
+
+        public PlayableEntity CurrentlyPlaying
+        {
+            get
+            {
+                if (FightersList.Fighters.Count == 0)
+                    return null;
+                return FightersList.Fighters.ElementAt(TurnIndex);
+            }
+        }
+
+        public PlayableEntity CurrentlySelected
+        {
+            get => _currentlySelected;
+            set
+            {
+                _currentlySelected = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private PlayableEntity _currentlySelected = null;
 
         #endregion
 
