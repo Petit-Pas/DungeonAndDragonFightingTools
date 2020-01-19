@@ -37,6 +37,7 @@ namespace DDFight.Controlers.Fight
                 GroupBox gb = (GroupBox)uiElement.GetFirstChildByName("CharacterTileGroupBoxControl");
                 gb.Background = (Brush)Application.Current.Resources["Indigo"];
                 gb.BorderThickness = new Thickness(2);
+                FightersControl.LayoutUpdated -= FightersControl_LayoutUpdated;
             }
         }
 
@@ -47,7 +48,6 @@ namespace DDFight.Controlers.Fight
 
         public void UnregisterToAll()
         {
-            FightersControl.LayoutUpdated -= FightersControl_LayoutUpdated;
         }
     }
 }

@@ -74,6 +74,8 @@ namespace DDFight
 
         public static FrameworkElement GetFirstChildByName(this FrameworkElement element, string name)
         {
+            if (element == null)
+                return null;
             for (int i = 0; i != VisualTreeHelper.GetChildrenCount(element); i += 1)
             {
                 var child = VisualTreeHelper.GetChild(element, i) as FrameworkElement;
