@@ -140,6 +140,7 @@
     <Compile Include="Game\Dices\Dices.cs" />
     <Compile Include="Game\Fight\FightDataContext.cs" />
     <Compile Include="Game\Fight\FightEvents\EndTurnEventArgs.cs" />
+    <Compile Include="Game\Fight\FightEvents\SelectedCharacterEvent.cs" />
     <Compile Include="Game\Fight\FightEvents\StartNewTurnEventArgs.cs" />
     <Compile Include="Game\Fight\FightingCharactersDataContext.cs" />
     <Compile Include="Game\PlayableEntity.cs" />

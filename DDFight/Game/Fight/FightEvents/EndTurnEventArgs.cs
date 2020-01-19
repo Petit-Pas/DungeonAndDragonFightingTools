@@ -11,12 +11,12 @@ namespace DDFight.Game.Fight.FightEvents
     public class EndTurnEventArgs
     {
         /// <summary>
-        ///     The character that starts its turn
+        ///     The character that ends its turn
         /// </summary>
         public PlayableEntity Character;
 
         /// <summary>
-        ///     The index of the character that starts its turn among the Fighter list
+        ///     The index of the character that ends its turn among the Fighter list
         /// </summary>
         public int CharacterIndex;
     }

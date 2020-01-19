@@ -77,6 +77,10 @@ namespace DDFight.Game.Fight
                 Character = tmp,  
                 CharacterIndex = (int)TurnIndex,
             });
+            OnSelectedCharacter(new SelectedCharacterEventArgs()
+            {
+                Character = tmp,
+            });
         }
 
         public void OnStartNewTurn(StartNewTurnEventArgs args)
@@ -86,7 +90,6 @@ namespace DDFight.Game.Fight
                 NewTurnStarted(this, args);
             }
         }
-        
         public event StartNewTurnEventHandler NewTurnStarted;
 
         public void OnEndTurn(EndTurnEventArgs args)
@@ -96,8 +99,16 @@ namespace DDFight.Game.Fight
                 TurnEnded(this, args);
             }
         }
-        
         public event EndTurnEventHandler TurnEnded;
+
+        public void OnSelectedCharacter(SelectedCharacterEventArgs args)
+        {
+            if (CharacterSelected != null)
+            {
+                CharacterSelected(this, args);
+            }
+        }
+        public event SelectedCharacterEventHandler CharacterSelected;
 
         #endregion
 

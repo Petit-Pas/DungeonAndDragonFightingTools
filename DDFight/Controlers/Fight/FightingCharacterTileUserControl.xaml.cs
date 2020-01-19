@@ -1,4 +1,5 @@
 ﻿using DDFight.Game;
+using DDFight.Game.Fight.FightEvents;
 using DDFight.Tools;
 using System;
 using System.Collections.Generic;
@@ -37,6 +38,19 @@ namespace DDFight.Controlers.Fight
         {
             data_context.NewTurnStarted += Data_context_NewTurnStarted;
             data_context.TurnEnded += Data_context_TurnEnded;
+            Global.Context.FightContext.CharacterSelected += FightContext_CharacterSelected;
+        }
+
+        private void FightContext_CharacterSelected(object sender, SelectedCharacterEventArgs args)
+        {
+            if (args.Character == data_context)
+            {
+                CharacterTileGroupBoxControl.BorderThickness = new Thickness(2);
+            }
+            else
+            {
+                CharacterTileGroupBoxControl.BorderThickness = new Thickness(0);
+            }
         }
 
         private void Data_context_TurnEnded(object sender, DDFight.Game.Fight.FightEvents.EndTurnEventArgs args)
@@ -49,20 +63,19 @@ namespace DDFight.Controlers.Fight
             CharacterTileGroupBoxControl.Background = (Brush)Application.Current.Resources["Indigo"];
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Console.WriteLine("in button click");
-        }
-
         private void MainControl_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Console.WriteLine("in mouse up event");
+            Global.Context.FightContext.OnSelectedCharacter(new SelectedCharacterEventArgs()
+            {
+                Character = data_context,
+            });
         }
 
         public void UnregisterToAll()
         {
             data_context.NewTurnStarted -= Data_context_NewTurnStarted;
             data_context.TurnEnded -= Data_context_TurnEnded;
+            Global.Context.FightContext.CharacterSelected -= FightContext_CharacterSelected;
         }
     }
 }
