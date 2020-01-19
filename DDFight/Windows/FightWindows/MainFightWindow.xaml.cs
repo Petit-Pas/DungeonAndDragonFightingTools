@@ -40,10 +40,9 @@ namespace DDFight.Windows.FightWindows
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Global.Context.FightersList.SetTurnOrders();
-            foreach (PlayableEntity tmp in this.CharactersControl.FightersControl.ItemsSource)
+            foreach (PlayableEntity tmp in Global.Context.FightersList.Fighters)
             {
-                Console.WriteLine(tmp.DisplayName + " " + (tmp.InitiativeRoll + tmp.Characteristics.GetCharacteristicModifier(CharacteristicsEnum.Dexterity)));
+                tmp.HasAction = !tmp.HasAction;
             }
         }
 

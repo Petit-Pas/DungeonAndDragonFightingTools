@@ -68,6 +68,9 @@
     <Compile Include="Controlers\Fight\FightingCharacterListUserControl.xaml.cs">
       <DependentUpon>FightingCharacterListUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controlers\Fight\FightingCharacterTileUserControl.xaml.cs">
+      <DependentUpon>FightingCharacterTileUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controlers\Game\Attacks\EditableHitAttackTemplateUserControl.xaml.cs">
       <DependentUpon>EditableHitAttackTemplateUserControl.xaml</DependentUpon>
     </Compile>
@@ -88,6 +91,9 @@
     </Compile>
     <Compile Include="Controlers\InputBoxes\BindableRichTextBox.xaml.cs">
       <DependentUpon>BindableRichTextBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controlers\InputBoxes\BooleanButton.xaml.cs">
+      <DependentUpon>BooleanButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controlers\InputBoxes\IntTextBox.xaml.cs">
       <DependentUpon>IntTextBox.xaml</DependentUpon>
@@ -185,6 +191,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controlers\Fight\FightingCharacterTileUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controlers\Game\Attacks\EditableHitAttackTemplateUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -210,6 +220,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controlers\InputBoxes\BindableRichTextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controlers\InputBoxes\BooleanButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

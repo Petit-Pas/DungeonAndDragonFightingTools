@@ -154,6 +154,51 @@ namespace DDFight.Game
         #region Fight
 
         /// <summary>
+        ///     Tells wether or not he action of the character was consumed
+        /// </summary>
+        [XmlIgnore]
+        public bool HasAction
+        {
+            get => _hasAction;
+            set
+            {
+                _hasAction = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private bool _hasAction = true;
+
+        /// <summary>
+        ///     Tells wether or not he action of the character was consumed
+        /// </summary>
+        [XmlIgnore]
+        public bool HasBonusAction
+        {
+            get => _hasBonusAction;
+            set
+            {
+                _hasBonusAction = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private bool _hasBonusAction = true;
+
+        /// <summary>
+        ///     Tells wether or not he action of the character was consumed
+        /// </summary>
+        [XmlIgnore]
+        public bool HasReaction
+        {
+            get => _hasReaction;
+            set
+            {
+                _hasReaction = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private bool _hasReaction = true;
+
+        /// <summary>
         ///     The initiative rolled for a given fight
         ///     Does not take dexterity into account
         /// </summary>
