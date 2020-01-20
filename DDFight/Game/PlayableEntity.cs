@@ -7,11 +7,15 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Media;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Documents;
 using System.Xml.Serialization;
+using System.Windows.Media;
 
 namespace DDFight.Game
 {
@@ -250,6 +254,10 @@ namespace DDFight.Game
 
         public void OnStartNewTurn(StartNewTurnEventArgs args)
         {
+            Global.Context.UserLogs.Blocks.Add(new Paragraph());
+            Paragraph tmp = (Paragraph) Global.Context.UserLogs.Blocks.LastBlock;
+            tmp.Inlines.Add(Extensions.BuildRun(args.Character.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+            tmp.Inlines.Add(Extensions.BuildRun(" starts its turn!\r\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
             if (NewTurnStarted != null)
             {
                 NewTurnStarted(this, args);

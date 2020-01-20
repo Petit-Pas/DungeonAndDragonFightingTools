@@ -27,7 +27,6 @@ namespace DDFight
             }
         }
 
-
         public static bool AreAllChildrenValid(this FrameworkElement element)
         {
             foreach (Control ctrl in element.FindAllChildren<IValidable>())

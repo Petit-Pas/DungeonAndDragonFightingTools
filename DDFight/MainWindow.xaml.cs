@@ -67,14 +67,6 @@ namespace DDFight
                 Global.Context.FightContext.FightersList.SetTurnOrders();
 
                 Global.Context.UserLogs = new FlowDocument();
-                Paragraph par = new Paragraph();
-                par.Inlines.Add(new Run("toto\r\n"));
-                par.Inlines.Add(new Run("toto\r\n"));
-                par.Inlines.Add(new Run("toto\r\n"));
-                par.Inlines.Add(new Run("toto\r\n"));
-                par.Inlines.Add(new Run("toto\r\n"));
-                par.Inlines.Add(new Run("toto\r\n"));
-                Global.Context.UserLogs.Blocks.Add(par);
 
                 MainFightWindow fightWindow = new MainFightWindow();
                 fightWindow.DataContext = Global.Context;
