@@ -9,7 +9,8 @@
         Title="RollInitiativeWindow" Height="450" Width="400"
         Background="{StaticResource LightestGray}"
         x:Name="Window"
-        WindowStartupLocation="CenterOwner">
+        WindowStartupLocation="CenterOwner"
+        Closing="Window_Closing">
     <Grid 
         MaxHeight="{Binding ElementName=Window, Path=Height}">
         <Grid.RowDefinitions>
@@ -69,6 +70,7 @@
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition SharedSizeGroup="FirstColumn" />
+                                        <ColumnDefinition SharedSizeGroup="SecondColumn" />
                                         <ColumnDefinition Width="50" />
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
@@ -77,18 +79,24 @@
                                     </Grid.RowDefinitions>
                                     <TextBlock 
                                         Grid.Column="0" Grid.Row="0"
+                                        Margin="0, 2"
+                                        Text="{Binding Amount}"
+                                        />
+                                    <TextBlock 
+                                        Grid.Column="1" Grid.Row="0"
                                         Margin="10, 2"
-                                        Text="{Binding DisplayName}" 
+                                        Text="{Binding Name}" 
                                         Foreground="{StaticResource Light}"/>
                                     <inputboxes:RangedIntBox
                                         PropertyMin="0"
                                         PropertyMax="20"
+                                        DataContext="{Binding Entity}"
                                         PropertyPath="InitiativeRoll"
-                                        Grid.Column="1"
+                                        Grid.Column="2"
                                         Grid.Row="0"
                                         Margin="2"/>
                                     <Separator
-                                        Grid.Row="1" Grid.ColumnSpan="2"/>
+                                        Grid.Row="1" Grid.ColumnSpan="3"/>
                                 </Grid>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
