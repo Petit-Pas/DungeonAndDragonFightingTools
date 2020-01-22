@@ -93,6 +93,7 @@ namespace DDFight.Game.Aggression.Attacks
         protected HitAttackTemplate(HitAttackTemplate to_copy) : base(to_copy)
         {
             HitBonus = to_copy.HitBonus;
+            HitAmount = to_copy.HitAmount;
             DamageList = (List<DamageTemplate>)to_copy.DamageList.Clone();
         }
 
