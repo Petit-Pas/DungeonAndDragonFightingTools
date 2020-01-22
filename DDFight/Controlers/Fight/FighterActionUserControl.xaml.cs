@@ -1,4 +1,5 @@
-﻿using DDFight.Game.Fight.FightEvents;
+﻿using DDFight.Game;
+using DDFight.Game.Fight.FightEvents;
 using DDFight.Tools;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,12 @@ namespace DDFight.Controlers.Fight
     /// </summary>
     public partial class FighterActionUserControl : UserControl, IEventUnregisterable
     {
+
+        public PlayableEntity data_context
+        {
+            get => (PlayableEntity)DataContext;
+        }
+
         public FighterActionUserControl()
         {
             DataContext = null;
@@ -33,6 +40,7 @@ namespace DDFight.Controlers.Fight
         {
             Global.Context.FightContext.CharacterSelected += FightContext_CharacterSelected;
             this.LayoutUpdated += FighterActionUserControl_LayoutUpdated;
+            //AttacksListControl.DataContext = data_context;
         }
 
         private void FighterActionUserControl_LayoutUpdated(object sender, EventArgs e)

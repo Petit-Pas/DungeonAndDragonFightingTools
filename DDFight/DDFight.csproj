@@ -77,6 +77,12 @@
     <Compile Include="Controlers\Fight\GeneralInfoFightUserControl.xaml.cs">
       <DependentUpon>GeneralInfoFightUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controlers\Game\Attacks\DetailsHitAttackTemplateUserControl.xaml.cs">
+      <DependentUpon>DetailsHitAttackTemplateUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controlers\Game\Attacks\DetailsListHitAttackTemplateUserControl.xaml.cs">
+      <DependentUpon>DetailsListHitAttackTemplateUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controlers\Game\Attacks\EditableHitAttackTemplateUserControl.xaml.cs">
       <DependentUpon>EditableHitAttackTemplateUserControl.xaml</DependentUpon>
     </Compile>
@@ -211,6 +217,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controlers\Fight\GeneralInfoFightUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controlers\Game\Attacks\DetailsHitAttackTemplateUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controlers\Game\Attacks\DetailsListHitAttackTemplateUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
