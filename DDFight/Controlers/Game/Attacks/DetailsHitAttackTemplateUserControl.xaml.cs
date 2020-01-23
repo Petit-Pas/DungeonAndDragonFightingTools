@@ -1,4 +1,5 @@
 ﻿using DDFight.Game.Aggression.Attacks;
+using DDFight.Windows.FightWindows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,6 +39,18 @@ namespace DDFight.Controlers.Game.Attacks
                 this.Visibility = Visibility.Hidden;
             else
                 this.Visibility = Visibility.Visible;
+        }
+
+        private void ExecuteButton_Click(object sender, RoutedEventArgs e)
+        {
+            ExecuteHitAttackWindow window = new ExecuteHitAttackWindow()
+            {
+                DataContext = this.DataContext,
+                Owner = Window.GetWindow(this),
+            };
+
+            window.ShowDialog();
+
         }
     }
 }

@@ -1,0 +1,126 @@
+﻿<Window x:Class="DDFight.Windows.FightWindows.ExecuteHitAttackWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DDFight.Windows.FightWindows"
+        xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes"
+        xmlns:converters="clr-namespace:DDFight.Converters"
+        mc:Ignorable="d"
+        Title="{Binding Name}" Height="450" Width="800"
+        Style="{StaticResource ResourceKey=WindowStyle}"
+        x:Name="Window"
+        WindowStartupLocation="CenterOwner">
+    <Window.Resources>
+        <converters:BrushToDamageTypeEnumConverter x:Key="DamageColorConverter" />
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            
+        </Grid.ColumnDefinitions>
+
+        <StackPanel 
+            Orientation="Vertical">
+            <TextBlock
+                Margin="20, 10"
+                Grid.Row="0"
+                Foreground="{StaticResource Light}"
+                FontSize="14"
+                FontWeight="SemiBold"
+                TextWrapping="Wrap"
+                TextAlignment="Center">
+                        When you press on the Roll button, 
+                        all the results equal to 0 will be 
+                        automatically rolled
+            </TextBlock>
+        </StackPanel>
+
+        <ItemsControl
+            Margin="10"
+            Grid.Row="1"
+            x:Name="AttackList">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <GroupBox
+                        Margin="0, 5">
+                        <GroupBox.Header>
+                            <TextBlock 
+                                Foreground="{StaticResource Light}"
+                                FontSize="15"
+                                FontWeight="SemiBold"
+                                Text="{Binding AttackIndex, StringFormat='{}Attack n° {0}'}"/>
+                        </GroupBox.Header>
+                        <WrapPanel Orientation="Vertical">
+                            <WrapPanel 
+                                Margin="5"
+                                Orientation="Horizontal">
+                                <WrapPanel.Resources>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Foreground" Value="{StaticResource Light}"/>
+                                    </Style>
+                                </WrapPanel.Resources>
+                                <TextBlock
+                                    Text="Targeting: "/>
+                                <ComboBox 
+                                    MinWidth="80"
+                                    x:Name="HitAttackTargetComboControl">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding DisplayName}"/>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                                <TextBlock 
+                                    Text="With an attack of: "/>
+                                <inputboxes:RangedIntBox
+                                    PropertyMin="0" PropertyMax="20"
+                                    PropertyPath="HitRoll"
+                                    MinWidth="35"/>
+                                <TextBlock 
+                                    Text="{Binding HitBonus, StringFormat={}{0:+#;-#;''}}"/>
+                            </WrapPanel>
+                            <ItemsControl
+                                Grid.IsSharedSizeScope="True"
+                                x:Name="DamageControl">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <WrapPanel 
+                                            Orientation="Horizontal">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition SharedSizeGroup="FirstColumn"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock 
+                                                Text="{Binding Damage}" />
+                                            </Grid>
+
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition SharedSizeGroup="SecondColumn" />
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock 
+                                                Text="{Binding DamageType}" 
+                                                Foreground="{Binding DamageType, Converter={StaticResource DamageColorConverter}}"
+                                                />
+                                            </Grid>
+                                            
+                                            <TextBlock 
+                                                Text="Damage" />
+                                        </WrapPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </WrapPanel>
+                    </GroupBox>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        
+    </Grid>
+</Window>

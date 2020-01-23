@@ -67,6 +67,24 @@ namespace DDFight.Game.Aggression.Attacks
         }
         private List<DamageTemplate> _damage = new List<DamageTemplate> ();
 
+        public List<HitAttackResult> GetResultTemplate()
+        {
+            List<HitAttackResult> result = new List<HitAttackResult>();
+
+            for (int i = 0; i != HitAmount; i++)
+            {
+                result.Add(new HitAttackResult()
+                {
+                    DamageRoll = 0,
+                    DamageList = DamageList,
+                    HitRoll = 0,
+                    HitBonus = HitBonus,
+                    Target = null,
+                    AttackIndex = i,
+                });
+            }
+            return result;
+        }
 
         #region INotifyPropertyChanged
 

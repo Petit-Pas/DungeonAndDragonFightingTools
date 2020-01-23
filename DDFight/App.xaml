@@ -13,6 +13,8 @@
         <SolidColorBrush x:Key="Light" Color="#fbf2d4" />
         <SolidColorBrush x:Key="Indigo" Color="#4B0082" />
 
+        <SolidColorBrush x:Key="Force" Color="Green"/>
+
         <Style x:Key="WindowStyle" TargetType="Window">
             <Setter Property="Background" Value="{StaticResource LightestGray}" />
         </Style>

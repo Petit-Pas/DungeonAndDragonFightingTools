@@ -13,3 +13,5 @@ in prepare fight : duplicate element, erase first, duplicate remaining, you now 
 should have possibility to add minus sign in DiceRolls
 
 Any function that use llist.SelectedItem should have a null protection
+
+Bonus to Hit in HitAttackTemplate should be allowed to be negative

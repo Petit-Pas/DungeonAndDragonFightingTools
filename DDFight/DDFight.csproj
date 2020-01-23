@@ -128,12 +128,14 @@
     <Compile Include="Controlers\PrepareFightCharacterList.xaml.cs">
       <DependentUpon>PrepareFightCharacterList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\BrushToDamageTypeEnumConverter.cs" />
     <Compile Include="Converters\StringListStringConverter.cs" />
     <Compile Include="Converters\StringIntConverter.cs" />
     <Compile Include="Converters\StringToDiceRollConverter.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Game\Aggression\Aggression.cs" />
     <Compile Include="Game\Aggression\Attacks\AAttackTemplate.cs" />
+    <Compile Include="Game\Aggression\Attacks\HitAttackResult.cs" />
     <Compile Include="Game\Aggression\Attacks\HitAttackTemplate.cs" />
     <Compile Include="Game\Aggression\DamageTemplate.cs" />
     <Compile Include="Game\Characteristics\CharacteristicDataContext.cs" />
@@ -181,6 +183,9 @@
     </Compile>
     <Compile Include="Windows\EditMonsterWindow.xaml.cs">
       <DependentUpon>EditMonsterWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\FightWindows\ExecuteHitAttackWindow.xaml.cs">
+      <DependentUpon>ExecuteHitAttackWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\FightWindows\MainFightWindow.xaml.cs">
       <DependentUpon>MainFightWindow.xaml</DependentUpon>
@@ -316,6 +321,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\EditMonsterWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\FightWindows\ExecuteHitAttackWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

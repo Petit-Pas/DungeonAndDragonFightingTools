@@ -40,7 +40,8 @@
             <ScrollViewer
                 Grid.Row="1" Grid.ColumnSpan="2"
                 Margin="10, 5"
-                VerticalScrollBarVisibility="Auto">
+                VerticalScrollBarVisibility="Auto"
+                Background="{StaticResource Gray}">
                 <ItemsControl
                     ItemsSource="{Binding DamageList}">
                     <ItemsControl.ItemTemplate>
@@ -66,7 +67,8 @@
                 Margin="10, 0"
                 Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                 FontSize="15"
-                FontWeight="SemiBold">
+                FontWeight="SemiBold"
+                Click="ExecuteButton_Click">
                 Execute
             </Button>
         </Grid>
