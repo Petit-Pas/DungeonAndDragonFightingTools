@@ -7,18 +7,18 @@
         xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes"
         xmlns:converters="clr-namespace:DDFight.Converters"
         mc:Ignorable="d"
-        Title="{Binding Name}" Height="450" Width="800"
+        Title="{Binding Name}" Height="450" Width="500"
         Style="{StaticResource ResourceKey=WindowStyle}"
         x:Name="Window"
         WindowStartupLocation="CenterOwner">
     <Window.Resources>
         <converters:BrushToDamageTypeEnumConverter x:Key="DamageColorConverter" />
+
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -35,92 +35,154 @@
                 FontWeight="SemiBold"
                 TextWrapping="Wrap"
                 TextAlignment="Center">
-                        When you press on the Roll button, 
+                        When you press on the Attack button, 
                         all the results equal to 0 will be 
                         automatically rolled
             </TextBlock>
         </StackPanel>
 
-        <ItemsControl
-            Margin="10"
+        <Grid
             Grid.Row="1"
-            x:Name="AttackList">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <GroupBox
-                        Margin="0, 5">
-                        <GroupBox.Header>
-                            <TextBlock 
-                                Foreground="{StaticResource Light}"
-                                FontSize="15"
-                                FontWeight="SemiBold"
-                                Text="{Binding AttackIndex, StringFormat='{}Attack n° {0}'}"/>
-                        </GroupBox.Header>
-                        <WrapPanel Orientation="Vertical">
-                            <WrapPanel 
-                                Margin="5"
-                                Orientation="Horizontal">
-                                <WrapPanel.Resources>
-                                    <Style TargetType="TextBlock">
-                                        <Setter Property="Foreground" Value="{StaticResource Light}"/>
-                                    </Style>
-                                </WrapPanel.Resources>
-                                <TextBlock
-                                    Text="Targeting: "/>
-                                <ComboBox 
-                                    MinWidth="80"
-                                    x:Name="HitAttackTargetComboControl">
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="{Binding DisplayName}"/>
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
-                                </ComboBox>
-                                <TextBlock 
-                                    Text="With an attack of: "/>
-                                <inputboxes:RangedIntBox
-                                    PropertyMin="0" PropertyMax="20"
-                                    PropertyPath="HitRoll"
-                                    MinWidth="35"/>
-                                <TextBlock 
-                                    Text="{Binding HitBonus, StringFormat={}{0:+#;-#;''}}"/>
-                            </WrapPanel>
-                            <ItemsControl
-                                Grid.IsSharedSizeScope="True"
-                                x:Name="DamageControl">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
+            Margin="10">
+            <ScrollViewer
+                x:Name="AttackScrollViewControl"
+                Grid.Row="1"
+                Margin="10"
+                VerticalScrollBarVisibility="Auto">
+                <ItemsControl
+                    x:Name="AttackList">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <GroupBox
+                                Background="{StaticResource Gray}"
+                                Margin="0, 5">
+                                <GroupBox.Header>
+                                    <TextBlock 
+                                        Foreground="{StaticResource Light}"
+                                        FontSize="15"
+                                        FontWeight="SemiBold"
+                                        Text="{Binding AttackIndex, StringFormat='{}Hit n° {0}'}"/>
+                                </GroupBox.Header>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                    </Grid.ColumnDefinitions>
+                                    <WrapPanel 
+                                        Grid.Row="0"
+                                        Orientation="Vertical">
                                         <WrapPanel 
+                                            Margin="5"
                                             Orientation="Horizontal">
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition SharedSizeGroup="FirstColumn"/>
-                                                </Grid.ColumnDefinitions>
-                                                <TextBlock 
-                                                Text="{Binding Damage}" />
-                                            </Grid>
-
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition SharedSizeGroup="SecondColumn" />
-                                                </Grid.ColumnDefinitions>
-                                                <TextBlock 
-                                                Text="{Binding DamageType}" 
-                                                Foreground="{Binding DamageType, Converter={StaticResource DamageColorConverter}}"
-                                                />
-                                            </Grid>
-                                            
+                                            <WrapPanel.Resources>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="Foreground" Value="{StaticResource Light}"/>
+                                                </Style>
+                                            </WrapPanel.Resources>
+                                            <TextBlock
+                                                Margin="5, 0"
+                                                Text="Targeting: "/>
+                                            <ComboBox 
+                                                Margin="0, 0, 5, 0"
+                                                MinWidth="80"
+                                                x:Name="HitAttackTargetComboControl">
+                                                <ComboBox.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock 
+                                                            Text="{Binding DisplayName}"/>
+                                                    </DataTemplate>
+                                                </ComboBox.ItemTemplate>
+                                            </ComboBox>
                                             <TextBlock 
-                                                Text="Damage" />
+                                                Margin="0, 0, 5, 0"
+                                                Text="With an attack roll of: "/>
+                                            <inputboxes:RangedIntBox
+                                                Margin="0, 0, 5, 0"
+                                                PropertyMin="0" PropertyMax="20"
+                                                PropertyPath="HitRoll"
+                                                MinWidth="35"/>
+                                            <TextBlock 
+                                                Margin="0, 0, 5, 0"
+                                               
+                                                Text="{Binding HitBonus, StringFormat={}{0:+#;-#;''}}"/>
                                         </WrapPanel>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </WrapPanel>
-                    </GroupBox>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-        
+                                        <ItemsControl
+                                            Grid.IsSharedSizeScope="True"
+                                            x:Name="DamageControl">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <WrapPanel
+                                                        Margin="5"
+                                                        Orientation="Horizontal">
+                                                        <Grid
+                                                            Margin="5, 0">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition SharedSizeGroup="FirstColumn"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <TextBlock 
+                                                                Foreground="{StaticResource Light}"
+                                                                Text="{Binding Damage}" />
+                                                        </Grid>
+
+                                                        <Grid
+                                                        Margin="0, 0, 5, 0">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition SharedSizeGroup="SecondColumn" />
+                                                            </Grid.ColumnDefinitions>
+                                                            <TextBlock 
+                                                                Text="{Binding DamageType}" 
+                                                                FontWeight="SemiBold"
+                                                                Foreground="{Binding DamageType, Converter={StaticResource DamageColorConverter}}"
+                                                        />
+                                                        </Grid>
+                                                        <TextBlock 
+                                                            Margin="0, 0, 5, 0"
+                                                            Foreground="{StaticResource Light}"
+                                                            Text="Damage: " />
+                                                        <inputboxes:PositiveIntTextBox 
+                                                            MinWidth="40"
+                                                            DataContext="{Binding Damage}"
+                                                            PropertyPath="LastResult"
+                                                        />
+                                                    </WrapPanel>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </WrapPanel>
+                                    <Button
+                                        x:Name="AttackButtonControl"
+                                        Padding="10, 5"
+                                        Grid.Row="1"
+                                        HorizontalAlignment="Center"
+                                        FontSize="15"
+                                        FontWeight="SemiBold"
+                                        IsEnabled="False"
+                                        Click="AttackButtonControl_Click"
+                                        >
+                                        Attack
+                                    </Button>
+                                </Grid>
+                            </GroupBox>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
+        <Button
+            x:Name="QuitButtonControl"
+            Grid.Row="2"
+            Height="40"
+            Width="100"
+            Visibility="Collapsed"
+            FontSize="15"
+            FontWeight="Bold"
+            Foreground="{StaticResource LightestGray}"
+            Background="{StaticResource Light}"
+            Click="QuitButtonControl_Click"
+            Margin="10">
+            Quit
+        </Button>
     </Grid>
 </Window>

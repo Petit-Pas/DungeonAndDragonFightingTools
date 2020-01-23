@@ -92,6 +92,18 @@ namespace DDFight.Game.Dices
             return format;
         }
 
+        [XmlIgnore]
+        public int LastResult
+        {
+            get => _lastResult;
+            set
+            {
+                _lastResult = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private int _lastResult;
+
         public int Roll()
         {
             int result = Modifier;
@@ -100,6 +112,7 @@ namespace DDFight.Game.Dices
             {
                 result += dice.Roll();
             }
+            LastResult = result;
             return result;
         }
 

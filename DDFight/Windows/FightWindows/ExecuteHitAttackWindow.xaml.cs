@@ -41,22 +41,57 @@ namespace DDFight.Windows.FightWindows
             AttackList.LayoutUpdated += AttackList_LayoutUpdated;
         }
 
+        private List<FrameworkElement> buttons = new List<FrameworkElement>();
+
         private void AttackList_LayoutUpdated(object sender, EventArgs e)
         {
             List<FrameworkElement> comboBoxes = this.GetAllChildrenByName("HitAttackTargetComboControl");
-            Console.WriteLine(comboBoxes.Count);
             foreach (ComboBox box in comboBoxes)
             {
                 box.ItemsSource = Global.Context.FightContext.FightersList.Fighters;
             }
             AttackList.LayoutUpdated -= AttackList_LayoutUpdated;
 
-            List<FrameworkElement> tmp = this.GetAllChildrenByName("DamageControl");
-            foreach (ItemsControl control in tmp)
+            List<FrameworkElement> damageControls = this.GetAllChildrenByName("DamageControl");
+            foreach (ItemsControl control in damageControls)
             {
-                control.ItemsSource = data_context.DamageList;
+                control.ItemsSource = data_context.DamageList.Clone();
             }
-            Console.WriteLine(tmp.Count);
+            Console.WriteLine(damageControls.Count);
+
+            buttons = this.GetAllChildrenByName("AttackButtonControl");
+            foreach (Button btn in buttons)
+            {
+                btn.IsEnabled = false;
+            }
+            if (buttons.Count != 0)
+                ((Button)buttons.ElementAt(0)).IsEnabled = true;
+        }
+
+        private void AttackButtonControl_Click(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i != buttons.Count; i += 1)
+            {
+                if (((Button)buttons[i]).IsEnabled == true)
+                {
+                    ((Button)buttons[i]).IsEnabled = false;
+                    if (i + 1 != buttons.Count)
+                    {
+                        ((Button)buttons[i + 1]).IsEnabled = true;
+                    }
+                    else
+                    {
+                        this.QuitButtonControl.Visibility = Visibility.Visible;
+                        this.AttackScrollViewControl.ScrollToEnd();
+                    }
+                    return;
+                }
+            }
+        }
+
+        private void QuitButtonControl_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
