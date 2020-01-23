@@ -5,43 +5,39 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DDFight.Controlers.Fight"
              xmlns:fight="clr-namespace:DDFight.Controlers.Game.Attacks"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <system:String x:Key="Format"> {0}'s Actions </system:String>
+    </UserControl.Resources>
     <GroupBox
         Foreground="{StaticResource LightestGray}">
         <GroupBox.Header>
             <TextBlock
                 Foreground="{StaticResource Light}"
                 FontSize="15"
-                FontWeight="SemiBold">
-                Actions
-            </TextBlock>
+                FontWeight="SemiBold"
+                Text="{Binding Name, StringFormat={StaticResource Format}}" />
+
         </GroupBox.Header>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            
-            
-            
-            <TextBlock 
-                x:Name="CurrentCharacterName"
-                Grid.Row="0" Grid.Column="0" 
-                Foreground="{StaticResource Light}"
-                Text="{Binding DisplayName}" />
 
             <fight:DetailsListHitAttackTemplateUserControl 
                 x:Name="AttacksListControl"
-                Grid.Row="1" Grid.Column="0"/>
+                Grid.Row="0" Grid.Column="0"/>
 
             <Button 
                 x:Name="NextTurnButton"
-                Grid.Row="1" Grid.Column="1"
+                Grid.Row="0" Grid.Column="2"
                 Click="NextTurn_Button_Click"
                 Content="Next Turn"/>
         </Grid>

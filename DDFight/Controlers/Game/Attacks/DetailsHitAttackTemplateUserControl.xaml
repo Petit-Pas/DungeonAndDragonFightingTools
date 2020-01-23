@@ -19,6 +19,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -36,28 +37,38 @@
                 Margin="5, 0"
                 Text="{Binding HitBonus, StringFormat='Bonus to Hits: {0}'}"/>
 
-            <ItemsControl
+            <ScrollViewer
                 Grid.Row="1" Grid.ColumnSpan="2"
                 Margin="10, 5"
-                ItemsSource="{Binding DamageList}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <DataTemplate.Resources>
-                            <Style TargetType="Label">
-                                <Setter Property="Foreground" Value="{StaticResource Light}"/>
-                                <Setter Property="FontSize" Value="14" />
-                            </Style>
-                        </DataTemplate.Resources>
-                        <StackPanel 
-                            Orientation="Horizontal">
-                            <Label Content="{Binding Damage}" />
-                            <Label Content="{Binding DamageType}" />
-                            <Label Content="Damage" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-                
-            </ItemsControl>
+                VerticalScrollBarVisibility="Auto">
+                <ItemsControl
+                    ItemsSource="{Binding DamageList}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <DataTemplate.Resources>
+                                <Style TargetType="Label">
+                                    <Setter Property="Foreground" Value="{StaticResource Light}"/>
+                                    <Setter Property="FontSize" Value="14" />
+                                </Style>
+                            </DataTemplate.Resources>
+                            <StackPanel 
+                                Orientation="Horizontal">
+                                <Label Content="{Binding Damage}" />
+                                <Label Content="{Binding DamageType}" />
+                                <Label Content="Damage" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+
+            <Button
+                Margin="10, 0"
+                Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                FontSize="15"
+                FontWeight="SemiBold">
+                Execute
+            </Button>
         </Grid>
     </GroupBox>
 </UserControl>
