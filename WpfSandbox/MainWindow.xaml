@@ -10,34 +10,10 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100" />
+            <RowDefinition Height="*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <ScrollViewer Grid.Row="1" Grid.Column="1">
-            <ItemsControl x:Name="itemControl" Grid.Column="1" Grid.Row="1" Grid.IsSharedSizeScope="True">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Grid >
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition SharedSizeGroup="ColumnSize" />
-                            </Grid.ColumnDefinitions>   
-                            <Button Content="{Binding Name}" FontSize="22" Margin="10" Padding="5" Grid.Column="0" Grid.Row="0" />
-                        </Grid>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
-        </ScrollViewer>
+        <CheckBox IsChecked="{Binding IsLongRanged}"></CheckBox>
+        <CheckBox Grid.Row="1" IsChecked="{Binding IsCloseRanged}"></CheckBox>
     </Grid>
 </Window>

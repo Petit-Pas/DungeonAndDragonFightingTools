@@ -52,12 +52,73 @@ namespace DDFight.Game.Aggression.Attacks
         protected AAttackTemplate(AAttackTemplate to_copy)
         {
             Name = (string)to_copy.Name.Clone();
+            Range = to_copy.Range;
         }
 
         public object Clone()
         {
             throw new MissingMethodException("Cannot clone an instance of AAttackTemplate");
         }
+        #endregion
+
+        #region Range
+
+        public AttackRangeEnum Range
+        {
+            get => _range;
+            set
+            {
+                if (_range != value)
+                {
+                    _range = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        private AttackRangeEnum _range = AttackRangeEnum.CloseRange;
+
+        [XmlIgnore]
+        public bool IsLongRanged
+        {
+            get
+            {
+                Console.WriteLine("in get long");
+                return Range == AttackRangeEnum.LongRange;
+            }
+            set
+            {
+                Console.WriteLine("in set long" + value);
+                if (value == true)
+                {
+                    Console.WriteLine("setting range to long");
+                    Range = AttackRangeEnum.LongRange;
+                    IsCloseRanged = false;
+                }
+                NotifyPropertyChanged();
+            }
+        }
+
+        [XmlIgnore]
+        public bool IsCloseRanged
+        {
+            get
+            {
+                Console.WriteLine("in get close");
+                return Range == AttackRangeEnum.CloseRange;
+            }
+            set 
+            {
+                Console.WriteLine("in set close" + value);
+                if (value == true)
+                {
+                    Console.WriteLine("setting range to close");
+                    Range = AttackRangeEnum.CloseRange;
+                    IsLongRanged = false;
+                }
+                NotifyPropertyChanged();
+            }
+        }
+
         #endregion
     }
 }

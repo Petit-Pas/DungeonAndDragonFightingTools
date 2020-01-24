@@ -8,59 +8,71 @@ using System.Threading.Tasks;
 
 namespace WpfSandbox
 {
-    public class EmbeddedClass : INotifyPropertyChanged
+    public enum AttackRangeEnum
     {
-        public int EmbeddedInt
-        {
-            get => _embeddedInt;
-            set
-            {
-                if (_embeddedInt != value)
-                {
-                    _embeddedInt = value;
-                    NotifyPropertyChanged();
-                }
-            }
-        }
-        private int _embeddedInt = 1;
-
-        /// <summary>
-        ///     PropertyChanged EventHandler
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="propertyName"></param>
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            Console.WriteLine("property {0} in mainDataContext changed", propertyName);
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
+        CloseRange,
+        LongRange,
     }
 
     public class MainDataContext : INotifyPropertyChanged
     {
-        public int MainInt
+        #region Range
+
+        public AttackRangeEnum Range
         {
-            get => _mainInt;
+            get => _range;
             set
             {
-                if (_mainInt != value)
+                if (_range != value)
                 {
-                    _mainInt = value;
+                    _range = value;
                     NotifyPropertyChanged();
                 }
             }
         }
-        private int _mainInt = 0;
+        private AttackRangeEnum _range = AttackRangeEnum.CloseRange;
 
-        public EmbeddedClass Embedded { get => _embedded ; set => _embedded = value; }
-        private EmbeddedClass _embedded = new EmbeddedClass();
+        public bool IsLongRanged
+        {
+            get
+            {
+                Console.WriteLine("in get long");
+                return Range == AttackRangeEnum.LongRange;
+            }
+            set
+            {
+                Console.WriteLine("in set long" + value);
+                if (value == true)
+                {
+                    Console.WriteLine("setting range to long");
+                    Range = AttackRangeEnum.LongRange;
+                    IsCloseRanged = false;
+                }
+                NotifyPropertyChanged();
+            }
+        }
+
+        public bool IsCloseRanged
+        {
+            get
+            {
+                Console.WriteLine("in get close");
+                return Range == AttackRangeEnum.CloseRange;
+            }
+            set
+            {
+                Console.WriteLine("in set close" + value);
+                if (value == true)
+                {
+                    Console.WriteLine("setting range to close");
+                    Range = AttackRangeEnum.CloseRange;
+                    IsLongRanged = false;
+                }
+                NotifyPropertyChanged();
+            }
+        }
+
+        #endregion
 
         /// <summary>
         ///     PropertyChanged EventHandler

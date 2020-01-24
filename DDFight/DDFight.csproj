@@ -89,6 +89,9 @@
     <Compile Include="Controlers\Game\Attacks\EditableListHitAttackTemplate.xaml.cs">
       <DependentUpon>EditableListHitAttackTemplate.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controlers\Game\Attacks\EditableRangeController.xaml.cs">
+      <DependentUpon>EditableRangeController.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controlers\Game\Characteristics\EditableCharacteristicsListUserControl.xaml.cs">
       <DependentUpon>EditableCharacteristicsListUserControl.xaml</DependentUpon>
     </Compile>
@@ -133,7 +136,7 @@
     <Compile Include="Converters\StringIntConverter.cs" />
     <Compile Include="Converters\StringToDiceRollConverter.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="Game\Aggression\Aggression.cs" />
+    <Compile Include="Game\Aggression\AttackRangeEnum.cs" />
     <Compile Include="Game\Aggression\Attacks\AAttackTemplate.cs" />
     <Compile Include="Game\Aggression\Attacks\HitAttackResult.cs" />
     <Compile Include="Game\Aggression\Attacks\HitAttackTemplate.cs" />
@@ -238,6 +241,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controlers\Game\Attacks\EditableListHitAttackTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controlers\Game\Attacks\EditableRangeController.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

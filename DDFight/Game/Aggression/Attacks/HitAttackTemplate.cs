@@ -13,7 +13,6 @@ namespace DDFight.Game.Aggression.Attacks
 {
     /// <summary>
     ///     Represents a possible attack, example: inflamed two handed sword, +7 to Hit, 2d6+3 of Slashing Damage + 1d4 of Fire Damage 
-    ///     In case of Scroching Ray for instance (x hits with 2d8 Fire Damage) this class should be instantiated x times
     /// </summary>
     public class HitAttackTemplate : AAttackTemplate, ICloneable, INotifyPropertyChanged
     {

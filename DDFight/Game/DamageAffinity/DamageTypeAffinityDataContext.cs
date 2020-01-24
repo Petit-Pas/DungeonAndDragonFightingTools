@@ -50,7 +50,7 @@ namespace DDFight.Game.DamageAffinity
                 }
             }
         }
-        private DamageAffinityEnum _affinity;
+        private DamageAffinityEnum _affinity = DamageAffinityEnum.Neutral;
 
         [XmlIgnore]
         public bool IsWeak
@@ -83,7 +83,6 @@ namespace DDFight.Game.DamageAffinity
                 }
                 NotifyPropertyChanged();
             }
-
         }
 
         [XmlIgnore]
@@ -101,7 +100,6 @@ namespace DDFight.Game.DamageAffinity
                 }
                 NotifyPropertyChanged();
             }
-
         }
 
         [XmlIgnore]

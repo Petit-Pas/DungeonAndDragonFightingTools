@@ -36,6 +36,8 @@
                 <RowDefinition Height="Auto" />
                 <!-- Bonus to Hits -->
                 <RowDefinition Height="Auto" />
+                <!-- Range -->
+                <RowDefinition Height="Auto" />
                 <!-- Damage List -->
                 <RowDefinition Height="Auto" />
                 <!-- Add Damage Button -->
@@ -72,8 +74,14 @@
                 MaxHeight="20"
                 PropertyPath="HitBonus"/>
 
+            <Label 
+                Grid.Row="3" Grid.Column="0"
+                Content="Range"/>
+            <local:EditableRangeController 
+                Grid.Row="3" Grid.Column="1"/>
+
             <GroupBox 
-                Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2">
+                Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2">
                 <GroupBox.Header>
                     <TextBlock
                         FontSize="15"
