@@ -1,5 +1,7 @@
 ﻿using DDFight.Game;
+using DDFight.Game.Aggression;
 using DDFight.Game.Aggression.Attacks;
+using DDFight.Game.Dices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,10 +44,13 @@ namespace DDFight.Windows.FightWindows
         }
 
         private List<FrameworkElement> buttons = new List<FrameworkElement>();
+        private List<FrameworkElement> comboBoxes = new List<FrameworkElement>();
+        private List<FrameworkElement> groupBoxes = new List<FrameworkElement>();
+        private List<FrameworkElement> errorBoxes = new List<FrameworkElement>();
 
         private void AttackList_LayoutUpdated(object sender, EventArgs e)
         {
-            List<FrameworkElement> comboBoxes = this.GetAllChildrenByName("HitAttackTargetComboControl");
+            comboBoxes = this.GetAllChildrenByName("HitAttackTargetComboControl");
             foreach (ComboBox box in comboBoxes)
             {
                 box.ItemsSource = Global.Context.FightContext.FightersList.Fighters;
@@ -55,7 +60,7 @@ namespace DDFight.Windows.FightWindows
             List<FrameworkElement> damageControls = this.GetAllChildrenByName("DamageControl");
             foreach (ItemsControl control in damageControls)
             {
-                control.ItemsSource = data_context.DamageList.Clone();
+                //control.ItemsSource = data_context.DamageList.Clone();
             }
             Console.WriteLine(damageControls.Count);
 
@@ -66,6 +71,9 @@ namespace DDFight.Windows.FightWindows
             }
             if (buttons.Count != 0)
                 ((Button)buttons.ElementAt(0)).IsEnabled = true;
+
+            groupBoxes = this.GetAllChildrenByName("AttackGroupBoxControl");
+            errorBoxes = this.GetAllChildrenByName("ErrorTextblockControl");
         }
 
         private void AttackButtonControl_Click(object sender, RoutedEventArgs e)
@@ -74,15 +82,45 @@ namespace DDFight.Windows.FightWindows
             {
                 if (((Button)buttons[i]).IsEnabled == true)
                 {
-                    ((Button)buttons[i]).IsEnabled = false;
-                    if (i + 1 != buttons.Count)
+                    if (((ComboBox)comboBoxes[i]).SelectedIndex != -1)
                     {
-                        ((Button)buttons[i + 1]).IsEnabled = true;
+                        // a character has well been selected
+                        if (groupBoxes[i].AreAllChildrenValid())
+                        {
+                            // there is no error in input boxes
+
+                            // computes unrolled rolls
+                            if (attacks[i].HitRoll == 0)
+                                attacks[i].HitRoll = (uint)DiceRoll.Roll("1d20");
+                            foreach (DamageTemplate dmg in attacks[i].DamageList)
+                            {
+                                if (dmg.Damage.LastResult == 0)
+                                    dmg.Damage.Roll();
+                                Console.WriteLine(dmg.Damage.LastResult);
+                            }
+                            // Go to next Attack
+                            ((Button)buttons[i]).IsEnabled = false;
+                            if (i + 1 != buttons.Count)
+                            {
+                                ((Button)buttons[i + 1]).IsEnabled = true;
+                            }
+                            else
+                            {
+                                this.QuitButtonControl.Visibility = Visibility.Visible;
+                                this.AttackScrollViewControl.ScrollToEnd();
+                            }
+                            ((TextBlock)errorBoxes[i]).Visibility = Visibility.Collapsed;
+                        }
+                        else
+                        {
+                            ((TextBlock)errorBoxes[i]).Text = "One of the input boxes is badly filled";
+                            ((TextBlock)errorBoxes[i]).Visibility = Visibility.Visible;
+                        }
                     }
                     else
                     {
-                        this.QuitButtonControl.Visibility = Visibility.Visible;
-                        this.AttackScrollViewControl.ScrollToEnd();
+                        ((TextBlock)errorBoxes[i]).Text = "Please select a target first";
+                        ((TextBlock)errorBoxes[i]).Visibility = Visibility.Visible;
                     }
                     return;
                 }

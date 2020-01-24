@@ -104,6 +104,12 @@ namespace DDFight.Game.Dices
         }
         private int _lastResult;
 
+        public static int Roll(string input)
+        {
+            DiceRoll dice = new DiceRoll(input);
+            return dice.Roll();
+        }
+
         public int Roll()
         {
             int result = Modifier;

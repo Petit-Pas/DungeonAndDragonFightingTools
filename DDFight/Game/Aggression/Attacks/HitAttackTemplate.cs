@@ -76,7 +76,7 @@ namespace DDFight.Game.Aggression.Attacks
                 result.Add(new HitAttackResult()
                 {
                     DamageRoll = 0,
-                    DamageList = DamageList,
+                    DamageList = (List<DamageTemplate>)DamageList.Clone(),
                     HitRoll = 0,
                     HitBonus = HitBonus,
                     Target = null,

@@ -54,6 +54,7 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <GroupBox
+                                x:Name="AttackGroupBoxControl"
                                 Background="{StaticResource Gray}"
                                 Margin="0, 5">
                                 <GroupBox.Header>
@@ -66,6 +67,7 @@
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition />
+                                        <RowDefinition Height="Auto" />
                                         <RowDefinition />
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
@@ -105,12 +107,12 @@
                                                 MinWidth="35"/>
                                             <TextBlock 
                                                 Margin="0, 0, 5, 0"
-                                               
                                                 Text="{Binding HitBonus, StringFormat={}{0:+#;-#;''}}"/>
                                         </WrapPanel>
                                         <ItemsControl
                                             Grid.IsSharedSizeScope="True"
-                                            x:Name="DamageControl">
+                                            x:Name="DamageControl"
+                                            ItemsSource="{Binding DamageList}">
                                             <ItemsControl.ItemTemplate>
                                                 <DataTemplate>
                                                     <WrapPanel
@@ -151,10 +153,18 @@
                                             </ItemsControl.ItemTemplate>
                                         </ItemsControl>
                                     </WrapPanel>
+                                    <TextBlock
+                                        x:Name="ErrorTextblockControl"
+                                        Margin="5"
+                                        Grid.Row="1"
+                                        Foreground="Red"
+                                        Visibility="Collapsed" 
+                                        TextAlignment="Center"
+                                        FontSize="14"/>
                                     <Button
                                         x:Name="AttackButtonControl"
                                         Padding="10, 5"
-                                        Grid.Row="1"
+                                        Grid.Row="2"
                                         HorizontalAlignment="Center"
                                         FontSize="15"
                                         FontWeight="SemiBold"
