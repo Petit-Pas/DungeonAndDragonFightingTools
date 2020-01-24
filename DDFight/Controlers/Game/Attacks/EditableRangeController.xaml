@@ -29,9 +29,5 @@
             x:Name="LongRangedCheckBoxControl"
             Grid.Column="3"
             IsChecked="{Binding IsLongRanged}"/>
-        <Button 
-            Grid.Column="4"  
-            Content="Test" 
-            Click="Button_Click"/>
     </Grid>
 </UserControl>

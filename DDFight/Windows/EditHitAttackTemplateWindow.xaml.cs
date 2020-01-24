@@ -32,12 +32,6 @@ namespace DDFight.Windows
         public EditHitAttackTemplateWindow()
         {
             InitializeComponent();
-
-            Loaded += EditHitAttackTemplateWindow_Loaded;
-        }
-
-        private void EditHitAttackTemplateWindow_Loaded(object sender, RoutedEventArgs e)
-        {
         }
 
         /// <summary>

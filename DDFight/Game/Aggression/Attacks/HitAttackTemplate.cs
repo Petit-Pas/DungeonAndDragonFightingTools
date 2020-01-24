@@ -14,7 +14,7 @@ namespace DDFight.Game.Aggression.Attacks
     /// <summary>
     ///     Represents a possible attack, example: inflamed two handed sword, +7 to Hit, 2d6+3 of Slashing Damage + 1d4 of Fire Damage 
     /// </summary>
-    public class HitAttackTemplate : AAttackTemplate, ICloneable, INotifyPropertyChanged
+    public class HitAttackTemplate : AAttackTemplate, ICloneable
     {
         public HitAttackTemplate() : base()
         {
@@ -84,27 +84,6 @@ namespace DDFight.Game.Aggression.Attacks
             }
             return result;
         }
-
-        #region INotifyPropertyChanged
-
-        /// <summary>
-        ///     PropertyChanged EventHandler
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="propertyName"></param>
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-        #endregion
-
         #region ICloneable
 
         protected HitAttackTemplate(HitAttackTemplate to_copy) : base(to_copy)

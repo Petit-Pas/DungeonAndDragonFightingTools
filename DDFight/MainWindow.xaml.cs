@@ -1,4 +1,5 @@
 ﻿using DDFight.Game;
+using DDFight.Game.Aggression.Attacks;
 using DDFight.Game.Fight;
 using DDFight.Tools.Save;
 using DDFight.Windows;

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace WpfSandbox
 {
@@ -32,6 +33,7 @@ namespace WpfSandbox
         }
         private AttackRangeEnum _range = AttackRangeEnum.CloseRange;
 
+        [XmlIgnore]
         public bool IsLongRanged
         {
             get
@@ -52,6 +54,7 @@ namespace WpfSandbox
             }
         }
 
+        [XmlIgnore]
         public bool IsCloseRanged
         {
             get

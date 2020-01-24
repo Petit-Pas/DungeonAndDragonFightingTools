@@ -27,7 +27,7 @@ namespace DDFight.Game.Aggression.Attacks
         }
         private string _name = "Name";
 
-        #region INotifyPropertyChanged
+        #region INotifyPr#region INotifyPropertyChanged
 
         /// <summary>
         ///     PropertyChanged EventHandler
@@ -38,7 +38,7 @@ namespace DDFight.Game.Aggression.Attacks
         /// 
         /// </summary>
         /// <param name="propertyName"></param>
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
             if (PropertyChanged != null)
             {
@@ -82,15 +82,12 @@ namespace DDFight.Game.Aggression.Attacks
         {
             get
             {
-                Console.WriteLine("in get long");
                 return Range == AttackRangeEnum.LongRange;
             }
             set
             {
-                Console.WriteLine("in set long" + value);
                 if (value == true)
                 {
-                    Console.WriteLine("setting range to long");
                     Range = AttackRangeEnum.LongRange;
                     IsCloseRanged = false;
                 }
@@ -103,15 +100,12 @@ namespace DDFight.Game.Aggression.Attacks
         {
             get
             {
-                Console.WriteLine("in get close");
                 return Range == AttackRangeEnum.CloseRange;
             }
-            set 
+            set
             {
-                Console.WriteLine("in set close" + value);
                 if (value == true)
                 {
-                    Console.WriteLine("setting range to close");
                     Range = AttackRangeEnum.CloseRange;
                     IsLongRanged = false;
                 }
