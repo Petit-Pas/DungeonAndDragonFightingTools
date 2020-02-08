@@ -68,6 +68,8 @@
                                     <Grid.RowDefinitions>
                                         <RowDefinition />
                                         <!-- Target + attack throw control -->
+                                        <RowDefinition />
+                                        <!-- Situational boons and debuffs -->
                                         <RowDefinition Height="Auto" />
                                         <!-- Damage control -->
                                         <RowDefinition Height="Auto" />
@@ -79,44 +81,76 @@
                                     </Grid.ColumnDefinitions>
                                     <WrapPanel 
                                         Grid.Row="0"
-                                        Orientation="Vertical">
-                                        <WrapPanel 
-                                            Margin="5"
-                                            Orientation="Horizontal">
-                                            <WrapPanel.Resources>
-                                                <Style TargetType="TextBlock">
-                                                    <Setter Property="Foreground" Value="{StaticResource Light}"/>
-                                                </Style>
-                                            </WrapPanel.Resources>
-                                            <TextBlock
-                                                Margin="5, 0">
-                                                Targeting:
-                                            </TextBlock>
-                                            <ComboBox 
-                                                Margin="0, 0, 5, 0"
-                                                MinWidth="80"
-                                                x:Name="HitAttackTargetComboControl">
-                                                <ComboBox.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <TextBlock 
-                                                            Text="{Binding DisplayName}"/>
-                                                    </DataTemplate>
-                                                </ComboBox.ItemTemplate>
-                                            </ComboBox>
-                                            <TextBlock 
-                                                Margin="0, 0, 5, 0">
-                                                With an attack roll of:
-                                            </TextBlock>
-                                            <inputboxes:RangedIntBox
-                                                Margin="0, 0, 5, 0"
-                                                PropertyMin="0" PropertyMax="20"
-                                                PropertyPath="HitRoll"
-                                                MinWidth="35"/>
-                                            <TextBlock 
-                                                Margin="0, 0, 5, 0"
-                                                Text="{Binding HitBonus, StringFormat={}{0:+#;-#;''}}"/>
-                                        </WrapPanel>
+                                        Margin="10, 5"
+                                        Orientation="Horizontal">
+                                        <WrapPanel.Resources>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="Foreground" Value="{StaticResource Light}"/>
+                                            </Style>
+                                        </WrapPanel.Resources>
+                                        <TextBlock
+                                            VerticalAlignment="Center">
+                                            Targeting:
+                                        </TextBlock>
+                                        <ComboBox 
+                                            Margin="5, 0"
+                                            MinWidth="80"
+                                            VerticalAlignment="Center"
+                                            x:Name="HitAttackTargetComboControl">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock 
+                                                        Text="{Binding DisplayName}"/>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                        <TextBlock 
+                                            Margin="0, 0, 5, 0"
+                                            VerticalAlignment="Center">
+                                            With an attack roll of:
+                                        </TextBlock>
+                                        <inputboxes:RangedIntBox
+                                            Margin="0, 0, 5, 0"
+                                            PropertyMin="0" PropertyMax="20"
+                                            PropertyPath="HitRoll"
+                                            MinWidth="35"/>
+                                        <TextBlock 
+                                            Margin="0, 0, 5, 0"
+                                            FontWeight="Bold"
+                                            VerticalAlignment="Center"
+                                            Text="{Binding HitBonus, StringFormat={}{0:+#;-#;''}}"/>
+                                    </WrapPanel>
+                                    <WrapPanel
+                                        Grid.Row="1"
+                                        Orientation="Horizontal"
+                                        Margin="10, 5">
+                                        <WrapPanel.Resources>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="Foreground" Value="{StaticResource Light}"/>
+                                            </Style>
+                                        </WrapPanel.Resources>
+                                        <TextBlock
+                                            VerticalAlignment="Center">
+                                            Situational AC Modifier:
+                                        </TextBlock>
+                                        <inputboxes:IntTextBox 
+                                            VerticalAlignment="Center"
+                                            Margin="5, 0"
+                                            MinWidth="35"
+                                            PropertyPath="SituationalACModifier"/>
+                                        <TextBlock
+                                            VerticalAlignment="Center">
+                                            Situational Hit Modifier:
+                                        </TextBlock>
+                                        <inputboxes:IntTextBox 
+                                            VerticalAlignment="Center"
+                                            Margin="5, 0"
+                                            MinWidth="35"
+                                            PropertyPath="SituationalHitModifier"/>
+
+                                    </WrapPanel>
                                     <ItemsControl
+                                        Grid.Row="2"
                                         Grid.IsSharedSizeScope="True"
                                         x:Name="DamageControl"
                                         ItemsSource="{Binding DamageList}">
@@ -160,17 +194,16 @@
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
                                     </ItemsControl>
-                                    </WrapPanel>
                                     <TextBlock
                                         x:Name="ErrorTextblockControl"
                                         Margin="5"
-                                        Grid.Row="1"
+                                        Grid.Row="3"
                                         Foreground="Red"
                                         Visibility="Collapsed" 
                                         TextAlignment="Center"
                                         FontSize="14"/>
                                     <Grid x:Name="ButtonsGridControl"
-                                          Grid.Row="2">
+                                          Grid.Row="4">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="*" />
