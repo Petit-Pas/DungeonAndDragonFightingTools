@@ -67,8 +67,13 @@
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition />
+                                        <!-- Target + attack throw control -->
                                         <RowDefinition Height="Auto" />
+                                        <!-- Damage control -->
+                                        <RowDefinition Height="Auto" />
+                                        <!-- Errors Control -->
                                         <RowDefinition />
+                                        <!-- Validate Buttons Control -->
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
                                     </Grid.ColumnDefinitions>
@@ -84,8 +89,9 @@
                                                 </Style>
                                             </WrapPanel.Resources>
                                             <TextBlock
-                                                Margin="5, 0"
-                                                Text="Targeting: "/>
+                                                Margin="5, 0">
+                                                Targeting:
+                                            </TextBlock>
                                             <ComboBox 
                                                 Margin="0, 0, 5, 0"
                                                 MinWidth="80"
@@ -98,8 +104,9 @@
                                                 </ComboBox.ItemTemplate>
                                             </ComboBox>
                                             <TextBlock 
-                                                Margin="0, 0, 5, 0"
-                                                Text="With an attack roll of: "/>
+                                                Margin="0, 0, 5, 0">
+                                                With an attack roll of:
+                                            </TextBlock>
                                             <inputboxes:RangedIntBox
                                                 Margin="0, 0, 5, 0"
                                                 PropertyMin="0" PropertyMax="20"
@@ -109,49 +116,50 @@
                                                 Margin="0, 0, 5, 0"
                                                 Text="{Binding HitBonus, StringFormat={}{0:+#;-#;''}}"/>
                                         </WrapPanel>
-                                        <ItemsControl
-                                            Grid.IsSharedSizeScope="True"
-                                            x:Name="DamageControl"
-                                            ItemsSource="{Binding DamageList}">
-                                            <ItemsControl.ItemTemplate>
-                                                <DataTemplate>
-                                                    <WrapPanel
-                                                        Margin="5"
-                                                        Orientation="Horizontal">
-                                                        <Grid
-                                                            Margin="5, 0">
-                                                            <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition SharedSizeGroup="FirstColumn"/>
-                                                            </Grid.ColumnDefinitions>
-                                                            <TextBlock 
-                                                                Foreground="{StaticResource Light}"
-                                                                Text="{Binding Damage}" />
-                                                        </Grid>
-
-                                                        <Grid
-                                                        Margin="0, 0, 5, 0">
-                                                            <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition SharedSizeGroup="SecondColumn" />
-                                                            </Grid.ColumnDefinitions>
-                                                            <TextBlock 
-                                                                Text="{Binding DamageType}" 
-                                                                FontWeight="SemiBold"
-                                                                Foreground="{Binding DamageType, Converter={StaticResource DamageColorConverter}}"
-                                                        />
-                                                        </Grid>
+                                    <ItemsControl
+                                        Grid.IsSharedSizeScope="True"
+                                        x:Name="DamageControl"
+                                        ItemsSource="{Binding DamageList}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <WrapPanel
+                                                    Margin="5"
+                                                    Orientation="Horizontal">
+                                                    <Grid
+                                                        Margin="5, 0">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition SharedSizeGroup="FirstColumn"/>
+                                                        </Grid.ColumnDefinitions>
                                                         <TextBlock 
-                                                            Margin="0, 0, 5, 0"
                                                             Foreground="{StaticResource Light}"
-                                                            Text="Damage: " />
-                                                        <inputboxes:PositiveIntTextBox 
-                                                            MinWidth="40"
-                                                            DataContext="{Binding Damage}"
-                                                            PropertyPath="LastResult"
-                                                        />
-                                                    </WrapPanel>
-                                                </DataTemplate>
-                                            </ItemsControl.ItemTemplate>
-                                        </ItemsControl>
+                                                            Text="{Binding Damage}" />
+                                                    </Grid>
+
+                                                    <Grid
+                                                    Margin="0, 0, 5, 0">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition SharedSizeGroup="SecondColumn" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock 
+                                                            Text="{Binding DamageType}" 
+                                                            FontWeight="SemiBold"
+                                                            Foreground="{Binding DamageType, Converter={StaticResource DamageColorConverter}}"
+                                                    />
+                                                    </Grid>
+                                                    <TextBlock 
+                                                        Margin="0, 0, 5, 0"
+                                                        Foreground="{StaticResource Light}">
+                                                        Damage :
+                                                    </TextBlock>
+                                                    <inputboxes:PositiveIntTextBox 
+                                                        MinWidth="40"
+                                                        DataContext="{Binding Damage}"
+                                                        PropertyPath="LastResult"
+                                                    />
+                                                </WrapPanel>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
                                     </WrapPanel>
                                     <TextBlock
                                         x:Name="ErrorTextblockControl"
@@ -161,18 +169,36 @@
                                         Visibility="Collapsed" 
                                         TextAlignment="Center"
                                         FontSize="14"/>
-                                    <Button
-                                        x:Name="AttackButtonControl"
-                                        Padding="10, 5"
-                                        Grid.Row="2"
-                                        HorizontalAlignment="Center"
-                                        FontSize="15"
-                                        FontWeight="SemiBold"
-                                        IsEnabled="False"
-                                        Click="AttackButtonControl_Click"
-                                        >
-                                        Attack
-                                    </Button>
+                                    <Grid x:Name="ButtonsGridControl"
+                                          Grid.Row="2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Button
+                                            x:Name="RollButtonControl"
+                                            Padding="10, 5"
+                                            Grid.Column="0"
+                                            HorizontalAlignment="Center"
+                                            FontSize="15"
+                                            FontWeight="SemiBold"
+                                            IsEnabled="False"
+                                            Click="RollButtonControl_Click">
+                                            Roll
+                                        </Button>
+                                        <Button
+                                            x:Name="ValidateButtonControl"
+                                            Padding="10, 5"
+                                            Grid.Column="1"
+                                            HorizontalAlignment="Center"
+                                            FontSize="15"
+                                            FontWeight="SemiBold"
+                                            IsEnabled="False"
+                                            Click="ValidateButtonControl_Click">
+                                            Validate
+                                        </Button>
+
+                                    </Grid>
                                 </Grid>
                             </GroupBox>
                         </DataTemplate>

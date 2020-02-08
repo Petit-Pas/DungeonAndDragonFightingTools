@@ -43,7 +43,8 @@ namespace DDFight.Windows.FightWindows
             AttackList.LayoutUpdated += AttackList_LayoutUpdated;
         }
 
-        private List<FrameworkElement> buttons = new List<FrameworkElement>();
+        private List<FrameworkElement> rollButtons = new List<FrameworkElement>();
+        private List<FrameworkElement> validateButtons = new List<FrameworkElement>();
         private List<FrameworkElement> comboBoxes = new List<FrameworkElement>();
         private List<FrameworkElement> groupBoxes = new List<FrameworkElement>();
         private List<FrameworkElement> errorBoxes = new List<FrameworkElement>();
@@ -64,23 +65,29 @@ namespace DDFight.Windows.FightWindows
             }
             Console.WriteLine(damageControls.Count);
 
-            buttons = this.GetAllChildrenByName("AttackButtonControl");
-            foreach (Button btn in buttons)
+            rollButtons = this.GetAllChildrenByName("RollButtonControl");
+            foreach (Button btn in rollButtons)
             {
                 btn.IsEnabled = false;
             }
-            if (buttons.Count != 0)
-                ((Button)buttons.ElementAt(0)).IsEnabled = true;
+            if (rollButtons.Count != 0)
+                ((Button)rollButtons.ElementAt(0)).IsEnabled = true;
+
+            validateButtons = this.GetAllChildrenByName("ValidateButtonControl");
+            foreach(Button btn in validateButtons)
+            {
+                btn.IsEnabled = false;
+            }
 
             groupBoxes = this.GetAllChildrenByName("AttackGroupBoxControl");
             errorBoxes = this.GetAllChildrenByName("ErrorTextblockControl");
         }
 
-        private void AttackButtonControl_Click(object sender, RoutedEventArgs e)
+        private void RollButtonControl_Click(object sender, RoutedEventArgs e)
         {
-            for (int i = 0; i != buttons.Count; i += 1)
+            for (int i = 0; i != rollButtons.Count; i += 1)
             {
-                if (((Button)buttons[i]).IsEnabled == true)
+                if (((Button)rollButtons[i]).IsEnabled == true)
                 {
                     if (((ComboBox)comboBoxes[i]).SelectedIndex != -1)
                     {
@@ -98,11 +105,61 @@ namespace DDFight.Windows.FightWindows
                                     dmg.Damage.Roll();
                                 Console.WriteLine(dmg.Damage.LastResult);
                             }
-                            // Go to next Attack
-                            ((Button)buttons[i]).IsEnabled = false;
-                            if (i + 1 != buttons.Count)
+                            // Enables the validate button
+                            ((Button)rollButtons[i]).IsEnabled = false;
+                            ((Button)validateButtons[i]).IsEnabled = true;
+                            /*if (i + 1 != rollButtons.Count)
                             {
-                                ((Button)buttons[i + 1]).IsEnabled = true;
+                                ((Button)rollButtons[i + 1]).IsEnabled = true;
+                            }
+                            else
+                            {
+                                this.QuitButtonControl.Visibility = Visibility.Visible;
+                                this.AttackScrollViewControl.ScrollToEnd();
+                            }*/
+                            ((TextBlock)errorBoxes[i]).Visibility = Visibility.Collapsed;
+                        }
+                        else
+                        {
+                            ((TextBlock)errorBoxes[i]).Text = "One of the input boxes is badly filled";
+                            ((TextBlock)errorBoxes[i]).Visibility = Visibility.Visible;
+                        }
+                    }
+                    else
+                    {
+                        ((TextBlock)errorBoxes[i]).Text = "Please select a target first";
+                        ((TextBlock)errorBoxes[i]).Visibility = Visibility.Visible;
+                    }
+                    return;
+                }
+            }
+        }
+
+        private void QuitButtonControl_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void ValidateButtonControl_Click(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i != validateButtons.Count; i += 1)
+            {
+                if (validateButtons[i].IsEnabled == true)
+                {
+                    if (((ComboBox)comboBoxes[i]).SelectedIndex != -1)
+                    {
+                        // a character has well been selected
+                        if (groupBoxes[i].AreAllChildrenValid())
+                        {
+                            // there is no error in input boxes
+
+                            // TODO SHOULD FIRE ATTACK EVENT
+
+                            // Enables next Attack control
+                            ((Button)validateButtons[i]).IsEnabled = false;
+                            if (i + 1 != rollButtons.Count)
+                            {
+                                ((Button)rollButtons[i + 1]).IsEnabled = true;
                             }
                             else
                             {
@@ -125,11 +182,6 @@ namespace DDFight.Windows.FightWindows
                     return;
                 }
             }
-        }
-
-        private void QuitButtonControl_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
         }
     }
 }
