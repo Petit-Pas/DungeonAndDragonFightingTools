@@ -16,19 +16,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DDFight.Controlers.Game.Attacks
+namespace DDFight.Controlers.Game.Attacks.DamageListControls
 {
     /// <summary>
     /// Logique d'interaction pour DamageListUserControl.xaml
     /// </summary>
-    public partial class DamageListUserControl : UserControl
+    public partial class EditableDamageListUserControl : UserControl
     {
         private List<DamageTemplate> data_context
         {
             get => (List<DamageTemplate>)this.DataContext;
         }
 
-        public DamageListUserControl()
+        public EditableDamageListUserControl()
         {
             InitializeComponent();
 

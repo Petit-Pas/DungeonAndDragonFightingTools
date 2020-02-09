@@ -5,8 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DDFight.Controlers.Game.Attacks"
              xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes"
-             xmlns:dices="clr-namespace:DDFight.Controlers.Game.Dices"
-             xmlns:damageaffinity="clr-namespace:DDFight.Controlers.Game.DamageAffinity"
+             xmlns:damagelistcontrols="clr-namespace:DDFight.Controlers.Game.Attacks.DamageListControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -80,7 +79,7 @@
             <local:EditableRangeController 
                 Grid.Row="3" Grid.Column="1"/>
 
-            <local:DamageListUserControl
+            <damagelistcontrols:EditableDamageListUserControl
                 Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" DataContext="{Binding DamageList}"/>
         </Grid>
     </GroupBox>
