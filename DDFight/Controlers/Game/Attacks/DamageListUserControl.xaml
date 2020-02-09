@@ -9,8 +9,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <GroupBox 
-                Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2">
+        <GroupBox>
             <GroupBox.Header>
                 <TextBlock
                         FontSize="15"

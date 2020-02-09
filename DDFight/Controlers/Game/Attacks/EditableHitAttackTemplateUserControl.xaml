@@ -80,66 +80,8 @@
             <local:EditableRangeController 
                 Grid.Row="3" Grid.Column="1"/>
 
-            <GroupBox 
-                Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2">
-                <GroupBox.Header>
-                    <TextBlock
-                        FontSize="15"
-                        FontWeight="SemiBold">
-                        Damages Types
-                    </TextBlock>
-                </GroupBox.Header>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <ItemsControl 
-                        x:Name="DamageListView"
-                        Grid.Row="0"
-                        Focusable="False">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Grid
-                                    Margin="0,5">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition />
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="100" />
-                                        <ColumnDefinition SharedSizeGroup="*" />
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    <damageaffinity:DamageAffinityDropdownListUserControl 
-                                        Grid.Row="0" Grid.Column="0"
-                                        PropertyPath="DamageType">
-                                    </damageaffinity:DamageAffinityDropdownListUserControl>
-                                    <dices:EditableDiceRollUserControl
-                                        x:Name="DamageTextBox"
-                                        Grid.Row="0" Grid.Column="1"
-                                        Margin="10,0"
-                                        PropertyPath="Damage"/>
-                                    <Button 
-                                        Grid.Row="0" Grid.Column="2"
-                                        Click="RemoveDamage_Button_Click">
-                                        Remove
-                                    </Button>
-                                </Grid>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                    <Button 
-                        Grid.Row="1"
-                        Margin="0,5"
-                        Click="AddDamage_Button_Click" 
-                        FontWeight="SemiBold">
-                        Add Damage
-                    </Button>
-                </Grid>
-            </GroupBox>
+            <local:DamageListUserControl
+                Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" DataContext="{Binding DamageList}"/>
         </Grid>
     </GroupBox>
 </UserControl>
