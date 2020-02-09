@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:DDFight.Windows.FightWindows"
         xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes"
         xmlns:converters="clr-namespace:DDFight.Converters"
+        xmlns:damagelistcontrols="clr-namespace:DDFight.Controlers.Game.Attacks.DamageListControls"
         mc:Ignorable="d"
         Title="{Binding Name}" Height="450" Width="500"
         Style="{StaticResource ResourceKey=WindowStyle}"
@@ -149,52 +150,12 @@
                                             PropertyPath="SituationalHitModifier"/>
 
                                     </WrapPanel>
-                                    <ItemsControl
+
+                                    <damagelistcontrols:PlayableDamageListUserControl 
                                         Grid.Row="2"
                                         Margin="5"
-                                        Grid.IsSharedSizeScope="True"
                                         x:Name="DamageControl"
-                                        ItemsSource="{Binding DamageList}">
-                                        <ItemsControl.ItemTemplate>
-                                            <DataTemplate>
-                                                <WrapPanel
-                                                    Margin="5"
-                                                    Orientation="Horizontal">
-                                                    <Grid
-                                                        Margin="5, 0">
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition SharedSizeGroup="FirstColumn"/>
-                                                        </Grid.ColumnDefinitions>
-                                                        <TextBlock 
-                                                            Foreground="{StaticResource Light}"
-                                                            Text="{Binding Damage}" />
-                                                    </Grid>
-
-                                                    <Grid
-                                                    Margin="0, 0, 5, 0">
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition SharedSizeGroup="SecondColumn" />
-                                                        </Grid.ColumnDefinitions>
-                                                        <TextBlock 
-                                                            Text="{Binding DamageType}" 
-                                                            FontWeight="SemiBold"
-                                                            Foreground="{Binding DamageType, Converter={StaticResource DamageColorConverter}}"
-                                                    />
-                                                    </Grid>
-                                                    <TextBlock 
-                                                        Margin="0, 0, 5, 0"
-                                                        Foreground="{StaticResource Light}">
-                                                        Damage :
-                                                    </TextBlock>
-                                                    <inputboxes:PositiveIntTextBox 
-                                                        MinWidth="40"
-                                                        DataContext="{Binding Damage}"
-                                                        PropertyPath="LastResult"
-                                                    />
-                                                </WrapPanel>
-                                            </DataTemplate>
-                                        </ItemsControl.ItemTemplate>
-                                    </ItemsControl>
+                                        DataContext="{Binding DamageList}"/>
                                     <TextBlock
                                         x:Name="ErrorTextblockControl"
                                         Margin="5"

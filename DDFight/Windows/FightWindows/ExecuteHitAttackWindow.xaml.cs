@@ -58,11 +58,6 @@ namespace DDFight.Windows.FightWindows
             }
             AttackList.LayoutUpdated -= AttackList_LayoutUpdated;
 
-            List<FrameworkElement> damageControls = this.GetAllChildrenByName("DamageControl");
-            foreach (ItemsControl control in damageControls)
-            {
-            }
-
             rollButtons = this.GetAllChildrenByName("RollButtonControl");
             foreach (Button btn in rollButtons)
             {

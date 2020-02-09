@@ -80,6 +80,9 @@
     <Compile Include="Controlers\Game\Attacks\DamageListControls\EditableDamageListUserControl.xaml.cs">
       <DependentUpon>EditableDamageListUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controlers\Game\Attacks\DamageListControls\PlayableDamageListUserControl.xaml.cs">
+      <DependentUpon>PlayableDamageListUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controlers\Game\Attacks\DamageListControls\ReadOnlyDamageListUserControl.xaml.cs">
       <DependentUpon>ReadOnlyDamageListUserControl.xaml</DependentUpon>
     </Compile>
@@ -235,6 +238,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controlers\Game\Attacks\DamageListControls\EditableDamageListUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controlers\Game\Attacks\DamageListControls\PlayableDamageListUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
