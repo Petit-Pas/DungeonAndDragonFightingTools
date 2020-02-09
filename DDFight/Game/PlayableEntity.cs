@@ -16,6 +16,8 @@ using System.Windows;
 using System.Windows.Documents;
 using System.Xml.Serialization;
 using System.Windows.Media;
+using DDFight.Game.Aggression;
+using DDFight.Converters;
 
 namespace DDFight.Game
 {
@@ -284,6 +286,74 @@ namespace DDFight.Game
         }
 
         public event EndTurnEventHandler TurnEnded;
+
+        /// <summary>
+        ///     method called when a hit attack lands to compute the damage received
+        /// </summary>
+        /// <param name="damages"></param>
+        public void TakeHitDamage(List<DamageTemplate> damages, Paragraph paragraph)
+        {
+            int i = 1;
+            int total = 0;
+
+            foreach (DamageTemplate dmg in damages)
+            {
+                int damage_value = 0;
+                DamageAffinityEnum affinity = this.DamageAffinities.GetAffinity(dmg.DamageType).Affinity;
+
+                switch (affinity)
+                {
+                    case DamageAffinityEnum.Neutral:
+                        damage_value = dmg.Damage.LastResult;
+                        break;
+                    case DamageAffinityEnum.Resistant:
+                        damage_value = dmg.Damage.LastResult / 2;
+                        break;
+                    case DamageAffinityEnum.Immune:
+                        damage_value = 0;
+                        break;
+                    case DamageAffinityEnum.Weak:
+                        damage_value = dmg.Damage.LastResult * 2;
+                        break;
+                }
+                paragraph.Inlines.Add(Extensions.BuildRun(damage_value.ToString() + " ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                paragraph.Inlines.Add(Extensions.BuildRun(dmg.DamageType.ToString(), (Brush)BrushToDamageTypeEnumConverter.StaticConvert(dmg.DamageType), 15, FontWeights.Bold));
+                paragraph.Inlines.Add(Extensions.BuildRun(i == damages.Count ? " damage" : " damage, ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                Hp -= damage_value;
+                total += damage_value;
+                i += 1;
+            }
+            paragraph.Inlines.Add(Extensions.BuildRun("\nTotal: ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+            paragraph.Inlines.Add(Extensions.BuildRun(total.ToString(), (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+            paragraph.Inlines.Add(Extensions.BuildRun(" damage\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+        }
+
+        public void GetAttacked(HitAttackResult result, PlayableEntity attacker)
+        {
+            Paragraph tmp = (Paragraph)Global.Context.UserLogs.Blocks.LastBlock;
+
+            tmp.Inlines.Add(Extensions.BuildRun(attacker.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+            tmp.Inlines.Add(Extensions.BuildRun(" attacks ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+            tmp.Inlines.Add(Extensions.BuildRun(this.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+            tmp.Inlines.Add(Extensions.BuildRun(". ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+            tmp.Inlines.Add(Extensions.BuildRun((result.HitRoll + result.HitBonus + result.SituationalHitModifier).ToString(), (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+            tmp.Inlines.Add(Extensions.BuildRun("/", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+            tmp.Inlines.Add(Extensions.BuildRun((result.SituationalACModifier + this.CA).ToString(), (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+            tmp.Inlines.Add(Extensions.BuildRun(" ==> ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+
+            // if the character gets hit with a normal hit
+            if (result.HitRoll + result.HitBonus + result.SituationalHitModifier >= result.SituationalACModifier + this.CA)
+            {
+                tmp.Inlines.Add(Extensions.BuildRun(" Hit! " + this.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                tmp.Inlines.Add(Extensions.BuildRun(" takes ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                TakeHitDamage(result.DamageList, tmp);
+            }
+            // If the character can avoid / block the attack
+            else
+            {
+                tmp.Inlines.Add(Extensions.BuildRun(" Missed!\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+            }
+        }
 
         #endregion
 

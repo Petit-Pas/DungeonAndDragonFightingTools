@@ -77,6 +77,9 @@
     <Compile Include="Controlers\Fight\GeneralInfoFightUserControl.xaml.cs">
       <DependentUpon>GeneralInfoFightUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controlers\Game\Attacks\DamageListUserControl.xaml.cs">
+      <DependentUpon>DamageListUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controlers\Game\Attacks\DetailsHitAttackTemplateUserControl.xaml.cs">
       <DependentUpon>DetailsHitAttackTemplateUserControl.xaml</DependentUpon>
     </Compile>
@@ -225,6 +228,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controlers\Fight\GeneralInfoFightUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controlers\Game\Attacks\DamageListUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -34,17 +34,6 @@ namespace DDFight.Game.Aggression.Attacks
         }
         private uint _hitRoll = 0;
 
-        public uint DamageRoll
-        {
-            get => _damageRoll;
-            set
-            {
-                _damageRoll = value;
-                NotifyPropertyChanged();
-            }
-        }
-        private uint _damageRoll = 0;
-
         public List<DamageTemplate> DamageList
         {
             get => _damageTemplate;

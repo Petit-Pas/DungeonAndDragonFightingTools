@@ -13,7 +13,7 @@ namespace DDFight.Converters
 {
     public class BrushToDamageTypeEnumConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public static object StaticConvert(object value)
         {
             switch (value)
             {
@@ -49,11 +49,14 @@ namespace DDFight.Converters
             return Application.Current.Resources["Light"];
         }
 
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return StaticConvert(value);
+        }
+
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             // --> to enum
-            Console.WriteLine("in convert from brush");
-            Console.WriteLine(value.GetType().ToString());
             return default;
         }
     }

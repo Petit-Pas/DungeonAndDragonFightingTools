@@ -27,13 +27,7 @@ namespace BindValidation
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             dc = new MainDataContext();
-            dc.PropertyChanged += Dc_PropertyChanged;
             this.DataContext = dc;
-        }
-
-        private void Dc_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            Console.WriteLine("change");
         }
     }
 }

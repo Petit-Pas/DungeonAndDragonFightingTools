@@ -77,5 +77,20 @@ namespace DDFight.Controlers.Fight
             data_context.TurnEnded -= Data_context_TurnEnded;
             Global.Context.FightContext.CharacterSelected -= FightContext_CharacterSelected;
         }
+
+        private void ContextTakeDamage_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ContextHeal_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ContextManageStatus_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

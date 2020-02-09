@@ -1,4 +1,5 @@
-﻿using DDFight.Game.Aggression.Attacks;
+﻿using DDFight.Game;
+using DDFight.Game.Aggression.Attacks;
 using DDFight.Windows.FightWindows;
 using System;
 using System.Collections.Generic;

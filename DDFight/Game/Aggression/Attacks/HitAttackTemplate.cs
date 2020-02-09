@@ -21,6 +21,9 @@ namespace DDFight.Game.Aggression.Attacks
         }
 
         [XmlIgnore]
+        public PlayableEntity Owner;
+
+        [XmlIgnore]
         public bool Validated;
 
         [XmlAttribute]
@@ -74,7 +77,6 @@ namespace DDFight.Game.Aggression.Attacks
             {
                 result.Add(new HitAttackResult()
                 {
-                    DamageRoll = 0,
                     DamageList = (List<DamageTemplate>)DamageList.Clone(),
                     HitRoll = 0,
                     HitBonus = HitBonus,

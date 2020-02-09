@@ -1,5 +1,6 @@
 ﻿using DDFight.Controlers.InputBoxes;
 using DDFight.Game;
+using DDFight.Game.Aggression.Attacks;
 using DDFight.Game.Characteristics;
 using DDFight.Game.Fight;
 using System;
@@ -39,9 +40,21 @@ namespace DDFight.Windows.FightWindows
             Loaded += MainFightWindow_Loaded;
         }
 
+        private void setupAttacksOwner()
+        {
+            foreach (PlayableEntity tmp in data_context.FightContext.FightersList.Fighters)
+            {
+                foreach (HitAttackTemplate atk in tmp.HitAttacks)
+                {
+                    atk.Owner = tmp;
+                }
+            }
+        }
+
         private void MainFightWindow_Loaded(object sender, RoutedEventArgs e)
         {
             GeneralInfoControl.DataContext = Global.Context;
+            setupAttacksOwner();
             Global.Context.FightContext.NextTurn();
         }
 

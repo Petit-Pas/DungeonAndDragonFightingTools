@@ -45,14 +45,14 @@ namespace DDFight.Windows.FightWindows
 
         private List<FrameworkElement> rollButtons = new List<FrameworkElement>();
         private List<FrameworkElement> validateButtons = new List<FrameworkElement>();
-        private List<FrameworkElement> comboBoxes = new List<FrameworkElement>();
+        private List<FrameworkElement> targetBoxes = new List<FrameworkElement>();
         private List<FrameworkElement> groupBoxes = new List<FrameworkElement>();
         private List<FrameworkElement> errorBoxes = new List<FrameworkElement>();
 
         private void AttackList_LayoutUpdated(object sender, EventArgs e)
         {
-            comboBoxes = this.GetAllChildrenByName("HitAttackTargetComboControl");
-            foreach (ComboBox box in comboBoxes)
+            targetBoxes = this.GetAllChildrenByName("HitAttackTargetComboControl");
+            foreach (ComboBox box in targetBoxes)
             {
                 box.ItemsSource = Global.Context.FightContext.FightersList.Fighters;
             }
@@ -61,9 +61,7 @@ namespace DDFight.Windows.FightWindows
             List<FrameworkElement> damageControls = this.GetAllChildrenByName("DamageControl");
             foreach (ItemsControl control in damageControls)
             {
-                //control.ItemsSource = data_context.DamageList.Clone();
             }
-            Console.WriteLine(damageControls.Count);
 
             rollButtons = this.GetAllChildrenByName("RollButtonControl");
             foreach (Button btn in rollButtons)
@@ -89,7 +87,7 @@ namespace DDFight.Windows.FightWindows
             {
                 if (((Button)rollButtons[i]).IsEnabled == true)
                 {
-                    if (((ComboBox)comboBoxes[i]).SelectedIndex != -1)
+                    if (((ComboBox)targetBoxes[i]).SelectedIndex != -1)
                     {
                         // a character has well been selected
                         if (groupBoxes[i].AreAllChildrenValid())
@@ -103,20 +101,10 @@ namespace DDFight.Windows.FightWindows
                             {
                                 if (dmg.Damage.LastResult == 0)
                                     dmg.Damage.Roll();
-                                Console.WriteLine(dmg.Damage.LastResult);
                             }
                             // Enables the validate button
                             ((Button)rollButtons[i]).IsEnabled = false;
                             ((Button)validateButtons[i]).IsEnabled = true;
-                            /*if (i + 1 != rollButtons.Count)
-                            {
-                                ((Button)rollButtons[i + 1]).IsEnabled = true;
-                            }
-                            else
-                            {
-                                this.QuitButtonControl.Visibility = Visibility.Visible;
-                                this.AttackScrollViewControl.ScrollToEnd();
-                            }*/
                             ((TextBlock)errorBoxes[i]).Visibility = Visibility.Collapsed;
                         }
                         else
@@ -140,20 +128,26 @@ namespace DDFight.Windows.FightWindows
             this.Close();
         }
 
+        private void triggerAttack(int attack_index)
+        {
+            attacks[attack_index].Target = (PlayableEntity)((ComboBox)targetBoxes[attack_index]).SelectedItem;
+            attacks[attack_index].Target.GetAttacked(attacks[attack_index], data_context.Owner);
+        }
+
         private void ValidateButtonControl_Click(object sender, RoutedEventArgs e)
         {
             for (int i = 0; i != validateButtons.Count; i += 1)
             {
                 if (validateButtons[i].IsEnabled == true)
                 {
-                    if (((ComboBox)comboBoxes[i]).SelectedIndex != -1)
+                    if (((ComboBox)targetBoxes[i]).SelectedIndex != -1)
                     {
                         // a character has well been selected
                         if (groupBoxes[i].AreAllChildrenValid())
                         {
                             // there is no error in input boxes
 
-                            // TODO SHOULD FIRE ATTACK EVENT
+                            triggerAttack(i);
 
                             // Enables next Attack control
                             ((Button)validateButtons[i]).IsEnabled = false;
