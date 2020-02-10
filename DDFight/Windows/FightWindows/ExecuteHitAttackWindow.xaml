@@ -1,4 +1,4 @@
-﻿ <Window x:Class="DDFight.Windows.FightWindows.ExecuteHitAttackWindow"
+﻿<Window x:Class="DDFight.Windows.FightWindows.ExecuteHitAttackWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,6 +7,7 @@
         xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes"
         xmlns:converters="clr-namespace:DDFight.Converters"
         xmlns:damagelistcontrols="clr-namespace:DDFight.Controlers.Game.Attacks.DamageListControls"
+        xmlns:situationalmodifiers="clr-namespace:DDFight.Controlers.Game.Attacks.SituationalModifiers"
         mc:Ignorable="d"
         Title="{Binding Name}" Height="450" Width="500"
         Style="{StaticResource ResourceKey=WindowStyle}"
@@ -71,6 +72,8 @@
                                         <!-- Target + attack throw control -->
                                         <RowDefinition />
                                         <!-- Situational boons and debuffs -->
+                                        <RowDefinition />
+                                        <!-- Advantage / Disadvantage -->
                                         <RowDefinition Height="Auto" />
                                         <!-- Damage control -->
                                         <RowDefinition Height="Auto" />
@@ -121,51 +124,34 @@
                                             VerticalAlignment="Center"
                                             Text="{Binding HitBonus, StringFormat={}{0:+#;-#;''}}"/>
                                     </WrapPanel>
-                                    <WrapPanel
+                                    <situationalmodifiers:SituationalHitAttackModifiersUserControl                                 
                                         Grid.Row="1"
-                                        Orientation="Horizontal"
-                                        Margin="10, 5">
-                                        <WrapPanel.Resources>
-                                            <Style TargetType="TextBlock">
-                                                <Setter Property="Foreground" Value="{StaticResource Light}"/>
-                                            </Style>
-                                        </WrapPanel.Resources>
-                                        <TextBlock
-                                            VerticalAlignment="Center">
-                                            Situational AC Modifier:
-                                        </TextBlock>
-                                        <inputboxes:IntTextBox 
-                                            VerticalAlignment="Center"
-                                            Margin="5, 0"
-                                            MinWidth="35"
-                                            PropertyPath="SituationalACModifier"/>
-                                        <TextBlock
-                                            VerticalAlignment="Center">
-                                            Situational Hit Modifier:
-                                        </TextBlock>
-                                        <inputboxes:IntTextBox 
-                                            VerticalAlignment="Center"
-                                            Margin="5, 0"
-                                            MinWidth="35"
-                                            PropertyPath="SituationalHitModifier"/>
+                                        Margin="10, 5"
+                                        DataContext="{Binding SituationalHitAttackModifiers}"/>
 
-                                    </WrapPanel>
+                                    <situationalmodifiers:SituationalAdvantageModifiersUserControl
+                                        Grid.Row="2" 
+                                        Margin="10, 5"
+                                        DataContext="{Binding SituationalAdvantageModifiers}"/>
+
 
                                     <damagelistcontrols:PlayableDamageListUserControl 
-                                        Grid.Row="2"
+                                        Grid.Row="3"
                                         Margin="5"
                                         x:Name="DamageControl"
                                         DataContext="{Binding DamageList}"/>
+                                    
                                     <TextBlock
                                         x:Name="ErrorTextblockControl"
                                         Margin="5"
-                                        Grid.Row="3"
+                                        Grid.Row="4"
                                         Foreground="Red"
                                         Visibility="Collapsed" 
                                         TextAlignment="Center"
                                         FontSize="14"/>
+                                    
                                     <Grid x:Name="ButtonsGridControl"
-                                          Grid.Row="4">
+                                          Grid.Row="5">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="*" />

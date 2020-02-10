@@ -56,30 +56,27 @@ namespace DDFight.Game.Aggression.Attacks
         }
         private int _hitBonus;
 
-        /// <summary>
-        ///     can be provided by various elements, such as cover
-        /// </summary>
-        public int SituationalHitModifier
+        public SituationalHitAttackModifiers SituationalHitAttackModifiers
         {
-            get => _situationalHitModifier;
+            get => _situationalHitAttackModifiers;
             set
             {
-                _situationalHitModifier = value;
+                _situationalHitAttackModifiers = value;
                 NotifyPropertyChanged();
             }
         }
-        private int _situationalHitModifier;
+        private SituationalHitAttackModifiers _situationalHitAttackModifiers;
 
-        public int SituationalACModifier
+        public SituationalAdvantageModifiers SituationalAdvantageModifiers
         {
-            get => _situationalACModifier;
+            get => _situationalAdvantageModifiers;
             set
             {
-                _situationalACModifier = value;
+                _situationalAdvantageModifiers = value;
                 NotifyPropertyChanged();
             }
         }
-        private int _situationalACModifier;
+        private SituationalAdvantageModifiers _situationalAdvantageModifiers;
 
         public int AttackIndex
         {

@@ -91,7 +91,12 @@ namespace DDFight.Windows.FightWindows
 
                             // computes unrolled rolls
                             if (attacks[i].HitRoll == 0)
-                                attacks[i].HitRoll = (uint)DiceRoll.Roll("1d20");
+                            {
+                                attacks[i].HitRoll = (uint)DiceRoll.Roll(
+                                    "1d20",
+                                    attacks[i].SituationalAdvantageModifiers.SituationalAdvantage,
+                                    attacks[i].SituationalAdvantageModifiers.SituationalDisadvantage);
+                            }
                             foreach (DamageTemplate dmg in attacks[i].DamageList)
                             {
                                 if (dmg.Damage.LastResult == 0)

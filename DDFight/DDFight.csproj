@@ -101,6 +101,12 @@
     <Compile Include="Controlers\Game\Attacks\EditableRangeController.xaml.cs">
       <DependentUpon>EditableRangeController.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controlers\Game\Attacks\SituationalModifiers\SituationalAdvantageModifiersUserControl.xaml.cs">
+      <DependentUpon>SituationalAdvantageModifiersUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controlers\Game\Attacks\SituationalModifiers\SituationalHitAttackModifiersUserControl.xaml.cs">
+      <DependentUpon>SituationalHitAttackModifiersUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controlers\Game\Characteristics\EditableCharacteristicsListUserControl.xaml.cs">
       <DependentUpon>EditableCharacteristicsListUserControl.xaml</DependentUpon>
     </Compile>
@@ -149,6 +155,8 @@
     <Compile Include="Game\Aggression\Attacks\AAttackTemplate.cs" />
     <Compile Include="Game\Aggression\Attacks\HitAttackResult.cs" />
     <Compile Include="Game\Aggression\Attacks\HitAttackTemplate.cs" />
+    <Compile Include="Game\Aggression\Attacks\SituationalAdvantageModifiers.cs" />
+    <Compile Include="Game\Aggression\Attacks\SituationalHitAttackModifiers.cs" />
     <Compile Include="Game\Aggression\DamageTemplate.cs" />
     <Compile Include="Game\Characteristics\CharacteristicDataContext.cs" />
     <Compile Include="Game\Characteristics\CharacteristicsDataContext.cs" />
@@ -266,6 +274,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controlers\Game\Attacks\EditableRangeController.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controlers\Game\Attacks\SituationalModifiers\SituationalAdvantageModifiersUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controlers\Game\Attacks\SituationalModifiers\SituationalHitAttackModifiersUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

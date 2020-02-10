@@ -336,13 +336,13 @@ namespace DDFight.Game
             tmp.Inlines.Add(Extensions.BuildRun(" attacks ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
             tmp.Inlines.Add(Extensions.BuildRun(this.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
             tmp.Inlines.Add(Extensions.BuildRun(". ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-            tmp.Inlines.Add(Extensions.BuildRun((result.HitRoll + result.HitBonus + result.SituationalHitModifier).ToString(), (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+            tmp.Inlines.Add(Extensions.BuildRun((result.HitRoll + result.HitBonus + result.SituationalHitAttackModifiers.HitModifier).ToString(), (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
             tmp.Inlines.Add(Extensions.BuildRun("/", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-            tmp.Inlines.Add(Extensions.BuildRun((result.SituationalACModifier + this.CA).ToString(), (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+            tmp.Inlines.Add(Extensions.BuildRun((result.SituationalHitAttackModifiers.ACModifier + this.CA).ToString(), (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
             tmp.Inlines.Add(Extensions.BuildRun(" ==> ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
 
             // if the character gets hit with a normal hit
-            if (result.HitRoll + result.HitBonus + result.SituationalHitModifier >= result.SituationalACModifier + this.CA)
+            if (result.HitRoll + result.HitBonus + result.SituationalHitAttackModifiers.HitModifier >= result.SituationalHitAttackModifiers.ACModifier + this.CA)
             {
                 tmp.Inlines.Add(Extensions.BuildRun(" Hit! " + this.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
                 tmp.Inlines.Add(Extensions.BuildRun(" takes ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));

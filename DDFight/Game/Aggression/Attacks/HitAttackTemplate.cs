@@ -82,6 +82,8 @@ namespace DDFight.Game.Aggression.Attacks
                     HitBonus = HitBonus,
                     Target = null,
                     AttackIndex = i,
+                    SituationalHitAttackModifiers = new SituationalHitAttackModifiers(),
+                    SituationalAdvantageModifiers = new SituationalAdvantageModifiers(),
                 });
             }
             return result;

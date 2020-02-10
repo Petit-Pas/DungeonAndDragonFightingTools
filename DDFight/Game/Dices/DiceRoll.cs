@@ -104,10 +104,21 @@ namespace DDFight.Game.Dices
         }
         private int _lastResult;
 
-        public static int Roll(string input)
+        public static int Roll(string input, bool advantage = false, bool disadvantage = false)
         {
             DiceRoll dice = new DiceRoll(input);
-            return dice.Roll();
+            dice.Roll();
+
+            if (advantage != disadvantage)
+            {
+                DiceRoll second_dice = new DiceRoll(input);
+                second_dice.Roll();
+                if (advantage == true)
+                    return dice.LastResult > second_dice.LastResult ? dice.LastResult : second_dice.LastResult;
+                return dice.LastResult < second_dice.LastResult ? dice.LastResult : second_dice.LastResult;
+            }
+
+            return dice.LastResult;
         }
 
         public int Roll()
