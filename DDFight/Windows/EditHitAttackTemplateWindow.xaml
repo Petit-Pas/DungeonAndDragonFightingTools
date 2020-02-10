@@ -12,9 +12,9 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
             <!-- Editor -->
-            <RowDefinition  Height="*"/>
+            <RowDefinition  Height="Auto"/>
             <!-- buttons -->
         </Grid.RowDefinitions>
         <attacks:EditableHitAttackTemplateUserControl 
@@ -28,7 +28,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Button 
                 x:Name="ValidateButton" 

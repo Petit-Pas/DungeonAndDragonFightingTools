@@ -36,10 +36,8 @@
                 <!-- Bonus to Hits -->
                 <RowDefinition Height="Auto" />
                 <!-- Range -->
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
                 <!-- Damage List -->
-                <RowDefinition Height="Auto" />
-                <!-- Add Damage Button -->
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />

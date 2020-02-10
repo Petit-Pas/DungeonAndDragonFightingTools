@@ -12,53 +12,57 @@
         <GroupBox>
             <GroupBox.Header>
                 <TextBlock
-                        FontSize="15"
-                        FontWeight="SemiBold">
-                        Damages Types
+                    FontSize="15"
+                    Foreground="{StaticResource Light}"
+                    FontWeight="SemiBold">
+                    Damages Types
                 </TextBlock>
             </GroupBox.Header>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition />
-                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <ItemsControl 
+                <ScrollViewer
+                    Grid.Row="0"
+                    VerticalScrollBarVisibility="Auto">
+                    <ItemsControl 
                         x:Name="DamageListView"
-                        Grid.Row="0"
                         Focusable="False">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Grid
-                                    Margin="0,5">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="100" />
-                                    <ColumnDefinition SharedSizeGroup="*" />
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <damageaffinity:DamageAffinityDropdownListUserControl 
-                                        Grid.Row="0" Grid.Column="0"
-                                        PropertyPath="DamageType">
-                                </damageaffinity:DamageAffinityDropdownListUserControl>
-                                <dices:EditableDiceRollUserControl
-                                        x:Name="DamageTextBox"
-                                        Grid.Row="0" Grid.Column="1"
-                                        Margin="10,0"
-                                        PropertyPath="Damage"/>
-                                <Button 
-                                        Grid.Row="0" Grid.Column="2"
-                                        Click="RemoveDamage_Button_Click">
-                                    Remove
-                                </Button>
-                            </Grid>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid
+                                        Margin="0,5">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100" />
+                                        <ColumnDefinition SharedSizeGroup="*" />
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <damageaffinity:DamageAffinityDropdownListUserControl 
+                                            Grid.Row="0" Grid.Column="0"
+                                            PropertyPath="DamageType">
+                                    </damageaffinity:DamageAffinityDropdownListUserControl>
+                                    <dices:EditableDiceRollUserControl
+                                            x:Name="DamageTextBox"
+                                            Grid.Row="0" Grid.Column="1"
+                                            Margin="10,0"
+                                            PropertyPath="Damage"/>
+                                    <Button 
+                                            Grid.Row="0" Grid.Column="2"
+                                            Click="RemoveDamage_Button_Click">
+                                        Remove
+                                    </Button>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
                 <Button 
                         Grid.Row="1"
                         Margin="0,5"

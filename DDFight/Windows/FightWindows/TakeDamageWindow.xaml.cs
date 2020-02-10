@@ -1,0 +1,56 @@
+﻿using DDFight.Game;
+using DDFight.Game.Aggression;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+namespace DDFight.Windows.FightWindows
+{
+    /// <summary>
+    /// Logique d'interaction pour TakeDamageWindow.xaml
+    /// </summary>
+    public partial class TakeDamageWindow : Window
+    {
+
+        private PlayableEntity data_context {
+            get => (PlayableEntity)DataContext;
+        }
+
+        List<DamageTemplate> damage_list = new List<DamageTemplate>();
+
+        public TakeDamageWindow()
+        {
+            InitializeComponent();
+            
+            Loaded += TakeDamageWindow_Loaded;
+        }
+
+        private void TakeDamageWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            DamageControl.DataContext = damage_list;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (damage_list.Count != 0)
+            {
+                foreach (DamageTemplate dmg in damage_list)
+                {
+                    dmg.Damage.Roll();
+                }
+                data_context.TakeHitDamage(damage_list);
+            }
+            this.Close();
+        }
+    }
+}

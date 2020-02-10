@@ -291,10 +291,16 @@ namespace DDFight.Game
         ///     method called when a hit attack lands to compute the damage received
         /// </summary>
         /// <param name="damages"></param>
-        public void TakeHitDamage(List<DamageTemplate> damages, Paragraph paragraph)
+        public void TakeHitDamage(List<DamageTemplate> damages)
         {
             int i = 1;
             int total = 0;
+
+            Paragraph paragraph = (Paragraph)Global.Context.UserLogs.Blocks.LastBlock;
+
+            paragraph.Inlines.Add(Extensions.BuildRun(this.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+            paragraph.Inlines.Add(Extensions.BuildRun(" takes ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+
 
             foreach (DamageTemplate dmg in damages)
             {
@@ -316,8 +322,9 @@ namespace DDFight.Game
                         damage_value = dmg.Damage.LastResult * 2;
                         break;
                 }
-                paragraph.Inlines.Add(Extensions.BuildRun(damage_value.ToString() + " ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-                paragraph.Inlines.Add(Extensions.BuildRun(dmg.DamageType.ToString(), (Brush)BrushToDamageTypeEnumConverter.StaticConvert(dmg.DamageType), 15, FontWeights.Bold));
+                if (i == damages.Count && i != 1)
+                    paragraph.Inlines.Add(Extensions.BuildRun("and ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                paragraph.Inlines.Add(Extensions.BuildRun(damage_value.ToString() + " " +  dmg.DamageType.ToString(), (Brush)BrushToDamageTypeEnumConverter.StaticConvert(dmg.DamageType), 15, FontWeights.Bold));
                 paragraph.Inlines.Add(Extensions.BuildRun(i == damages.Count ? " damage" : " damage, ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
                 Hp -= damage_value;
                 total += damage_value;
@@ -344,9 +351,8 @@ namespace DDFight.Game
             // if the character gets hit with a normal hit
             if (result.HitRoll + result.HitBonus + result.SituationalHitAttackModifiers.HitModifier >= result.SituationalHitAttackModifiers.ACModifier + this.CA)
             {
-                tmp.Inlines.Add(Extensions.BuildRun(" Hit! " + this.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-                tmp.Inlines.Add(Extensions.BuildRun(" takes ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-                TakeHitDamage(result.DamageList, tmp);
+                tmp.Inlines.Add(Extensions.BuildRun(" Hit!\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                TakeHitDamage(result.DamageList);
             }
             // If the character can avoid / block the attack
             else

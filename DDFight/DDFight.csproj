@@ -210,6 +210,9 @@
     <Compile Include="Windows\FightWindows\MainFightWindow.xaml.cs">
       <DependentUpon>MainFightWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\FightWindows\TakeDamageWindow.xaml.cs">
+      <DependentUpon>TakeDamageWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\RollInitiativeWindow.xaml.cs">
       <DependentUpon>RollInitiativeWindow.xaml</DependentUpon>
     </Compile>
@@ -373,6 +376,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\FightWindows\MainFightWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\FightWindows\TakeDamageWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

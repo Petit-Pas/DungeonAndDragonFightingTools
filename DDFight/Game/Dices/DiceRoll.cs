@@ -113,6 +113,7 @@ namespace DDFight.Game.Dices
             {
                 DiceRoll second_dice = new DiceRoll(input);
                 second_dice.Roll();
+
                 if (advantage == true)
                     return dice.LastResult > second_dice.LastResult ? dice.LastResult : second_dice.LastResult;
                 return dice.LastResult < second_dice.LastResult ? dice.LastResult : second_dice.LastResult;

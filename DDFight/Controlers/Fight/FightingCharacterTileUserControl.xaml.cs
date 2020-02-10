@@ -1,6 +1,8 @@
 ﻿using DDFight.Game;
+using DDFight.Game.Aggression;
 using DDFight.Game.Fight.FightEvents;
 using DDFight.Tools;
+using DDFight.Windows.FightWindows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -80,7 +82,12 @@ namespace DDFight.Controlers.Fight
 
         private void ContextTakeDamage_Click(object sender, RoutedEventArgs e)
         {
+            TakeDamageWindow window = new TakeDamageWindow();
+            window.Owner = Window.GetWindow(this);
 
+            window.DataContext = data_context;
+
+            window.ShowDialog();
         }
 
         private void ContextHeal_Click(object sender, RoutedEventArgs e)
