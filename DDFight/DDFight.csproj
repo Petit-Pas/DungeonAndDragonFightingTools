@@ -207,6 +207,9 @@
     <Compile Include="Windows\FightWindows\ExecuteHitAttackWindow.xaml.cs">
       <DependentUpon>ExecuteHitAttackWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\FightWindows\HealWindow.xaml.cs">
+      <DependentUpon>HealWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\FightWindows\MainFightWindow.xaml.cs">
       <DependentUpon>MainFightWindow.xaml</DependentUpon>
     </Compile>
@@ -372,6 +375,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\FightWindows\ExecuteHitAttackWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\FightWindows\HealWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

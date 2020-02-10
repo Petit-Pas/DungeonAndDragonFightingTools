@@ -1,5 +1,6 @@
 ﻿using DDFight.Game;
 using DDFight.Game.Aggression;
+using DDFight.Game.Dices;
 using DDFight.Game.Fight.FightEvents;
 using DDFight.Tools;
 using DDFight.Windows.FightWindows;
@@ -90,9 +91,27 @@ namespace DDFight.Controlers.Fight
             window.ShowDialog();
         }
 
+        public class embedded_roll
+        {
+            public DiceRoll Roll
+            {
+                get => _roll;
+                set
+                {
+                    _roll = value;
+                }
+            }
+            private DiceRoll _roll;
+        }
+
         private void ContextHeal_Click(object sender, RoutedEventArgs e)
         {
+            HealWindow window = new HealWindow();
+            window.Owner = Window.GetWindow(this);
 
+            window.DataContext = data_context;
+
+            window.ShowDialog();
         }
 
         private void ContextManageStatus_Click(object sender, RoutedEventArgs e)

@@ -54,7 +54,7 @@ namespace DDFight.Controlers.Game.Dices
                 UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
                 Converter = new StringToDiceRollConverter(),
             };
-
+            Console.WriteLine("COCHON binding, PropertyPath:" + ctl.PropertyPath.ToString() + " " + ctl.DataContext?.ToString());
             ctl.textBox.SetBinding(TextBox.TextProperty, binding);
 
         }

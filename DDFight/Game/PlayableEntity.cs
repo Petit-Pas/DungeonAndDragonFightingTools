@@ -18,6 +18,7 @@ using System.Xml.Serialization;
 using System.Windows.Media;
 using DDFight.Game.Aggression;
 using DDFight.Converters;
+using DDFight.Game.Dices;
 
 namespace DDFight.Game
 {
@@ -61,7 +62,6 @@ namespace DDFight.Game
             }
         }
         private string _displayName = "DisplayName";
-
 
         /// <summary>
         ///     Armor Class
@@ -286,6 +286,24 @@ namespace DDFight.Game
         }
 
         public event EndTurnEventHandler TurnEnded;
+
+
+        public void Heal(DiceRoll to_roll)
+        {
+            int amount = to_roll.Roll();
+
+            if (Hp + amount >= MaxHp)
+                amount = (int)MaxHp - Hp;
+
+            Paragraph paragraph = (Paragraph)Global.Context.UserLogs.Blocks.LastBlock;
+
+            paragraph.Inlines.Add(Extensions.BuildRun(this.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+            paragraph.Inlines.Add(Extensions.BuildRun(" regains ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+            paragraph.Inlines.Add(Extensions.BuildRun(amount.ToString(), (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+            paragraph.Inlines.Add(Extensions.BuildRun(" Hps.\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+
+            Hp += amount;
+        }
 
         /// <summary>
         ///     method called when a hit attack lands to compute the damage received
