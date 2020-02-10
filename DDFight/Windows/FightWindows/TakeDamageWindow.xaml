@@ -8,11 +8,13 @@
         mc:Ignorable="d"
         Title="TakeDamageWindow" Height="450" Width="800"
         WindowStartupLocation="CenterOwner"
-        Background="{StaticResource LightestGray}">
+        Background="{StaticResource LightestGray}"
+        KeyDown="Window_KeyDown">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
@@ -32,8 +34,20 @@
             Grid.Row="1" Grid.Column="0"
             Margin="10, 10, 10, 0"/>
 
-        <Grid 
+        <TextBlock
+            x:Name="ErrorControl"
             Grid.Row="2"
+            TextAlignment="Center"
+            TextWrapping="Wrap"
+            Visibility="Collapsed"
+            Foreground="Red"
+            FontSize="15"
+            FontWeight="DemiBold">
+            Please check the input strings, they need to correspond either to an integer, or to a dice format (ex: 2d4+1d6+8)
+        </TextBlock>
+        
+        <Grid 
+            Grid.Row="3"
             HorizontalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>

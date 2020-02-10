@@ -42,6 +42,12 @@ namespace DDFight.Windows.FightWindows
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            if (!this.AreAllChildrenValid())
+            {
+                ErrorControl.Visibility = Visibility.Visible;
+                return;
+            }
+
             if (damage_list.Count != 0)
             {
                 foreach (DamageTemplate dmg in damage_list)
@@ -51,6 +57,12 @@ namespace DDFight.Windows.FightWindows
                 data_context.TakeHitDamage(damage_list);
             }
             this.Close();
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+                this.Close();
         }
     }
 }
