@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DDFight.Controlers.Fight"
              xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes"
+             xmlns:status="clr-namespace:DDFight.Controlers.Game.Status"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -31,10 +32,12 @@
         <Grid
             Margin="10, 0">
             <Grid.ColumnDefinitions>
+                <!-- we can try this: https://stackoverflow.com/questions/1312043/setting-a-wpf-control-to-expand-to-fill-available-space-and-no-more -->
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
@@ -111,6 +114,13 @@
                     FontSize="15"
                     Text="Hps"/>
             </Grid>
+
+            <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" ShowGridLines="True" Background="AliceBlue">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <status:CustomVerboseStatusTileList Grid.Row="0"/>
+            </Grid>
         </Grid>
-        </GroupBox>
+    </GroupBox>
 </UserControl>

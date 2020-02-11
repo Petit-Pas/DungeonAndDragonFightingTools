@@ -1,0 +1,70 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DDFight.Game.Status
+{
+    public class CustomVerboseStatusList : INotifyPropertyChanged, ICloneable
+    {
+        public CustomVerboseStatusList() { }
+
+        public ObservableCollection<CustomVerboseStatus> List
+        {
+            get => _list;
+            set
+            {
+                _list = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private ObservableCollection<CustomVerboseStatus> _list = new ObservableCollection<CustomVerboseStatus>();
+
+        #region INotifyPropertyChanged
+
+        /// <summary>
+        ///     PropertyChanged EventHandler
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
+        protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        #endregion
+
+        public void init_copy(CustomVerboseStatusList to_copy)
+        {
+            List = to_copy.List.Clone();
+        }
+
+        public CustomVerboseStatusList(CustomVerboseStatusList to_copy)
+        {
+            init_copy(to_copy);
+        }
+
+        public object Clone()
+        {
+            return new CustomVerboseStatusList(this);
+        }
+
+        public virtual void CopyAssign(object _to_copy)
+        {
+            CustomVerboseStatusList to_copy = (CustomVerboseStatusList)_to_copy;
+            init_copy(to_copy);
+        }
+
+    }
+}

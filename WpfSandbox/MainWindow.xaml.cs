@@ -22,12 +22,16 @@ namespace BindValidation
             Loaded += MainWindow_Loaded;
         }
 
-        private MainDataContext dc;
+        private string dc = "toto";
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            dc = new MainDataContext();
             this.DataContext = dc;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("click: " + this.DataContext);
         }
     }
 }

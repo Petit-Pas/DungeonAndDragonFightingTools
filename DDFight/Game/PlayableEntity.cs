@@ -19,6 +19,7 @@ using System.Windows.Media;
 using DDFight.Game.Aggression;
 using DDFight.Converters;
 using DDFight.Game.Dices;
+using DDFight.Game.Status;
 
 namespace DDFight.Game
 {
@@ -156,7 +157,22 @@ namespace DDFight.Game
         }
         private ObservableCollection<HitAttackTemplate> _hitAttacks = new ObservableCollection<HitAttackTemplate>();
 
-        #endregion
+        #endregion Characteristics
+
+        #region Status
+
+        public CustomVerboseStatusList CustomVerboseStatusList
+        {
+            get => _customVerboseStatusList;
+            set
+            {
+                _customVerboseStatusList = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private CustomVerboseStatusList _customVerboseStatusList = new CustomVerboseStatusList();
+
+        #endregion Status
 
         #region Fight
 
@@ -381,20 +397,6 @@ namespace DDFight.Game
 
         #endregion
 
-        #region INotifyPropertyChangedSub
-        /*
-        /// <summary>
-        ///     Subscribes the given event handler to this + all nested classes' PropertyChanged events
-        /// </summary>
-        /// <param name="handler"></param>
-        public void PropertyChangedSubscript(PropertyChangedEventHandler handler)
-        {
-            this.PropertyChanged += handler;
-            Characteristics.PropertyChangedSubscript(handler);
-        }
-        */
-        #endregion
-
         #region INotifyPropertyChanged
 
         /// <summary>
@@ -415,6 +417,8 @@ namespace DDFight.Game
         }
         #endregion
 
+        #region IClonable
+
         /// <summary>
         ///     this method is required to completely initialize an instance of this by copying another object
         /// </summary>
@@ -427,9 +431,8 @@ namespace DDFight.Game
             Characteristics = (CharacteristicsDataContext)to_copy.Characteristics.Clone();
             DamageAffinities = (DamageTypeAffinitiesDataContext)to_copy.DamageAffinities.Clone();
             HitAttacks = to_copy.HitAttacks.Clone();
+            CustomVerboseStatusList = (CustomVerboseStatusList)to_copy.CustomVerboseStatusList.Clone();
         }
-
-        #region IClonable
 
         /// <summary>
         ///     copy contructor, required for the Clone method to work properly with derived classes

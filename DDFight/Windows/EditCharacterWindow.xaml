@@ -10,13 +10,14 @@
         xmlns:damageaffinity="clr-namespace:DDFight.Controlers.Game.DamageAffinity"
         xmlns:dices="clr-namespace:DDFight.Controlers.Game.Dices"
         xmlns:attacks="clr-namespace:DDFight.Controlers.Game.Attacks"
+        xmlns:status="clr-namespace:DDFight.Controlers.Game.Status"
         Title="Edit Character" Height="600" Width="400"
         WindowStartupLocation="CenterOwner"
         Closing="Window_Closing">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" /> <!-- TabControl -->
-            <RowDefinition Height="*"/>  <!-- Button's Grid -->
+            <RowDefinition Height="*" /> <!-- TabControl -->
+            <RowDefinition Height="Auto"/>  <!-- Button's Grid -->
         </Grid.RowDefinitions>
         <TabControl 
             Grid.Row="0" Grid.ColumnSpan="2"
@@ -32,9 +33,10 @@
             <TabItem Header="Attacks">
                 <attacks:EditableListHitAttackTemplate />
             </TabItem>
-            <TabItem Header="test">
-                <Button Click="TestButton_Click">Test</Button>
+            <TabItem Header="Status">
+                <status:EditableCustomVerboseStatusList />
             </TabItem>
+            
         </TabControl>
         <Grid 
             x:Name="ButtonsGrid" 

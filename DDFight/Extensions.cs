@@ -60,6 +60,9 @@ namespace DDFight
         {
             List<FrameworkElement> found_here = new List<FrameworkElement>();
 
+            if (element == null)
+                return found_here;
+
             for (int i = 0; i != VisualTreeHelper.GetChildrenCount(element); i += 1)
             {
                 var child = VisualTreeHelper.GetChild(element, i) as FrameworkElement;

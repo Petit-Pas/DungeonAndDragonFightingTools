@@ -37,7 +37,7 @@
                     TextWrapping="Wrap"
                     >
                         When you press on the Roll button, 
-                        all the results aqual to 0 will be 
+                        all the results equal to 0 will be 
                         automatically rolled between 1 and 20
                 </TextBlock>
             </StackPanel>

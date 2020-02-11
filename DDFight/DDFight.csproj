@@ -119,6 +119,15 @@
     <Compile Include="Controlers\Game\Dices\EditableDiceRollUserControl.xaml.cs">
       <DependentUpon>EditableDiceRollUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controlers\Game\Status\CustomVerboseStatusTile.xaml.cs">
+      <DependentUpon>CustomVerboseStatusTile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controlers\Game\Status\CustomVerboseStatusTileList.xaml.cs">
+      <DependentUpon>CustomVerboseStatusTileList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controlers\Game\Status\EditableCustomVerboseStatusList.xaml.cs">
+      <DependentUpon>EditableCustomVerboseStatusList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controlers\InputBoxes\BindableRichTextBox.xaml.cs">
       <DependentUpon>BindableRichTextBox.xaml</DependentUpon>
     </Compile>
@@ -174,6 +183,8 @@
     <Compile Include="Game\PlayableEntity.cs" />
     <Compile Include="Game\MonsterDataContext.cs" />
     <Compile Include="Game\GameDataContext.cs" />
+    <Compile Include="Game\Status\CustomVerboseStatus.cs" />
+    <Compile Include="Game\Status\CustomVerboseStatusList.cs" />
     <Compile Include="Resources\ResourceManager.cs" />
     <Compile Include="Tools\ICopyAssignable.cs" />
     <Compile Include="Tools\IEventUnregisterable.cs" />
@@ -203,6 +214,9 @@
     </Compile>
     <Compile Include="Windows\EditMonsterWindow.xaml.cs">
       <DependentUpon>EditMonsterWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\EditWindows\EditCustomVerboseStatusWindow.xaml.cs">
+      <DependentUpon>EditCustomVerboseStatusWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\FightWindows\ExecuteHitAttackWindow.xaml.cs">
       <DependentUpon>ExecuteHitAttackWindow.xaml</DependentUpon>
@@ -307,6 +321,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controlers\Game\Status\CustomVerboseStatusTile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controlers\Game\Status\CustomVerboseStatusTileList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controlers\Game\Status\EditableCustomVerboseStatusList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controlers\InputBoxes\BindableRichTextBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -371,6 +397,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\EditMonsterWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\EditWindows\EditCustomVerboseStatusWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
