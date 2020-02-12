@@ -185,6 +185,9 @@
     <Compile Include="Game\GameDataContext.cs" />
     <Compile Include="Game\Status\CustomVerboseStatus.cs" />
     <Compile Include="Game\Status\CustomVerboseStatusList.cs" />
+    <Compile Include="Game\Status\Display\EditCustomVerboseStatusListWindow.xaml.cs">
+      <DependentUpon>EditCustomVerboseStatusListWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Resources\ResourceManager.cs" />
     <Compile Include="Tools\ICopyAssignable.cs" />
     <Compile Include="Tools\IEventUnregisterable.cs" />
@@ -215,7 +218,7 @@
     <Compile Include="Windows\EditMonsterWindow.xaml.cs">
       <DependentUpon>EditMonsterWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\EditWindows\EditCustomVerboseStatusWindow.xaml.cs">
+    <Compile Include="Game\Status\Display\EditCustomVerboseStatusWindow.xaml.cs">
       <DependentUpon>EditCustomVerboseStatusWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\FightWindows\ExecuteHitAttackWindow.xaml.cs">
@@ -369,6 +372,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Game\Status\Display\EditCustomVerboseStatusListWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -400,7 +407,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\EditWindows\EditCustomVerboseStatusWindow.xaml">
+    <Page Include="Game\Status\Display\EditCustomVerboseStatusWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

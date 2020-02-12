@@ -29,19 +29,9 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition SharedSizeGroup="ColumnSize" />
                             </Grid.ColumnDefinitions>
-
-                            <Grid 
-                                Grid.Column="0" Grid.Row="0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
-                                </Grid.ColumnDefinitions>
-                                <fight:FightingCharacterTileUserControl
-                                    Grid.Column="0" Grid.Row="0"
-                                    Margin="10"/>
-                            </Grid>
+                            <fight:FightingCharacterTileUserControl
+                            Grid.Column="0" Grid.Row="0"
+                            Margin="10"/>
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
@@ -50,7 +40,7 @@
                         <WrapPanel  />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
-            </ItemsControl>
+            </ItemsControl> 
         </ScrollViewer>
     </GroupBox>
 </UserControl>

@@ -116,7 +116,7 @@ namespace DDFight.Controlers.Fight
 
         private void ContextManageStatus_Click(object sender, RoutedEventArgs e)
         {
-
+            data_context.CustomVerboseStatusList.OpenEditWindow(data_context);
         }
     }
 }

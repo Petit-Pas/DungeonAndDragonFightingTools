@@ -4,18 +4,41 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BindValidation"
+        xmlns:wpfsandbox="clr-namespace:WpfSandbox"
         mc:Ignorable="d"
         Title="MainWindow"
         Width="650" Height="400">
 
-    <Grid>
+    <Grid ShowGridLines="True">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Button Click="Button_Click">
-            test
-        </Button>
-        <TextBox Grid.Row="1" Text="{Binding Path=., Mode=TwoWay}"></TextBox>
+
+        <TextBlock Grid.Row="0" Grid.Column="0">
+            Name
+        </TextBlock>
+
+        <TextBlock Grid.Row="0" Grid.Column="1">
+            Actions...
+        </TextBlock>
+
+            <WrapPanel Background="Red" Grid.Row="1" Grid.Column="0">
+                <TextBlock Margin="10">TOTO</TextBlock>
+                <TextBlock Margin="10">TOTO</TextBlock>
+                <TextBlock Margin="10">TOTO</TextBlock>
+                <TextBlock Margin="10">TOTO</TextBlock>
+                <TextBlock Margin="10">TOTO</TextBlock>
+                <TextBlock Margin="10">TOTO</TextBlock>
+                <TextBlock Margin="10">TOTO</TextBlock>
+                <TextBlock Margin="10">TOTO</TextBlock>
+                <TextBlock Margin="10">TOTO</TextBlock>
+                <TextBlock Margin="10">TOTO</TextBlock>
+            </WrapPanel>
+
     </Grid>
 </Window>

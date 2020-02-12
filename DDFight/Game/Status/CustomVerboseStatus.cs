@@ -1,4 +1,4 @@
-﻿using DDFight.Windows.EditWindows;
+﻿using DDFight.Game.Status.Display;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -87,7 +87,7 @@ namespace DDFight.Game.Status
         ///     Will open a window to edit this instance
         /// </summary>
         /// <returns> True if the current instance has changed, false otherwise </returns>
-        public bool OpenModifyWindow()
+        public bool OpenEditWindow()
         {
             EditCustomVerboseStatusWindow window = new EditCustomVerboseStatusWindow();
 

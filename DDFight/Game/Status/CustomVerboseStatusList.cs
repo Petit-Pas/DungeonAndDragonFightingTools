@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DDFight.Game.Status.Display;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -23,6 +24,20 @@ namespace DDFight.Game.Status
             }
         }
         private ObservableCollection<CustomVerboseStatus> _list = new ObservableCollection<CustomVerboseStatus>();
+
+        public void OpenEditWindow(PlayableEntity Owner)
+        {
+            EditCustomVerboseStatusListWindow window = new EditCustomVerboseStatusListWindow();
+            PlayableEntity dc = (PlayableEntity)Owner.Clone();
+            dc.Validated = false;
+
+            window.DataContext = dc;
+
+            window.ShowDialog();
+
+            if (dc.Validated == true)
+                List = dc.CustomVerboseStatusList.List;
+        }
 
         #region INotifyPropertyChanged
 

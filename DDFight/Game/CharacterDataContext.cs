@@ -17,12 +17,6 @@ namespace DDFight.Game
         {
         }
 
-        /// <summary>
-        ///     This is used when the CharacterDataContext is used as a DataContext for an edit window. If the user Cancelled the operation, it is set to false.
-        /// </summary>
-        [XmlIgnore]
-        public bool Validated = false;
-
         #region CharacterProperties
 
         /// <summary>

@@ -29,6 +29,9 @@ namespace DDFight.Game
         {
         }
 
+        [XmlIgnore]
+        public bool Validated = false;
+
         #region Properties
 
         [XmlAttribute]
