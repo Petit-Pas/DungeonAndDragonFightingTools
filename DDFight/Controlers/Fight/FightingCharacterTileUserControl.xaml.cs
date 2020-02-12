@@ -23,9 +23,6 @@ namespace DDFight.Controlers.Fight
                 return (PlayableEntity)DataContext;
             }
         }
-
-        private string tmp;
-
         public FightingCharacterTileUserControl()
         {
             InitializeComponent();
@@ -37,7 +34,6 @@ namespace DDFight.Controlers.Fight
             data_context.NewTurnStarted += Data_context_NewTurnStarted;
             data_context.TurnEnded += Data_context_TurnEnded;
             Global.Context.FightContext.CharacterSelected += FightContext_CharacterSelected;
-            tmp = data_context.DisplayName;
         }
 
         private void FightContext_CharacterSelected(object sender, SelectedCharacterEventArgs args)
@@ -137,6 +133,11 @@ namespace DDFight.Controlers.Fight
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
             data_context.OpenEditWindow();
+        }
+
+        private void TestButton_Click(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine(TestGrid.ActualWidth);
         }
     }
 }

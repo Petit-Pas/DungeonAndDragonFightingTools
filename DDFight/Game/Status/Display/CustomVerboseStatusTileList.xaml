@@ -6,7 +6,8 @@
              xmlns:display="clr-namespace:DDFight.Game.Status.Display"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <Grid
+        x:Name="ContainerGrid">
         <ItemsControl 
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
             ItemsSource="{Binding CustomVerboseStatusList.List}">
@@ -19,6 +20,7 @@
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel 
+                        Width="{Binding ActualWidth, ElementName=ContainerGrid}"
                         Orientation="Horizontal"
                     />
                 </ItemsPanelTemplate>

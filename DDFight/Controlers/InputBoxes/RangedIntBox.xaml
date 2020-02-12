@@ -33,7 +33,7 @@
     
     <Grid>
         <TextBox 
-            Background="{StaticResource LightestGray}"
+            Background="{StaticResource Gray}"
             Foreground="{StaticResource Light}"
             x:Name="IntBox" 
             Style="{StaticResource TextBoxInError}" 
