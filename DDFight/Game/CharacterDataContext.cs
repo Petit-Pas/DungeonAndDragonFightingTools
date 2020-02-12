@@ -1,4 +1,6 @@
-﻿using System.Xml.Serialization;
+﻿using DDFight.Windows;
+using System.Windows;
+using System.Xml.Serialization;
 
 namespace DDFight.Game
 {
@@ -38,26 +40,24 @@ namespace DDFight.Game
 
         #endregion
 
-        #region INotifyPropertyChangedSub
-
-        /*
-        /// <summary>
-        ///     Subscribes the given event handler to this + all nested classes' PropertyChanged events
-        /// </summary>
-        /// <param name="handler"></param>
-        public void PropertyChangedSubscript(PropertyChangedEventHandler handler)
+        public override void OpenEditWindow()
         {
-            this.PropertyChanged += handler;
-            Characteristics.PropertyChangedSubscript(handler);
-        }
-        */
+            EditCharacterWindow window = new EditCharacterWindow();
+            CharacterDataContext temporary = (CharacterDataContext)this.Clone();
+            window.DataContext = temporary;
 
-        #endregion
+            window.ShowDialog();
 
-        private void init_copy(CharacterDataContext to_copy)
-        {
-            Level = to_copy.Level;
+            if (temporary.Validated == true)
+            {
+                this.CopyAssign(temporary);
+            }
         }
+
+    private void init_copy(CharacterDataContext to_copy)
+    {
+        Level = to_copy.Level;
+    }
 
         #region IClonable
 

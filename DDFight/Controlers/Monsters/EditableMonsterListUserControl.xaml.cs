@@ -122,20 +122,8 @@ namespace DDFight.Controlers
 
         private void update_Monster(MonsterDataContext to_update)
         {
-            EditMonsterWindow window = new EditMonsterWindow
-            {
-                Owner = Window.GetWindow(this),
-            };
-            MonsterDataContext temporary = (MonsterDataContext)to_update.Clone();
-            window.DataContext = temporary;
-
-            window.ShowDialog();
-
-            if (temporary.Validated == true)
-            {
-                data_context.MonsterList.Replace(to_update, temporary);
-                data_context.MonsterList.Save();
-            }
+            to_update.OpenEditWindow();
+            Global.Context.MonsterList.Save();
         }
 
         /// <summary>

@@ -396,6 +396,12 @@ namespace DDFight.Game
 
         #endregion
 
+        public virtual void OpenEditWindow()
+        {
+            throw new NotImplementedException();
+        }
+
+
         #region INotifyPropertyChanged
 
         /// <summary>

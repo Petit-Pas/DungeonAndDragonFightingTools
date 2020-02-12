@@ -73,6 +73,8 @@ namespace DDFight
 
                 fightWindow.UnregisterAll();
                 Global.Context.FightContext.Reset();
+
+                Global.Context.CharacterList.Save();
             }
 
         }

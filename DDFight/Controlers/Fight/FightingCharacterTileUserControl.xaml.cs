@@ -133,5 +133,10 @@ namespace DDFight.Controlers.Fight
                 Global.Context.FightContext.RemoveCharacterFromFight(data_context);
             }
         }
+
+        private void Edit_Click(object sender, RoutedEventArgs e)
+        {
+            data_context.OpenEditWindow();
+        }
     }
 }

@@ -120,21 +120,8 @@ namespace DDFight.Controlers
 
         private void update_character(CharacterDataContext to_update)
         {
-            EditCharacterWindow window = new EditCharacterWindow
-            {
-                Owner = Window.GetWindow(this),
-            };
-            CharacterDataContext temporary = (CharacterDataContext)to_update.Clone();
-            window.DataContext = temporary;
-
-            window.ShowDialog();
-
-            if (temporary.Validated == true)
-            {
-                to_update.CopyAssign(temporary);
-
-                data_context.CharacterList.Save();
-            }
+            to_update.OpenEditWindow();
+            Global.Context.CharacterList.Save();
         }
 
         /// <summary>

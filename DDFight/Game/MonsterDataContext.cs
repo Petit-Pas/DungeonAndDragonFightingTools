@@ -1,4 +1,5 @@
-﻿using System.Xml.Serialization;
+﻿using DDFight.Windows;
+using System.Xml.Serialization;
 
 namespace DDFight.Game
 {
@@ -7,10 +8,6 @@ namespace DDFight.Game
         public MonsterDataContext()
         {
         }
-
-        /// <summary>
-        ///     This is used when the MonsterDataContext is used as a DataContext for an edit window. If the user Cancelled the operation, it is set to false.
-        /// </summary>
 
         #region MonsterProperties
 
@@ -34,27 +31,32 @@ namespace DDFight.Game
 
         #endregion
 
-        #region INotifyPropertyChangedSub
-        /*
-        /// <summary>
-        ///     Subscribes the given event handler to this + all nested classes' PropertyChanged events
-        /// </summary>
-        /// <param name="handler"></param>
-        public void PropertyChangedSubscript(PropertyChangedEventHandler handler)
+        public override void OpenEditWindow()
         {
-            this.PropertyChanged += handler;
-            Characteristics.PropertyChangedSubscript(handler);
+            EditMonsterWindow window = new EditMonsterWindow();
+            MonsterDataContext temporary = (MonsterDataContext)this.Clone();
+            window.DataContext = temporary;
+
+            window.ShowDialog();
+
+            if (temporary.Validated == true)
+            {
+                this.CopyAssign(temporary);
+            }
         }
-        */
 
-        #endregion
+        #region ICloneable
 
-        protected MonsterDataContext(MonsterDataContext to_copy) : base(to_copy)
+        private void init_copy(MonsterDataContext to_copy)
         {
             Level = to_copy.Level;
         }
 
-        #region ICloneable
+        protected MonsterDataContext(MonsterDataContext to_copy) : base(to_copy)
+        {
+            init_copy(to_copy);
+        }
+
         /// <summary>
         ///     Method to clone a character (Deep Copy)
         /// </summary>
@@ -62,6 +64,12 @@ namespace DDFight.Game
         public override object Clone()
         {
             return new MonsterDataContext(this);
+        }
+
+        public override void CopyAssign(object to_copy)
+        {
+            base.CopyAssign(to_copy);
+            init_copy((MonsterDataContext)to_copy);
         }
 
         #endregion
