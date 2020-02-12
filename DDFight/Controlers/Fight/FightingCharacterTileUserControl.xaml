@@ -117,12 +117,7 @@
                     Text="Hps"/>
             </Grid>
 
-            <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" ShowGridLines="True" 
-                  x:Name="TestGrid">
-                <Grid.ColumnDefinitions>
-                </Grid.ColumnDefinitions>
-                <display:CustomVerboseStatusTileList Grid.Row="0"/>
-            </Grid>
+            <display:CustomVerboseStatusTileList Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"/>
         </Grid>
     </GroupBox>
 </UserControl>

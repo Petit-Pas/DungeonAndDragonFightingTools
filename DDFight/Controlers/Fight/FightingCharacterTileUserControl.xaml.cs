@@ -134,10 +134,5 @@ namespace DDFight.Controlers.Fight
         {
             data_context.OpenEditWindow();
         }
-
-        private void TestButton_Click(object sender, RoutedEventArgs e)
-        {
-            Console.WriteLine(TestGrid.ActualWidth);
-        }
     }
 }
