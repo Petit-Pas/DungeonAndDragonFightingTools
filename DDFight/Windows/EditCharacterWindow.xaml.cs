@@ -1,18 +1,11 @@
-﻿using DDFight.Controlers.InputBoxes;
-using DDFight.Game;
+﻿using DDFight.Game;
 using DDFight.Game.Aggression;
 using DDFight.Game.Aggression.Attacks;
 using DDFight.Game.DamageAffinity;
 using DDFight.Resources;
-using DDFight.Tools;
-using DDFight.ValidationRules;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Threading;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace DDFight.Windows
 {

@@ -1,11 +1,5 @@
 ﻿using DDFight.Game;
-using DDFight.Tools;
-using DDFight.Tools.Save;
 using DDFight.Windows;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;

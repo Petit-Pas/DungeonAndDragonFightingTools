@@ -1,11 +1,7 @@
 ﻿using DDFight.Game;
-using DDFight.Game.Aggression.Attacks;
-using DDFight.Game.Fight;
 using DDFight.Tools.Save;
 using DDFight.Windows;
 using DDFight.Windows.FightWindows;
-using System;
-using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Documents;
 

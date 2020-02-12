@@ -1,10 +1,7 @@
 ﻿using DDFight.Game;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Xml.Serialization;
 
 namespace DDFight.Tools.Save
 {

@@ -10,7 +10,7 @@
         xmlns:damageaffinity="clr-namespace:DDFight.Controlers.Game.DamageAffinity"
         xmlns:dices="clr-namespace:DDFight.Controlers.Game.Dices"
         xmlns:attacks="clr-namespace:DDFight.Controlers.Game.Attacks"
-        xmlns:status="clr-namespace:DDFight.Controlers.Game.Status"
+        xmlns:status="clr-namespace:DDFight.Game.Status.Display"
         Title="Edit Character" Height="600" Width="400"
         WindowStartupLocation="CenterOwner"
         Closing="Window_Closing">

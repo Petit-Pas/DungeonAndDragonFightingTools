@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DDFight.Tools
+﻿namespace DDFight.Tools
 {
     /// <summary>
     ///     intended to provide with a void CopyAssign (to_copy) object

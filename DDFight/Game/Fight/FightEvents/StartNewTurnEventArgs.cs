@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DDFight.Game.Fight.FightEvents
+﻿namespace DDFight.Game.Fight.FightEvents
 {
 
     public delegate void StartNewTurnEventHandler(object sender, StartNewTurnEventArgs args);

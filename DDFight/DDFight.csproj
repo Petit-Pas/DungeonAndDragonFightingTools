@@ -119,13 +119,13 @@
     <Compile Include="Controlers\Game\Dices\EditableDiceRollUserControl.xaml.cs">
       <DependentUpon>EditableDiceRollUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controlers\Game\Status\CustomVerboseStatusTile.xaml.cs">
+    <Compile Include="Game\Status\Display\CustomVerboseStatusTile.xaml.cs">
       <DependentUpon>CustomVerboseStatusTile.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controlers\Game\Status\CustomVerboseStatusTileList.xaml.cs">
+    <Compile Include="Game\Status\Display\CustomVerboseStatusTileList.xaml.cs">
       <DependentUpon>CustomVerboseStatusTileList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controlers\Game\Status\EditableCustomVerboseStatusList.xaml.cs">
+    <Compile Include="Game\Status\Display\EditableCustomVerboseStatusList.xaml.cs">
       <DependentUpon>EditableCustomVerboseStatusList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controlers\InputBoxes\BindableRichTextBox.xaml.cs">
@@ -324,15 +324,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controlers\Game\Status\CustomVerboseStatusTile.xaml">
+    <Page Include="Game\Status\Display\CustomVerboseStatusTile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controlers\Game\Status\CustomVerboseStatusTileList.xaml">
+    <Page Include="Game\Status\Display\CustomVerboseStatusTileList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controlers\Game\Status\EditableCustomVerboseStatusList.xaml">
+    <Page Include="Game\Status\Display\EditableCustomVerboseStatusList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,11 +1,7 @@
 ﻿using DDFight.Game;
 using DDFight.Resources;
-using DDFight.ValidationRules;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
 
 
 namespace DDFight.Windows

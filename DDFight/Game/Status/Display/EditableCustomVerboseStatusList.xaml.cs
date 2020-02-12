@@ -1,10 +1,8 @@
-﻿using DDFight.Game;
-using DDFight.Game.Status;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace DDFight.Controlers.Game.Status
+namespace DDFight.Game.Status.Display
 {
     /// <summary>
     /// Logique d'interaction pour EditableCustomVerboseStatusList.xaml

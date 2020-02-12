@@ -1,10 +1,4 @@
-﻿using DDFight.Game.Characteristics;
-using DDFight.Tools;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace DDFight.Game
 {
