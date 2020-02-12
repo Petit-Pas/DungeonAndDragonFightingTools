@@ -2,7 +2,9 @@
 using DDFight.Game.Dices;
 using DDFight.Game.Fight.FightEvents;
 using DDFight.Tools;
+using DDFight.Windows;
 using DDFight.Windows.FightWindows;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -17,20 +19,25 @@ namespace DDFight.Controlers.Fight
     {
         public PlayableEntity data_context
         {
-            get => (PlayableEntity)DataContext;
+            get {
+                return (PlayableEntity)DataContext;
+            }
         }
+
+        private string tmp;
 
         public FightingCharacterTileUserControl()
         {
             InitializeComponent();
             Loaded += FightingCharacterTileUserControl_Loaded;
         }
-
+        
         private void FightingCharacterTileUserControl_Loaded(object sender, RoutedEventArgs e)
         {
             data_context.NewTurnStarted += Data_context_NewTurnStarted;
             data_context.TurnEnded += Data_context_TurnEnded;
             Global.Context.FightContext.CharacterSelected += FightContext_CharacterSelected;
+            tmp = data_context.DisplayName;
         }
 
         private void FightContext_CharacterSelected(object sender, SelectedCharacterEventArgs args)
@@ -65,6 +72,7 @@ namespace DDFight.Controlers.Fight
 
         public void UnregisterToAll()
         {
+            this.UnregisterAll();
             data_context.NewTurnStarted -= Data_context_NewTurnStarted;
             data_context.TurnEnded -= Data_context_TurnEnded;
             Global.Context.FightContext.CharacterSelected -= FightContext_CharacterSelected;
@@ -106,6 +114,24 @@ namespace DDFight.Controlers.Fight
         private void ContextManageStatus_Click(object sender, RoutedEventArgs e)
         {
             data_context.CustomVerboseStatusList.OpenEditWindow(data_context);
+        }
+
+        private void RemoveFromFight_Click(object sender, RoutedEventArgs e)
+        {
+            AskYesNoWindow window = new AskYesNoWindow();
+            AskYesNoDataContext dc = new AskYesNoDataContext()
+            {
+                Message = "Are you sure you want to remove " + data_context.DisplayName + " from the fight?",
+            };
+            window.DataContext = dc;
+
+            window.ShowDialog();
+
+            if (dc.Yes)
+            {
+                UnregisterToAll();
+                Global.Context.FightContext.RemoveCharacterFromFight(data_context);
+            }
         }
     }
 }

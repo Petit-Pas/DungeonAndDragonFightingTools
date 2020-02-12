@@ -14,6 +14,12 @@ namespace DDFight
 {
     public static class Extensions
     {
+        /// <summary>
+        ///     Filter a collection with the given comparison
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="collection"></param>
+        /// <param name="comparison"></param>
         public static void Sort<T>(this ObservableCollection<T> collection, Comparison<T> comparison)
         {
             var sortableList = new List<T>(collection);
@@ -25,6 +31,11 @@ namespace DDFight
             }
         }
 
+        /// <summary>
+        ///     Checks if all the IValidable children are Valid (elem.IsValid())
+        /// </summary>
+        /// <param name="element"></param>
+        /// <returns></returns>
         public static bool AreAllChildrenValid(this FrameworkElement element)
         {
             foreach (Control ctrl in element.FindAllChildren<IValidable>())

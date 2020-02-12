@@ -1,4 +1,5 @@
 ﻿using DDFight.Game.Fight.FightEvents;
+using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -128,7 +129,35 @@ namespace DDFight.Game.Fight
         }
         private PlayableEntity _currentlySelected = null;
 
-        #endregion
+        public void RemoveCharacterFromFight(PlayableEntity to_remove)
+        {
+            bool wasPlaying = false;
+
+            if (to_remove == CurrentlyPlaying)
+                wasPlaying = true;
+
+            // modifies the turn order of the character that were playing after the removed character
+            foreach (PlayableEntity tmp in FightersList.Fighters)
+            {
+                if (tmp.TurnOrder > to_remove.TurnOrder)
+                    tmp.TurnOrder -= 1;
+            }
+
+            // if it was the turn of the character, we need to skip its turn
+            if (wasPlaying)
+            {
+                NextTurn();
+                TurnIndex -= 1;
+            }
+            // if it was previously in the same round
+            else if (CurrentlyPlaying.TurnOrder >= to_remove.TurnOrder)
+            {
+                TurnIndex -= 1;
+            }
+            FightersList.Fighters.Remove(to_remove);
+        }
+
+        #endregion turn
 
         #region INotifyPropertyChanged
 
@@ -148,7 +177,7 @@ namespace DDFight.Game.Fight
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-        #endregion
+        #endregion INotifyPropertyChanged
 
         public void Reset()
         {

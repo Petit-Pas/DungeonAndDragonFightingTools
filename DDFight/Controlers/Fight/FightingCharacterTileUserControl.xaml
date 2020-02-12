@@ -13,6 +13,7 @@
             <MenuItem Header="Take Damage" Click="ContextTakeDamage_Click"/>
             <MenuItem Header="Heal" Click="ContextHeal_Click" />
             <MenuItem Header="Manage Statuses" Click="ContextManageStatus_Click"/>
+            <MenuItem Header="Remove From Fight" Click="RemoveFromFight_Click" />   
         </ContextMenu>
         <Style x:Key="ActionsButtons" TargetType="Button">
             <Setter Property="Padding" Value="5, 2" />
@@ -114,7 +115,7 @@
                     Text="Hps"/>
             </Grid>
 
-            <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" ShowGridLines="True" Background="AliceBlue">
+            <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" ShowGridLines="True" >
                 <Grid.ColumnDefinitions>
                 </Grid.ColumnDefinitions>
                 <display:CustomVerboseStatusTileList Grid.Row="0"/>
