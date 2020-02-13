@@ -16,6 +16,7 @@ using DDFight.Game.Aggression;
 using DDFight.Converters;
 using DDFight.Game.Dices;
 using DDFight.Game.Status;
+using DDFight.Windows.FightWindows;
 
 namespace DDFight.Game
 {
@@ -371,13 +372,24 @@ namespace DDFight.Game
                     paragraph.Inlines.Add(Extensions.BuildRun("and ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
                 paragraph.Inlines.Add(Extensions.BuildRun(damage_value.ToString() + " " +  dmg.DamageType.ToString(), (Brush)BrushToDamageTypeEnumConverter.StaticConvert(dmg.DamageType), 15, FontWeights.Bold));
                 paragraph.Inlines.Add(Extensions.BuildRun(i == damages.Count ? " damage" : " damage, ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-                Hp -= damage_value;
                 total += damage_value;
                 i += 1;
             }
+            LooseHp(total);
             paragraph.Inlines.Add(Extensions.BuildRun("\nTotal: ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
             paragraph.Inlines.Add(Extensions.BuildRun(total.ToString(), (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
             paragraph.Inlines.Add(Extensions.BuildRun(" damage\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+        }
+
+        public void LooseHp(int amount)
+        {
+            Hp -= amount;
+            if (IsFocused)
+            {
+                ConcentrationCheckWindow window = new ConcentrationCheckWindow();
+                window.DataContext = this;
+                window.ShowDialog();
+            }
         }
 
         public void GetAttacked(HitAttackResult result, PlayableEntity attacker)
