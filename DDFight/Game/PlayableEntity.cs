@@ -220,6 +220,18 @@ namespace DDFight.Game
         }
         private bool _hasReaction = true;
 
+        [XmlIgnore]
+        public bool IsFocused
+        {
+            get => _isFocused;
+            set
+            {
+                _isFocused = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private bool _isFocused;
+
         /// <summary>
         ///     The initiative rolled for a given fight
         ///     Does not take dexterity into account

@@ -119,6 +119,7 @@
     <Compile Include="Controlers\Game\Dices\EditableDiceRollUserControl.xaml.cs">
       <DependentUpon>EditableDiceRollUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\BoolToCustomStringConverter.cs" />
     <Compile Include="Game\Status\Display\CustomVerboseStatusTile.xaml.cs">
       <DependentUpon>CustomVerboseStatusTile.xaml</DependentUpon>
     </Compile>

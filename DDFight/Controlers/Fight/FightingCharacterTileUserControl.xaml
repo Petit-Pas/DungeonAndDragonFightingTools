@@ -6,9 +6,11 @@
              xmlns:local="clr-namespace:DDFight.Controlers.Fight"
              xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes"
              xmlns:display="clr-namespace:DDFight.Game.Status.Display"
+             xmlns:converters="clr-namespace:DDFight.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
+        <converters:BoolToCustomStringConverter x:Key="BoolCustomStringConverter" />
         <ContextMenu x:Key="CMenu">
             <MenuItem Header="Take Damage" Click="ContextTakeDamage_Click"/>
             <MenuItem Header="Heal" Click="ContextHeal_Click" />
@@ -51,6 +53,7 @@
 
 
             <Grid
+                HorizontalAlignment="Right"
                 Grid.Column="1"
                 VerticalAlignment="Center">
                 <!-- Grid for Action Reaction and Bonus Action buttons -->
@@ -77,45 +80,31 @@
                     Style="{StaticResource ActionsButtons}"
                     Grid.Column="2"
                     PropertyPath="HasBonusAction"
-                    Content="B" />
+                    Content="B"/>
 
             </Grid>
 
-            <Grid
+            <TextBlock 
+                Grid.Column="0" Grid.Row="1"
                 Margin="10,0"
-                Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
-                <!-- HP Grid -->
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
+                FontSize="15">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0} / {1} Hps">
+                            <Binding Path="Hp" />
+                            <Binding Path="MaxHp" />
+                        </MultiBinding>
+                    </TextBlock.Text>
+            </TextBlock>
 
-                <TextBlock 
-                    Grid.Column="0"
-                    Margin="3, 0"
-                    FontSize="15"
-                    Text="{Binding Hp}"/>
-                <TextBlock 
-                    Grid.Column="1"
-                    Margin="3, 0"
-                    FontSize="15"
-                    Text="/"/>
-                <TextBlock 
-                    Grid.Column="2"
-                    Margin="3, 0"
-                    FontSize="15"
-                    Text="{Binding MaxHp}"/>
-                <TextBlock 
-                    Grid.Column="3"
-                    Margin="3, 0"
-                    FontSize="15"
-                    Text="Hps"/>
-            </Grid>
+            <inputboxes:BooleanButton 
+                Grid.Column="1" Grid.Row="1"
+                Padding="5"
+                Background="{StaticResource Light}"
+                Foreground="{StaticResource LightestGray}"
+                FontWeight="SemiBold"
+                PropertyPath="IsFocused"
+                Content="{Binding IsFocused, Converter={StaticResource BoolCustomStringConverter}, 
+                ConverterParameter=Focused|Not\ Focused}"/>
 
             <display:CustomVerboseStatusTileList Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"/>
         </Grid>

@@ -48,22 +48,28 @@ namespace DDFight.Controlers.InputBoxes
             INotifyPropertyChanged dc = DataContext as INotifyPropertyChanged;
             dc.PropertyChanged += DataContext_PropertyChanged;
             this.Click += ButtonControl_Click;
+            UpdateButtonColors();
+        }
+
+        private void UpdateButtonColors()
+        {
+            if (_propertyValue == true)
+            {
+                Foreground = (Brush)Application.Current.Resources["LightestGray"];
+                Background = (Brush)Application.Current.Resources["Light"];
+            }
+            else
+            {
+                Background = (Brush)Application.Current.Resources["LightestGray"];
+                Foreground = (Brush)Application.Current.Resources["Light"];
+            }
         }
 
         private void DataContext_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == PropertyPath)
             {
-                if (_propertyValue == true)
-                {
-                    Foreground = (Brush)Application.Current.Resources["LightestGray"];
-                    Background = (Brush)Application.Current.Resources["Light"];
-                }
-                else
-                {
-                    Background = (Brush)Application.Current.Resources["LightestGray"];
-                    Foreground = (Brush)Application.Current.Resources["Light"];
-                }
+                UpdateButtonColors();
             }
         }
 
