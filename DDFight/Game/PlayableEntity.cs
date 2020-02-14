@@ -392,9 +392,6 @@ namespace DDFight.Game
                 if (window.Success == false)
                 {
                     this.IsFocused = false;
-                    Paragraph paragraph = (Paragraph)Global.Context.UserLogs.Blocks.LastBlock;
-                    paragraph.Inlines.Add(Extensions.BuildRun(DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
-                    paragraph.Inlines.Add(Extensions.BuildRun(" lost Focus", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
                 }
             }
         }
@@ -431,7 +428,6 @@ namespace DDFight.Game
         {
             throw new NotImplementedException();
         }
-
 
         #region INotifyPropertyChanged
 

@@ -11,7 +11,7 @@
         Background="{StaticResource LightestGray}"
         x:Name="CurrentWindow"
         WindowStartupLocation="CenterScreen">
-    <Grid ShowGridLines="True">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />

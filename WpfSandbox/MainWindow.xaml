@@ -9,36 +9,13 @@
         Title="MainWindow"
         Width="650" Height="400">
 
-    <Grid ShowGridLines="True">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="220" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+    <StackPanel >
+        <RadioButton Content="Small" HorizontalAlignment="center" VerticalAlignment="Top" Margin="300,55,0,0" Click="SmlClicked"></RadioButton>
+        <RadioButton Content="Medium" HorizontalAlignment="center" VerticalAlignment="Top" Margin="450,55,0,0" Click="MdClicked"></RadioButton>
 
-        <TextBlock Grid.Row="0" Grid.Column="0">
-            Name
-        </TextBlock>
+        <CheckBox Name="SugarCheck" Content="Sugar" HorizontalAlignment="center" VerticalAlignment="Center" Margin="250,0,0,0" Checked="SugarChecked"></CheckBox>
+        <CheckBox Name="CreamCheck" Content="Cream" HorizontalAlignment="center" VerticalAlignment="Center" Margin="500,0,0,0" Checked="CreamChecked"></CheckBox>
 
-        <TextBlock Grid.Row="0" Grid.Column="1">
-            Actions...
-        </TextBlock>
-
-            <WrapPanel Background="Red" Grid.Row="1" Grid.Column="0">
-                <TextBlock Margin="10">TOTO</TextBlock>
-                <TextBlock Margin="10">TOTO</TextBlock>
-                <TextBlock Margin="10">TOTO</TextBlock>
-                <TextBlock Margin="10">TOTO</TextBlock>
-                <TextBlock Margin="10">TOTO</TextBlock>
-                <TextBlock Margin="10">TOTO</TextBlock>
-                <TextBlock Margin="10">TOTO</TextBlock>
-                <TextBlock Margin="10">TOTO</TextBlock>
-                <TextBlock Margin="10">TOTO</TextBlock>
-                <TextBlock Margin="10">TOTO</TextBlock>
-            </WrapPanel>
-
-    </Grid>
+        <Label Name="order" Content="Your Coffee" HorizontalAlignment="center" VerticalAlignment="Center" Margin="170,145,0,0"></Label>
+    </StackPanel>
 </Window>

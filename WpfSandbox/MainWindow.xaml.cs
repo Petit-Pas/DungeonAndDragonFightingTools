@@ -15,19 +15,30 @@ namespace BindValidation
         {
             InitializeComponent();
 
-            Loaded += MainWindow_Loaded;
         }
 
-        private string dc = "toto";
-
-        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        private void SugarChecked(object sender, RoutedEventArgs e)
         {
-            this.DataContext = dc;
+            order.Content += "with sugar";
+        }
+        private void CreamChecked(object sender, RoutedEventArgs e)
+        {
+            order.Content += "with cream";
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void SmlClicked(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("click: " + this.DataContext);
+            order.Content += "Small";
+        }
+
+        private void MdClicked(object sender, RoutedEventArgs e)
+        {
+            order.Content += "Medium";
+        }
+
+        private void LrgClicked(object sender, RoutedEventArgs e)
+        {
+            order.Content += "Large";
         }
     }
 }

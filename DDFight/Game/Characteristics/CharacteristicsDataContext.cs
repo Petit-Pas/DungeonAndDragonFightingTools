@@ -40,7 +40,7 @@ namespace DDFight.Game.Characteristics
 
         public int GetCharacteristicModifier(CharacteristicsEnum type)
         {
-            return CharacteristicsList.First(x => x.Name == CharacteristicsEnum.Dexterity).Modifier;
+            return CharacteristicsList.First(x => x.Name == type).Modifier;
         }
 
         public List<CharacteristicDataContext> CharacteristicsList

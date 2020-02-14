@@ -101,6 +101,14 @@ namespace DDFight.Windows.FightWindows
         {
             if (Roll + SituationalSavingThrowModifier.Modifier + data_context.Characteristics.GetCharacteristicModifier(CharacteristicsEnum.Constitution) >= 10)
                 Success = true;
+            else
+            {
+                Paragraph paragraph = (Paragraph)Global.Context.UserLogs.Blocks.LastBlock;
+                paragraph.Inlines.Add(Extensions.BuildRun(data_context.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
+                paragraph.Inlines.Add(Extensions.BuildRun(" lost Focus: ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                paragraph.Inlines.Add(Extensions.BuildRun((data_context.Characteristics.GetCharacteristicModifier(CharacteristicsEnum.Constitution) + SituationalSavingThrowModifier.Modifier + Roll).ToString()
+                    + " / 10\n" , (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
+            }
         }
 
         private void roll_dice()
