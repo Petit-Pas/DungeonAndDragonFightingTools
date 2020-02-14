@@ -18,7 +18,7 @@
                 Foreground="{StaticResource Light}"
                 FontSize="15"
                 FontWeight="SemiBold"
-                Text="{Binding Name, StringFormat={StaticResource Format}}" />
+                Text="{Binding DisplayName, StringFormat={StaticResource Format}}" />
 
         </GroupBox.Header>
         <Grid>

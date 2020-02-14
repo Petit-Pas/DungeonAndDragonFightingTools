@@ -74,6 +74,12 @@ namespace DDFight
                 fightWindow.UnregisterAll();
                 Global.Context.FightContext.Reset();
 
+                foreach (CharacterDataContext character in Global.Context.CharacterList.Characters)
+                {
+                    if (character.IsTransformed)
+                        character.TransformBack();
+                }
+
                 Global.Context.CharacterList.Save();
             }
 

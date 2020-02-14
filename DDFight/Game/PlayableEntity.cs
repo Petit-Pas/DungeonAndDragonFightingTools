@@ -22,7 +22,7 @@ namespace DDFight.Game
 {
     public class PlayableEntity : ICloneable, INotifyPropertyChanged, ICopyAssignable /*, INotifyPropertyChangedSub*/
     {
-        public PlayableEntity() 
+        public PlayableEntity()
         {
         }
 
@@ -49,7 +49,7 @@ namespace DDFight.Game
         /// <summary>
         ///     Only used for monsters when they are duplicates in fight, Name will be the same, while DisplayName will be unique
         /// </summary>
-        [XmlAttribute]
+        [XmlIgnore]
         public virtual string DisplayName
         {
             get => _displayName;
@@ -176,6 +176,48 @@ namespace DDFight.Game
 
         #region Fight
 
+        #region Transformation
+
+        [XmlIgnore]
+        /// <summary>
+        ///     Tells wether or not the character is currenlty transformed
+        /// </summary>
+        public bool IsTransformed
+        {
+            get => _isTransformed;
+            set
+            {
+                Console.WriteLine("change is transformed in " + GetType().ToString());
+                _isTransformed = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private bool _isTransformed = false;
+
+        /// <summary>
+        ///     Stored an instance of the actual character (non transformed)
+        /// </summary>
+        private PlayableEntity realOne; 
+
+        public void Transform(PlayableEntity to_transform_into)
+        {
+            realOne = (PlayableEntity)this.Clone();
+            to_transform_into.DisplayName = to_transform_into.Name + " (" + this.DisplayName + ")";
+            this.CopyAssign(to_transform_into);
+            IsTransformed = true;
+            this.DisplayName = to_transform_into.DisplayName;
+        }
+
+        public void TransformBack()
+        {
+            this.CopyAssign(realOne);
+            IsTransformed = false;
+        }
+
+        #endregion Transformation
+
+        #region Actions
+
         /// <summary>
         ///     Tells wether or not he action of the character was consumed
         /// </summary>
@@ -221,6 +263,8 @@ namespace DDFight.Game
         }
         private bool _hasReaction = true;
 
+        #endregion Actions
+
         [XmlIgnore]
         public bool IsFocused
         {
@@ -232,6 +276,8 @@ namespace DDFight.Game
             }
         }
         private bool _isFocused;
+
+        #region Turns
 
         /// <summary>
         ///     The initiative rolled for a given fight
@@ -315,6 +361,9 @@ namespace DDFight.Game
 
         public event EndTurnEventHandler TurnEnded;
 
+        #endregion Turns
+
+        #region HpManagement
 
         public void Heal(DiceRoll to_roll)
         {
@@ -422,7 +471,9 @@ namespace DDFight.Game
             }
         }
 
-        #endregion
+        #endregion HpManagement
+
+        #endregion Fight
 
         public virtual void OpenEditWindow()
         {
@@ -464,6 +515,9 @@ namespace DDFight.Game
             DamageAffinities = (DamageTypeAffinitiesDataContext)to_copy.DamageAffinities.Clone();
             HitAttacks = to_copy.HitAttacks.Clone();
             CustomVerboseStatusList = (CustomVerboseStatusList)to_copy.CustomVerboseStatusList.Clone();
+            DisplayName = (string)to_copy.DisplayName.Clone();
+            TurnOrder = to_copy.TurnOrder;
+            InitiativeRoll = to_copy.InitiativeRoll;
         }
 
         /// <summary>

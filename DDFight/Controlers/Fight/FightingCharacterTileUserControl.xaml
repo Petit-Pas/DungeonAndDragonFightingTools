@@ -15,6 +15,7 @@
             <MenuItem Header="Take Damage" Click="ContextTakeDamage_Click"/>
             <MenuItem Header="Heal" Click="ContextHeal_Click" />
             <MenuItem Header="Manage Statuses" Click="ContextManageStatus_Click"/>
+            <MenuItem Header="{Binding IsTransformed, Converter={StaticResource BoolCustomStringConverter}, ConverterParameter=Transform\ Back|Transform}" Click="Transform_Click"/>
             <MenuItem Header="Remove From Fight" Click="RemoveFromFight_Click" />
             <Separator />
             <MenuItem Header="Edit" Click="Edit_Click" />

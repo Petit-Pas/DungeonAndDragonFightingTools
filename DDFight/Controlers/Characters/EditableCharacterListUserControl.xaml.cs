@@ -154,7 +154,10 @@ namespace DDFight.Controlers
         private void AddToFight_MenuItem_Click(object sender, RoutedEventArgs e)
         {
             if (CharacterList.SelectedItem != null)
+            {
+                ((CharacterDataContext)CharacterList.SelectedItem).DisplayName = ((CharacterDataContext)CharacterList.SelectedItem).Name;
                 data_context.FightContext.FightersList.AddCharacter((CharacterDataContext)CharacterList.SelectedItem);
+            }
         }
         #endregion
 

@@ -33,11 +33,6 @@ namespace DDFight.Game
         }
         private uint _level = 1;
 
-        public override string DisplayName
-        {
-            get => Name;
-        }
-
         #endregion
 
         public override void OpenEditWindow()
@@ -80,7 +75,8 @@ namespace DDFight.Game
         public override void CopyAssign (object _to_copy)
         {
             base.CopyAssign(_to_copy);
-            init_copy((CharacterDataContext)_to_copy);
+            if (_to_copy.GetType() == this.GetType())
+                init_copy((CharacterDataContext)_to_copy);
         }
     }
 }

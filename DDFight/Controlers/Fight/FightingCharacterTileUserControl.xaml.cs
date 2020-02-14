@@ -134,5 +134,15 @@ namespace DDFight.Controlers.Fight
         {
             data_context.OpenEditWindow();
         }
+
+        private void Transform_Click(object sender, RoutedEventArgs e)
+        {
+            if (data_context.IsTransformed)
+                data_context.TransformBack();
+            else
+            {
+                data_context.Transform(Global.Context.MonsterList.Monsters[0]);
+            }
+        }
     }
 }
