@@ -107,6 +107,9 @@
     <Compile Include="Controlers\Game\Attacks\SituationalModifiers\SituationalHitAttackModifiersUserControl.xaml.cs">
       <DependentUpon>SituationalHitAttackModifiersUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controlers\Game\Attacks\SituationalModifiers\SituationalSavingThrowModifierUserControl.xaml.cs">
+      <DependentUpon>SituationalSavingThrowModifierUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controlers\Game\Characteristics\EditableCharacteristicsListUserControl.xaml.cs">
       <DependentUpon>EditableCharacteristicsListUserControl.xaml</DependentUpon>
     </Compile>
@@ -120,6 +123,7 @@
       <DependentUpon>EditableDiceRollUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BoolToCustomStringConverter.cs" />
+    <Compile Include="Game\Aggression\Attacks\SituationalSavingThrowModifier.cs" />
     <Compile Include="Game\Status\Display\CustomVerboseStatusTile.xaml.cs">
       <DependentUpon>CustomVerboseStatusTile.xaml</DependentUpon>
     </Compile>
@@ -309,6 +313,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controlers\Game\Attacks\SituationalModifiers\SituationalHitAttackModifiersUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controlers\Game\Attacks\SituationalModifiers\SituationalSavingThrowModifierUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

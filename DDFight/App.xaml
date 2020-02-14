@@ -92,5 +92,11 @@
         <Style TargetType="{x:Type windows:EditMonsterWindow}" BasedOn="{StaticResource WindowStyle}"/>
         <Style TargetType="{x:Type windows:StatusMessageWindow}" BasedOn="{StaticResource WindowStyle}"/>
 
+        <Style TargetType="{x:Type TextBlock}" x:Key="ErrorMessage" >
+            <Setter Property="Foreground" Value="Red"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+
     </Application.Resources>
 </Application>

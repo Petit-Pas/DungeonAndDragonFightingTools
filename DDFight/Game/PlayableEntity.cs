@@ -375,10 +375,10 @@ namespace DDFight.Game
                 total += damage_value;
                 i += 1;
             }
-            LooseHp(total);
             paragraph.Inlines.Add(Extensions.BuildRun("\nTotal: ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
             paragraph.Inlines.Add(Extensions.BuildRun(total.ToString(), (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
             paragraph.Inlines.Add(Extensions.BuildRun(" damage\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+            LooseHp(total);
         }
 
         public void LooseHp(int amount)
@@ -389,6 +389,13 @@ namespace DDFight.Game
                 ConcentrationCheckWindow window = new ConcentrationCheckWindow();
                 window.DataContext = this;
                 window.ShowDialog();
+                if (window.Success == false)
+                {
+                    this.IsFocused = false;
+                    Paragraph paragraph = (Paragraph)Global.Context.UserLogs.Blocks.LastBlock;
+                    paragraph.Inlines.Add(Extensions.BuildRun(DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
+                    paragraph.Inlines.Add(Extensions.BuildRun(" lost Focus", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                }
             }
         }
 

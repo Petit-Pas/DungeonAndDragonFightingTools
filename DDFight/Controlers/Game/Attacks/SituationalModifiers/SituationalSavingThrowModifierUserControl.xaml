@@ -1,0 +1,28 @@
+﻿<UserControl x:Class="DDFight.Controlers.Game.Attacks.SituationalModifiers.SituationalSavingThrowModifierUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DDFight.Controlers.Game.Attacks.SituationalModifiers"
+             xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <WrapPanel Orientation="Horizontal">
+            <WrapPanel.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Foreground" Value="{StaticResource Light}"/>
+                </Style>
+            </WrapPanel.Resources>
+            <TextBlock
+                VerticalAlignment="Center">
+                Situational Saving Modifier: 
+            </TextBlock>
+            <inputboxes:IntTextBox 
+                VerticalAlignment="Center"
+                Margin="5, 0"
+                Width="40"
+                PropertyPath="Modifier"/>
+        </WrapPanel>
+    </Grid>
+</UserControl>
