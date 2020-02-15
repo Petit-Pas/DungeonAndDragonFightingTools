@@ -34,11 +34,11 @@
         <Grid
             Margin="10">
             <Grid.RowDefinitions>
-                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
                 <!-- Header -->
-                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
                 <!-- Separator -->
-                <RowDefinition/>
+                <RowDefinition Height="*"/>
                 <!-- ItemsControl for array -->
             </Grid.RowDefinitions>
             <Grid

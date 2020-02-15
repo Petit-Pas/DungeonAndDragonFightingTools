@@ -28,15 +28,13 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <Grid
                 Grid.Row="0">
                 <!-- Turn Info Grid -->
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -44,27 +42,28 @@
 
                 <TextBlock
                     Grid.Column="0" Grid.Row="0"
-                    Style="{StaticResource ResourceKey=TurnInfo}">
-                    Round n°: 
-                </TextBlock>
-                <TextBlock
-                    Grid.Column="1" Grid.Row="0" 
                     Style="{StaticResource ResourceKey=TurnInfo}"
-                    DataContext="{Binding Path=FightContext}"
-                    Text="{Binding Path=RoundCount}"/>
+                    DataContext="{Binding FightContext}"
+                    Text="{Binding RoundCount, StringFormat='{}Round n°: {0}'}"
+                    >
+                </TextBlock>
 
                 <TextBlock
                     Grid.Row="1" Grid.Column="0"
+                    x:Name="CharacterTurnTextboxCountrol"
                     Style="{StaticResource ResourceKey=TurnInfo}"
                     Text="Turn of:"/>
-                <TextBlock
-                    x:Name="CharactersTurnTextBox"
-                    Grid.Row="1" Grid.Column="1"
-                    Style="{StaticResource ResourceKey=TurnInfo}"
-                    Text="DEFAULT"/>
-
 
             </Grid>
+
+            <Button
+                Grid.Row="2"
+                Margin="5"
+                FontSize="18"
+                FontWeight="SemiBold"
+                Click="Button_Click">
+                Add To Fight
+            </Button>
             
         </Grid>
     </GroupBox>

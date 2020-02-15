@@ -21,10 +21,10 @@
             Grid.Row="1"
             Background="{StaticResource LightestGray}">
             <TabItem Header="Characters">
-                <ctrl:EditableCharacterListUserControl x:Name="CharacterListControl" Grid.Row="1"/>
+                <ctrl:EditableCharacterListUserControl x:Name="CharacterListControl"/>
             </TabItem>
             <TabItem Header="Monsters">
-                <ctrl:EditableMonsterListUserControl x:Name="MonsterListControl" Grid.Row="1"/>
+                <ctrl:EditableMonsterListUserControl x:Name="MonsterListControl"/>
             </TabItem>
         </TabControl>
 

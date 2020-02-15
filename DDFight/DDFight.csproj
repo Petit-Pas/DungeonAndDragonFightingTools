@@ -226,6 +226,9 @@
     <Compile Include="Game\Status\Display\EditCustomVerboseStatusWindow.xaml.cs">
       <DependentUpon>EditCustomVerboseStatusWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\FightWindows\AddToFightWindow.xaml.cs">
+      <DependentUpon>AddToFightWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\FightWindows\ConcentrationCheckWindow.xaml.cs">
       <DependentUpon>ConcentrationCheckWindow.xaml</DependentUpon>
     </Compile>
@@ -423,6 +426,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Game\Status\Display\EditCustomVerboseStatusWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\FightWindows\AddToFightWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

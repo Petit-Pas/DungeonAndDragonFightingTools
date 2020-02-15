@@ -1,4 +1,5 @@
 ﻿using DDFight.Game.Characteristics;
+using DDFight.Game.Dices;
 using DDFight.Tools;
 using System;
 using System.Collections.Generic;
@@ -62,6 +63,8 @@ namespace DDFight.Game.Fight
             PlayableEntity new_fighter = (PlayableEntity)(monster.Clone());
 
             int i = 0;
+            if (list.Count() != 0)
+                new_fighter.InitiativeRoll = list.ElementAt(i).InitiativeRoll;
             for (; i < list.Count(); i++)
             {
                 string tmp = new_fighter.Name + " - " + i;
@@ -76,6 +79,9 @@ namespace DDFight.Game.Fight
 
         /// <summary>
         ///     Will sort the list in Initiative + Dexterity order, then sets the PlyableEntity.TurnOrder value
+        ///     
+        ///     /!\ should only be called at start of fight, theer is a more complicate handling for when in middle of a fight
+        ///     See SetTurnOrdersMiddleFight()
         /// </summary>
         public void SetTurnOrders()
         {
@@ -99,6 +105,23 @@ namespace DDFight.Game.Fight
                 fighter.TurnOrder = i;
                 i++;
             }
+        }
+
+        public void SetTurnOrdersMiddleFight()
+        {
+            foreach (PlayableEntity fighter in Global.Context.FightContext.FightersList.Fighters)
+            {
+                if (fighter.InitiativeRoll == 0)
+                {
+                    fighter.InitiativeRoll = (uint)DiceRoll.Roll("1d20");
+                    foreach (PlayableEntity tmp in Global.Context.FightContext.FightersList.Fighters)
+                    {
+                        if (tmp.Name == fighter.Name)
+                            tmp.InitiativeRoll = fighter.InitiativeRoll;
+                    }
+                }
+            }
+            SetTurnOrders();
         }
 
         #region INotifyPropertyChanged

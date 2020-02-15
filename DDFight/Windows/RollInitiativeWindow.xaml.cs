@@ -62,7 +62,6 @@ namespace DDFight.Windows
             contextList = new ObservableCollection<InitiativeCellDataContext>();
             foreach (PlayableEntity entity in data_context.Fighters)
             {
-                entity.InitiativeRoll = 0;
                 if (contextList.Any(x => x.Entity.Name == entity.Name))
                 {
                     contextList.First(x => x.Entity.Name == entity.Name).Amount += 1;

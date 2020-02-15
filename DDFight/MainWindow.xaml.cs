@@ -78,6 +78,7 @@ namespace DDFight
                 {
                     if (character.IsTransformed)
                         character.TransformBack();
+                    character.InitiativeRoll = 0;
                 }
 
                 Global.Context.CharacterList.Save();
