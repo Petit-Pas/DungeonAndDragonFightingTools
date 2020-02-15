@@ -141,7 +141,14 @@ namespace DDFight.Controlers.Fight
                 data_context.TransformBack();
             else
             {
-                data_context.Transform(Global.Context.MonsterList.Monsters[0]);
+                SelectPlayableEntityWindow window = new SelectPlayableEntityWindow();
+                window.DataContext = Global.Context.MonsterList.Monsters.Clone<PlayableEntity, MonsterDataContext>();
+                window.Title.Text = "Select the monster in which to transform";
+
+                window.ShowDialog();
+
+                if (window.SelectedCharacter != null)
+                    data_context.Transform(window.SelectedCharacter);
             }
         }
     }
