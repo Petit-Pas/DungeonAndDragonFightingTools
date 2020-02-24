@@ -1,4 +1,5 @@
 ﻿using DDFight.Game;
+using DDFight.Tools;
 using DDFight.Tools.Save;
 using DDFight.Windows;
 using DDFight.Windows.FightWindows;
@@ -32,6 +33,7 @@ namespace DDFight
     {
         public MainWindow()
         {
+            Logger.Init();
             SaveManager.Init();
 
             Global.Context.CharacterList = SaveManager.LoadPlayers();

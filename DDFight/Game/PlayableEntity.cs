@@ -120,6 +120,23 @@ namespace DDFight.Game
         }
         private int _hp = 0;
 
+        /// <summary>
+        ///     used to dump a character in log file (in case of crash, it at least gives information back)
+        /// </summary>
+        internal void Dump()
+        {
+            Logger.Log("----------");
+            Logger.Log(DisplayName + " has " + Hp + " hps");
+            if (CustomVerboseStatusList.List.Count != 0)
+            {
+                Logger.Log("it has the statuses: ");
+                foreach (CustomVerboseStatus status in CustomVerboseStatusList.List)
+                {
+                    Logger.Log("\t- " + status.Header);
+                }
+            }
+        }
+
 
         /// <summary>
         ///     The characteristics of the character

@@ -1,4 +1,5 @@
 ﻿using DDFight.Game.Fight.FightEvents;
+using DDFight.Tools;
 using System;
 using System.ComponentModel;
 using System.Linq;
@@ -95,7 +96,21 @@ namespace DDFight.Game.Fight
             {
                 TurnEnded(this, args);
             }
+            DumpFigthState();
         }
+
+        private void DumpFigthState()
+        {
+            Logger.Log("==============================");
+            Logger.Log("End of the turn of " + CurrentlyPlaying.DisplayName);
+            Logger.Log("");
+            foreach (PlayableEntity tmp in FightersList.Fighters)
+            {
+                tmp.Dump();
+            }
+            Logger.Log("==============================");
+        }
+
         public event EndTurnEventHandler TurnEnded;
 
         public void OnSelectedCharacter(SelectedCharacterEventArgs args)
