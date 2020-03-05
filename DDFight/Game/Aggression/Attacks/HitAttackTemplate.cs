@@ -19,6 +19,8 @@ namespace DDFight.Game.Aggression.Attacks
         [XmlIgnore]
         public bool Validated;
 
+        #region Properties
+
         [XmlAttribute]
         /// <summary>
         ///     Amount of hit (1 target per hit, a target can be focused more than once)
@@ -62,6 +64,8 @@ namespace DDFight.Game.Aggression.Attacks
         }
         private List<DamageTemplate> _damage = new List<DamageTemplate> ();
 
+        #endregion Properties
+
         public List<HitAttackResult> GetResultTemplate()
         {
             List<HitAttackResult> result = new List<HitAttackResult>();
@@ -81,6 +85,7 @@ namespace DDFight.Game.Aggression.Attacks
             }
             return result;
         }
+   
         #region ICloneable
 
         private void init_copy(HitAttackTemplate to_copy)
@@ -100,11 +105,15 @@ namespace DDFight.Game.Aggression.Attacks
             return new HitAttackTemplate(this);
         }
 
+        #region ICopyAssignable
+
         public override void CopyAssign(object to_copy)
         {
             base.CopyAssign(to_copy);
             init_copy((HitAttackTemplate)to_copy);
         }
+
+        #endregion ICopyAssignable
 
         #endregion
     }
