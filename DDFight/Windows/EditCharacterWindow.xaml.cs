@@ -23,8 +23,6 @@ namespace DDFight.Windows
         {
             InitializeComponent();
 
-            MainInfo.NameBoxUserControl.SetFocus();
-
             Loaded += OnControlLoaded;
         }
 
