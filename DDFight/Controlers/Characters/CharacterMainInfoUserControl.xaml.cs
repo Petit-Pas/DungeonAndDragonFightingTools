@@ -12,6 +12,12 @@ namespace DDFight.Controlers.Characters
         public CharacterMainInfoUserControl()
         {
             InitializeComponent();
+            Loaded += CharacterMainInfoUserControl_Loaded;
+        }
+
+        private void CharacterMainInfoUserControl_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            NameBoxUserControl.StringBox.Focus();
         }
 
         public bool IsValid()

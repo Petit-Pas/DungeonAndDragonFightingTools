@@ -34,6 +34,7 @@
             x:Name="StringBox" 
             Style="{StaticResource TextBoxInError}" 
             BorderThickness="2"
-            KeyDown="StringBox_KeyDown"/>
+            KeyDown="StringBox_KeyDown"
+            GotFocus="StringBox_GotFocus"/>
     </Grid>
 </UserControl>

@@ -71,5 +71,10 @@ namespace DDFight.Controlers.Game.Dices
                 InputManager.Current.ProcessInput(args);
             }
         }
+
+        private void textBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            this.textBox.SelectAll();
+        }
     }
 }

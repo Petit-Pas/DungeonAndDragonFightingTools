@@ -36,6 +36,7 @@
                  Background="{StaticResource LightestGray}"
                  BorderThickness="2"
                  Style="{StaticResource TextBoxInError}"
-                 KeyDown="textBox_KeyDown"/>
+                 KeyDown="textBox_KeyDown"
+                 GotFocus="textBox_GotFocus"/>
     </Grid>
 </UserControl>

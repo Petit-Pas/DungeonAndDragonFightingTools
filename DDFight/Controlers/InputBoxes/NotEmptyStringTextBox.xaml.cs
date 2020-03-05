@@ -75,5 +75,10 @@ namespace DDFight.Controlers.InputBoxes
                 InputManager.Current.ProcessInput(args);
             }
         }
+
+        private void StringBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            this.StringBox.SelectAll();
+        }
     }
 }

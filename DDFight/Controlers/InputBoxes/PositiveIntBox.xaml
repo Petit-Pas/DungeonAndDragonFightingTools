@@ -32,6 +32,7 @@
             x:Name="IntBox" 
             Style="{StaticResource TextBoxInError}" 
             KeyDown="IntBox_KeyDown"
-            BorderThickness="2"/>
+            BorderThickness="2"
+            GotFocus="IntBox_GotFocus"/>
     </Grid>
 </UserControl>

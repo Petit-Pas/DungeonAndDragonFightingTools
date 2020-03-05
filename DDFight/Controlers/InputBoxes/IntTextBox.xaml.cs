@@ -19,11 +19,6 @@ namespace DDFight.Controlers.InputBoxes
         public IntTextBox()
         {
             InitializeComponent();
-            Loaded += IntTextBox_Loaded;
-        }
-
-        private void IntTextBox_Loaded(object sender, RoutedEventArgs e)
-        {
         }
 
         /// <summary>
@@ -97,6 +92,11 @@ namespace DDFight.Controlers.InputBoxes
                 args.RoutedEvent = Keyboard.KeyDownEvent;
                 InputManager.Current.ProcessInput(args);
             }
+        }
+
+        private void IntBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            this.IntBox.SelectAll();
         }
     }
 }
