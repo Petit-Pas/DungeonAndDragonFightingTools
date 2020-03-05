@@ -119,12 +119,15 @@ namespace DDFight.Game.Dices
             return dice.LastResult;
         }
 
-        public int Roll()
+        public int Roll(bool critical = false)
         {
             int result = Modifier;
 
             foreach(Dices dice in DicesList)
             {
+                // in case of critical, the dices are rolled twice, but not the bonus to damage (with 1d4+2, a critical shall roll 2d4+2, and not 2D4+4)
+                if (dice.ToString().Contains("d") && critical == true)
+                    result += dice.Roll();
                 result += dice.Roll();
             }
             LastResult = result;

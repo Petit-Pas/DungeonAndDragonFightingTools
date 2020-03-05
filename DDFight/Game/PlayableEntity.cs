@@ -475,8 +475,21 @@ namespace DDFight.Game
             tmp.Inlines.Add(Extensions.BuildRun((result.SituationalHitAttackModifiers.ACModifier + this.CA).ToString(), (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
             tmp.Inlines.Add(Extensions.BuildRun(" ==> ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
 
+            // Critical Miss
+            if (result.HitRoll == 1)
+            {
+                tmp.Inlines.Add(Extensions.BuildRun(" Critical Miss!\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+            }
+
+            // Critical Hit
+            else if (result.HitRoll >= 20)
+            {
+                tmp.Inlines.Add(Extensions.BuildRun(" Critical Hit!\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                TakeHitDamage(result.DamageList);
+            }
+
             // if the character gets hit with a normal hit
-            if (result.HitRoll + result.HitBonus + result.SituationalHitAttackModifiers.HitModifier >= result.SituationalHitAttackModifiers.ACModifier + this.CA)
+            else if (result.HitRoll + result.HitBonus + result.SituationalHitAttackModifiers.HitModifier >= result.SituationalHitAttackModifiers.ACModifier + this.CA)
             {
                 tmp.Inlines.Add(Extensions.BuildRun(" Hit!\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
                 TakeHitDamage(result.DamageList);
@@ -492,7 +505,7 @@ namespace DDFight.Game
 
         #endregion Fight
 
-        public virtual void OpenEditWindow()
+        public virtual bool OpenEditWindow()
         {
             throw new NotImplementedException();
         }

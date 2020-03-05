@@ -92,7 +92,7 @@ namespace DDFight.Windows.FightWindows
                             foreach (DamageTemplate dmg in attacks[i].DamageList)
                             {
                                 if (dmg.Damage.LastResult == 0)
-                                    dmg.Damage.Roll();
+                                    dmg.Damage.Roll(attacks[i].HitRoll >= 20 ? true : false);
                             }
                             // Enables the validate button
                             ((Button)rollButtons[i]).IsEnabled = false;
