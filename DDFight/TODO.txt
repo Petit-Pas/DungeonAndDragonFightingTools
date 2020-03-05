@@ -15,3 +15,7 @@ should have possibility to add minus sign in DiceRolls
 Any function that use llist.SelectedItem should have a null protection
 
 Bonus to Hit in HitAttackTemplate should be allowed to be negative
+
+//////
+Add citical implementation
+Add comment on attacks & playableEntities

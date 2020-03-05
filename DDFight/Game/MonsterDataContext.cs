@@ -31,7 +31,7 @@ namespace DDFight.Game
 
         #endregion
 
-        public override void OpenEditWindow()
+        public override bool OpenEditWindow()
         {
             EditMonsterWindow window = new EditMonsterWindow();
             MonsterDataContext temporary = (MonsterDataContext)this.Clone();
@@ -42,7 +42,9 @@ namespace DDFight.Game
             if (temporary.Validated == true)
             {
                 this.CopyAssign(temporary);
+                return true;
             }
+            return false;
         }
 
         #region ICloneable

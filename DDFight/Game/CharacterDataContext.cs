@@ -35,7 +35,7 @@ namespace DDFight.Game
 
         #endregion
 
-        public override void OpenEditWindow()
+        public override bool OpenEditWindow()
         {
             EditCharacterWindow window = new EditCharacterWindow();
             CharacterDataContext temporary = (CharacterDataContext)this.Clone();
@@ -46,7 +46,9 @@ namespace DDFight.Game
             if (temporary.Validated == true)
             {
                 this.CopyAssign(temporary);
+                return true;
             }
+            return false;
         }
 
     private void init_copy(CharacterDataContext to_copy)

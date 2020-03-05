@@ -67,7 +67,6 @@ namespace DDFight.Controlers
         private void add_Monster(MonsterDataContext Monster)
         {
             data_context.MonsterList.AddMonster(Monster);
-
         }
 
         /// <summary>
@@ -79,7 +78,8 @@ namespace DDFight.Controlers
         {
             MonsterDataContext Monster = new MonsterDataContext();
 
-            add_Monster(Monster);
+            if (Monster.OpenEditWindow())
+                add_Monster(Monster);
         }
 
         private void DuplicateMonster_MenuItem_Click(object sender, RoutedEventArgs e)

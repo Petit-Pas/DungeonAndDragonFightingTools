@@ -1,5 +1,6 @@
 ﻿using DDFight.Game;
 using DDFight.Windows;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -77,7 +78,8 @@ namespace DDFight.Controlers
         {
             CharacterDataContext character = new CharacterDataContext();
 
-            add_character(character);
+            if (character.OpenEditWindow())
+                add_character(character);
         }
 
         private void DuplicateCharacter_MenuItem_Click(object sender, RoutedEventArgs e)
