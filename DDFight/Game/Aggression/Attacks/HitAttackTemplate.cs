@@ -83,16 +83,27 @@ namespace DDFight.Game.Aggression.Attacks
         }
         #region ICloneable
 
-        protected HitAttackTemplate(HitAttackTemplate to_copy) : base(to_copy)
+        private void init_copy(HitAttackTemplate to_copy)
         {
             HitBonus = to_copy.HitBonus;
             HitAmount = to_copy.HitAmount;
             DamageList = (List<DamageTemplate>)to_copy.DamageList.Clone();
         }
 
+        protected HitAttackTemplate(HitAttackTemplate to_copy) : base(to_copy)
+        {
+            init_copy(to_copy);
+        }
+
         public new object Clone()
         {
             return new HitAttackTemplate(this);
+        }
+
+        public override void CopyAssign(object to_copy)
+        {
+            base.CopyAssign(to_copy);
+            init_copy((HitAttackTemplate)to_copy);
         }
 
         #endregion

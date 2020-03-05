@@ -45,17 +45,28 @@ namespace DDFight.Game.Aggression.Attacks
 
         #region ICloneable
 
-        protected AAttackTemplate(AAttackTemplate to_copy)
+        private void init_copy(AAttackTemplate to_copy)
         {
             Name = (string)to_copy.Name.Clone();
             Range = to_copy.Range;
+        }
+
+        protected AAttackTemplate(AAttackTemplate to_copy)
+        {
+            init_copy(to_copy);
         }
 
         public object Clone()
         {
             throw new MissingMethodException("Cannot clone an instance of AAttackTemplate");
         }
-        #endregion
+
+        public virtual void CopyAssign(object to_copy)
+        {
+            init_copy((AAttackTemplate)to_copy);
+        }
+
+        #endregion IConeable
 
         #region Range
 
