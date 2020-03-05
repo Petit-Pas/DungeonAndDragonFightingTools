@@ -1,5 +1,7 @@
-﻿using System;
+﻿using DDFight.Windows;
+using System;
 using System.Collections.Generic;
+using System.Windows;
 using System.Xml.Serialization;
 
 namespace DDFight.Game.Aggression.Attacks
@@ -85,7 +87,23 @@ namespace DDFight.Game.Aggression.Attacks
             }
             return result;
         }
-   
+
+        public bool OpenEditWindow()
+        {
+            EditHitAttackTemplateWindow window = new EditHitAttackTemplateWindow();
+            HitAttackTemplate temporary = (HitAttackTemplate)this.Clone();
+            window.DataContext = temporary;
+
+            window.ShowDialog();
+
+            if (temporary.Validated == true)
+            {
+                this.CopyAssign(temporary);
+                return true;
+            }
+            return false;
+        }
+
         #region ICloneable
 
         private void init_copy(HitAttackTemplate to_copy)

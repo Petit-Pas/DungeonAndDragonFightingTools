@@ -48,7 +48,8 @@ namespace DDFight.Controlers.Game.Attacks
         {
             HitAttackTemplate atk = new HitAttackTemplate();
 
-            add_attack(atk);
+            if (atk.OpenEditWindow())
+                add_attack(atk);
         }
 
         private void DuplicateAttack_MenuItem_Click(object sender, RoutedEventArgs e)
@@ -91,20 +92,7 @@ namespace DDFight.Controlers.Game.Attacks
 
         private void update_attack(HitAttackTemplate to_update)
         {
-            EditHitAttackTemplateWindow window = new EditHitAttackTemplateWindow
-            {
-                Owner = Window.GetWindow(this),
-            };
-            HitAttackTemplate temporary = (HitAttackTemplate)to_update.Clone();
-            window.DataContext = temporary;
-
-            window.ShowDialog();
-
-            if (temporary.Validated == true)
-            {
-                int index = this.AttacksList.SelectedIndex;
-                data_context.HitAttacks[index] = temporary;
-            }
+            to_update.OpenEditWindow();
         }
 
         /// <summary>
