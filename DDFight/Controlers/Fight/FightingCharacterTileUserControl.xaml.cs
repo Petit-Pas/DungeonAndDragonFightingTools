@@ -151,5 +151,12 @@ namespace DDFight.Controlers.Fight
                     data_context.Transform(window.SelectedCharacter);
             }
         }
+
+        private void SavingThrow_Click(object sender, RoutedEventArgs e)
+        {
+            CustomSavingThrowWindow window = new CustomSavingThrowWindow();
+            window.DataContext = this.DataContext;
+            window.ShowDialog();
+        }
     }
 }

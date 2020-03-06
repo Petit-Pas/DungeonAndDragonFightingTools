@@ -110,6 +110,9 @@
     <Compile Include="Controlers\Game\Attacks\SituationalModifiers\SituationalSavingThrowModifierUserControl.xaml.cs">
       <DependentUpon>SituationalSavingThrowModifierUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controlers\Game\Characteristics\CharacteristicDropdownListUserControl.xaml.cs">
+      <DependentUpon>CharacteristicDropdownListUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controlers\Game\Characteristics\EditableCharacteristicsListUserControl.xaml.cs">
       <DependentUpon>EditableCharacteristicsListUserControl.xaml</DependentUpon>
     </Compile>
@@ -232,6 +235,9 @@
     <Compile Include="Windows\FightWindows\ConcentrationCheckWindow.xaml.cs">
       <DependentUpon>ConcentrationCheckWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\FightWindows\CustomSavingThrowWindow.xaml.cs">
+      <DependentUpon>CustomSavingThrowWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\FightWindows\ExecuteHitAttackWindow.xaml.cs">
       <DependentUpon>ExecuteHitAttackWindow.xaml</DependentUpon>
     </Compile>
@@ -323,6 +329,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controlers\Game\Attacks\SituationalModifiers\SituationalSavingThrowModifierUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controlers\Game\Characteristics\CharacteristicDropdownListUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -434,6 +444,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\FightWindows\ConcentrationCheckWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\FightWindows\CustomSavingThrowWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

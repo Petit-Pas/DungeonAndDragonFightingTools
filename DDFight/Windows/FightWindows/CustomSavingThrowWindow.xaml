@@ -1,0 +1,132 @@
+﻿<Window x:Class="DDFight.Windows.FightWindows.CustomSavingThrowWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DDFight.Windows.FightWindows"
+        xmlns:characteristics="clr-namespace:DDFight.Controlers.Game.Characteristics"
+        xmlns:situationalmodifiers="clr-namespace:DDFight.Controlers.Game.Attacks.SituationalModifiers"
+        xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes"
+        mc:Ignorable="d"
+        Title="CustomSavingThrowWindow" Height="350" Width="400"
+        Background="{StaticResource LightestGray}"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock
+            Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+            Margin="10"
+            FontSize="15"
+            TextWrapping="Wrap"
+            TextAlignment="Center"
+            Foreground="{StaticResource Light}"
+            Text="{Binding DisplayName, 
+            StringFormat='Character {0} will now do a saving throw'}"/>
+
+        <WrapPanel
+            Grid.Row="1"
+            Orientation="Horizontal" 
+            Margin="10">
+            <TextBlock
+                VerticalAlignment="Center"
+                Foreground="{StaticResource Light}"
+                FontSize="18"
+                FontWeight="SemiBold"
+                Margin="0,0,5,0">
+                Characteristic: 
+            </TextBlock>
+            <characteristics:CharacteristicDropdownListUserControl
+                MinWidth="100"
+                VerticalAlignment="Center"
+                PropertyPath="Characteristic"
+                DataContext="{Binding ., RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                />
+        </WrapPanel>
+
+        <WrapPanel
+            Grid.Row="2"
+            Orientation="Horizontal" 
+            Margin="10">
+            <TextBlock
+                VerticalAlignment="Center"
+                Margin="0,0,5,0"
+                Foreground="{StaticResource Light}"
+                FontSize="18"
+                FontWeight="SemiBold">
+                Difficulty:
+            </TextBlock>
+            <inputboxes:RangedIntBox 
+                x:Name="testBox"
+                MinWidth="30"
+                PropertyMin="1"
+                PropertyMax="30"
+                PropertyPath="Difficulty"
+                DataContext="{Binding ., RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                />
+        </WrapPanel>
+
+        
+        <situationalmodifiers:SituationalAdvantageModifiersUserControl
+            Grid.Row="3" 
+            Margin="10, 5"
+            DataContext="{Binding AdvantageModifiers, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"/>
+        <situationalmodifiers:SituationalSavingThrowModifierUserControl 
+            Grid.Row="4"
+            Margin="10,5"
+            DataContext="{Binding SituationalSavingThrowModifier, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+            />
+
+        <WrapPanel 
+            Orientation="Horizontal" 
+            Grid.Row="5"
+            HorizontalAlignment="Center"
+            Margin="10">
+            <TextBlock
+                VerticalAlignment="Center"
+                Foreground="{StaticResource Light}"
+                FontSize="18"
+                FontWeight="SemiBold">
+                Roll
+            </TextBlock>
+            <inputboxes:RangedIntBox
+                DataContext="{Binding ., RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                VerticalAlignment="Center"
+                Margin="5"
+                Grid.Row="3"
+                Width="40"
+                PropertyMax="20"
+                PropertyMin="0"
+                PropertyPath="Roll"
+            />
+        </WrapPanel>
+
+        <TextBlock
+            x:Name="ErrorMessageControl"
+            Grid.Row="6"
+            HorizontalAlignment="Center"
+            Style="{StaticResource ErrorMessage}"
+            Visibility="Collapsed">
+            At least one of the input boxes is badly filled, or you forgot to choose a characteristic
+        </TextBlock>
+        <Button
+            Grid.Row="7"
+            x:Name="ButtonControl"
+            Margin="10"
+            Width="150"
+            FontSize="18"
+            Padding="10"
+            Click="Button_Click">
+            Automatic Roll
+        </Button>
+    </Grid>
+</Window>

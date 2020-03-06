@@ -67,7 +67,6 @@ namespace DDFight.Game.Aggression.Attacks
         private List<DamageTemplate> _damage = new List<DamageTemplate> ();
 
         #endregion Properties
-
         public List<HitAttackResult> GetResultTemplate()
         {
             List<HitAttackResult> result = new List<HitAttackResult>();
