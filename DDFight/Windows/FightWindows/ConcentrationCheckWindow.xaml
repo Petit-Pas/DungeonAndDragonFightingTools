@@ -10,7 +10,8 @@
         Title="ConcentrationCheckWindow" Height="300" Width="400"
         Background="{StaticResource LightestGray}"
         x:Name="CurrentWindow"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
