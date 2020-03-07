@@ -76,6 +76,7 @@ namespace DDFight.Controlers.InputBoxes
         {
             var ctl = d as RangedIntBox;
 
+            Console.WriteLine("{2}: Max is {0}, Min is {1}", ctl.PropertyMax, ctl.PropertyMin, ctl.Name);
             var binding = new Binding(ctl.PropertyPath)
             {
                 ValidationRules = { new RangedIntRule { Max=ctl.PropertyMax, Min=ctl.PropertyMin} },

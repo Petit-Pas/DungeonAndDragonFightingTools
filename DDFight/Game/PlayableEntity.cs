@@ -544,6 +544,10 @@ namespace DDFight.Game
             Characteristics = (CharacteristicsDataContext)to_copy.Characteristics.Clone();
             DamageAffinities = (DamageTypeAffinitiesDataContext)to_copy.DamageAffinities.Clone();
             HitAttacks = to_copy.HitAttacks.Clone();
+            foreach (HitAttackTemplate atk in HitAttacks)
+            {
+                atk.Owner = this;
+            }
             CustomVerboseStatusList = (CustomVerboseStatusList)to_copy.CustomVerboseStatusList.Clone();
             DisplayName = (string)to_copy.DisplayName.Clone();
             TurnOrder = to_copy.TurnOrder;
