@@ -34,7 +34,8 @@
         ContextMenu="{StaticResource CMenu}"
         Background="{StaticResource Gray}"
         BorderThickness="0"
-        MouseLeftButtonUp="MainControl_MouseLeftButtonUp">
+        MouseLeftButtonUp="MainControl_MouseLeftButtonUp"
+        MouseDoubleClick="Edit_Click">
         <Grid
             Margin="10, 0">
             <Grid.ColumnDefinitions>

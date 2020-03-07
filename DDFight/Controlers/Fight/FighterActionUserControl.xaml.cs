@@ -41,15 +41,7 @@ namespace DDFight.Controlers.Fight
 
         private void FightContext_CharacterSelected(object sender, SelectedCharacterEventArgs args)
         {
-            NextTurnButton.IsEnabled = false;
-            if (Global.Context.FightContext.CurrentlyPlaying == args.Character)
-                NextTurnButton.IsEnabled = true;
             DataContext = args.Character;
-        }
-
-        private void NextTurn_Button_Click(object sender, RoutedEventArgs e)
-        {
-            Global.Context.FightContext.NextTurn();
         }
 
         public void UnregisterToAll()

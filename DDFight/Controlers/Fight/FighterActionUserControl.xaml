@@ -34,12 +34,6 @@
             <fight:DetailsListHitAttackTemplateUserControl 
                 x:Name="AttacksListControl"
                 Grid.Row="0" Grid.Column="0"/>
-
-            <Button 
-                x:Name="NextTurnButton"
-                Grid.Row="0" Grid.Column="2"
-                Click="NextTurn_Button_Click"
-                Content="Next Turn"/>
         </Grid>
     </GroupBox>
 </UserControl>

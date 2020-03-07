@@ -28,6 +28,7 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
@@ -57,7 +58,17 @@
             </Grid>
 
             <Button
-                Grid.Row="2"
+                x:Name="NextTurnButton"
+                Grid.Row="1"
+                Margin="5"
+                FontSize="18"
+                FontWeight="SemiBold"
+                Click="NextTurnButton_Click">
+                Next Turn
+            </Button>
+
+            <Button
+                Grid.Row="3"
                 Margin="5"
                 FontSize="18"
                 FontWeight="SemiBold"

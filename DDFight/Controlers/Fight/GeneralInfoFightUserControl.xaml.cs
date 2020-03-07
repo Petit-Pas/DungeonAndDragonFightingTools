@@ -65,5 +65,10 @@ namespace DDFight.Controlers.Fight
             }
 
         }
+
+        private void NextTurnButton_Click(object sender, RoutedEventArgs e)
+        {
+            Global.Context.FightContext.NextTurn();
+        }
     }
 }
