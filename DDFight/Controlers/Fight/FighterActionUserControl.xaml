@@ -27,13 +27,26 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <fight:DetailsListHitAttackTemplateUserControl 
-                x:Name="AttacksListControl"
-                Grid.Row="0" Grid.Column="0"/>
+            <TabControl
+                Background="{StaticResource LightestGray}">
+                <TabItem Header="Capacitites">
+                    <TextBlock 
+                        Margin="5"
+                        Padding="5"
+                        MinWidth="250"
+                        Foreground="{StaticResource Light}"
+                        Background="{StaticResource Gray}"
+                        TextWrapping="Wrap"
+                        Text="{Binding SpecialCapacities}"/>
+                </TabItem>
+                <TabItem Header="Attacks">
+                    <fight:DetailsListHitAttackTemplateUserControl 
+                        x:Name="AttacksListControl"/>
+                </TabItem>
+            </TabControl>
+            
         </Grid>
     </GroupBox>
 </UserControl>

@@ -11,6 +11,7 @@
         xmlns:dices="clr-namespace:DDFight.Controlers.Game.Dices"
         xmlns:attacks="clr-namespace:DDFight.Controlers.Game.Attacks"
         xmlns:status="clr-namespace:DDFight.Game.Status.Display"
+        xmlns:game="clr-namespace:DDFight.Game"
         Title="Edit Character" Height="600" Width="400"
         WindowStartupLocation="CenterOwner"
         Closing="Window_Closing">
@@ -29,6 +30,10 @@
             <TabItem Header="Affinities">
                 <damageaffinity:EditableDamageAffinityListUserControl 
                     x:Name="DamageAffinities"/>
+            </TabItem>
+            <TabItem Header="Capacities">
+                <game:EditableSpecialCapacitiesUserControl
+                    x:Name="SpecialCapacitiesControl"/>
             </TabItem>
             <TabItem Header="Attacks">
                 <attacks:EditableListHitAttackTemplate />

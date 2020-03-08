@@ -126,7 +126,11 @@
       <DependentUpon>EditableDiceRollUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BoolToCustomStringConverter.cs" />
+    <Compile Include="Converters\StringToVisibilityConverter.cs" />
     <Compile Include="Game\Aggression\Attacks\SituationalSavingThrowModifier.cs" />
+    <Compile Include="Game\EditableSpecialCapacitiesUserControl.xaml.cs">
+      <DependentUpon>EditableSpecialCapacitiesUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Game\Status\Display\CustomVerboseStatusTile.xaml.cs">
       <DependentUpon>CustomVerboseStatusTile.xaml</DependentUpon>
     </Compile>
@@ -349,6 +353,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controlers\Game\Dices\EditableDiceRollUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\EditableSpecialCapacitiesUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

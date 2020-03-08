@@ -175,6 +175,18 @@ namespace DDFight.Game
         }
         private string _actionDescription = "";
 
+        [XmlAttribute]
+        public string SpecialCapacities
+        {
+            get => _specialCapacities;
+            set
+            {
+                _specialCapacities = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private string _specialCapacities = "";
+
         public ObservableCollection<HitAttackTemplate> HitAttacks
         {
             get => _hitAttacks;
@@ -565,6 +577,7 @@ namespace DDFight.Game
             TurnOrder = to_copy.TurnOrder;
             InitiativeRoll = to_copy.InitiativeRoll;
             ActionDescription = (string)to_copy.ActionDescription.Clone();
+            SpecialCapacities = (string)to_copy.SpecialCapacities.Clone();
         }
 
         /// <summary>
