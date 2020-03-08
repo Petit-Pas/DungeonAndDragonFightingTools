@@ -8,13 +8,13 @@ namespace DDFight.Tools.Save
         /// <summary>
         ///     The list of Monsters
         /// </summary>
-        public ObservableCollection<MonsterDataContext> Monsters = new ObservableCollection<MonsterDataContext>();
+        public ObservableCollection<Monster> Monsters = new ObservableCollection<Monster>();
 
         /// <summary>
         ///     Method to add and save a Monster
         /// </summary>
         /// <param name="Monster"></param>
-        public void AddMonster(MonsterDataContext Monster)
+        public void AddMonster(Monster Monster)
         {
             Monsters.Add(Monster);
             Save();
@@ -24,7 +24,7 @@ namespace DDFight.Tools.Save
         ///     Method to remove a Monster, then save
         /// </summary>
         /// <param name="Monster"></param>
-        public void RemoveMonster(MonsterDataContext Monster)
+        public void RemoveMonster(Monster Monster)
         {
             Monsters.Remove(Monster);
             Save();
@@ -46,7 +46,7 @@ namespace DDFight.Tools.Save
         /// </summary>
         /// <param name="to_update"></param>
         /// <param name="temporary"></param>
-        public void Replace(MonsterDataContext to_replace, MonsterDataContext new_Monster)
+        public void Replace(Monster to_replace, Monster new_Monster)
         {
             for (int i = 0; i != Monsters.Count; i += 1)
             {

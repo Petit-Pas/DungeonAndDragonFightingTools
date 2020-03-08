@@ -14,7 +14,7 @@ namespace DDFight.Windows
     /// </summary>
     public partial class EditCharacterWindow : Window
     {
-        private CharacterDataContext data_context { get => (CharacterDataContext)DataContext; }
+        private Character data_context { get => (Character)DataContext; }
 
         /// <summary>
         ///     Ctor

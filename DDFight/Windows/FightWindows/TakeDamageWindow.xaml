@@ -28,8 +28,8 @@
             FontWeight="SemiBold">
             Used to inflict arbitrary damage on a character. You can either enter precise numbers, or dices to roll. Damage affinities will be applied automatically
         </TextBlock>
-        
-        <damagelistcontrols:EditableDamageListUserControl 
+
+        <damagelistcontrols:DamageTemplateListEditableUserControl 
             x:Name="DamageControl"
             Grid.Row="1" Grid.Column="0"
             Margin="10, 10, 10, 0"/>

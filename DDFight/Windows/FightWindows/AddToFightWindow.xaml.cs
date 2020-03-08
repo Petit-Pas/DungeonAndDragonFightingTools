@@ -42,8 +42,8 @@ namespace DDFight.Windows.FightWindows
             {
                 if (CharacterListControl.SelectedItem != null)
                 {
-                    ((CharacterDataContext)CharacterListControl.SelectedItem).DisplayName = ((CharacterDataContext)CharacterListControl.SelectedItem).Name;
-                    Global.Context.FightContext.FightersList.AddCharacter((CharacterDataContext)CharacterListControl.SelectedItem);
+                    ((Character)CharacterListControl.SelectedItem).DisplayName = ((Character)CharacterListControl.SelectedItem).Name;
+                    Global.Context.FightContext.FightersList.AddCharacter((Character)CharacterListControl.SelectedItem);
                 }
             }
         }
@@ -54,8 +54,8 @@ namespace DDFight.Windows.FightWindows
             {
                 if (MonsterListControl.SelectedItem != null)
                 {
-                    ((MonsterDataContext)MonsterListControl.SelectedItem).DisplayName = ((MonsterDataContext)MonsterListControl.SelectedItem).Name;
-                    Global.Context.FightContext.FightersList.AddMonster((MonsterDataContext)MonsterListControl.SelectedItem);
+                    ((Monster)MonsterListControl.SelectedItem).DisplayName = ((Monster)MonsterListControl.SelectedItem).Name;
+                    Global.Context.FightContext.FightersList.AddMonster((Monster)MonsterListControl.SelectedItem);
                 }
             }
         }

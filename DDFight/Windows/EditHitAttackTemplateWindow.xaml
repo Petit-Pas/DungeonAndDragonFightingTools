@@ -17,7 +17,7 @@
             <RowDefinition  Height="Auto"/>
             <!-- buttons -->
         </Grid.RowDefinitions>
-        <attacks:EditableHitAttackTemplateUserControl 
+        <attacks:HitAttackTemplateEditableUserControl 
             x:Name="AttacksListUserControl"
             Grid.Row="0"/>
         <Grid

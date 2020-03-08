@@ -1,0 +1,114 @@
+﻿<UserControl x:Class="DDFight.Controlers.Game.Characteristics.CharacteristicsListEditableUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:input="clr-namespace:DDFight.Controlers.InputBoxes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" Grid.IsSharedSizeScope="True">
+    <UserControl.Resources>
+        <Style TargetType="input:IntTextBox">
+            <Setter Property="Margin" Value="5,3"></Setter>
+        </Style>
+        <Style TargetType="input:PositiveIntTextBox">
+            <Setter Property="Margin" Value="5,3"></Setter>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Margin" Value="5,3" />
+            <Setter Property="Foreground" Value="{StaticResource Light}"/>
+        </Style>
+    </UserControl.Resources>
+
+    <GroupBox
+        BorderBrush="{StaticResource LightestGray}"
+        Margin="0, 5, 0, 0"
+        Padding="0,10,0,0">
+        <GroupBox.Header>
+            <TextBlock
+                Background="{StaticResource LightestGray}"
+                FontSize="15"
+                FontWeight="SemiBold">
+                Bonus to Characteristics
+            </TextBlock>
+        </GroupBox.Header>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <!-- Header -->
+                <RowDefinition Height="Auto" />
+                <!-- Attributes Array -->
+            </Grid.RowDefinitions>
+
+            <Grid
+                x:Name="MasteryBonusControl"
+                Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition SharedSizeGroup="FirstColumn"/>
+                    <!-- Label -->
+                    <ColumnDefinition SharedSizeGroup="SecondColumn"/>
+                    <!-- Padding -->
+                    <ColumnDefinition Width="Auto"/>
+                    <!-- TextBox -->
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <!-- Mastery -->
+                    <RowDefinition />
+                    <!-- Separator -->
+                </Grid.RowDefinitions>
+                <TextBlock 
+                    Grid.Row="0" Grid.Column="0"
+                    Foreground="{StaticResource Light}">
+                    Mastery Bonus
+                </TextBlock>
+                <input:PositiveIntTextBox 
+                    Grid.Column="2" 
+                    x:Name="MasteryBonusBox" 
+                    PropertyPath="Characteristics.MasteryBonus"
+                    MinWidth="90"
+                    HorizontalAlignment="Left"
+                    Margin="10,2"
+                    />
+                <Separator 
+                    Grid.Row="1" Grid.ColumnSpan="3"
+                    Margin="5,5, 10, 5"/>
+            </Grid>
+            
+            <ItemsControl 
+                x:Name="CharacteristicsListView" 
+                Grid.Row="1"
+                Margin="5, 0"
+                Focusable="False">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition SharedSizeGroup="FirstColumn"/>
+                                <ColumnDefinition SharedSizeGroup="SecondColumn"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock 
+                                Grid.Row="0" Grid.Column="0"
+                                Foreground="{StaticResource Light}"
+                                Text="{Binding Name}">
+                            </TextBlock>
+                            <CheckBox 
+                                Margin="10,0"
+                                Grid.Row="0" Grid.Column="1"
+                                IsChecked="{Binding Mastery}">
+                            </CheckBox>
+                            <input:IntTextBox
+                                x:Name="ModifierBox"
+                                Grid.Row="0" Grid.Column="2"
+                                PropertyPath="Modifier">
+                            </input:IntTextBox>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            
+        </Grid>
+        
+    </GroupBox>
+</UserControl>

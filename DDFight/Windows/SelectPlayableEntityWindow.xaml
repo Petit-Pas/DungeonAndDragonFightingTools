@@ -15,8 +15,8 @@
         </Grid.RowDefinitions>
 
         <TextBlock
+            x:Name="TitleControl"
             Grid.Row="0"
-            x:Name="Title"
             Foreground="{StaticResource Light}"
             Margin="10"
             TextWrapping="Wrap"

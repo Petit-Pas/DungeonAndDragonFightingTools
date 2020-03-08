@@ -82,7 +82,7 @@ namespace DDFight.Tools.Save
             return result;
         }
 
-        #endregion
+        #endregion Players
 
         #region Monsters
 
@@ -113,6 +113,7 @@ namespace DDFight.Tools.Save
                 StreamReader reader = new StreamReader(monsters_config_file);
                 result = (MonstersList)serializer.Deserialize(reader);
                 reader.Close();
+                Console.WriteLine("import of monsters went fine");
             }
             catch (FileNotFoundException)
             {
@@ -122,9 +123,10 @@ namespace DDFight.Tools.Save
             {
                 Logger.Log(String.Format("Unknown error while trying to load the characters file: {0}, {1}", e.Message, e.StackTrace));
             }
+            Console.WriteLine("COCHON: found {0} monsters to load", result.Monsters.Count);
             return result;
         }
 
-        #endregion
+        #endregion Monsters
     }
 }

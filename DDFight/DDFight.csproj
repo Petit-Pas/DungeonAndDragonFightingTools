@@ -62,44 +62,44 @@
     <Compile Include="Controlers\Characters\CharacterMainInfoUserControl.xaml.cs">
       <DependentUpon>CharacterMainInfoUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controlers\Fight\ConsoleUserControl.xaml.cs">
-      <DependentUpon>ConsoleUserControl.xaml</DependentUpon>
+    <Compile Include="Controlers\Fight\FightConsoleUserControl.xaml.cs">
+      <DependentUpon>FightConsoleUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controlers\Fight\FighterActionUserControl.xaml.cs">
-      <DependentUpon>FighterActionUserControl.xaml</DependentUpon>
+    <Compile Include="Controlers\Fight\FightingEntityActionsUserControl.xaml.cs">
+      <DependentUpon>FightingEntityActionsUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controlers\Fight\FightingCharacterListUserControl.xaml.cs">
-      <DependentUpon>FightingCharacterListUserControl.xaml</DependentUpon>
+    <Compile Include="Controlers\Fight\FightingEntityListUserControl.xaml.cs">
+      <DependentUpon>FightingEntityListUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controlers\Fight\FightingCharacterTileUserControl.xaml.cs">
-      <DependentUpon>FightingCharacterTileUserControl.xaml</DependentUpon>
+    <Compile Include="Controlers\Fight\FightingEntityTileUserControl.xaml.cs">
+      <DependentUpon>FightingEntityTileUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controlers\Fight\GeneralInfoFightUserControl.xaml.cs">
-      <DependentUpon>GeneralInfoFightUserControl.xaml</DependentUpon>
+    <Compile Include="Controlers\Fight\FightGeneralInfoUserControl.xaml.cs">
+      <DependentUpon>FightGeneralInfoUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controlers\Game\Attacks\DamageListControls\EditableDamageListUserControl.xaml.cs">
-      <DependentUpon>EditableDamageListUserControl.xaml</DependentUpon>
+    <Compile Include="Controlers\Game\Attacks\DamageListControls\DamageTemplateListEditableUserControl.xaml.cs">
+      <DependentUpon>DamageTemplateListEditableUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controlers\Game\Attacks\DamageListControls\PlayableDamageListUserControl.xaml.cs">
-      <DependentUpon>PlayableDamageListUserControl.xaml</DependentUpon>
+    <Compile Include="Controlers\Game\Attacks\DamageListControls\DamageTemplateListRollableUserControl.xaml.cs">
+      <DependentUpon>DamageTemplateListRollableUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controlers\Game\Attacks\DamageListControls\ReadOnlyDamageListUserControl.xaml.cs">
-      <DependentUpon>ReadOnlyDamageListUserControl.xaml</DependentUpon>
+    <Compile Include="Controlers\Game\Attacks\DamageListControls\DamageTemplateListReadOnlyUserControl.xaml.cs">
+      <DependentUpon>DamageTemplateListReadOnlyUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controlers\Game\Attacks\DetailsHitAttackTemplateUserControl.xaml.cs">
-      <DependentUpon>DetailsHitAttackTemplateUserControl.xaml</DependentUpon>
+    <Compile Include="Controlers\Game\Attacks\HitAttackTemplateDetailsPreviewUserControl.xaml.cs">
+      <DependentUpon>HitAttackTemplateDetailsPreviewUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controlers\Game\Attacks\DetailsListHitAttackTemplateUserControl.xaml.cs">
-      <DependentUpon>DetailsListHitAttackTemplateUserControl.xaml</DependentUpon>
+    <Compile Include="Controlers\Game\Attacks\HitAttackTemplateListPreviewUserControl.xaml.cs">
+      <DependentUpon>HitAttackTemplateListPreviewUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controlers\Game\Attacks\EditableHitAttackTemplateUserControl.xaml.cs">
-      <DependentUpon>EditableHitAttackTemplateUserControl.xaml</DependentUpon>
+    <Compile Include="Controlers\Game\Attacks\HitAttackTemplateEditableUserControl.xaml.cs">
+      <DependentUpon>HitAttackTemplateEditableUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controlers\Game\Attacks\EditableListHitAttackTemplate.xaml.cs">
-      <DependentUpon>EditableListHitAttackTemplate.xaml</DependentUpon>
+    <Compile Include="Controlers\Game\Attacks\HitAttackTemplateListEditableUserControl.xaml.cs">
+      <DependentUpon>HitAttackTemplateListEditableUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controlers\Game\Attacks\EditableRangeController.xaml.cs">
-      <DependentUpon>EditableRangeController.xaml</DependentUpon>
+    <Compile Include="Controlers\Game\Attacks\RangeEditableUserControl.xaml.cs">
+      <DependentUpon>RangeEditableUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controlers\Game\Attacks\SituationalModifiers\SituationalAdvantageModifiersUserControl.xaml.cs">
       <DependentUpon>SituationalAdvantageModifiersUserControl.xaml</DependentUpon>
@@ -110,26 +110,27 @@
     <Compile Include="Controlers\Game\Attacks\SituationalModifiers\SituationalSavingThrowModifierUserControl.xaml.cs">
       <DependentUpon>SituationalSavingThrowModifierUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controlers\Game\Characteristics\CharacteristicDropdownListUserControl.xaml.cs">
-      <DependentUpon>CharacteristicDropdownListUserControl.xaml</DependentUpon>
+    <Compile Include="Controlers\Game\Characteristics\CharacteristicsListSelectableUserControl.xaml.cs">
+      <DependentUpon>CharacteristicsListSelectableUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controlers\Game\Characteristics\EditableCharacteristicsListUserControl.xaml.cs">
-      <DependentUpon>EditableCharacteristicsListUserControl.xaml</DependentUpon>
+    <Compile Include="Controlers\Game\Characteristics\CharacteristicsListEditableUserControl.xaml.cs">
+      <DependentUpon>CharacteristicsListEditableUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controlers\Game\DamageAffinity\DamageAffinityDropdownListUserControl.xaml.cs">
-      <DependentUpon>DamageAffinityDropdownListUserControl.xaml</DependentUpon>
+    <Compile Include="Controlers\Game\DamageAffinity\DamageTypeAffinityListSelectableUserControl.xaml.cs">
+      <DependentUpon>DamageTypeAffinityListSelectableUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controlers\Game\DamageAffinity\EditableDamageAffinityListUserControl.xaml.cs">
-      <DependentUpon>EditableDamageAffinityListUserControl.xaml</DependentUpon>
+    <Compile Include="Controlers\Game\DamageAffinity\DamageTypeAffinityListEditableUserControl.xaml.cs">
+      <DependentUpon>DamageTypeAffinityListEditableUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controlers\Game\Dices\EditableDiceRollUserControl.xaml.cs">
-      <DependentUpon>EditableDiceRollUserControl.xaml</DependentUpon>
+    <Compile Include="Controlers\Game\Dices\DiceRollEditableUserControl.xaml.cs">
+      <DependentUpon>DiceRollEditableUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BoolToCustomStringConverter.cs" />
     <Compile Include="Converters\StringToVisibilityConverter.cs" />
     <Compile Include="Game\Aggression\Attacks\SituationalSavingThrowModifier.cs" />
-    <Compile Include="Game\EditableSpecialCapacitiesUserControl.xaml.cs">
-      <DependentUpon>EditableSpecialCapacitiesUserControl.xaml</DependentUpon>
+    <Compile Include="Game\DamageAffinity\DamageTypeEnum.cs" />
+    <Compile Include="Game\SpecialAbilitiesEditableUserControl.xaml.cs">
+      <DependentUpon>SpecialAbilitiesEditableUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Game\Status\Display\CustomVerboseStatusTile.xaml.cs">
       <DependentUpon>CustomVerboseStatusTile.xaml</DependentUpon>
@@ -158,14 +159,14 @@
     <Compile Include="Controlers\InputBoxes\RangedIntBox.xaml.cs">
       <DependentUpon>RangedIntBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controlers\Monsters\EditableMonsterListUserControl.xaml.cs">
-      <DependentUpon>EditableMonsterListUserControl.xaml</DependentUpon>
+    <Compile Include="Controlers\Monsters\MonsterListEditableUserControl.xaml.cs">
+      <DependentUpon>MonsterListEditableUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controlers\Monsters\MonsterMainInfoUserControl.xaml.cs">
       <DependentUpon>MonsterMainInfoUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controlers\PrepareFightCharacterList.xaml.cs">
-      <DependentUpon>PrepareFightCharacterList.xaml</DependentUpon>
+    <Compile Include="Controlers\SoonToFightEntityListUserControl.xaml.cs">
+      <DependentUpon>SoonToFightEntityListUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BrushToDamageTypeEnumConverter.cs" />
     <Compile Include="Converters\StringListStringConverter.cs" />
@@ -173,7 +174,7 @@
     <Compile Include="Converters\StringToDiceRollConverter.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Game\Aggression\AttackRangeEnum.cs" />
-    <Compile Include="Game\Aggression\Attacks\AAttackTemplate.cs" />
+    <Compile Include="Game\Aggression\AAttackTemplate.cs" />
     <Compile Include="Game\Aggression\Attacks\HitAttackResult.cs" />
     <Compile Include="Game\Aggression\Attacks\HitAttackTemplate.cs" />
     <Compile Include="Game\Aggression\Attacks\SituationalAdvantageModifiers.cs" />
@@ -183,8 +184,8 @@
     <Compile Include="Game\Characteristics\CharacteristicsDataContext.cs" />
     <Compile Include="Game\Characteristics\CharacteristicsEnum.cs" />
     <Compile Include="Game\DamageAffinity\DamageAffinityEnum.cs" />
-    <Compile Include="Game\DamageAffinity\DamageTypeAffinitiesDataContext.cs" />
-    <Compile Include="Game\DamageAffinity\DamageTypeAffinityDataContext.cs" />
+    <Compile Include="Game\DamageAffinity\DamageTypeAffinityList.cs" />
+    <Compile Include="Game\DamageAffinity\DamageTypeAffinity.cs" />
     <Compile Include="Game\Dices\DiceRoll.cs" />
     <Compile Include="Game\Dices\Dices.cs" />
     <Compile Include="Game\Fight\FightDataContext.cs" />
@@ -193,7 +194,7 @@
     <Compile Include="Game\Fight\FightEvents\StartNewTurnEventArgs.cs" />
     <Compile Include="Game\Fight\FightingCharactersDataContext.cs" />
     <Compile Include="Game\PlayableEntity.cs" />
-    <Compile Include="Game\MonsterDataContext.cs" />
+    <Compile Include="Game\Monster.cs" />
     <Compile Include="Game\GameDataContext.cs" />
     <Compile Include="Game\Status\CustomVerboseStatus.cs" />
     <Compile Include="Game\Status\CustomVerboseStatusList.cs" />
@@ -214,7 +215,7 @@
     <Compile Include="ValidationRules\IntRule.cs" />
     <Compile Include="ValidationRules\NotEmptyStringRule.cs" />
     <Compile Include="ValidationRules\PositiveIntRule.cs" />
-    <Compile Include="Game\CharacterDataContext.cs" />
+    <Compile Include="Game\Character.cs" />
     <Compile Include="ValidationRules\RangedIntRule.cs" />
     <Compile Include="ValidationRules\ValidationRuleEventHandler.cs" />
     <Compile Include="Windows\AskYesNoDataContext.cs" />
@@ -264,7 +265,7 @@
       <DependentUpon>StatusMessageWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\StatusMessageWindowDataContext.cs" />
-    <Page Include="Controlers\Characters\EditableCharacterListUserControl.xaml">
+    <Page Include="Controlers\Characters\CharacterListEditableUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -272,55 +273,55 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controlers\Fight\ConsoleUserControl.xaml">
+    <Page Include="Controlers\Fight\FightConsoleUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controlers\Fight\FighterActionUserControl.xaml">
+    <Page Include="Controlers\Fight\FightingEntityActionsUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controlers\Fight\FightingCharacterListUserControl.xaml">
+    <Page Include="Controlers\Fight\FightingEntityListUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controlers\Fight\FightingCharacterTileUserControl.xaml">
+    <Page Include="Controlers\Fight\FightingEntityTileUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controlers\Fight\GeneralInfoFightUserControl.xaml">
+    <Page Include="Controlers\Fight\FightGeneralInfoUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controlers\Game\Attacks\DamageListControls\EditableDamageListUserControl.xaml">
+    <Page Include="Controlers\Game\Attacks\DamageListControls\DamageTemplateListEditableUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controlers\Game\Attacks\DamageListControls\PlayableDamageListUserControl.xaml">
+    <Page Include="Controlers\Game\Attacks\DamageListControls\DamageTemplateListRollableUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controlers\Game\Attacks\DamageListControls\ReadOnlyDamageListUserControl.xaml">
+    <Page Include="Controlers\Game\Attacks\DamageListControls\DamageTemplateListReadOnlyUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controlers\Game\Attacks\DetailsHitAttackTemplateUserControl.xaml">
+    <Page Include="Controlers\Game\Attacks\HitAttackTemplateDetailsPreviewUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controlers\Game\Attacks\DetailsListHitAttackTemplateUserControl.xaml">
+    <Page Include="Controlers\Game\Attacks\HitAttackTemplateListPreviewUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controlers\Game\Attacks\EditableHitAttackTemplateUserControl.xaml">
+    <Page Include="Controlers\Game\Attacks\HitAttackTemplateEditableUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controlers\Game\Attacks\EditableListHitAttackTemplate.xaml">
+    <Page Include="Controlers\Game\Attacks\HitAttackTemplateListEditableUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controlers\Game\Attacks\EditableRangeController.xaml">
+    <Page Include="Controlers\Game\Attacks\RangeEditableUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -336,27 +337,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controlers\Game\Characteristics\CharacteristicDropdownListUserControl.xaml">
+    <Page Include="Controlers\Game\Characteristics\CharacteristicsListSelectableUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controlers\Game\Characteristics\EditableCharacteristicsListUserControl.xaml">
+    <Page Include="Controlers\Game\Characteristics\CharacteristicsListEditableUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controlers\Game\DamageAffinity\DamageAffinityDropdownListUserControl.xaml">
+    <Page Include="Controlers\Game\DamageAffinity\DamageTypeAffinityListSelectableUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controlers\Game\DamageAffinity\EditableDamageAffinityListUserControl.xaml">
+    <Page Include="Controlers\Game\DamageAffinity\DamageTypeAffinityListEditableUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controlers\Game\Dices\EditableDiceRollUserControl.xaml">
+    <Page Include="Controlers\Game\Dices\DiceRollEditableUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Game\EditableSpecialCapacitiesUserControl.xaml">
+    <Page Include="Game\SpecialAbilitiesEditableUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -396,7 +397,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controlers\Monsters\EditableMonsterListUserControl.xaml">
+    <Page Include="Controlers\Monsters\MonsterListEditableUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -404,7 +405,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controlers\PrepareFightCharacterList.xaml">
+    <Page Include="Controlers\SoonToFightEntityListUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -420,8 +421,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controlers\Characters\EditableCharacterListUserControl.xaml.cs">
-      <DependentUpon>EditableCharacterListUserControl.xaml</DependentUpon>
+    <Compile Include="Controlers\Characters\CharacterListEditableUserControl.xaml.cs">
+      <DependentUpon>CharacterListEditableUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

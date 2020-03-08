@@ -12,7 +12,7 @@ namespace DDFight.Windows
     public partial class EditMonsterWindow : Window
     {
 
-        private MonsterDataContext data_context { get => (MonsterDataContext)DataContext; }
+        private Monster data_context { get => (Monster)DataContext; }
 
         /// <summary>
         ///     Ctor

@@ -28,7 +28,7 @@
             Used to do an arbitrary healing on a character. You can either enter precise numbers, or dices to roll.
         </TextBlock>
 
-        <dices:EditableDiceRollUserControl
+        <dices:DiceRollEditableUserControl
             Margin="15"
             Grid.Row="1"
             Width="120"

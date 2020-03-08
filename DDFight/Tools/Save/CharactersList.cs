@@ -13,7 +13,7 @@ namespace DDFight.Tools.Save
         /// <summary>
         ///     The list of characters
         /// </summary>
-        public ObservableCollection<CharacterDataContext> Characters = new ObservableCollection<CharacterDataContext>();
+        public ObservableCollection<Character> Characters = new ObservableCollection<Character>();
 
         #region INotifyPropertyChanged
 
@@ -39,7 +39,7 @@ namespace DDFight.Tools.Save
         ///     Method to add and save a character
         /// </summary>
         /// <param name="character"></param>
-        public void AddCharacter(CharacterDataContext character)
+        public void AddCharacter(Character character)
         {
             Characters.Add(character);
             NotifyPropertyChanged("Characters");
@@ -50,7 +50,7 @@ namespace DDFight.Tools.Save
         ///     Method to remove a character, then save
         /// </summary>
         /// <param name="character"></param>
-        public void RemoveCharacter(CharacterDataContext character)
+        public void RemoveCharacter(Character character)
         {
             Characters.Remove(character);
             NotifyPropertyChanged("Characters");
@@ -73,7 +73,7 @@ namespace DDFight.Tools.Save
         /// </summary>
         /// <param name="to_update"></param>
         /// <param name="temporary"></param>
-        public void Replace(CharacterDataContext to_replace, CharacterDataContext new_character)
+        public void Replace(Character to_replace, Character new_character)
         {
             for (int i = 0; i != Characters.Count; i += 1)
             {

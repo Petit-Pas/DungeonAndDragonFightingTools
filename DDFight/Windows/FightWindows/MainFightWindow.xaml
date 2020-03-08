@@ -21,23 +21,21 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <fight:FightingCharacterListUserControl 
+        <fight:FightingEntityListUserControl 
             x:Name="CharactersControl"
             Grid.Row="0" Grid.Column="0" 
             Margin="5"/>
-        <fight:ConsoleUserControl 
+        <fight:FightConsoleUserControl 
             x:Name="ConsoleControl"
             Grid.Row="0" Grid.Column="1"
             Margin="5"
             />
-        <fight:FighterActionUserControl 
+        <fight:FightingEntityActionsUserControl 
             Grid.Row="1" Grid.Column="0"
             Margin="5, 0, 5, 5"/>
-        <fight:GeneralInfoFightUserControl
+        <fight:FightGeneralInfoUserControl
             x:Name="GeneralInfoControl"
             Grid.Row="1" Grid.Column="1"
             Margin="5, 0, 5, 5"/>
-
-
     </Grid>
 </Window>

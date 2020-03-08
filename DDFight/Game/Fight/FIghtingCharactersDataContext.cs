@@ -37,7 +37,7 @@ namespace DDFight.Game.Fight
         ///     Adds a character (only once per character, as its not a copy)
         /// </summary>
         /// <param name="character"></param>
-        public void AddCharacter(CharacterDataContext character)
+        public void AddCharacter(Character character)
         {
             try
             {
@@ -57,7 +57,7 @@ namespace DDFight.Game.Fight
         ///     Adds a monster in the Fighting List (a copy of it) and gives it an index in the PlayableEntity.DisplayName
         /// </summary>
         /// <param name="character"></param>
-        public void AddMonster(MonsterDataContext monster)
+        public void AddMonster(Monster monster)
         {
             IEnumerable<PlayableEntity> list = Fighters.Where(x => x.Name == monster.Name);
             PlayableEntity new_fighter = (PlayableEntity)(monster.Clone());

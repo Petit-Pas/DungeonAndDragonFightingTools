@@ -46,7 +46,7 @@
                 Margin="0,0,5,0">
                 Characteristic: 
             </TextBlock>
-            <characteristics:CharacteristicDropdownListUserControl
+            <characteristics:CharacteristicsListSelectableUserControl
                 MinWidth="100"
                 VerticalAlignment="Center"
                 PropertyPath="Characteristic"

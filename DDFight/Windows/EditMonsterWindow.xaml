@@ -27,15 +27,15 @@
                     x:Name="MainInfo"/>
             </TabItem>
             <TabItem Header="Affinities">
-                <damageaffinity:EditableDamageAffinityListUserControl 
+                <damageaffinity:DamageTypeAffinityListEditableUserControl 
                     x:Name="DamageAffinities"/>
             </TabItem>
-            <TabItem Header="Capacities">
-                <game:EditableSpecialCapacitiesUserControl
+            <TabItem Header="Abilities">
+                <game:SpecialAbilitiesEditableUserControl
                     x:Name="SpecialCapacitiesControl"/>
             </TabItem>
             <TabItem Header="Attacks">
-                <attacks:EditableListHitAttackTemplate
+                <attacks:HitAttackTemplateListEditableUserControl
                     x:Name="HitAttacks"/>
             </TabItem>
         </TabControl>

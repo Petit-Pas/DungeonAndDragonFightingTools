@@ -21,14 +21,14 @@
             Grid.Row="1"
             Background="{StaticResource LightestGray}">
             <TabItem Header="Characters">
-                <ctrl:EditableCharacterListUserControl x:Name="CharacterListControl"/>
+                <ctrl:CharacterListEditableUserControl x:Name="CharacterListControl"/>
             </TabItem>
             <TabItem Header="Monsters">
-                <ctrl:EditableMonsterListUserControl x:Name="MonsterListControl"/>
+                <ctrl:MonsterListEditableUserControl x:Name="MonsterListControl"/>
             </TabItem>
         </TabControl>
 
-        <ctrl:PrepareFightCharacterList 
+        <ctrl:SoonToFightEntityListUserControl 
             Margin="10, 10, 0, 3"
             Grid.Column="1"/>
 

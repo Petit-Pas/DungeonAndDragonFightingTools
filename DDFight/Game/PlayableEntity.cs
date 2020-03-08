@@ -152,7 +152,7 @@ namespace DDFight.Game
         }
         private CharacteristicsDataContext _characteristics = new CharacteristicsDataContext();
 
-        public DamageTypeAffinitiesDataContext DamageAffinities
+        public DamageTypeAffinityList DamageAffinities
         {
             get => _damageAffinities;
             set
@@ -161,7 +161,7 @@ namespace DDFight.Game
                 NotifyPropertyChanged();
             }
         }
-        private DamageTypeAffinitiesDataContext _damageAffinities = new DamageTypeAffinitiesDataContext();
+        private DamageTypeAffinityList _damageAffinities = new DamageTypeAffinityList();
 
         [XmlAttribute]
         public string ActionDescription
@@ -176,16 +176,16 @@ namespace DDFight.Game
         private string _actionDescription = "";
 
         [XmlAttribute]
-        public string SpecialCapacities
+        public string SpecialAbilities
         {
-            get => _specialCapacities;
+            get => _specialAbilities;
             set
             {
-                _specialCapacities = value;
+                _specialAbilities = value;
                 NotifyPropertyChanged();
             }
         }
-        private string _specialCapacities = "";
+        private string _specialAbilities = "";
 
         public ObservableCollection<HitAttackTemplate> HitAttacks
         {
@@ -566,7 +566,7 @@ namespace DDFight.Game
             Hp = to_copy.Hp;
             MaxHp = to_copy.MaxHp;
             Characteristics = (CharacteristicsDataContext)to_copy.Characteristics.Clone();
-            DamageAffinities = (DamageTypeAffinitiesDataContext)to_copy.DamageAffinities.Clone();
+            DamageAffinities = (DamageTypeAffinityList)to_copy.DamageAffinities.Clone();
             HitAttacks = to_copy.HitAttacks.Clone();
             foreach (HitAttackTemplate atk in HitAttacks)
             {
@@ -577,7 +577,7 @@ namespace DDFight.Game
             TurnOrder = to_copy.TurnOrder;
             InitiativeRoll = to_copy.InitiativeRoll;
             ActionDescription = (string)to_copy.ActionDescription.Clone();
-            SpecialCapacities = (string)to_copy.SpecialCapacities.Clone();
+            SpecialAbilities = (string)to_copy.SpecialAbilities.Clone();
         }
 
         /// <summary>

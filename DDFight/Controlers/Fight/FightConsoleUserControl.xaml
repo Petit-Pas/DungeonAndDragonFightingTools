@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="DDFight.Controlers.Fight.FightConsoleUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DDFight.Controlers"
+             xmlns:converters="clr-namespace:DDFight.Converters"
+             xmlns:input="clr-namespace:DDFight.Controlers.InputBoxes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <converters:StringListStringConverter x:Key="Converter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <GroupBox Grid.Column="0">
+            <GroupBox.Header>
+                <TextBlock
+                    Text="Console"
+                    Foreground="{StaticResource Light}"
+                    FontWeight="SemiBold"
+                    FontSize="15"/>
+            </GroupBox.Header>
+            <input:BindableRichTextBox 
+                x:Name="RichTextBoxControl"
+                IsReadOnly="True"
+                Document="{Binding UserLogs}" 
+                VirtualizingStackPanel.VirtualizationMode="Standard"
+                Background="{StaticResource LightestGray}"
+                />
+
+        </GroupBox>
+    </Grid>
+</UserControl>
