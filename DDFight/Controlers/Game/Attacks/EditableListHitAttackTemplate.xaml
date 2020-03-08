@@ -20,6 +20,7 @@
             ShowGridLines="False"
             x:Name="AttacksGrid">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
@@ -27,12 +28,25 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-        
+
+            <TextBox
+                Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                Margin="5, 5, 5,0"
+                VerticalScrollBarVisibility="Auto"
+                TextWrapping="Wrap"
+                AcceptsReturn="True"
+                AcceptsTab="True"
+                MaxLines="6"
+                Text="{Binding ActionDescription}"
+                Background="{StaticResource Gray}"
+                Foreground="{StaticResource Light}"
+            />
+    
             <ListBox 
                 Background="{StaticResource Gray}"
                 Margin="5,10, 5, 5"
                 x:Name="AttacksList"
-                Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
+                Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"
                 DisplayMemberPath="Name"
                 MouseDoubleClick="AttackList_MouseDoubleClick"
                 KeyDown="AttacksList_KeyDown">
@@ -56,14 +70,14 @@
                 </ListBox.ItemContainerStyle>
             </ListBox>
             <Button 
-                Grid.Row="1" Grid.Column="0" 
+                Grid.Row="2" Grid.Column="0" 
                 Margin="5, 10, 10, 10" 
                 Click="AddAttack_Button_Click"
                 FontWeight="SemiBold">
                 Add Attack
             </Button>
             <Button 
-                Grid.Row="1" Grid.Column="1" 
+                Grid.Row="2" Grid.Column="1" 
                 Margin="10, 10, 5, 10" 
                 Click="RemoveAttack_Button_Click"
                 FontWeight="SemiBold">

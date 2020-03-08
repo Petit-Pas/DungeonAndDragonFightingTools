@@ -163,6 +163,18 @@ namespace DDFight.Game
         }
         private DamageTypeAffinitiesDataContext _damageAffinities = new DamageTypeAffinitiesDataContext();
 
+        [XmlAttribute]
+        public string ActionDescription
+        {
+            get => _actionDescription;
+            set
+            {
+                _actionDescription = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private string _actionDescription = "";
+
         public ObservableCollection<HitAttackTemplate> HitAttacks
         {
             get => _hitAttacks;
@@ -552,6 +564,7 @@ namespace DDFight.Game
             DisplayName = (string)to_copy.DisplayName.Clone();
             TurnOrder = to_copy.TurnOrder;
             InitiativeRoll = to_copy.InitiativeRoll;
+            ActionDescription = (string)to_copy.ActionDescription.Clone();
         }
 
         /// <summary>
