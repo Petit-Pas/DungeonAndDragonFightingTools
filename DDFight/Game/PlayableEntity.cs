@@ -141,7 +141,7 @@ namespace DDFight.Game
         /// <summary>
         ///     The characteristics of the character
         /// </summary>
-        public CharacteristicsDataContext Characteristics
+        public CharacteristicList Characteristics
         {
             get => _characteristics;
             set
@@ -150,7 +150,7 @@ namespace DDFight.Game
                 NotifyPropertyChanged();
             }
         }
-        private CharacteristicsDataContext _characteristics = new CharacteristicsDataContext();
+        private CharacteristicList _characteristics = new CharacteristicList();
 
         public DamageTypeAffinityList DamageAffinities
         {
@@ -460,7 +460,7 @@ namespace DDFight.Game
                 }
                 if (i == damages.Count && i != 1)
                     paragraph.Inlines.Add(Extensions.BuildRun("and ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-                paragraph.Inlines.Add(Extensions.BuildRun(damage_value.ToString() + " " +  dmg.DamageType.ToString(), (Brush)BrushToDamageTypeEnumConverter.StaticConvert(dmg.DamageType), 15, FontWeights.Bold));
+                paragraph.Inlines.Add(Extensions.BuildRun(damage_value.ToString() + " " +  dmg.DamageType.ToString(), (Brush)DamageTypeEnumToBrushConverter.StaticConvert(dmg.DamageType), 15, FontWeights.Bold));
                 paragraph.Inlines.Add(Extensions.BuildRun(i == damages.Count ? " damage" : " damage, ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
                 total += damage_value;
                 i += 1;
@@ -565,7 +565,7 @@ namespace DDFight.Game
             CA = to_copy.CA;
             Hp = to_copy.Hp;
             MaxHp = to_copy.MaxHp;
-            Characteristics = (CharacteristicsDataContext)to_copy.Characteristics.Clone();
+            Characteristics = (CharacteristicList)to_copy.Characteristics.Clone();
             DamageAffinities = (DamageTypeAffinityList)to_copy.DamageAffinities.Clone();
             HitAttacks = to_copy.HitAttacks.Clone();
             foreach (HitAttackTemplate atk in HitAttacks)

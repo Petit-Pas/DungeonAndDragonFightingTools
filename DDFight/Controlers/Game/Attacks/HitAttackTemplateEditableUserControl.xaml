@@ -54,8 +54,9 @@
                 PropertyPath="Name" />
 
             <Label
-                Grid.Row="1" Grid.Column="0"
-                Content="Amount of Hits"/>
+                Grid.Row="1" Grid.Column="0">
+                Amount of Hits
+            </Label>
             <inputboxes:PositiveIntTextBox
                 x:Name="HitAmountTextBox"
                 Grid.Row="1" Grid.Column="1"
@@ -63,17 +64,19 @@
                 PropertyPath="HitAmount"/>
 
             <Label
-                Grid.Row="2" Grid.Column="0"
-                Content="Bonus to Hits"/>
-            <inputboxes:PositiveIntTextBox
+                Grid.Row="2" Grid.Column="0">
+                Bonus to Hits
+            </Label>
+            <inputboxes:IntTextBox
                 x:Name="HitBonusTextBox"
                 Grid.Row="2" Grid.Column="1"
                 MaxHeight="20"
                 PropertyPath="HitBonus"/>
 
             <Label 
-                Grid.Row="3" Grid.Column="0"
-                Content="Range"/>
+                Grid.Row="3" Grid.Column="0">
+                Range
+            </Label>
             <local:RangeEditableUserControl 
                 Grid.Row="3" Grid.Column="1"/>
 

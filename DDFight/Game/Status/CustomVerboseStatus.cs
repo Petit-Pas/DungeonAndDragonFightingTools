@@ -85,7 +85,7 @@ namespace DDFight.Game.Status
         /// <returns> True if the current instance has changed, false otherwise </returns>
         public bool OpenEditWindow()
         {
-            EditCustomVerboseStatusWindow window = new EditCustomVerboseStatusWindow();
+            CustomVerboseStatusEditWindow window = new CustomVerboseStatusEditWindow();
 
             CustomVerboseStatus dc = (CustomVerboseStatus)this.Clone();
 

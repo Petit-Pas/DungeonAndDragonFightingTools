@@ -9,7 +9,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <converters:StringListStringConverter x:Key="Converter"/>
+        <converters:StringListToStringConverter x:Key="Converter"/>
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>

@@ -6,14 +6,14 @@ namespace DDFight.Game.Status.Display
     /// <summary>
     /// Interaction logic for EditCustomVerboseStatusListWindow.xaml
     /// </summary>
-    public partial class EditCustomVerboseStatusListWindow : Window
+    public partial class CustomVerboseStatusListEditWindow : Window
     {
         public PlayableEntity data_context
         {
             get => (PlayableEntity)DataContext;
         }
 
-        public EditCustomVerboseStatusListWindow()
+        public CustomVerboseStatusListEditWindow()
         {
             InitializeComponent();
         }

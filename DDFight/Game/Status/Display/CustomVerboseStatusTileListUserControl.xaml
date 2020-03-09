@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="DDFight.Game.Status.Display.CustomVerboseStatusTileList"
+﻿<UserControl x:Class="DDFight.Game.Status.Display.CustomVerboseStatusTileListUserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -13,7 +13,7 @@
             ItemsSource="{Binding CustomVerboseStatusList.List}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <display:CustomVerboseStatusTile
+                    <display:CustomVerboseStatusTileUserControl
                         Margin="5"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>

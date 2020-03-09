@@ -7,14 +7,14 @@ namespace DDFight.Game.Status.Display
     /// <summary>
     /// Logique d'interaction pour EditableCustomVerboseStatusList.xaml
     /// </summary>
-    public partial class EditableCustomVerboseStatusList : UserControl
+    public partial class CustomVerboseStatusListEditableUserControl : UserControl
     {
         private PlayableEntity data_context
         {
             get => (PlayableEntity)DataContext;
         }
 
-        public EditableCustomVerboseStatusList()
+        public CustomVerboseStatusListEditableUserControl()
         {
             InitializeComponent();
 

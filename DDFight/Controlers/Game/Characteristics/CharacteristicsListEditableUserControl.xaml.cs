@@ -24,8 +24,8 @@ namespace DDFight.Controlers.Game.Characteristics
 
         private void EditableCharacteristicsList_Loaded(object sender, RoutedEventArgs e)
         {
-            List<CharacteristicDataContext> items = new List<CharacteristicDataContext>();
-            foreach (CharacteristicDataContext dc in _dataContext.Characteristics.CharacteristicsList)
+            List<Characteristic> items = new List<Characteristic>();
+            foreach (Characteristic dc in _dataContext.Characteristics.CharacteristicsList)
             {
                 items.Add(dc);
             }

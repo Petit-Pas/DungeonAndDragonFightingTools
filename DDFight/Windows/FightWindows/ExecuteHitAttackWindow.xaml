@@ -14,7 +14,7 @@
         x:Name="Window"
         WindowStartupLocation="CenterOwner">
     <Window.Resources>
-        <converters:BrushToDamageTypeEnumConverter x:Key="DamageColorConverter" />
+        <converters:DamageTypeEnumToBrushConverter x:Key="DamageColorConverter" />
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>

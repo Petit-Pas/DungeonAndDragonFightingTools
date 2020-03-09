@@ -132,14 +132,14 @@
     <Compile Include="Game\SpecialAbilitiesEditableUserControl.xaml.cs">
       <DependentUpon>SpecialAbilitiesEditableUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Game\Status\Display\CustomVerboseStatusTile.xaml.cs">
-      <DependentUpon>CustomVerboseStatusTile.xaml</DependentUpon>
+    <Compile Include="Game\Status\Display\CustomVerboseStatusTileUserControl.xaml.cs">
+      <DependentUpon>CustomVerboseStatusTileUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Game\Status\Display\CustomVerboseStatusTileList.xaml.cs">
-      <DependentUpon>CustomVerboseStatusTileList.xaml</DependentUpon>
+    <Compile Include="Game\Status\Display\CustomVerboseStatusTileListUserControl.xaml.cs">
+      <DependentUpon>CustomVerboseStatusTileListUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Game\Status\Display\EditableCustomVerboseStatusList.xaml.cs">
-      <DependentUpon>EditableCustomVerboseStatusList.xaml</DependentUpon>
+    <Compile Include="Game\Status\Display\CustomVerboseStatusListEditableUserControl.xaml.cs">
+      <DependentUpon>CustomVerboseStatusListEditableUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controlers\InputBoxes\BindableRichTextBox.xaml.cs">
       <DependentUpon>BindableRichTextBox.xaml</DependentUpon>
@@ -168,10 +168,10 @@
     <Compile Include="Controlers\SoonToFightEntityListUserControl.xaml.cs">
       <DependentUpon>SoonToFightEntityListUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converters\BrushToDamageTypeEnumConverter.cs" />
-    <Compile Include="Converters\StringListStringConverter.cs" />
-    <Compile Include="Converters\StringIntConverter.cs" />
-    <Compile Include="Converters\StringToDiceRollConverter.cs" />
+    <Compile Include="Converters\DamageTypeEnumToBrushConverter.cs" />
+    <Compile Include="Converters\StringListToStringConverter.cs" />
+    <Compile Include="Converters\IntToStringConverter.cs" />
+    <Compile Include="Converters\DiceRollToStringConverter.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Game\Aggression\AttackRangeEnum.cs" />
     <Compile Include="Game\Aggression\AAttackTemplate.cs" />
@@ -180,8 +180,8 @@
     <Compile Include="Game\Aggression\Attacks\SituationalAdvantageModifiers.cs" />
     <Compile Include="Game\Aggression\Attacks\SituationalHitAttackModifiers.cs" />
     <Compile Include="Game\Aggression\DamageTemplate.cs" />
-    <Compile Include="Game\Characteristics\CharacteristicDataContext.cs" />
-    <Compile Include="Game\Characteristics\CharacteristicsDataContext.cs" />
+    <Compile Include="Game\Characteristics\Characteristic.cs" />
+    <Compile Include="Game\Characteristics\CharacteristicList.cs" />
     <Compile Include="Game\Characteristics\CharacteristicsEnum.cs" />
     <Compile Include="Game\DamageAffinity\DamageAffinityEnum.cs" />
     <Compile Include="Game\DamageAffinity\DamageTypeAffinityList.cs" />
@@ -198,8 +198,8 @@
     <Compile Include="Game\GameDataContext.cs" />
     <Compile Include="Game\Status\CustomVerboseStatus.cs" />
     <Compile Include="Game\Status\CustomVerboseStatusList.cs" />
-    <Compile Include="Game\Status\Display\EditCustomVerboseStatusListWindow.xaml.cs">
-      <DependentUpon>EditCustomVerboseStatusListWindow.xaml</DependentUpon>
+    <Compile Include="Game\Status\Display\CustomVerboseStatusListEditWindow.xaml.cs">
+      <DependentUpon>CustomVerboseStatusListEditWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Resources\ResourceManager.cs" />
     <Compile Include="Tools\ICopyAssignable.cs" />
@@ -231,8 +231,8 @@
     <Compile Include="Windows\EditMonsterWindow.xaml.cs">
       <DependentUpon>EditMonsterWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Game\Status\Display\EditCustomVerboseStatusWindow.xaml.cs">
-      <DependentUpon>EditCustomVerboseStatusWindow.xaml</DependentUpon>
+    <Compile Include="Game\Status\Display\CustomVerboseStatusEditWindow.xaml.cs">
+      <DependentUpon>CustomVerboseStatusEditWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\FightWindows\AddToFightWindow.xaml.cs">
       <DependentUpon>AddToFightWindow.xaml</DependentUpon>
@@ -361,15 +361,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Game\Status\Display\CustomVerboseStatusTile.xaml">
+    <Page Include="Game\Status\Display\CustomVerboseStatusTileUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Game\Status\Display\CustomVerboseStatusTileList.xaml">
+    <Page Include="Game\Status\Display\CustomVerboseStatusTileListUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Game\Status\Display\EditableCustomVerboseStatusList.xaml">
+    <Page Include="Game\Status\Display\CustomVerboseStatusListEditableUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -409,7 +409,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Game\Status\Display\EditCustomVerboseStatusListWindow.xaml">
+    <Page Include="Game\Status\Display\CustomVerboseStatusListEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -444,7 +444,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Game\Status\Display\EditCustomVerboseStatusWindow.xaml">
+    <Page Include="Game\Status\Display\CustomVerboseStatusEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

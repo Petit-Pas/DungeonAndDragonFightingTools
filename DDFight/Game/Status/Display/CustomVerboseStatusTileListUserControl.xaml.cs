@@ -5,9 +5,9 @@ namespace DDFight.Game.Status.Display
     /// <summary>
     /// Logique d'interaction pour CustomVerboseStatusTileList.xaml
     /// </summary>
-    public partial class CustomVerboseStatusTileList : UserControl
+    public partial class CustomVerboseStatusTileListUserControl : UserControl
     {
-        public CustomVerboseStatusTileList()
+        public CustomVerboseStatusTileListUserControl()
         {
             InitializeComponent();
         }

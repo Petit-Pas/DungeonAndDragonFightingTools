@@ -41,7 +41,7 @@ namespace DDFight.Controlers.Game.Dices
                 //  Optional. With this, the bound property will be updated and validation 
                 //  will be applied on every keystroke. 
                 UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
-                Converter = new StringToDiceRollConverter(),
+                Converter = new DiceRollToStringConverter(),
             };
             Console.WriteLine("COCHON binding, PropertyPath:" + ctl.PropertyPath.ToString() + " " + ctl.DataContext?.ToString());
             ctl.textBox.SetBinding(TextBox.TextProperty, binding);

@@ -109,7 +109,7 @@
                 Content="{Binding IsFocused, Converter={StaticResource BoolCustomStringConverter}, 
                 ConverterParameter=Focused|Not\ Focused}"/>
 
-            <display:CustomVerboseStatusTileList Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"/>
+            <display:CustomVerboseStatusTileListUserControl Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"/>
         </Grid>
     </GroupBox>
 </UserControl>

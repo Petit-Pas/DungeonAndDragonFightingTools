@@ -7,7 +7,7 @@ using System.Windows.Media;
 
 namespace DDFight.Converters
 {
-    public class BrushToDamageTypeEnumConverter : IValueConverter
+    public class DamageTypeEnumToBrushConverter : IValueConverter
     {
         public static object StaticConvert(object value)
         {

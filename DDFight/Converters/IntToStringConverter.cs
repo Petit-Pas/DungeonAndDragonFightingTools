@@ -4,7 +4,7 @@ using System.Windows.Data;
 
 namespace DDFight.Converters
 {
-    public class StringIntConverter : IValueConverter
+    public class IntToStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

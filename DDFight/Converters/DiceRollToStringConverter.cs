@@ -5,7 +5,7 @@ using System.Windows.Data;
 
 namespace DDFight.Converters
 {
-    public class StringToDiceRollConverter : IValueConverter
+    public class DiceRollToStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

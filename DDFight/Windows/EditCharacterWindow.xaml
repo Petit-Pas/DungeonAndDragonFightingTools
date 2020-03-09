@@ -39,7 +39,7 @@
                 <attacks:HitAttackTemplateListEditableUserControl />
             </TabItem>
             <TabItem Header="Status">
-                <status:EditableCustomVerboseStatusList />
+                <status:CustomVerboseStatusListEditableUserControl />
             </TabItem>
             
         </TabControl>

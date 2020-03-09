@@ -23,7 +23,7 @@ namespace DDFight.Game.Status
 
         public void OpenEditWindow(PlayableEntity Owner)
         {
-            EditCustomVerboseStatusListWindow window = new EditCustomVerboseStatusListWindow();
+            CustomVerboseStatusListEditWindow window = new CustomVerboseStatusListEditWindow();
             PlayableEntity dc = (PlayableEntity)Owner.Clone();
             dc.Validated = false;
 

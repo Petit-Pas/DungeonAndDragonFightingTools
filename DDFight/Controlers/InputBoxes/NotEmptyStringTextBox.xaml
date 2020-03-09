@@ -9,7 +9,7 @@
              xmlns:validation="clr-namespace:DDFight.ValidationRules"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <conv:StringIntConverter x:Key="IntStringConverter"/>
+        <conv:IntToStringConverter x:Key="IntStringConverter"/>
         <ControlTemplate x:Key="ValidationTemplate">
             <DockPanel>
                 <TextBlock Foreground="Red" FontSize="20"></TextBlock>

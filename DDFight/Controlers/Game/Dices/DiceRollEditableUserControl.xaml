@@ -10,7 +10,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <converters:StringToDiceRollConverter x:Key="StringToDiceRollConverterKey" />
+        <converters:DiceRollToStringConverter x:Key="StringToDiceRollConverterKey" />
         <ControlTemplate x:Key="ValidationTemplate">
             <DockPanel>
                 <TextBlock Foreground="Red" FontSize="20" >!</TextBlock>

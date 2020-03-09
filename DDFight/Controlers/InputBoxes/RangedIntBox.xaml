@@ -10,7 +10,7 @@
              d:DesignHeight="450" d:DesignWidth="800"
              x:Name="Control">
     <UserControl.Resources>
-        <converters:StringIntConverter x:Key="IntStringConverter"/>
+        <converters:IntToStringConverter x:Key="IntStringConverter"/>
         <ControlTemplate x:Key="ValidationTemplate">
             <DockPanel>
                 <TextBlock Foreground="Red" FontSize="20"></TextBlock>
