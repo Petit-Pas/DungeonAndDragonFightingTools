@@ -38,8 +38,13 @@
                     Characters' List
                 </TextBlock>
             </GroupBox.Header>
-            <StackPanel>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
                 <TextBox
+                    Grid.Row="0"
                     Margin="10, 5, 10, 0"
                     x:Name="FilterTextBox"
                     Background="{StaticResource Gray}"
@@ -47,9 +52,11 @@
                     KeyUp="FilterTextBox_KeyUp"
                     LostFocus="FilterTextBox_LostFocus"
                     GotFocus="FilterTextBox_GotFocus">
-                    
+
                 </TextBox>
+                
                 <ListBox 
+                    Grid.Row="1"
                     Margin="5"
                     Background="{StaticResource Gray}"
                     x:Name="CharacterListControl" 
@@ -64,7 +71,7 @@
                         </Style>
                     </ListBox.ItemContainerStyle>
                 </ListBox>
-            </StackPanel>
+            </Grid>
         </GroupBox>
 
         <Button

@@ -1,23 +1,25 @@
 ﻿using DDFight.Game;
+using DDFight.Game.Aggression;
+using DDFight.Game.Aggression.Attacks;
+using DDFight.Game.DamageAffinity;
 using DDFight.Resources;
+using System;
 using System.ComponentModel;
 using System.Windows;
-
 
 namespace DDFight.Windows
 {
     /// <summary>
-    /// Interaction logic for EditMonsterWindow.xaml
+    ///     Interaction logic for NewCharacterWindow.xaml
     /// </summary>
-    public partial class EditMonsterWindow : Window
+    public partial class CharacterEditWindow : Window
     {
-
-        private Monster data_context { get => (Monster)DataContext; }
+        private Character data_context { get => (Character)DataContext; }
 
         /// <summary>
         ///     Ctor
         /// </summary>
-        public EditMonsterWindow()
+        public CharacterEditWindow()
         {
             InitializeComponent();
 
@@ -124,6 +126,27 @@ namespace DDFight.Windows
                     }
                 }
             }
+        }
+
+        private void TestButton_Click(object sender, RoutedEventArgs e)
+        {
+            HitAttackTemplateEditWindow window = new HitAttackTemplateEditWindow
+            {
+                Owner = Window.GetWindow(this),
+            };
+            HitAttackTemplate dc = new HitAttackTemplate();
+            dc.Name = "Name";
+            dc.DamageList.Add(new DamageTemplate("1d4+2", DamageTypeEnum.Slashing));
+            dc.DamageList.Add(new DamageTemplate("2d6+3", DamageTypeEnum.Fire));
+            window.DataContext = dc;
+
+            window.ShowDialog();
+
+            Console.WriteLine(dc.Name);
+            Console.WriteLine(dc.HitAmount);
+            Console.WriteLine(dc.HitBonus);
+            Console.WriteLine(dc.DamageList.ToString());
+            Console.WriteLine(dc.DamageList[0].DamageType);
         }
     }
 }

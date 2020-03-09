@@ -1,38 +1,23 @@
-﻿using DDFight.Game;
-using DDFight.Game.Aggression;
-using DDFight.Game.Aggression.Attacks;
-using DDFight.Game.DamageAffinity;
+﻿using DDFight.Game.Aggression.Attacks;
 using DDFight.Resources;
-using System;
-using System.ComponentModel;
 using System.Windows;
 
 namespace DDFight.Windows
 {
     /// <summary>
-    ///     Interaction logic for NewCharacterWindow.xaml
+    /// Interaction logic for EditAAttackTemplate.xaml
     /// </summary>
-    public partial class EditCharacterWindow : Window
+    public partial class HitAttackTemplateEditWindow : Window
     {
-        private Character data_context { get => (Character)DataContext; }
-
-        /// <summary>
-        ///     Ctor
-        /// </summary>
-        public EditCharacterWindow()
+    
+        private HitAttackTemplate data_context
         {
-            InitializeComponent();
-
-            Loaded += OnControlLoaded;
+            get => (HitAttackTemplate)DataContext;
         }
 
-        /// <summary>
-        ///     when the cntrol is loaded, and the DataContext accessible
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void OnControlLoaded(object sender, RoutedEventArgs e)
+        public HitAttackTemplateEditWindow()
         {
+            InitializeComponent();
         }
 
         /// <summary>
@@ -83,7 +68,8 @@ namespace DDFight.Windows
             Close();
         }
 
-        private void Window_Closing(object sender, CancelEventArgs e)
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (!self_close)
             {
@@ -126,27 +112,6 @@ namespace DDFight.Windows
                     }
                 }
             }
-        }
-
-        private void TestButton_Click(object sender, RoutedEventArgs e)
-        {
-            EditHitAttackTemplateWindow window = new EditHitAttackTemplateWindow
-            {
-                Owner = Window.GetWindow(this),
-            };
-            HitAttackTemplate dc = new HitAttackTemplate();
-            dc.Name = "Name";
-            dc.DamageList.Add(new DamageTemplate("1d4+2", DamageTypeEnum.Slashing));
-            dc.DamageList.Add(new DamageTemplate("2d6+3", DamageTypeEnum.Fire));
-            window.DataContext = dc;
-
-            window.ShowDialog();
-
-            Console.WriteLine(dc.Name);
-            Console.WriteLine(dc.HitAmount);
-            Console.WriteLine(dc.HitBonus);
-            Console.WriteLine(dc.DamageList.ToString());
-            Console.WriteLine(dc.DamageList[0].DamageType);
         }
     }
 }

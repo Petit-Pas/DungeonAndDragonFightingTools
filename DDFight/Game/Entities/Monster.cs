@@ -33,7 +33,7 @@ namespace DDFight.Game
 
         public override bool OpenEditWindow()
         {
-            EditMonsterWindow window = new EditMonsterWindow();
+            MonsterEditWindow window = new MonsterEditWindow();
             Monster temporary = (Monster)this.Clone();
             window.DataContext = temporary;
 

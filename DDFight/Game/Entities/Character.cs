@@ -37,7 +37,7 @@ namespace DDFight.Game
 
         public override bool OpenEditWindow()
         {
-            EditCharacterWindow window = new EditCharacterWindow();
+            CharacterEditWindow window = new CharacterEditWindow();
             Character temporary = (Character)this.Clone();
             window.DataContext = temporary;
 

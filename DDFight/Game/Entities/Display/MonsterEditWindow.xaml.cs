@@ -1,23 +1,36 @@
-﻿using DDFight.Game.Aggression.Attacks;
+﻿using DDFight.Game;
 using DDFight.Resources;
+using System.ComponentModel;
 using System.Windows;
+
 
 namespace DDFight.Windows
 {
     /// <summary>
-    /// Interaction logic for EditAAttackTemplate.xaml
+    /// Interaction logic for EditMonsterWindow.xaml
     /// </summary>
-    public partial class EditHitAttackTemplateWindow : Window
+    public partial class MonsterEditWindow : Window
     {
-    
-        private HitAttackTemplate data_context
-        {
-            get => (HitAttackTemplate)DataContext;
-        }
 
-        public EditHitAttackTemplateWindow()
+        private Monster data_context { get => (Monster)DataContext; }
+
+        /// <summary>
+        ///     Ctor
+        /// </summary>
+        public MonsterEditWindow()
         {
             InitializeComponent();
+
+            Loaded += OnControlLoaded;
+        }
+
+        /// <summary>
+        ///     when the cntrol is loaded, and the DataContext accessible
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnControlLoaded(object sender, RoutedEventArgs e)
+        {
         }
 
         /// <summary>
@@ -68,8 +81,7 @@ namespace DDFight.Windows
             Close();
         }
 
-
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void Window_Closing(object sender, CancelEventArgs e)
         {
             if (!self_close)
             {

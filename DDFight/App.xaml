@@ -87,9 +87,9 @@
 
         <Style TargetType="{x:Type local:MainWindow}" BasedOn="{StaticResource WindowStyle}"/>
         <Style TargetType="{x:Type windows:AskYesNoWindow}" BasedOn="{StaticResource WindowStyle}"/>
-        <Style TargetType="{x:Type windows:EditCharacterWindow}" BasedOn="{StaticResource WindowStyle}"/>
-        <Style TargetType="{x:Type windows:EditHitAttackTemplateWindow}" BasedOn="{StaticResource WindowStyle}"/>
-        <Style TargetType="{x:Type windows:EditMonsterWindow}" BasedOn="{StaticResource WindowStyle}"/>
+        <Style TargetType="{x:Type windows:CharacterEditWindow}" BasedOn="{StaticResource WindowStyle}"/>
+        <Style TargetType="{x:Type windows:HitAttackTemplateEditWindow}" BasedOn="{StaticResource WindowStyle}"/>
+        <Style TargetType="{x:Type windows:MonsterEditWindow}" BasedOn="{StaticResource WindowStyle}"/>
         <Style TargetType="{x:Type windows:StatusMessageWindow}" BasedOn="{StaticResource WindowStyle}"/>
 
         <Style TargetType="{x:Type TextBlock}" x:Key="ErrorMessage" >
