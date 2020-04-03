@@ -52,6 +52,7 @@
                             MinWidth="40"
                             DataContext="{Binding Damage}"
                             PropertyPath="LastResult"
+                            KeyUp="PositiveIntTextBox_KeyUp"
                         />
                     </WrapPanel>
                 </DataTemplate>

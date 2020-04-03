@@ -7,7 +7,7 @@
         xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes"
         xmlns:converters="clr-namespace:DDFight.Converters"
         xmlns:damagelistcontrols="clr-namespace:DDFight.Controlers.Game.Attacks.DamageListControls"
-        xmlns:situationalmodifiers="clr-namespace:DDFight.Controlers.Game.Attacks.SituationalModifiers"
+        xmlns:situationalmodifiers="clr-namespace:DDFight.Controlers.Game.Attacks.SituationalModifiers" xmlns:display="clr-namespace:DDFight.Game.Aggression.Attacks.Display"
         mc:Ignorable="d"
         Title="{Binding Name}" Height="450" Width="500"
         Style="{StaticResource ResourceKey=WindowStyle}"
@@ -54,133 +54,7 @@
                     x:Name="AttackList">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <GroupBox
-                                x:Name="AttackGroupBoxControl"
-                                Background="{StaticResource Gray}"
-                                Margin="0, 5">
-                                <GroupBox.Header>
-                                    <TextBlock 
-                                        Foreground="{StaticResource Light}"
-                                        FontSize="15"
-                                        FontWeight="SemiBold"
-                                        Text="{Binding AttackIndex, StringFormat='{}Hit n° {0}'}"/>
-                                </GroupBox.Header>
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition />
-                                        <!-- Target + attack throw control -->
-                                        <RowDefinition />
-                                        <!-- Situational boons and debuffs -->
-                                        <RowDefinition />
-                                        <!-- Advantage / Disadvantage -->
-                                        <RowDefinition Height="Auto" />
-                                        <!-- Damage control -->
-                                        <RowDefinition Height="Auto" />
-                                        <!-- Errors Control -->
-                                        <RowDefinition />
-                                        <!-- Validate Buttons Control -->
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                    </Grid.ColumnDefinitions>
-                                    <WrapPanel 
-                                        Grid.Row="0"
-                                        Margin="10, 5"
-                                        Orientation="Horizontal">
-                                        <WrapPanel.Resources>
-                                            <Style TargetType="TextBlock">
-                                                <Setter Property="Foreground" Value="{StaticResource Light}"/>
-                                            </Style>
-                                        </WrapPanel.Resources>
-                                        <TextBlock
-                                            VerticalAlignment="Center">
-                                            Targeting:
-                                        </TextBlock>
-                                        <ComboBox 
-                                            Margin="5, 0"
-                                            MinWidth="80"
-                                            VerticalAlignment="Center"
-                                            x:Name="HitAttackTargetComboControl">
-                                            <ComboBox.ItemTemplate>
-                                                <DataTemplate>
-                                                    <TextBlock 
-                                                        Text="{Binding DisplayName}"/>
-                                                </DataTemplate>
-                                            </ComboBox.ItemTemplate>
-                                        </ComboBox>
-                                        <TextBlock 
-                                            Margin="0, 0, 5, 0"
-                                            VerticalAlignment="Center">
-                                            With an attack roll of:
-                                        </TextBlock>
-                                        <inputboxes:RangedIntBox
-                                            Margin="0, 0, 5, 0"
-                                            PropertyMin="0" PropertyMax="20"
-                                            PropertyPath="HitRoll"
-                                            MinWidth="35"/>
-                                        <TextBlock 
-                                            Margin="0, 0, 5, 0"
-                                            FontWeight="Bold"
-                                            VerticalAlignment="Center"
-                                            Text="{Binding HitBonus, StringFormat={}{0:+#;-#;''}}"/>
-                                    </WrapPanel>
-                                    <situationalmodifiers:SituationalHitAttackModifiersUserControl                                 
-                                        Grid.Row="1"
-                                        Margin="10, 5"
-                                        DataContext="{Binding SituationalHitAttackModifiers}"/>
-
-                                    <situationalmodifiers:SituationalAdvantageModifiersUserControl
-                                        Grid.Row="2" 
-                                        Margin="10, 5"
-                                        DataContext="{Binding SituationalAdvantageModifiers}"/>
-
-
-                                    <damagelistcontrols:DamageTemplateListRollableUserControl
-                                        Grid.Row="3"
-                                        Margin="5"
-                                        x:Name="DamageControl"
-                                        DataContext="{Binding DamageList}"/>
-                                    
-                                    <TextBlock
-                                        x:Name="ErrorTextblockControl"
-                                        Margin="5"
-                                        Grid.Row="4"
-                                        Foreground="Red"
-                                        Visibility="Collapsed" 
-                                        TextAlignment="Center"
-                                        FontSize="14"/>
-                                    
-                                    <Grid x:Name="ButtonsGridControl"
-                                          Grid.Row="5">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
-                                        <Button
-                                            x:Name="RollButtonControl"
-                                            Padding="10, 5"
-                                            Grid.Column="0"
-                                            HorizontalAlignment="Center"
-                                            FontSize="15"
-                                            FontWeight="SemiBold"
-                                            IsEnabled="False"
-                                            Click="RollButtonControl_Click">
-                                            Roll
-                                        </Button>
-                                        <Button
-                                            x:Name="ValidateButtonControl"
-                                            Padding="10, 5"
-                                            Grid.Column="1"
-                                            HorizontalAlignment="Center"
-                                            FontSize="15"
-                                            FontWeight="SemiBold"
-                                            IsEnabled="False"
-                                            Click="ValidateButtonControl_Click">
-                                            Validate
-                                        </Button>
-
-                                    </Grid>
-                                </Grid>
-                            </GroupBox>
+                            <display:HitAttackResultEditableControl />
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>

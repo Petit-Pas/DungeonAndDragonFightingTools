@@ -22,28 +22,31 @@
         </GroupBox.Header>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
+                <ColumnDefinition />
                 <ColumnDefinition Width="Auto" MinWidth="250" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <TextBlock
-                Grid.Row="0" Grid.Column="0"
-                Text="{Binding ActionDescription}"
-                Margin="10"
-                Padding="5"
-                Foreground="{StaticResource Light}"
-                Background="{StaticResource Gray}"
-                MaxWidth="250"
-                TextWrapping="Wrap"
-                Visibility="{Binding ActionDescription, Converter={StaticResource StringVisibilityConverter}}">
-            </TextBlock>
-            
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <TextBlock
+                    Grid.Row="0" Grid.Column="0"
+                    Text="{Binding ActionDescription}"
+                    Margin="10"
+                    Padding="5"
+                    Foreground="{StaticResource Light}"
+                    Background="{StaticResource Gray}"
+                    MaxWidth="250"
+                    TextWrapping="Wrap"
+                    Visibility="{Binding ActionDescription, Converter={StaticResource StringVisibilityConverter}}">
+                </TextBlock>
+            </ScrollViewer>
+
+
             <ListBox
-                Grid.Column="0" Grid.Row="1"
+                Grid.Column="1" Grid.Row="1"
                 Margin="10, 5"
                 SelectionChanged="AttackListControl_SelectionChanged"
                 x:Name="AttackListControl"
@@ -63,7 +66,7 @@
 
             <local:HitAttackTemplateDetailsPreviewUserControl 
                 x:Name="DetailControl"
-                Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"/>
+                Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"/>
 
         </Grid>
     </GroupBox>

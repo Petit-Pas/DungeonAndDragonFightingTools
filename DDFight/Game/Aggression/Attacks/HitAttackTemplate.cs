@@ -83,6 +83,7 @@ namespace DDFight.Game.Aggression.Attacks
                     AttackIndex = i,
                     SituationalHitAttackModifiers = new SituationalHitAttackModifiers(),
                     SituationalAdvantageModifiers = new SituationalAdvantageModifiers(),
+                    Owner = this.Owner
                 });
             }
             return result;

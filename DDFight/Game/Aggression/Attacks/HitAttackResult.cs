@@ -6,6 +6,17 @@ namespace DDFight.Game.Aggression.Attacks
 {
     public class HitAttackResult : INotifyPropertyChanged
     {
+        public PlayableEntity Owner
+        {
+            get => _owner;
+            set
+            {
+                _owner = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private PlayableEntity _owner;
+
         public PlayableEntity Target
         {
             get => _target;
