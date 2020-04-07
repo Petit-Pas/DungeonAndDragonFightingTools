@@ -31,6 +31,7 @@ namespace DDFight.Game.Status.Display
 
         private void EditCustomVerboseStatusWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            is_initializing = true;
             HeaderBox.StringBox.GetBindingExpression(TextBox.TextProperty).UpdateSource();
             HeaderBox.StringBox.TextChanged += StringBox_TextChanged;
             List<string> DCList = new List<string>();
@@ -52,8 +53,8 @@ namespace DDFight.Game.Status.Display
                         break;
                     }
                 }
-                is_initializing = false;
             }
+            is_initializing = false;
         }
 
         private void StringBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -100,10 +101,12 @@ namespace DDFight.Game.Status.Display
             {
                 if (ApplySavingCharacteristicControler.SelectedIndex == 0)
                 {
+                    Console.WriteLine("COCHON1");
                     data_context.HasApplyCondition = false;
                 }
                 else
                 {
+                    Console.WriteLine("COCHON2");
                     data_context.HasApplyCondition = true;
                     data_context.ApplySavingCharacteristic = (CharacteristicsEnum)Enum.Parse(typeof(CharacteristicsEnum), (string)ApplySavingCharacteristicControler.SelectedItem);
                 }

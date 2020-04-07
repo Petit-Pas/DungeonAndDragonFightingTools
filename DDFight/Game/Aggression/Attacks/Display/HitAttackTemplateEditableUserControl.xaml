@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DDFight.Controlers.Game.Attacks"
              xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes"
-             xmlns:damagelistcontrols="clr-namespace:DDFight.Controlers.Game.Attacks.DamageListControls"
+             xmlns:damagelistcontrols="clr-namespace:DDFight.Controlers.Game.Attacks.DamageListControls" xmlns:display="clr-namespace:DDFight.Game.Status.Display"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -38,6 +38,8 @@
                 <!-- Range -->
                 <RowDefinition Height="*" />
                 <!-- Damage List -->
+                <RowDefinition Height="*" />
+                <!-- Statuses List -->
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -82,6 +84,11 @@
 
             <damagelistcontrols:DamageTemplateListEditableUserControl
                 Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" DataContext="{Binding DamageList}"/>
+
+            <display:CustomVerboseStatusListEditableUserControl
+                Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2"
+                DataContext="{Binding OnHitStatuses}"/>
+
         </Grid>
     </GroupBox>
 </UserControl>

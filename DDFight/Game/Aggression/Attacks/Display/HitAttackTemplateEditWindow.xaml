@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:DDFight.Windows"
         xmlns:attacks="clr-namespace:DDFight.Controlers.Game.Attacks"
         mc:Ignorable="d"
-        Title="EditAAttackTemplate" Height="400" Width="400"
+        Title="EditAAttackTemplate" Height="600" Width="400"
         WindowStartupLocation="CenterOwner"
         Closing="Window_Closing">
 

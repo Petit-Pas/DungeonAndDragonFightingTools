@@ -1,6 +1,8 @@
-﻿using DDFight.Windows;
+﻿using DDFight.Game.Status;
+using DDFight.Windows;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Xml.Serialization;
 
@@ -38,6 +40,16 @@ namespace DDFight.Game.Aggression.Attacks
         }
         private int _hitAmount;
 
+        public CustomVerboseStatusList OnHitStatuses {
+            get => _onHitStatuses;
+            set
+            {
+                _onHitStatuses = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private CustomVerboseStatusList _onHitStatuses = new CustomVerboseStatusList();
+
         [XmlAttribute]
         /// <summary>
         ///     Bonus to hit on the d20 throw to know wehter the attack hits or not
@@ -67,7 +79,7 @@ namespace DDFight.Game.Aggression.Attacks
         private List<DamageTemplate> _damage = new List<DamageTemplate> ();
 
         #endregion Properties
-
+        
         public List<HitAttackResult> GetResultTemplate()
         {
             List<HitAttackResult> result = new List<HitAttackResult>();
@@ -112,6 +124,7 @@ namespace DDFight.Game.Aggression.Attacks
             HitBonus = to_copy.HitBonus;
             HitAmount = to_copy.HitAmount;
             DamageList = (List<DamageTemplate>)to_copy.DamageList.Clone();
+            OnHitStatuses = (CustomVerboseStatusList)to_copy.OnHitStatuses.Clone();
         }
 
         protected HitAttackTemplate(HitAttackTemplate to_copy) : base(to_copy)

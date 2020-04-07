@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -9,9 +10,9 @@ namespace DDFight.Game.Status.Display
     /// </summary>
     public partial class CustomVerboseStatusListEditableUserControl : UserControl
     {
-        private PlayableEntity data_context
+        private CustomVerboseStatusList data_context
         {
-            get => (PlayableEntity)DataContext;
+            get => (CustomVerboseStatusList)DataContext;
         }
 
         public CustomVerboseStatusListEditableUserControl()
@@ -23,7 +24,7 @@ namespace DDFight.Game.Status.Display
 
         private void EditableCustomVerboseStatusList_Loaded(object sender, RoutedEventArgs e)
         {
-            StatusListControl.ItemsSource = data_context.CustomVerboseStatusList.List;
+            StatusListControl.ItemsSource = data_context.List;
         }
 
         private void AddStatusButton_Click(object sender, RoutedEventArgs e)
@@ -32,7 +33,7 @@ namespace DDFight.Game.Status.Display
 
             if (_new.OpenEditWindow() == true)
             {
-                data_context.CustomVerboseStatusList.List.Add(_new);
+                data_context.List.Add(_new);
             }
         }
 
@@ -44,7 +45,7 @@ namespace DDFight.Game.Status.Display
             {
                 if (StatusListControl.SelectedIndex != -1)
                 {
-                    data_context.CustomVerboseStatusList.List.RemoveAt(StatusListControl.SelectedIndex);
+                    data_context.List.RemoveAt(StatusListControl.SelectedIndex);
                 }
             }
         }

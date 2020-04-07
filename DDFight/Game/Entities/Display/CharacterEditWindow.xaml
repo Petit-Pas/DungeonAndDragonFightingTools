@@ -39,7 +39,8 @@
                 <attacks:HitAttackTemplateListEditableUserControl />
             </TabItem>
             <TabItem Header="Status">
-                <status:CustomVerboseStatusListEditableUserControl />
+                <status:CustomVerboseStatusListEditableUserControl 
+                    DataContext="{Binding CustomVerboseStatusList}"/>
             </TabItem>
             
         </TabControl>

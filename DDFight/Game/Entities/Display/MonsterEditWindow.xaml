@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         xmlns:monsters_controls="clr-namespace:DDFight.Controlers.Monsters"
         xmlns:attacks="clr-namespace:DDFight.Controlers.Game.Attacks"
-        xmlns:game="clr-namespace:DDFight.Game"
+        xmlns:game="clr-namespace:DDFight.Game" xmlns:status="clr-namespace:DDFight.Game.Status.Display"
         Title="Edit Monster Window" Height="600" Width="400"
         WindowStartupLocation="CenterOwner"
         Closing="Window_Closing">
@@ -37,6 +37,10 @@
             <TabItem Header="Attacks">
                 <attacks:HitAttackTemplateListEditableUserControl
                     x:Name="HitAttacks"/>
+            </TabItem>
+            <TabItem Header="Status">
+                <status:CustomVerboseStatusListEditableUserControl 
+                    DataContext="{Binding CustomVerboseStatusList}"/>
             </TabItem>
         </TabControl>
         <Grid 
