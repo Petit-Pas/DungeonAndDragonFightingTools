@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes"
+        xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes" xmlns:characteristics="clr-namespace:DDFight.Controlers.Game.Characteristics" xmlns:display="clr-namespace:DDFight.Game.Status.Display"
         mc:Ignorable="d"
         Title="EditCustomVerboseStatusWindow" Height="450" Width="800"
         Background="{StaticResource LightestGray}"
@@ -28,8 +28,69 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
+        <!-- Grid for the end condition of the status -->
+        <Grid
+            Margin="5, 0"
+            Grid.Row="1" Grid.RowSpan="4" Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="150" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock
+                Grid.Row="0" Grid.Column="0"
+                Style="{StaticResource LabelStyle}">
+                Apply Saving: 
+            </TextBlock>
+            <ComboBox 
+                Grid.Row="0" Grid.Column="1"
+                x:Name="ApplySavingCharacteristicControler"
+                SelectionChanged="ApplySavingCharacteristicControler_SelectionChanged">
+                <ComboBox.Resources>
+                    <Style TargetType="TextBlock">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ComboBoxItem}}" Value="True">
+                                <Setter Property="FontWeight" Value="Bold" />
+                                <Setter Property="Foreground" Value="Black"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ComboBox.Resources>
+                <ComboBox.ItemContainerStyle>
+                    <Style TargetType="ComboBoxItem">
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="Red" />
+                            </Trigger>
+                        </Style.Triggers>
+                        <Setter Property="FontWeight" Value="SemiBold"/>
+                        <Setter Property="Background" Value="{StaticResource LightestGray}" />
+                        <Setter Property="Foreground" Value="{StaticResource Light}"/>
+                    </Style>
+                </ComboBox.ItemContainerStyle>
+            </ComboBox>
+
+            <TextBlock 
+                Grid.Row="1" Grid.Column="0"
+                Style="{StaticResource LabelStyle}">
+                Difficulty (0 for innate)
+            </TextBlock>
+            <inputboxes:PositiveIntTextBox
+                Grid.Row="1" Grid.Column="1"
+                PropertyPath="ApplySavingDifficulty"/>
+
+        </Grid>
+        
         <TextBlock
             Grid.Row="0"
             Grid.Column="0"

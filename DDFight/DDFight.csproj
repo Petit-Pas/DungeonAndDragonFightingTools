@@ -204,6 +204,10 @@
     <Compile Include="Game\Status\Display\CustomVerboseStatusListEditWindow.xaml.cs">
       <DependentUpon>CustomVerboseStatusListEditWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Game\Status\Display\StatusEndMomentumListSelectableUserControl.xaml.cs">
+      <DependentUpon>StatusEndMomentumListSelectableUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Game\Status\StatusEndMomentumEnum.cs" />
     <Compile Include="Resources\ResourceManager.cs" />
     <Compile Include="Tools\ICopyAssignable.cs" />
     <Compile Include="Tools\IEventUnregisterable.cs" />
@@ -417,6 +421,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Game\Status\Display\CustomVerboseStatusListEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\Status\Display\StatusEndMomentumListSelectableUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,4 +1,5 @@
-﻿using DDFight.Game.Status.Display;
+﻿using DDFight.Game.Characteristics;
+using DDFight.Game.Status.Display;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -24,7 +25,7 @@ namespace DDFight.Game.Status
                 NotifyPropertyChanged();
             }
         }
-        private string _header;
+        private string _header = "";
 
         [XmlAttribute]
         // Should be a short sentence explaining the condition
@@ -37,7 +38,7 @@ namespace DDFight.Game.Status
                 NotifyPropertyChanged();
             }
         }
-        private string _toolTip;
+        private string _toolTip = "";
 
         [XmlAttribute]
         // Should be a long description explaining both condition and the way it gets removed
@@ -50,16 +51,56 @@ namespace DDFight.Game.Status
                 NotifyPropertyChanged();
             }
         }
-        private string _description;
+        private string _description = "";
+
+
+        [XmlAttribute]
+        public bool HasApplyCondition
+        {
+            get => _hasApplyCondition;
+            set
+            {
+                _hasApplyCondition = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private bool _hasApplyCondition = false;
+
+        [XmlAttribute]
+        public CharacteristicsEnum ApplySavingCharacteristic
+        {
+            get => _applySavingCharacteristic;
+            set
+            {
+                _applySavingCharacteristic = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private CharacteristicsEnum _applySavingCharacteristic = CharacteristicsEnum.Wisdom;
+
+        // 0 for default spellcasting ability DC
+        [XmlAttribute]
+        public int ApplySavingDifficulty
+        {
+            get => _applySavingDifficulty;
+            set
+            {
+                _applySavingDifficulty = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private int _applySavingDifficulty = 0;
 
         #region ICloneable
 
         public void init_copy(CustomVerboseStatus to_copy)
         {
-            Description = to_copy.Description;
-            Header = to_copy.Header;
-            ToolTip = to_copy.ToolTip;
-            
+            Description = (string)to_copy.Description.Clone();
+            Header = (string)to_copy.Header.Clone();
+            ToolTip = (string)to_copy.ToolTip.Clone();
+            HasApplyCondition = to_copy.HasApplyCondition;
+            ApplySavingCharacteristic = to_copy.ApplySavingCharacteristic;
+            ApplySavingDifficulty = to_copy.ApplySavingDifficulty;
         }
 
         public CustomVerboseStatus (CustomVerboseStatus to_copy)
