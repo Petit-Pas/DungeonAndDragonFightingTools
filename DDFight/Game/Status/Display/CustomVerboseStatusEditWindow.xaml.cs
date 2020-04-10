@@ -24,37 +24,11 @@ namespace DDFight.Game.Status.Display
             Loaded += EditCustomVerboseStatusWindow_Loaded;
         }
 
-        /// <summary>
-        ///     used to avoid triggering certain event when forcing the SelectedIndex in ComboBoxes
-        /// </summary>
-        private bool is_initializing = false;
 
         private void EditCustomVerboseStatusWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            is_initializing = true;
             HeaderBox.StringBox.GetBindingExpression(TextBox.TextProperty).UpdateSource();
             HeaderBox.StringBox.TextChanged += StringBox_TextChanged;
-            List<string> DCList = new List<string>();
-            DCList.Add("None");
-            foreach (var charac in Enum.GetValues(typeof(CharacteristicsEnum)))
-                DCList.Add(charac.ToString());
-            ApplySavingCharacteristicControler.ItemsSource = DCList;
-            ApplySavingCharacteristicControler.SelectedIndex = 0;
-            if (data_context.HasApplyCondition)
-            {
-                is_initializing = true;
-                int i = 0;
-                foreach(CharacteristicsEnum charac in Enum.GetValues(typeof(CharacteristicsEnum)))
-                {
-                    i += 1;
-                    if (charac == data_context.ApplySavingCharacteristic)
-                    {
-                        ApplySavingCharacteristicControler.SelectedIndex = i;
-                        break;
-                    }
-                }
-            }
-            is_initializing = false;
         }
 
         private void StringBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -92,24 +66,6 @@ namespace DDFight.Game.Status.Display
 
                 if (dc.Yes == false)
                     e.Cancel = true;
-            }
-        }
-
-        private void ApplySavingCharacteristicControler_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (!is_initializing)
-            {
-                if (ApplySavingCharacteristicControler.SelectedIndex == 0)
-                {
-                    Console.WriteLine("COCHON1");
-                    data_context.HasApplyCondition = false;
-                }
-                else
-                {
-                    Console.WriteLine("COCHON2");
-                    data_context.HasApplyCondition = true;
-                    data_context.ApplySavingCharacteristic = (CharacteristicsEnum)Enum.Parse(typeof(CharacteristicsEnum), (string)ApplySavingCharacteristicControler.SelectedItem);
-                }
             }
         }
     }

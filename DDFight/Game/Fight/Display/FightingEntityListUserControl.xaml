@@ -30,8 +30,8 @@
                                 <ColumnDefinition SharedSizeGroup="ColumnSize" />
                             </Grid.ColumnDefinitions>
                             <fight:FightingEntityTileUserControl
-                            Grid.Column="0" Grid.Row="0"
-                            Margin="10"/>
+                                Grid.Column="0" Grid.Row="0"
+                                Margin="10"/>
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

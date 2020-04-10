@@ -1,4 +1,5 @@
 ﻿using DDFight.Game.Dices;
+using DDFight.Game.Status;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,6 +42,7 @@ namespace DDFight.Game.Aggression.Attacks.Display
 
         private void HitAttackResultEditableControl_Loaded(object sender, RoutedEventArgs e)
         {
+            HitAttackTargetComboControl.ItemsSource = Global.Context.FightContext.FightersList.Fighters;
             HitAttackTargetComboControl.SelectionChanged += HitAttackTargetComboControl_SelectionChanged;
             DamageControl.PropertyChanged += DamageControl_PropertyChanged;
         }
@@ -120,7 +122,14 @@ namespace DDFight.Game.Aggression.Attacks.Display
         {
             if (this.AreAllChildrenValid())
             {
-                data_context.Target.GetAttacked(data_context, data_context.Owner);
+                bool hit = data_context.Target.GetAttacked(data_context, data_context.Owner);
+                if (hit == true && data_context.OnHitStatuses.List.Count != 0)
+                {
+                    foreach (OnHitStatus onHitStatus in data_context.OnHitStatuses.List)
+                    {
+                        onHitStatus.Apply(data_context.Owner, data_context.Target);
+                    }
+                }
                 this.Visibility = Visibility.Collapsed;
             }
         }

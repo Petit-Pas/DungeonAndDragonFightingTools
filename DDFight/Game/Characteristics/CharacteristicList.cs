@@ -38,6 +38,11 @@ namespace DDFight.Game.Characteristics
 
         #region characteristics
 
+        public Characteristic GetCharacteristic(CharacteristicsEnum type)
+        {
+            return CharacteristicsList.First(x => x.Name == type);
+        }
+
         public int GetCharacteristicModifier(CharacteristicsEnum type)
         {
             return CharacteristicsList.First(x => x.Name == type).Modifier;

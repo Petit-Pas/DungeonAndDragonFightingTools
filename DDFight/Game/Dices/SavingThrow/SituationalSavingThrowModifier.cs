@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DDFight.Game.Aggression.Attacks
+namespace DDFight.Game.Dices.SavingThrow
 {
     public class SituationalSavingThrowModifier : INotifyPropertyChanged
     {

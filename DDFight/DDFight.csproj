@@ -62,6 +62,10 @@
     <Compile Include="Game\Aggression\Attacks\Display\HitAttackResultEditableControl.xaml.cs">
       <DependentUpon>HitAttackResultEditableControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Game\Dices\SavingThrow\Display\SavingThrowRollableUserControl.xaml.cs">
+      <DependentUpon>SavingThrowRollableUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Game\Dices\SavingThrow\SavingThrow.cs" />
     <Compile Include="Game\Entities\Display\CharacterMainInfoUserControl.xaml.cs">
       <DependentUpon>CharacterMainInfoUserControl.xaml</DependentUpon>
     </Compile>
@@ -110,7 +114,7 @@
     <Compile Include="Game\Aggression\Attacks\Display\SituationalHitAttackModifiersUserControl.xaml.cs">
       <DependentUpon>SituationalHitAttackModifiersUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Game\Aggression\Display\SituationalSavingThrowModifierUserControl.xaml.cs">
+    <Compile Include="Game\Dices\SavingThrow\Display\SituationalSavingThrowModifierUserControl.xaml.cs">
       <DependentUpon>SituationalSavingThrowModifierUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Game\Characteristics\Display\CharacteristicsListSelectableUserControl.xaml.cs">
@@ -130,10 +134,16 @@
     </Compile>
     <Compile Include="Converters\BoolToCustomStringConverter.cs" />
     <Compile Include="Converters\StringToVisibilityConverter.cs" />
-    <Compile Include="Game\Aggression\SituationalSavingThrowModifier.cs" />
+    <Compile Include="Game\Dices\SavingThrow\SituationalSavingThrowModifier.cs" />
     <Compile Include="Game\DamageAffinity\DamageTypeEnum.cs" />
     <Compile Include="Game\SpecialAbilitiesEditableUserControl.xaml.cs">
       <DependentUpon>SpecialAbilitiesEditableUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Game\Status\Display\OnHitStatusApplyWindow.xaml.cs">
+      <DependentUpon>OnHitStatusApplyWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Game\Status\Display\OnHitStatusEditWindow.xaml.cs">
+      <DependentUpon>OnHitStatusEditWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Game\Status\Display\CustomVerboseStatusTileUserControl.xaml.cs">
       <DependentUpon>CustomVerboseStatusTileUserControl.xaml</DependentUpon>
@@ -204,9 +214,14 @@
     <Compile Include="Game\Status\Display\CustomVerboseStatusListEditWindow.xaml.cs">
       <DependentUpon>CustomVerboseStatusListEditWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Game\Status\Display\OnHitStatusListEditableUserControl.xaml.cs">
+      <DependentUpon>OnHitStatusListEditableUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Game\Status\Display\StatusEndMomentumListSelectableUserControl.xaml.cs">
       <DependentUpon>StatusEndMomentumListSelectableUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Game\Status\OnHitStatus.cs" />
+    <Compile Include="Game\Status\OnHitStatusList.cs" />
     <Compile Include="Game\Status\StatusEndMomentumEnum.cs" />
     <Compile Include="Resources\ResourceManager.cs" />
     <Compile Include="Tools\ICopyAssignable.cs" />
@@ -273,6 +288,10 @@
     </Compile>
     <Compile Include="Windows\ModalWindows\StatusModal\StatusMessageWindowDataContext.cs" />
     <Page Include="Game\Aggression\Attacks\Display\HitAttackResultEditableControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\Dices\SavingThrow\Display\SavingThrowRollableUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -344,7 +363,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Game\Aggression\Display\SituationalSavingThrowModifierUserControl.xaml">
+    <Page Include="Game\Dices\SavingThrow\Display\SituationalSavingThrowModifierUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -371,6 +390,14 @@
     <Page Include="Game\SpecialAbilitiesEditableUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\Status\Display\OnHitStatusApplyWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\Status\Display\OnHitStatusEditWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Game\Status\Display\CustomVerboseStatusTileUserControl.xaml">
       <SubType>Designer</SubType>
@@ -421,6 +448,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Game\Status\Display\CustomVerboseStatusListEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\Status\Display\OnHitStatusListEditableUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -60,19 +60,5 @@
                 </ItemsControl>
             </ScrollViewer>
         </Grid>
-        <Button
-            x:Name="QuitButtonControl"
-            Grid.Row="2"
-            Height="40"
-            Width="100"
-            Visibility="Collapsed"
-            FontSize="15"
-            FontWeight="Bold"
-            Foreground="{StaticResource LightestGray}"
-            Background="{StaticResource Light}"
-            Click="QuitButtonControl_Click"
-            Margin="10">
-            Quit
-        </Button>
     </Grid>
 </Window>

@@ -85,7 +85,7 @@
             <damagelistcontrols:DamageTemplateListEditableUserControl
                 Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" DataContext="{Binding DamageList}"/>
 
-            <display:CustomVerboseStatusListEditableUserControl
+            <display:OnHitStatusListEditableUserControl
                 Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2"
                 DataContext="{Binding OnHitStatuses}"/>
 

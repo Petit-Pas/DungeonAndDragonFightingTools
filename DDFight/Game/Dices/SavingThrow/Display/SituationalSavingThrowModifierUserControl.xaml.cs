@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DDFight.Controlers.Game.Attacks.SituationalModifiers
+namespace DDFight.Game.Dices.SavingThrow.Display
 {
     /// <summary>
     /// Interaction logic for SituationalSavingThrowModifierUserControl.xaml

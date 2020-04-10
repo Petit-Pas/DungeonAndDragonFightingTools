@@ -8,14 +8,20 @@ namespace DDFight.Game.Status.Display
     /// </summary>
     public partial class CustomVerboseStatusListEditWindow : Window
     {
-        public PlayableEntity data_context
+        public CustomVerboseStatusList data_context
         {
-            get => (PlayableEntity)DataContext;
+            get => (CustomVerboseStatusList)DataContext;
         }
 
         public CustomVerboseStatusListEditWindow()
         {
             InitializeComponent();
+            DataContextChanged += CustomVerboseStatusListEditWindow_DataContextChanged;
+        }
+
+        private void CustomVerboseStatusListEditWindow_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            data_context.Validated = false;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

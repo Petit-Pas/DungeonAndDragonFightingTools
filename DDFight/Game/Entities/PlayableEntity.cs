@@ -486,8 +486,9 @@ namespace DDFight.Game
             }
         }
 
-        public void GetAttacked(HitAttackResult result, PlayableEntity attacker)
+        public bool GetAttacked(HitAttackResult result, PlayableEntity attacker)
         {
+            bool hit = false;
             Paragraph tmp = (Paragraph)Global.Context.UserLogs.Blocks.LastBlock;
 
             tmp.Inlines.Add(Extensions.BuildRun(attacker.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
@@ -503,6 +504,7 @@ namespace DDFight.Game
             if (result.HitRoll == 1)
             {
                 tmp.Inlines.Add(Extensions.BuildRun(" Critical Miss!\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                hit = false;
             }
 
             // Critical Hit
@@ -510,6 +512,7 @@ namespace DDFight.Game
             {
                 tmp.Inlines.Add(Extensions.BuildRun(" Critical Hit!\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
                 TakeHitDamage(result.DamageList);
+                hit = true;
             }
 
             // if the character gets hit with a normal hit
@@ -517,12 +520,15 @@ namespace DDFight.Game
             {
                 tmp.Inlines.Add(Extensions.BuildRun(" Hit!\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
                 TakeHitDamage(result.DamageList);
+                hit = true;
             }
             // If the character can avoid / block the attack
             else
             {
                 tmp.Inlines.Add(Extensions.BuildRun(" Missed!\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                hit = false;
             }
+            return hit;
         }
 
         #endregion HpManagement

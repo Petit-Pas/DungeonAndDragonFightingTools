@@ -1,20 +1,20 @@
 ﻿using DDFight.Game.Status.Display;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Xml.Serialization;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace DDFight.Game.Status
 {
-    public class CustomVerboseStatusList : INotifyPropertyChanged, ICloneable
+    public class OnHitStatusList : INotifyPropertyChanged, ICloneable
     {
-        public CustomVerboseStatusList() { }
+        public OnHitStatusList() { }
 
-        [XmlIgnore]
-        public bool Validated = false;
-
-        public ObservableCollection<CustomVerboseStatus> List
+        public ObservableCollection<OnHitStatus> List
         {
             get => _list;
             set
@@ -23,12 +23,12 @@ namespace DDFight.Game.Status
                 NotifyPropertyChanged();
             }
         }
-        private ObservableCollection<CustomVerboseStatus> _list = new ObservableCollection<CustomVerboseStatus>();
+        private ObservableCollection<OnHitStatus> _list = new ObservableCollection<OnHitStatus>();
 
-        public void OpenEditWindow()
+        /*public void OpenEditWindow(PlayableEntity Owner)
         {
-            CustomVerboseStatusListEditWindow window = new CustomVerboseStatusListEditWindow();
-            CustomVerboseStatusList dc = (CustomVerboseStatusList)this.Clone();
+            OnHitStatusListEditWindow window = new OnHitStatusListEditWindow();
+            PlayableEntity dc = (PlayableEntity)Owner.Clone();
             dc.Validated = false;
 
             window.DataContext = dc;
@@ -36,8 +36,8 @@ namespace DDFight.Game.Status
             window.ShowDialog();
 
             if (dc.Validated == true)
-                List = dc.List;
-        }
+                List = dc.OnHitStatusList.List;
+        }*/
 
         #region INotifyPropertyChanged
 
@@ -60,24 +60,24 @@ namespace DDFight.Game.Status
 
         #endregion
 
-        public void init_copy(CustomVerboseStatusList to_copy)
+        public void init_copy(OnHitStatusList to_copy)
         {
             List = to_copy.List.Clone();
         }
 
-        public CustomVerboseStatusList(CustomVerboseStatusList to_copy)
+        public OnHitStatusList(OnHitStatusList to_copy)
         {
             init_copy(to_copy);
         }
 
         public object Clone()
         {
-            return new CustomVerboseStatusList(this);
+            return new OnHitStatusList(this);
         }
 
         public virtual void CopyAssign(object _to_copy)
         {
-            CustomVerboseStatusList to_copy = (CustomVerboseStatusList)_to_copy;
+            OnHitStatusList to_copy = (OnHitStatusList)_to_copy;
             init_copy(to_copy);
         }
 

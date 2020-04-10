@@ -40,7 +40,7 @@ namespace DDFight.Game.Aggression.Attacks
         }
         private int _hitAmount;
 
-        public CustomVerboseStatusList OnHitStatuses {
+        public OnHitStatusList OnHitStatuses {
             get => _onHitStatuses;
             set
             {
@@ -48,7 +48,7 @@ namespace DDFight.Game.Aggression.Attacks
                 NotifyPropertyChanged();
             }
         }
-        private CustomVerboseStatusList _onHitStatuses = new CustomVerboseStatusList();
+        private OnHitStatusList _onHitStatuses = new OnHitStatusList();
 
         [XmlAttribute]
         /// <summary>
@@ -95,7 +95,8 @@ namespace DDFight.Game.Aggression.Attacks
                     AttackIndex = i,
                     SituationalHitAttackModifiers = new SituationalHitAttackModifiers(),
                     SituationalAdvantageModifiers = new SituationalAdvantageModifiers(),
-                    Owner = this.Owner
+                    Owner = this.Owner,
+                    OnHitStatuses = (OnHitStatusList)this.OnHitStatuses.Clone(),
                 });
             }
             return result;
@@ -124,7 +125,7 @@ namespace DDFight.Game.Aggression.Attacks
             HitBonus = to_copy.HitBonus;
             HitAmount = to_copy.HitAmount;
             DamageList = (List<DamageTemplate>)to_copy.DamageList.Clone();
-            OnHitStatuses = (CustomVerboseStatusList)to_copy.OnHitStatuses.Clone();
+            OnHitStatuses = (OnHitStatusList)to_copy.OnHitStatuses.Clone();
         }
 
         protected HitAttackTemplate(HitAttackTemplate to_copy) : base(to_copy)

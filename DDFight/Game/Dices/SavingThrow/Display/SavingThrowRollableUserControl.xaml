@@ -1,0 +1,91 @@
+﻿<UserControl x:Class="DDFight.Game.Dices.SavingThrow.Display.SavingThrowRollableUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DDFight.Game.Dices.SavingThrow.Display" xmlns:situationalmodifiers="clr-namespace:DDFight.Controlers.Game.Attacks.SituationalModifiers" xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource Light}"/>
+        </Style>
+    </UserControl.Resources>
+    <GroupBox
+        Padding="10, 5">
+        <GroupBox.Header>
+            <TextBlock
+                FontSize="18"
+                FontWeight="SemiBold">
+                Saving Throw
+            </TextBlock>
+        </GroupBox.Header>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock
+                Grid.Row="0" Grid.Column="0">
+                Characteristic:
+            </TextBlock>
+            <TextBlock
+                Grid.Row="0" Grid.Column="1"
+                Text="{Binding Characteristic}"/>
+
+            <TextBlock
+                Grid.Row="1" Grid.Column="0">
+                Difficulty: 
+            </TextBlock>
+            <TextBlock
+                Grid.Row="1" Grid.Column="1"
+                Text="{Binding Difficulty}"/>
+
+            <local:SituationalSavingThrowModifierUserControl
+                Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"/>
+
+            <situationalmodifiers:SituationalAdvantageModifiersUserControl 
+                Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                DataContext="{Binding Modifiers}"/>
+
+            <Grid
+                Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock 
+                    Grid.Row="0" Grid.Column="0">
+                    Roll: 
+                </TextBlock>
+                <inputboxes:RangedIntBox 
+                    Grid.Row="0" Grid.Column="1"
+                    PropertyMin="0"
+                    PropertyMax="20"
+                    PropertyPath="SavingRoll"/>
+
+                <Button
+                    x:Name="RollButtonControl"
+                    Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                    Click="RollButtonControl_Click">
+                    Roll
+                </Button>
+
+            </Grid>
+        </Grid>
+    </GroupBox>
+</UserControl>

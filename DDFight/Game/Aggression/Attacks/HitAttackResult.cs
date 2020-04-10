@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using DDFight.Game.Status;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -60,6 +61,17 @@ namespace DDFight.Game.Aggression.Attacks
             }
         }
         private int _hitBonus;
+
+        public OnHitStatusList OnHitStatuses
+        {
+            get => _onHitStatuses;
+            set
+            {
+                _onHitStatuses = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private OnHitStatusList _onHitStatuses = new OnHitStatusList();
 
         public SituationalHitAttackModifiers SituationalHitAttackModifiers
         {

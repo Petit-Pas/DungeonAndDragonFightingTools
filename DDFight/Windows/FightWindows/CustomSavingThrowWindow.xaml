@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:DDFight.Windows.FightWindows"
         xmlns:characteristics="clr-namespace:DDFight.Controlers.Game.Characteristics"
         xmlns:situationalmodifiers="clr-namespace:DDFight.Controlers.Game.Attacks.SituationalModifiers"
-        xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes"
+        xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes" xmlns:situationalmodifiers1="clr-namespace:DDFight.Game.Dices.SavingThrow.Display"
         mc:Ignorable="d"
         Title="CustomSavingThrowWindow" Height="350" Width="400"
         Background="{StaticResource LightestGray}"
@@ -81,7 +81,7 @@
             Grid.Row="3" 
             Margin="10, 5"
             DataContext="{Binding AdvantageModifiers, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"/>
-        <situationalmodifiers:SituationalSavingThrowModifierUserControl 
+        <situationalmodifiers1:SituationalSavingThrowModifierUserControl 
             Grid.Row="4"
             Margin="10,5"
             DataContext="{Binding SituationalSavingThrowModifier, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"

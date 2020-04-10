@@ -109,7 +109,7 @@ namespace DDFight.Controlers.Fight
 
         private void ContextManageStatus_Click(object sender, RoutedEventArgs e)
         {
-            data_context.CustomVerboseStatusList.OpenEditWindow(data_context);
+            data_context.CustomVerboseStatusList.OpenEditWindow();
         }
 
         private void RemoveFromFight_Click(object sender, RoutedEventArgs e)
