@@ -1,5 +1,6 @@
 ﻿using DDFight.Game.Status;
 using DDFight.Windows;
+using DDFight.Windows.FightWindows;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -100,6 +101,16 @@ namespace DDFight.Game.Aggression.Attacks
                 });
             }
             return result;
+        }
+
+        public void ExecuteAttack()
+        {
+            ExecuteHitAttackWindow window = new ExecuteHitAttackWindow()
+            {
+                DataContext = this,
+            };
+
+            window.ShowDialog();
         }
 
         public bool OpenEditWindow()

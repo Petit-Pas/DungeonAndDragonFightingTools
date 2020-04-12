@@ -10,6 +10,11 @@ namespace DDFight.Controlers.Game.Attacks
     /// </summary>
     public partial class HitAttackTemplateDetailsPreviewUserControl : UserControl
     {
+        private HitAttackTemplate data_context
+        {
+            get => (HitAttackTemplate)DataContext;
+        }
+
         public HitAttackTemplateDetailsPreviewUserControl()
         {
             InitializeComponent();
@@ -31,14 +36,7 @@ namespace DDFight.Controlers.Game.Attacks
 
         private void ExecuteButton_Click(object sender, RoutedEventArgs e)
         {
-            ExecuteHitAttackWindow window = new ExecuteHitAttackWindow()
-            {
-                DataContext = this.DataContext,
-                Owner = Window.GetWindow(this),
-            };
-
-            window.ShowDialog();
-
+            data_context.ExecuteAttack();
         }
     }
 }

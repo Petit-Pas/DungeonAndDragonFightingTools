@@ -1,4 +1,5 @@
-﻿using DDFight.ValidationRules;
+﻿using DDFight.Game.Characteristics;
+using DDFight.ValidationRules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,19 @@ namespace DDFight.Game.Dices.SavingThrow.Display
     {
         private SavingThrow data_context 
         {
-            get => (SavingThrow)DataContext;
+            get {
+                try
+                {
+                    return (SavingThrow)DataContext;
+                }
+                catch (Exception)
+                {
+                    return new SavingThrow {
+                        Characteristic = CharacteristicsEnum.Dexterity,
+                        Difficulty = 9999,
+                    };
+                }
+            }
         }
 
         public SavingThrowRollableUserControl()

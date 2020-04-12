@@ -1,4 +1,5 @@
 ﻿using DDFight.Game;
+using DDFight.Game.Aggression.Attacks;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -45,6 +46,14 @@ namespace DDFight.Controlers.Game.Attacks
         {
             if (AttackListControl.SelectedItem != null)
                 DetailControl.DataContext = AttackListControl.SelectedItem;
+        }
+
+        private void AttackListControl_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (AttackListControl.SelectedIndex != -1)
+            {
+                ((HitAttackTemplate)AttackListControl.SelectedItem).ExecuteAttack();
+            }
         }
     }
 }

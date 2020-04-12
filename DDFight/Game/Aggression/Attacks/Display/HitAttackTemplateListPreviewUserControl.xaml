@@ -52,6 +52,7 @@
                 x:Name="AttackListControl"
                 Background="{StaticResource Gray}"
                 DisplayMemberPath="Name"
+                MouseDoubleClick="AttackListControl_MouseDoubleClick"
                 >
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">

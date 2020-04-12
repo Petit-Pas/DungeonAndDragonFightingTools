@@ -105,29 +105,43 @@ namespace DDFight.Game.Status.Display
 
         private void validateOnHit()
         {
-            Characteristic charac = Target.Characteristics.GetCharacteristic(data_context.ApplySavingCharacteristic);
-            int total = ((SavingThrow)SavingThrowControl.DataContext).SavingRoll + ((SavingThrow)SavingThrowControl.DataContext).Modifier + charac.Modifier + (int)(charac.Mastery ? Target.Characteristics.MasteryBonus : 0);
             Paragraph paragraph = (Paragraph)Global.Context.UserLogs.Blocks.LastBlock;
 
-            paragraph.Inlines.Add(Extensions.BuildRun(Target.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-            paragraph.Inlines.Add(Extensions.BuildRun(" tries to resist ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-            paragraph.Inlines.Add(Extensions.BuildRun(data_context.Header, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-            paragraph.Inlines.Add(Extensions.BuildRun(" from ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-            paragraph.Inlines.Add(Extensions.BuildRun(Applicant.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-            paragraph.Inlines.Add(Extensions.BuildRun(" ==> ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-            paragraph.Inlines.Add(Extensions.BuildRun(total.ToString() + "/" + data_context.ApplySavingDifficulty.ToString()  , (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-            paragraph.Inlines.Add(Extensions.BuildRun(" ==> ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-
-
-            if (total >= data_context.ApplySavingDifficulty)
+            if (data_context.HasApplyCondition)
             {
-                //resist
-                paragraph.Inlines.Add(Extensions.BuildRun("Success\r\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                // there is a saving throw to resist the status
+                Characteristic charac = Target.Characteristics.GetCharacteristic(data_context.ApplySavingCharacteristic);
+                int total = ((SavingThrow)SavingThrowControl.DataContext).SavingRoll + ((SavingThrow)SavingThrowControl.DataContext).Modifier + charac.Modifier + (int)(charac.Mastery ? Target.Characteristics.MasteryBonus : 0);
+
+                paragraph.Inlines.Add(Extensions.BuildRun(Target.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                paragraph.Inlines.Add(Extensions.BuildRun(" tries to resist ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                paragraph.Inlines.Add(Extensions.BuildRun(data_context.Header, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                paragraph.Inlines.Add(Extensions.BuildRun(" from ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                paragraph.Inlines.Add(Extensions.BuildRun(Applicant.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                paragraph.Inlines.Add(Extensions.BuildRun(" ==> ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                paragraph.Inlines.Add(Extensions.BuildRun(total.ToString() + "/" + data_context.ApplySavingDifficulty.ToString(), (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                paragraph.Inlines.Add(Extensions.BuildRun(" ==> ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+
+                if (total >= data_context.ApplySavingDifficulty)
+                {
+                    //resist
+                    paragraph.Inlines.Add(Extensions.BuildRun("Success\r\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                }
+                else
+                {
+                    //fails
+                    paragraph.Inlines.Add(Extensions.BuildRun("Failure\r\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                    Target.CustomVerboseStatusList.List.Add(data_context);
+                }
             }
             else
             {
-                //fails
-                paragraph.Inlines.Add(Extensions.BuildRun("Failure\r\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                // there is no saving throw to resist the status 
+                paragraph.Inlines.Add(Extensions.BuildRun(Applicant.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                paragraph.Inlines.Add(Extensions.BuildRun(" applies ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                paragraph.Inlines.Add(Extensions.BuildRun(data_context.Header, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                paragraph.Inlines.Add(Extensions.BuildRun(" on ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                paragraph.Inlines.Add(Extensions.BuildRun(Target.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
                 Target.CustomVerboseStatusList.List.Add(data_context);
             }
         }
