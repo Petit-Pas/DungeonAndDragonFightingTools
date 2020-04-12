@@ -57,13 +57,12 @@ namespace DDFight.Game.Status
 
         #endregion Properties
 
-        public SavingThrow GetSavingThrow(PlayableEntity target)
+        public SavingThrow GetSavingThrow(PlayableEntity applicant, PlayableEntity target)
         {
             SavingThrow result = new SavingThrow
             {
                 Characteristic = this.ApplySavingCharacteristic,
-                //TODO should fetch the innate spellcasting ability when that stat exist
-                Difficulty = this.ApplySavingDifficulty,
+                Difficulty = this.ApplySavingDifficulty != 0 ? this.ApplySavingDifficulty : applicant.SpellSave,
                 Target = target,
             };
             return result;

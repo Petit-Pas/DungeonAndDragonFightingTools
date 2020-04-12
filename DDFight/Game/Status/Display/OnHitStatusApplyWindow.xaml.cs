@@ -77,7 +77,7 @@ namespace DDFight.Game.Status.Display
             if (data_context.HasApplyCondition)
             {
                 ValidateButtonControl.Content = "Automatic Roll";
-                SavingThrowControl.DataContext = data_context.GetSavingThrow(Target);
+                SavingThrowControl.DataContext = data_context.GetSavingThrow(Applicant, Target);
                 SavingThrowControl.Visibility = Visibility.Visible;
                 ((SavingThrow)SavingThrowControl.DataContext).PropertyChanged += OnHitStatusApplyWindow_PropertyChanged;
             }
@@ -119,7 +119,7 @@ namespace DDFight.Game.Status.Display
                 paragraph.Inlines.Add(Extensions.BuildRun(" from ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
                 paragraph.Inlines.Add(Extensions.BuildRun(Applicant.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
                 paragraph.Inlines.Add(Extensions.BuildRun(" ==> ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-                paragraph.Inlines.Add(Extensions.BuildRun(total.ToString() + "/" + data_context.ApplySavingDifficulty.ToString(), (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                paragraph.Inlines.Add(Extensions.BuildRun(total.ToString() + "/" + ((SavingThrow)SavingThrowControl.DataContext).Difficulty.ToString(), (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
                 paragraph.Inlines.Add(Extensions.BuildRun(" ==> ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
 
                 if (total >= data_context.ApplySavingDifficulty)

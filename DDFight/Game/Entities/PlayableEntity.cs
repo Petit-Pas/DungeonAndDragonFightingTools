@@ -120,6 +120,18 @@ namespace DDFight.Game
         }
         private int _hp = 0;
 
+        [XmlAttribute]
+        public int SpellSave
+        {
+            get => _spellSave;
+            set
+            {
+                _spellSave = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private int _spellSave = 10;
+
         /// <summary>
         ///     used to dump a character in log file (in case of crash, it at least gives information back)
         /// </summary>
@@ -571,6 +583,7 @@ namespace DDFight.Game
             CA = to_copy.CA;
             Hp = to_copy.Hp;
             MaxHp = to_copy.MaxHp;
+            SpellSave = to_copy.SpellSave;
             Characteristics = (CharacteristicList)to_copy.Characteristics.Clone();
             DamageAffinities = (DamageTypeAffinityList)to_copy.DamageAffinities.Clone();
             HitAttacks = to_copy.HitAttacks.Clone();

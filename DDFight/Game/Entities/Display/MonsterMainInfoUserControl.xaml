@@ -40,6 +40,8 @@
                     <RowDefinition Height="Auto"/>
                     <!-- Armor Class -->
                     <RowDefinition Height="Auto"/>
+                    <!-- Spell Save -->
+                    <RowDefinition Height="Auto"/>
                     <!-- Max HPs -->
                     <RowDefinition Height="Auto"/>
                     <!-- Current HPs -->
@@ -52,59 +54,69 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock 
-                                    Grid.Row="0" Grid.Column="0" 
-                                    Margin="10, 5">
-                                    Name
+                    Grid.Row="0" Grid.Column="0" 
+                    Margin="10, 5">
+                    Name
                 </TextBlock>
                 <input:NotEmptyStringTextBox 
-                                    x:Name="NameBoxUserControl" 
-                                    Grid.Row="0" Grid.Column="1" 
-                                    Margin="0, 5, 10, 5"
-                                    PropertyPath="Name"/>
+                    x:Name="NameBoxUserControl" 
+                    Grid.Row="0" Grid.Column="1" 
+                    Margin="0, 5, 10, 5"
+                    PropertyPath="Name"/>
 
                 <TextBlock 
-                                    Grid.Row="1" Grid.Column="0" 
-                                    Margin="10, 5">
-                                    Level
+                    Grid.Row="1" Grid.Column="0" 
+                    Margin="10, 5">
+                    Level
                 </TextBlock>
                 <input:NotEmptyStringTextBox 
-                                    x:Name="LevelBoxUserControl" 
-                                    Grid.Row="1" Grid.Column="1" 
-                                    Margin="0, 5, 10, 5"
-                                    PropertyPath="Level"/>
+                    x:Name="LevelBoxUserControl" 
+                    Grid.Row="1" Grid.Column="1" 
+                    Margin="0, 5, 10, 5"
+                    PropertyPath="Level"/>
 
                 <TextBlock 
-                                    Grid.Row="2" Grid.Column="0" 
-                                    Margin="10, 5">
-                                    Armor class
+                    Grid.Row="2" Grid.Column="0" 
+                    Margin="10, 5">
+                    Armor class
                 </TextBlock>
                 <input:PositiveIntTextBox 
-                                    x:Name="CABoxUserControl" 
-                                    Grid.Row="2" Grid.Column="1" 
-                                    Margin="0, 5, 10, 5" 
-                                    PropertyPath="CA"/>
+                    x:Name="CABoxUserControl" 
+                    Grid.Row="2" Grid.Column="1" 
+                    Margin="0, 5, 10, 5" 
+                    PropertyPath="CA"/>
 
+                <TextBlock
+                    Grid.Row="3" Grid.Column="0"
+                    Margin="10, 5">
+                    Spell Save
+                </TextBlock>
+                <input:PositiveIntTextBox
+                    Grid.Row="3" Grid.Column="1"
+                    PropertyPath="SpellSave"
+                    Margin="0, 5, 10, 5"/>
+                
                 <TextBlock 
-                                    Grid.Row="3" Grid.Column="0" 
-                                    Margin="10, 5">
-                                    Max HP
+                    Grid.Row="4" Grid.Column="0" 
+                    Margin="10, 5">
+                    Max HP
                 </TextBlock>
                 <input:PositiveIntTextBox 
-                                    x:Name="MaxHPBoxUserControl" 
-                                    Grid.Row="3" Grid.Column="1" 
-                                    Margin="0, 5, 10, 5" 
-                                    PropertyPath="MaxHp"/>
+                    x:Name="MaxHPBoxUserControl" 
+                    Grid.Row="4" Grid.Column="1" 
+                    Margin="0, 5, 10, 5" 
+                    PropertyPath="MaxHp"/>
 
                 <TextBlock 
-                                    Grid.Row="4" Grid.Column="0"
-                                    Margin="10, 5">
-                                    Current HP
+                    Grid.Row="5" Grid.Column="0"
+                    Margin="10, 5">
+                    Current HP
                 </TextBlock>
                 <input:IntTextBox 
-                                    x:Name="HPBoxUserControl" 
-                                    Grid.Row="4" Grid.Column="1" 
-                                    Margin="0, 5, 10, 5"
-                                    PropertyPath="Hp"/>
+                    x:Name="HPBoxUserControl" 
+                    Grid.Row="5" Grid.Column="1" 
+                    Margin="0, 5, 10, 5"
+                    PropertyPath="Hp"/>
 
             </Grid>
             <characteristics:CharacteristicsListEditableUserControl 
