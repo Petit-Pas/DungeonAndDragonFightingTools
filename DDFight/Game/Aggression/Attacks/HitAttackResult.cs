@@ -95,17 +95,6 @@ namespace DDFight.Game.Aggression.Attacks
         }
         private SituationalAdvantageModifiers _situationalAdvantageModifiers;
 
-        public int AttackIndex
-        {
-            get => _attackIndex;
-            set
-            {
-                _attackIndex = value;
-                NotifyPropertyChanged();
-            }
-        }
-        private int _attackIndex;
-
         #region INotifyPropertyChanged
 
         /// <summary>

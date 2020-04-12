@@ -31,8 +31,6 @@
                 <RowDefinition Height="Auto" />
                 <!-- Name -->
                 <RowDefinition Height="Auto" />
-                <!-- Amount of Hits -->
-                <RowDefinition Height="Auto" />
                 <!-- Bonus to Hits -->
                 <RowDefinition Height="Auto" />
                 <!-- Range -->
@@ -57,36 +55,26 @@
 
             <Label
                 Grid.Row="1" Grid.Column="0">
-                Amount of Hits
-            </Label>
-            <inputboxes:PositiveIntTextBox
-                x:Name="HitAmountTextBox"
-                Grid.Row="1" Grid.Column="1"
-                MaxHeight="20"
-                PropertyPath="HitAmount"/>
-
-            <Label
-                Grid.Row="2" Grid.Column="0">
                 Bonus to Hits
             </Label>
             <inputboxes:IntTextBox
                 x:Name="HitBonusTextBox"
-                Grid.Row="2" Grid.Column="1"
+                Grid.Row="1" Grid.Column="1"
                 MaxHeight="20"
                 PropertyPath="HitBonus"/>
 
             <Label 
-                Grid.Row="3" Grid.Column="0">
+                Grid.Row="2" Grid.Column="0">
                 Range
             </Label>
             <local:RangeEditableUserControl 
-                Grid.Row="3" Grid.Column="1"/>
+                Grid.Row="2" Grid.Column="1"/>
 
             <damagelistcontrols:DamageTemplateListEditableUserControl
-                Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" DataContext="{Binding DamageList}"/>
+                Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" DataContext="{Binding DamageList}"/>
 
             <display:OnHitStatusListEditableUserControl
-                Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2"
+                Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2"
                 DataContext="{Binding OnHitStatuses}"/>
 
         </Grid>

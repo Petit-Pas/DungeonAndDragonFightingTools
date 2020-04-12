@@ -36,8 +36,13 @@ namespace DDFight.Game.Aggression.Attacks.Display
 
         private void HitAttackResultEditableControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            data_context.PropertyChanged += Data_context_PropertyChanged;
-            data_context.SituationalHitAttackModifiers.PropertyChanged += SituationalHitAttackModifiers_PropertyChanged;
+            try
+            {
+                data_context.PropertyChanged += Data_context_PropertyChanged;
+                data_context.SituationalHitAttackModifiers.PropertyChanged += SituationalHitAttackModifiers_PropertyChanged;
+            }
+            catch (Exception)
+            { }
         }
 
         private void HitAttackResultEditableControl_Loaded(object sender, RoutedEventArgs e)

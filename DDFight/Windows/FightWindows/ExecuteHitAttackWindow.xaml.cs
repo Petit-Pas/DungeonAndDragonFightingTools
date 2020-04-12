@@ -26,12 +26,9 @@ namespace DDFight.Windows.FightWindows
             Loaded += ExecuteHitAttackWindow_Loaded;
         }
 
-        private List<HitAttackResult> attacks = new List<HitAttackResult>();
-
         private void ExecuteHitAttackWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            attacks = data_context.GetResultTemplate();
-            AttackList.ItemsSource = attacks;
+            AttackControl.DataContext = data_context.GetResultTemplate();
         }
     }
 }

@@ -143,7 +143,6 @@ namespace DDFight.Windows
             window.ShowDialog();
 
             Console.WriteLine(dc.Name);
-            Console.WriteLine(dc.HitAmount);
             Console.WriteLine(dc.HitBonus);
             Console.WriteLine(dc.DamageList.ToString());
             Console.WriteLine(dc.DamageList[0].DamageType);

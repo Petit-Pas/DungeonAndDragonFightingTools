@@ -15,7 +15,7 @@
                 Foreground="{StaticResource Light}"
                 FontSize="15"
                 FontWeight="SemiBold"
-                Text="{Binding AttackIndex, StringFormat='{}Hit n° {0}'}"/>
+                Text="Attack"/>
         </GroupBox.Header>
         <Grid>
             <Grid.RowDefinitions>

@@ -19,7 +19,6 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -36,29 +35,17 @@
                 FontWeight="SemiBold"
                 TextWrapping="Wrap"
                 TextAlignment="Center">
-                        When you press on the Roll button, 
-                        all the results equal to 0 will be 
-                        automatically rolled
+                When you press on the Roll button, 
+                all the results equal to 0 will be 
+                automatically rolled
             </TextBlock>
         </StackPanel>
 
         <Grid
             Grid.Row="1"
             Margin="10">
-            <ScrollViewer
-                x:Name="AttackScrollViewControl"
-                Grid.Row="1"
-                Margin="10"
-                VerticalScrollBarVisibility="Auto">
-                <ItemsControl
-                    x:Name="AttackList">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <display:HitAttackResultEditableControl />
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </ScrollViewer>
+                <display:HitAttackResultEditableControl 
+                    x:Name="AttackControl"/>
         </Grid>
     </Grid>
 </Window>

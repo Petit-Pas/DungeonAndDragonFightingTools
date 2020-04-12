@@ -63,7 +63,8 @@ namespace DDFight.Game.Characteristics
 
         [XmlAttribute]
         /// <summary>
-        ///     The amount to add to mastered characteristics
+        ///     The 
+        ///     to add to mastered characteristics
         /// </summary>
         public uint MasteryBonus
         {

@@ -26,21 +26,6 @@ namespace DDFight.Game.Aggression.Attacks
 
         #region Properties
 
-        [XmlAttribute]
-        /// <summary>
-        ///     Amount of hit (1 target per hit, a target can be focused more than once)
-        /// </summary>
-        public int HitAmount
-        {
-            get => _hitAmount;
-            set
-            {
-                _hitAmount = value;
-                NotifyPropertyChanged();
-            }
-        }
-        private int _hitAmount;
-
         public OnHitStatusList OnHitStatuses {
             get => _onHitStatuses;
             set
@@ -81,26 +66,19 @@ namespace DDFight.Game.Aggression.Attacks
 
         #endregion Properties
         
-        public List<HitAttackResult> GetResultTemplate()
+        public HitAttackResult GetResultTemplate()
         {
-            List<HitAttackResult> result = new List<HitAttackResult>();
-
-            for (int i = 0; i != HitAmount; i++)
+            return new HitAttackResult()
             {
-                result.Add(new HitAttackResult()
-                {
-                    DamageList = (List<DamageTemplate>)DamageList.Clone(),
-                    HitRoll = 0,
-                    HitBonus = HitBonus,
-                    Target = null,
-                    AttackIndex = i,
-                    SituationalHitAttackModifiers = new SituationalHitAttackModifiers(),
-                    SituationalAdvantageModifiers = new SituationalAdvantageModifiers(),
-                    Owner = this.Owner,
-                    OnHitStatuses = (OnHitStatusList)this.OnHitStatuses.Clone(),
-                });
-            }
-            return result;
+                DamageList = (List<DamageTemplate>)DamageList.Clone(),
+                HitRoll = 0,
+                HitBonus = HitBonus,
+                Target = null,
+                SituationalHitAttackModifiers = new SituationalHitAttackModifiers(),
+                SituationalAdvantageModifiers = new SituationalAdvantageModifiers(),
+                Owner = this.Owner,
+                OnHitStatuses = (OnHitStatusList)this.OnHitStatuses.Clone(),
+            };
         }
 
         public void ExecuteAttack()
@@ -134,7 +112,6 @@ namespace DDFight.Game.Aggression.Attacks
         private void init_copy(HitAttackTemplate to_copy)
         {
             HitBonus = to_copy.HitBonus;
-            HitAmount = to_copy.HitAmount;
             DamageList = (List<DamageTemplate>)to_copy.DamageList.Clone();
             OnHitStatuses = (OnHitStatusList)to_copy.OnHitStatuses.Clone();
         }
