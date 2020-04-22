@@ -62,6 +62,9 @@
     <Compile Include="Game\Aggression\Attacks\Display\HitAttackResultEditableControl.xaml.cs">
       <DependentUpon>HitAttackResultEditableControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Game\Aggression\Display\DamageTemplateRollableUserControl.xaml.cs">
+      <DependentUpon>DamageTemplateRollableUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Game\Dices\SavingThrow\Display\SavingThrowRollableUserControl.xaml.cs">
       <DependentUpon>SavingThrowRollableUserControl.xaml</DependentUpon>
     </Compile>
@@ -288,6 +291,10 @@
     </Compile>
     <Compile Include="Windows\ModalWindows\StatusModal\StatusMessageWindowDataContext.cs" />
     <Page Include="Game\Aggression\Attacks\Display\HitAttackResultEditableControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\Aggression\Display\DamageTemplateRollableUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

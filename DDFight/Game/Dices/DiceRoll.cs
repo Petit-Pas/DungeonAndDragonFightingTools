@@ -62,6 +62,26 @@ namespace DDFight.Game.Dices
         }
 
         /// <summary>
+        ///     example : 1d6+1d4+4 will only return "1d6+1d4"
+        /// </summary>
+        /// <returns></returns>
+        public string RollTemplateToString()
+        {
+            string format = "";
+
+            if (DicesList != null)
+            {
+                foreach (Dices d in DicesList)
+                {
+                    format = format + d.ToString() + "+";
+                }
+            }
+            if (format.EndsWith("+"))
+                format = format.Substring(0, format.Length - 1);
+            return format;
+        }
+
+        /// <summary>
         ///     Converts this object to a string (opposite so ctor(string))
         /// </summary>
         /// <returns></returns>
@@ -89,17 +109,30 @@ namespace DDFight.Game.Dices
             return format;
         }
 
+        /// <summary>
+        ///     does not contain the modifier, dices only
+        /// </summary>
         [XmlIgnore]
-        public int LastResult
+        public int LastRoll
         {
-            get => _lastResult;
+            get => _lastRoll;
             set
             {
-                _lastResult = value;
+                _lastRoll = value;
                 NotifyPropertyChanged();
             }
         }
-        private int _lastResult;
+        private int _lastRoll = 0;
+
+
+        /// <summary>
+        ///     contains the modifier
+        /// </summary>
+        [XmlIgnore]
+        public int LastResult
+        {
+            get => LastRoll + Modifier;
+        }
 
         public static int Roll(string input, bool advantage = false, bool disadvantage = false)
         {
@@ -119,19 +152,18 @@ namespace DDFight.Game.Dices
             return dice.LastResult;
         }
 
-        public int Roll(bool critical = false)
+        public void Roll(bool critical = false)
         {
-            int result = Modifier;
+            int result = 0;
 
             foreach(Dices dice in DicesList)
             {
-                // in case of critical, the dices are rolled twice, but not the bonus to damage (with 1d4+2, a critical shall roll 2d4+2, and not 2D4+4)
+                // in case of critical, the dices are rolled twice, but not the bonus to damage (with 1d4+2, a critical shall roll 2d4+2, and not 2d4+4)
                 if (dice.ToString().Contains("d") && critical == true)
                     result += dice.Roll();
                 result += dice.Roll();
             }
-            LastResult = result;
-            return result;
+            LastRoll = result;
         }
 
         #region Properties 

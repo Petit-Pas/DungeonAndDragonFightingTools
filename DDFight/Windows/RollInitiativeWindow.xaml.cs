@@ -80,7 +80,6 @@ namespace DDFight.Windows
 
         private void RollButton_Click(object sender, RoutedEventArgs e)
         {
-            DiceRoll roll = new DiceRoll("1d20");
             if (!this.AreAllChildrenValid())
             {
                 StatusMessageWindow message = new StatusMessageWindow();
@@ -97,14 +96,13 @@ namespace DDFight.Windows
                 foreach (InitiativeCellDataContext tmp in contextList)
                 {
                     if (tmp.Entity.InitiativeRoll == 0)
-                        tmp.Entity.InitiativeRoll = (uint)roll.Roll();
+                        tmp.Entity.InitiativeRoll = (uint)DiceRoll.Roll("1d20");
                 }
             }
         }
 
         private void LaunchFightButton_Click(object sender, RoutedEventArgs e)
         {
-            DiceRoll roll = new DiceRoll("1d20");
             if (!this.AreAllChildrenValid())
             {
                 StatusMessageWindow message = new StatusMessageWindow();
@@ -121,7 +119,7 @@ namespace DDFight.Windows
                 foreach (InitiativeCellDataContext tmp in contextList)
                 {
                     if (tmp.Entity.InitiativeRoll == 0)
-                        tmp.Entity.InitiativeRoll = (uint)roll.Roll();
+                        tmp.Entity.InitiativeRoll = (uint)DiceRoll.Roll("1d20");
                 }
                 this.Cancelled = false;
                 this.Close();

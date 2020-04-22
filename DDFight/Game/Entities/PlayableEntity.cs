@@ -420,7 +420,8 @@ namespace DDFight.Game
 
         public void Heal(DiceRoll to_roll)
         {
-            int amount = to_roll.Roll();
+            to_roll.Roll();
+            int amount = to_roll.LastResult;
 
             if (Hp + amount >= MaxHp)
                 amount = (int)MaxHp - Hp;

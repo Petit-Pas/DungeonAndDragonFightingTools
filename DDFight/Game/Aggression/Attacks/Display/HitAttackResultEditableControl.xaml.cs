@@ -34,12 +34,19 @@ namespace DDFight.Game.Aggression.Attacks.Display
             DataContextChanged += HitAttackResultEditableControl_DataContextChanged;
         }
 
+        private void HitAttackResultEditableControl_LayoutUpdated(object sender, EventArgs e)
+        {
+            //TODO this should not be, it juste spams the function way too much, the problem is to find a way to refresh buttons when one of the damageTemplate.Damage.LastRoll gets updated
+            refresh_buttons();
+        }
+
         private void HitAttackResultEditableControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             try
             {
                 data_context.PropertyChanged += Data_context_PropertyChanged;
                 data_context.SituationalHitAttackModifiers.PropertyChanged += SituationalHitAttackModifiers_PropertyChanged;
+                LayoutUpdated += HitAttackResultEditableControl_LayoutUpdated;
             }
             catch (Exception)
             { }
@@ -49,7 +56,6 @@ namespace DDFight.Game.Aggression.Attacks.Display
         {
             HitAttackTargetComboControl.ItemsSource = Global.Context.FightContext.FightersList.Fighters;
             HitAttackTargetComboControl.SelectionChanged += HitAttackTargetComboControl_SelectionChanged;
-            DamageControl.PropertyChanged += DamageControl_PropertyChanged;
         }
 
         private void DamageControl_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -81,7 +87,7 @@ namespace DDFight.Game.Aggression.Attacks.Display
                 RollButtonControl.IsEnabled = true;
             foreach (DamageTemplate dmg in data_context.DamageList)
             {
-                if (dmg.Damage.LastResult == 0)
+                if (dmg.Damage.LastRoll == 0)
                     RollButtonControl.IsEnabled = true;
             }
             if (RollButtonControl.IsEnabled == false && data_context.Target != null)
@@ -115,7 +121,7 @@ namespace DDFight.Game.Aggression.Attacks.Display
                 data_context.HitRoll = (uint)DiceRoll.Roll("1d20");
             foreach (DamageTemplate dmg in data_context.DamageList)
             {
-                if (dmg.Damage.LastResult == 0)
+                if (dmg.Damage.LastRoll == 0)
                 {
                     dmg.Damage.Roll(data_context.HitRoll >= 20 ? true : false);
                 }

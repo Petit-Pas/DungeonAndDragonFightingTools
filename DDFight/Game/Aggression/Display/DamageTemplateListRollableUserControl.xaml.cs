@@ -1,16 +1,22 @@
 ﻿using DDFight.Controlers.InputBoxes;
+using DDFight.Game.Aggression;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 
 namespace DDFight.Controlers.Game.Attacks.DamageListControls
 {
     /// <summary>
     /// Logique d'interaction pour PlayableDamageListUserControl.xaml
     /// </summary>
-    public partial class DamageTemplateListRollableUserControl : UserControl, INotifyPropertyChanged
+    public partial class DamageTemplateListRollableUserControl : UserControl
     {
-
+        private List<DamageTemplate> data_context
+        {
+            get => (List<DamageTemplate>)DataContext;
+        }
 
         public DamageTemplateListRollableUserControl()
         {
@@ -21,37 +27,7 @@ namespace DDFight.Controlers.Game.Attacks.DamageListControls
 
         private void PlayableDamageListUserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            DamageControl.ItemsSource = (System.Collections.IEnumerable)DataContext;
+            DamageControl.ItemsSource = data_context;
         }
-
-        private void PositiveIntTextBox_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-            PositiveIntTextBox textBox = (PositiveIntTextBox)sender;
-            if (textBox.IsValid())
-            {
-                NotifyPropertyChanged("Damage");
-            }
-        }
-
-        #region INotifyPropertyChanged
-
-        /// <summary>
-        ///     PropertyChanged EventHandler
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="propertyName"></param>
-        private void NotifyPropertyChanged(string propertyName = "default")
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-        #endregion
-
     }
 }

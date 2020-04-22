@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DDFight.Controlers.Game.Attacks.DamageListControls"
              xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes"
-             xmlns:converters="clr-namespace:DDFight.Converters"
+             xmlns:converters="clr-namespace:DDFight.Converters" xmlns:display="clr-namespace:DDFight.Game.Aggression.Display"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -19,42 +19,7 @@
             x:Name="DamageControl">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <WrapPanel
-                        Margin="5"
-                        Orientation="Horizontal">
-                        <Grid
-                            Margin="5, 0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition 
-                                    SharedSizeGroup="FirstColumn"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock 
-                                Foreground="{StaticResource Light}"
-                                Text="{Binding Damage}" />
-                        </Grid>
-                        <Grid
-                            Margin="0, 0, 5, 0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition 
-                                    SharedSizeGroup="SecondColumn" />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock 
-                                Text="{Binding DamageType}" 
-                                FontWeight="SemiBold"
-                                Foreground="{Binding DamageType, Converter={StaticResource DamageColorConverter}}"/>
-                        </Grid>
-                        <TextBlock 
-                            Margin="0, 0, 5, 0"
-                            Foreground="{StaticResource Light}">
-                            Damage :
-                        </TextBlock>
-                        <inputboxes:PositiveIntTextBox 
-                            MinWidth="40"
-                            DataContext="{Binding Damage}"
-                            PropertyPath="LastResult"
-                            KeyUp="PositiveIntTextBox_KeyUp"
-                        />
-                    </WrapPanel>
+                    <display:DamageTemplateRollableUserControl/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

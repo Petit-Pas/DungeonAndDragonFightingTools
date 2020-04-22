@@ -25,6 +25,20 @@ namespace DDFight.Game.Aggression
 
         #region Properties
             
+        public string ToRollDamage
+        {
+            get => Damage.RollTemplateToString();
+        }
+
+        public string ToRollBonus
+        {
+            get
+            {
+                int tmp = Damage.Modifier;
+                return (tmp >= 0 ? ("+" + tmp.ToString()) : tmp.ToString());
+            }
+        }
+
         /// <summary>
         ///     The dices to throw
         /// </summary>
