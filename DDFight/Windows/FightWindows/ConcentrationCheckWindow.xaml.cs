@@ -103,10 +103,10 @@ namespace DDFight.Windows.FightWindows
             Paragraph paragraph = (Paragraph)Global.Context.UserLogs.Blocks.LastBlock;
             paragraph.Inlines.Add(Extensions.BuildRun(data_context.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
             paragraph.Inlines.Add(Extensions.BuildRun(": Concentration check: ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-            paragraph.Inlines.Add(Extensions.BuildRun((Roll + SituationalSavingThrowModifier.Modifier + data_context.Characteristics.GetCharacteristicModifier(CharacteristicsEnum.Constitution)).ToString() + "/10: ", 
+            paragraph.Inlines.Add(Extensions.BuildRun((Roll + SituationalSavingThrowModifier.Modifier + data_context.Characteristics.GetSavingModifier(CharacteristicsEnum.Constitution)).ToString() + "/10: ", 
                 (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
 
-            if (Roll + SituationalSavingThrowModifier.Modifier + data_context.Characteristics.GetCharacteristicModifier(CharacteristicsEnum.Constitution) >= 10)
+            if (Roll + SituationalSavingThrowModifier.Modifier + data_context.Characteristics.GetSavingModifier(CharacteristicsEnum.Constitution) >= 10)
             {
                 paragraph.Inlines.Add(Extensions.BuildRun("still focused.", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
                 Success = true;

@@ -48,6 +48,7 @@ namespace DDFight.Game.Fight
 
         public void NextTurn()
         {
+            Console.WriteLine("Next Turn");
             if (TurnIndex != -1)
             {
                 // 1st turn of first round

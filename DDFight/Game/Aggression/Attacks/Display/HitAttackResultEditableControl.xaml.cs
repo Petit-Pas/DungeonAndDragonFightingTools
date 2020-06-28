@@ -118,7 +118,7 @@ namespace DDFight.Game.Aggression.Attacks.Display
         private void RollButtonControl_Click(object sender, RoutedEventArgs e)
         {
             if (data_context.HitRoll == 0)
-                data_context.HitRoll = (uint)DiceRoll.Roll("1d20");
+                data_context.HitRoll = (uint)DiceRoll.Roll("1d20", data_context.SituationalAdvantageModifiers.SituationalAdvantage, data_context.SituationalAdvantageModifiers.SituationalDisadvantage);
             foreach (DamageTemplate dmg in data_context.DamageList)
             {
                 if (dmg.Damage.LastRoll == 0)

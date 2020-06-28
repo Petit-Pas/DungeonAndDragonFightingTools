@@ -43,6 +43,16 @@ namespace DDFight.Game.Characteristics
             return CharacteristicsList.First(x => x.Name == type);
         }
 
+        public int GetSavingModifier(CharacteristicsEnum type)
+        {
+            Characteristic charac = CharacteristicsList.First(x => x.Name == type);
+            int reuslt = charac.Modifier;
+
+            if (charac.Mastery == true)
+                reuslt += (int)MasteryBonus;
+            return reuslt;
+        }
+
         public int GetCharacteristicModifier(CharacteristicsEnum type)
         {
             return CharacteristicsList.First(x => x.Name == type).Modifier;

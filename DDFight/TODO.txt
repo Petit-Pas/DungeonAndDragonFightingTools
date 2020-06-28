@@ -11,10 +11,8 @@ should have possibility to add minus sign in DiceRolls
 Any function that use llist.SelectedItem should have a null protection
 
 //////
-Add Custom status on given hits
-In DiceRoll, there is already the dices and the bonus split appart, this should allow to modify the way HitAttacks are made in order to only ask for the roll, and not the result (example: 2D6+4 with 3 and 5 rolled, the user only need to enter 3+5=>8, the +4 will be automatically)
+
+add glance on status when selecting an attack in fight
 
 
 
-
-//TODO ABSOLUMENT: ajouter un statut a un personnage, lancer un combat, manage status, crash, a regarder
