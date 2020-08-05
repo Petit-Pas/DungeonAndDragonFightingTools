@@ -31,8 +31,6 @@
                 <!-- Damage control -->
                 <RowDefinition Height="Auto" />
                 <!-- Errors Control -->
-                <RowDefinition />
-                <!-- Validate Buttons Control -->
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
             </Grid.ColumnDefinitions>
@@ -130,36 +128,6 @@
                 TextAlignment="Center"
                 FontSize="14"/>
 
-            <Grid x:Name="ButtonsGridControl"
-                Grid.Row="6">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Button
-                    x:Name="RollButtonControl"
-                    Padding="10, 5"
-                    Grid.Column="0"
-                    HorizontalAlignment="Center"
-                    FontSize="15"
-                    FontWeight="SemiBold"
-                    IsEnabled="False"
-                    Click="RollButtonControl_Click">
-                    Roll
-                </Button>
-                <Button
-                    x:Name="ValidateButtonControl"
-                    Padding="10, 5"
-                    Grid.Column="1"
-                    HorizontalAlignment="Center"
-                    FontSize="15"
-                    FontWeight="SemiBold"
-                    IsEnabled="False"
-                    Click="ValidateButtonControl_Click">
-                    Validate
-                </Button>
-
             </Grid>
-        </Grid>
     </GroupBox>
 </UserControl>

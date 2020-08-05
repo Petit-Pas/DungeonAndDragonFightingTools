@@ -20,9 +20,10 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <StackPanel 
@@ -46,6 +47,56 @@
             Margin="10">
                 <display:HitAttackResultEditableControl 
                     x:Name="AttackControl"/>
+        </Grid>
+        <Grid
+            Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Button
+                Grid.Row="0"
+                Grid.ColumnSpan="2"
+                x:Name="RollButtonControl"
+                Margin="10, 0, 10, 10"
+                Padding="7"
+                FontSize="15"
+                FontWeight="SemiBold"
+                IsEnabled="False"
+                Click="RollButtonControl_Click">
+                Roll
+            </Button>
+            <Button
+                Grid.Row="1"
+                Grid.Column="0"
+                x:Name="ValidateAndResetButtonControl"
+                Margin="10, 0"
+                Padding="10, 5"
+                HorizontalAlignment="Left"
+                FontSize="15"
+                FontWeight="SemiBold"
+                IsEnabled="False"
+                Click="ValidateAndResetButtonControl_Click">
+                Validate And Reset
+            </Button>
+            <Button
+                Grid.Row="1"
+                Grid.Column="1"
+                x:Name="ValidateAndExitButtonControl"
+                Padding="10, 5"
+                Margin="10, 0"
+                HorizontalAlignment="Right"
+                FontSize="15"
+                FontWeight="SemiBold"
+                IsEnabled="False"
+                Click="ValidateAndExitButtonControl_Click">
+                Validate And Exit
+            </Button>
         </Grid>
     </Grid>
 </Window>

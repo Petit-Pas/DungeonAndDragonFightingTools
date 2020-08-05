@@ -30,37 +30,25 @@ namespace DDFight.Game.Aggression.Attacks.Display
         public HitAttackResultEditableControl()
         {
             InitializeComponent();
-            Loaded += HitAttackResultEditableControl_Loaded;
             DataContextChanged += HitAttackResultEditableControl_DataContextChanged;
-        }
-
-        private void HitAttackResultEditableControl_LayoutUpdated(object sender, EventArgs e)
-        {
-            //TODO this should not be, it juste spams the function way too much, the problem is to find a way to refresh buttons when one of the damageTemplate.Damage.LastRoll gets updated
-            refresh_buttons();
         }
 
         private void HitAttackResultEditableControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
+            HitAttackTargetComboControl.ItemsSource = Global.Context.FightContext.FightersList.Fighters;
+            HitAttackTargetComboControl.SelectionChanged += HitAttackTargetComboControl_SelectionChanged;
             try
             {
                 data_context.PropertyChanged += Data_context_PropertyChanged;
                 data_context.SituationalHitAttackModifiers.PropertyChanged += SituationalHitAttackModifiers_PropertyChanged;
-                LayoutUpdated += HitAttackResultEditableControl_LayoutUpdated;
+                if (HitAttackTargetComboControl.SelectedIndex != -1)
+                    data_context.Target = (PlayableEntity)HitAttackTargetComboControl.SelectedItem;
+                refresh_hit();
+                refresh_hit_target();
             }
             catch (Exception)
-            { }
-        }
-
-        private void HitAttackResultEditableControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            HitAttackTargetComboControl.ItemsSource = Global.Context.FightContext.FightersList.Fighters;
-            HitAttackTargetComboControl.SelectionChanged += HitAttackTargetComboControl_SelectionChanged;
-        }
-
-        private void DamageControl_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            refresh_buttons();
+            {
+            }
         }
 
         private void HitAttackTargetComboControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -69,29 +57,12 @@ namespace DDFight.Game.Aggression.Attacks.Display
                 data_context.Target = null;
             else
                 data_context.Target = (PlayableEntity)HitAttackTargetComboControl.SelectedItem;
-            refresh_buttons();
         }
 
         private void SituationalHitAttackModifiers_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             refresh_hit();
             refresh_hit_target();
-            refresh_buttons();
-        }
-
-        void refresh_buttons()
-        {
-            RollButtonControl.IsEnabled = false;
-            ValidateButtonControl.IsEnabled = false;
-            if (data_context.HitRoll == 0)
-                RollButtonControl.IsEnabled = true;
-            foreach (DamageTemplate dmg in data_context.DamageList)
-            {
-                if (dmg.Damage.LastRoll == 0)
-                    RollButtonControl.IsEnabled = true;
-            }
-            if (RollButtonControl.IsEnabled == false && data_context.Target != null)
-                ValidateButtonControl.IsEnabled = true;
         }
 
         void refresh_hit_target()
@@ -105,17 +76,18 @@ namespace DDFight.Game.Aggression.Attacks.Display
 
         void refresh_hit()
         {
-            HitResultControl.Text = (data_context.HitBonus + data_context.HitRoll + data_context.SituationalHitAttackModifiers.HitModifier).ToString();
+            HitResultControl.Text = "0";
+            if (data_context.HitRoll != 0)
+                HitResultControl.Text = (data_context.HitBonus + data_context.HitRoll + data_context.SituationalHitAttackModifiers.HitModifier).ToString();
         }
 
         private void Data_context_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             refresh_hit();
             refresh_hit_target();
-            refresh_buttons();
         }
 
-        private void RollButtonControl_Click(object sender, RoutedEventArgs e)
+        public void Roll()
         {
             if (data_context.HitRoll == 0)
                 data_context.HitRoll = (uint)DiceRoll.Roll("1d20", data_context.SituationalAdvantageModifiers.SituationalAdvantage, data_context.SituationalAdvantageModifiers.SituationalDisadvantage);
@@ -126,10 +98,9 @@ namespace DDFight.Game.Aggression.Attacks.Display
                     dmg.Damage.Roll(data_context.HitRoll >= 20 ? true : false);
                 }
             }
-            refresh_buttons();
         }
 
-        private void ValidateButtonControl_Click(object sender, RoutedEventArgs e)
+        public void Validate()
         {
             if (this.AreAllChildrenValid())
             {
@@ -141,7 +112,6 @@ namespace DDFight.Game.Aggression.Attacks.Display
                         onHitStatus.Apply(data_context.Owner, data_context.Target);
                     }
                 }
-                this.Visibility = Visibility.Collapsed;
             }
         }
     }

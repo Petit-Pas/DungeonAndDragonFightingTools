@@ -41,7 +41,6 @@ namespace DDFight.Game.Status.Display
         {
             OnHitStatus _new = new OnHitStatus();
 
-            Console.WriteLine("COCHON 123");
             if (_new.OpenEditWindow() == true)
             {
                 data_context.List.Add(_new);

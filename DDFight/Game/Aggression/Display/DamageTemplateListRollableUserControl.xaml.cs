@@ -22,12 +22,16 @@ namespace DDFight.Controlers.Game.Attacks.DamageListControls
         {
             InitializeComponent();
 
-            Loaded += PlayableDamageListUserControl_Loaded;
+            DataContextChanged += DamageTemplateListRollableUserControl_DataContextChanged;
         }
 
-        private void PlayableDamageListUserControl_Loaded(object sender, RoutedEventArgs e)
+        private void DamageTemplateListRollableUserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            DamageControl.ItemsSource = data_context;
+            try
+            {
+                DamageControl.ItemsSource = data_context;
+            }
+            catch { }
         }
     }
 }

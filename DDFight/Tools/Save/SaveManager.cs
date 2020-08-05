@@ -123,7 +123,7 @@ namespace DDFight.Tools.Save
             {
                 Logger.Log(String.Format("Unknown error while trying to load the characters file: {0}, {1}", e.Message, e.StackTrace));
             }
-            Console.WriteLine("COCHON: found {0} monsters to load", result.Monsters.Count);
+            Console.WriteLine("Found {0} monsters to load", result.Monsters.Count);
             return result;
         }
 
