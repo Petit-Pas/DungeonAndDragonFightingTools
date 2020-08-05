@@ -50,6 +50,7 @@
             </Grid.RowDefinitions>
 
             <TextBlock 
+                x:Name="DisplayNameTextBlock"
                 Margin="10, 10"
                 Text="{Binding DisplayName}"
                 FontSize="24"/>

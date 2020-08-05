@@ -28,12 +28,14 @@ namespace DDFight.Controlers.Fight
             InitializeComponent();
             Loaded += FightingCharacterTileUserControl_Loaded;
         }
-        
+
         private void FightingCharacterTileUserControl_Loaded(object sender, RoutedEventArgs e)
         {
             data_context.NewTurnStarted += Data_context_NewTurnStarted;
             data_context.TurnEnded += Data_context_TurnEnded;
             Global.Context.FightContext.CharacterSelected += FightContext_CharacterSelected;
+            if (data_context.DisplayName == "Name")
+                Console.WriteLine("Subbed");
         }
 
         private void FightContext_CharacterSelected(object sender, SelectedCharacterEventArgs args)
@@ -72,6 +74,8 @@ namespace DDFight.Controlers.Fight
             data_context.NewTurnStarted -= Data_context_NewTurnStarted;
             data_context.TurnEnded -= Data_context_TurnEnded;
             Global.Context.FightContext.CharacterSelected -= FightContext_CharacterSelected;
+            if (data_context.DisplayName == "Name")
+                Console.WriteLine("COCHON should be unsubbed");
         }
 
         private void ContextTakeDamage_Click(object sender, RoutedEventArgs e)

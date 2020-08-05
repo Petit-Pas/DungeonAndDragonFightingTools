@@ -16,8 +16,13 @@ namespace DDFight.Controlers.Fight
             InitializeComponent();
             Loaded += FightingCharacterListUserControl_Loaded;
             FightersControl.LayoutUpdated += FightersControl_LayoutUpdated;
+            Global.Context.FightContext.FightersList.PropertyChanged += FightersList_PropertyChanged;
         }
 
+        private void FightersList_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            this.UnregisterAll();
+        }
 
         private void FightersControl_LayoutUpdated(object sender, EventArgs e)
         {

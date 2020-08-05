@@ -13,6 +13,3 @@ Any function that use llist.SelectedItem should have a null protection
 //////
 
 add glance on status when selecting an attack in fight
-
-
-
