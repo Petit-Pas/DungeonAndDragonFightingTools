@@ -486,7 +486,23 @@ namespace DDFight.Game
 
         public void LooseHp(int amount)
         {
-            Hp -= amount;
+            int tempHp = Hp;
+
+            tempHp -= amount;
+            if (tempHp <= 0)
+            {
+                tempHp = 0;
+                if (IsFocused == true)
+                {
+                    IsFocused = false;
+                    Paragraph paragraph = (Paragraph)Global.Context.UserLogs.Blocks.LastBlock;
+                    paragraph.Inlines.Add(Extensions.BuildRun(this.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
+                    paragraph.Inlines.Add(Extensions.BuildRun(": Has reached", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                    paragraph.Inlines.Add(Extensions.BuildRun(" 0 Hps", (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
+                    paragraph.Inlines.Add(Extensions.BuildRun(", lost Focus.", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                }
+            }
+            Hp = tempHp;
             if (IsFocused)
             {
                 ConcentrationCheckWindow window = new ConcentrationCheckWindow();

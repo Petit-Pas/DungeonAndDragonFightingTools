@@ -103,6 +103,17 @@ namespace DDFight.Game.Status.Display
         }
         #endregion
 
+        private void applyStatus()
+        {
+            Target.CustomVerboseStatusList.List.Add(data_context);
+            data_context.Caster = Applicant;
+            data_context.Affected = Target;
+            if (data_context.EndsOnCasterLossOfConcentration)
+            {
+                Applicant.PropertyChanged += data_context.Caster_PropertyChanged;
+            }
+        }
+
         private void validateOnHit()
         {
             Paragraph paragraph = (Paragraph)Global.Context.UserLogs.Blocks.LastBlock;
@@ -131,7 +142,7 @@ namespace DDFight.Game.Status.Display
                 {
                     //fails
                     paragraph.Inlines.Add(Extensions.BuildRun("Failure\r\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-                    Target.CustomVerboseStatusList.List.Add(data_context);
+                    applyStatus();
                 }
             }
             else
@@ -142,7 +153,7 @@ namespace DDFight.Game.Status.Display
                 paragraph.Inlines.Add(Extensions.BuildRun(data_context.Header, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
                 paragraph.Inlines.Add(Extensions.BuildRun(" on ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
                 paragraph.Inlines.Add(Extensions.BuildRun(Target.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-                Target.CustomVerboseStatusList.List.Add(data_context);
+                applyStatus();
             }
         }
 

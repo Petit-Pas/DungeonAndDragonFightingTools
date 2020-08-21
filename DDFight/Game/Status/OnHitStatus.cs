@@ -1,8 +1,10 @@
 ﻿using DDFight.Game.Characteristics;
 using DDFight.Game.Dices.SavingThrow;
 using DDFight.Game.Status.Display;
+using DDFight.Tools;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,13 +12,25 @@ using System.Xml.Serialization;
 
 namespace DDFight.Game.Status
 {
-    public class OnHitStatus : CustomVerboseStatus
+    public class OnHitStatus : CustomVerboseStatus, IEventUnregisterable
     {
         public OnHitStatus()
         {
         }
 
         #region Properties
+
+        /// <summary>
+        ///     The Entity that initiated the status, can be used when its concentration loss provokes the annulation of the status
+        /// </summary>
+        public PlayableEntity Caster = null;
+
+        /// <summary>
+        ///     The Entity that is affected by the status, can be used to remove the status from its list of Statuses   
+        /// </summary>
+        public PlayableEntity Affected = null;
+
+        #region Apply
 
         [XmlAttribute]
         public bool HasApplyCondition
@@ -55,6 +69,32 @@ namespace DDFight.Game.Status
         }
         private int _applySavingDifficulty = 0;
 
+        #endregion Apply
+
+        #region EndConditions
+
+        [XmlAttribute]
+        public bool EndsOnCasterLossOfConcentration
+        {
+            get => _endsOnCasterLossOfConcentration;
+            set
+            {
+                _endsOnCasterLossOfConcentration = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private bool _endsOnCasterLossOfConcentration = false;
+
+        public void Caster_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "IsFocused" && Caster.IsFocused == false)
+            {
+                Affected.CustomVerboseStatusList.List.Remove(this);
+            }
+        }
+
+        #endregion EndConditons
+
         #endregion Properties
 
         public SavingThrow GetSavingThrow(PlayableEntity applicant, PlayableEntity target)
@@ -73,8 +113,6 @@ namespace DDFight.Game.Status
             OnHitStatusApplyWindow window = new OnHitStatusApplyWindow(applicator, target);
             window.DataContext = this;
             window.ShowDialog();
-
-
 
             return false;
         }
@@ -109,6 +147,7 @@ namespace DDFight.Game.Status
             HasApplyCondition = to_copy.HasApplyCondition;
             ApplySavingCharacteristic = to_copy.ApplySavingCharacteristic;
             ApplySavingDifficulty = to_copy.ApplySavingDifficulty;
+            EndsOnCasterLossOfConcentration = to_copy.EndsOnCasterLossOfConcentration;
         }
 
         public OnHitStatus(OnHitStatus to_copy)
@@ -119,6 +158,11 @@ namespace DDFight.Game.Status
         public void CopyAssign(OnHitStatus to_copy)
         {
             init_copy(to_copy);
+        }
+
+        public void UnregisterToAll()
+        {
+            Caster.PropertyChanged -= Caster_PropertyChanged;
         }
 
         #endregion ICloneable
