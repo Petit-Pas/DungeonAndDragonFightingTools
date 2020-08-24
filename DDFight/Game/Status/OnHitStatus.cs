@@ -1,14 +1,14 @@
 ﻿using DDFight.Game.Characteristics;
 using DDFight.Game.Dices.SavingThrow;
+using DDFight.Game.Fight.FightEvents;
 using DDFight.Game.Status.Display;
 using DDFight.Tools;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Documents;
 using System.Xml.Serialization;
+using System.Windows;
+using System.Windows.Media;
+
 
 namespace DDFight.Game.Status
 {
@@ -23,11 +23,13 @@ namespace DDFight.Game.Status
         /// <summary>
         ///     The Entity that initiated the status, can be used when its concentration loss provokes the annulation of the status
         /// </summary>
+        [XmlIgnore]
         public PlayableEntity Caster = null;
 
         /// <summary>
         ///     The Entity that is affected by the status, can be used to remove the status from its list of Statuses   
         /// </summary>
+        [XmlIgnore]
         public PlayableEntity Affected = null;
 
         #region Apply
@@ -58,7 +60,7 @@ namespace DDFight.Game.Status
 
         // 0 for default spellcasting ability DC
         [XmlAttribute]
-        public int ApplySavingDifficulty
+        public int ApplySavingDifficulty    
         {
             get => _applySavingDifficulty;
             set
@@ -73,6 +75,57 @@ namespace DDFight.Game.Status
 
         #region EndConditions
 
+        #region SavingRemade
+
+        [XmlAttribute]
+        public bool CanRedoSavingThrow
+        {
+            get => _canRedoSavingThrow;
+            set 
+            {
+                _canRedoSavingThrow = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private bool _canRedoSavingThrow = false;
+
+        /// <summary>
+        ///     This is only used if CanRedoSavingThrow is set to True
+        ///         If this value is true ---> the saving is remade at start of turn
+        ///         If this value is false --> the saving is remade at end of turn
+        /// </summary>
+        public bool SavingIsRemadeAtStartOfTurn 
+        {
+            get => _savingIsRemadeAtStartOfTurn;
+            set 
+            {
+                _savingIsRemadeAtStartOfTurn = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private bool _savingIsRemadeAtStartOfTurn = true;
+
+        public void Affected_NewTurnStarted(object sender, StartNewTurnEventArgs args)
+        {
+            OnHitStatusApplyWindow window = new OnHitStatusApplyWindow(Caster, Affected, false);
+            window.DataContext = this;
+
+            window.ShowDialog();
+        }
+
+        public void Affected_TurnEnded(object sender, TurnEndedEventArgs args)
+        {
+            OnHitStatusApplyWindow window = new OnHitStatusApplyWindow(Caster, Affected, false);
+            window.DataContext = this;
+
+            window.ShowDialog();
+        }
+
+
+        #endregion SavingRemade
+
+        #region Concentration
+
         [XmlAttribute]
         public bool EndsOnCasterLossOfConcentration
         {
@@ -85,12 +138,30 @@ namespace DDFight.Game.Status
         }
         private bool _endsOnCasterLossOfConcentration = false;
 
+        #endregion Concentration
+
         public void Caster_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "IsFocused" && Caster.IsFocused == false)
+            if (this.EndsOnCasterLossOfConcentration && e.PropertyName == "IsFocused" && Caster.IsFocused == false)
             {
-                Affected.CustomVerboseStatusList.List.Remove(this);
+                removeStatus();
+                Paragraph paragraph = (Paragraph)Global.Context.UserLogs.Blocks.LastBlock;
+
+                paragraph.Inlines.Add(Extensions.BuildRun("Due to ", (Brush)System.Windows.Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                paragraph.Inlines.Add(Extensions.BuildRun(Caster.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
+                paragraph.Inlines.Add(Extensions.BuildRun("'s loss of concentration, ", (Brush)System.Windows.Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                paragraph.Inlines.Add(Extensions.BuildRun(Affected.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
+                paragraph.Inlines.Add(Extensions.BuildRun(" is not affected by ", (Brush)System.Windows.Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                paragraph.Inlines.Add(Extensions.BuildRun(this.Header, (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
+                paragraph.Inlines.Add(Extensions.BuildRun(" anymore.\r\n", (Brush)System.Windows.Application.Current.Resources["Light"], 15, FontWeights.Normal));
+
             }
+        }
+
+        private void removeStatus()
+        {
+            Affected.CustomVerboseStatusList.List.Remove(this);
+            UnregisterToAll();
         }
 
         #endregion EndConditons
@@ -114,6 +185,24 @@ namespace DDFight.Game.Status
             window.DataContext = this;
             window.ShowDialog();
 
+            return false;
+        }
+
+        /// <summary>
+        ///     In this method should be implemented any "end of condition" such as : 
+        ///     - after n turns
+        ///     - after a saving throw has been successfully remade
+        ///     - after 10 rounds
+        ///     - etc...
+        ///     
+        ///     Will be used as such condition can be vanished by the end of a fight
+        /// </summary>
+        /// <returns></returns>
+        public bool HasEndCondition()
+        {
+            //TODO implement them all
+            if (EndsOnCasterLossOfConcentration == true)
+                return true;
             return false;
         }
 
@@ -148,6 +237,8 @@ namespace DDFight.Game.Status
             ApplySavingCharacteristic = to_copy.ApplySavingCharacteristic;
             ApplySavingDifficulty = to_copy.ApplySavingDifficulty;
             EndsOnCasterLossOfConcentration = to_copy.EndsOnCasterLossOfConcentration;
+            CanRedoSavingThrow = to_copy.CanRedoSavingThrow;
+            SavingIsRemadeAtStartOfTurn = to_copy.SavingIsRemadeAtStartOfTurn;
         }
 
         public OnHitStatus(OnHitStatus to_copy)

@@ -4,6 +4,7 @@ using DDFight.Tools.Save;
 using DDFight.Windows;
 using DDFight.Windows.FightWindows;
 using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Documents;
 
@@ -76,16 +77,13 @@ namespace DDFight
                 fightWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 fightWindow.ShowDialog();
 
+                // Clean up after a Fight
                 fightWindow.UnregisterAll();
-                Global.Context.FightContext.Reset();
-
-                foreach (Character character in Global.Context.CharacterList.Characters)
+                foreach (Character character in Global.Context.FightContext.FightersList.Fighters.OfType<Character>())
                 {
-                    if (character.IsTransformed)
-                        character.TransformBack();
-                    character.InitiativeRoll = 0;
+                    character.GetOutOfFight();
                 }
-
+                Global.Context.FightContext.Reset();
                 Global.Context.CharacterList.Save();
             }
 

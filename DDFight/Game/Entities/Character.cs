@@ -1,4 +1,7 @@
-﻿using DDFight.Windows;
+﻿using DDFight.Game.Status;
+using DDFight.Windows;
+using System;
+using System.Linq;
 using System.Windows;
 using System.Xml.Serialization;
 
@@ -34,6 +37,24 @@ namespace DDFight.Game
         private uint _level = 1;
 
         #endregion
+
+        public void GetOutOfFight()
+        {
+            if (IsTransformed)
+                TransformBack();
+            InitiativeRoll = 0;
+            for (int i = 0; i != CustomVerboseStatusList.List.Count; i++)
+            {
+                CustomVerboseStatus status = CustomVerboseStatusList.List.ElementAt(i);
+                if (status.GetType() == typeof(OnHitStatus))
+                {
+                    OnHitStatus onHit = (OnHitStatus)status;
+                    onHit.UnregisterToAll();
+                    CustomVerboseStatusList.List.Remove(status);
+                    i--;
+                }
+            }
+        }
 
         public override bool OpenEditWindow()
         {

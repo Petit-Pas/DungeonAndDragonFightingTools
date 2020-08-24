@@ -4,10 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DDFight.Game.Status.Display" xmlns:display="clr-namespace:DDFight.Game.Dices.SavingThrow.Display"
+        xmlns:converters="clr-namespace:DDFight.Converters"
         mc:Ignorable="d"
-        Title="OnHitStatusApplyWindow" Height="450" Width="800"
+        Title="OnHitStatusApplyWindow" Height="650" Width="600"
         Background="{StaticResource LightestGray}">
     <Window.Resources>
+        <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />
         <Style TargetType="TextBlock" x:Key="TextBoxColor" >
             <Setter Property="Foreground" Value="{StaticResource Light}" />
         </Style>
@@ -27,6 +29,7 @@
         <WrapPanel
             x:Name="HeaderPanelControl"
             Grid.Row="0" Grid.Column="0"
+            Margin="10"
             Orientation="Horizontal"
             HorizontalAlignment="Center">
             <WrapPanel.Resources>
@@ -36,14 +39,17 @@
             </WrapPanel.Resources>
             <TextBlock 
                 Text="{Binding DisplayName}"
-                DataContext="{Binding Applicant, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
-                FontWeight="SemiBold"/>
+                DataContext="{Binding Target, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                FontWeight="SemiBold"
+                FontSize="20"/>
             <TextBlock 
-                Text="{Binding Header, StringFormat=' tries to apply the {0} Status on '}"/>
+                Text="{Binding Header, StringFormat=' tries to resist the &quot;{0}&quot; Status from '}"
+                FontSize="20"/>
             <TextBlock
                 Text="{Binding DisplayName}"
-                DataContext="{Binding Target, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
-                FontWeight="SemiBold"/>
+                DataContext="{Binding Applicant, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                FontWeight="SemiBold"
+                FontSize="20"/>
         </WrapPanel>
 
         <TextBlock 
@@ -51,24 +57,28 @@
             Margin="10"
             Style="{StaticResource TextBoxColor}"
             Background="{StaticResource Gray}"
-            Text="{Binding ToolTip}">
+            Text="{Binding ToolTip}"
+            Visibility="{Binding ToolTip, Converter={StaticResource StringToVisibilityConverter}}">
         </TextBlock>
-        
+
         <TextBlock 
             Grid.Row="2"
             Margin="10, 0"
             Style="{StaticResource TextBoxColor}"
             Background="{StaticResource Gray}"
-            Text="{Binding Description}">
+            Text="{Binding Description}"
+            Visibility="{Binding Description, Converter={StaticResource StringToVisibilityConverter}}">
         </TextBlock>
 
         <display:SavingThrowRollableUserControl
             Grid.Row="3"
             x:Name="SavingThrowControl"
+            HorizontalAlignment="Center"
             Visibility="Collapsed"/>
 
         <Grid
-            Grid.Row="4">
+            Grid.Row="4"
+            Margin="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -77,12 +87,15 @@
             <Button
                 x:Name="ValidateButtonControl"
                 Grid.Column="0"
-                Click="ValidateButtonControl_Click">
+                Margin="5"
+                Click="ValidateButtonControl_Click"
+                IsEnabled="False">
                 Validate
             </Button>
             <Button
                 x:Name="CancelButtonControl"
                 Grid.Column="1"
+                Margin="5"
                 Click="CancelButtonControl_Click">
                 Cancel
             </Button>

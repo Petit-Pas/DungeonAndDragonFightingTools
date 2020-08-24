@@ -2,6 +2,7 @@
 using DDFight.Tools;
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Xml.Serialization;
@@ -53,7 +54,7 @@ namespace DDFight.Game.Fight
             {
                 // 1st turn of first round
                 Global.Context.FightContext.FightersList.Fighters.ElementAt((int)TurnIndex).EndTurn();
-                OnEndTurn(new EndTurnEventArgs()
+                OnEndTurn(new TurnEndedEventArgs()
                 {
                     Character = Global.Context.FightContext.FightersList.Fighters.ElementAt((int)TurnIndex),
                     CharacterIndex = (int)TurnIndex,
@@ -91,7 +92,7 @@ namespace DDFight.Game.Fight
         }
         public event StartNewTurnEventHandler NewTurnStarted;
 
-        public void OnEndTurn(EndTurnEventArgs args)
+        public void OnEndTurn(TurnEndedEventArgs args)
         {
             if (TurnEnded != null)
             {
@@ -129,6 +130,8 @@ namespace DDFight.Game.Fight
             get
             {
                 if (FightersList.Fighters.Count == 0)
+                    return null;
+                if (TurnIndex < 0 || TurnIndex >= FightersList.Fighters.Count)
                     return null;
                 return FightersList.Fighters.ElementAt(TurnIndex);
             }

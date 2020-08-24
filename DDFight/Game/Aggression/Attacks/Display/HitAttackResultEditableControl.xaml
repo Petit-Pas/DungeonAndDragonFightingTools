@@ -51,14 +51,10 @@
                     Margin="5, 0"
                     MinWidth="80"
                     VerticalAlignment="Center"
-                    x:Name="HitAttackTargetComboControl">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock 
-                                Text="{Binding DisplayName}"/>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
+                    x:Name="HitAttackTargetComboControl"
+                    IsTextSearchEnabled="True"
+                    TextSearch.Text="Text"
+                    DisplayMemberPath="Name"/>
                 <TextBlock 
                     Margin="0, 0, 5, 0"
                     VerticalAlignment="Center">
@@ -76,6 +72,7 @@
                     VerticalAlignment="Center"
                     Text="{Binding HitBonus, StringFormat={}{0:+#;-#;''}}"/>
             </WrapPanel>
+            
             <situationalmodifiers:SituationalHitAttackModifiersUserControl                                 
                 Grid.Row="1"
                 Margin="10, 5"

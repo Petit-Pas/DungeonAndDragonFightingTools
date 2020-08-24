@@ -17,9 +17,6 @@ using System.Windows.Shapes;
 
 namespace DDFight.Game.Dices.SavingThrow.Display
 {
-    /// <summary>
-    /// Logique d'interaction pour SavingThrowRollableUserControl.xaml
-    /// </summary>
     public partial class SavingThrowRollableUserControl : UserControl, IValidable
     {
         private SavingThrow data_context 
@@ -43,15 +40,29 @@ namespace DDFight.Game.Dices.SavingThrow.Display
         {
             InitializeComponent();
             DataContextChanged += SavingThrowRollableUserControl_DataContextChanged;
+            Loaded += SavingThrowRollableUserControl_Loaded;
+        }
+
+        private void refreshSavingModifier()
+        {
+            int modifier = data_context.Target.Characteristics.GetSavingModifier(data_context.Characteristic);
+            CharacteristicTextBlockControl.Text = (data_context.Characteristic + " " + (modifier > 0 ? "+":"" )+ modifier).ToString();
+        }
+
+        private void SavingThrowRollableUserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            refreshSavingModifier();
         }
 
         private void SavingThrowRollableUserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             data_context.PropertyChanged += Data_context_PropertyChanged;
+            refreshSavingModifier();
         }
 
         private void Data_context_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
+            // updates roll button
             if (data_context.SavingRoll == 0)
             {
                 RollButtonControl.IsEnabled = true;
@@ -60,6 +71,11 @@ namespace DDFight.Game.Dices.SavingThrow.Display
             {
                 RollButtonControl.IsEnabled = false;
             }
+
+            // updates the result of the Saving
+            int save_bonus = data_context.Target.Characteristics.GetSavingModifier(data_context.Characteristic);
+            int score = data_context.SavingRoll + save_bonus + data_context.Modifier;
+            ResultTextBoxControl.Text = score.ToString() + "/" + data_context.Difficulty;
         }
 
         public void Roll()

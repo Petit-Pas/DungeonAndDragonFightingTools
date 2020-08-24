@@ -20,7 +20,7 @@
             </TextBlock>
             <inputboxes:IntTextBox 
                 VerticalAlignment="Center"
-                Margin="5, 0"
+                Margin="7, 0"
                 Width="40"
                 PropertyPath="Modifier"/>
         </WrapPanel>

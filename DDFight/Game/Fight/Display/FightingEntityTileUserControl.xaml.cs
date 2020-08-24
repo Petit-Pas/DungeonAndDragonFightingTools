@@ -50,7 +50,7 @@ namespace DDFight.Controlers.Fight
             }
         }
 
-        private void Data_context_TurnEnded(object sender, DDFight.Game.Fight.FightEvents.EndTurnEventArgs args)
+        private void Data_context_TurnEnded(object sender, DDFight.Game.Fight.FightEvents.TurnEndedEventArgs args)
         {
             CharacterTileGroupBoxControl.Background = (Brush)Application.Current.Resources["Gray"];
         }

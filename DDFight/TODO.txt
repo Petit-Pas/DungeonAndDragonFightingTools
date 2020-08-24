@@ -13,3 +13,5 @@ Any function that use llist.SelectedItem should have a null protection
 //////
 
 add glance on status when selecting an attack in fight
+
+add a IsRollable Interface, making me able to just press R on a window, and call Roll() on any rollable control

@@ -1,20 +1,10 @@
 ﻿using DDFight.Game.Characteristics;
 using DDFight.Game.Dices.SavingThrow;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace DDFight.Game.Status.Display
 {
@@ -50,10 +40,21 @@ namespace DDFight.Game.Status.Display
         }
         private PlayableEntity _applicant;
 
-        public OnHitStatusApplyWindow(PlayableEntity applicant, PlayableEntity target)
+        private bool first_application = true;
+
+        /// <summary>
+        ///     Ctor
+        /// </summary>
+        /// <param name="applicant"> The applicant of the status </param>
+        /// <param name="target"> The target of the status </param>
+        /// <param name="first_application"> set to false if this window is used to retry the saving throw in a further round
+        ///                                  set to true (default) if the window is used to determine wether or not the target is affected in the first place
+        /// </param>
+        public OnHitStatusApplyWindow(PlayableEntity applicant, PlayableEntity target, bool first_application = true)
         {
             Target = target;
             Applicant = applicant;
+            this.first_application = first_application;
             
             InitializeComponent();
             DataContextChanged += OnHitStatusApplyWindow_DataContextChanged;
@@ -62,21 +63,26 @@ namespace DDFight.Game.Status.Display
         private void OnHitStatusApplyWindow_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             refresh_saving_control();
+            refresh_validate_button();
         }
 
         private void OnHitStatusApplyWindow_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+            refresh_validate_button();
+        }
+
+        private void refresh_validate_button()
+        {
             if (((SavingThrow)SavingThrowControl.DataContext).SavingRoll == 0)
-                ValidateButtonControl.Content = "Automatic Roll";
+                ValidateButtonControl.IsEnabled = false;
             else
-                ValidateButtonControl.Content = "Validate";
+                ValidateButtonControl.IsEnabled = true;
         }
 
         private void refresh_saving_control()
         {
             if (data_context.HasApplyCondition)
             {
-                ValidateButtonControl.Content = "Automatic Roll";
                 SavingThrowControl.DataContext = data_context.GetSavingThrow(Applicant, Target);
                 SavingThrowControl.Visibility = Visibility.Visible;
                 ((SavingThrow)SavingThrowControl.DataContext).PropertyChanged += OnHitStatusApplyWindow_PropertyChanged;
@@ -109,11 +115,18 @@ namespace DDFight.Game.Status.Display
             data_context.Caster = Applicant;
             data_context.Affected = Target;
             if (data_context.EndsOnCasterLossOfConcentration)
-            {
                 Applicant.PropertyChanged += data_context.Caster_PropertyChanged;
-            }
+            if (data_context.CanRedoSavingThrow == true)
+                if (data_context.SavingIsRemadeAtStartOfTurn == true)
+                    Target.NewTurnStarted += data_context.Affected_NewTurnStarted;
+                else
+                    Target.TurnEnded += data_context.Affected_TurnEnded;
         }
 
+        /// <summary>
+        ///     Method that validates wether or not the status affects the character
+        ///     In opposition with validateResist() below
+        /// </summary>
         private void validateOnHit()
         {
             Paragraph paragraph = (Paragraph)Global.Context.UserLogs.Blocks.LastBlock;
@@ -125,9 +138,9 @@ namespace DDFight.Game.Status.Display
                 int total = ((SavingThrow)SavingThrowControl.DataContext).SavingRoll + ((SavingThrow)SavingThrowControl.DataContext).Modifier + charac.Modifier + (int)(charac.Mastery ? Target.Characteristics.MasteryBonus : 0);
 
                 paragraph.Inlines.Add(Extensions.BuildRun(Target.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-                paragraph.Inlines.Add(Extensions.BuildRun(" tries to resist ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                paragraph.Inlines.Add(Extensions.BuildRun(" tries to resist the ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
                 paragraph.Inlines.Add(Extensions.BuildRun(data_context.Header, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-                paragraph.Inlines.Add(Extensions.BuildRun(" from ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                paragraph.Inlines.Add(Extensions.BuildRun(" status from ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
                 paragraph.Inlines.Add(Extensions.BuildRun(Applicant.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
                 paragraph.Inlines.Add(Extensions.BuildRun(" ==> ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
                 paragraph.Inlines.Add(Extensions.BuildRun(total.ToString() + "/" + ((SavingThrow)SavingThrowControl.DataContext).Difficulty.ToString(), (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
@@ -157,11 +170,48 @@ namespace DDFight.Game.Status.Display
             }
         }
 
+        /// <summary>
+        ///     Method that validates wether or not the target finally remove the status
+        ///     In opposition with validateOnHit() below
+        /// </summary>
+        private void validateResist()
+        {
+            Paragraph paragraph = (Paragraph)Global.Context.UserLogs.Blocks.LastBlock;
+
+            Characteristic charac = Target.Characteristics.GetCharacteristic(data_context.ApplySavingCharacteristic);
+            int total = ((SavingThrow)SavingThrowControl.DataContext).SavingRoll + ((SavingThrow)SavingThrowControl.DataContext).Modifier + charac.Modifier + (int)(charac.Mastery ? Target.Characteristics.MasteryBonus : 0);
+
+            paragraph.Inlines.Add(Extensions.BuildRun(Target.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+            paragraph.Inlines.Add(Extensions.BuildRun(" tries again to resist the ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+            paragraph.Inlines.Add(Extensions.BuildRun(data_context.Header, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+            paragraph.Inlines.Add(Extensions.BuildRun(" status from ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+            paragraph.Inlines.Add(Extensions.BuildRun(Applicant.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+            paragraph.Inlines.Add(Extensions.BuildRun(" ==> ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+            paragraph.Inlines.Add(Extensions.BuildRun(total.ToString() + "/" + ((SavingThrow)SavingThrowControl.DataContext).Difficulty.ToString(), (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+            paragraph.Inlines.Add(Extensions.BuildRun(" ==> ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+
+            if (total >= data_context.ApplySavingDifficulty)
+            {
+                //resist
+                paragraph.Inlines.Add(Extensions.BuildRun("Success\r\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                data_context.UnregisterToAll();
+                data_context.Affected.CustomVerboseStatusList.List.Remove(data_context);
+            }
+            else
+            {
+                //fails
+                paragraph.Inlines.Add(Extensions.BuildRun("Failure\r\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+            }
+        }
+
         private void ValidateButtonControl_Click(object sender, RoutedEventArgs e)
         {
             if ((string)ValidateButtonControl.Content == "Validate")
             {
-                validateOnHit();
+                if (first_application == true)
+                    validateOnHit();
+                else
+                    validateResist();
                 this.Close();
             }
             else

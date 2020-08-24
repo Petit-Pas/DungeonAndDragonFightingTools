@@ -1,8 +1,8 @@
 ﻿namespace DDFight.Game.Fight.FightEvents
 {
-    public delegate void EndTurnEventHandler(object sender, EndTurnEventArgs args);
+    public delegate void EndTurnEventHandler(object sender, TurnEndedEventArgs args);
 
-    public class EndTurnEventArgs
+    public class TurnEndedEventArgs
     {
         /// <summary>
         ///     The character that ends its turn

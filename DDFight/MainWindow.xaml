@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ctrl="clr-namespace:DDFight.Controlers"
+        xmlns:fight="clr-namespace:DDFight.Controlers.Fight"
         mc:Ignorable="d"
         Title="Dungeons &amp; Dragons Fighting Tool" Height="450" Width="800"
         x:Name="Window">
@@ -43,5 +44,6 @@
             IsEnabled="False">
             Fight
         </Button>
+
     </Grid>
 </Window>

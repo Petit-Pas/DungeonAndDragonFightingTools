@@ -397,14 +397,14 @@ namespace DDFight.Game
 
         public void EndTurn()
         {
-            OnEndTurn(new EndTurnEventArgs()
+            OnEndTurn(new TurnEndedEventArgs()
             {
                 Character = this,
                 CharacterIndex = Global.Context.FightContext.FightersList.Fighters.IndexOf(this),
             });
         }
 
-        public void OnEndTurn(EndTurnEventArgs args)
+        public void OnEndTurn(TurnEndedEventArgs args)
         {
             if (TurnEnded != null)
             {

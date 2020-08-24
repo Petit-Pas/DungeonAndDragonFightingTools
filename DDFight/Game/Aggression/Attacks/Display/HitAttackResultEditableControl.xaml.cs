@@ -31,6 +31,12 @@ namespace DDFight.Game.Aggression.Attacks.Display
         {
             InitializeComponent();
             DataContextChanged += HitAttackResultEditableControl_DataContextChanged;
+            Loaded += HitAttackResultEditableControl_Loaded;
+        }
+
+        private void HitAttackResultEditableControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            HitAttackTargetComboControl.Focus();
         }
 
         private void HitAttackResultEditableControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)

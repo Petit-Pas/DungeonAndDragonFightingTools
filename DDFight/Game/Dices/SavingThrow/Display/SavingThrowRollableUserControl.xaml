@@ -9,6 +9,7 @@
     <UserControl.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="Foreground" Value="{StaticResource Light}"/>
+            <Setter Property="Margin" Value="0, 5"/>
         </Style>
     </UserControl.Resources>
     <GroupBox
@@ -40,7 +41,8 @@
             </TextBlock>
             <TextBlock
                 Grid.Row="0" Grid.Column="1"
-                Text="{Binding Characteristic}"/>
+                x:Name="CharacteristicTextBlockControl"
+                FontWeight="SemiBold"/>
 
             <TextBlock
                 Grid.Row="1" Grid.Column="0">
@@ -48,18 +50,23 @@
             </TextBlock>
             <TextBlock
                 Grid.Row="1" Grid.Column="1"
-                Text="{Binding Difficulty}"/>
+                Text="{Binding Difficulty}"
+                FontWeight="SemiBold"/>
 
             <local:SituationalSavingThrowModifierUserControl
-                Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"/>
+                Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                Margin="0, 5"/>
 
             <situationalmodifiers:SituationalAdvantageModifiersUserControl 
                 Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                Margin="0, 5"
                 DataContext="{Binding Modifiers}"/>
 
             <Grid
                 Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
                     <RowDefinition />
                     <RowDefinition />
                 </Grid.RowDefinitions>
@@ -69,18 +76,49 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock 
-                    Grid.Row="0" Grid.Column="0">
+                    Grid.Row="0" Grid.Column="0"
+                    VerticalAlignment="Center">
                     Roll: 
                 </TextBlock>
                 <inputboxes:RangedIntBox 
                     Grid.Row="0" Grid.Column="1"
+                    Margin="0, 5, 0, 0"
+                    Width="40"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
                     PropertyMin="0"
                     PropertyMax="20"
                     PropertyPath="SavingRoll"/>
 
+                <Separator
+                    Grid.Row="1" Grid.ColumnSpan="2"
+                    Margin="0, 0, 0, 10"
+                    FontWeight="Bold"
+                    FontSize="20"
+                    Height="10"
+                    >
+                    <Separator.RenderTransform>
+                        <ScaleTransform ScaleY="3" />
+                    </Separator.RenderTransform>
+                </Separator>
+
+                <TextBlock
+                    Grid.Row="2" Grid.Column="0"
+                    FontWeight="SemiBold"
+                    >
+                    Result:
+                </TextBlock>
+                <TextBlock
+                    Grid.Row="2" Grid.Column="1"
+                    x:Name="ResultTextBoxControl"
+                    FontWeight="SemiBold"
+                    FontSize="14">
+                    0/0
+                </TextBlock>
+                
                 <Button
                     x:Name="RollButtonControl"
-                    Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                    Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
                     Click="RollButtonControl_Click">
                     Roll
                 </Button>

@@ -1,5 +1,6 @@
 ﻿using DDFight.Game.Fight;
 using DDFight.Tools.Save;
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Documents;
@@ -50,7 +51,9 @@ namespace DDFight.Game
         [XmlIgnore]
         public FlowDocument UserLogs
         {
-            get => _userLogs;
+            get {
+                return _userLogs; 
+            }
             set
             {
                 _userLogs = value;
