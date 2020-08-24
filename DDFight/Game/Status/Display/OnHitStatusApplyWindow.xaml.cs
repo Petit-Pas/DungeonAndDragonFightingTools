@@ -111,16 +111,7 @@ namespace DDFight.Game.Status.Display
 
         private void applyStatus()
         {
-            Target.CustomVerboseStatusList.List.Add(data_context);
-            data_context.Caster = Applicant;
-            data_context.Affected = Target;
-            if (data_context.EndsOnCasterLossOfConcentration)
-                Applicant.PropertyChanged += data_context.Caster_PropertyChanged;
-            if (data_context.CanRedoSavingThrow == true)
-                if (data_context.SavingIsRemadeAtStartOfTurn == true)
-                    Target.NewTurnStarted += data_context.Affected_NewTurnStarted;
-                else
-                    Target.TurnEnded += data_context.Affected_TurnEnded;
+            data_context.Apply(Applicant, Target);
         }
 
         /// <summary>

@@ -115,7 +115,7 @@ namespace DDFight.Game.Aggression.Attacks.Display
                 {
                     foreach (OnHitStatus onHitStatus in data_context.OnHitStatuses.List)
                     {
-                        onHitStatus.Apply(data_context.Owner, data_context.Target);
+                        onHitStatus.CheckIfApply(data_context.Owner, data_context.Target);
                     }
                 }
             }
