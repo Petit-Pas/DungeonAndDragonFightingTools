@@ -60,7 +60,7 @@ namespace DDFight.Game.Status
 
         // 0 for default spellcasting ability DC
         [XmlAttribute]
-        public int ApplySavingDifficulty    
+        public int ApplySavingDifficulty
         {
             get => _applySavingDifficulty;
             set
@@ -81,13 +81,35 @@ namespace DDFight.Game.Status
         public bool HasAMaximumDuration
         {
             get => _hasAMaximumLength;
-            set 
+            set
             {
                 _hasAMaximumLength = value;
                 NotifyPropertyChanged();
             }
         }
         private bool _hasAMaximumLength = false;
+
+        public bool DurationIsCalculatedOnCasterTurn
+        {
+            get => _durationIsCalculatedOnCasterTurn;
+            set
+            {
+                _durationIsCalculatedOnCasterTurn = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private bool _durationIsCalculatedOnCasterTurn = true;
+
+        public bool DurationIsBasedOnStartOfTurn
+        {
+            get => _durationIsBasedOnStartOfTurn;
+            set
+            {
+                _durationIsBasedOnStartOfTurn = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private bool _durationIsBasedOnStartOfTurn = false;
 
         [XmlAttribute]
         public int RemainingRounds
@@ -101,10 +123,9 @@ namespace DDFight.Game.Status
         }
         private int _remainingRounds = 0;
 
-        public void Applicant_TurnEnded(object sender, Fight.FightEvents.TurnEndedEventArgs args)
+        private bool check_expired()
         {
-            if (HasAMaximumDuration == true && args.Character == Caster)
-                RemainingRounds -= 1;
+            RemainingRounds -= 1;
             if (RemainingRounds <= 0)
             {
                 removeStatus();
@@ -116,7 +137,21 @@ namespace DDFight.Game.Status
                 paragraph.Inlines.Add(Extensions.BuildRun(" has expired on ", (Brush)System.Windows.Application.Current.Resources["Light"], 15, FontWeights.Normal));
                 paragraph.Inlines.Add(Extensions.BuildRun(Affected.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
                 paragraph.Inlines.Add(Extensions.BuildRun(".\r\n", (Brush)System.Windows.Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                return true;
             }
+            return false;
+        }
+
+        private void Caster_TurnEnded(object sender, TurnEndedEventArgs args)
+        {
+            if (HasAMaximumDuration && DurationIsCalculatedOnCasterTurn && !DurationIsBasedOnStartOfTurn)
+                check_expired();
+        }
+
+        private void Caster_NewTurnStarted(object sender, StartNewTurnEventArgs args)
+        {
+            if (HasAMaximumDuration && DurationIsCalculatedOnCasterTurn && DurationIsBasedOnStartOfTurn)
+                check_expired();
         }
 
         #endregion MaximumLength
@@ -153,18 +188,32 @@ namespace DDFight.Game.Status
 
         public void Affected_NewTurnStarted(object sender, StartNewTurnEventArgs args)
         {
-            OnHitStatusApplyWindow window = new OnHitStatusApplyWindow(Caster, Affected, false);
-            window.DataContext = this;
+            bool expired = false;
 
-            window.ShowDialog();
+            if (HasAMaximumDuration && !DurationIsCalculatedOnCasterTurn && DurationIsBasedOnStartOfTurn)
+                expired = check_expired();
+            if (!expired && CanRedoSavingThrow && SavingIsRemadeAtStartOfTurn)
+            {
+                OnHitStatusApplyWindow window = new OnHitStatusApplyWindow(Caster, Affected, false);
+                window.DataContext = this;
+
+                window.ShowDialog();
+            }
         }
 
         public void Affected_TurnEnded(object sender, TurnEndedEventArgs args)
         {
-            OnHitStatusApplyWindow window = new OnHitStatusApplyWindow(Caster, Affected, false);
-            window.DataContext = this;
+            bool expired = false;
 
-            window.ShowDialog();
+            if (HasAMaximumDuration && !DurationIsCalculatedOnCasterTurn && !DurationIsBasedOnStartOfTurn)
+                expired = check_expired();
+            if (!expired && CanRedoSavingThrow && !SavingIsRemadeAtStartOfTurn)
+            {
+                OnHitStatusApplyWindow window = new OnHitStatusApplyWindow(Caster, Affected, false);
+                window.DataContext = this;
+
+                window.ShowDialog();
+            }
         }
 
 
@@ -232,13 +281,16 @@ namespace DDFight.Game.Status
             this.Affected = target;
             if (this.EndsOnCasterLossOfConcentration)
                 applicant.PropertyChanged += this.Caster_PropertyChanged;
-            if (this.CanRedoSavingThrow == true)
-                if (this.SavingIsRemadeAtStartOfTurn == true)
-                    target.NewTurnStarted += this.Affected_NewTurnStarted;
-                else
-                    target.TurnEnded += this.Affected_TurnEnded;
-            if (this.HasAMaximumDuration == true)
-                applicant.TurnEnded += this.Applicant_TurnEnded;
+            if ((this.CanRedoSavingThrow && this.SavingIsRemadeAtStartOfTurn) || 
+                (this.HasAMaximumDuration && !this.DurationIsCalculatedOnCasterTurn && this.DurationIsBasedOnStartOfTurn))
+                target.NewTurnStarted += this.Affected_NewTurnStarted;
+            if ((this.CanRedoSavingThrow && this.SavingIsRemadeAtStartOfTurn == false) || 
+                (this.HasAMaximumDuration && !this.DurationIsCalculatedOnCasterTurn && !this.DurationIsBasedOnStartOfTurn))
+                target.TurnEnded += this.Affected_TurnEnded;
+            if (this.HasAMaximumDuration && this.DurationIsCalculatedOnCasterTurn && this.DurationIsBasedOnStartOfTurn)
+                applicant.NewTurnStarted += Caster_NewTurnStarted;
+            if (this.HasAMaximumDuration && this.DurationIsCalculatedOnCasterTurn && !this.DurationIsBasedOnStartOfTurn)
+                applicant.TurnEnded += Caster_TurnEnded;
         }
 
         /// <summary>
@@ -314,6 +366,8 @@ namespace DDFight.Game.Status
             SavingIsRemadeAtStartOfTurn = to_copy.SavingIsRemadeAtStartOfTurn;
             RemainingRounds = to_copy.RemainingRounds;
             HasAMaximumDuration = to_copy.HasAMaximumDuration;
+            DurationIsCalculatedOnCasterTurn = to_copy.DurationIsCalculatedOnCasterTurn;
+            DurationIsBasedOnStartOfTurn = to_copy.DurationIsBasedOnStartOfTurn;
         }
 
         public OnHitStatus(OnHitStatus to_copy)
@@ -329,6 +383,10 @@ namespace DDFight.Game.Status
         public void UnregisterToAll()
         {
             Caster.PropertyChanged -= Caster_PropertyChanged;
+            Caster.NewTurnStarted -= Caster_NewTurnStarted;
+            Affected.NewTurnStarted -= Affected_NewTurnStarted;
+            Affected.TurnEnded -= Affected_TurnEnded;
+            Caster.TurnEnded -= Caster_TurnEnded;
         }
 
         #endregion ICloneable

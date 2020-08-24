@@ -6,7 +6,7 @@
         xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes" xmlns:characteristics="clr-namespace:DDFight.Controlers.Game.Characteristics" xmlns:display="clr-namespace:DDFight.Game.Status.Display"
         xmlns:converter="clr-namespace:DDFight.Converters"
         mc:Ignorable="d"
-        Title="EditCustomVerboseStatusWindow" Height="450" Width="800"
+        Title="EditCustomVerboseStatusWindow" Height="550" Width="800"
         Background="{StaticResource LightestGray}"
         Closing="Window_Closing">
     <Window.Resources>
@@ -175,14 +175,15 @@
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
                 Margin="5, 16, 0, 8"
-                Style="{StaticResource LabelStyle}">
+                Style="{StaticResource LabelStyle}"
+                >
                 Ends on Caster's loss of concentration:
             </TextBlock>
             <CheckBox
                 Grid.Row="0"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
-                Margin="20, 0"
+                Margin="20, 16, 20, 8"
                 HorizontalAlignment="Right"
                 IsChecked="{Binding EndsOnCasterLossOfConcentration}">
             </CheckBox>
@@ -251,6 +252,7 @@
                 </CheckBox>
             </Grid>
 
+            <!-- Grid for an possible maximum duration -->
             <Grid
                 Grid.Row="2"
                 Grid.ColumnSpan="2"
@@ -258,20 +260,26 @@
                 <Grid.RowDefinitions>
                     <RowDefinition />
                     <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
                 <TextBlock
                     Grid.Row="0"
                     Grid.Column="0"
+                    Grid.ColumnSpan="2"
                     Style="{StaticResource LabelStyle}">
-                    Has the Status a maximum duration:
+                    The status has a maximum duration:
                 </TextBlock>
                 <CheckBox
                     Grid.Row="0"
                     Grid.Column="0"
+                    Grid.ColumnSpan="2"
                     Margin="20, 0"
                     HorizontalAlignment="Right"
                     IsChecked="{Binding HasAMaximumDuration}">
@@ -279,12 +287,14 @@
 
                 <TextBlock
                     Grid.Row="1" Grid.Column="0"
+                    Grid.ColumnSpan="2"
                     Style="{StaticResource LabelStyle}"
                     Visibility="{Binding HasAMaximumDuration, Converter={StaticResource BoolToVisibilityConverter}}">
                     Duration in rounds:
                 </TextBlock>
                 <inputboxes:PositiveIntTextBox 
                     Grid.Row="1" Grid.Column="0"
+                    Grid.ColumnSpan="2"
                     Margin="20, 5"
                     HorizontalAlignment="Right"
                     Width="60"
@@ -292,6 +302,74 @@
                     Visibility="{Binding HasAMaximumDuration, Converter={StaticResource BoolToVisibilityConverter}}"
                     />
 
+                <TextBlock
+                    Grid.Row="2"
+                    Style="{StaticResource LabelStyle}"
+                    Visibility="{Binding HasAMaximumDuration, Converter={StaticResource BoolToVisibilityConverter}}">
+                    Based on:
+                </TextBlock>
+                <TextBlock
+                    Grid.Row="3" Grid.Column="0"
+                    Style="{StaticResource LabelStyle}"
+                    Visibility="{Binding HasAMaximumDuration, Converter={StaticResource BoolToVisibilityConverter}}"
+                    >
+                    Caster
+                </TextBlock>
+                <CheckBox 
+                    Grid.Row="3" Grid.Column="0"
+                    HorizontalAlignment="Right"
+                    Margin="20, 0"
+                    VerticalAlignment="Center"
+                    IsChecked="{Binding DurationIsCalculatedOnCasterTurn}"
+                    Visibility="{Binding HasAMaximumDuration, Converter={StaticResource BoolToVisibilityConverter}}"
+                    />
+                <TextBlock
+                    Grid.Row="3" Grid.Column="1"
+                    Style="{StaticResource LabelStyle}"
+                    Visibility="{Binding HasAMaximumDuration, Converter={StaticResource BoolToVisibilityConverter}}"
+                    >
+                    Affected
+                </TextBlock>
+                <CheckBox 
+                    Grid.Row="3" Grid.Column="1"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Margin="20, 0"
+                    IsChecked="{Binding DurationIsCalculatedOnCasterTurn, Converter={StaticResource BootToReversedBoolConverter}}"
+                    Visibility="{Binding HasAMaximumDuration, Converter={StaticResource BoolToVisibilityConverter}}"
+                    />
+
+                <TextBlock
+                    Grid.Row="4" Grid.Column="0"
+                    Style="{StaticResource LabelStyle}"
+                    Visibility="{Binding HasAMaximumDuration, Converter={StaticResource BoolToVisibilityConverter}}"
+                    >
+                    Start of Turn
+                </TextBlock>
+                <CheckBox 
+                    Grid.Row="4" Grid.Column="0"
+                    HorizontalAlignment="Right"
+                    Margin="20, 0"
+                    VerticalAlignment="Center"
+                    IsChecked="{Binding DurationIsBasedOnStartOfTurn}"
+                    Visibility="{Binding HasAMaximumDuration, Converter={StaticResource BoolToVisibilityConverter}}"
+                    />
+                <TextBlock
+                    Grid.Row="4" Grid.Column="1"
+                    Style="{StaticResource LabelStyle}"
+                    Visibility="{Binding HasAMaximumDuration, Converter={StaticResource BoolToVisibilityConverter}}"
+                    >
+                    End Of Turn
+                </TextBlock>
+                <CheckBox 
+                    Grid.Row="4" Grid.Column="1"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Margin="20, 0"
+                    IsChecked="{Binding DurationIsBasedOnStartOfTurn, Converter={StaticResource BootToReversedBoolConverter}}"
+                    Visibility="{Binding HasAMaximumDuration, Converter={StaticResource BoolToVisibilityConverter}}"
+                    />
+                
             </Grid>
             
         </Grid>
