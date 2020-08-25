@@ -1,11 +1,7 @@
-﻿using DDFight.Controlers.InputBoxes;
-using DDFight.Game.Aggression;
-using DDFight.Tools.UXShortcuts;
+﻿using DDFight.Game.Aggression;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
 
 namespace DDFight.Controlers.Game.Attacks.DamageListControls
 {

@@ -3,7 +3,6 @@ using DDFight.Game.Fight.FightEvents;
 using DDFight.Tools;
 using DDFight.Windows;
 using DDFight.Windows.FightWindows;
-using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;

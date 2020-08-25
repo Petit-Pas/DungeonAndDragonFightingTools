@@ -1,5 +1,4 @@
-﻿using DDFight.Game.Characteristics;
-using DDFight.Game.Status.Display;
+﻿using DDFight.Game.Status.Display;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;

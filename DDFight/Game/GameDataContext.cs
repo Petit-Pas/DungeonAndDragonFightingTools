@@ -1,6 +1,5 @@
 ﻿using DDFight.Game.Fight;
 using DDFight.Tools.Save;
-using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Documents;

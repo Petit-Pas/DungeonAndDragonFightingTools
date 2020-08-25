@@ -1,5 +1,4 @@
 ﻿using DDFight.Game.Aggression.Attacks;
-using DDFight.Windows.FightWindows;
 using System.Windows;
 using System.Windows.Controls;
 

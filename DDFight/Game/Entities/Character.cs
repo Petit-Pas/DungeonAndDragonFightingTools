@@ -1,8 +1,6 @@
 ﻿using DDFight.Game.Status;
 using DDFight.Windows;
-using System;
 using System.Linq;
-using System.Windows;
 using System.Xml.Serialization;
 
 namespace DDFight.Game

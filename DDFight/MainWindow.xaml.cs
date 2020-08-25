@@ -3,7 +3,6 @@ using DDFight.Tools;
 using DDFight.Tools.Save;
 using DDFight.Windows;
 using DDFight.Windows.FightWindows;
-using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Documents;

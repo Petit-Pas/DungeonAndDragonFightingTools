@@ -1,6 +1,5 @@
 ﻿using DDFight.Game;
 using DDFight.Game.DamageAffinity;
-using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
