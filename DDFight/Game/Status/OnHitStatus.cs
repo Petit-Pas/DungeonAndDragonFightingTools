@@ -18,8 +18,6 @@ namespace DDFight.Game.Status
         {
         }
 
-        #region Properties
-
         /// <summary>
         ///     The Entity that initiated the status, can be used when its concentration loss provokes the annulation of the status
         /// </summary>
@@ -32,7 +30,7 @@ namespace DDFight.Game.Status
         [XmlIgnore]
         public PlayableEntity Affected = null;
 
-        #region Apply
+        #region Apply Properties
 
         [XmlAttribute]
         public bool HasApplyCondition
@@ -71,23 +69,23 @@ namespace DDFight.Game.Status
         }
         private int _applySavingDifficulty = 0;
 
-        #endregion Apply
+        #endregion Apply Properties
 
         #region EndConditions
 
-        #region MaximumLength
+        #region Maximum Duration
 
         [XmlAttribute]
         public bool HasAMaximumDuration
         {
-            get => _hasAMaximumLength;
+            get => _hasAMaximumDuration;
             set
             {
-                _hasAMaximumLength = value;
+                _hasAMaximumDuration = value;
                 NotifyPropertyChanged();
             }
         }
-        private bool _hasAMaximumLength = false;
+        private bool _hasAMaximumDuration = false;
 
         public bool DurationIsCalculatedOnCasterTurn
         {
@@ -123,7 +121,12 @@ namespace DDFight.Game.Status
         }
         private int _remainingRounds = 0;
 
-        private bool check_expired()
+        /// <summary>
+        ///     removes 1 turn from the Remaining rounds variable
+        ///     if the status expires, the function removes it from the target of the status
+        /// </summary>
+        /// <returns></returns>
+        private bool removeDuration()
         {
             RemainingRounds -= 1;
             if (RemainingRounds <= 0)
@@ -142,21 +145,9 @@ namespace DDFight.Game.Status
             return false;
         }
 
-        private void Caster_TurnEnded(object sender, TurnEndedEventArgs args)
-        {
-            if (HasAMaximumDuration && DurationIsCalculatedOnCasterTurn && !DurationIsBasedOnStartOfTurn)
-                check_expired();
-        }
+        #endregion Maximum Duration
 
-        private void Caster_NewTurnStarted(object sender, StartNewTurnEventArgs args)
-        {
-            if (HasAMaximumDuration && DurationIsCalculatedOnCasterTurn && DurationIsBasedOnStartOfTurn)
-                check_expired();
-        }
-
-        #endregion MaximumLength
-
-        #region SavingRemade
+        #region Saving can be remade
 
         [XmlAttribute]
         public bool CanRedoSavingThrow
@@ -185,41 +176,9 @@ namespace DDFight.Game.Status
             }
         }
         private bool _savingIsRemadeAtStartOfTurn = true;
+        #endregion  Saving can be remade
 
-        public void Affected_NewTurnStarted(object sender, StartNewTurnEventArgs args)
-        {
-            bool expired = false;
-
-            if (HasAMaximumDuration && !DurationIsCalculatedOnCasterTurn && DurationIsBasedOnStartOfTurn)
-                expired = check_expired();
-            if (!expired && CanRedoSavingThrow && SavingIsRemadeAtStartOfTurn)
-            {
-                OnHitStatusApplyWindow window = new OnHitStatusApplyWindow(Caster, Affected, false);
-                window.DataContext = this;
-
-                window.ShowDialog();
-            }
-        }
-
-        public void Affected_TurnEnded(object sender, TurnEndedEventArgs args)
-        {
-            bool expired = false;
-
-            if (HasAMaximumDuration && !DurationIsCalculatedOnCasterTurn && !DurationIsBasedOnStartOfTurn)
-                expired = check_expired();
-            if (!expired && CanRedoSavingThrow && !SavingIsRemadeAtStartOfTurn)
-            {
-                OnHitStatusApplyWindow window = new OnHitStatusApplyWindow(Caster, Affected, false);
-                window.DataContext = this;
-
-                window.ShowDialog();
-            }
-        }
-
-
-        #endregion SavingRemade
-
-        #region Concentration
+        #region Concentration Loss
 
         [XmlAttribute]
         public bool EndsOnCasterLossOfConcentration
@@ -234,6 +193,49 @@ namespace DDFight.Game.Status
         private bool _endsOnCasterLossOfConcentration = false;
 
         #endregion Concentration
+
+        #region End status events
+        public void Affected_NewTurnStarted(object sender, StartNewTurnEventArgs args)
+        {
+            bool expired = false;
+
+            if (HasAMaximumDuration && !DurationIsCalculatedOnCasterTurn && DurationIsBasedOnStartOfTurn)
+                expired = removeDuration();
+            if (!expired && CanRedoSavingThrow && SavingIsRemadeAtStartOfTurn)
+            {
+                OnHitStatusApplyWindow window = new OnHitStatusApplyWindow(Caster, Affected, false);
+                window.DataContext = this;
+
+                window.ShowDialog();
+            }
+        }
+
+        public void Affected_TurnEnded(object sender, TurnEndedEventArgs args)
+        {
+            bool expired = false;
+
+            if (HasAMaximumDuration && !DurationIsCalculatedOnCasterTurn && !DurationIsBasedOnStartOfTurn)
+                expired = removeDuration();
+            if (!expired && CanRedoSavingThrow && !SavingIsRemadeAtStartOfTurn)
+            {
+                OnHitStatusApplyWindow window = new OnHitStatusApplyWindow(Caster, Affected, false);
+                window.DataContext = this;
+
+                window.ShowDialog();
+            }
+        }
+
+        private void Caster_TurnEnded(object sender, TurnEndedEventArgs args)
+        {
+            if (HasAMaximumDuration && DurationIsCalculatedOnCasterTurn && !DurationIsBasedOnStartOfTurn)
+                removeDuration();
+        }
+
+        private void Caster_NewTurnStarted(object sender, StartNewTurnEventArgs args)
+        {
+            if (HasAMaximumDuration && DurationIsCalculatedOnCasterTurn && DurationIsBasedOnStartOfTurn)
+                removeDuration();
+        }
 
         public void Caster_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -253,6 +255,11 @@ namespace DDFight.Game.Status
             }
         }
 
+        #endregion End status events
+
+        /// <summary>
+        ///     Remove the status from the target, and unregister all events
+        /// </summary>
         private void removeStatus()
         {
             Affected.CustomVerboseStatusList.List.Remove(this);
@@ -261,26 +268,37 @@ namespace DDFight.Game.Status
 
         #endregion EndConditons
 
-        #endregion Properties
-
-        public SavingThrow GetSavingThrow(PlayableEntity applicant, PlayableEntity target)
+        /// <summary>
+        ///     Returns a saving throw object to know if the status is applied
+        /// </summary>
+        /// <param name="caster"> the one that tries to apply the status </param>
+        /// <param name="target"> the target of the status </param>
+        /// <returns></returns>
+        public SavingThrow GetSavingThrow(PlayableEntity caster, PlayableEntity target)
         {
             SavingThrow result = new SavingThrow
             {
                 Characteristic = this.ApplySavingCharacteristic,
-                Difficulty = this.ApplySavingDifficulty != 0 ? this.ApplySavingDifficulty : applicant.SpellSave,
+                Difficulty = this.ApplySavingDifficulty != 0 ? this.ApplySavingDifficulty : caster.SpellSave,
                 Target = target,
             };
             return result;
         }
 
-        public void Apply(PlayableEntity applicant, PlayableEntity target)
+        /// <summary>
+        ///     A function that applies this status to the given target
+        ///     
+        ///     it will register to any required event for the status to automatically ends
+        /// </summary>
+        /// <param name="caster"> the one that tries to apply the status </param>
+        /// <param name="target"> the target of the status </param>
+        public void Apply(PlayableEntity caster, PlayableEntity target)
         {
             target.CustomVerboseStatusList.List.Add(this);
-            this.Caster = applicant;
+            this.Caster = caster;
             this.Affected = target;
             if (this.EndsOnCasterLossOfConcentration)
-                applicant.PropertyChanged += this.Caster_PropertyChanged;
+                caster.PropertyChanged += this.Caster_PropertyChanged;
             if ((this.CanRedoSavingThrow && this.SavingIsRemadeAtStartOfTurn) || 
                 (this.HasAMaximumDuration && !this.DurationIsCalculatedOnCasterTurn && this.DurationIsBasedOnStartOfTurn))
                 target.NewTurnStarted += this.Affected_NewTurnStarted;
@@ -288,17 +306,16 @@ namespace DDFight.Game.Status
                 (this.HasAMaximumDuration && !this.DurationIsCalculatedOnCasterTurn && !this.DurationIsBasedOnStartOfTurn))
                 target.TurnEnded += this.Affected_TurnEnded;
             if (this.HasAMaximumDuration && this.DurationIsCalculatedOnCasterTurn && this.DurationIsBasedOnStartOfTurn)
-                applicant.NewTurnStarted += Caster_NewTurnStarted;
+                caster.NewTurnStarted += Caster_NewTurnStarted;
             if (this.HasAMaximumDuration && this.DurationIsCalculatedOnCasterTurn && !this.DurationIsBasedOnStartOfTurn)
-                applicant.TurnEnded += Caster_TurnEnded;
+                caster.TurnEnded += Caster_TurnEnded;
         }
 
         /// <summary>
-        ///     Will open a window if a check has to be made for the OnHitStatus to affect the target
+        ///     Will open a window if a check has to be made for the OnHitStatus to affect the target, then apply the status if required
         /// </summary>
-        /// <param name="caster"></param>
-        /// <param name="target"></param>
-        /// <returns></returns>
+        /// <param name="caster"> the one that tries to apply the status </param>
+        /// <param name="target"> the target of the status </param>
         public void CheckIfApply(PlayableEntity caster, PlayableEntity target)
         {
             if (this.HasApplyCondition)
@@ -314,7 +331,7 @@ namespace DDFight.Game.Status
         }
 
         /// <summary>
-        ///     In this method should be implemented any "end of condition" such as : 
+        ///     In this method implements any "end of condition" such as : 
         ///     - after n turns
         ///     - after a saving throw has been successfully remade
         ///     - after 10 rounds
@@ -322,15 +339,23 @@ namespace DDFight.Game.Status
         ///     
         ///     Will be used as such condition can be vanished by the end of a fight
         /// </summary>
-        /// <returns></returns>
+        /// <returns> true if so, false otherwise </returns>
         public bool HasEndCondition()
         {
-            //TODO implement them all
-            if (EndsOnCasterLossOfConcentration == true)
+            if (EndsOnCasterLossOfConcentration)
+                return true;
+            if (CanRedoSavingThrow)
+                return true;
+            // if more than 50 rounds remain (5 mins), it is left on the characters, in case a second fight comes close
+            if (HasAMaximumDuration && RemainingRounds < 50)
                 return true;
             return false;
         }
 
+        /// <summary>
+        ///     Will open an edit window to updates the status
+        /// </summary>
+        /// <returns></returns>
         public override bool OpenEditWindow()
         {
 
@@ -380,6 +405,9 @@ namespace DDFight.Game.Status
             init_copy(to_copy);
         }
 
+        /// <summary>
+        ///     Unregister to all possible events
+        /// </summary>
         public void UnregisterToAll()
         {
             Caster.PropertyChanged -= Caster_PropertyChanged;

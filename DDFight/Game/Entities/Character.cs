@@ -49,9 +49,12 @@ namespace DDFight.Game
                 if (status.GetType() == typeof(OnHitStatus))
                 {
                     OnHitStatus onHit = (OnHitStatus)status;
-                    onHit.UnregisterToAll();
-                    CustomVerboseStatusList.List.Remove(status);
-                    i--;
+                    if (onHit.HasEndCondition())
+                    {
+                        onHit.UnregisterToAll();
+                        CustomVerboseStatusList.List.Remove(status);
+                        i--;
+                    }
                 }
             }
         }
