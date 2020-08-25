@@ -1,5 +1,6 @@
 ﻿using DDFight.Game.Characteristics;
 using DDFight.Game.Dices.SavingThrow;
+using DDFight.Tools.UXShortcuts;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -197,21 +198,25 @@ namespace DDFight.Game.Status.Display
 
         private void ValidateButtonControl_Click(object sender, RoutedEventArgs e)
         {
-            if ((string)ValidateButtonControl.Content == "Validate")
-            {
-                if (first_application == true)
-                    validateOnHit();
-                else
-                    validateResist();
-                this.Close();
-            }
+            if (first_application == true)
+                validateOnHit();
             else
-                SavingThrowControl.Roll();
+                validateResist();
+            this.Close();
         }
 
         private void CancelButtonControl_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (RollableWindowTool.IsRollControlPressed(e))
+            {
+                RollableWindowTool.RollRollableChildren(this);
+                e.Handled = true;
+            }
         }
     }
 }

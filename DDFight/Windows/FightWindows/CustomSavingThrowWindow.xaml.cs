@@ -3,6 +3,7 @@ using DDFight.Game.Aggression.Attacks;
 using DDFight.Game.Characteristics;
 using DDFight.Game.Dices;
 using DDFight.Game.Dices.SavingThrow;
+using DDFight.Tools.UXShortcuts;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -134,7 +135,8 @@ namespace DDFight.Windows.FightWindows
 
         private void roll_dice()
         {
-            Roll = DiceRoll.Roll("1d20", AdvantageModifiers.SituationalAdvantage, AdvantageModifiers.SituationalDisadvantage);
+            if (Roll == 0)
+                Roll = DiceRoll.Roll("1d20", AdvantageModifiers.SituationalAdvantage, AdvantageModifiers.SituationalDisadvantage);
         }
 
         #region INotifyPropertyChanged
@@ -157,5 +159,13 @@ namespace DDFight.Windows.FightWindows
         }
         #endregion
 
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (RollableWindowTool.IsRollControlPressed(e))
+            {
+                roll_dice();
+                e.Handled = true;
+            }
+        }
     }
 }

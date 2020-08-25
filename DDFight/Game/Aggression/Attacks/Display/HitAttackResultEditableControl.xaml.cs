@@ -1,5 +1,6 @@
 ﻿using DDFight.Game.Dices;
 using DDFight.Game.Status;
+using DDFight.Tools.UXShortcuts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace DDFight.Game.Aggression.Attacks.Display
     /// <summary>
     /// Logique d'interaction pour HitAttackResultEditableControl.xaml
     /// </summary>
-    public partial class HitAttackResultEditableControl : UserControl
+    public partial class HitAttackResultEditableControl : UserControl, IRollableControl
     {
         private HitAttackResult data_context
         {
@@ -93,7 +94,7 @@ namespace DDFight.Game.Aggression.Attacks.Display
             refresh_hit_target();
         }
 
-        public void Roll()
+        public void RollControl()
         {
             if (data_context.HitRoll == 0)
                 data_context.HitRoll = (uint)DiceRoll.Roll("1d20", data_context.SituationalAdvantageModifiers.SituationalAdvantage, data_context.SituationalAdvantageModifiers.SituationalDisadvantage);

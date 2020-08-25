@@ -2,6 +2,7 @@
 using DDFight.Game.Aggression;
 using DDFight.Game.Aggression.Attacks;
 using DDFight.Game.Dices;
+using DDFight.Tools.UXShortcuts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -82,7 +83,7 @@ namespace DDFight.Windows.FightWindows
 
         private void RollButtonControl_Click(object sender, RoutedEventArgs e)
         {
-            AttackControl.Roll();
+            RollableWindowTool.RollRollableChildren(this);
             refresh_buttons();
         }
 
@@ -104,12 +105,9 @@ namespace DDFight.Windows.FightWindows
 
         private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            if (e.Key == System.Windows.Input.Key.R && 
-                (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl) || 
-                Keyboard.IsKeyDown(Key.LeftAlt) || Keyboard.IsKeyDown(Key.RightAlt) ||
-                Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift)))
+            if (RollableWindowTool.IsRollControlPressed(e))
             {
-                RollButtonControl_Click(this, null);
+                RollButtonControl_Click(sender, null);
                 e.Handled = true;
             }
         }

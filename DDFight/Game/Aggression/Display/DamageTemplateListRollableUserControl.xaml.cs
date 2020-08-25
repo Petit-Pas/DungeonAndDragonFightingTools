@@ -1,5 +1,6 @@
 ﻿using DDFight.Controlers.InputBoxes;
 using DDFight.Game.Aggression;
+using DDFight.Tools.UXShortcuts;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;

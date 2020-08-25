@@ -11,7 +11,8 @@
         Title="CustomSavingThrowWindow" Height="350" Width="400"
         Background="{StaticResource LightestGray}"
         WindowStartupLocation="CenterScreen"
-        WindowStyle="None">
+        WindowStyle="None"
+        KeyDown="Window_KeyDown">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

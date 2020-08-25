@@ -1,4 +1,5 @@
 ﻿using DDFight.Game.Characteristics;
+using DDFight.Tools.UXShortcuts;
 using DDFight.ValidationRules;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ using System.Windows.Shapes;
 
 namespace DDFight.Game.Dices.SavingThrow.Display
 {
-    public partial class SavingThrowRollableUserControl : UserControl, IValidable
+    public partial class SavingThrowRollableUserControl : UserControl, IValidable, IRollableControl
     {
         private SavingThrow data_context 
         {
@@ -78,14 +79,15 @@ namespace DDFight.Game.Dices.SavingThrow.Display
             ResultTextBoxControl.Text = score.ToString() + "/" + data_context.Difficulty;
         }
 
-        public void Roll()
+        public void RollControl()
         {
-            data_context.SavingRoll = DiceRoll.Roll("1d20", data_context.AdvantageModifiers.SituationalAdvantage, data_context.AdvantageModifiers.SituationalDisadvantage);
+            if (data_context.SavingRoll == 0)
+                data_context.SavingRoll = DiceRoll.Roll("1d20", data_context.AdvantageModifiers.SituationalAdvantage, data_context.AdvantageModifiers.SituationalDisadvantage);
         }
 
         private void RollButtonControl_Click(object sender, RoutedEventArgs e)
         {
-            Roll();
+            RollControl();
         }
 
         public bool IsValid()

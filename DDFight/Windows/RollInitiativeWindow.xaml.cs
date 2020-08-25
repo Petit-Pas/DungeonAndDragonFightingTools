@@ -2,6 +2,7 @@
 using DDFight.Game.Dices;
 using DDFight.Game.Fight;
 using DDFight.Resources;
+using DDFight.Tools.UXShortcuts;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -134,6 +135,15 @@ namespace DDFight.Windows
                 {
                     entity.InitiativeRoll = contextList.First(x => x.Entity.Name == entity.Name).Entity.InitiativeRoll;
                 }
+            }
+        }
+
+        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (RollableWindowTool.IsRollControlPressed(e))
+            {
+                RollButton_Click(sender, e);
+                e.Handled = true;
             }
         }
     }

@@ -10,7 +10,8 @@
         Background="{StaticResource LightestGray}"
         x:Name="Window"
         WindowStartupLocation="CenterOwner"
-        Closing="Window_Closing">
+        Closing="Window_Closing"
+        KeyDown="Window_KeyDown">
     <Grid 
         MaxHeight="{Binding ElementName=Window, Path=Height}">
         <Grid.RowDefinitions>
