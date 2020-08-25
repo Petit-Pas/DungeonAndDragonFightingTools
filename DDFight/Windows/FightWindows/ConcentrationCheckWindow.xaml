@@ -11,7 +11,8 @@
         Background="{StaticResource LightestGray}"
         x:Name="CurrentWindow"
         WindowStartupLocation="CenterScreen"
-        WindowStyle="None">
+        WindowStyle="None"
+        KeyDown="CurrentWindow_KeyDown">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
