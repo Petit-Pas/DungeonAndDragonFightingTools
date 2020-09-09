@@ -20,20 +20,6 @@ namespace DDFight.Game.Status
         }
         private ObservableCollection<OnHitStatus> _list = new ObservableCollection<OnHitStatus>();
 
-        /*public void OpenEditWindow(PlayableEntity Owner)
-        {
-            OnHitStatusListEditWindow window = new OnHitStatusListEditWindow();
-            PlayableEntity dc = (PlayableEntity)Owner.Clone();
-            dc.Validated = false;
-
-            window.DataContext = dc;
-
-            window.ShowDialog();
-
-            if (dc.Validated == true)
-                List = dc.OnHitStatusList.List;
-        }*/
-
         #region INotifyPropertyChanged
 
         /// <summary>

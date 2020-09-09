@@ -3,6 +3,7 @@ using DDFight.Windows;
 using DDFight.Windows.FightWindows;
 using System;
 using System.Collections.Generic;
+using System.Windows;
 using System.Xml.Serialization;
 
 namespace DDFight.Game.Aggression.Attacks
@@ -85,8 +86,7 @@ namespace DDFight.Game.Aggression.Attacks
             {
                 DataContext = this,
             };
-
-            window.ShowDialog();
+            window.ShowCentered();
         }
 
         public bool OpenEditWindow()
@@ -94,8 +94,7 @@ namespace DDFight.Game.Aggression.Attacks
             HitAttackTemplateEditWindow window = new HitAttackTemplateEditWindow();
             HitAttackTemplate temporary = (HitAttackTemplate)this.Clone();
             window.DataContext = temporary;
-
-            window.ShowDialog();
+            window.ShowCentered();
 
             if (temporary.Validated == true)
             {

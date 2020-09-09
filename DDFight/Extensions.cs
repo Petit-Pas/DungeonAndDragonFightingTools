@@ -14,7 +14,14 @@ namespace DDFight
 {
     public static class Extensions
     {
- 
+
+        public static void ShowCentered(this Window window)
+        {
+            window.Owner = Global.CurrentMainWindow;
+            window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            window.ShowDialog();
+        }
+
         /// <summary>
         ///     Filter a collection with the given comparison
         /// </summary>

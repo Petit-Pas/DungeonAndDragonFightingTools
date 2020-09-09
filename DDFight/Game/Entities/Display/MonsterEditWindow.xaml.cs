@@ -59,7 +59,7 @@ namespace DDFight.Windows
                     Owner = this,
                 };
 
-                message.ShowDialog();
+                message.ShowCentered();
             }
             else
             {
@@ -98,7 +98,7 @@ namespace DDFight.Windows
                         Owner = this,
                         DataContext = context,
                     };
-                    window.ShowDialog();
+                    window.ShowCentered();
 
                     if (!context.Yes)
                     {
@@ -116,7 +116,7 @@ namespace DDFight.Windows
                         Owner = this,
                         DataContext = context,
                     };
-                    window.ShowDialog();
+                    window.ShowCentered();
 
                     if (context.Yes)
                     {

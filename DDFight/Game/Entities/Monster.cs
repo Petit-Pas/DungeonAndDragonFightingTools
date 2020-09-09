@@ -37,7 +37,7 @@ namespace DDFight.Game
             Monster temporary = (Monster)this.Clone();
             window.DataContext = temporary;
 
-            window.ShowDialog();
+            window.ShowCentered();
 
             if (temporary.Validated == true)
             {

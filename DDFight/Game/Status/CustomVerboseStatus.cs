@@ -91,7 +91,7 @@ namespace DDFight.Game.Status
 
             window.DataContext = dc;
 
-            window.ShowDialog();
+            window.ShowCentered();
 
             if (dc.Validated)
             {

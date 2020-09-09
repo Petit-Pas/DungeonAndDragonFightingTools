@@ -41,7 +41,7 @@ namespace DDFight.Game.Status.Display
                 };
 
                 window.DataContext = dc;
-                window.ShowDialog();
+                window.ShowCentered();
 
                 if (dc.Yes == false)
                     e.Cancel = true;

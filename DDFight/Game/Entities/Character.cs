@@ -62,8 +62,7 @@ namespace DDFight.Game
             CharacterEditWindow window = new CharacterEditWindow();
             Character temporary = (Character)this.Clone();
             window.DataContext = temporary;
-
-            window.ShowDialog();
+            window.ShowCentered();
 
             if (temporary.Validated == true)
             {

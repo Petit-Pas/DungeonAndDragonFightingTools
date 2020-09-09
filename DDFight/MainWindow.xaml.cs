@@ -25,6 +25,10 @@ namespace DDFight
             Context.CharacterList.Save();
             Context.MonsterList.Save();
         }
+
+        public static Window CurrentMainWindow { 
+            get => Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+        }
     }
 
     /// <summary>
@@ -60,9 +64,8 @@ namespace DDFight
         {
             RollInitiativeWindow window = new RollInitiativeWindow();
             window.DataContext = Global.Context.FightContext.FightersList;
-            window.Owner = this;
 
-            window.ShowDialog();
+            window.ShowCentered();
 
             if (window.Cancelled == false)
             {
@@ -72,9 +75,7 @@ namespace DDFight
 
                 MainFightWindow fightWindow = new MainFightWindow();
                 fightWindow.DataContext = Global.Context;
-                fightWindow.Owner = this;
-                fightWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-                fightWindow.ShowDialog();
+                fightWindow.ShowCentered();
 
                 // Clean up after a Fight
                 fightWindow.UnregisterAll();

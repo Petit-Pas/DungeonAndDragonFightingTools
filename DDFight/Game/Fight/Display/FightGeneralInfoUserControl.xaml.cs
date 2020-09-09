@@ -47,12 +47,12 @@ namespace DDFight.Controlers.Fight
 
             AddToFightWindow window = new AddToFightWindow();
              
-            window.ShowDialog();
+            window.ShowCentered();
 
             RollInitiativeWindow rollInitiativeWindow = new RollInitiativeWindow();
             rollInitiativeWindow.DataContext = Global.Context.FightContext.FightersList;
 
-            rollInitiativeWindow.ShowDialog();
+            rollInitiativeWindow.ShowCentered();
 
             Global.Context.FightContext.FightersList.SetTurnOrdersMiddleFight();
 

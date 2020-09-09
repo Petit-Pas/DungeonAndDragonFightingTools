@@ -87,7 +87,7 @@ namespace DDFight.Game.Status.Display
                 AskYesNoDataContext dc = new AskYesNoDataContext { Message = "Are you sure you want to discard all your changes?" };
 
                 window.DataContext = dc;
-                window.ShowDialog();
+                window.ShowCentered();
                 window.Owner = this;
 
                 if (dc.Yes == false)

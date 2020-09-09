@@ -87,7 +87,7 @@ namespace DDFight.Controlers.Fight
 
             window.DataContext = data_context;
 
-            window.ShowDialog();
+            window.ShowCentered();
         }
 
         public class embedded_roll
@@ -110,7 +110,7 @@ namespace DDFight.Controlers.Fight
 
             window.DataContext = data_context;
 
-            window.ShowDialog();
+            window.ShowCentered();
         }
 
         private void ContextManageStatus_Click(object sender, RoutedEventArgs e)
@@ -127,7 +127,7 @@ namespace DDFight.Controlers.Fight
             };
             window.DataContext = dc;
 
-            window.ShowDialog();
+            window.ShowCentered();
 
             if (dc.Yes)
             {
@@ -151,7 +151,7 @@ namespace DDFight.Controlers.Fight
                 window.DataContext = Global.Context.MonsterList.Monsters.Clone<PlayableEntity, Monster>();
                 window.TitleControl.Text = "Select the monster in which to transform";
 
-                window.ShowDialog();
+                window.ShowCentered();
 
                 if (window.SelectedCharacter != null)
                     data_context.Transform(window.SelectedCharacter);
@@ -162,7 +162,7 @@ namespace DDFight.Controlers.Fight
         {
             CustomSavingThrowWindow window = new CustomSavingThrowWindow();
             window.DataContext = this.DataContext;
-            window.ShowDialog();
+            window.ShowCentered();
         }
     }
 }

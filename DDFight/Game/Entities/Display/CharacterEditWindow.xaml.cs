@@ -60,8 +60,7 @@ namespace DDFight.Windows
                     DataContext = context,
                     Owner = this,
                 };
-
-                message.ShowDialog();
+                message.ShowCentered();
             }
             else
             {
@@ -100,7 +99,7 @@ namespace DDFight.Windows
                         Owner = this,
                         DataContext = context,
                     };
-                    window.ShowDialog();
+                    window.ShowCentered();
 
                     if (!context.Yes)
                     {
@@ -118,7 +117,7 @@ namespace DDFight.Windows
                         Owner = this,
                         DataContext = context,
                     };
-                    window.ShowDialog();
+                    window.ShowCentered();
 
                     if (context.Yes)
                     {
@@ -140,7 +139,7 @@ namespace DDFight.Windows
             dc.DamageList.Add(new DamageTemplate("2d6+3", DamageTypeEnum.Fire));
             window.DataContext = dc;
 
-            window.ShowDialog();
+            window.ShowCentered();
 
             Console.WriteLine(dc.Name);
             Console.WriteLine(dc.HitBonus);

@@ -206,7 +206,7 @@ namespace DDFight.Game.Status
                 OnHitStatusApplyWindow window = new OnHitStatusApplyWindow(Caster, Affected, false);
                 window.DataContext = this;
 
-                window.ShowDialog();
+                window.ShowCentered();
             }
         }
 
@@ -221,7 +221,7 @@ namespace DDFight.Game.Status
                 OnHitStatusApplyWindow window = new OnHitStatusApplyWindow(Caster, Affected, false);
                 window.DataContext = this;
 
-                window.ShowDialog();
+                window.ShowCentered();
             }
         }
 
@@ -322,7 +322,7 @@ namespace DDFight.Game.Status
             {
                 OnHitStatusApplyWindow window = new OnHitStatusApplyWindow(caster, target);
                 window.DataContext = this;
-                window.ShowDialog();
+                window.ShowCentered();
             }
             else
             {
@@ -363,7 +363,7 @@ namespace DDFight.Game.Status
             OnHitStatus dc = (OnHitStatus)this.Clone();
             window.DataContext = dc;
 
-            window.ShowDialog();
+            window.ShowCentered();
 
             if (dc.Validated)
             {

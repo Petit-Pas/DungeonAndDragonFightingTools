@@ -89,8 +89,7 @@ namespace DDFight.Windows
                 dc.Icon = ResourceManager.BmUnchecked();
 
                 message.DataContext = dc;
-                message.Owner = this;
-                message.ShowDialog();
+                message.ShowCentered();
             }
             else
             {
@@ -112,8 +111,7 @@ namespace DDFight.Windows
                 dc.Icon = ResourceManager.BmUnchecked();
 
                 message.DataContext = dc;
-                message.Owner = this;
-                message.ShowDialog();
+                message.ShowCentered();
             }
             else
             {

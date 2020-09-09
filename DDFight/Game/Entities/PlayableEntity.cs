@@ -507,7 +507,7 @@ namespace DDFight.Game
             {
                 ConcentrationCheckWindow window = new ConcentrationCheckWindow();
                 window.DataContext = this;
-                window.ShowDialog();
+                window.ShowCentered();
                 if (window.Success == false)
                 {
                     this.IsFocused = false;
