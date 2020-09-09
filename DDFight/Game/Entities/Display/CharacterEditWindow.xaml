@@ -12,7 +12,7 @@
         xmlns:attacks="clr-namespace:DDFight.Controlers.Game.Attacks"
         xmlns:status="clr-namespace:DDFight.Game.Status.Display"
         xmlns:game="clr-namespace:DDFight.Game"
-        Title="Edit Character" Height="600" Width="400"
+        Title="Edit Character" Height="650" Width="400"
         WindowStartupLocation="CenterOwner"
         Closing="Window_Closing">
     <Grid>

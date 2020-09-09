@@ -16,6 +16,18 @@ namespace DDFight.Game
 
         #region CharacterProperties
 
+        [XmlAttribute]
+        public bool HasInspiration 
+        {
+            get => _hasInpiration;
+            set 
+            {
+                _hasInpiration = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private bool _hasInpiration = false;
+
         /// <summary>
         ///     Level of the Character
         /// </summary>
@@ -75,6 +87,7 @@ namespace DDFight.Game
     private void init_copy(Character to_copy)
     {
         Level = to_copy.Level;
+        HasInspiration = to_copy.HasInspiration;
     }
 
         #region IClonable

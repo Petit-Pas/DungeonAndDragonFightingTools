@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 
 namespace DDFight.Controlers.Fight
 {
@@ -33,6 +34,7 @@ namespace DDFight.Controlers.Fight
         {
             UnregisterToAll();
             RegisterToAll();
+            refresh_InspirationButton();
         }
 
         private void FightContext_CharacterSelected(object sender, SelectedCharacterEventArgs args)
@@ -163,6 +165,27 @@ namespace DDFight.Controlers.Fight
             CustomSavingThrowWindow window = new CustomSavingThrowWindow();
             window.DataContext = this.DataContext;
             window.ShowCentered();
+        }
+
+        private void refresh_InspirationButton()
+        {
+            if (DataContext.GetType() == typeof(Character))
+            {
+                if (((Character)data_context).HasInspiration)
+                {
+                    InspirationImage.Source = Application.Current.Resources["InspirationOn"] as ImageSource;
+                }
+                else
+                {
+                    InspirationImage.Source = Application.Current.Resources["InspirationOff"] as ImageSource;
+                }
+            }
+        }
+
+        private void Inspiration_Click(object sender, RoutedEventArgs e)
+        {
+            ((Character)data_context).HasInspiration = !((Character)data_context).HasInspiration;
+            refresh_InspirationButton();
         }
     }
 }

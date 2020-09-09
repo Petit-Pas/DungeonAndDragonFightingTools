@@ -1,0 +1,10 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Geometry x:Key="lightbulbGeometry">F1 M352,512z M0,0z M96.06,454.35C96.07,460.64,97.93,466.8,101.42,472.04L118.51,497.73A31.99,31.99,0,0,0,145.15,512.01L206.86,512.01A31.99,31.99,0,0,0,233.5,497.73L250.59,472.04A31.989,31.989,0,0,0,255.95,454.35L255.99,416 96.01,416 96.06,454.35z M0,176C0,220.37 16.45,260.85 43.56,291.78 60.08,310.63 85.92,350.01 95.77,383.23 95.81,383.49 95.84,383.75 95.88,384.01L256.12,384.01C256.16,383.75 256.19,383.5 256.23,383.23 266.08,350.01 291.92,310.63 308.44,291.78 335.55,260.85 352,220.37 352,176 352,78.61 272.91,-0.3 175.45,0 73.44,0.31 0,82.97 0,176z M176,96C131.89,96 96,131.89 96,176 96,184.84 88.84,192 80,192 71.16,192 64,184.84 64,176 64,114.24 114.24,64 176,64 184.84,64 192,71.16 192,80 192,88.84 184.84,96 176,96z</Geometry>
+  <DrawingGroup x:Key="lightbulbDrawingGroup" ClipGeometry="M0,0 V512 H352 V0 H0 Z">
+    <DrawingGroup.Transform>
+      <TranslateTransform X="0" Y="0.00085257808677852154" />
+    </DrawingGroup.Transform>
+    <GeometryDrawing Brush="#FFFFFFFF" Geometry="{StaticResource lightbulbGeometry}" />
+  </DrawingGroup>
+  <DrawingImage x:Key="InspirationOn" Drawing="{StaticResource lightbulbDrawingGroup}" />
+</ResourceDictionary>

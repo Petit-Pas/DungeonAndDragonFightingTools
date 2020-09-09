@@ -61,6 +61,7 @@
     </ApplicationDefinition>
     <Compile Include="Converters\BoolToReversedBoolConverter.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\VisibleIfCharacter.cs" />
     <Compile Include="Game\Aggression\Attacks\Display\HitAttackResultEditableControl.xaml.cs">
       <DependentUpon>HitAttackResultEditableControl.xaml</DependentUpon>
     </Compile>
@@ -484,6 +485,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Resources\bulbenabled.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\bulbdisabled.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Windows\ModalWindows\YesNoModal\AskYesNoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

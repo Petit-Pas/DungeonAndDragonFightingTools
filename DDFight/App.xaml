@@ -8,95 +8,103 @@
              xmlns:input="clr-namespace:DDFight.Controlers.InputBoxes"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <SolidColorBrush x:Key="LightestGray" Color="#2e2e2e" />
-        <SolidColorBrush x:Key="Gray" Color="#202020" />
-        <SolidColorBrush x:Key="Light" Color="#fbf2d4" />
-        <SolidColorBrush x:Key="Indigo" Color="#4B0082" />
 
-        <SolidColorBrush x:Key="Force" Color="Green"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary x:Name="InspirationOff" Source="Resources/bulbdisabled.xaml"/>
+                <ResourceDictionary x:Name="InspirationOn" Source="Resources/bulbenabled.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
 
-        <Style x:Key="WindowStyle" TargetType="Window">
-            <Setter Property="Background" Value="{StaticResource LightestGray}" />
-        </Style>
+            <SolidColorBrush x:Key="LightestGray" Color="#2e2e2e" />
+            <SolidColorBrush x:Key="Gray" Color="#202020" />
+            <SolidColorBrush x:Key="Light" Color="#fbf2d4" />
+            <SolidColorBrush x:Key="Indigo" Color="#4B0082" />
 
-        <Style TargetType="Button">
-            <Setter Property="Background" Value="{StaticResource Light}" />
-            <Setter Property="Foreground" Value="{StaticResource LightestGray}"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
-        </Style>
+            <SolidColorBrush x:Key="Force" Color="Green"/>
 
-        <Style TargetType="{x:Type ContentControl}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type ContentControl}">
-                        <ContentPresenter Margin="{TemplateBinding Padding}"/>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+            <Style x:Key="WindowStyle" TargetType="Window">
+                <Setter Property="Background" Value="{StaticResource LightestGray}" />
+            </Style>
 
-        <Style TargetType="{x:Type CheckBox}">
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="OverridesDefaultStyle" Value="true"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type CheckBox}">    
-                        <BulletDecorator Background="Transparent">
-                            <BulletDecorator.Bullet>
-                                <Border x:Name="Border" 
-                                    Width="13" 
-                                    Height="13" 
-                                    CornerRadius="0" 
-                                    Background="{StaticResource LightestGray}"
-                                    BorderThickness="1.5"
-                                    BorderBrush="{StaticResource Light}">
-                                    <Path 
-                                        Width="7" Height="7" 
-                                        x:Name="CheckMark"
-                                        Stroke="{StaticResource Light}"
-                                        StrokeThickness="2"
-                                        Data="M 0 0 L 7 9 M 0 7 L 9 0" />
-                                </Border>
-                            </BulletDecorator.Bullet>
-                            <ContentPresenter />
-                        </BulletDecorator>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsChecked" Value="false">
-                                <Setter TargetName="CheckMark" Property="Visibility" Value="Collapsed"/>
-                            </Trigger>
-                            <Trigger Property="IsChecked" Value="{x:Null}">
-                                <Setter TargetName="CheckMark" Property="Data" Value="M 0 7 L 7 0" />
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter TargetName="Border" Property="Background" Value="#808080" />
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="true">
-                                <Setter TargetName="Border" Property="Background" Value="#E0E0E0" />
-                                <Setter TargetName="Border" Property="BorderBrush" Value="#606060" />
-                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="false">
-                                <Setter TargetName="Border" Property="Background" Value="#EEEEEE" />
-                                <Setter TargetName="Border" Property="BorderBrush" Value="#AAAAAA" />
-                                <Setter Property="Foreground" Value="#888888"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+            <Style TargetType="Button">
+                <Setter Property="Background" Value="{StaticResource Light}" />
+                <Setter Property="Foreground" Value="{StaticResource LightestGray}"/>
+                <Setter Property="FontWeight" Value="SemiBold"/>
+            </Style>
 
-        <Style TargetType="{x:Type local:MainWindow}" BasedOn="{StaticResource WindowStyle}"/>
-        <Style TargetType="{x:Type windows:AskYesNoWindow}" BasedOn="{StaticResource WindowStyle}"/>
-        <Style TargetType="{x:Type windows:CharacterEditWindow}" BasedOn="{StaticResource WindowStyle}"/>
-        <Style TargetType="{x:Type windows:HitAttackTemplateEditWindow}" BasedOn="{StaticResource WindowStyle}"/>
-        <Style TargetType="{x:Type windows:MonsterEditWindow}" BasedOn="{StaticResource WindowStyle}"/>
-        <Style TargetType="{x:Type windows:StatusMessageWindow}" BasedOn="{StaticResource WindowStyle}"/>
+            <Style TargetType="{x:Type ContentControl}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ContentControl}">
+                            <ContentPresenter Margin="{TemplateBinding Padding}"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
 
-        <Style TargetType="{x:Type TextBlock}" x:Key="ErrorMessage" >
-            <Setter Property="Foreground" Value="Red"/>
-            <Setter Property="FontSize" Value="15"/>
-            <Setter Property="FontWeight" Value="SemiBold" />
-        </Style>
+            <Style TargetType="{x:Type CheckBox}">
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="OverridesDefaultStyle" Value="true"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type CheckBox}">    
+                            <BulletDecorator Background="Transparent">
+                                <BulletDecorator.Bullet>
+                                    <Border x:Name="Border" 
+                                        Width="13" 
+                                        Height="13" 
+                                        CornerRadius="0" 
+                                        Background="{StaticResource LightestGray}"
+                                        BorderThickness="1.5"
+                                        BorderBrush="{StaticResource Light}">
+                                        <Path 
+                                            Width="7" Height="7" 
+                                            x:Name="CheckMark"
+                                            Stroke="{StaticResource Light}"
+                                            StrokeThickness="2"
+                                            Data="M 0 0 L 7 9 M 0 7 L 9 0" />
+                                    </Border>
+                                </BulletDecorator.Bullet>
+                                <ContentPresenter />
+                            </BulletDecorator>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="false">
+                                    <Setter TargetName="CheckMark" Property="Visibility" Value="Collapsed"/>
+                                </Trigger>
+                                <Trigger Property="IsChecked" Value="{x:Null}">
+                                    <Setter TargetName="CheckMark" Property="Data" Value="M 0 7 L 7 0" />
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter TargetName="Border" Property="Background" Value="#808080" />
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="true">
+                                    <Setter TargetName="Border" Property="Background" Value="#E0E0E0" />
+                                    <Setter TargetName="Border" Property="BorderBrush" Value="#606060" />
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter TargetName="Border" Property="Background" Value="#EEEEEE" />
+                                    <Setter TargetName="Border" Property="BorderBrush" Value="#AAAAAA" />
+                                    <Setter Property="Foreground" Value="#888888"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style TargetType="{x:Type local:MainWindow}" BasedOn="{StaticResource WindowStyle}"/>
+            <Style TargetType="{x:Type windows:AskYesNoWindow}" BasedOn="{StaticResource WindowStyle}"/>
+            <Style TargetType="{x:Type windows:CharacterEditWindow}" BasedOn="{StaticResource WindowStyle}"/>
+            <Style TargetType="{x:Type windows:HitAttackTemplateEditWindow}" BasedOn="{StaticResource WindowStyle}"/>
+            <Style TargetType="{x:Type windows:MonsterEditWindow}" BasedOn="{StaticResource WindowStyle}"/>
+            <Style TargetType="{x:Type windows:StatusMessageWindow}" BasedOn="{StaticResource WindowStyle}"/>
+
+            <Style TargetType="{x:Type TextBlock}" x:Key="ErrorMessage" >
+                <Setter Property="Foreground" Value="Red"/>
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="FontWeight" Value="SemiBold" />
+            </Style>
+        </ResourceDictionary>
 
     </Application.Resources>
 </Application>
