@@ -52,7 +52,8 @@
                     Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
                     DisplayMemberPath="Name"
                     MouseDoubleClick="CharacterList_MouseDoubleClick"
-                    KeyDown="CharacterList_KeyDown">
+                    KeyDown="CharacterList_KeyDown"
+                    VirtualizingPanel.IsVirtualizing="False">
 
                     <ListBox.Resources>
                         <ContextMenu x:Key="CMenu">

@@ -50,7 +50,8 @@
                     Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
                     DisplayMemberPath="Name"
                     MouseDoubleClick="MonsterList_MouseDoubleClick"
-                    KeyDown="MonsterList_KeyDown">
+                    KeyDown="MonsterList_KeyDown"
+                    VirtualizingPanel.IsVirtualizing="False">
                     <ListBox.Resources>
                         <ContextMenu x:Key="CMenu">
                             <MenuItem Header="Edit" Click="EditMonster_MenuItem_Click"/>
