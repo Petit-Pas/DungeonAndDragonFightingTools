@@ -41,7 +41,7 @@ namespace DDFight.Controlers.Fight
             Global.Context.FightContext.NewTurnStarted -= FightContext_NewTurnStarted;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void AddToFightButton_Click(object sender, RoutedEventArgs e)
         {
             PlayableEntity currently_playing = Global.Context.FightContext.CurrentlyPlaying;
 

@@ -17,3 +17,8 @@ add glance on status when selecting an attack in fight
 add a IsRollable Interface, making me able to just press R on a window, and call Roll() on any rollable control
 
 Make the save as a 2 part step, so that if it crashes midway, I have a backup
+
+Inspirations
+Compteurs
+save a chaque tour
+repos court / long

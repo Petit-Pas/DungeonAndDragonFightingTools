@@ -80,7 +80,7 @@ namespace DDFight.Game.Fight
         /// <summary>
         ///     Will sort the list in Initiative + Dexterity order, then sets the PlyableEntity.TurnOrder value
         ///     
-        ///     /!\ should only be called at start of fight, theer is a more complicate handling for when in middle of a fight
+        ///     /!\ should only be called at start of fight, thera is a more complicate handling for when in middle of a fight
         ///     See SetTurnOrdersMiddleFight()
         /// </summary>
         public void SetTurnOrders()

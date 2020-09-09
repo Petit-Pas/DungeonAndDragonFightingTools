@@ -51,7 +51,6 @@ namespace DDFight.Game.Fight
             Console.WriteLine("Next Turn");
             if (TurnIndex != -1)
             {
-                // 1st turn of first round
                 Global.Context.FightContext.FightersList.Fighters.ElementAt((int)TurnIndex).EndTurn();
                 OnEndTurn(new TurnEndedEventArgs()
                 {

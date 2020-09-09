@@ -26,16 +26,13 @@ namespace DDFight.Controlers.Fight
         public FightingEntityTileUserControl()
         {
             InitializeComponent();
-            Loaded += FightingCharacterTileUserControl_Loaded;
+            DataContextChanged += FightingEntityTileUserControl_DataContextChanged;
         }
 
-        private void FightingCharacterTileUserControl_Loaded(object sender, RoutedEventArgs e)
+        private void FightingEntityTileUserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            data_context.NewTurnStarted += Data_context_NewTurnStarted;
-            data_context.TurnEnded += Data_context_TurnEnded;
-            Global.Context.FightContext.CharacterSelected += FightContext_CharacterSelected;
-            if (data_context.DisplayName == "Name")
-                Console.WriteLine("Subbed");
+            UnregisterToAll();
+            RegisterToAll();
         }
 
         private void FightContext_CharacterSelected(object sender, SelectedCharacterEventArgs args)
@@ -68,14 +65,19 @@ namespace DDFight.Controlers.Fight
             });
         }
 
+        private void RegisterToAll()
+        {
+            data_context.NewTurnStarted += Data_context_NewTurnStarted;
+            data_context.TurnEnded += Data_context_TurnEnded;
+            Global.Context.FightContext.CharacterSelected += FightContext_CharacterSelected;
+        }
+
         public void UnregisterToAll()
         {
             this.UnregisterAll();
             data_context.NewTurnStarted -= Data_context_NewTurnStarted;
             data_context.TurnEnded -= Data_context_TurnEnded;
             Global.Context.FightContext.CharacterSelected -= FightContext_CharacterSelected;
-            if (data_context.DisplayName == "Name")
-                Console.WriteLine("COCHON should be unsubbed");
         }
 
         private void ContextTakeDamage_Click(object sender, RoutedEventArgs e)

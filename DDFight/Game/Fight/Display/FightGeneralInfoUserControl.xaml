@@ -72,7 +72,7 @@
                 Margin="5"
                 FontSize="18"
                 FontWeight="SemiBold"
-                Click="Button_Click">
+                Click="AddToFightButton_Click">
                 Add To Fight
             </Button>
             
