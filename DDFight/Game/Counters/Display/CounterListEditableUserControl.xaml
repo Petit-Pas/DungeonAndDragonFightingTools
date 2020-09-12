@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="DDFight.Game.Counters.Display.CounterListEditableUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DDFight.Game.Counters.Display"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <ListView
+            x:Name="CounterListControl"
+            ItemsSource="{Binding}"
+            SelectionChanged="CounterListControl_SelectionChanged"
+            KeyDown="CounterListControl_KeyDown"
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
+            VirtualizingPanel.IsVirtualizing="False">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <local:CounterEditableUserControl/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Grid
+            Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Button
+                Click="AddButton_Click">
+                Add New
+            </Button>
+            <Button 
+                Grid.Column="1"
+                x:Name="RemoveButtonControl"
+                Click="RemoveButton_Click"
+                IsEnabled="False">
+                Remove
+            </Button>
+        </Grid>
+        
+    </Grid>
+</UserControl>

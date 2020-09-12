@@ -8,15 +8,15 @@
         mc:Ignorable="d"
         xmlns:monsters_controls="clr-namespace:DDFight.Controlers.Monsters"
         xmlns:attacks="clr-namespace:DDFight.Controlers.Game.Attacks"
-        xmlns:game="clr-namespace:DDFight.Game" xmlns:status="clr-namespace:DDFight.Game.Status.Display"
+        xmlns:game="clr-namespace:DDFight.Game" xmlns:status="clr-namespace:DDFight.Game.Status.Display" xmlns:counter="clr-namespace:DDFight.Game.Counters.Display"
         Title="Edit Monster Window" Height="600" Width="400"
         WindowStartupLocation="CenterOwner"
         Closing="Window_Closing">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
             <!-- TabControl -->
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
             <!-- Button's Grid -->
         </Grid.RowDefinitions>
         <TabControl 
@@ -42,10 +42,14 @@
                 <status:CustomVerboseStatusListEditableUserControl 
                     DataContext="{Binding CustomVerboseStatusList}"/>
             </TabItem>
+            <TabItem Header="Counter">
+                <counter:CounterListEditableUserControl
+                    DataContext="{Binding Counters}"/>
+            </TabItem>
         </TabControl>
         <Grid 
             x:Name="ButtonsGrid" 
-            Grid.Row="6" 
+            Grid.Row="1" 
             Margin="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>

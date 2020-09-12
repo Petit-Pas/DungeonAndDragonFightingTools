@@ -1,10 +1,6 @@
-﻿Change EditCharacterWindow to make it reusable for anything (Generic / inheritance, wtv)
-
-Think about a way to implement temporary Hps properly
+﻿Think about a way to implement temporary Hps properly
 
 Check for // HERE comments 
-
-in prepare fight : duplicate element, erase first, duplicate remaining, you now have 2 with same ids :/
 
 should have possibility to add minus sign in DiceRolls
 
@@ -14,11 +10,10 @@ Any function that use llist.SelectedItem should have a null protection
 
 add glance on status when selecting an attack in fight
 
-add a IsRollable Interface, making me able to just press R on a window, and call Roll() on any rollable control
-
 Make the save as a 2 part step, so that if it crashes midway, I have a backup
 
-Inspirations
 Compteurs
 save a chaque tour
 repos court / long
+
+les validations des EditXXXWindow sont buggées

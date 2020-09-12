@@ -68,6 +68,19 @@
     <Compile Include="Game\Aggression\Display\DamageTemplateRollableUserControl.xaml.cs">
       <DependentUpon>DamageTemplateRollableUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Game\Counters\Counter.cs" />
+    <Compile Include="Game\Counters\Display\CounterEditableUserControl.xaml.cs">
+      <DependentUpon>CounterEditableUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Game\Counters\Display\CounterIncrementableUserControl.xaml.cs">
+      <DependentUpon>CounterIncrementableUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Game\Counters\Display\CounterListEditableUserControl.xaml.cs">
+      <DependentUpon>CounterListEditableUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Game\Counters\Display\CounterListIncrementableUserControl.xaml.cs">
+      <DependentUpon>CounterListIncrementableUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Game\Dices\SavingThrow\Display\SavingThrowRollableUserControl.xaml.cs">
       <DependentUpon>SavingThrowRollableUserControl.xaml</DependentUpon>
     </Compile>
@@ -299,6 +312,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Game\Aggression\Display\DamageTemplateRollableUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\Counters\Display\CounterEditableUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\Counters\Display\CounterIncrementableUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\Counters\Display\CounterListEditableUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\Counters\Display\CounterListIncrementableUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

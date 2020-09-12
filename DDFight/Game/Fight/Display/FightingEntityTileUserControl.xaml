@@ -38,7 +38,6 @@
         MouseLeftButtonUp="MainControl_MouseLeftButtonUp"
         MouseDoubleClick="Edit_Click">
         <Grid
-            ShowGridLines="True"
             Margin="10, 0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>

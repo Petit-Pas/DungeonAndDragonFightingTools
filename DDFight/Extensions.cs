@@ -42,12 +42,18 @@ namespace DDFight
         /// <summary>
         ///     Checks if all the IValidable children are Valid (elem.IsValid())
         /// </summary>
-        /// <param name="element"></param>
+        /// <param name="root"></param>
         /// <returns></returns>
-        public static bool AreAllChildrenValid(this FrameworkElement element)
+        public static bool AreAllChildrenValid(this FrameworkElement root)
         {
-            foreach (Control ctrl in element.FindAllChildren<IValidable>())
+            if (root == null)
+                return true;
+
+            Console.WriteLine("BHDEBUG main control is " + root.GetType().ToString());
+            foreach (Control ctrl in root.FindAllChildren<IValidable>())
             {
+                Console.WriteLine("BHDEBUG: " + ctrl.GetType().ToString());
+                //Console.WriteLine("BHDEBUG: " + ctrl.Name);
                 IValidable test = ctrl as IValidable;
                 if (test != null)
                     if (test.IsValid() == false)
@@ -73,20 +79,54 @@ namespace DDFight
             }
         }
 
-        public static List<FrameworkElement> FindAllChildren<T>(this FrameworkElement element) 
+        /// <summary>
+        ///     Not gonna lie, a bit of black magic due to lazy WPF was needed here
+        ///     The First loop is supposed to go trough anything logical control (tabs, grids, etc) but controls such as Listview wont have their children in it.
+        ///     The Second loop is supposed to counter that problem, by taking any control that didn't have any logical child, and checking for any visual one.
+        ///     
+        ///     Important to note that some components that haven't been showed yet (like in an unopened tab) wont be visible.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="root"></param>
+        /// <returns></returns>
+        public static List<FrameworkElement> FindAllChildren<T>(this FrameworkElement root)
         {
             List<FrameworkElement> found_here = new List<FrameworkElement>();
 
-            if (element == null)
+            if (root == null)
                 return found_here;
 
-            for (int i = 0; i != VisualTreeHelper.GetChildrenCount(element); i += 1)
+            bool hadLogicalChildren = false;
+
+            foreach (object item in LogicalTreeHelper.GetChildren(root))
             {
-                var child = VisualTreeHelper.GetChild(element, i) as FrameworkElement;
-                if (child is T)
-                    found_here.Add(child);
-                else
-                    found_here.AddRange(child.FindAllChildren<T>());
+                hadLogicalChildren = true;
+                if (item is FrameworkElement)
+                {
+                    FrameworkElement element = (FrameworkElement)item;
+                    if (element is T)
+                    {
+                        found_here.Add(element);
+                    }
+                    else
+                    {
+                        found_here.AddRange(element.FindAllChildren<T>());
+                    }
+                }
+            }
+            if (!hadLogicalChildren)
+            {
+                for (int i = 0; i != VisualTreeHelper.GetChildrenCount(root); i += 1)
+                {
+                var child = VisualTreeHelper.GetChild(root, i) as FrameworkElement;
+                    if (child != null)
+                    {
+                        if (child is T)
+                            found_here.Add(child);
+                        else
+                            found_here.AddRange(child.FindAllChildren<T>());
+                    }
+                }
             }
             return found_here;
         }

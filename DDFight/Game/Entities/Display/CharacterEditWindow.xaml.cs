@@ -126,25 +126,5 @@ namespace DDFight.Windows
                 }
             }
         }
-
-        private void TestButton_Click(object sender, RoutedEventArgs e)
-        {
-            HitAttackTemplateEditWindow window = new HitAttackTemplateEditWindow
-            {
-                Owner = Window.GetWindow(this),
-            };
-            HitAttackTemplate dc = new HitAttackTemplate();
-            dc.Name = "Name";
-            dc.DamageList.Add(new DamageTemplate("1d4+2", DamageTypeEnum.Slashing));
-            dc.DamageList.Add(new DamageTemplate("2d6+3", DamageTypeEnum.Fire));
-            window.DataContext = dc;
-
-            window.ShowCentered();
-
-            Console.WriteLine(dc.Name);
-            Console.WriteLine(dc.HitBonus);
-            Console.WriteLine(dc.DamageList.ToString());
-            Console.WriteLine(dc.DamageList[0].DamageType);
-        }
     }
 }

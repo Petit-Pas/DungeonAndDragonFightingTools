@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:DDFight.Controlers.Fight"
              xmlns:fight="clr-namespace:DDFight.Controlers.Game.Attacks"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:counter="clr-namespace:DDFight.Game.Counters.Display"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -44,6 +45,11 @@
                 <TabItem Header="Attacks">
                     <fight:HitAttackTemplateListPreviewUserControl 
                         x:Name="AttacksListControl"/>
+                </TabItem>
+                <TabItem Header="Counters">
+                    <counter:CounterListIncrementableUserControl
+                        x:Name="CounterListControl"
+                        DataContext="{Binding Counters}"/>
                 </TabItem>
             </TabControl>
             

@@ -17,6 +17,7 @@ using DDFight.Converters;
 using DDFight.Game.Dices;
 using DDFight.Game.Status;
 using DDFight.Windows.FightWindows;
+using DDFight.Game.Counters;
 
 namespace DDFight.Game
 {
@@ -209,6 +210,17 @@ namespace DDFight.Game
             }
         }
         private ObservableCollection<HitAttackTemplate> _hitAttacks = new ObservableCollection<HitAttackTemplate>();
+
+        public ObservableCollection<Counter> Counters
+        {
+            get => _counters;
+            set 
+            {
+                _counters = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private ObservableCollection<Counter> _counters = new ObservableCollection<Counter>();
 
         #endregion Characteristics
 
@@ -614,6 +626,7 @@ namespace DDFight.Game
             InitiativeRoll = to_copy.InitiativeRoll;
             ActionDescription = (string)to_copy.ActionDescription.Clone();
             SpecialAbilities = (string)to_copy.SpecialAbilities.Clone();
+            Counters = to_copy.Counters.Clone();
         }
 
         /// <summary>

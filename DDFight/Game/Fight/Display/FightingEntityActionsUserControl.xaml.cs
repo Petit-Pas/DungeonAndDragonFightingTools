@@ -30,7 +30,6 @@ namespace DDFight.Controlers.Fight
         {
             Global.Context.FightContext.CharacterSelected += FightContext_CharacterSelected;
             this.LayoutUpdated += FighterActionUserControl_LayoutUpdated;
-            //AttacksListControl.DataContext = data_context;
         }
 
         private void FighterActionUserControl_LayoutUpdated(object sender, EventArgs e)

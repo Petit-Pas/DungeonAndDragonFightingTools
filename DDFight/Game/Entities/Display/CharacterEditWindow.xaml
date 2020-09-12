@@ -12,6 +12,7 @@
         xmlns:attacks="clr-namespace:DDFight.Controlers.Game.Attacks"
         xmlns:status="clr-namespace:DDFight.Game.Status.Display"
         xmlns:game="clr-namespace:DDFight.Game"
+        xmlns:counter="clr-namespace:DDFight.Game.Counters.Display"
         Title="Edit Character" Height="650" Width="400"
         WindowStartupLocation="CenterOwner"
         Closing="Window_Closing">
@@ -22,25 +23,36 @@
         </Grid.RowDefinitions>
         <TabControl 
             Grid.Row="0" Grid.ColumnSpan="2"
-            Background="{StaticResource LightestGray}">
-            <TabItem Header="Main">
+            Background="{StaticResource LightestGray}"
+            VirtualizingPanel.IsVirtualizing="False">
+            <TabItem Header="Main"
+                     x:Name="MainControl">
                 <characters_controls:CharacterMainInfoUserControl 
                     x:Name="MainInfo"/>
             </TabItem>
-            <TabItem Header="Affinities">
+            <TabItem Header="Affinities"
+                     x:Name="AffinitiesControl">
                 <damageaffinity:DamageTypeAffinityListEditableUserControl 
                     x:Name="DamageAffinities"/>
             </TabItem>
-            <TabItem Header="Abilities">
+            <TabItem Header="Abilities"
+                     x:Name="AbilitiesControl">
                 <game:SpecialAbilitiesEditableUserControl
                     x:Name="SpecialCapacitiesControl"/>
             </TabItem>
-            <TabItem Header="Attacks">
+            <TabItem Header="Attacks"
+                     x:Name="AttacksControl">
                 <attacks:HitAttackTemplateListEditableUserControl />
             </TabItem>
-            <TabItem Header="Status">
+            <TabItem Header="Status"
+                     x:Name="StatusControl">
                 <status:CustomVerboseStatusListEditableUserControl 
                     DataContext="{Binding CustomVerboseStatusList}"/>
+            </TabItem>
+            <TabItem Header="Counter"
+                     x:Name="CounterControl">
+                <counter:CounterListEditableUserControl
+                    DataContext="{Binding Counters}"/>
             </TabItem>
             
         </TabControl>
