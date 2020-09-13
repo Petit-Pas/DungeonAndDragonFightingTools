@@ -7,6 +7,13 @@
              xmlns:input="clr-namespace:DDFight.Controlers.InputBoxes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock" x:Key="Label">
+            <Setter Property="Foreground" Value="{StaticResource Light}"/>
+            <Setter Property="Margin" Value="5, 5"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -14,29 +21,44 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        
-        <input:NotEmptyStringTextBox 
-            Grid.ColumnSpan="2"
-            PropertyPath="Name"/>
 
         <TextBlock
-            Grid.Row="1" Grid.Column="0">
+            Style="{StaticResource Label}"
+            Width="100"
+            HorizontalAlignment="Left">
+            Name:
+        </TextBlock>
+        <input:NotEmptyStringTextBox 
+            Grid.Column="1"
+            PropertyPath="Name"
+            Height="20"/>
+
+        <TextBlock
+            Grid.Row="1" Grid.Column="0"
+            Style="{StaticResource Label}">
             Current: 
         </TextBlock>
         <input:PositiveIntTextBox 
             Grid.Row="1" Grid.Column="1"
-            PropertyPath="CurrentValue"/>
+            PropertyPath="CurrentValue"
+            Width="40"
+            Height="20"
+            HorizontalAlignment="Left"/>
 
         <TextBlock
-            Grid.Row="2" Grid.Column="0">
+            Grid.Row="2" Grid.Column="0"
+            Style="{StaticResource Label}">
             Max (0 for no max):
         </TextBlock>
         <input:PositiveIntTextBox 
             Grid.Row="2" Grid.Column="1"
-            PropertyPath="MaxValue"/>
+            PropertyPath="MaxValue"
+            Width="40"
+            Height="20"
+            HorizontalAlignment="Left"/>
 
     </Grid>
 </UserControl>

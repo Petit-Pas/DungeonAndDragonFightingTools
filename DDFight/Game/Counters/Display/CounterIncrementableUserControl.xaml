@@ -16,12 +16,15 @@
         <TextBlock 
             Grid.Column="0"
             Text="{Binding Name}"
-            VerticalAlignment="Center"/>
+            Foreground="{StaticResource Light}"
+            FontWeight="SemiBold"
+            VerticalAlignment="Center"
+            Margin="5, 0, 5, 0"/>
 
         <Button
             Grid.Column="1"
             x:Name="MinusButtonControl"
-            FontWeight="Bold"
+            FontWeight="ExtraBold"
             Width="20"
             Height="20"
             Click="MinusButton_Click">
@@ -32,15 +35,18 @@
             Grid.Column="2"
             Margin="10"
             Text="{Binding CurrentValue}"
-            VerticalAlignment="Center"/>
+            VerticalAlignment="Center"
+            Foreground="{StaticResource Light}"
+            FontWeight="SemiBold"/>
         
         <Button
             Grid.Column="3"
             x:Name="PlusButtonControl"
-            FontWeight="Bold"
+            FontWeight="ExtraBold"
             Width="20"
             Height="20"
-            Click="PlusButton_Click">
+            Click="PlusButton_Click"
+            Margin="0, 0, 5, 0">
             +
         </Button>
 

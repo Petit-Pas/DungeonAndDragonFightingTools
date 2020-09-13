@@ -6,47 +6,82 @@
              xmlns:local="clr-namespace:DDFight.Game.Counters.Display"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Grid.ColumnDefinitions>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-
-        <ListView
-            x:Name="CounterListControl"
-            ItemsSource="{Binding}"
-            SelectionChanged="CounterListControl_SelectionChanged"
-            KeyDown="CounterListControl_KeyDown"
-            ScrollViewer.VerticalScrollBarVisibility="Auto"
-            VirtualizingPanel.IsVirtualizing="False">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <local:CounterEditableUserControl/>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-
+    <GroupBox        
+        Margin="0, 5, 0, 0"
+        BorderBrush="{StaticResource LightestGray}">
+        <GroupBox.Header>
+            <TextBlock
+                Background="{StaticResource LightestGray}"
+                FontSize="15"
+                FontWeight="SemiBold"
+                Foreground="{StaticResource Light}">
+                Custom Counters
+            </TextBlock>
+        </GroupBox.Header>
         <Grid
-            Grid.Row="1">
+            ShowGridLines="True">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-            <Button
-                Click="AddButton_Click">
-                Add New
-            </Button>
-            <Button 
-                Grid.Column="1"
-                x:Name="RemoveButtonControl"
-                Click="RemoveButton_Click"
-                IsEnabled="False">
-                Remove
-            </Button>
-        </Grid>
+            <ListView
+                x:Name="CounterListControl"
+                ItemsSource="{Binding}"
+                Background="{StaticResource LightestGray}"
+                Margin="5"
+                SelectionChanged="CounterListControl_SelectionChanged"
+                KeyDown="CounterListControl_KeyDown"
+                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                VirtualizingPanel.IsVirtualizing="False">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <local:CounterEditableUserControl
+                                Background="{StaticResource Gray}"/>
+                            <Separator
+                                Grid.Row="1"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Grid
+                Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Button
+                    Click="AddButton_Click">
+                    Add New
+                </Button>
+                <Button 
+                    Grid.Column="1"
+                    x:Name="RemoveButtonControl"
+                    Click="RemoveButton_Click"
+                    IsEnabled="False">
+                    Remove
+                </Button>
+            </Grid>
         
-    </Grid>
+        </Grid>
+    </GroupBox>
 </UserControl>
