@@ -49,11 +49,8 @@ namespace DDFight
             if (root == null)
                 return true;
 
-            Console.WriteLine("BHDEBUG main control is " + root.GetType().ToString());
             foreach (Control ctrl in root.FindAllChildren<IValidable>())
             {
-                Console.WriteLine("BHDEBUG: " + ctrl.GetType().ToString());
-                //Console.WriteLine("BHDEBUG: " + ctrl.Name);
                 IValidable test = ctrl as IValidable;
                 if (test != null)
                     if (test.IsValid() == false)

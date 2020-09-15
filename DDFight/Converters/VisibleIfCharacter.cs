@@ -14,7 +14,6 @@ namespace DDFight.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            Console.WriteLine("type is: " + value.GetType().ToString());
             if (value.GetType() == typeof(Character))
                 return Visibility.Visible;
             return Visibility.Collapsed;

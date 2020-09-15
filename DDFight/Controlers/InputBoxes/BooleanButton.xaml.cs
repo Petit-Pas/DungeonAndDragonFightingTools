@@ -82,6 +82,7 @@ namespace DDFight.Controlers.InputBoxes
         {
             INotifyPropertyChanged dc = DataContext as INotifyPropertyChanged;
             dc.PropertyChanged -= DataContext_PropertyChanged;
+            this.Click -= ButtonControl_Click;
         }
     }
 }
