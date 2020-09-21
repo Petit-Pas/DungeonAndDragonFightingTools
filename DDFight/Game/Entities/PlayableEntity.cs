@@ -452,6 +452,7 @@ namespace DDFight.Game
         ///     method called when a hit attack lands to compute the damage received
         /// </summary>
         /// <param name="damages"></param>
+        // TODO Might need to rename this
         public void TakeHitDamage(List<DamageTemplate> damages)
         {
             int i = 1;

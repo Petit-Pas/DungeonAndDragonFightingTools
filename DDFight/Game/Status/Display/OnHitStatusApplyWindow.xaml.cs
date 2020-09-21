@@ -1,4 +1,5 @@
-﻿using DDFight.Game.Characteristics;
+﻿using DDFight.Game.Aggression;
+using DDFight.Game.Characteristics;
 using DDFight.Game.Dices.SavingThrow;
 using DDFight.Tools.UXShortcuts;
 using System.ComponentModel;
@@ -56,9 +57,16 @@ namespace DDFight.Game.Status.Display
             Target = target;
             Applicant = applicant;
             this.first_application = first_application;
-            
+            Loaded += OnHitStatusApplyWindow_Loaded;
+
             InitializeComponent();
             DataContextChanged += OnHitStatusApplyWindow_DataContextChanged;
+        }
+
+        private void OnHitStatusApplyWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (!this.first_application)
+                OnApplyDamageControl.Visibility = Visibility.Hidden;
         }
 
         private void OnHitStatusApplyWindow_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -216,6 +224,11 @@ namespace DDFight.Game.Status.Display
             {
                 RollableWindowTool.RollRollableChildren(this);
                 e.Handled = true;
+                foreach (DamageTemplate dmg in data_context.OnApplyDamageList)
+                {
+                    if (dmg.Damage.LastRoll == 0)
+                        dmg.Damage.Roll();
+                }
             }
         }
     }

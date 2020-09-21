@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes" xmlns:characteristics="clr-namespace:DDFight.Controlers.Game.Characteristics" xmlns:display="clr-namespace:DDFight.Game.Status.Display"
         xmlns:converter="clr-namespace:DDFight.Converters"
+        xmlns:damagelistcontrols="clr-namespace:DDFight.Controlers.Game.Attacks.DamageListControls"
         mc:Ignorable="d"
         Title="EditCustomVerboseStatusWindow" Height="550" Width="800"
         Background="{StaticResource LightestGray}"
@@ -24,8 +25,8 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="2*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -158,6 +159,7 @@
         <!--  Grid for end of statuses  -->
         <Grid
             Grid.Row="3"
+            Grid.RowSpan="3"
             Grid.Column="2"
             Margin="5">
             <Grid.ColumnDefinitions>
@@ -187,7 +189,7 @@
                 HorizontalAlignment="Right"
                 IsChecked="{Binding EndsOnCasterLossOfConcentration}">
             </CheckBox>
-            
+
             <!-- Grid for the Start / End Saving Throw selection -->
             <Grid
                 Grid.Row="1"
@@ -369,26 +371,21 @@
                     IsChecked="{Binding DurationIsBasedOnStartOfTurn, Converter={StaticResource BootToReversedBoolConverter}}"
                     Visibility="{Binding HasAMaximumDuration, Converter={StaticResource BoolToVisibilityConverter}}"
                     />
-                
+
             </Grid>
-            
+
         </Grid>
 
-        <TextBlock
-            x:Name="ErrorMessage"
+
+        <damagelistcontrols:DamageTemplateListEditableUserControl
+            x:Name="DamageListControl"
             Grid.Row="4"
-            Grid.ColumnSpan="3"
-            FontSize="15"
-            Foreground="Red"
-            FontWeight="SemiBold"
-            Visibility="Collapsed"
-            TextAlignment="Center"
-            TextWrapping="Wrap">
-            At least 1 field is wrong
-        </TextBlock>
-        
+            Grid.ColumnSpan="2"
+            DataContext="{Binding OnApplyDamageList}"/>
+
         <Button
             Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3"
+            x:Name="ValidateButtonControl"
             Width="200"
             Margin="10"
             Padding="10"

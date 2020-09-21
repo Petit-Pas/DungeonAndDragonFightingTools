@@ -8,7 +8,8 @@ using System.Windows.Documents;
 using System.Xml.Serialization;
 using System.Windows;
 using System.Windows.Media;
-
+using DDFight.Game.Aggression;
+using System.Collections.Generic;
 
 namespace DDFight.Game.Status
 {
@@ -70,6 +71,24 @@ namespace DDFight.Game.Status
         private int _applySavingDifficulty = 0;
 
         #endregion Apply Properties
+
+        #region Damage
+
+        #region ApplyDamage
+
+        public List<DamageTemplate> OnApplyDamageList
+        {
+            get => _onApplyDamageList;
+            set {
+                _onApplyDamageList = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private List<DamageTemplate> _onApplyDamageList = new List<DamageTemplate> ();
+
+        #endregion ApplyDamage
+
+        #endregion Damage
 
         #region EndConditions
 
@@ -295,6 +314,8 @@ namespace DDFight.Game.Status
         public void Apply(PlayableEntity caster, PlayableEntity target)
         {
             target.CustomVerboseStatusList.List.Add(this);
+            if (OnApplyDamageList.Count != 0)
+                target.TakeHitDamage(OnApplyDamageList);
             this.Caster = caster;
             this.Affected = target;
             if (this.EndsOnCasterLossOfConcentration)
@@ -393,6 +414,7 @@ namespace DDFight.Game.Status
             HasAMaximumDuration = to_copy.HasAMaximumDuration;
             DurationIsCalculatedOnCasterTurn = to_copy.DurationIsCalculatedOnCasterTurn;
             DurationIsBasedOnStartOfTurn = to_copy.DurationIsBasedOnStartOfTurn;
+            OnApplyDamageList = (List<DamageTemplate>)to_copy.OnApplyDamageList.Clone();
         }
 
         public OnHitStatus(OnHitStatus to_copy)

@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DDFight.Game.Status.Display" xmlns:display="clr-namespace:DDFight.Game.Dices.SavingThrow.Display"
         xmlns:converters="clr-namespace:DDFight.Converters"
+        xmlns:damagelistcontrols="clr-namespace:DDFight.Controlers.Game.Attacks.DamageListControls"
         mc:Ignorable="d"
         Title="OnHitStatusApplyWindow" Height="650" Width="600"
         Background="{StaticResource LightestGray}"
@@ -20,6 +21,7 @@
             
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -77,8 +79,13 @@
             HorizontalAlignment="Center"
             Visibility="Collapsed"/>
 
-        <Grid
+        <damagelistcontrols:DamageTemplateListRollableUserControl
+            x:Name="OnApplyDamageControl"
             Grid.Row="4"
+            DataContext="{Binding OnApplyDamageList}"/>
+
+        <Grid
+            Grid.Row="5"
             Margin="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -101,6 +108,5 @@
                 Cancel
             </Button>
         </Grid>
-        
     </Grid>
 </Window>

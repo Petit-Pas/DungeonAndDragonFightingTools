@@ -31,9 +31,8 @@ namespace DDFight.Game.Status.Display
 
         private void EditCustomVerboseStatusWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            DamageListControl.HeaderTextControl.Text = "On Apply Damage";
             is_initializing = true;
-            HeaderBox.StringBox.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-            HeaderBox.StringBox.TextChanged += StringBox_TextChanged;
             List<string> DCList = new List<string>();
             DCList.Add("None");
             foreach (var charac in Enum.GetValues(typeof(CharacteristicsEnum)))
@@ -60,7 +59,9 @@ namespace DDFight.Game.Status.Display
         private void StringBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (this.AreAllChildrenValid())
-                ErrorMessage.Visibility = Visibility.Collapsed;
+                ValidateButtonControl.IsEnabled = true;
+            else
+                ValidateButtonControl.IsEnabled = false;
         }
 
         private bool planned_close = false;
@@ -72,10 +73,6 @@ namespace DDFight.Game.Status.Display
                 data_context.Validated = true;
                 planned_close = true;
                 this.Close();
-            }
-            else
-            {
-                ErrorMessage.Visibility = Visibility.Visible;
             }
         }
 
