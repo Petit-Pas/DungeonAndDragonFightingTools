@@ -12,6 +12,8 @@ add glance on status when selecting an attack in fight
 
 Make the save as a 2 part step, so that if it crashes midway, I have a backup
 
+ajouter un checkbox disant quoi faire des degats si Saving Throw réussi
+
 save a chaque tour
 repos court / long
 

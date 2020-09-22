@@ -20,7 +20,16 @@
             <Setter Property="Margin" Value="5" />
         </Style>
     </Window.Resources>
-    <Grid>
+    <TabControl
+        BorderThickness="0"
+        Background="{StaticResource LightestGray}">
+        <TabItem Style="{StaticResource TabItemStyle}">
+            <TabItem.Header>
+                <TextBlock Style="{StaticResource HeaderTextBlockStyle}">
+                    Description
+                </TextBlock>
+            </TabItem.Header>
+            <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -396,4 +405,15 @@
         </Button>
 
     </Grid>
+        </TabItem>
+        <TabItem 
+            Style="{StaticResource TabItemStyle}">
+            <TabItem.Header>
+                <TextBlock Style="{StaticResource HeaderTextBlockStyle}">
+                    Damage
+                </TextBlock>
+            </TabItem.Header>
+            <display:OnHitStatusDamageEditableUserControl/>
+        </TabItem>
+    </TabControl>
 </Window>

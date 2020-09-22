@@ -21,10 +21,20 @@
         <TabControl 
             Grid.Row="1"
             Background="{StaticResource LightestGray}">
-            <TabItem Header="Characters">
+            <TabItem Style="{StaticResource TabItemStyle}">
+                <TabItem.Header>
+                    <TextBlock Style="{StaticResource HeaderTextBlockStyle}">
+                        Characters
+                    </TextBlock>
+                </TabItem.Header>
                 <ctrl:CharacterListEditableUserControl x:Name="CharacterListControl"/>
             </TabItem>
-            <TabItem Header="Monsters">
+            <TabItem Style="{StaticResource TabItemStyle}">
+                <TabItem.Header>
+                    <TextBlock Style="{StaticResource HeaderTextBlockStyle}">
+                        Monsters
+                    </TextBlock>
+                </TabItem.Header>
                 <ctrl:MonsterListEditableUserControl x:Name="MonsterListControl"/>
             </TabItem>
         </TabControl>

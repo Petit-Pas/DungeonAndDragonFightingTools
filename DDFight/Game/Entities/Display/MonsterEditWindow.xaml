@@ -21,28 +21,69 @@
         </Grid.RowDefinitions>
         <TabControl 
             Grid.Row="0" Grid.ColumnSpan="2"
+            BorderThickness="0"
             Background="{StaticResource LightestGray}">
-            <TabItem Header="Main">
+            <TabItem Style="{StaticResource TabItemStyle}"
+                     x:Name="MainControl">
+                <TabItem.Header>
+                    <TextBlock Style="{StaticResource HeaderTextBlockStyle}">
+                        Main
+                    </TextBlock>
+                </TabItem.Header>
                 <monsters_controls:MonsterMainInfoUserControl 
                     x:Name="MainInfo"/>
             </TabItem>
-            <TabItem Header="Affinities">
+
+            <TabItem Style="{StaticResource TabItemStyle}"
+                     x:Name="AffinitiesControl">
+                <TabItem.Header>
+                    <TextBlock Style="{StaticResource HeaderTextBlockStyle}">
+                        Affinities
+                    </TextBlock>
+                </TabItem.Header>
                 <damageaffinity:DamageTypeAffinityListEditableUserControl 
                     x:Name="DamageAffinities"/>
             </TabItem>
-            <TabItem Header="Abilities">
+
+            <TabItem Style="{StaticResource TabItemStyle}"
+                     x:Name="AbilitiesControl">
+                <TabItem.Header>
+                    <TextBlock Style="{StaticResource HeaderTextBlockStyle}">
+                        Abilities
+                    </TextBlock>
+                </TabItem.Header>
                 <game:SpecialAbilitiesEditableUserControl
                     x:Name="SpecialCapacitiesControl"/>
             </TabItem>
-            <TabItem Header="Attacks">
-                <attacks:HitAttackTemplateListEditableUserControl
-                    x:Name="HitAttacks"/>
+
+            <TabItem Style="{StaticResource TabItemStyle}"
+                     x:Name="AttacksControl">
+                <TabItem.Header>
+                    <TextBlock Style="{StaticResource HeaderTextBlockStyle}">
+                        Attacks
+                    </TextBlock>
+                </TabItem.Header>
+                <attacks:HitAttackTemplateListEditableUserControl />
             </TabItem>
-            <TabItem Header="Status">
+
+            <TabItem Style="{StaticResource TabItemStyle}"
+                     x:Name="StatusControl">
+                <TabItem.Header>
+                    <TextBlock Style="{StaticResource HeaderTextBlockStyle}">
+                        Statuses
+                    </TextBlock>
+                </TabItem.Header>
                 <status:CustomVerboseStatusListEditableUserControl 
                     DataContext="{Binding CustomVerboseStatusList}"/>
             </TabItem>
-            <TabItem Header="Counter">
+
+            <TabItem Style="{StaticResource TabItemStyle}"
+                     x:Name="CounterControl">
+                <TabItem.Header>
+                    <TextBlock Style="{StaticResource HeaderTextBlockStyle}">
+                        Counters
+                    </TextBlock>
+                </TabItem.Header>
                 <counter:CounterListEditableUserControl
                     DataContext="{Binding Counters}"/>
             </TabItem>

@@ -31,8 +31,14 @@
             </Grid.ColumnDefinitions>
 
             <TabControl
-                Background="{StaticResource LightestGray}">
-                <TabItem Header="Abilities">
+                Background="{StaticResource LightestGray}"
+                BorderThickness="0">
+                <TabItem Style="{StaticResource TabItemStyle}">
+                    <TabItem.Header>
+                        <TextBlock Style="{StaticResource HeaderTextBlockStyle}">
+                            Abilities
+                        </TextBlock>
+                    </TabItem.Header>
                     <TextBlock 
                         Margin="5"
                         Padding="5"
@@ -42,11 +48,21 @@
                         TextWrapping="Wrap"
                         Text="{Binding SpecialAbilities}"/>
                 </TabItem>
-                <TabItem Header="Attacks">
+                <TabItem Style="{StaticResource TabItemStyle}">
+                    <TabItem.Header>
+                        <TextBlock Style="{StaticResource HeaderTextBlockStyle}">
+                            Attacks
+                        </TextBlock>
+                    </TabItem.Header>
                     <fight:HitAttackTemplateListPreviewUserControl 
                         x:Name="AttacksListControl"/>
                 </TabItem>
-                <TabItem Header="Counters">
+                <TabItem Style="{StaticResource TabItemStyle}">
+                    <TabItem.Header>
+                        <TextBlock Style="{StaticResource HeaderTextBlockStyle}">
+                            Counters
+                        </TextBlock>
+                    </TabItem.Header>
                     <counter:CounterListIncrementableUserControl
                         x:Name="CounterListControl"
                         DataContext="{Binding Counters}"/>
