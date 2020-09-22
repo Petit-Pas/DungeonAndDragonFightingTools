@@ -152,7 +152,6 @@
                                     </MultiDataTrigger.Conditions>
                                     <Setter Property="Background" Value="{StaticResource Light}"/>
                                     <Setter Property="Foreground" Value="{StaticResource Gray}"/>
-                                    <Setter Property="FontWeight" Value="SemiBold"/>
                                 </MultiDataTrigger>
 
                                 <!--NOT SELECTED-->
@@ -180,6 +179,7 @@
                 </Setter>
             </Style>
             <Style TargetType="TextBlock" x:Key="HeaderTextBlockStyle">
+                <Setter Property="FontSize" Value="15"/>
                 <Style.Triggers>
                     <DataTrigger Binding="{Binding IsSelected,
                          RelativeSource={RelativeSource AncestorType=TabItem}}"

@@ -34,8 +34,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -44,68 +43,6 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <!-- Grid for the end condition of the status -->
-        <Grid
-            Margin="5, 0"
-            Grid.Row="1" Grid.RowSpan="2" Grid.Column="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="150" />
-            </Grid.ColumnDefinitions>
-
-            <TextBlock
-                Grid.Row="0" Grid.Column="0"
-                Style="{StaticResource LabelStyle}">
-                Apply Saving: 
-            </TextBlock>
-            <ComboBox 
-                Grid.Row="0" Grid.Column="1"
-                x:Name="ApplySavingCharacteristicControler"
-                Margin="0,5"
-                SelectionChanged="ApplySavingCharacteristicControler_SelectionChanged">
-                <ComboBox.Resources>
-                    <Style TargetType="TextBlock">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ComboBoxItem}}" Value="True">
-                                <Setter Property="FontWeight" Value="Bold" />
-                                <Setter Property="Foreground" Value="Black"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </ComboBox.Resources>
-                <ComboBox.ItemContainerStyle>
-                    <Style TargetType="ComboBoxItem">
-                        <Style.Triggers>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Background" Value="Red" />
-                            </Trigger>
-                        </Style.Triggers>
-                        <Setter Property="FontWeight" Value="SemiBold"/>
-                        <Setter Property="Background" Value="{StaticResource LightestGray}" />
-                        <Setter Property="Foreground" Value="{StaticResource Light}"/>
-                    </Style>
-                </ComboBox.ItemContainerStyle>
-            </ComboBox>
-
-            <TextBlock 
-                Grid.Row="1" Grid.Column="0"
-                Style="{StaticResource LabelStyle}">
-                Difficulty (0 for innate)
-            </TextBlock>
-            <inputboxes:PositiveIntTextBox
-                Grid.Row="1" Grid.Column="1"
-                Margin="0, 5"
-                PropertyPath="ApplySavingDifficulty"/>
-
-        </Grid>
-        
         <TextBlock
             Grid.Row="0"
             Grid.Column="0"
@@ -165,235 +102,8 @@
             />
         </ScrollViewer>
 
-        <!--  Grid for end of statuses  -->
-        <Grid
-            Grid.Row="3"
-            Grid.RowSpan="3"
-            Grid.Column="2"
-            Margin="5">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <TextBlock
-                Grid.Row="0"
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                Margin="5, 16, 0, 8"
-                Style="{StaticResource LabelStyle}"
-                >
-                Ends on Caster's loss of concentration:
-            </TextBlock>
-            <CheckBox
-                Grid.Row="0"
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                Margin="20, 16, 20, 8"
-                HorizontalAlignment="Right"
-                IsChecked="{Binding EndsOnCasterLossOfConcentration}">
-            </CheckBox>
-
-            <!-- Grid for the Start / End Saving Throw selection -->
-            <Grid
-                Grid.Row="1"
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                Margin="0, 8">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-
-                <TextBlock
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    Style="{StaticResource LabelStyle}">
-                    Can the Saving Throw be repeated:
-                </TextBlock>
-                <CheckBox
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    Margin="20, 0"
-                    HorizontalAlignment="Right"
-                    IsChecked="{Binding CanRedoSavingThrow}">
-                </CheckBox>
-
-                <TextBlock
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    Style="{StaticResource LabelStyle}"
-                    Visibility="{Binding CanRedoSavingThrow, Converter={StaticResource BoolToVisibilityConverter}}">
-                    At Start of turn:
-                </TextBlock>
-                <CheckBox
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    Margin="20, 0"
-                    HorizontalAlignment="Right"
-                    IsChecked="{Binding SavingIsRemadeAtStartOfTurn}"
-                    Visibility="{Binding CanRedoSavingThrow, Converter={StaticResource BoolToVisibilityConverter}}">
-                </CheckBox>
-
-                <TextBlock
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    Style="{StaticResource LabelStyle}"
-                    Visibility="{Binding CanRedoSavingThrow, Converter={StaticResource BoolToVisibilityConverter}}">
-                    At End of turn:
-                </TextBlock>
-                <CheckBox
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    Margin="20, 0"
-                    HorizontalAlignment="Right"
-                    IsChecked="{Binding SavingIsRemadeAtStartOfTurn, Converter={StaticResource BootToReversedBoolConverter}}"
-                    Visibility="{Binding CanRedoSavingThrow, Converter={StaticResource BoolToVisibilityConverter}}">
-                </CheckBox>
-            </Grid>
-
-            <!-- Grid for an possible maximum duration -->
-            <Grid
-                Grid.Row="2"
-                Grid.ColumnSpan="2"
-                Margin="0,8">
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-
-                <TextBlock
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    Style="{StaticResource LabelStyle}">
-                    The status has a maximum duration:
-                </TextBlock>
-                <CheckBox
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    Margin="20, 0"
-                    HorizontalAlignment="Right"
-                    IsChecked="{Binding HasAMaximumDuration}">
-                </CheckBox>
-
-                <TextBlock
-                    Grid.Row="1" Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    Style="{StaticResource LabelStyle}"
-                    Visibility="{Binding HasAMaximumDuration, Converter={StaticResource BoolToVisibilityConverter}}">
-                    Duration in rounds:
-                </TextBlock>
-                <inputboxes:PositiveIntTextBox 
-                    Grid.Row="1" Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    Margin="20, 5"
-                    HorizontalAlignment="Right"
-                    Width="60"
-                    PropertyPath="RemainingRounds"
-                    Visibility="{Binding HasAMaximumDuration, Converter={StaticResource BoolToVisibilityConverter}}"
-                    />
-
-                <TextBlock
-                    Grid.Row="2"
-                    Style="{StaticResource LabelStyle}"
-                    Visibility="{Binding HasAMaximumDuration, Converter={StaticResource BoolToVisibilityConverter}}">
-                    Based on:
-                </TextBlock>
-                <TextBlock
-                    Grid.Row="3" Grid.Column="0"
-                    Style="{StaticResource LabelStyle}"
-                    Visibility="{Binding HasAMaximumDuration, Converter={StaticResource BoolToVisibilityConverter}}"
-                    >
-                    Caster
-                </TextBlock>
-                <CheckBox 
-                    Grid.Row="3" Grid.Column="0"
-                    HorizontalAlignment="Right"
-                    Margin="20, 0"
-                    VerticalAlignment="Center"
-                    IsChecked="{Binding DurationIsCalculatedOnCasterTurn}"
-                    Visibility="{Binding HasAMaximumDuration, Converter={StaticResource BoolToVisibilityConverter}}"
-                    />
-                <TextBlock
-                    Grid.Row="3" Grid.Column="1"
-                    Style="{StaticResource LabelStyle}"
-                    Visibility="{Binding HasAMaximumDuration, Converter={StaticResource BoolToVisibilityConverter}}"
-                    >
-                    Affected
-                </TextBlock>
-                <CheckBox 
-                    Grid.Row="3" Grid.Column="1"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Center"
-                    Margin="20, 0"
-                    IsChecked="{Binding DurationIsCalculatedOnCasterTurn, Converter={StaticResource BootToReversedBoolConverter}}"
-                    Visibility="{Binding HasAMaximumDuration, Converter={StaticResource BoolToVisibilityConverter}}"
-                    />
-
-                <TextBlock
-                    Grid.Row="4" Grid.Column="0"
-                    Style="{StaticResource LabelStyle}"
-                    Visibility="{Binding HasAMaximumDuration, Converter={StaticResource BoolToVisibilityConverter}}"
-                    >
-                    Start of Turn
-                </TextBlock>
-                <CheckBox 
-                    Grid.Row="4" Grid.Column="0"
-                    HorizontalAlignment="Right"
-                    Margin="20, 0"
-                    VerticalAlignment="Center"
-                    IsChecked="{Binding DurationIsBasedOnStartOfTurn}"
-                    Visibility="{Binding HasAMaximumDuration, Converter={StaticResource BoolToVisibilityConverter}}"
-                    />
-                <TextBlock
-                    Grid.Row="4" Grid.Column="1"
-                    Style="{StaticResource LabelStyle}"
-                    Visibility="{Binding HasAMaximumDuration, Converter={StaticResource BoolToVisibilityConverter}}"
-                    >
-                    End Of Turn
-                </TextBlock>
-                <CheckBox 
-                    Grid.Row="4" Grid.Column="1"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Center"
-                    Margin="20, 0"
-                    IsChecked="{Binding DurationIsBasedOnStartOfTurn, Converter={StaticResource BootToReversedBoolConverter}}"
-                    Visibility="{Binding HasAMaximumDuration, Converter={StaticResource BoolToVisibilityConverter}}"
-                    />
-
-            </Grid>
-
-        </Grid>
-
-
-        <damagelistcontrols:DamageTemplateListEditableUserControl
-            x:Name="DamageListControl"
-            Grid.Row="4"
-            Grid.ColumnSpan="2"
-            DataContext="{Binding OnApplyDamageList}"/>
-
         <Button
-            Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3"
+            Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3"
             x:Name="ValidateButtonControl"
             Width="200"
             Margin="10"
@@ -414,6 +124,15 @@
                 </TextBlock>
             </TabItem.Header>
             <display:OnHitStatusDamageEditableUserControl/>
+        </TabItem>
+        <TabItem
+            Style="{StaticResource TabItemStyle}">
+            <TabItem.Header>
+                <TextBlock Style="{StaticResource HeaderTextBlockStyle}">
+                    Conditions
+                </TextBlock>
+            </TabItem.Header>
+            <display:OnHitStatusConditionsUserControl/>
         </TabItem>
     </TabControl>
 </Window>

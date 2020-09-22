@@ -22,7 +22,13 @@ namespace DDFight.Game.Status.Display
     {
         public OnHitStatusDamageEditableUserControl()
         {
+            Loaded += OnHitStatusDamageEditableUserControl_Loaded;
             InitializeComponent();
+        }
+
+        private void OnHitStatusDamageEditableUserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            OnApplyDamageListControl.HeaderTextControl.Text = "On Apply Damage";
         }
     }
 }

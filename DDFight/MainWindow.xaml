@@ -20,6 +20,7 @@
         </Grid.ColumnDefinitions>
         <TabControl 
             Grid.Row="1"
+            BorderThickness="0"
             Background="{StaticResource LightestGray}">
             <TabItem Style="{StaticResource TabItemStyle}">
                 <TabItem.Header>

@@ -4,9 +4,92 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DDFight.Game.Status.Display"
+             xmlns:damagelistcontrols="clr-namespace:DDFight.Controlers.Game.Attacks.DamageListControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <Grid
+        Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
         
+        <Grid
+            Grid.Column="0"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Margin="10, 5, 10, 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock
+                FontSize="15"
+                FontWeight="SemiBold"> 
+                What to do in case of successful saving? 
+            </TextBlock>
+
+            <Grid
+                Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock 
+                    Grid.Row="0" Grid.Column="0"
+                    HorizontalAlignment="Center"
+                    FontSize="15" 
+                    FontWeight="SemiBold">
+                    Normal
+                </TextBlock>
+                <CheckBox 
+                    Grid.Row="1" Grid.Column="0"
+                    HorizontalAlignment="Center"/>
+
+                <TextBlock 
+                    Grid.Row="0" Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    FontSize="15" 
+                    FontWeight="SemiBold">
+                    Halved
+                </TextBlock>
+                <CheckBox 
+                    Grid.Row="1" Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    />
+
+                <TextBlock 
+                    Grid.Row="0" Grid.Column="2"
+                    HorizontalAlignment="Center"
+                    FontSize="15" 
+                    FontWeight="SemiBold">
+                    Canceled
+                </TextBlock>
+                <CheckBox 
+                    Grid.Row="1" Grid.Column="2"
+                    HorizontalAlignment="Center"
+                    />
+            </Grid>
+        </Grid>
+        
+        <damagelistcontrols:DamageTemplateListEditableUserControl
+            Grid.Column="1"
+            VerticalAlignment="Center"
+            x:Name="OnApplyDamageListControl"
+            MinWidth="300"
+            DataContext="{Binding OnApplyDamageList}"/>
     </Grid>
 </UserControl>

@@ -161,6 +161,9 @@
     <Compile Include="Game\Status\Display\OnHitStatusApplyWindow.xaml.cs">
       <DependentUpon>OnHitStatusApplyWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Game\Status\Display\OnHitStatusConditionsUserControl.xaml.cs">
+      <DependentUpon>OnHitStatusConditionsUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Game\Status\Display\OnHitStatusDamageEditableUserControl.xaml.cs">
       <DependentUpon>OnHitStatusDamageEditableUserControl.xaml</DependentUpon>
     </Compile>
@@ -435,6 +438,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Game\Status\Display\OnHitStatusApplyWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\Status\Display\OnHitStatusConditionsUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
