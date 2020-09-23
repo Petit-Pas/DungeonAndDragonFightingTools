@@ -18,18 +18,24 @@ namespace DDFight.Game.DamageAffinity
         {
             _damageTypeAffinityList = new List<DamageTypeAffinity>
             {
-                new DamageTypeAffinity(DamageTypeEnum.Acid),
                 new DamageTypeAffinity(DamageTypeEnum.Bludgeoning),
+                new DamageTypeAffinity(DamageTypeEnum.Piercing),
+                new DamageTypeAffinity(DamageTypeEnum.Slashing),
+                new DamageTypeAffinity(DamageTypeEnum.Bludgeoning_Silver),
+                new DamageTypeAffinity(DamageTypeEnum.Piercing_Silver),
+                new DamageTypeAffinity(DamageTypeEnum.Slashing_Silver),
+                new DamageTypeAffinity(DamageTypeEnum.Bludgeoning_Magic),
+                new DamageTypeAffinity(DamageTypeEnum.Piercing_Magic),
+                new DamageTypeAffinity(DamageTypeEnum.Slashing_Magic),
+                new DamageTypeAffinity(DamageTypeEnum.Acid),
                 new DamageTypeAffinity(DamageTypeEnum.Cold),
                 new DamageTypeAffinity(DamageTypeEnum.Fire),
                 new DamageTypeAffinity(DamageTypeEnum.Force),
                 new DamageTypeAffinity(DamageTypeEnum.Lightning),
                 new DamageTypeAffinity(DamageTypeEnum.Necrotic),
-                new DamageTypeAffinity(DamageTypeEnum.Piercing),
                 new DamageTypeAffinity(DamageTypeEnum.Poison),
                 new DamageTypeAffinity(DamageTypeEnum.Psychic),
                 new DamageTypeAffinity(DamageTypeEnum.Radiant),
-                new DamageTypeAffinity(DamageTypeEnum.Slashing),
                 new DamageTypeAffinity(DamageTypeEnum.Thunder)
             };
         }

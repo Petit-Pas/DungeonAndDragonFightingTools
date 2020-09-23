@@ -9,12 +9,12 @@
         xmlns:monsters_controls="clr-namespace:DDFight.Controlers.Monsters"
         xmlns:attacks="clr-namespace:DDFight.Controlers.Game.Attacks"
         xmlns:game="clr-namespace:DDFight.Game" xmlns:status="clr-namespace:DDFight.Game.Status.Display" xmlns:counter="clr-namespace:DDFight.Game.Counters.Display"
-        Title="Edit Monster Window" Height="600" Width="450"
+        Title="Edit Monster Window" Height="750" Width="450"
         WindowStartupLocation="CenterOwner"
         Closing="Window_Closing">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
+            <RowDefinition Height="*"/>
             <!-- TabControl -->
             <RowDefinition Height="Auto"/>
             <!-- Button's Grid -->

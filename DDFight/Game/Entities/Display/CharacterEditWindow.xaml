@@ -13,7 +13,7 @@
         xmlns:status="clr-namespace:DDFight.Game.Status.Display"
         xmlns:game="clr-namespace:DDFight.Game"
         xmlns:counter="clr-namespace:DDFight.Game.Counters.Display"
-        Title="Edit Character" Height="650" Width="450"
+        Title="Edit Character" Height="750" Width="450"
         WindowStartupLocation="CenterOwner"
         Closing="Window_Closing">
     <Grid>

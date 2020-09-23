@@ -36,12 +36,12 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Grid
-                                        Margin="0,5">
+                                    Margin="0,5">
                                     <Grid.RowDefinitions>
                                         <RowDefinition />
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="100" />
+                                        <ColumnDefinition Width="134" />
                                         <ColumnDefinition SharedSizeGroup="*" />
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>

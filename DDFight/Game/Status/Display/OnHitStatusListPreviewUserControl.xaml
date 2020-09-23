@@ -18,7 +18,6 @@
                 ItemsSource="{Binding List}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-
                         <TextBlock 
                             Padding="5"
                             Margin="5"
@@ -26,7 +25,6 @@
                             Text="{Binding Description}"
                             FontSize="14"
                             TextWrapping="Wrap">
-
                         </TextBlock>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
