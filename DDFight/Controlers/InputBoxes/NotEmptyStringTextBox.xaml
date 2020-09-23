@@ -35,6 +35,8 @@
             Style="{StaticResource TextBoxInError}" 
             BorderThickness="2"
             KeyDown="StringBox_KeyDown"
-            GotFocus="StringBox_GotFocus"/>
+            GotFocus="StringBox_GotFocus"
+            TextWrapping="NoWrap"
+            HorizontalAlignment="Stretch"/>
     </Grid>
 </UserControl>

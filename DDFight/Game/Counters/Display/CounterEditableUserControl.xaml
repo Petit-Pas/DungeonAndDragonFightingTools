@@ -31,10 +31,22 @@
             HorizontalAlignment="Left">
             Name:
         </TextBlock>
-        <input:NotEmptyStringTextBox 
+
+        <Canvas
+            x:Name="Canvas"
             Grid.Column="1"
-            PropertyPath="Name"
-            Height="20"/>
+            Height="{Binding ElementName=TextBlock, Path=ActualHeight}" 
+            VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <input:NotEmptyStringTextBox 
+                x:Name="TextBlock"
+                Width="{Binding ElementName=Canvas, Path=ActualWidth}"
+                Grid.Column="1"
+                PropertyPath="Name"
+                HorizontalAlignment="Stretch"
+            />
+
+        </Canvas>
+        
 
         <TextBlock
             Grid.Row="1" Grid.Column="0"

@@ -70,7 +70,9 @@
             Style="{StaticResource TextBoxColor}"
             Background="{StaticResource Gray}"
             Text="{Binding Description}"
-            Visibility="{Binding Description, Converter={StaticResource StringToVisibilityConverter}}">
+            Visibility="{Binding Description, Converter={StaticResource StringToVisibilityConverter}}"
+            TextWrapping="Wrap"
+            >
         </TextBlock>
 
         <display:SavingThrowRollableUserControl

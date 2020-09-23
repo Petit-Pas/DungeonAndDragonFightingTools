@@ -18,8 +18,7 @@
                 Custom Counters
             </TextBlock>
         </GroupBox.Header>
-        <Grid
-            ShowGridLines="True">
+        <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>

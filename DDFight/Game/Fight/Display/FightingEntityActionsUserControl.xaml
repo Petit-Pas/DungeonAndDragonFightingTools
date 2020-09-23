@@ -27,10 +27,11 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
             <TabControl
+                HorizontalAlignment="Left"
                 Background="{StaticResource LightestGray}"
                 BorderThickness="0">
                 <TabItem Style="{StaticResource TabItemStyle}">
