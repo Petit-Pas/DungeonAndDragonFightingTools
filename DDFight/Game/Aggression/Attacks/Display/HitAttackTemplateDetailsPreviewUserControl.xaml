@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:DDFight.Controlers.Game.Attacks"
              xmlns:converters="clr-namespace:DDFight.Converters"
              xmlns:damagelistcontrols="clr-namespace:DDFight.Controlers.Game.Attacks.DamageListControls"
+             xmlns:display="clr-namespace:DDFight.Game.Status.Display"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Visibility="Hidden">
@@ -27,7 +28,7 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             
             <TextBlock
@@ -38,6 +39,12 @@
 
             <damagelistcontrols:DamageTemplateListReadOnlyUserControl 
                 Grid.Row="1"/>
+
+            <display:OnHitStatusListPreviewUserControl
+                Grid.Column="1"
+                Grid.Row="1"
+                DataContext="{Binding OnHitStatuses}"/>
+
 
             <Button
                 Margin="10, 0"

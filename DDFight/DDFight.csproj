@@ -246,6 +246,9 @@
     <Compile Include="Game\Status\Display\OnHitStatusListEditableUserControl.xaml.cs">
       <DependentUpon>OnHitStatusListEditableUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Game\Status\Display\OnHitStatusListPreviewUserControl.xaml.cs">
+      <DependentUpon>OnHitStatusListPreviewUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Game\Status\Display\StatusEndMomentumListSelectableUserControl.xaml.cs">
       <DependentUpon>StatusEndMomentumListSelectableUserControl.xaml</DependentUpon>
     </Compile>
@@ -514,6 +517,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Game\Status\Display\OnHitStatusListEditableUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\Status\Display\OnHitStatusListPreviewUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

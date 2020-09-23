@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="DDFight.Game.Status.Display.OnHitStatusListPreviewUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DDFight.Game.Status.Display"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <ScrollViewer
+            VerticalScrollBarVisibility="Auto">
+            <ItemsControl
+                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                x:Name="ItemsControlControl"
+                ItemsSource="{Binding List}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+
+                        <TextBlock 
+                            Padding="5"
+                            Margin="5"
+                            Background="{StaticResource Gray}"
+                            Text="{Binding Description}"
+                            FontSize="14"
+                            TextWrapping="Wrap">
+
+                        </TextBlock>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+
+            </ItemsControl>
+        </ScrollViewer>
+
+    </Grid>
+</UserControl>
