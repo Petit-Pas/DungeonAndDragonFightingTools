@@ -39,6 +39,19 @@ namespace DDFight.Game.Aggression
             }
         }
 
+        [XmlIgnore]
+        public DamageModifierEnum SituationalDamageModifier
+        {
+            get => _temporaryDamageModifier;
+            set 
+            {
+                _temporaryDamageModifier = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private DamageModifierEnum _temporaryDamageModifier = DamageModifierEnum.Normal;
+            
+
         /// <summary>
         ///     The dices to throw
         /// </summary>

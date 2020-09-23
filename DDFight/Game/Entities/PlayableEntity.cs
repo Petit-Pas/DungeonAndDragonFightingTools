@@ -469,6 +469,7 @@ namespace DDFight.Game
                 int damage_value = 0;
                 DamageAffinityEnum affinity = this.DamageAffinities.GetAffinity(dmg.DamageType).Affinity;
 
+                // damage resistance / weakness
                 switch (affinity)
                 {
                     case DamageAffinityEnum.Neutral:
@@ -484,6 +485,20 @@ namespace DDFight.Game
                         damage_value = dmg.Damage.LastResult * 2;
                         break;
                 }
+                // Situational damage modifiers (such as a saving throw that could divide damge by 2)
+                switch (dmg.SituationalDamageModifier) 
+                {
+                    case DamageModifierEnum.Halved:
+                        damage_value /= 2;
+                        break;
+                    case DamageModifierEnum.Canceled:
+                        damage_value = 0;
+                        break;
+                    default:
+                        break;
+                }
+                dmg.SituationalDamageModifier = DamageModifierEnum.Normal;
+
                 if (i == damages.Count && i != 1)
                     paragraph.Inlines.Add(Extensions.BuildRun("and ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
                 paragraph.Inlines.Add(Extensions.BuildRun(damage_value.ToString() + " " +  dmg.DamageType.ToString(), (Brush)DamageTypeEnumToBrushConverter.StaticConvert(dmg.DamageType), 15, FontWeights.Bold));

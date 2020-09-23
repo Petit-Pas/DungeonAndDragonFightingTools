@@ -73,6 +73,15 @@ namespace DDFight.Game.Status.Display
         {
             refresh_saving_control();
             refresh_validate_button();
+            foreach (DamageTemplate dmg in data_context.OnApplyDamageList)
+            {
+                dmg.Damage.PropertyChanged += Dmg_PropertyChanged;
+            }
+        }
+
+        private void Dmg_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            refresh_validate_button();
         }
 
         private void OnHitStatusApplyWindow_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -82,10 +91,14 @@ namespace DDFight.Game.Status.Display
 
         private void refresh_validate_button()
         {
+            ValidateButtonControl.IsEnabled = true;
             if (((SavingThrow)SavingThrowControl.DataContext).SavingRoll == 0)
                 ValidateButtonControl.IsEnabled = false;
-            else
-                ValidateButtonControl.IsEnabled = true;
+            foreach (DamageTemplate dmg in data_context.OnApplyDamageList)
+            {
+                if (dmg.Damage.LastRoll == 0)
+                    ValidateButtonControl.IsEnabled = false;
+            }
         }
 
         private void refresh_saving_control()
@@ -118,9 +131,10 @@ namespace DDFight.Game.Status.Display
         }
         #endregion
 
-        private void applyStatus()
+        /// <param name="success"> mirrors the success parameter of the OnHitStatus.Apply() method </param>
+        private void applyStatus(bool success = true)
         {
-            data_context.Apply(Applicant, Target);
+            data_context.Apply(Applicant, Target, success);
         }
 
         /// <summary>
@@ -142,14 +156,15 @@ namespace DDFight.Game.Status.Display
                 paragraph.Inlines.Add(Extensions.BuildRun(data_context.Header, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
                 paragraph.Inlines.Add(Extensions.BuildRun(" status from ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
                 paragraph.Inlines.Add(Extensions.BuildRun(Applicant.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-                paragraph.Inlines.Add(Extensions.BuildRun(" ==> ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                paragraph.Inlines.Add(Extensions.BuildRun(". ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
                 paragraph.Inlines.Add(Extensions.BuildRun(total.ToString() + "/" + ((SavingThrow)SavingThrowControl.DataContext).Difficulty.ToString(), (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
                 paragraph.Inlines.Add(Extensions.BuildRun(" ==> ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
 
                 if (total >= data_context.ApplySavingDifficulty)
                 {
                     //resist
-                    paragraph.Inlines.Add(Extensions.BuildRun("Success\r\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                    paragraph.Inlines.Add(Extensions.BuildRun("Success", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                    applyStatus(false);
                 }
                 else
                 {

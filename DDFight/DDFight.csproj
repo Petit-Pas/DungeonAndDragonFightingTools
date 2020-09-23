@@ -65,6 +65,10 @@
     <Compile Include="Game\Aggression\Attacks\Display\HitAttackResultEditableControl.xaml.cs">
       <DependentUpon>HitAttackResultEditableControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Game\Aggression\DamageModifierEnum.cs" />
+    <Compile Include="Game\Aggression\Display\DamageModifierEnumListSelectableUserControl.xaml.cs">
+      <DependentUpon>DamageModifierEnumListSelectableUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Game\Aggression\Display\DamageTemplateRollableUserControl.xaml.cs">
       <DependentUpon>DamageTemplateRollableUserControl.xaml</DependentUpon>
     </Compile>
@@ -314,6 +318,10 @@
     </Compile>
     <Compile Include="Windows\ModalWindows\StatusModal\StatusMessageWindowDataContext.cs" />
     <Page Include="Game\Aggression\Attacks\Display\HitAttackResultEditableControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\Aggression\Display\DamageModifierEnumListSelectableUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

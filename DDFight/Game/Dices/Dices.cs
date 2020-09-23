@@ -78,8 +78,9 @@ namespace DDFight.Game.Dices
             {
                 Console.Write("rolling a " + DiceValue.ToString()+ ": ");
                 result += rand.Next(1, DiceValue + 1);
-                Console.WriteLine(result.ToString());
+                Console.Write(result.ToString() + " ");
             }
+            Console.WriteLine();
             return result;
         }
 
