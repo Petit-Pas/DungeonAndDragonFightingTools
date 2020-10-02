@@ -1,0 +1,55 @@
+﻿<Window x:Class="DDFight.Game.Aggression.Spells.Display.SpellEditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DDFight.Game.Aggression.Spells.Display"
+        xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes"
+        mc:Ignorable="d"
+        Title="SpellEditWindow" Height="450" Width="800"
+        Style="{StaticResource WindowStyle}"
+        Closing="Window_Closing">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TabControl
+            Grid.ColumnSpan="2"
+            BorderThickness="0"
+            Background="{StaticResource LightestGray}">
+            <TabItem Style="{StaticResource TabItemStyle}">
+                <TabItem.Header>
+                    <TextBlock Style="{StaticResource HeaderTextBlockStyle}">
+                        General
+                    </TextBlock>
+                </TabItem.Header>
+                <local:SpellGeneralInfoUserControl/>
+            </TabItem>
+        </TabControl>
+
+        <Button
+            Grid.Row="1" Grid.Column="0"
+            Margin="30"
+            Padding="10"
+            FontWeight="SemiBold"
+            FontSize="20"
+            Click="ValidateButton_Click">
+            Validate
+        </Button>
+        <Button
+            Grid.Row="1" Grid.Column="1"
+            Margin="30"
+            Padding="10"
+            FontWeight="SemiBold"
+            FontSize="20"
+            Click="CancelButton_Click">
+            Cancel
+        </Button>
+    </Grid>
+</Window>

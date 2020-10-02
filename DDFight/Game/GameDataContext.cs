@@ -1,4 +1,5 @@
-﻿using DDFight.Game.Fight;
+﻿using DDFight.Game.Aggression.Spells;
+using DDFight.Game.Fight;
 using DDFight.Tools.Save;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -14,6 +15,11 @@ namespace DDFight.Game
     /// </summary>
     public class GameDataContext : INotifyPropertyChanged
     {
+        /// <summary>
+        ///     The list of all possible spells encountered
+        /// </summary>
+        public SpellsList SpellList = new SpellsList();
+
         /// <summary>
         ///     The list of existing character
         /// </summary>

@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ctrl="clr-namespace:DDFight.Controlers"
         xmlns:fight="clr-namespace:DDFight.Controlers.Fight"
+        xmlns:spells="clr-namespace:DDFight.Game.Aggression.Spells"
         mc:Ignorable="d"
         Title="Dungeons &amp; Dragons Fighting Tool" Height="450" Width="800"
         x:Name="Window">
@@ -38,6 +39,15 @@
                 </TabItem.Header>
                 <ctrl:MonsterListEditableUserControl x:Name="MonsterListControl"/>
             </TabItem>
+            <TabItem Style="{StaticResource TabItemStyle}">
+                <TabItem.Header>
+                    <TextBlock Style="{StaticResource HeaderTextBlockStyle}">
+                        Spells
+                    </TextBlock>
+                </TabItem.Header>
+                <spells:SpellListEditableUserControl/>
+            </TabItem>
+            
         </TabControl>
 
         <ctrl:SoonToFightEntityListUserControl 

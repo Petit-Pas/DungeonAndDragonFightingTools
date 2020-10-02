@@ -1,4 +1,7 @@
-﻿using System;
+﻿using DDFight.Game.Aggression;
+using DDFight.Game.Aggression.Spells;
+using System;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Xml.Serialization;
 
@@ -30,6 +33,14 @@ namespace DDFight.Tools.Save
             }
         }
 
+        private static string spells_config_file
+        { 
+            get 
+            {
+                return config_folder + "spells.xml";
+            }
+        }
+
         /// <summary>
         ///     Creates its own directory if does not exist
         /// </summary>
@@ -40,6 +51,44 @@ namespace DDFight.Tools.Save
                 Directory.CreateDirectory(config_folder);
             }
         }
+
+        #region Spells
+
+        public static void SaveSpells(SpellsList spells)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(SpellsList));
+            StreamWriter writer = new StreamWriter(spells_config_file);
+
+            serializer.Serialize(writer, spells);
+            writer.Close();
+        }
+
+        public static SpellsList LoadSpells()
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(SpellsList));
+            SpellsList result = new SpellsList();
+
+            try
+            {
+                StreamReader reader = new StreamReader(spells_config_file);
+                result = (SpellsList)serializer.Deserialize(reader);
+                reader.Close();
+                Console.WriteLine("Found {0} spells to load", result.Spells.Count);
+            }
+            catch (FileNotFoundException)
+            {
+                Logger.Log("Could not find the spells save file");
+            }
+            catch (Exception e)
+            {
+                Logger.Log(String.Format("Unknown error while trying to load the spells file: {0}, {1}", e.Message, e.StackTrace));
+            }
+            if (result.Spells == null)
+                result.Spells = new ObservableCollection<Spell>();
+            return result;
+        }
+
+        #endregion Spells
 
         #region Characters
 
@@ -70,6 +119,7 @@ namespace DDFight.Tools.Save
                 StreamReader reader = new StreamReader(characters_config_file);
                 result = (CharactersList)serializer.Deserialize(reader);
                 reader.Close();
+
             }
             catch (FileNotFoundException)
             {
@@ -114,6 +164,7 @@ namespace DDFight.Tools.Save
                 result = (MonstersList)serializer.Deserialize(reader);
                 reader.Close();
                 Console.WriteLine("import of monsters went fine");
+                Console.WriteLine("Found {0} monsters to load", result.Monsters.Count);
             }
             catch (FileNotFoundException)
             {
@@ -123,7 +174,6 @@ namespace DDFight.Tools.Save
             {
                 Logger.Log(String.Format("Unknown error while trying to load the characters file: {0}, {1}", e.Message, e.StackTrace));
             }
-            Console.WriteLine("Found {0} monsters to load", result.Monsters.Count);
             return result;
         }
 

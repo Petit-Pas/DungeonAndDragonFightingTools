@@ -24,6 +24,7 @@ namespace DDFight
         {
             Context.CharacterList.Save();
             Context.MonsterList.Save();
+            Context.SpellList.Save();
         }
 
         public static Window CurrentMainWindow { 
@@ -45,6 +46,7 @@ namespace DDFight
 
             Global.Context.CharacterList = SaveManager.LoadPlayers();
             Global.Context.MonsterList = SaveManager.LoadMonsters();
+            Global.Context.SpellList = SaveManager.LoadSpells();
 
             Global.Loading = false;
 

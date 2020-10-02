@@ -72,6 +72,17 @@
     <Compile Include="Game\Aggression\Display\DamageTemplateRollableUserControl.xaml.cs">
       <DependentUpon>DamageTemplateRollableUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Game\Aggression\Spells\Display\SpellEditWindow.xaml.cs">
+      <DependentUpon>SpellEditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Game\Aggression\Spells\Display\SpellGeneralInfoUserControl.xaml.cs">
+      <DependentUpon>SpellGeneralInfoUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Game\Aggression\Spells\Spell.cs" />
+    <Compile Include="Game\Aggression\Spells\Display\SpellListEditableUserControl.xaml.cs">
+      <DependentUpon>SpellListEditableUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\Save\SpellList.cs" />
     <Compile Include="Game\Counters\Counter.cs" />
     <Compile Include="Game\Counters\Display\CounterEditableUserControl.xaml.cs">
       <DependentUpon>CounterEditableUserControl.xaml</DependentUpon>
@@ -329,6 +340,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Game\Aggression\Display\DamageTemplateRollableUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\Aggression\Spells\Display\SpellEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\Aggression\Spells\Display\SpellGeneralInfoUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\Aggression\Spells\Display\SpellListEditableUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -651,8 +674,6 @@
     <Resource Include="Resources\checked.png" />
     <Resource Include="Resources\unchecked.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Game\Aggression\Spells\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
