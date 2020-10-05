@@ -11,6 +11,14 @@
         Background="{StaticResource LightestGray}"
         WindowState="Maximized"
         Closed="Window_Closed">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/CheckBoxStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/TabControlStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*" />

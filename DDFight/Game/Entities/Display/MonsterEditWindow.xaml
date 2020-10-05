@@ -12,6 +12,14 @@
         Title="Edit Monster Window" Height="750" Width="450"
         WindowStartupLocation="CenterOwner"
         Closing="Window_Closing">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/CheckBoxStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/TabControlStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>

@@ -11,10 +11,16 @@
         Background="{StaticResource LightestGray}"
         KeyDown="Window_KeyDown">
     <Window.Resources>
-        <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />
-        <Style TargetType="TextBlock" x:Key="TextBoxColor" >
-            <Setter Property="Foreground" Value="{StaticResource Light}" />
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/CheckBoxStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/TabControlStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />
+            <Style TargetType="TextBlock" x:Key="TextBoxColor" >
+                <Setter Property="Foreground" Value="{StaticResource Light}" />
+            </Style>
+        </ResourceDictionary>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>

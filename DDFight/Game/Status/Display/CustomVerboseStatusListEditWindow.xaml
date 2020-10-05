@@ -7,6 +7,14 @@
         mc:Ignorable="d"
         Title="EditCustomVerboseStatusListWindow" Height="450" Width="800"
         Closing="Window_Closing">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/CheckBoxStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/TabControlStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid Background="{StaticResource LightestGray}">
         <Grid.RowDefinitions>
             <RowDefinition />

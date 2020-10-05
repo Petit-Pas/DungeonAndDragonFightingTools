@@ -15,7 +15,13 @@
         WindowStartupLocation="CenterOwner"
         KeyDown="Window_KeyDown">
     <Window.Resources>
-        <converters:DamageTypeEnumToBrushConverter x:Key="DamageColorConverter" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/CheckBoxStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/TabControlStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <converters:DamageTypeEnumToBrushConverter x:Key="DamageColorConverter" />
+        </ResourceDictionary>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>

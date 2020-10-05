@@ -11,14 +11,20 @@
         Background="{StaticResource LightestGray}"
         Closing="Window_Closing">
     <Window.Resources>
-        <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-        <converter:BoolToReversedBoolConverter x:Key="BootToReversedBoolConverter"/>
-        <Style TargetType="TextBlock" x:Key="LabelStyle">
-            <Setter Property="Foreground" Value="{StaticResource Light}" />
-            <Setter Property="FontSize" Value="15" />
-            <Setter Property="FontWeight" Value="SemiBold" />
-            <Setter Property="Margin" Value="5" />
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/CheckBoxStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/TabControlStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+            <converter:BoolToReversedBoolConverter x:Key="BootToReversedBoolConverter"/>
+            <Style TargetType="TextBlock" x:Key="LabelStyle">
+                <Setter Property="Foreground" Value="{StaticResource Light}" />
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="FontWeight" Value="SemiBold" />
+                <Setter Property="Margin" Value="5" />
+            </Style>
+        </ResourceDictionary>
     </Window.Resources>
     <TabControl
         BorderThickness="0"

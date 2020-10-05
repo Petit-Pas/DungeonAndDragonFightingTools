@@ -12,8 +12,6 @@ add glance on status when selecting an attack in fight
 
 Make the save as a 2 part step, so that if it crashes midway, I have a backup
 
-ajouter un checkbox disant quoi faire des degats si Saving Throw réussi
-
 ajouter slider ON/OFF dans les assets
 
 save a chaque tour
@@ -23,5 +21,4 @@ les validations des EditXXXWindow sont buggées
 
 
 bearded devil pas bien encodé
-Un statut résisté ne disparait pas 
 les events sont toujours buggés quand on ajoute qqun dans le combat

@@ -9,8 +9,14 @@
         WindowStartupLocation="CenterOwner"
         KeyDown="Window_KeyDown">
     <Window.Resources>
-        <DataTemplate DataType="{x:Type local:AskYesNoDataContext}">
-        </DataTemplate>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/CheckBoxStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/TabControlStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <DataTemplate DataType="{x:Type local:AskYesNoDataContext}">
+            </DataTemplate>
+        </ResourceDictionary>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
