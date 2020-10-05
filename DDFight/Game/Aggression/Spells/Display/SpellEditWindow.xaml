@@ -31,6 +31,14 @@
                 </TabItem.Header>
                 <local:SpellGeneralInfoUserControl/>
             </TabItem>
+            <TabItem Style="{StaticResource TabItemStyle}">
+                <TabItem.Header>
+                    <TextBlock Style="{StaticResource HeaderTextBlockStyle}">
+                        Effect
+                    </TextBlock>
+                </TabItem.Header>
+                <local:SpellEffectEditableUserControl/>
+            </TabItem>
         </TabControl>
 
         <Button
