@@ -20,3 +20,8 @@ save a chaque tour
 repos court / long
 
 les validations des EditXXXWindow sont buggées
+
+
+bearded devil pas bien encodé
+Un statut résisté ne disparait pas 
+les events sont toujours buggés quand on ajoute qqun dans le combat
