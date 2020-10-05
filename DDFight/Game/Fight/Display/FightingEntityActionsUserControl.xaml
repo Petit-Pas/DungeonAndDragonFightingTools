@@ -10,7 +10,12 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <system:String x:Key="Format"> {0}'s Actions </system:String>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/TabControlStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <system:String x:Key="Format">{0}'s Actions</system:String>
+        </ResourceDictionary>
     </UserControl.Resources>
     <GroupBox
         Foreground="{StaticResource LightestGray}">
