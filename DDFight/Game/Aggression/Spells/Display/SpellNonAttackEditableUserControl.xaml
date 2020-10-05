@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="DDFight.Game.Aggression.Spells.Display.SpellNonAttackEditableUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DDFight.Game.Aggression.Spells.Display" xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes" xmlns:characteristics="clr-namespace:DDFight.Controlers.Game.Characteristics" xmlns:converters="clr-namespace:DDFight.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    </UserControl.Resources>
+    <Grid
+        Margin="5, 15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid
+            Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBlock
+                Grid.Column="0"
+                VerticalAlignment="Center">
+                The Spell has a Saving Throw :
+            </TextBlock>
+            <CheckBox
+                Grid.Column="1"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left"
+                Margin="5"
+                IsChecked="{Binding HasSavingThrow}"/>
+
+            <characteristics:CharacteristicsListSelectableUserControl
+                Grid.Row="1" Grid.Column="0"
+                Height="25"
+                PropertyPath="SavingCharacteristic"
+                Visibility="{Binding HasSavingThrow, Converter={StaticResource BoolToVisibilityConverter}}"/>
+
+            <inputboxes:PositiveIntTextBox 
+                Grid.Row="1" Grid.Column="1"
+                Width="40"
+                Margin="5"
+                PropertyPath="SavingDifficulty"
+                Visibility="{Binding HasSavingThrow, Converter={StaticResource BoolToVisibilityConverter}}"/>
+        </Grid>
+    </Grid>
+</UserControl>

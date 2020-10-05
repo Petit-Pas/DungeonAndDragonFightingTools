@@ -355,7 +355,12 @@ namespace DDFight.Game.Status
                 this.Caster = caster;
                 this.Affected = target;
                 if (this.EndsOnCasterLossOfConcentration)
+                {
+                    if (caster.IsFocused == true)
+                        caster.IsFocused = false;
                     caster.PropertyChanged += this.Caster_PropertyChanged;
+                    caster.IsFocused = true;
+                }
                 if ((this.CanRedoSavingThrow && this.SavingIsRemadeAtStartOfTurn) ||
                     (this.HasAMaximumDuration && !this.DurationIsCalculatedOnCasterTurn && this.DurationIsBasedOnStartOfTurn))
                     target.NewTurnStarted += this.Affected_NewTurnStarted;
@@ -385,6 +390,13 @@ namespace DDFight.Game.Status
             else
             {
                 Apply(caster, target);
+                Paragraph paragraph = (Paragraph)Global.Context.UserLogs.Blocks.LastBlock;
+                paragraph.Inlines.Add(Extensions.BuildRun(caster.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                paragraph.Inlines.Add(Extensions.BuildRun(" applies ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                paragraph.Inlines.Add(Extensions.BuildRun(Header, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                paragraph.Inlines.Add(Extensions.BuildRun(" on ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                paragraph.Inlines.Add(Extensions.BuildRun(target.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                paragraph.Inlines.Add(Extensions.BuildRun("\r\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
             }
         }
 

@@ -21,7 +21,7 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <inputboxes:NotEmptyStringTextBox
@@ -31,6 +31,12 @@
             <DockPanel
                 Grid.Row="1"
                 Grid.Column="0">
+                <TextBlock
+                    DockPanel.Dock="Left"
+                    Margin="10"
+                    VerticalAlignment="Center">
+                    Level
+                </TextBlock>
                 <inputboxes:RangedIntBox
                     PropertyMin="0"
                     PropertyMax="9"
