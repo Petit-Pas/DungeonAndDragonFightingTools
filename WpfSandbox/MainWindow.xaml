@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Title="MainWindow"
         Width="650" Height="400"
-        >
+        Background="{StaticResource LightestGray}">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -66,6 +66,8 @@
             Width="100"
             Height="40"
             Background="Green">
+            
+            
 
             <Ellipse Width="20" Height="20" Stroke="{StaticResource Gray}" Panel.ZIndex="3" >
                 <Ellipse.Style>
@@ -113,11 +115,22 @@
             </Ellipse>
         </Canvas>
 
+        <wpfsandbox:CustomSliderButton 
+            Margin="10"
+            Height="20"
+            Width="60"
+            DataContext="{Binding Test}"/>
 
         <Canvas
             Width="100"
             Height="40"
             Background="Red">
+
+            <Ellipse Width="20" Height="20" Style="{StaticResource styleEllipseGreyButton}" Stroke="{StaticResource Gray}" Panel.ZIndex="10" />
+            <Ellipse Canvas.Right="0" Width="20" Height="20" Style="{StaticResource styleEllipseGreyButton}" Stroke="{StaticResource Gray}" Panel.ZIndex="10" />
+
+            <Border Canvas.Left="10" Width="80" Height="20" Background="{StaticResource Indigo}" BorderBrush="{StaticResource Gray}" BorderThickness="0,1,0,1" />
+
 
             <Ellipse Width="20" Height="20">
                 <Ellipse.RenderTransform>
@@ -128,8 +141,8 @@
                 </Ellipse.Stroke>
                 <Ellipse.Fill>
                     <LinearGradientBrush EndPoint="0.504,1.5" StartPoint="0.504,0.03">
-                        <GradientStop x:Name="test1" Color="White" Offset="0" />
-                        <GradientStop x:Name="test2" Color="Black" Offset="0.567"/>
+                        <GradientStop Color="White" Offset="0" />
+                        <GradientStop Color="Black" Offset="0.567"/>
                     </LinearGradientBrush>
                 </Ellipse.Fill>
                 <Ellipse.Style>
@@ -140,7 +153,7 @@
                                     <BeginStoryboard >
                                         <Storyboard>
                                             <ColorAnimation Duration="0:0:0.5" To="Black" Storyboard.TargetProperty="(Stroke).(SolidColorBrush.Color)" />
-                                            <DoubleAnimation Duration="0:0:0.5" To="100" Storyboard.TargetProperty="(Ellipse.RenderTransform).(TranslateTransform.X)" />
+                                            <DoubleAnimation Duration="0:0:0.5" To="80" Storyboard.TargetProperty="(Ellipse.RenderTransform).(TranslateTransform.X)" />
                                             <ColorAnimation Duration="0:0:0.5" To="White" Storyboard.TargetProperty="(Ellipse.Fill).(LinearGradientBrush.GradientStops)[0].Color" />
                                             <ColorAnimation Duration="0:0:0.5" To="Black" Storyboard.TargetProperty="(Ellipse.Fill).(LinearGradientBrush.GradientStops)[1].Color" />
                                         </Storyboard>
