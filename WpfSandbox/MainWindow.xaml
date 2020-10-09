@@ -55,6 +55,7 @@
         </TextBlock>
 
         <local1:SliderButton
+            Margin="5"
             Width="70"
             ButtonWidth="30"
             IsChecked="{Binding Test}"

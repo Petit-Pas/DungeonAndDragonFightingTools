@@ -17,207 +17,220 @@
             </Setter.Value>
         </Setter>
     </Style>
-
-    <Style x:Key="styleSliderButtonLabel" TargetType="{x:Type Label}">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="White"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-        <Setter Property="Padding" Value="0"/>
-        <Setter Property="FontWeight" Value="SemiBold"/>
-        <Setter Property="FontSize" Value="15"/>
-    </Style>
-
-    <Style x:Key="styleSliderButtonSideLabel" TargetType="{x:Type controlers:SliderButton}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controlers:SliderButton}">
-                    <Grid x:Name="mainGrid">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="10"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid Grid.Column="2" Name="_borderOn" Background="Transparent">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Ellipse Grid.Row="0" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="2" Width="{TemplateBinding ButtonWidth}" Height="{TemplateBinding ButtonWidth}"  Style="{StaticResource styleEllipseGreyButton}" Panel.ZIndex="3" />
-                            <Border Grid.Row="0" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="3" Background="ForestGreen" BorderBrush="Gray" BorderThickness="0,1,0,1" Panel.ZIndex="1"/>
-                            <Ellipse Grid.Row="0" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="2" Width="{TemplateBinding ButtonWidth}" Height="{TemplateBinding ButtonWidth}" Style="{StaticResource styleEllipseButton}" Fill="ForestGreen" Panel.ZIndex="0"/>
-                        </Grid>
-                        <Label Grid.Row="0" Grid.Column="0" Name="_labelOn" Content="{TemplateBinding OnLabel}" Style="{StaticResource styleSliderButtonLabel}" Foreground="Black"/>
-
-                        <Grid Grid.Column="2" Name="_borderOff" Background="Transparent">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Ellipse Grid.Row="0" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="2" Width="{TemplateBinding ButtonWidth}" Height="{TemplateBinding ButtonWidth}"  VerticalAlignment="Stretch" Fill="Crimson" Stroke="{StaticResource Gray}" Panel.ZIndex="0"/>
-                            <Border Grid.Row="0" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="3" Background="Crimson" BorderBrush="Gray" BorderThickness="0,1,0,1" Panel.ZIndex="1"/>
-                            <Ellipse Grid.Row="0" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="2" Width="{TemplateBinding ButtonWidth}" Height="{TemplateBinding ButtonWidth}"  Style="{StaticResource styleEllipseGreyButton}" Panel.ZIndex="3"/>
-                        </Grid>
-                        <Label Grid.Row="0" Grid.Column="0" Name="_labelOff" Content="{TemplateBinding OffLabel}" Style="{StaticResource styleSliderButtonLabel}" Foreground="Black"/>
-                    </Grid>
-
-                    <!-- triggers toggle visual appearance -->
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsChecked" Value="True">
-                            <Setter TargetName="_labelOff" Property="Visibility" Value="Collapsed" />
-                            <Setter TargetName="_borderOff" Property="Visibility" Value="Collapsed" />
-                            <Setter TargetName="_labelOn" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="_borderOn" Property="Visibility" Value="Visible" />
-                        </Trigger>
-                        <Trigger Property="IsChecked" Value="False">
-                            <Setter TargetName="_labelOff" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="_borderOff" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="_labelOn" Property="Visibility" Value="Collapsed" />
-                            <Setter TargetName="_borderOn" Property="Visibility" Value="Collapsed" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
+    
     <Style x:Key="styleSliderButton" TargetType="{x:Type controlers:SliderButton}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controlers:SliderButton}">
-                    <Grid x:Name="mainGrid">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid Grid.Column="0" Name="_borderOff" Background="Transparent" Width="{TemplateBinding Width}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Ellipse Grid.Row="0" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="2"  Width="{TemplateBinding ButtonWidth}" Height="{TemplateBinding ButtonWidth}"  Style="{StaticResource styleEllipseGreyButton}" Stroke="{StaticResource Gray}" Panel.ZIndex="3" />
-                            <Border Grid.Row="0" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="3" Background="{StaticResource Gray}" BorderBrush="{StaticResource Indigo}" BorderThickness="0,1,0,1" Panel.ZIndex="1"/>
-                            <Label Grid.Row="0" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="3" Name="_labelOff" Content="{TemplateBinding OffLabel}" Style="{StaticResource styleSliderButtonLabel}" Panel.ZIndex="2"/>
-                            <Ellipse Grid.Row="0" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="2" Width="{TemplateBinding ButtonWidth}" Height="{TemplateBinding ButtonWidth}" Style="{StaticResource styleEllipseButton}" Fill="{StaticResource Gray}" Panel.ZIndex="0" Stroke="{StaticResource Indigo}"  />
-                        </Grid>
+                    <Grid>
+                        <Canvas
+            Width="60" Height="25">
 
-                        <Grid Grid.Column="0" Name="_borderOn" Background="Transparent" Width="{TemplateBinding Width}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Ellipse Grid.Row="0" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="2" Width="{TemplateBinding ButtonWidth}" Height="{TemplateBinding ButtonWidth}"  VerticalAlignment="Stretch" Fill="{StaticResource Indigo}" Stroke="{StaticResource Gray}" Panel.ZIndex="0"/>
-                            <Label Grid.Row="0" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="3" Name="_labelOn" Content="{TemplateBinding OnLabel}" Style="{StaticResource styleSliderButtonLabel}" Panel.ZIndex="2"/>
-                            <Border Grid.Row="0" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="3" Background="{StaticResource Indigo}" BorderBrush="{StaticResource Gray}" BorderThickness="0,1,0,1" Panel.ZIndex="1"/>
-                            <Ellipse Grid.Row="0" Grid.RowSpan="1" Grid.Column="3" Grid.ColumnSpan="2" Width="{TemplateBinding ButtonWidth}" Height="{TemplateBinding ButtonWidth}"  Style="{StaticResource styleEllipseGreyButton}" Panel.ZIndex="3" Stroke="{StaticResource Gray}"/>
-                        </Grid>
+                            <!-- Left side border -->
+                            <Ellipse  
+                Width="25" Height="25" StrokeThickness="0.5" Panel.ZIndex="1" >
+                                <Ellipse.Stroke>
+                                    <SolidColorBrush Color="{StaticResource RawGray}"/>
+                                </Ellipse.Stroke>
+                                <Ellipse.Fill>
+                                    <SolidColorBrush Color="{StaticResource RawIndigo}" />
+                                </Ellipse.Fill>
+                                <Ellipse.Style>
+                                    <Style TargetType="Ellipse">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=IsChecked, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controlers:SliderButton}}" Value="False">
+                                                <DataTrigger.EnterActions>
+                                                    <BeginStoryboard >
+                                                        <Storyboard>
+                                                            <ColorAnimation Duration="0:0:0.25" To="{StaticResource RawIndigo}" Storyboard.TargetProperty="(Stroke).(SolidColorBrush.Color)"/>
+                                                            <ColorAnimation Duration="0:0:0.25" To="{StaticResource RawGray}" Storyboard.TargetProperty="(Fill).(SolidColorBrush.Color)"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </DataTrigger.EnterActions>
+                                                <DataTrigger.ExitActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <ColorAnimation Duration="0:0:0.25" To="{StaticResource RawIndigo}" Storyboard.TargetProperty="(Stroke).(SolidColorBrush.Color)"/>
+                                                            <ColorAnimation Duration="0:0:0.25" To="{StaticResource RawIndigo}" Storyboard.TargetProperty="(Fill).(SolidColorBrush.Color)"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </DataTrigger.ExitActions>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Ellipse.Style>
+                            </Ellipse>
+
+                            <!-- Right side border -->
+                            <Ellipse Canvas.Right="0" Width="25" Height="25" StrokeThickness="0.5" Panel.ZIndex="1">
+                                <Ellipse.Stroke>
+                                    <SolidColorBrush Color="{StaticResource RawGray}"/>
+                                </Ellipse.Stroke>
+                                <Ellipse.Fill>
+                                    <SolidColorBrush Color="{StaticResource RawIndigo}" />
+                                </Ellipse.Fill>
+                                <Ellipse.Style>
+                                    <Style TargetType="Ellipse">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=IsChecked, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controlers:SliderButton}}" Value="False">
+                                                <DataTrigger.EnterActions>
+                                                    <BeginStoryboard >
+                                                        <Storyboard>
+                                                            <ColorAnimation Duration="0:0:0.25" To="{StaticResource RawIndigo}" Storyboard.TargetProperty="(Stroke).(SolidColorBrush.Color)"/>
+                                                            <ColorAnimation Duration="0:0:0.25" To="{StaticResource RawGray}" Storyboard.TargetProperty="(Fill).(SolidColorBrush.Color)"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </DataTrigger.EnterActions>
+                                                <DataTrigger.ExitActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <ColorAnimation Duration="0:0:0.25" To="{StaticResource RawIndigo}" Storyboard.TargetProperty="(Stroke).(SolidColorBrush.Color)"/>
+                                                            <ColorAnimation Duration="0:0:0.25" To="{StaticResource RawIndigo}" Storyboard.TargetProperty="(Fill).(SolidColorBrush.Color)"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </DataTrigger.ExitActions>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Ellipse.Style>
+                            </Ellipse>
+
+                            <!-- Middle border -->
+                            <Border Canvas.Left="10" Width="40" Height="25" BorderThickness="0, 0.5, 0, 0.5" Panel.ZIndex="2">
+                                <Border.BorderBrush>
+                                    <SolidColorBrush Color="{StaticResource RawGray}"/>
+                                </Border.BorderBrush>
+                                <Border.Background>
+                                    <SolidColorBrush Color="{StaticResource RawIndigo}" />
+                                </Border.Background>
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=IsChecked, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controlers:SliderButton}}" Value="False">
+                                                <DataTrigger.EnterActions>
+                                                    <BeginStoryboard >
+                                                        <Storyboard>
+                                                            <ColorAnimation Duration="0:0:0.25" To="{StaticResource RawIndigo}" Storyboard.TargetProperty="(BorderBrush).(SolidColorBrush.Color)"/>
+                                                            <ColorAnimation Duration="0:0:0.25" To="{StaticResource RawGray}" Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </DataTrigger.EnterActions>
+                                                <DataTrigger.ExitActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <ColorAnimation Duration="0:0:0.25" To="{StaticResource RawIndigo}" Storyboard.TargetProperty="(BorderBrush).(SolidColorBrush.Color)"/>
+                                                            <ColorAnimation Duration="0:0:0.25" To="{StaticResource RawIndigo}" Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </DataTrigger.ExitActions>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                            </Border>
+
+                            <!-- Yes Placeholder -->
+                            <TextBlock 
+                Panel.ZIndex="3"
+                Foreground="{StaticResource Light}"
+                FontSize="15"
+                FontWeight="SemiBold"
+                Canvas.Top="2" Canvas.Left="9"
+                Opacity="1">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=IsChecked, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controlers:SliderButton}}" Value="False">
+                                                <DataTrigger.EnterActions>
+                                                    <BeginStoryboard >
+                                                        <Storyboard>
+                                                            <DoubleAnimation Duration="0:0:0.25" To="0" Storyboard.TargetProperty="(Opacity)"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </DataTrigger.EnterActions>
+                                                <DataTrigger.ExitActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <DoubleAnimation Duration="0:0:0.25" To="1" Storyboard.TargetProperty="(Opacity)"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </DataTrigger.ExitActions>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                Yes
+                            </TextBlock>
+
+                            <!-- No Placeholder -->
+                            <TextBlock 
+                Panel.ZIndex="3"
+                Foreground="{StaticResource Light}"
+                FontSize="15"
+                FontWeight="SemiBold"
+                Canvas.Top="2" Canvas.Right="9"
+                Opacity="1">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=IsChecked, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controlers:SliderButton}}" Value="True">
+                                                <DataTrigger.EnterActions>
+                                                    <BeginStoryboard >
+                                                        <Storyboard>
+                                                            <DoubleAnimation Duration="0:0:0.25" To="0" Storyboard.TargetProperty="(Opacity)"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </DataTrigger.EnterActions>
+                                                <DataTrigger.ExitActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <DoubleAnimation Duration="0:0:0.25" To="1" Storyboard.TargetProperty="(Opacity)"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </DataTrigger.ExitActions>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                No
+                            </TextBlock>
+
+                            <!-- Button -->
+                            <Ellipse Width="25" Height="25" Panel.ZIndex="3">
+                                <Ellipse.RenderTransform>
+                                    <TranslateTransform X="0" Y="0"/>
+                                </Ellipse.RenderTransform>
+                                <Ellipse.Stroke>
+                                    <SolidColorBrush Color="{StaticResource RawLightestGray}"/>
+                                </Ellipse.Stroke>
+                                <Ellipse.Style>
+                                    <Style TargetType="Ellipse" BasedOn="{StaticResource styleEllipseGreyButton}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=IsChecked, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=controlers:SliderButton}}" Value="True">
+                                                <DataTrigger.EnterActions>
+                                                    <BeginStoryboard >
+                                                        <Storyboard>
+                                                            <DoubleAnimation Duration="0:0:0.25" To="40" Storyboard.TargetProperty="(Ellipse.RenderTransform).(TranslateTransform.X)" />
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </DataTrigger.EnterActions>
+                                                <DataTrigger.ExitActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <DoubleAnimation Duration="0:0:0.25" To="0" Storyboard.TargetProperty="(TextBox.RenderTransform).(TranslateTransform.X)"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </DataTrigger.ExitActions>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Ellipse.Style>
+                            </Ellipse>
+                        </Canvas>
                     </Grid>
-
-                    <!-- triggers toggle visual appearance -->
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsChecked" Value="True">
-                            <Setter TargetName="_borderOff" Property="Visibility" Value="Collapsed" />
-                            <Setter TargetName="_borderOn" Property="Visibility" Value="Visible" />
-                        </Trigger>
-                        <Trigger Property="IsChecked" Value="False">
-                            <Setter TargetName="_borderOff" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="_borderOn" Property="Visibility" Value="Collapsed" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
-    <Style x:Key="styleBorderGreyButton" TargetType="{x:Type Border}">
-        <Setter Property="Background">
-            <Setter.Value>
-                <LinearGradientBrush EndPoint="0.504,1.5" StartPoint="0.504,0.03">
-                    <GradientStop Color="#FFFFFF" Offset="0"/>
-                    <GradientStop Color="#BBBBBB" Offset="0.567"/>
-                </LinearGradientBrush>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="BorderBrush" Value="Gray"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="VerticalAlignment" Value="Stretch"/>
-    </Style>
-
-    <Style x:Key="styleSliderButtonRectangular" TargetType="{x:Type controlers:SliderButton}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controlers:SliderButton}">
-                    <Grid x:Name="mainGrid" Background="Transparent" HorizontalAlignment="Stretch">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Border Grid.Column="0" Name="_borderOn" Background="ForestGreen" CornerRadius="0" BorderBrush="Gray" BorderThickness="1" VerticalAlignment="Stretch">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Border Grid.Row="0" Grid.Column="0" CornerRadius="0" Style="{StaticResource styleBorderGreyButton}"/>
-                                <Label Grid.Row="1" Grid.Column="1" Name="_labelOn" Content="{TemplateBinding OnLabel}" Style="{StaticResource styleSliderButtonLabel}" />
-                            </Grid>
-                        </Border>
-
-                        <Border Grid.Column="0" Name="_borderOff" Background="Crimson" CornerRadius="0" BorderBrush="Gray" BorderThickness="1" VerticalAlignment="Stretch">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.Row="0" Grid.Column="0" Name="_labelOff" Content="{TemplateBinding OffLabel}" Style="{StaticResource styleSliderButtonLabel}" />
-                                <Border Grid.Row="0" Grid.Column="1" CornerRadius="0" Style="{StaticResource styleBorderGreyButton}"/>
-                            </Grid>
-                        </Border>
-                    </Grid>
-
-                    <!-- triggers toggle visual appearance -->
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsChecked" Value="True">
-                            <Setter TargetName="_borderOff" Property="Visibility" Value="Collapsed" />
-                            <Setter TargetName="_borderOn" Property="Visibility" Value="Visible" />
-                        </Trigger>
-                        <Trigger Property="IsChecked" Value="False">
-                            <Setter TargetName="_borderOff" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="_borderOn" Property="Visibility" Value="Collapsed" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
 </ResourceDictionary>
