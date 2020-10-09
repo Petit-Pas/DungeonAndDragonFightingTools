@@ -4,6 +4,11 @@
              xmlns:local="clr-namespace:WpfSandbox"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="LightestGray" Color="#2e2e2e" />
+            <SolidColorBrush x:Key="Gray" Color="#202020" />
+            <SolidColorBrush x:Key="Light" Color="#fbf2d4" />
+            <SolidColorBrush x:Key="Indigo" Color="#4B0082" />
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
