@@ -26,7 +26,7 @@ namespace DDFight.Controlers.InputBoxes
         {
             get {
                 Type t = DataContext.GetType();
-                PropertyInfo p = t.GetProperty(PropertyPath);
+                PropertyInfo p = t.GetProperty(PropertyPath); // crash ici
                 return (bool)p.GetValue(DataContext, null);
             }
             set

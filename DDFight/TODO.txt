@@ -8,11 +8,7 @@ Any function that use llist.SelectedItem should have a null protection
 
 //////
 
-add glance on status when selecting an attack in fight
-
 Make the save as a 2 part step, so that if it crashes midway, I have a backup
-
-ajouter slider ON/OFF dans les assets
 
 save a chaque tour
 repos court / long
@@ -20,5 +16,10 @@ repos court / long
 les validations des EditXXXWindow sont buggées
 
 
-bearded devil pas bien encodé
 les events sont toujours buggés quand on ajoute qqun dans le combat
+
+Changer les messages de confirmation de fenetres
+
+Ajouter les compétences en plus des DC
+
+Ajouter les résistances / immunités aux statuts
