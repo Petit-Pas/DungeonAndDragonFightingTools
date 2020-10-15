@@ -12,45 +12,19 @@
         Margin="5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
-        <Grid
-            Grid.Column="0"
-            VerticalAlignment="Center"
-            HorizontalAlignment="Center"
-            Margin="10, 5, 10, 0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-
-            <TextBlock
-                FontSize="15"
-                FontWeight="SemiBold"
-                VerticalAlignment="Center"> 
-                What to do in case of successful saving? 
-            </TextBlock>
-
-            <display:DamageModifierEnumListSelectableUserControl
-                Margin="5"
-                Grid.Column="1"
-                VerticalAlignment="Center"
-                PropertyPath="ApplyDamageModifier"/>
-
-        </Grid>
-        
+                
         <damagelistcontrols:DamageTemplateListEditableUserControl
-            Grid.Column="1"
-            VerticalAlignment="Center"
+            Grid.Column="0"
+            VerticalAlignment="Top"
+            Width="400"
+            Height="250"
             x:Name="OnApplyDamageListControl"
             MinWidth="300"
-            DataContext="{Binding OnApplyDamageList}"/>
+            DataContext="{Binding OnApplyDamageList}"
+            HasSavingModifier="True"/>
     </Grid>
 </UserControl>

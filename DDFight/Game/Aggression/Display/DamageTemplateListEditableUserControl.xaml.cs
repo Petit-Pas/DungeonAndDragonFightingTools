@@ -1,6 +1,8 @@
 ﻿using DDFight.Game.Aggression;
 using DDFight.Game.DamageAffinity;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -9,12 +11,23 @@ namespace DDFight.Controlers.Game.Attacks.DamageListControls
     /// <summary>
     /// Logique d'interaction pour DamageListUserControl.xaml
     /// </summary>
-    public partial class DamageTemplateListEditableUserControl : UserControl
+    public partial class DamageTemplateListEditableUserControl : UserControl, INotifyPropertyChanged
     {
         private List<DamageTemplate> data_context
         {
             get => (List<DamageTemplate>)this.DataContext;
         }
+
+        public bool HasSavingModifier 
+        {
+            get => _hasSavingModifier;
+            set
+            {
+                _hasSavingModifier = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private bool _hasSavingModifier = false;
 
         public DamageTemplateListEditableUserControl()
         {
@@ -63,5 +76,25 @@ namespace DDFight.Controlers.Game.Attacks.DamageListControls
         {
             return this.AreAllChildrenValid();
         }
+
+        #region INotifyPropertyChanged
+
+        /// <summary>
+        ///     PropertyChanged EventHandler
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+        #endregion
     }
 }

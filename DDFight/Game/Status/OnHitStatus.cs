@@ -75,17 +75,6 @@ namespace DDFight.Game.Status
         #region Damage
 
         #region ApplyDamage
-        public DamageModifierEnum ApplyDamageModifier
-        {
-            get => _applyDamageModifier;
-            set 
-            {
-                _applyDamageModifier = value;
-                NotifyPropertyChanged();
-            }
-        }
-        private DamageModifierEnum _applyDamageModifier;
-
 
         public List<DamageTemplate> OnApplyDamageList
         {
@@ -325,33 +314,16 @@ namespace DDFight.Game.Status
         /// <param name="success"> tells wether or not the application is a success, only used with "false" to tell the OnApplyDamage can be resisted / canceled </param>
         public void Apply(PlayableEntity caster, PlayableEntity target, bool success = true)
         {
-            if (!success)
+            if (OnApplyDamageList.Count != 0)
             {
-                Paragraph paragraph = (Paragraph)Global.Context.UserLogs.Blocks.LastBlock;
-                // the status is not applied but OnApply damage could be computed anyway (e.g.: some poisons)
-                if (OnApplyDamageList.Count != 0 && ApplyDamageModifier != DamageModifierEnum.Canceled)
-                {
-                    paragraph.Inlines.Add(Extensions.BuildRun(" but ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-                    if (ApplyDamageModifier == DamageModifierEnum.Normal)
-                        target.TakeHitDamage(OnApplyDamageList);
-                    else if (ApplyDamageModifier == DamageModifierEnum.Halved)
-                    {
-                        foreach (DamageTemplate dmg in OnApplyDamageList)
-                        {
-                            dmg.SituationalDamageModifier = DamageModifierEnum.Halved   ;
-                        }
-                        target.TakeHitDamage(OnApplyDamageList);
-                    }
-                }
-                else
-                    paragraph.Inlines.Add(Extensions.BuildRun("\r\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                if (!success)
+                    // the target resisted
+                    foreach (DamageTemplate dmg in OnApplyDamageList)
+                        dmg.LastSavingWasSuccesfull = true;
+                target.TakeHitDamage(OnApplyDamageList);
             }
-            else
+            if (success)
             {
-                // the status is applied and the OnApply damage will be computed normally
-                target.CustomVerboseStatusList.List.Add(this);
-                if (OnApplyDamageList.Count != 0)
-                    target.TakeHitDamage(OnApplyDamageList);
                 this.Caster = caster;
                 this.Affected = target;
                 if (this.EndsOnCasterLossOfConcentration)
@@ -464,7 +436,6 @@ namespace DDFight.Game.Status
             DurationIsCalculatedOnCasterTurn = to_copy.DurationIsCalculatedOnCasterTurn;
             DurationIsBasedOnStartOfTurn = to_copy.DurationIsBasedOnStartOfTurn;
             OnApplyDamageList = (List<DamageTemplate>)to_copy.OnApplyDamageList.Clone();
-            ApplyDamageModifier = to_copy.ApplyDamageModifier;
         }
 
         public OnHitStatus(OnHitStatus to_copy)

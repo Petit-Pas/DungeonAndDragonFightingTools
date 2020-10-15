@@ -3,6 +3,7 @@ using DDFight.Game.Dices;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Ink;
 using System.Xml.Serialization;
 
 namespace DDFight.Game.Aggression
@@ -39,7 +40,26 @@ namespace DDFight.Game.Aggression
             }
         }
 
+        /// <summary>
+        ///     Set to true when SituationalDamageModifier should be taken into account
+        ///     Should always be resetted to false after use
+        /// </summary>
         [XmlIgnore]
+        public bool LastSavingWasSuccesfull
+        {
+            get => _lastSavingWasSuccesfull;
+            set
+            {
+                _lastSavingWasSuccesfull = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private bool _lastSavingWasSuccesfull = false;
+
+        /// <summary>
+        ///     Can be used to determine what happens in case of a successful saving Throw (OnHitStatus damage, spells, etc...)
+        /// </summary>
+        [XmlAttribute]
         public DamageModifierEnum SituationalDamageModifier
         {
             get => _temporaryDamageModifier;
@@ -104,6 +124,7 @@ namespace DDFight.Game.Aggression
         {
             Damage = (DiceRoll)to_copy.Damage.Clone();
             DamageType = to_copy.DamageType;
+            SituationalDamageModifier = to_copy.SituationalDamageModifier;
         }
 
         public object Clone()

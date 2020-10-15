@@ -5,9 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DDFight.Controlers.Game.Attacks"
              xmlns:damageaffinity="clr-namespace:DDFight.Controlers.Game.DamageAffinity"
-             xmlns:dices="clr-namespace:DDFight.Controlers.Game.Dices"
+             xmlns:dices="clr-namespace:DDFight.Controlers.Game.Dices" xmlns:display="clr-namespace:DDFight.Game.Aggression.Display"
+             xmlns:converter="clr-namespace:DDFight.Converters"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             x:Name="DamageTemplateListEditableControl">
+    <UserControl.Resources>
+        <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    </UserControl.Resources>
     <Grid>
         <GroupBox>
             <GroupBox.Header>
@@ -36,8 +41,10 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Grid
-                                    Margin="0,5">
+                                    Background="{StaticResource Gray}"
+                                    Margin="5">
                                     <Grid.RowDefinitions>
+                                        <RowDefinition />
                                         <RowDefinition />
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
@@ -45,6 +52,7 @@
                                         <ColumnDefinition SharedSizeGroup="*" />
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
+                                    
                                     <damageaffinity:DamageTypeAffinityListSelectableUserControl 
                                             Grid.Row="0" Grid.Column="0"
                                             PropertyPath="DamageType">
@@ -55,12 +63,29 @@
                                             Margin="10,0"
                                             PropertyPath="Damage"/>
                                     <Button 
-                                        Grid.Row="0" Grid.Column="2"
+                                        Grid.Row="0" Grid.Column="2" Grid.RowSpan="2"
+                                        VerticalAlignment="Stretch"
+                                        Height="25"
                                         Margin="0, 0, 5, 0"
                                         Padding="5,0"
                                         Click="RemoveDamage_Button_Click">
                                         Remove
                                     </Button>
+
+                                    <TextBlock
+                                        Grid.Row="1" Grid.Column="0"
+                                        VerticalAlignment="Center"
+                                        Margin="5"
+                                        Foreground="{StaticResource Light}"
+                                        Visibility="{Binding HasSavingModifier, ElementName=DamageTemplateListEditableControl, Converter={StaticResource BoolToVisibilityConverter}}">
+                                        In case of DC success:
+                                    </TextBlock>
+                                    <display:DamageModifierEnumListSelectableUserControl
+                                        Grid.Row="1" Grid.Column="1"
+                                        PropertyPath="SituationalDamageModifier"
+                                        Margin="5, 0"
+                                        Visibility="{Binding HasSavingModifier, ElementName=DamageTemplateListEditableControl, Converter={StaticResource BoolToVisibilityConverter}}"/>
+
                                 </Grid>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>

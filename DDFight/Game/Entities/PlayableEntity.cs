@@ -485,19 +485,22 @@ namespace DDFight.Game
                         damage_value = dmg.Damage.LastResult * 2;
                         break;
                 }
-                // Situational damage modifiers (such as a saving throw that could divide damge by 2)
-                switch (dmg.SituationalDamageModifier) 
+                if (dmg.LastSavingWasSuccesfull)
                 {
-                    case DamageModifierEnum.Halved:
-                        damage_value /= 2;
-                        break;
-                    case DamageModifierEnum.Canceled:
-                        damage_value = 0;
-                        break;
-                    default:
-                        break;
+                    // Situational damage modifiers (such as a saving throw that could divide damge by 2)
+                    switch (dmg.SituationalDamageModifier)
+                    {
+                        case DamageModifierEnum.Halved:
+                            damage_value /= 2;
+                            break;
+                        case DamageModifierEnum.Canceled:
+                            damage_value = 0;
+                            break;
+                        default:
+                            break;
+                    }
+                    dmg.LastSavingWasSuccesfull = false;
                 }
-                dmg.SituationalDamageModifier = DamageModifierEnum.Normal;
 
                 if (i == damages.Count && i != 1)
                     paragraph.Inlines.Add(Extensions.BuildRun("and ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
