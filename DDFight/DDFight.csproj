@@ -86,6 +86,9 @@
     <Compile Include="Game\Aggression\Spells\Display\SpellGeneralInfoUserControl.xaml.cs">
       <DependentUpon>SpellGeneralInfoUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Game\Aggression\Spells\Display\SpellListSpellBookUserControl.xaml.cs">
+      <DependentUpon>SpellListSpellBookUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Game\Aggression\Spells\Display\SpellNonAttackEditableUserControl.xaml.cs">
       <DependentUpon>SpellNonAttackEditableUserControl.xaml</DependentUpon>
     </Compile>
@@ -375,6 +378,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Game\Aggression\Spells\Display\SpellListEditableUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\Aggression\Spells\Display\SpellListSpellBookUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

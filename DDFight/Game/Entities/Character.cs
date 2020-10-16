@@ -8,7 +8,7 @@ namespace DDFight.Game
     /// <summary>
     ///     Represents a Character for D&D (not to confound with Monsters)
     /// </summary>
-    public class Character : PlayableEntity /*, INotifyPropertyChangedSub*/
+    public class Character : PlayableEntity
     {
         public Character() : base()
         {

@@ -12,8 +12,8 @@
         xmlns:attacks="clr-namespace:DDFight.Controlers.Game.Attacks"
         xmlns:status="clr-namespace:DDFight.Game.Status.Display"
         xmlns:game="clr-namespace:DDFight.Game"
-        xmlns:counter="clr-namespace:DDFight.Game.Counters.Display"
-        Title="Edit Character" Height="750" Width="450"
+        xmlns:counter="clr-namespace:DDFight.Game.Counters.Display" xmlns:display="clr-namespace:DDFight.Game.Aggression.Spells.Display"
+        Title="Edit Character" Height="750" Width="500"
         WindowStartupLocation="CenterOwner"
         Closing="Window_Closing">
     <Window.Resources>
@@ -86,6 +86,17 @@
                 </TabItem.Header>
                 <status:CustomVerboseStatusListEditableUserControl 
                     DataContext="{Binding CustomVerboseStatusList}"/>
+            </TabItem>
+
+            <TabItem Style="{StaticResource TabItemStyle}"
+                     x:Name="SpellBookControl">
+                <TabItem.Header>
+                    <TextBlock Style="{StaticResource HeaderTextBlockStyle}">
+                        Spell Book
+                    </TextBlock>
+                </TabItem.Header>
+                <display:SpellListSpellBookUserControl 
+                    DataContext="{Binding Spells}"/>
             </TabItem>
 
             <TabItem Style="{StaticResource TabItemStyle}"

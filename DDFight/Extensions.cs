@@ -1,10 +1,12 @@
 ﻿using DDFight.Game;
+using DDFight.Game.Aggression;
 using DDFight.Tools;
 using DDFight.ValidationRules;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -163,6 +165,31 @@ namespace DDFight
                 }
             }
             return result;
+        }
+
+        public static void FilterSpellListBox(this FrameworkElement element, string filter)
+        {
+            for (int i = 0; i != VisualTreeHelper.GetChildrenCount(element); i += 1)
+            {
+                FrameworkElement child = VisualTreeHelper.GetChild(element, i) as FrameworkElement;
+                if (child != null)
+                {
+                    if (child is ListBoxItem)
+                    {
+                        child.Visibility = Visibility.Visible;
+                        if (filter != "")
+                        {
+                            Spell ctx = (Spell)child.DataContext;
+                            if (!ctx.Name.ToLower().Contains(filter.ToLower()))
+                                child.Visibility = Visibility.Collapsed;
+                        }
+                    }
+                    else
+                    {
+                        child.FilterSpellListBox(filter);
+                    }
+                }
+            }
         }
 
         public static void FilterPlayableEntityListBox(this FrameworkElement element, string filter)

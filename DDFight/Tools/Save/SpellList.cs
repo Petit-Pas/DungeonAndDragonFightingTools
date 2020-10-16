@@ -33,7 +33,7 @@ namespace DDFight.Game.Aggression.Spells
                 NotifyPropertyChanged();
             }
         }
-        private ObservableCollection<Spell> _spellList;
+        private ObservableCollection<Spell> _spellList = new ObservableCollection<Spell>();
 
         /// <summary>
         ///     Method to add and save a spell
@@ -74,7 +74,7 @@ namespace DDFight.Game.Aggression.Spells
         /// </summary>
         /// <param name="to_update"></param>
         /// <param name="temporary"></param>
-        public void Replace(Spell to_replace, Spell new_spell)
+        public void ReplaceSpell(Spell to_replace, Spell new_spell)
         {
             for (int i = 0; i != Spells.Count; i += 1)
             {

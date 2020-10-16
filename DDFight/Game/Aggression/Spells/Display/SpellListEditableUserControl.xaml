@@ -4,23 +4,23 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DDFight.Game.Aggression.Spells"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <GroupBox
         Foreground="{StaticResource Light}">
             <GroupBox.Header>
                 <TextBlock
-                FontSize="15"
-                FontWeight="SemiBold"
-                Foreground="{StaticResource Light}">
-                Spells' list
+                    FontSize="15"
+                    FontWeight="SemiBold"
+                    Foreground="{StaticResource Light}">
+                    Spells' list
                 </TextBlock>
             </GroupBox.Header>
             <Grid 
-            Background="{StaticResource LightestGray}"
-            x:Name="SpellsGrid" 
-            Margin="10">
+                Background="{StaticResource LightestGray}"
+                x:Name="SpellsGrid" 
+                Margin="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
@@ -30,13 +30,13 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBox
-                Grid.Row="0"
-                Grid.Column="0"
-                x:Name="FilterTextBox"
-                KeyUp="FilterTextBox_KeyUp"
-                Background="{StaticResource Gray}"
-                Foreground="{StaticResource Light}"
-                Margin="5" />
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    x:Name="FilterTextBox"
+                    KeyUp="FilterTextBox_KeyUp"
+                    Background="{StaticResource Gray}"
+                    Foreground="{StaticResource Light}"
+                    Margin="5" />
 
                 <Grid Grid.Row="1" MinWidth="200">
                     <Grid.RowDefinitions>
@@ -48,13 +48,13 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <ListBox 
-                    Background="{StaticResource Gray}"
-                    x:Name="SpellList" 
-                    Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
-                    DisplayMemberPath="Name"
-                    MouseDoubleClick="SpellList_MouseDoubleClick"
-                    KeyDown="SpellList_KeyDown"
-                    VirtualizingPanel.IsVirtualizing="False">
+                        Background="{StaticResource Gray}"
+                        x:Name="SpellList" 
+                        Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
+                        DisplayMemberPath="Name"
+                        MouseDoubleClick="SpellList_MouseDoubleClick"
+                        KeyDown="SpellList_KeyDown"
+                        VirtualizingPanel.IsVirtualizing="False">
 
                         <ListBox.Resources>
                             <ContextMenu x:Key="CMenu">
@@ -75,17 +75,17 @@
                         </ListBox.ItemContainerStyle>
                     </ListBox>
                     <Button 
-                    Grid.Row="1" Grid.Column="0" 
-                    Margin="0, 10, 10, 10" 
-                    Click="AddSpell_Button_Click"
-                    FontWeight="SemiBold">
+                        Grid.Row="1" Grid.Column="0" 
+                        Margin="0, 10, 10, 10" 
+                        Click="AddSpell_Button_Click"
+                        FontWeight="SemiBold">
                         Add Spell
                     </Button>
                     <Button 
-                    Grid.Row="1" Grid.Column="1" 
-                    Margin="10, 10, 0, 10" 
-                    Click="RemoveSpell_Button_Click"
-                    FontWeight="SemiBold">
+                        Grid.Row="1" Grid.Column="1" 
+                        Margin="10, 10, 0, 10" 
+                        Click="RemoveSpell_Button_Click"
+                        FontWeight="SemiBold">
                         Remove
                     </Button>
                 </Grid>
