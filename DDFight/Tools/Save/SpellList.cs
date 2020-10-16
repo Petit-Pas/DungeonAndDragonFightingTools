@@ -12,6 +12,13 @@ namespace DDFight.Game.Aggression.Spells
 {
     public class SpellsList : INotifyPropertyChanged
     {
+        public SpellsList(bool isMainSpellList = false)
+        {
+            this.isMainSpellList = isMainSpellList;
+        }
+
+        private bool isMainSpellList = false;
+
         public ObservableCollection<Spell> Spells
         {
             get => _spellList;
@@ -53,7 +60,8 @@ namespace DDFight.Game.Aggression.Spells
             Spells.Sort((x, y) => {
                 return x.Name.CompareTo(y.Name);
             });
-            SaveManager.SaveSpells(this);
+            if (isMainSpellList)
+                SaveManager.SaveSpells(this);
         }
 
         /// <summary>

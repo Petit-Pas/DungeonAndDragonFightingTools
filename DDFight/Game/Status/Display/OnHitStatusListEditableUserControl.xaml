@@ -3,13 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:DDFight.Game.Status.Display"
+             xmlns:local="clr-namespace:DDFight.Game.Status.Display" xmlns:display="clr-namespace:DDFight.Game.Aggression.Display"
+             xmlns:converter="clr-namespace:DDFight.Converters"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             x:Name="OnHitStatusListEditableControl">
     <UserControl.Resources>
         <Style TargetType="TextBlock" >
             <Setter Property="Foreground" Value="{StaticResource Light}"/>
         </Style>
+        <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
     </UserControl.Resources>
     <GroupBox
         Foreground="{StaticResource LightestGray}">
@@ -29,19 +32,51 @@
             <ListBox
                 Grid.Row="0"
                 x:Name="StatusListControl"
-                Background="{StaticResource Gray}"
-                DisplayMemberPath="Header"
+                Background="{StaticResource LightestGray}"
                 KeyDown="StatusListControl_KeyDown"
-                MouseDoubleClick="StatusListControl_MouseDoubleClick">
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem">
-                        <Setter Property="BorderBrush" Value="{StaticResource Light}"/>
-                        <Setter Property="Margin" Value="3"/>
-                        <Setter Property="Foreground" Value="{StaticResource Light}"/>
-                        <Setter Property="BorderThickness" Value="2"/>
-                        <Setter Property="ToolTip" Value="{Binding ToolTip}"/>
-                    </Style>
-                </ListBox.ItemContainerStyle>
+                MouseDoubleClick="StatusListControl_MouseDoubleClick"
+                Grid.IsSharedSizeScope="True"
+                HorizontalContentAlignment="Stretch"
+                BorderThickness="0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid
+                            Background="{StaticResource Gray}"
+                            ToolTip="{Binding ToolTip}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            
+                            <TextBlock 
+                                Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                                Margin="2"
+                                Text="{Binding Header}"
+                                Foreground="{StaticResource Light}"
+                                FontSize="14"/>
+
+                            <TextBlock
+                                Grid.Row="1" Grid.Column="0"
+                                VerticalAlignment="Center"
+                                Margin="5"
+                                Foreground="{StaticResource Light}"
+                                Visibility="{Binding HasSavingThrow, ElementName=OnHitStatusListEditableControl, Converter={StaticResource BoolToVisibilityConverter}}">
+                                In case of DC success:
+                            </TextBlock>
+                            <local:ApplicationModifierEnumListSelectableUserControl
+                                Grid.Row="1" Grid.Column="1"
+                                PropertyPath="SpellApplicationModifier"
+                                Margin="5, 0"
+                                Width="100"
+                                Visibility="{Binding HasSavingThrow, ElementName=OnHitStatusListEditableControl, Converter={StaticResource BoolToVisibilityConverter}}"/>
+
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
             </ListBox>
 
             <Button

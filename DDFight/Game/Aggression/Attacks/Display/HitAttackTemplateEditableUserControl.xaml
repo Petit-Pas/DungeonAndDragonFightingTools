@@ -72,7 +72,7 @@
 
             <damagelistcontrols:DamageTemplateListEditableUserControl
                 Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" DataContext="{Binding DamageList}"
-                HasSavingModifier="False"/>
+                HasSavingThrow="False"/>
 
             <display:OnHitStatusListEditableUserControl
                 Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2"

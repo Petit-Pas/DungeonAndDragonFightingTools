@@ -25,6 +25,6 @@
             x:Name="OnApplyDamageListControl"
             MinWidth="300"
             DataContext="{Binding OnApplyDamageList}"
-            HasSavingModifier="True"/>
+            HasSavingThrow="True"/>
     </Grid>
 </UserControl>

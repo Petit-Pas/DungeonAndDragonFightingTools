@@ -66,7 +66,7 @@ namespace DDFight.Tools.Save
         public static SpellsList LoadSpells()
         {
             XmlSerializer serializer = new XmlSerializer(typeof(SpellsList));
-            SpellsList result = new SpellsList();
+            SpellsList result = new SpellsList(true);
 
             try
             {

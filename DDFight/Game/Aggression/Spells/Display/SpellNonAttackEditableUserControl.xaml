@@ -3,9 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:DDFight.Game.Aggression.Spells.Display" xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes" xmlns:characteristics="clr-namespace:DDFight.Controlers.Game.Characteristics" xmlns:converters="clr-namespace:DDFight.Converters" xmlns:controlers="clr-namespace:DDFight.Controlers"
+             xmlns:local="clr-namespace:DDFight.Game.Aggression.Spells.Display" xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes" xmlns:characteristics="clr-namespace:DDFight.Controlers.Game.Characteristics" xmlns:converters="clr-namespace:DDFight.Converters" xmlns:controlers="clr-namespace:DDFight.Controlers" xmlns:damagelistcontrols="clr-namespace:DDFight.Controlers.Game.Attacks.DamageListControls" xmlns:display="clr-namespace:DDFight.Game.Status.Display"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="400">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -15,28 +15,41 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid
+        Background="{StaticResource Gray}"
         Margin="5, 15">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Grid
+            Margin="5"
             Grid.Row="0"
-            ShowGridLines="True">
+            ShowGridLines="False">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <TextBlock
+
+            <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock
                 Grid.Column="0"
                 VerticalAlignment="Center">
                 The Spell has a Saving Throw :
-            </TextBlock>
-            <controlers:SliderButton 
+                </TextBlock>
+                <controlers:SliderButton 
                 Margin="5"
                 Grid.Column="1"
                 HorizontalAlignment="Left"
@@ -45,18 +58,40 @@
                 IsChecked="{Binding HasSavingThrow}"
                 />
 
-            <characteristics:CharacteristicsListSelectableUserControl
+                <characteristics:CharacteristicsListSelectableUserControl
                 Grid.Row="1" Grid.Column="0"
                 Height="25"
                 PropertyPath="SavingCharacteristic"
-                Visibility="{Binding HasSavingThrow, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                Visibility="{Binding HasSavingThrow, Converter={StaticResource BoolToVisibilityConverter}}"
+                />
 
-            <inputboxes:PositiveIntTextBox 
+                <inputboxes:PositiveIntTextBox 
                 Grid.Row="1" Grid.Column="1"
                 Width="40"
                 Margin="5"
                 PropertyPath="SavingDifficulty"
-                Visibility="{Binding HasSavingThrow, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                Visibility="{Binding HasSavingThrow, Converter={StaticResource BoolToVisibilityConverter}}"
+                />
+
+            </Grid>
+
+            <damagelistcontrols:DamageTemplateListEditableUserControl 
+                Background="{StaticResource LightestGray}"
+                Grid.Column="0" Grid.Row="1"
+                Margin="5"
+                HasSavingThrow="{Binding Path=DataContext.HasSavingThrow, RelativeSource={RelativeSource AncestorType=local:SpellNonAttackEditableUserControl}}"
+                DataContext="{Binding HitDamage}"
+            />
+
+            <display:OnHitStatusListEditableUserControl 
+                Background="{StaticResource LightestGray}"
+                Grid.Column="1" Grid.Row="1"
+                Margin="5"
+                DataContext="{Binding AppliedStatus}"
+                HasSavingThrow="{Binding Path=DataContext.HasSavingThrow, RelativeSource={RelativeSource AncestorType=local:SpellNonAttackEditableUserControl}}"
+            />
+
+
         </Grid>
     </Grid>
 </UserControl>

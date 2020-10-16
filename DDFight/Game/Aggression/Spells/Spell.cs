@@ -1,5 +1,6 @@
 ﻿using DDFight.Game.Aggression.Spells.Display;
 using DDFight.Game.Characteristics;
+using DDFight.Game.Status;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,6 +17,8 @@ namespace DDFight.Game.Aggression
         {
         }
 
+        #region Properties
+
         public string Description
         {
             get => _description;
@@ -26,6 +29,28 @@ namespace DDFight.Game.Aggression
             }
         }
         private string _description = "";
+
+        public List<DamageTemplate> HitDamage
+        {
+            get => _hitDamage;
+            set
+            {
+                _hitDamage = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private List<DamageTemplate> _hitDamage = new List<DamageTemplate>();
+
+        public OnHitStatusList AppliedStatus 
+        {
+            get => _appliedStatus;
+            set
+            {
+                _appliedStatus = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private OnHitStatusList _appliedStatus = new OnHitStatusList();
 
         public int BaseLevel
         {
@@ -103,6 +128,8 @@ namespace DDFight.Game.Aggression
 
         #endregion SavingThrow
 
+        #endregion Properties
+
         #region EditWindow
 
         [XmlIgnore]
@@ -136,6 +163,8 @@ namespace DDFight.Game.Aggression
             this.HasSavingThrow = to_copy.HasSavingThrow;
             this.SavingCharacteristic = to_copy.SavingCharacteristic;
             this.SavingDifficulty = to_copy.SavingDifficulty;
+            this.HitDamage = (List<DamageTemplate>)to_copy.HitDamage.Clone();
+            this.AppliedStatus = (OnHitStatusList)to_copy.AppliedStatus.Clone();
         }
 
         protected Spell(Spell to_copy) : base(to_copy)

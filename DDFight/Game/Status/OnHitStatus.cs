@@ -31,6 +31,55 @@ namespace DDFight.Game.Status
         [XmlIgnore]
         public PlayableEntity Affected = null;
 
+        #region Spells
+
+        /* WARNING : these (in Spells region) are only used when the status is applied by a spell
+                     with a spell you can have a Saving Throw (on the spell, not the status)
+                     Is is different than the Saving Throw you could set in the OnHitStatus itself
+                     You could resist a Status from the Saving of the spell, not the saving of the Status itself
+        */
+
+        /// <summary>
+        ///     Means it is applied by a spell that has a Saving Throw
+        /// </summary>
+        [XmlAttribute]
+        public bool HasSpellSaving
+        {
+            get => _hasSpellSaving;
+            set
+            {
+                _hasSpellSaving = value;
+                NotifyPropertyChanged();
+            }
+        }    
+        private bool _hasSpellSaving = false;
+
+        [XmlAttribute]
+        public ApplicationModifierEnum SpellApplicationModifier
+        {
+            get => _spellApplicationModifier;
+            set
+            {
+                _spellApplicationModifier = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private ApplicationModifierEnum _spellApplicationModifier = ApplicationModifierEnum.Maintained;
+
+        [XmlIgnore]
+        public bool SpellSavingWasSuccessful
+        {
+            get => _spellSavingWasSuccessful;
+            set
+            {
+                _spellSavingWasSuccessful = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private bool _spellSavingWasSuccessful = false;
+
+        #endregion Spells
+
         #region Apply Properties
 
         [XmlAttribute]
@@ -304,6 +353,8 @@ namespace DDFight.Game.Status
             return result;
         }
 
+        #region Application Methods
+
         /// <summary>
         ///     A function that applies this status to the given target
         ///     
@@ -372,6 +423,8 @@ namespace DDFight.Game.Status
             }
         }
 
+        #endregion Application Methods
+
         /// <summary>
         ///     In this method implements any "end of condition" such as : 
         ///     - after n turns
@@ -436,6 +489,9 @@ namespace DDFight.Game.Status
             DurationIsCalculatedOnCasterTurn = to_copy.DurationIsCalculatedOnCasterTurn;
             DurationIsBasedOnStartOfTurn = to_copy.DurationIsBasedOnStartOfTurn;
             OnApplyDamageList = (List<DamageTemplate>)to_copy.OnApplyDamageList.Clone();
+            HasSpellSaving = to_copy.HasSpellSaving;
+            SpellApplicationModifier = to_copy.SpellApplicationModifier;
+            SpellSavingWasSuccessful = to_copy.SpellSavingWasSuccessful;
         }
 
         public OnHitStatus(OnHitStatus to_copy)

@@ -21,6 +21,15 @@ namespace DDFight.Game.Status.Display
             Loaded += EditableOnHitStatusList_Loaded;
         }
 
+        public bool HasSavingThrow
+        {
+            get { return (bool)GetValue(HasSavingThrowProperty); }
+            set { SetValue(HasSavingThrowProperty, value); }
+        }
+
+        public static readonly DependencyProperty HasSavingThrowProperty =
+            DependencyProperty.Register(nameof(HasSavingThrow), typeof(bool),
+                typeof(OnHitStatusListEditableUserControl));
         private void EditableOnHitStatusList_Loaded(object sender, RoutedEventArgs e)
         {
             StatusListControl.ItemsSource = data_context.List;

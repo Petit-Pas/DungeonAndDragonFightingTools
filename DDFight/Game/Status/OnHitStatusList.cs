@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Xml.Serialization;
 
 namespace DDFight.Game.Status
 {
@@ -19,6 +20,26 @@ namespace DDFight.Game.Status
             }
         }
         private ObservableCollection<OnHitStatus> _list = new ObservableCollection<OnHitStatus>();
+
+        /// <summary>
+        ///     Watch out to do the difference with this (set to true if the status is applied after a Saving on a Spell), 
+        ///     not the same as OnHitStatus.HasSavingThrow which represent a chance to resist a status only
+        /// </summary>
+        [XmlAttribute]
+        public bool HasSavingThrow
+        {
+            get => _hasSavingThrow;
+            set
+            {
+                _hasSavingThrow = value;
+                foreach (OnHitStatus status in List)
+                {
+                    status.HasSpellSaving = value;
+                }
+                NotifyPropertyChanged();
+            }
+        }
+        private bool _hasSavingThrow = false;
 
         #region INotifyPropertyChanged
 
@@ -44,6 +65,7 @@ namespace DDFight.Game.Status
         public void init_copy(OnHitStatusList to_copy)
         {
             List = to_copy.List.Clone();
+            HasSavingThrow = to_copy.HasSavingThrow;
         }
 
         public OnHitStatusList(OnHitStatusList to_copy)

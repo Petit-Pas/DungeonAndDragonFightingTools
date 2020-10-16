@@ -54,14 +54,16 @@
                                     </Grid.ColumnDefinitions>
                                     
                                     <damageaffinity:DamageTypeAffinityListSelectableUserControl 
+                                        Margin="5"
                                             Grid.Row="0" Grid.Column="0"
                                             PropertyPath="DamageType">
                                     </damageaffinity:DamageTypeAffinityListSelectableUserControl>
                                     <dices:DiceRollEditableUserControl
-                                            x:Name="DamageTextBox"
-                                            Grid.Row="0" Grid.Column="1"
-                                            Margin="10,0"
-                                            PropertyPath="Damage"/>
+                                        Height="25"
+                                        x:Name="DamageTextBox"
+                                        Grid.Row="0" Grid.Column="1"
+                                        Margin="10,0"
+                                        PropertyPath="Damage"/>
                                     <Button 
                                         Grid.Row="0" Grid.Column="2" Grid.RowSpan="2"
                                         VerticalAlignment="Stretch"
@@ -77,14 +79,14 @@
                                         VerticalAlignment="Center"
                                         Margin="5"
                                         Foreground="{StaticResource Light}"
-                                        Visibility="{Binding HasSavingModifier, ElementName=DamageTemplateListEditableControl, Converter={StaticResource BoolToVisibilityConverter}}">
+                                        Visibility="{Binding HasSavingThrow, ElementName=DamageTemplateListEditableControl, Converter={StaticResource BoolToVisibilityConverter}}">
                                         In case of DC success:
                                     </TextBlock>
                                     <display:DamageModifierEnumListSelectableUserControl
                                         Grid.Row="1" Grid.Column="1"
                                         PropertyPath="SituationalDamageModifier"
                                         Margin="5, 0"
-                                        Visibility="{Binding HasSavingModifier, ElementName=DamageTemplateListEditableControl, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                                        Visibility="{Binding HasSavingThrow, ElementName=DamageTemplateListEditableControl, Converter={StaticResource BoolToVisibilityConverter}}"/>
 
                                 </Grid>
                             </DataTemplate>

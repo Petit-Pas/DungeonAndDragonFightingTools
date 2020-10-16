@@ -93,6 +93,10 @@
     <Compile Include="Game\Aggression\Spells\Display\SpellListEditableUserControl.xaml.cs">
       <DependentUpon>SpellListEditableUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Game\Status\ApplicationModifierEnum.cs" />
+    <Compile Include="Game\Status\Display\ApplicationModifierEnumListSelectableUserControl.xaml.cs">
+      <DependentUpon>ApplicationModifierEnumListSelectableUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tools\Save\SpellList.cs" />
     <Compile Include="Game\Counters\Counter.cs" />
     <Compile Include="Game\Counters\Display\CounterEditableUserControl.xaml.cs">
@@ -491,6 +495,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Game\SpecialAbilitiesEditableUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\Status\Display\ApplicationModifierEnumListSelectableUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

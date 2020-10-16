@@ -18,6 +18,7 @@ using DDFight.Game.Dices;
 using DDFight.Game.Status;
 using DDFight.Windows.FightWindows;
 using DDFight.Game.Counters;
+using DDFight.Game.Aggression.Spells;
 
 namespace DDFight.Game
 {
@@ -210,6 +211,17 @@ namespace DDFight.Game
             }
         }
         private ObservableCollection<HitAttackTemplate> _hitAttacks = new ObservableCollection<HitAttackTemplate>();
+
+        public SpellsList Spells
+        {
+            get => _spells;
+            set
+            {
+                _spells = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private SpellsList _spells = new SpellsList();
 
         public ObservableCollection<Counter> Counters
         {

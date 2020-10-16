@@ -15,7 +15,8 @@
             <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
             </ResourceDictionary>
     </UserControl.Resources>
-    <Grid>
+    <Grid
+        ShowGridLines="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>

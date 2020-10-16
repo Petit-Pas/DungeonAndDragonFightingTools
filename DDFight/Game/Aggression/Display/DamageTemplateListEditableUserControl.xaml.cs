@@ -18,16 +18,15 @@ namespace DDFight.Controlers.Game.Attacks.DamageListControls
             get => (List<DamageTemplate>)this.DataContext;
         }
 
-        public bool HasSavingModifier 
+        public bool HasSavingThrow
         {
-            get => _hasSavingModifier;
-            set
-            {
-                _hasSavingModifier = value;
-                NotifyPropertyChanged();
-            }
+            get { return (bool)GetValue(HasSavingThrowProperty); }
+            set { SetValue(HasSavingThrowProperty, value); }
         }
-        private bool _hasSavingModifier = false;
+
+        public static readonly DependencyProperty HasSavingThrowProperty =
+            DependencyProperty.Register(nameof(HasSavingThrow), typeof(bool),
+                typeof(DamageTemplateListEditableUserControl));
 
         public DamageTemplateListEditableUserControl()
         {
