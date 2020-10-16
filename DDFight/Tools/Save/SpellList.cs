@@ -17,6 +17,11 @@ namespace DDFight.Game.Aggression.Spells
             this.isMainSpellList = isMainSpellList;
         }
 
+        public SpellsList()
+        {
+            this.isMainSpellList = false;
+        }
+
         private bool isMainSpellList = false;
 
         public ObservableCollection<Spell> Spells
