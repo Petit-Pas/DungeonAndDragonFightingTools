@@ -523,7 +523,11 @@ namespace DDFight.Game
             }
             paragraph.Inlines.Add(Extensions.BuildRun("\nTotal: ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
             paragraph.Inlines.Add(Extensions.BuildRun(total.ToString(), (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-            paragraph.Inlines.Add(Extensions.BuildRun(" damage\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+            paragraph.Inlines.Add(Extensions.BuildRun(" damage (", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+            paragraph.Inlines.Add(Extensions.BuildRun(Hp.ToString(), (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
+            paragraph.Inlines.Add(Extensions.BuildRun(" ==> ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+            paragraph.Inlines.Add(Extensions.BuildRun((Hp - total).ToString(), (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
+            paragraph.Inlines.Add(Extensions.BuildRun(").\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
             LooseHp(total);
         }
 
