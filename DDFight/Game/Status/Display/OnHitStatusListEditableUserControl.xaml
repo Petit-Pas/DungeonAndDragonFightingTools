@@ -38,6 +38,13 @@
                 Grid.IsSharedSizeScope="True"
                 HorizontalContentAlignment="Stretch"
                 BorderThickness="0">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="BorderBrush" Value="{StaticResource Light}"/>
+                        <Setter Property="BorderThickness" Value="2" />
+                        <Setter Property="Margin" Value="2" />
+                    </Style>
+                </ListBox.ItemContainerStyle>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid
