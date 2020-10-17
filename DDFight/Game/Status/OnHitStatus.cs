@@ -375,6 +375,7 @@ namespace DDFight.Game.Status
             }
             if (success)
             {
+                target.CustomVerboseStatusList.List.Add(this);
                 this.Caster = caster;
                 this.Affected = target;
                 if (this.EndsOnCasterLossOfConcentration)

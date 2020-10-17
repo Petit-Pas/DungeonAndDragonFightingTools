@@ -29,7 +29,12 @@ namespace DDFight.Game.Fight
         public void Sort()
         {
             Fighters.Sort((x, y) => {
-                return x.DisplayName.CompareTo(y.DisplayName);
+                int retval = x.Name.CompareTo(y.Name);
+                if (retval != 0)
+                    return retval;
+                int num1 = Int32.Parse(x.DisplayName.Substring(x.Name.Length + 2));
+                int num2 = Int32.Parse(y.DisplayName.Substring(x.Name.Length + 2));
+                return num1.CompareTo(num2);
             });
         }
 
@@ -85,19 +90,64 @@ namespace DDFight.Game.Fight
         /// </summary>
         public void SetTurnOrders()
         {
-            Fighters.Sort (((x, y) => { return -(x.InitiativeRoll + x.Characteristics.GetCharacteristicModifier(CharacteristicsEnum.Dexterity)).CompareTo
-                                                (y.InitiativeRoll + y.Characteristics.GetCharacteristicModifier(CharacteristicsEnum.Dexterity)); }));
-            
+            Console.WriteLine("Before");
+            foreach (PlayableEntity ent in Fighters)
+            {
+                Console.WriteLine(ent.DisplayName);
+            }
+
+
             Fighters.Sort (((x, y) => {
+                int val = (x.InitiativeRoll + x.Characteristics.GetCharacteristicModifier(CharacteristicsEnum.Dexterity)).CompareTo
+                                                (y.InitiativeRoll + y.Characteristics.GetCharacteristicModifier(CharacteristicsEnum.Dexterity));
+                if (val != 0)
+                    return -val;
+
+                val = (x.Characteristics.GetCharacteristicModifier(CharacteristicsEnum.Dexterity).CompareTo(
+                    y.Characteristics.GetCharacteristicModifier(CharacteristicsEnum.Dexterity)));
+                if (val != 0)
+                    return -val;
+
+                val = x.Name.CompareTo(y.Name);
+                if (val != 0)
+                    return val;
+                int num1 = Int32.Parse(x.DisplayName.Substring(x.Name.Length + 2));
+                int num2 = Int32.Parse(y.DisplayName.Substring(x.Name.Length + 2));
+                return num1.CompareTo(num2);
+
+            }));
+
+
+            /*Fighters.Sort (((x, y) => { return -(x.InitiativeRoll + x.Characteristics.GetCharacteristicModifier(CharacteristicsEnum.Dexterity)).CompareTo
+                                                (y.InitiativeRoll + y.Characteristics.GetCharacteristicModifier(CharacteristicsEnum.Dexterity)); }));
+
+            Console.WriteLine("Step 1");
+            foreach (PlayableEntity ent in Fighters)
+            {
+                Console.WriteLine(ent.DisplayName);
+            }
+
+            Fighters.Sort (((x, y) => {
+                Console.WriteLine("BHDEBUG0 {0}, {1}", x.DisplayName, y.DisplayName);
+                Console.WriteLine("BHDEBUG1 {0} {1}", x.InitiativeRoll + x.Characteristics.GetCharacteristicModifier(CharacteristicsEnum.Dexterity),
+                    y.InitiativeRoll + y.Characteristics.GetCharacteristicModifier(CharacteristicsEnum.Dexterity));
                 if (x.InitiativeRoll + x.Characteristics.GetCharacteristicModifier(CharacteristicsEnum.Dexterity) !=
                     y.InitiativeRoll + y.Characteristics.GetCharacteristicModifier(CharacteristicsEnum.Dexterity))
                 {
                     return 0;
                 }
+                Console.WriteLine("BHDEBUG2 {0} {1}", x.Characteristics.GetCharacteristicModifier(CharacteristicsEnum.Dexterity),
+                    y.Characteristics.GetCharacteristicModifier(CharacteristicsEnum.Dexterity));
                 return -(x.Characteristics.GetCharacteristicModifier(CharacteristicsEnum.Dexterity).CompareTo(
                     y.Characteristics.GetCharacteristicModifier(CharacteristicsEnum.Dexterity))
                 );
             }));
+
+            Console.WriteLine("Step 2");
+            foreach (PlayableEntity ent in Fighters)
+            {
+                Console.WriteLine(ent.DisplayName);
+            }*/
 
             uint i = 1;
             foreach (PlayableEntity fighter in Fighters)
@@ -105,6 +155,12 @@ namespace DDFight.Game.Fight
                 fighter.TurnOrder = i;
                 i++;
             }
+            Console.WriteLine("After");
+            foreach (PlayableEntity ent in Fighters)
+            {
+                Console.WriteLine(ent.Name);
+            }
+
         }
 
         public void SetTurnOrdersMiddleFight()

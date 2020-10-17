@@ -1,4 +1,5 @@
 ﻿using DDFight.Game;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -54,7 +55,6 @@ namespace DDFight.Controlers
         private void add_fighter(PlayableEntity fighter)
         {
             data_context.FightContext.FightersList.Fighters.Add(fighter);
-
         }
 
         private void DuplicateFighter_MenuItem_Click(object sender, RoutedEventArgs e)

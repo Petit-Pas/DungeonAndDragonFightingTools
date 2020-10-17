@@ -3,6 +3,7 @@ using DDFight.Game.Dices;
 using DDFight.Game.Fight;
 using DDFight.Resources;
 using DDFight.Tools.UXShortcuts;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -122,6 +123,11 @@ namespace DDFight.Windows
                 }
                 this.Cancelled = false;
                 this.Close();
+
+                foreach (PlayableEntity ent in Global.Context.FightContext.FightersList.Fighters)
+                {
+                    Console.WriteLine("{0} has {1}", ent.Name, ent.InitiativeRoll);
+                }
             }
         }
 
