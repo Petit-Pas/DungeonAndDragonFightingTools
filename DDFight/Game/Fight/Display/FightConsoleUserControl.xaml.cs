@@ -18,7 +18,7 @@ namespace DDFight.Controlers.Fight
 
         private void RichTextBoxControl_TextChanged(object sender, TextChangedEventArgs e)
         {
-            RichTextBoxControl.ScrollToEnd();
+            ScrollViewerControl.ScrollToEnd();
         }
     }
 }

@@ -54,7 +54,7 @@
                     Grid.Row="1"
                     x:Name="AllSpellsControl"
                     VirtualizingPanel.IsVirtualizing="False"
-                    KeyDown="AllSpellsControl_KeyDown"
+                    PreviewKeyDown="AllSpellsControl_PreviewKeyDown"
                     Background="{StaticResource Gray}"
                     DisplayMemberPath="Name">
                     <ListBox.ItemContainerStyle>

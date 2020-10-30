@@ -61,6 +61,7 @@ namespace DDFight.Tools.Save
 
             serializer.Serialize(writer, spells);
             writer.Close();
+            Console.WriteLine("Just Saved {0} spells!", spells.Spells.Count);
         }
 
         public static SpellsList LoadSpells()
@@ -73,6 +74,7 @@ namespace DDFight.Tools.Save
                 StreamReader reader = new StreamReader(spells_config_file);
                 result = (SpellsList)serializer.Deserialize(reader);
                 reader.Close();
+                result.isMainSpellList = true;
                 Console.WriteLine("Found {0} spells to load", result.Spells.Count);
             }
             catch (FileNotFoundException)

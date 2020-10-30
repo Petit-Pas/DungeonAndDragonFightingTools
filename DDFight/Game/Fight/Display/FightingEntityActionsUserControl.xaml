@@ -32,28 +32,38 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <TabControl
-                HorizontalAlignment="Left"
-                Background="{StaticResource LightestGray}"
-                BorderThickness="0">
-                <TabItem Style="{StaticResource TabItemStyle}">
-                    <TabItem.Header>
-                        <TextBlock Style="{StaticResource HeaderTextBlockStyle}">
-                            Abilities
-                        </TextBlock>
-                    </TabItem.Header>
+            <GroupBox
+                Grid.Column="0">
+                <GroupBox.Header>
+                    <TextBlock 
+                        Foreground="{StaticResource Light}"
+                        FontSize="15"
+                        FontWeight="SemiBold">
+                        Abilities
+                    </TextBlock>
+                </GroupBox.Header>
+
+                <ScrollViewer 
+                    VerticalScrollBarVisibility="Auto">
                     <TextBlock 
                         Margin="5"
                         Padding="5"
-                        MinWidth="250"
                         Foreground="{StaticResource Light}"
                         Background="{StaticResource Gray}"
                         TextWrapping="Wrap"
                         Text="{Binding SpecialAbilities}"/>
-                </TabItem>
+                </ScrollViewer>
+            </GroupBox>            
+            
+            <TabControl
+                Grid.Column="1"
+                HorizontalAlignment="Left"
+                Background="{StaticResource LightestGray}"
+                BorderThickness="0">
                 <TabItem Style="{StaticResource TabItemStyle}">
                     <TabItem.Header>
                         <TextBlock Style="{StaticResource HeaderTextBlockStyle}">

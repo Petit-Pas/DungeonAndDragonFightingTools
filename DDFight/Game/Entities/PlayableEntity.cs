@@ -662,6 +662,7 @@ namespace DDFight.Game
             ActionDescription = (string)to_copy.ActionDescription.Clone();
             SpecialAbilities = (string)to_copy.SpecialAbilities.Clone();
             Counters = to_copy.Counters.Clone();
+            Spells = (SpellsList)to_copy.Spells.Clone();
         }
 
         /// <summary>

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DDFight.Game.Aggression.Spells
 {
-    public class SpellsList : INotifyPropertyChanged
+    public class SpellsList : INotifyPropertyChanged, ICloneable
     {
         public SpellsList(bool isMainSpellList = false)
         {
@@ -22,7 +22,7 @@ namespace DDFight.Game.Aggression.Spells
             this.isMainSpellList = false;
         }
 
-        private bool isMainSpellList = false;
+        public bool isMainSpellList = false;
 
         public ObservableCollection<Spell> Spells
         {
@@ -108,5 +108,45 @@ namespace DDFight.Game.Aggression.Spells
         }
         #endregion
 
+
+        #region IClonable
+
+        /// <summary>
+        ///     this method is required to completely initialize an instance of this by copying another object
+        /// </summary>
+        private void init_copy(SpellsList to_copy)
+        {
+            Spells = to_copy.Spells.Clone();
+        }
+
+        /// <summary>
+        ///     copy contructor, required for the Clone method to work properly with derived classes
+        /// </summary>
+        /// <param name=""></param>
+        protected SpellsList(SpellsList to_copy)
+        {
+            init_copy(to_copy);
+        }
+
+        /// <summary>
+        ///     Method to clone a character (Deep Copy)
+        /// </summary>
+        /// <returns></returns>
+        public virtual object Clone()
+        {
+            return new SpellsList(this);
+        }
+
+        /// <summary>
+        ///     reinitialize this object by copying the received one
+        /// </summary>
+        /// <param name="_to_copy"></param>
+        public virtual void CopyAssign(object _to_copy)
+        {
+            SpellsList to_copy = (SpellsList)_to_copy;
+            init_copy(to_copy);
+        }
+
+        #endregion IClonable
     }
 }

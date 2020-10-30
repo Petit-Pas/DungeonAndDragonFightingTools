@@ -90,12 +90,13 @@ namespace DDFight.Game.Aggression.Spells.Display
             data_context.AddSpell(spell);
         }
 
-        private void AllSpellsControl_KeyDown(object sender, KeyEventArgs e)
+        private void AllSpellsControl_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Down)
             {
                 if (AllSpellsControl.SelectedIndex != -1)
                     addSpell((Spell)((Spell)AllSpellsControl.SelectedItem).Clone());
+                e.Handled = true;
             }
         }
 
