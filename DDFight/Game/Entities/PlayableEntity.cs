@@ -212,6 +212,14 @@ namespace DDFight.Game
         }
         private ObservableCollection<HitAttackTemplate> _hitAttacks = new ObservableCollection<HitAttackTemplate>();
 
+        [XmlIgnore]
+        public bool HasSpells {
+            get => (Spells.Spells.Count != 0);
+            set {
+                NotifyPropertyChanged();
+            }
+        }
+
         public SpellsList Spells
         {
             get => _spells;
@@ -219,6 +227,7 @@ namespace DDFight.Game
             {
                 _spells = value;
                 NotifyPropertyChanged();
+                NotifyPropertyChanged("HasSpells");
             }
         }
         private SpellsList _spells = new SpellsList();

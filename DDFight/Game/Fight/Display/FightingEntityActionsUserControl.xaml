@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:DDFight.Controlers.Fight"
              xmlns:fight="clr-namespace:DDFight.Controlers.Game.Attacks"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
-             xmlns:counter="clr-namespace:DDFight.Game.Counters.Display"
+             xmlns:counter="clr-namespace:DDFight.Game.Counters.Display" 
+             xmlns:converters="clr-namespace:DDFight.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -15,6 +16,7 @@
                 <ResourceDictionary Source="/Styles/TabControlStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <system:String x:Key="Format">{0}'s Actions</system:String>
+            <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
     <GroupBox
@@ -57,13 +59,14 @@
                         TextWrapping="Wrap"
                         Text="{Binding SpecialAbilities}"/>
                 </ScrollViewer>
-            </GroupBox>            
-            
+            </GroupBox>
+
             <TabControl
+                Margin="5,0"
                 Grid.Column="1"
                 HorizontalAlignment="Left"
                 Background="{StaticResource LightestGray}"
-                BorderThickness="0">
+                Style="{StaticResource TabControlStyle}">
                 <TabItem Style="{StaticResource TabItemStyle}">
                     <TabItem.Header>
                         <TextBlock Style="{StaticResource HeaderTextBlockStyle}">
@@ -72,6 +75,14 @@
                     </TabItem.Header>
                     <fight:HitAttackTemplateListPreviewUserControl 
                         x:Name="AttacksListControl"/>
+                </TabItem>
+                <TabItem Style="{StaticResource TabItemStyle}"
+                         Visibility="{Binding HasSpells, Converter={StaticResource BoolToVisibilityConverter}}">
+                    <TabItem.Header>
+                        <TextBlock Style="{StaticResource HeaderTextBlockStyle}">
+                            Spells
+                        </TextBlock>
+                    </TabItem.Header>
                 </TabItem>
                 <TabItem Style="{StaticResource TabItemStyle}">
                     <TabItem.Header>

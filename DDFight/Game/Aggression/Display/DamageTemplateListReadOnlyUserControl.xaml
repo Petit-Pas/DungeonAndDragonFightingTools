@@ -12,10 +12,8 @@
     </UserControl.Resources>
     <Grid>
         <ScrollViewer
-                Grid.Row="1" Grid.ColumnSpan="2"
-                Margin="10, 5"
-                VerticalScrollBarVisibility="Auto"
-                Background="{StaticResource Gray}">
+            VerticalScrollBarVisibility="Auto"
+            Background="{StaticResource Gray}">
             <ItemsControl
                     ItemsSource="{Binding DamageList}">
                 <ItemsControl.ItemTemplate>

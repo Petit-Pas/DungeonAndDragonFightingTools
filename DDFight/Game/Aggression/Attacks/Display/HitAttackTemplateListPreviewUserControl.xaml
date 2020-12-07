@@ -10,23 +10,13 @@
     <UserControl.Resources>
         <converters:StringToVisibilityConverter x:Key="StringVisibilityConverter"/>
     </UserControl.Resources>
-    <GroupBox
-        Foreground="{StaticResource Light}">
-        <GroupBox.Header>
-            <TextBlock 
-                Foreground="{StaticResource Light}"
-                FontSize="15"
-                FontWeight="SemiBold">
-                Attacks
-            </TextBlock>
-        </GroupBox.Header>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
-                <ColumnDefinition Width="Auto" MinWidth="250" />
+                <ColumnDefinition Width="Auto" MinWidth="200" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
@@ -34,8 +24,8 @@
                 <TextBlock
                     Grid.Row="0" Grid.Column="0"
                     Text="{Binding ActionDescription}"
-                    Margin="10"
                     Padding="5"
+                    Margin="0, 0, 8, 0"
                     Foreground="{StaticResource Light}"
                     Background="{StaticResource Gray}"
                     MaxWidth="250"
@@ -45,16 +35,15 @@
             </ScrollViewer>
 
 
-            <ListBox
+        <ListBox
                 Grid.Column="1" Grid.Row="1"
-                Margin="10, 5"
                 SelectionChanged="AttackListControl_SelectionChanged"
                 x:Name="AttackListControl"
+                Margin="5, 10, 5, 0"
                 Background="{StaticResource Gray}"
                 DisplayMemberPath="Name"
-                MouseDoubleClick="AttackListControl_MouseDoubleClick"
-                >
-                <ListBox.ItemContainerStyle>
+                MouseDoubleClick="AttackListControl_MouseDoubleClick">
+            <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
                         <Setter Property="BorderBrush" Value="{StaticResource Light}"/>
                         <Setter Property="Margin" Value="3"/>
@@ -62,13 +51,13 @@
                         <Setter Property="BorderThickness" Value="2"/>
                     </Style>
                 </ListBox.ItemContainerStyle>
-                
             </ListBox>
 
             <local:HitAttackTemplateDetailsPreviewUserControl 
                 x:Name="DetailControl"
+                Visibility="Collapsed"
+                Margin="5, 10, 5, 0"
                 Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"/>
 
         </Grid>
-    </GroupBox>
 </UserControl>

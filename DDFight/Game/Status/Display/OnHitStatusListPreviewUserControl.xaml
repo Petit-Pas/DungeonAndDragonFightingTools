@@ -6,25 +6,30 @@
              xmlns:local="clr-namespace:DDFight.Game.Status.Display"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <Grid ShowGridLines="True">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         <ScrollViewer
             VerticalScrollBarVisibility="Auto">
             <ItemsControl
                 ScrollViewer.VerticalScrollBarVisibility="Auto"
+                Background="{StaticResource LightestGray}"
                 x:Name="ItemsControlControl"
                 ItemsSource="{Binding List}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <TextBlock 
                             Padding="5"
-                            Margin="5"
+                            Margin="0, 0, 0, 5"
                             Background="{StaticResource Gray}"
                             Text="{Binding Description}"
                             FontSize="14"
-                            TextWrapping="Wrap">
+                            TextWrapping="Wrap"
+                            VerticalAlignment="Stretch">
                         </TextBlock>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

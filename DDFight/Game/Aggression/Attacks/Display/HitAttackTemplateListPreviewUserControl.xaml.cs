@@ -26,6 +26,7 @@ namespace DDFight.Controlers.Game.Attacks
         {
             AttackListControl.ItemsSource = data_context.HitAttacks;
             DetailControl.DataContext = null;
+            DetailControl.Visibility = Visibility.Collapsed;
             data_context.PropertyChanged += Data_context_PropertyChanged;
         }
 
@@ -43,8 +44,12 @@ namespace DDFight.Controlers.Game.Attacks
 
         private void AttackListControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            DetailControl.Visibility = Visibility.Collapsed;
             if (AttackListControl.SelectedItem != null)
+            {
                 DetailControl.DataContext = AttackListControl.SelectedItem;
+                DetailControl.Visibility = Visibility.Visible;
+            }
         }
 
         private void AttackListControl_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
