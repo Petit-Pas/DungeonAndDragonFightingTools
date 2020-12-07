@@ -1,0 +1,47 @@
+﻿<Window x:Class="DDFight.Windows.ModalWindows.BlankDiceRollModal.BlankDiceRollModal"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DDFight.Windows.ModalWindows.BlankDiceRollModal" xmlns:converters="clr-namespace:DDFight.Converters" xmlns:dices="clr-namespace:DDFight.Controlers.Game.Dices"
+        mc:Ignorable="d"
+        Style="{StaticResource WindowStyle}"
+        Title="{Binding WindowTitle}" Height="250" Width="400">
+    <Window.Resources>
+        <converters:DiceRollToStringConverter x:Key="DiceRollStringConverter" />
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <TextBlock 
+            Grid.Row="0"
+            Margin="15"
+            Foreground="{StaticResource Light}"
+            FontSize="15"
+            HorizontalAlignment="Center"
+            Text="{Binding WindowTitle}" 
+            />
+
+        <dices:DiceRollEditableUserControl
+            x:Name="DiceRollControl"
+            Grid.Row="1"
+            Width="80"
+            PropertyPath="DiceRoll"
+            />
+
+        <Button 
+            x:Name="ValidateButtonControl"
+            Grid.Row="2"
+            Width="150"
+            Height="50"
+            FontSize="15"
+            Click="ValidateButton_Click">
+            Validate
+        </Button>
+            
+    </Grid>
+</Window>

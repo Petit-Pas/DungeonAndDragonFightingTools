@@ -63,6 +63,8 @@
     <Compile Include="Converters\BoolToReversedBoolConverter.cs" />
     <Compile Include="Converters\BoolToReversedVisibilityConverter.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\IntEqualToZeroToVisibility.cs" />
+    <Compile Include="Converters\IntGreaterThanZeroToVisibility.cs" />
     <Compile Include="Converters\VisibleIfCharacter.cs" />
     <Compile Include="Game\Aggression\Attacks\Display\HitAttackResultEditableControl.xaml.cs">
       <DependentUpon>HitAttackResultEditableControl.xaml</DependentUpon>
@@ -302,6 +304,10 @@
     <Compile Include="Game\Entities\Character.cs" />
     <Compile Include="ValidationRules\RangedIntRule.cs" />
     <Compile Include="ValidationRules\ValidationRuleEventHandler.cs" />
+    <Compile Include="Windows\ModalWindows\BlankDiceRollModal\BlankDiceRollModal.xaml.cs">
+      <DependentUpon>BlankDiceRollModal.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ModalWindows\BlankDiceRollModal\BlankDiceRollModalDataContext.cs" />
     <Compile Include="Windows\ModalWindows\YesNoModal\AskYesNoDataContext.cs" />
     <Compile Include="Windows\ModalWindows\YesNoModal\AskYesNoWindow.xaml.cs">
       <DependentUpon>AskYesNoWindow.xaml</DependentUpon>
@@ -625,6 +631,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\TabControlStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ModalWindows\BlankDiceRollModal\BlankDiceRollModal.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

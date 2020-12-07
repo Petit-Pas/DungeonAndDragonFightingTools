@@ -4,6 +4,7 @@ using DDFight.Game.Fight.FightEvents;
 using DDFight.Tools;
 using DDFight.Windows;
 using DDFight.Windows.FightWindows;
+using DDFight.Windows.ModalWindows.BlankDiceRollModal;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -105,6 +106,22 @@ namespace DDFight.Controlers.Fight
             private DiceRoll _roll;
         }
 
+        private void ContextTempHealClick(object sender, RoutedEventArgs e)
+        {
+            BlankDiceRollModalDataContext context = new BlankDiceRollModalDataContext
+            {
+                WindowDesc = "Enter the amount (or the roll) for the temporary Hps",
+                WindowTitle = "Add Temporary Hps"
+            };
+            BlankDiceRollModal window = new BlankDiceRollModal { DataContext = context };
+
+            window.ShowCentered();
+            if (context.Validated == true)
+            {
+                data_context.HealTempHP(context.DiceRoll);
+            }
+        }
+
         private void ContextHeal_Click(object sender, RoutedEventArgs e)
         {
             HealWindow window = new HealWindow();
@@ -187,5 +204,6 @@ namespace DDFight.Controlers.Fight
             ((Character)data_context).HasInspiration = !((Character)data_context).HasInspiration;
             refresh_InspirationButton();
         }
+
     }
 }

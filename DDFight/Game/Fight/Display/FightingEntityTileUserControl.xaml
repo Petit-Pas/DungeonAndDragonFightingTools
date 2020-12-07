@@ -11,9 +11,12 @@
     <UserControl.Resources>
         <converters:BoolToCustomStringConverter x:Key="BoolCustomStringConverter" />
         <converters:VisibleIfCharacter x:Key="VisibleIfCharacter" />
+        <converters:IntEqualToZeroToVisibility x:Key="IntEqualToZeroToVisibility" />
+        <converters:IntGreaterThanZeroToVisibility x:Key="IntGreaterThanZeroToVisibility" />
         <ContextMenu x:Key="CMenu">
             <MenuItem Header="Take Damage" Click="ContextTakeDamage_Click"/>
             <MenuItem Header="Heal" Click="ContextHeal_Click" />
+            <MenuItem Header="Add temporary HP" Click="ContextTempHealClick"/>
             <MenuItem Header="Make a Saving Throw" Click="SavingThrow_Click"/>
             <MenuItem Header="Manage Statuses" Click="ContextManageStatus_Click"/>
             <MenuItem Header="{Binding IsTransformed, Converter={StaticResource BoolCustomStringConverter}, ConverterParameter=Transform\ Back|Transform}" Click="Transform_Click"/>
@@ -93,14 +96,29 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                
+
+                <!--
+                <TextBlock 
+                    Visibility="{Binding TempHp, Converter={StaticResource IntGreaterThanZeroToVisibility}}"
+                    Margin="10,0"
+                    FontSize="15"
+                    VerticalAlignment="Center">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0}(+{2}) / {1} Hps">
+                            <Binding Path="Hp" />
+                            <Binding Path="MaxHp" />
+                            <Binding Path="TempHp" />
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+-->
                 <TextBlock 
                     Margin="10,0"
                     FontSize="15"
                     VerticalAlignment="Center">
                     <TextBlock.Text>
                         <MultiBinding StringFormat="{}{0} / {1} Hps">
-                            <Binding Path="Hp" />
+                            <Binding Path="HpString" />
                             <Binding Path="MaxHp" />
                         </MultiBinding>
                     </TextBlock.Text>

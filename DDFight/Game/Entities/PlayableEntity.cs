@@ -103,6 +103,41 @@ namespace DDFight.Game
         }
         private uint _maxHp = 0;
 
+        [XmlIgnore]
+        public string HpString
+        { 
+            get {
+                string result = Hp.ToString();
+
+                if (TempHp != 0)
+                {
+                    result += "(+";
+                    result += TempHp.ToString();
+                    result += ")";
+                }
+                return result;
+            }
+            set
+            {
+                NotifyPropertyChanged();
+            }
+        }
+
+        [XmlAttribute]
+        public int TempHp
+        {
+            get => _tempHP;
+            set 
+            {
+                if (value != _tempHP)
+                {
+                    _tempHP = value;
+                    NotifyPropertyChanged();
+                    NotifyPropertyChanged("HpString");
+                }
+            }
+        }
+        private int _tempHP = 0;
 
         /// <summary>
         ///     Current Hps (Temporary Hps not taken into account)
@@ -117,6 +152,7 @@ namespace DDFight.Game
                 {
                     _hp = value;
                     NotifyPropertyChanged();
+                    NotifyPropertyChanged("HpString");
                 }
             }
         }
@@ -451,6 +487,29 @@ namespace DDFight.Game
 
         #region HpManagement
 
+        public void HealTempHP(DiceRoll to_roll)
+        {
+            to_roll.Roll();
+            int amount = to_roll.LastResult;
+            Paragraph paragraph = (Paragraph)Global.Context.UserLogs.Blocks.LastBlock;
+
+            paragraph.Inlines.Add(Extensions.BuildRun(this.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+
+            if (TempHp < amount)
+            {
+                paragraph.Inlines.Add(Extensions.BuildRun(" now has ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                paragraph.Inlines.Add(Extensions.BuildRun(amount.ToString(), (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                paragraph.Inlines.Add(Extensions.BuildRun(" temporary Hps.\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                TempHp = amount;
+            }
+            else
+            {
+                paragraph.Inlines.Add(Extensions.BuildRun(" keeps his ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                paragraph.Inlines.Add(Extensions.BuildRun(TempHp.ToString(), (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                paragraph.Inlines.Add(Extensions.BuildRun(" temporary Hps.\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+            }
+        }
+
         public void Heal(DiceRoll to_roll)
         {
             to_roll.Roll();
@@ -530,35 +589,56 @@ namespace DDFight.Game
                 total += damage_value;
                 i += 1;
             }
-            paragraph.Inlines.Add(Extensions.BuildRun("\nTotal: ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-            paragraph.Inlines.Add(Extensions.BuildRun(total.ToString(), (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-            paragraph.Inlines.Add(Extensions.BuildRun(" damage (", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-            paragraph.Inlines.Add(Extensions.BuildRun(Hp.ToString(), (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
-            paragraph.Inlines.Add(Extensions.BuildRun(" ==> ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-            paragraph.Inlines.Add(Extensions.BuildRun((Hp - total).ToString(), (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
-            paragraph.Inlines.Add(Extensions.BuildRun(").\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
             LooseHp(total);
         }
 
         public void LooseHp(int amount)
         {
-            int tempHp = Hp;
+            Paragraph paragraph = (Paragraph)Global.Context.UserLogs.Blocks.LastBlock;
 
-            tempHp -= amount;
-            if (tempHp <= 0)
+            paragraph.Inlines.Add(Extensions.BuildRun("\nTotal: ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+            paragraph.Inlines.Add(Extensions.BuildRun(amount.ToString(), (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+            paragraph.Inlines.Add(Extensions.BuildRun(" damage (", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+            paragraph.Inlines.Add(Extensions.BuildRun(HpString, (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
+            paragraph.Inlines.Add(Extensions.BuildRun(" ==> ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+
+            // handles temp HP
+            if (TempHp != 0)
             {
-                tempHp = 0;
+                if (TempHp - amount < 0)
+                {
+                    amount -= TempHp;
+                    TempHp = 0;
+                }
+                else
+                {
+                    TempHp -= amount;
+                    amount = 0;
+                }
+            }
+
+            // removes remaining HPs
+            Hp -= amount;
+
+            paragraph.Inlines.Add(Extensions.BuildRun(HpString, (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
+            paragraph.Inlines.Add(Extensions.BuildRun(").\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+
+
+            // handles 0 HP
+            if (Hp <= 0)
+            {
+                Hp = 0;
                 if (IsFocused == true)
                 {
                     IsFocused = false;
-                    Paragraph paragraph = (Paragraph)Global.Context.UserLogs.Blocks.LastBlock;
                     paragraph.Inlines.Add(Extensions.BuildRun(this.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
                     paragraph.Inlines.Add(Extensions.BuildRun(": Has reached", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
                     paragraph.Inlines.Add(Extensions.BuildRun(" 0 Hps", (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
                     paragraph.Inlines.Add(Extensions.BuildRun(", lost Focus.", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
                 }
             }
-            Hp = tempHp;
+
+            // handles Concentration Check if required
             if (IsFocused)
             {
                 ConcentrationCheckWindow window = new ConcentrationCheckWindow();
@@ -672,6 +752,7 @@ namespace DDFight.Game
             SpecialAbilities = (string)to_copy.SpecialAbilities.Clone();
             Counters = to_copy.Counters.Clone();
             Spells = (SpellsList)to_copy.Spells.Clone();
+            TempHp = to_copy.TempHp;
         }
 
         /// <summary>
