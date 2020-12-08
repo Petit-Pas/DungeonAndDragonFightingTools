@@ -52,6 +52,8 @@
                     <RowDefinition Height="Auto"/>
                     <!-- Current HPs -->
                     <RowDefinition Height="Auto"/>
+                    <!-- Temporary HPs -->
+                    <RowDefinition Height="Auto"/>
                     <!-- Inspiration -->
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -123,10 +125,19 @@
 
                 <TextBlock
                     Grid.Row="6">
+                    Temporary HPs
+                </TextBlock>
+                <input:PositiveIntTextBox
+                    Grid.Row="6" Grid.Column="1"
+                    Margin="0, 5, 10, 5"
+                    PropertyPath="TempHp"/>
+
+                <TextBlock
+                    Grid.Row="7">
                     Has Inpiration
                 </TextBlock>
                 <CheckBox
-                    Grid.Row="6" Grid.Column="1"
+                    Grid.Row="7" Grid.Column="1"
                     HorizontalAlignment="Left"
                     IsChecked="{Binding HasInspiration}"/>
 
