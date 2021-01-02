@@ -1,4 +1,5 @@
 ﻿using DDFight.Game;
+using DDFight.Game.Fight.Display;
 using DDFight.Tools;
 using DDFight.Tools.Save;
 using DDFight.Windows;
@@ -74,6 +75,9 @@ namespace DDFight
                 Global.Context.FightContext.FightersList.SetTurnOrders();
 
                 Global.Context.UserLogs = new FlowDocument();
+
+                FightingEntityListSelectableWindow win = new FightingEntityListSelectableWindow{ MaximumSelected = 3, CanSelectSameTargetTwice = true };
+                win.ShowCentered();
 
                 MainFightWindow fightWindow = new MainFightWindow();
                 fightWindow.DataContext = Global.Context;

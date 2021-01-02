@@ -97,21 +97,6 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <!--
-                <TextBlock 
-                    Visibility="{Binding TempHp, Converter={StaticResource IntGreaterThanZeroToVisibility}}"
-                    Margin="10,0"
-                    FontSize="15"
-                    VerticalAlignment="Center">
-                    <TextBlock.Text>
-                        <MultiBinding StringFormat="{}{0}(+{2}) / {1} Hps">
-                            <Binding Path="Hp" />
-                            <Binding Path="MaxHp" />
-                            <Binding Path="TempHp" />
-                        </MultiBinding>
-                    </TextBlock.Text>
-                </TextBlock>
--->
                 <TextBlock 
                     Margin="10,0"
                     FontSize="15"

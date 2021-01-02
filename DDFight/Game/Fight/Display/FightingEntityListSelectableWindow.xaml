@@ -1,0 +1,144 @@
+﻿<Window x:Class="DDFight.Game.Fight.Display.FightingEntityListSelectableWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DDFight.Game.Fight.Display" xmlns:converters="clr-namespace:DDFight.Converters"
+        mc:Ignorable="d"
+        Title="FightingEntityListSelectableWindow" Height="450" Width="850"
+        x:Name="FightingEntityListSelectableWindowControl"
+        Style="{StaticResource WindowStyle}"
+        Closing="FightingEntityListSelectableWindowControl_Closing">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/ScrollBarStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/ListBoxStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <converters:BoolToCustomStringConverter x:Key="BoolToCustomStringConverter" />
+            <converters:IntGreaterThanZeroToVisibility x:Key="IntGreaterThanZeroToVisibility" />
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        
+        <GroupBox
+            Grid.Column="0"
+            BorderBrush="{StaticResource Light}"
+            BorderThickness="1"
+            Margin="5">
+            <GroupBox.Header>
+                <TextBlock
+                    FontSize="15"
+                    FontWeight="SemiBold"
+                    Foreground="{StaticResource Light}">
+                    Characters
+                </TextBlock>
+            </GroupBox.Header>
+            <Grid
+                
+                Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBox
+                    x:Name="FilterTextBox"
+                    KeyUp="FilterTextBox_KeyUp"
+                    Margin="5, 0, 5, 5"
+                    Background="{StaticResource Gray}"
+                    Foreground="{StaticResource Light}"
+                    BorderBrush="{StaticResource Light}">
+                </TextBox>
+                <ListBox
+                    VirtualizingPanel.IsVirtualizing="False"
+                    Grid.Row="1" Grid.Column="0"
+                    x:Name="SelectFromListControl"
+                    KeyDown="SelectFromListControl_KeyDown">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding DisplayName}" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                   
+                </ListBox>
+            </Grid>
+        </GroupBox>
+
+
+        <GroupBox
+            Grid.Column="1"
+            Margin="5"
+            BorderBrush="{StaticResource Light}">
+            <GroupBox.Header>
+                <TextBlock
+                    FontSize="15"
+                    FontWeight="SemiBold"
+                    Foreground="{StaticResource Light}">
+                    Selected
+                </TextBlock>
+            </GroupBox.Header>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock 
+                    Grid.Row="0" Grid.Column="0"
+                    Margin="5, 5, 5, 0"
+                    Foreground="{StaticResource Light}">
+                    <Run Text="Targets can be selected twice: " />
+                    <Run FontWeight="Bold" Text="{Binding CanSelectSameTargetTwice, ElementName=FightingEntityListSelectableWindowControl, Converter={StaticResource BoolToCustomStringConverter}, ConverterParameter='Yes|No' }"/>
+                </TextBlock>
+
+                <TextBlock 
+                    Grid.Row="0" Grid.Column="1"
+                    Margin="5, 5, 5, 0"
+                    Foreground="{StaticResource Light}"
+                    Visibility="{Binding MaximumSelected, ElementName=FightingEntityListSelectableWindowControl, Converter={StaticResource IntGreaterThanZeroToVisibility}}">
+                    <Run Text="Maximum amount of targets: " />
+                    <Run FontWeight="Bold" Text="{Binding MaximumSelected, ElementName=FightingEntityListSelectableWindowControl}"/>
+                </TextBlock>
+
+                <ListBox
+                    Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                    Margin="5"
+                    x:Name="SelectedListControl"
+                    KeyDown="SelectedListControl_KeyDown"
+                    Background="{StaticResource Gray}"
+                    BorderBrush="{StaticResource Light}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding DisplayName}" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+
+                </ListBox>
+            </Grid>
+        </GroupBox>
+
+        <Button
+            Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+            x:Name="ValidateButton"
+            FontSize="20"
+            Margin="15"
+            IsEnabled="False"
+            Click="ValidateButton_Click">
+            Validate
+        </Button>
+        
+    </Grid>
+</Window>

@@ -98,6 +98,9 @@
     <Compile Include="Game\Aggression\Spells\Display\SpellListEditableUserControl.xaml.cs">
       <DependentUpon>SpellListEditableUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Game\Fight\Display\FightingEntityListSelectableWindow.xaml.cs">
+      <DependentUpon>FightingEntityListSelectableWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Game\Status\ApplicationModifierEnum.cs" />
     <Compile Include="Game\Status\Display\ApplicationModifierEnumListSelectableUserControl.xaml.cs">
       <DependentUpon>ApplicationModifierEnumListSelectableUserControl.xaml</DependentUpon>
@@ -431,6 +434,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Game\Fight\Display\FightingEntityListSelectableWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Game\Fight\Display\FightingEntityListUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -619,6 +626,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Styles\CheckBoxStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\ListBoxStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

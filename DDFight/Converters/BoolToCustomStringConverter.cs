@@ -24,6 +24,7 @@ namespace DDFight.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            DDFight.Tools.Logger.Log("ERROR: BoolToCustimStringConverter was used in the wrong direction");
             return null;
         }
     }
