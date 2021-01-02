@@ -14,6 +14,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/ScrollBarStyle.xaml"/>
                 <ResourceDictionary Source="/Styles/ListBoxStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/ScrollBarStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <converters:BoolToCustomStringConverter x:Key="BoolToCustomStringConverter" />
             <converters:IntGreaterThanZeroToVisibility x:Key="IntGreaterThanZeroToVisibility" />
@@ -63,6 +64,9 @@
                     Grid.Row="1" Grid.Column="0"
                     x:Name="SelectFromListControl"
                     KeyDown="SelectFromListControl_KeyDown">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem" BasedOn="{StaticResource ListBoxItemCustomStyle}" />
+                    </ListBox.ItemContainerStyle>
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding DisplayName}" />

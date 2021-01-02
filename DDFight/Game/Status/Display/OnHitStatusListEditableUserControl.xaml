@@ -9,10 +9,16 @@
              d:DesignHeight="450" d:DesignWidth="800"
              x:Name="OnHitStatusListEditableControl">
     <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/ScrollBarStyle.xaml" />
+                <ResourceDictionary Source="/Styles/ListBoxStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
         <Style TargetType="TextBlock" >
             <Setter Property="Foreground" Value="{StaticResource Light}"/>
         </Style>
         <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        </ResourceDictionary>
     </UserControl.Resources>
     <GroupBox
         Foreground="{StaticResource LightestGray}">
@@ -39,16 +45,11 @@
                 HorizontalContentAlignment="Stretch"
                 BorderThickness="0">
                 <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem">
-                        <Setter Property="BorderBrush" Value="{StaticResource Light}"/>
-                        <Setter Property="BorderThickness" Value="2" />
-                        <Setter Property="Margin" Value="2" />
-                    </Style>
+                    <Style TargetType="ListBoxItem" BasedOn="{StaticResource ListBoxItemCustomStyle}" />
                 </ListBox.ItemContainerStyle>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid
-                            Background="{StaticResource Gray}"
                             ToolTip="{Binding ToolTip}">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -61,7 +62,7 @@
                             
                             <TextBlock 
                                 Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
-                                Margin="2"
+                                Margin="5"
                                 Text="{Binding Header}"
                                 Foreground="{StaticResource Light}"
                                 FontSize="14"/>

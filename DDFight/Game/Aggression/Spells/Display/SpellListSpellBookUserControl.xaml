@@ -7,6 +7,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/ListBoxStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
         <Style TargetType="TextBox" x:Key="FilterTextBoxStyle">
             <Setter Property="Background" Value="{StaticResource Gray}"/>
             <Setter Property="Foreground" Value="{StaticResource Light}"/>
@@ -14,6 +18,7 @@
         <Style TargetType="TextBlock" x:Key="SpellStyle">
             <Setter Property="Foreground" Value="{StaticResource Light}"/>
         </Style>
+        </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -54,17 +59,16 @@
                     Grid.Row="1"
                     x:Name="AllSpellsControl"
                     VirtualizingPanel.IsVirtualizing="False"
-                    PreviewKeyDown="AllSpellsControl_PreviewKeyDown"
-                    Background="{StaticResource Gray}"
-                    DisplayMemberPath="Name">
+                    PreviewKeyDown="AllSpellsControl_PreviewKeyDown">
                     <ListBox.ItemContainerStyle>
-                        <Style TargetType="ListBoxItem">
-                            <Setter Property="Foreground" Value="{StaticResource Light}"/>
-                            <Setter Property="BorderThickness" Value="2"/>
-                            <Setter Property="Margin" Value="3"/>
-                            <Setter Property="BorderBrush" Value="{StaticResource Light}"/>
-                        </Style>
+                        <Style TargetType="ListBoxItem" BasedOn="{StaticResource ListBoxItemCustomStyle}" />
+
                     </ListBox.ItemContainerStyle>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
                 </ListBox>
             </Grid>
         </GroupBox>
@@ -105,8 +109,6 @@
                     VirtualizingPanel.IsVirtualizing="False"
                     KeyDown="EntitySpellsControl_KeyDown"
                     MouseDoubleClick="EntitySpellsControl_MouseDoubleClick"
-                    DisplayMemberPath="Name"
-                    Background="{StaticResource Gray}"
                     >
                     <ListBox.Resources>
                         <ContextMenu x:Key="CMenu">
@@ -116,14 +118,15 @@
                         </ContextMenu>
                     </ListBox.Resources>
                     <ListBox.ItemContainerStyle>
-                        <Style TargetType="ListBoxItem">
-                            <Setter Property="ContextMenu" Value="{StaticResource CMenu}"></Setter>
-                            <Setter Property="Foreground" Value="{StaticResource Light}"/>
-                            <Setter Property="BorderThickness" Value="2"/>
-                            <Setter Property="Margin" Value="3"/>
-                            <Setter Property="BorderBrush" Value="{StaticResource Light}"/>
+                        <Style TargetType="ListBoxItem" BasedOn="{StaticResource ListBoxItemCustomStyle}">
+                            <Setter Property="ContextMenu" Value="{StaticResource CMenu}" />
                         </Style>
                     </ListBox.ItemContainerStyle>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
                 </ListBox>
 
                 <Button

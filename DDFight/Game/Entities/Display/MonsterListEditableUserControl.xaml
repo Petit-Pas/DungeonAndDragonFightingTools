@@ -10,6 +10,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/ScrollBarStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/ListBoxStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -55,7 +56,6 @@
                     Background="{StaticResource Gray}"
                     x:Name="MonsterList" 
                     Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
-                    DisplayMemberPath="Name"
                     MouseDoubleClick="MonsterList_MouseDoubleClick"
                     KeyDown="MonsterList_KeyDown"
                     VirtualizingPanel.IsVirtualizing="False">
@@ -69,14 +69,13 @@
                         </ContextMenu>
                     </ListBox.Resources>
                     <ListBox.ItemContainerStyle>
-                        <Style TargetType="ListBoxItem">
-                            <Setter Property="ContextMenu" Value="{StaticResource CMenu}"/>
-                            <Setter Property="BorderBrush" Value="{StaticResource Light}"/>
-                            <Setter Property="Margin" Value="3"/>
-                            <Setter Property="Foreground" Value="{StaticResource Light}"/>
-                            <Setter Property="BorderThickness" Value="2"/>
-                        </Style>
+                        <Style TargetType="ListBoxItem" BasedOn="{StaticResource ListBoxItemCustomStyle}" />
                     </ListBox.ItemContainerStyle>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
                 </ListBox>
                 <Button 
                     Grid.Row="1" Grid.Column="0" 

@@ -6,6 +6,14 @@
              xmlns:local="clr-namespace:DDFight.Controlers"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/ListBoxStyle.xaml" />
+                <ResourceDictionary Source="/Styles/ScrollBarStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <GroupBox
         MinWidth="200"
         Foreground="{StaticResource Light}">
@@ -37,7 +45,6 @@
             <ListBox 
                 Grid.Row="1"
                 x:Name="CharactersList"
-                DisplayMemberPath="DisplayName"
                 Background="{StaticResource Gray}"
                 KeyDown="CharactersList_KeyDown">
                 <ListBox.Resources>
@@ -48,14 +55,15 @@
                     </ContextMenu>
                 </ListBox.Resources>
                 <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem">
+                    <Style TargetType="ListBoxItem" BasedOn="{StaticResource ListBoxItemCustomStyle}">
                         <Setter Property="ContextMenu" Value="{StaticResource CMenu}"/>
-                        <Setter Property="BorderBrush" Value="{StaticResource Light}"/>
-                        <Setter Property="Margin" Value="3"/>
-                        <Setter Property="Foreground" Value="{StaticResource Light}"/>
-                        <Setter Property="BorderThickness" Value="2"/>
                     </Style>
                 </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding DisplayName}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
             </ListBox>
         </Grid>
         
