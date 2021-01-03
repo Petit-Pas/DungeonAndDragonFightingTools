@@ -49,8 +49,7 @@ namespace DDFight.Windows
 
         private void FilterTextBox_KeyUp(object sender, KeyEventArgs e)
         {
-            CharacterListControl.FilterPlayableEntityListBox(FilterTextBox.Text);
-
+            CharacterListControl.FilterINameableListBox(FilterTextBox.Text);
         }
 
         private void FilterTextBox_LostFocus(object sender, RoutedEventArgs e)

@@ -103,7 +103,7 @@ namespace DDFight.Controlers
 
         private void FilterTextBox_KeyUp(object sender, KeyEventArgs e)
         {
-            CharactersList.FilterPlayableEntityListBox(FilterTextBox.Text);
+            CharactersList.FilterINameableListBox(FilterTextBox.Text);
         }
     }
 }

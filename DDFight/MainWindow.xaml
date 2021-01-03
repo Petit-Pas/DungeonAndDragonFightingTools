@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ctrl="clr-namespace:DDFight.Controlers"
         xmlns:fight="clr-namespace:DDFight.Controlers.Fight"
-        xmlns:spells="clr-namespace:DDFight.Game.Aggression.Spells"
+        xmlns:spells="clr-namespace:DDFight.Game.Aggression.Spells.Display"
         mc:Ignorable="d"
         Title="Dungeons &amp; Dragons Fighting Tool" Height="450" Width="800"
         x:Name="Window">
@@ -53,7 +53,8 @@
                         Spells
                     </TextBlock>
                 </TabItem.Header>
-                <spells:SpellListEditableUserControl/>
+                <spells:SpellListEditableUserControl
+                    x:Name="GlobalSpellListControl"/>
             </TabItem>
             
         </TabControl>

@@ -1,6 +1,7 @@
 ﻿using DDFight.Game.Aggression.Spells.Display;
 using DDFight.Game.Characteristics;
 using DDFight.Game.Status;
+using DDFight.Tools;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,11 +12,13 @@ using System.Xml.Serialization;
 
 namespace DDFight.Game.Aggression
 {
-    public class Spell : AAttackTemplate, ICloneable
+    public class Spell : AAttackTemplate, ICloneable, INameable
     {
         public Spell () : base()
         {
         }
+
+        public string GetName() { return Name; }
 
         #region Properties
 

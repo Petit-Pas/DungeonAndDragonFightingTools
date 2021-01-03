@@ -172,7 +172,7 @@ namespace DDFight.Controlers
 
         private void FilterTextBox_KeyUp(object sender, KeyEventArgs e)
         {
-            MonsterList.FilterPlayableEntityListBox(FilterTextBox.Text);
+            MonsterList.FilterINameableListBox(FilterTextBox.Text);
         }
     }
 }

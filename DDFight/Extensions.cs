@@ -167,7 +167,7 @@ namespace DDFight
             return result;
         }
 
-        public static void FilterSpellListBox(this FrameworkElement element, string filter)
+        public static void FilterINameableListBox(this FrameworkElement element, string filter)
         {
             for (int i = 0; i != VisualTreeHelper.GetChildrenCount(element); i += 1)
             {
@@ -179,39 +179,14 @@ namespace DDFight
                         child.Visibility = Visibility.Visible;
                         if (filter != "")
                         {
-                            Spell ctx = (Spell)child.DataContext;
-                            if (!ctx.Name.ToLower().Contains(filter.ToLower()))
+                            INameable ctx = (INameable)child.DataContext;
+                            if (!ctx.GetName().ToLower().Contains(filter.ToLower()))
                                 child.Visibility = Visibility.Collapsed;
                         }
                     }
                     else
                     {
-                        child.FilterSpellListBox(filter);
-                    }
-                }
-            }
-        }
-
-        public static void FilterPlayableEntityListBox(this FrameworkElement element, string filter)
-        {
-            for (int i = 0; i != VisualTreeHelper.GetChildrenCount(element); i += 1)
-            {
-                FrameworkElement child = VisualTreeHelper.GetChild(element, i) as FrameworkElement;
-                if (child != null)
-                {
-                    if (child is ListBoxItem)
-                    {
-                        child.Visibility = Visibility.Visible;
-                        if (filter != "")
-                        {
-                            PlayableEntity ctx = (PlayableEntity)child.DataContext;
-                            if (!ctx.Name.ToLower().Contains(filter.ToLower()))
-                                child.Visibility = Visibility.Collapsed;
-                        }
-                    }
-                    else
-                    {
-                        child.FilterPlayableEntityListBox(filter);
+                        child.FilterINameableListBox(filter);
                     }
                 }
             }

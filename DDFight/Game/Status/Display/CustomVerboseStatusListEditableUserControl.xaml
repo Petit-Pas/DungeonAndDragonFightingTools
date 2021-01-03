@@ -6,9 +6,15 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <Style TargetType="TextBlock" >
-            <Setter Property="Foreground" Value="{StaticResource Light}"/>
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/ScrollBarStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/ListBoxStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="TextBlock" >
+                <Setter Property="Foreground" Value="{StaticResource Light}"/>
+            </Style>
+        </ResourceDictionary>
     </UserControl.Resources>
     <GroupBox
         Foreground="{StaticResource LightestGray}">
@@ -29,18 +35,18 @@
                 Grid.Row="0"
                 x:Name="StatusListControl"
                 Background="{StaticResource Gray}"
-                DisplayMemberPath="Header"
                 KeyDown="StatusListControl_KeyDown"
                 MouseDoubleClick="StatusListControl_MouseDoubleClick">
                 <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem">
-                        <Setter Property="BorderBrush" Value="{StaticResource Light}"/>
-                        <Setter Property="Margin" Value="3"/>
-                        <Setter Property="Foreground" Value="{StaticResource Light}"/>
-                        <Setter Property="BorderThickness" Value="2"/>
+                    <Style TargetType="ListBoxItem" BasedOn="{StaticResource ListBoxItemCustomStyle}">
                         <Setter Property="ToolTip" Value="{Binding ToolTip}"/>
                     </Style>
                 </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Header}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
             </ListBox>
 
             <Button

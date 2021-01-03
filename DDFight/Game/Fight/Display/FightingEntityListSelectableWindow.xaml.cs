@@ -94,7 +94,7 @@ namespace DDFight.Game.Fight.Display
 
         private void FilterTextBox_KeyUp(object sender, KeyEventArgs e)
         {
-            SelectFromListControl.FilterPlayableEntityListBox(FilterTextBox.Text);
+            SelectFromListControl.FilterINameableListBox(FilterTextBox.Text);
         }
 
         #endregion Filter

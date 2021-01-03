@@ -1,8 +1,9 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace DDFight.Game.Aggression.Spells
+namespace DDFight.Game.Aggression.Spells.Display
 {
     /// <summary>
     /// Interaction logic for SpellListEditableUserControl.xaml
@@ -14,10 +15,7 @@ namespace DDFight.Game.Aggression.Spells
         /// </summary>
         private SpellsList data_context
         {
-            get
-            {
-                return Global.Context.SpellList;
-            }
+            get => (SpellsList)DataContext;
         }
 
         /// <summary>
@@ -156,7 +154,7 @@ namespace DDFight.Game.Aggression.Spells
 
         private void FilterTextBox_KeyUp(object sender, KeyEventArgs e)
         {
-            SpellList.FilterPlayableEntityListBox(FilterTextBox.Text);
+            SpellList.FilterINameableListBox(FilterTextBox.Text);
         }
     }
 }

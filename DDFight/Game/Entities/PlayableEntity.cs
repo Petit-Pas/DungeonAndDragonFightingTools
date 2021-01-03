@@ -22,11 +22,13 @@ using DDFight.Game.Aggression.Spells;
 
 namespace DDFight.Game
 {
-    public class PlayableEntity : ICloneable, INotifyPropertyChanged, ICopyAssignable /*, INotifyPropertyChangedSub*/
+    public class PlayableEntity : ICloneable, INotifyPropertyChanged, ICopyAssignable, INameable
     {
         public PlayableEntity()
         {
         }
+
+        public string GetName() { return Name; }
 
         [XmlIgnore]
         public bool Validated = false;

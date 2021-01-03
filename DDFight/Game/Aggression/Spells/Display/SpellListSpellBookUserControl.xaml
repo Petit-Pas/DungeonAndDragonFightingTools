@@ -20,124 +20,26 @@
         </Style>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid>
+    <Grid
+        ShowGridLines="True">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <GroupBox
-                Margin="5">
-            <GroupBox.Header>
-                <TextBlock
-                    FontWeight="SemiBold"
-                    FontSize="15">
-                    All Spells
-                </TextBlock>
-            </GroupBox.Header>
-            <Grid
-                Grid.Row="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
+        <local:SpellListEditableUserControl
+            Grid.Row="0"
+            Margin="5, 5, 5, 0"
+            x:Name="AllSpellsControl"
+            />
 
-                <TextBox
-                    Style="{StaticResource FilterTextBoxStyle}"
-                    Margin="0, 5"
-                    Grid.Row="0"
-                    x:Name="AllSpellsFilterTextBoxControl"
-                    KeyUp="AllSpellsFilterTextBoxControl_KeyUp"/>
-
-                <ListBox
-                    Grid.Row="1"
-                    x:Name="AllSpellsControl"
-                    VirtualizingPanel.IsVirtualizing="False"
-                    PreviewKeyDown="AllSpellsControl_PreviewKeyDown">
-                    <ListBox.ItemContainerStyle>
-                        <Style TargetType="ListBoxItem" BasedOn="{StaticResource ListBoxItemCustomStyle}" />
-
-                    </ListBox.ItemContainerStyle>
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Name}" />
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </Grid>
-        </GroupBox>
-
-        <GroupBox
+        <local:SpellListEditableUserControl 
             Grid.Row="1"
-            Margin="5">
-            <GroupBox.Header>
-                <TextBlock
-                    FontWeight="SemiBold"
-                    FontSize="15">
-                    Your Spells
-                </TextBlock>
-            </GroupBox.Header>
-
-            <Grid
-                Grid.Row="1"
-                ShowGridLines="False">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-
-                <TextBox
-                    Style="{StaticResource FilterTextBoxStyle}"
-                    Margin="0, 5"
-                    Grid.Row="0"
-                    x:Name="EntitySpellsFilterTextBoxControl"
-                    KeyUp="EntitySpellsFilterTextBoxControl_KeyUp"/>
-
-                <ListBox
-                    Grid.Row="1"
-                    x:Name="EntitySpellsControl"
-                    VirtualizingPanel.IsVirtualizing="False"
-                    KeyDown="EntitySpellsControl_KeyDown"
-                    MouseDoubleClick="EntitySpellsControl_MouseDoubleClick"
-                    >
-                    <ListBox.Resources>
-                        <ContextMenu x:Key="CMenu">
-                            <MenuItem Header="Edit" Click="EditEntitySpellContextMenu_Click" />
-                            <MenuItem Header="Duplicate" Click="DuplicateEntitySpellContextMenu_Click"/>
-                            <MenuItem Header="Delete" Click="DeleteEntitySpellContextMenu_Click"/>
-                        </ContextMenu>
-                    </ListBox.Resources>
-                    <ListBox.ItemContainerStyle>
-                        <Style TargetType="ListBoxItem" BasedOn="{StaticResource ListBoxItemCustomStyle}">
-                            <Setter Property="ContextMenu" Value="{StaticResource CMenu}" />
-                        </Style>
-                    </ListBox.ItemContainerStyle>
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Name}" />
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-
-                <Button
-                    Grid.Row="2" Grid.Column="0"
-                    Margin="5, 2"
-                    Click="AddNewSpellButton_Click">
-                    Add new spell
-                </Button>
-
-            </Grid>
-        </GroupBox>
+            Margin="5"
+            x:Name="EntitySpellsControl"/>
 
     </Grid>
 </UserControl>

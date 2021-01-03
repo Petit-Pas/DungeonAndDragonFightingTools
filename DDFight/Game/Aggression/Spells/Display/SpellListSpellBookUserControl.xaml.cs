@@ -30,58 +30,24 @@ namespace DDFight.Game.Aggression.Spells.Display
             InitializeComponent();
 
             Loaded += SpellListSpellBookUserControl_Loaded;
-            AllSpellsFilterTextBoxControl.GotFocus += AllSpellsFilterTextBoxControl_GotFocus;
-            AllSpellsFilterTextBoxControl.LostFocus += AllSpellsFilterTextBoxControl_LostFocus;
-            AllSpellsFilterTextBoxControl.Text = filterPlaceholder;
-            EntitySpellsFilterTextBoxControl.GotFocus += EntitySpellsFilterTextBoxControl_GotFocus;
-            EntitySpellsFilterTextBoxControl.LostFocus += EntitySpellsFilterTextBoxControl_LostFocus;
-            EntitySpellsFilterTextBoxControl.Text = filterPlaceholder;
         }
 
-        #region Filtering
-
-        private string filterPlaceholder = "Filter...";
-
-        private void AllSpellsFilterTextBoxControl_GotFocus(object sender, RoutedEventArgs e)
-        {
-            if (AllSpellsFilterTextBoxControl.Text == filterPlaceholder)
-                AllSpellsFilterTextBoxControl.Text = "";
-        }
-
-        private void EntitySpellsFilterTextBoxControl_GotFocus(object sender, RoutedEventArgs e)
-        {
-            if (EntitySpellsFilterTextBoxControl.Text == filterPlaceholder)
-                EntitySpellsFilterTextBoxControl.Text = "";
-        }
-
-        private void AllSpellsFilterTextBoxControl_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(AllSpellsFilterTextBoxControl.Text))
-                AllSpellsFilterTextBoxControl.Text = filterPlaceholder;
-        }
-
-        private void EntitySpellsFilterTextBoxControl_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(EntitySpellsFilterTextBoxControl.Text))
-                EntitySpellsFilterTextBoxControl.Text = filterPlaceholder;
-        }
         private void SpellListSpellBookUserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            AllSpellsControl.ItemsSource = Global.Context.SpellList.Spells;
-            EntitySpellsControl.ItemsSource = data_context.Spells;
+            AllSpellsControl.DataContext = Global.Context.SpellList;
+            EntitySpellsControl.DataContext = data_context;
+            AllSpellsControl.SpellList.PreviewKeyDown += AllSpellList_PreviewKeyDown;
         }
 
-        private void EntitySpellsFilterTextBoxControl_KeyUp(object sender, KeyEventArgs e)
+        private void AllSpellList_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            EntitySpellsControl.FilterSpellListBox(EntitySpellsFilterTextBoxControl.Text);
+            if (e.Key == Key.Enter)
+            {
+                if (AllSpellsControl.SpellList.SelectedIndex != -1)
+                    addSpell((Spell)((Spell)AllSpellsControl.SpellList.SelectedItem).Clone());
+                e.Handled = true;
+            }
         }
-
-        private void AllSpellsFilterTextBoxControl_KeyUp(object sender, KeyEventArgs e)
-        {
-            AllSpellsControl.FilterSpellListBox(AllSpellsFilterTextBoxControl.Text);
-        }
-
-        #endregion Filtering
 
         #region EditLists
 
@@ -90,41 +56,31 @@ namespace DDFight.Game.Aggression.Spells.Display
             data_context.AddSpell(spell);
         }
 
-        private void AllSpellsControl_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Down)
-            {
-                if (AllSpellsControl.SelectedIndex != -1)
-                    addSpell((Spell)((Spell)AllSpellsControl.SelectedItem).Clone());
-                e.Handled = true;
-            }
-        }
-
         private void removeSelectedEntitySpell()
         {
-            data_context.RemoveSpell((Spell)EntitySpellsControl.SelectedItem);
+            data_context.RemoveSpell((Spell)EntitySpellsControl.SpellList.SelectedItem);
         }
 
         private void EntitySpellsControl_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Delete)
             {
-                if (EntitySpellsControl.SelectedIndex != -1)
+                if (EntitySpellsControl.SpellList.SelectedIndex != -1)
                     removeSelectedEntitySpell();
             }
         }
 
         private void DeleteEntitySpellContextMenu_Click(object sender, RoutedEventArgs e)
         {
-            if (EntitySpellsControl.SelectedIndex != -1)
+            if (EntitySpellsControl.SpellList.SelectedIndex != -1)
             removeSelectedEntitySpell();
         }
 
         private void DuplicateEntitySpellContextMenu_Click(object sender, RoutedEventArgs e)
         {
-            if (EntitySpellsControl.SelectedIndex != -1)
+            if (EntitySpellsControl.SpellList.SelectedIndex != -1)
             {
-                Spell new_spell = (Spell)((Spell)AllSpellsControl.SelectedItem).Clone();
+                Spell new_spell = (Spell)((Spell)AllSpellsControl.SpellList.SelectedItem).Clone();
                 new_spell.Name += " - copy";
                 addSpell(new_spell);
             }
@@ -138,14 +94,14 @@ namespace DDFight.Game.Aggression.Spells.Display
 
         private void EditEntitySpellContextMenu_Click(object sender, RoutedEventArgs e)
         {
-            if (EntitySpellsControl.SelectedIndex != -1)
-                editSpell((Spell)EntitySpellsControl.SelectedItem);
+            if (EntitySpellsControl.SpellList.SelectedIndex != -1)
+                editSpell((Spell)EntitySpellsControl.SpellList.SelectedItem);
         }
 
         private void EntitySpellsControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (EntitySpellsControl.SelectedIndex != -1)
-                editSpell((Spell)EntitySpellsControl.SelectedItem);
+            if (EntitySpellsControl.SpellList.SelectedIndex != -1)
+                editSpell((Spell)EntitySpellsControl.SpellList.SelectedItem);
         }
 
         #endregion EditLists

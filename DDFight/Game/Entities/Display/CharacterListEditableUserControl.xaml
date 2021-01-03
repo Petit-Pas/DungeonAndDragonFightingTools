@@ -27,7 +27,7 @@
         <Grid 
             Background="{StaticResource LightestGray}"
             x:Name="CharactersGrid" 
-            Margin="10">
+            Margin="10, 5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>

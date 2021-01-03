@@ -56,6 +56,13 @@ namespace DDFight
             DataContext = Global.Context;
 
             InitializeComponent();
+
+            Loaded += MainWindow_Loaded;
+        }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            GlobalSpellListControl.DataContext = Global.Context.SpellList;
         }
 
         private void FightingCharacters_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)

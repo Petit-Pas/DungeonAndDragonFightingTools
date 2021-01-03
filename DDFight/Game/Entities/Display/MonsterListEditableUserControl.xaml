@@ -24,7 +24,9 @@
                 Monsters' List
             </TextBlock>
         </GroupBox.Header>
-        <Grid x:Name="MonstersGrid" Margin="10"
+        <Grid 
+            x:Name="MonstersGrid" 
+            Margin="10, 5"
           Background="{StaticResource LightestGray}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>

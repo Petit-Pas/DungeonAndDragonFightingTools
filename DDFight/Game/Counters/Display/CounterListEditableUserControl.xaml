@@ -6,6 +6,13 @@
              xmlns:local="clr-namespace:DDFight.Game.Counters.Display"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/ListBoxStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <GroupBox        
         Margin="0, 5, 0, 0"
         BorderBrush="{StaticResource LightestGray}">
@@ -27,21 +34,22 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <ListView
+            <ListBox
                 x:Name="CounterListControl"
                 ItemsSource="{Binding}"
-                Background="{StaticResource LightestGray}"
                 Margin="5"
                 SelectionChanged="CounterListControl_SelectionChanged"
                 KeyDown="CounterListControl_KeyDown"
                 ScrollViewer.VerticalScrollBarVisibility="Auto"
                 VirtualizingPanel.IsVirtualizing="False">
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem" BasedOn="{StaticResource ListBoxItemCustomStyle}">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        <Setter Property="BorderThickness" Value="1" />
+                        <Setter Property="Margin" Value="2, 3" />
                     </Style>
-                </ListView.ItemContainerStyle>
-                <ListView.ItemTemplate>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
                             <Grid.RowDefinitions>
@@ -52,14 +60,11 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <local:CounterEditableUserControl
-                                Background="{StaticResource Gray}"/>
-                            <Separator
-                                Grid.Row="1"/>
+                            <local:CounterEditableUserControl/>
                         </Grid>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                </ListBox.ItemTemplate>
+            </ListBox>
 
             <Grid
                 Grid.Row="1">
