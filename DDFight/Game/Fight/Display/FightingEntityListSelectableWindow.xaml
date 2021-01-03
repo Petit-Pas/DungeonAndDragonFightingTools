@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DDFight.Game.Fight.Display" xmlns:converters="clr-namespace:DDFight.Converters"
+        xmlns:local="clr-namespace:DDFight.Game.Fight.Display" xmlns:converters="clr-namespace:DDFight.Converters" xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes"
         mc:Ignorable="d"
         Title="FightingEntityListSelectableWindow" Height="450" Width="850"
         x:Name="FightingEntityListSelectableWindowControl"
@@ -51,14 +51,9 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <TextBox
-                    x:Name="FilterTextBox"
-                    KeyUp="FilterTextBox_KeyUp"
-                    Margin="5, 0, 5, 5"
-                    Background="{StaticResource Gray}"
-                    Foreground="{StaticResource Light}"
-                    BorderBrush="{StaticResource Light}">
-                </TextBox>
+                <inputboxes:FilterTextBoxControl
+                    x:Name="FilterControl"
+                    KeyUp="FilterTextBox_KeyUp"/>
                 <ListBox
                     VirtualizingPanel.IsVirtualizing="False"
                     Grid.Row="1" Grid.Column="0"

@@ -26,7 +26,6 @@ namespace DDFight.Windows
         private void SelectPlayableEntityWindow_Loaded(object sender, RoutedEventArgs e)
         {
             CharacterListControl.ItemsSource = data_context;
-            FilterTextBox.Text = filterPlaceHolder;
         }
 
         public PlayableEntity SelectedCharacter = null;
@@ -45,23 +44,9 @@ namespace DDFight.Windows
             this.Close();
         }
 
-        private string filterPlaceHolder = "Filter...";
-
         private void FilterTextBox_KeyUp(object sender, KeyEventArgs e)
         {
-            CharacterListControl.FilterINameableListBox(FilterTextBox.Text);
-        }
-
-        private void FilterTextBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(FilterTextBox.Text))
-                FilterTextBox.Text = filterPlaceHolder;
-        }
-
-        private void FilterTextBox_GotFocus(object sender, RoutedEventArgs e)
-        {
-            if (FilterTextBox.Text == filterPlaceHolder)
-                FilterTextBox.Text = "";
+            CharacterListControl.FilterINameableListBox(FilterControl.TextBoxControl.Text);
         }
     }
 }

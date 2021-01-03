@@ -28,23 +28,6 @@ namespace DDFight.Controlers
         {
             Loaded += CharacterListUserControl_Loaded;
             InitializeComponent();
-            FilterTextBox.GotFocus += FilterTextBox_GotFocus;
-            FilterTextBox.LostFocus += FilterTextBox_LostFocus;
-            FilterTextBox.Text = filterPlaceHolder;
-        }
-
-        private string filterPlaceHolder = "Filter...";
-
-        private void FilterTextBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(FilterTextBox.Text))
-                FilterTextBox.Text = filterPlaceHolder;
-        }
-
-        private void FilterTextBox_GotFocus(object sender, RoutedEventArgs e)
-        {
-            if (FilterTextBox.Text == filterPlaceHolder)
-                FilterTextBox.Text = "";
         }
 
         /// <summary>
@@ -171,7 +154,7 @@ namespace DDFight.Controlers
 
         private void FilterTextBox_KeyUp(object sender, KeyEventArgs e)
         {
-            CharacterList.FilterINameableListBox(FilterTextBox.Text);
+            CharacterList.FilterINameableListBox(FilterControl.TextBoxControl.Text);
         }
     }
 }

@@ -71,30 +71,12 @@ namespace DDFight.Game.Fight.Display
         {
             InitializeComponent();
             Loaded += FightingEntityListSelectableWindow_Loaded;
-            FilterTextBox.GotFocus += FilterTextBox_GotFocus;
-            FilterTextBox.LostFocus += FilterTextBox_LostFocus;
-            FilterTextBox.Text = filterPlaceHolder;
         }
 
         #region Filter
-
-        private string filterPlaceHolder = "Filter...";
-
-        private void FilterTextBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(FilterTextBox.Text))
-                FilterTextBox.Text = filterPlaceHolder;
-        }
-
-        private void FilterTextBox_GotFocus(object sender, RoutedEventArgs e)
-        {
-            if (FilterTextBox.Text == filterPlaceHolder)
-                FilterTextBox.Text = "";
-        }
-
         private void FilterTextBox_KeyUp(object sender, KeyEventArgs e)
         {
-            SelectFromListControl.FilterINameableListBox(FilterTextBox.Text);
+            SelectFromListControl.FilterINameableListBox(FilterControl.TextBoxControl.Text);
         }
 
         #endregion Filter

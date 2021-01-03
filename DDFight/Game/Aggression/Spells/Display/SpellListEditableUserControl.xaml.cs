@@ -25,23 +25,6 @@ namespace DDFight.Game.Aggression.Spells.Display
         {
             Loaded += SpellListUserControl_Loaded;
             InitializeComponent();
-            FilterTextBox.GotFocus += FilterTextBox_GotFocus;
-            FilterTextBox.LostFocus += FilterTextBox_LostFocus;
-            FilterTextBox.Text = filterPlaceHolder;
-        }
-
-        private string filterPlaceHolder = "Filter...";
-
-        private void FilterTextBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(FilterTextBox.Text))
-                FilterTextBox.Text = filterPlaceHolder;
-        }
-
-        private void FilterTextBox_GotFocus(object sender, RoutedEventArgs e)
-        {
-            if (FilterTextBox.Text == filterPlaceHolder)
-                FilterTextBox.Text = "";
         }
 
         /// <summary>
@@ -154,7 +137,7 @@ namespace DDFight.Game.Aggression.Spells.Display
 
         private void FilterTextBox_KeyUp(object sender, KeyEventArgs e)
         {
-            SpellList.FilterINameableListBox(FilterTextBox.Text);
+            SpellList.FilterINameableListBox(FilterControl.TextBoxControl.Text);
         }
     }
 }

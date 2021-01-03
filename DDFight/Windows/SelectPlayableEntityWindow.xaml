@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DDFight.Windows"
+        xmlns:local="clr-namespace:DDFight.Windows" xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes"
         mc:Ignorable="d"
         Title="SelectPlayableEntityWindow" Height="450" Width="800"
         Background="{StaticResource LightestGray}">
@@ -51,17 +51,9 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <TextBox
-                    Grid.Row="0"
-                    Margin="10, 5, 10, 0"
-                    x:Name="FilterTextBox"
-                    Background="{StaticResource Gray}"
-                    Foreground="{StaticResource Light}"
-                    KeyUp="FilterTextBox_KeyUp"
-                    LostFocus="FilterTextBox_LostFocus"
-                    GotFocus="FilterTextBox_GotFocus">
-
-                </TextBox>
+                <inputboxes:FilterTextBoxControl
+                    x:Name="FilterControl"
+                    KeyUp="FilterTextBox_KeyUp"/>
                 
                 <ListBox 
                     Grid.Row="1"
