@@ -6,13 +6,19 @@
              xmlns:local="clr-namespace:DDFight.Controlers.InputBoxes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/FilterTextBoxStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
         <TextBox
             x:Name="TextBoxControl"
             Background="{StaticResource Gray}"
             Foreground="{StaticResource Light}"
             Margin="5">
-            
         </TextBox>
     </Grid>
 </UserControl>
