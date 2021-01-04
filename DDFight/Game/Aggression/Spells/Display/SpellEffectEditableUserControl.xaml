@@ -20,6 +20,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -42,6 +43,22 @@
             <TextBlock
                 VerticalAlignment="Center"
                 Margin="5">
+                Same target can be selected more than once
+            </TextBlock>
+            <controlers:SliderButton 
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Style="{StaticResource styleSliderButton}"
+                IsChecked="{Binding CanSelectSameTargetTwice}"
+             />
+        </DockPanel>
+        
+        <DockPanel
+            Grid.Row="2"
+            Margin="0, 15, 0, 0">
+            <TextBlock
+                VerticalAlignment="Center"
+                Margin="5">
                 The Spell requires an Attack Roll :
             </TextBlock>
             <controlers:SliderButton 
@@ -53,10 +70,10 @@
         </DockPanel>
 
         <local:SpellAttackEditableUserControl
-            Grid.Row="2"
+            Grid.Row="3"
             Visibility="{Binding IsAnAttack, Converter={StaticResource BoolToVisibilityConverter}}"/>
         <local:SpellNonAttackEditableUserControl
-            Grid.Row="2"
+            Grid.Row="3"
             Visibility="{Binding IsAnAttack, Converter={StaticResource BoolToReversedVisibilityBoolConverter}}"/>
     </Grid>
 </UserControl>

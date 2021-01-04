@@ -119,6 +119,9 @@
                     KeyDown="SelectedListControl_KeyDown"
                     Background="{StaticResource Gray}"
                     BorderBrush="{StaticResource Light}">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource ListBoxItemCustomStyle}"/>
+                    </ListBox.ItemContainerStyle>
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding DisplayName}" />

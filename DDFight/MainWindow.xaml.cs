@@ -83,9 +83,6 @@ namespace DDFight
 
                 Global.Context.UserLogs = new FlowDocument();
 
-                FightingEntityListSelectableWindow win = new FightingEntityListSelectableWindow{ MaximumSelected = 3, CanSelectSameTargetTwice = true };
-                win.ShowCentered();
-
                 MainFightWindow fightWindow = new MainFightWindow();
                 fightWindow.DataContext = Global.Context;
                 fightWindow.ShowCentered();

@@ -1,5 +1,6 @@
 ﻿using DDFight.Game.Aggression.Spells.Display;
 using DDFight.Game.Characteristics;
+using DDFight.Game.Fight.Display;
 using DDFight.Game.Status;
 using DDFight.Tools;
 using System;
@@ -19,6 +20,20 @@ namespace DDFight.Game.Aggression
         }
 
         public string GetName() { return Name; }
+
+        public void CastSpell(PlayableEntity Caster)
+        {
+            FightingEntityListSelectableWindow targetWindow = new FightingEntityListSelectableWindow {
+                MaximumSelected = this.AmountTargets,
+                CanSelectSameTargetTwice = this.CanSelectSameTargetTwice,
+            };
+            targetWindow.ShowCentered();
+
+            if (targetWindow.Validated == true)
+            {
+
+            }
+        }
 
         #region Properties
 
@@ -79,6 +94,17 @@ namespace DDFight.Game.Aggression
             }
         }
         private int _amountTargets = 0;
+
+        public bool CanSelectSameTargetTwice
+        {
+            get => _canSelectSameTargetTwice;
+            set
+            {
+                _canSelectSameTargetTwice = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private bool _canSelectSameTargetTwice = false;
 
         /// <summary>
         ///     tells wether or not there is an attack roll (opposed to saving throw OR automatic success)
@@ -162,6 +188,7 @@ namespace DDFight.Game.Aggression
             this.BaseLevel = to_copy.BaseLevel;
             this.Description = (string)to_copy.Description.Clone();
             this.AmountTargets = to_copy.AmountTargets;
+            this.CanSelectSameTargetTwice = to_copy.CanSelectSameTargetTwice;
             this.IsAnAttack = to_copy.IsAnAttack;
             this.HasSavingThrow = to_copy.HasSavingThrow;
             this.SavingCharacteristic = to_copy.SavingCharacteristic;

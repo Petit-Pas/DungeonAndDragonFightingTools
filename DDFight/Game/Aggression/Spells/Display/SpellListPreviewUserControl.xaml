@@ -24,8 +24,9 @@
         <ListBox
             x:Name="SpellListControl"
             Grid.Row="0" Grid.Column="0"
-            ItemsSource="{Binding Spells}"
-            SelectionChanged="SpellListControl_SelectionChanged">
+            ItemsSource="{Binding Spells.Spells}"
+            SelectionChanged="SpellListControl_SelectionChanged"
+            MouseDoubleClick="SpellListControl_MouseDoubleClick">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem" BasedOn="{StaticResource ListBoxItemCustomStyle}"/>
             </ListBox.ItemContainerStyle>

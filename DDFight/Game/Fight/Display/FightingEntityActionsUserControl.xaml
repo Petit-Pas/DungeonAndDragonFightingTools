@@ -83,8 +83,7 @@
                             Spells
                         </TextBlock>
                     </TabItem.Header>
-                    <display:SpellListPreviewUserControl
-                        DataContext="{Binding Spells}"/>
+                    <display:SpellListPreviewUserControl/>
                 </TabItem>
                 <TabItem Style="{StaticResource TabItemStyle}">
                     <TabItem.Header>

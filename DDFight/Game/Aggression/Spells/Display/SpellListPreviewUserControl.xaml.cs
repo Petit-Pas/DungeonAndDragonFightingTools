@@ -20,15 +20,14 @@ namespace DDFight.Game.Aggression.Spells.Display
     /// </summary>
     public partial class SpellListPreviewUserControl : UserControl
     {
-        private SpellsList data_context
+        private PlayableEntity data_context
         {
-            get => (SpellsList)DataContext;
+            get => (PlayableEntity)DataContext;
         }
 
         public SpellListPreviewUserControl()
         {
             InitializeComponent();
-
         }
 
         private void SpellListControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -37,6 +36,15 @@ namespace DDFight.Game.Aggression.Spells.Display
                 SpellPreviewControl.DataContext = SpellListControl.SelectedItem;
             else
                 SpellPreviewControl.DataContext = null;
+        }
+
+        private void SpellListControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (SpellListControl.SelectedIndex != -1) 
+            {
+                Spell spell = (Spell)SpellListControl.SelectedItem;
+                spell.CastSpell(data_context);
+            }
         }
     }
 }
