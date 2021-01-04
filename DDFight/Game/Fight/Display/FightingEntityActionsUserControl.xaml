@@ -7,7 +7,7 @@
              xmlns:fight="clr-namespace:DDFight.Controlers.Game.Attacks"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:counter="clr-namespace:DDFight.Game.Counters.Display" 
-             xmlns:converters="clr-namespace:DDFight.Converters"
+             xmlns:converters="clr-namespace:DDFight.Converters" xmlns:display="clr-namespace:DDFight.Game.Aggression.Spells.Display"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -83,6 +83,8 @@
                             Spells
                         </TextBlock>
                     </TabItem.Header>
+                    <display:SpellListPreviewUserControl
+                        DataContext="{Binding Spells}"/>
                 </TabItem>
                 <TabItem Style="{StaticResource TabItemStyle}">
                     <TabItem.Header>

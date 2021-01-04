@@ -7,6 +7,7 @@
                 <Style.Resources>
                     <ResourceDictionary />
                 </Style.Resources>
+                <Setter Property="TextBoxBase.SelectionBrush" Value="{StaticResource LightIndigo}" />
                 <Setter Property="Panel.Background">
                     <Setter.Value>
                         <DynamicResource ResourceKey="{x:Static SystemColors.WindowBrushKey}" />
