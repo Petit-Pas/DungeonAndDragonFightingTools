@@ -79,6 +79,7 @@
     <Compile Include="Game\Aggression\Display\DamageTemplateRollableUserControl.xaml.cs">
       <DependentUpon>DamageTemplateRollableUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Game\Aggression\Spells\NonAttackSpellResult.cs" />
     <Compile Include="Game\Aggression\Spells\Display\SpellAttackEditableUserControl.xaml.cs">
       <DependentUpon>SpellAttackEditableUserControl.xaml</DependentUpon>
     </Compile>
@@ -97,6 +98,9 @@
     <Compile Include="Game\Aggression\Spells\Display\SpellListSpellBookUserControl.xaml.cs">
       <DependentUpon>SpellListSpellBookUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Game\Aggression\Spells\Display\SpellNonAttackCastWindow.xaml.cs">
+      <DependentUpon>SpellNonAttackCastWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Game\Aggression\Spells\Display\SpellNonAttackEditableUserControl.xaml.cs">
       <DependentUpon>SpellNonAttackEditableUserControl.xaml</DependentUpon>
     </Compile>
@@ -106,6 +110,9 @@
     <Compile Include="Game\Aggression\Spells\Spell.cs" />
     <Compile Include="Game\Aggression\Spells\Display\SpellListEditableUserControl.xaml.cs">
       <DependentUpon>SpellListEditableUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Game\Dices\SavingThrow\Display\SavingThrowRollableDenseUserControl.xaml.cs">
+      <DependentUpon>SavingThrowRollableDenseUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Game\Fight\Display\FightingEntityListSelectableWindow.xaml.cs">
       <DependentUpon>FightingEntityListSelectableWindow.xaml</DependentUpon>
@@ -412,6 +419,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Game\Aggression\Spells\Display\SpellNonAttackCastWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Game\Aggression\Spells\Display\SpellNonAttackEditableUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -433,6 +444,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Game\Counters\Display\CounterListIncrementableUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\Dices\SavingThrow\Display\SavingThrowRollableDenseUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

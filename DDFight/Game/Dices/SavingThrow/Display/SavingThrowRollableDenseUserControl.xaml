@@ -1,0 +1,110 @@
+﻿<UserControl x:Class="DDFight.Game.Dices.SavingThrow.Display.SavingThrowRollableDenseUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DDFight.Game.Dices.SavingThrow.Display" xmlns:situationalmodifiers="clr-namespace:DDFight.Controlers.Game.Attacks.SituationalModifiers" xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             x:Name="SavingThrowRollableDenseControl">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/CheckBoxStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="TextBlock">
+                <Setter Property="Foreground" Value="{StaticResource Light}"/>
+                <Setter Property="Margin" Value="0, 5"/>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <GroupBox
+        Padding="10, 5">
+        <GroupBox.Header>
+            <TextBlock
+                FontSize="15"
+                FontWeight="SemiBold">
+                Saving Throw
+            </TextBlock>
+        </GroupBox.Header>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <StackPanel
+                Orientation="Horizontal"
+                Grid.Row="0">
+                <TextBlock>
+                    Advantage
+                </TextBlock>
+                <CheckBox
+                    VerticalAlignment="Center"
+                    Margin="5">
+                </CheckBox>
+                <TextBlock>
+                    Disadvantage
+                </TextBlock>
+                <CheckBox
+                    VerticalAlignment="Center"
+                    Margin="5">
+                </CheckBox>
+            </StackPanel>
+
+            <StackPanel
+                Grid.Row="1"
+                Orientation="Horizontal"
+                >
+                <TextBlock
+                    Margin="0, 0, 5, 0"
+                    VerticalAlignment="Center"
+                    >
+                    Roll: 
+                </TextBlock>
+                <inputboxes:RangedIntBox
+                    Width="40"
+                    Height="20"
+                    Margin="5, 0"
+                    PropertyMin="0"
+                    PropertyMax="20"
+                    PropertyPath="SavingRoll"
+                    VerticalAlignment="Center"
+                    />
+                <TextBlock
+                    Margin="5, 0"
+                    VerticalAlignment="Center"
+                    > 
+                    + 
+                </TextBlock>
+                <inputboxes:IntTextBox
+                    Width="40"
+                    Height="20"
+                    Margin="5, 0"
+                    PropertyPath="Modifier"
+                    VerticalAlignment="Center"
+                    />
+                <TextBlock
+                    x:Name="AbilityModifierControl"
+                    Text="+ 0 (DEFAULT)"
+                    Margin="5, 0"
+                    VerticalAlignment="Center"
+                    />
+                <TextBlock
+                    Text=" ==> "
+                    Margin="5, 0"
+                    VerticalAlignment="Center"
+                    />
+                <TextBlock
+                    x:Name="ResultControl"
+                    VerticalAlignment="Center"
+                    FontWeight="SemiBold"
+                    >
+                    0/0
+                </TextBlock>
+            </StackPanel>
+
+        </Grid>
+    </GroupBox>
+</UserControl>

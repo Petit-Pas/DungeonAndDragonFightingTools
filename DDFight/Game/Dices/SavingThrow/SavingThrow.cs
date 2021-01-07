@@ -47,6 +47,9 @@ namespace DDFight.Game.Dices.SavingThrow
         }
         private SituationalAdvantageModifiers _advantageModifiers = new SituationalAdvantageModifiers();
 
+        /// <summary>
+        ///     An arbitrary modifier for the Saving Throw
+        /// </summary>
         public int Modifier
         {
             get => _modifier;

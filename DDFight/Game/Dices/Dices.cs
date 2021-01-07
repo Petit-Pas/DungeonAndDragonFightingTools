@@ -74,11 +74,12 @@ namespace DDFight.Game.Dices
         {
             int result = 0;
 
+            Console.Write("rolling " + DiceAmount.ToString() + " " + DiceValue.ToString() + ": ");
             for (int i = 0; i != DiceAmount; i++)
             {
-                Console.Write("rolling a " + DiceValue.ToString()+ ": ");
-                result += rand.Next(1, DiceValue + 1);
-                Console.Write(result.ToString() + " ");
+                int new_val = rand.Next(1, DiceValue + 1);
+                Console.Write(new_val.ToString() + ", ");
+                result += new_val;
             }
             Console.WriteLine();
             return result;

@@ -5,13 +5,14 @@ using DDFight.Game.Status;
 using DDFight.Tools;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace DDFight.Game.Aggression
+namespace DDFight.Game.Aggression.Spells
 {
     public class Spell : AAttackTemplate, ICloneable, INameable
     {
@@ -31,8 +32,34 @@ namespace DDFight.Game.Aggression
 
             if (targetWindow.Validated == true)
             {
+                if (IsAnAttack)
+                {
 
+                }
+                else
+                {
+                    SpellNonAttackCastWindow window = new SpellNonAttackCastWindow() { 
+                        DataContext = this.GetNonAttackSpellResult(Caster, targetWindow.Selected) 
+                    };
+                    window.ShowCentered();
+                }
             }
+        }
+
+        public NonAttackSpellResult GetNonAttackSpellResult(PlayableEntity caster, ObservableCollection<PlayableEntity> targets)
+        {
+            NonAttackSpellResult template = new NonAttackSpellResult {
+                HitDamage = this.HitDamage,
+                AppliedStatusList = this.AppliedStatus,
+                Caster = caster,
+                HasSavingThrow = this.HasSavingThrow,
+                SavingCharacteristic = this.SavingCharacteristic,
+                SavingDifficulty = (this.SavingDifficulty == 0 ? caster.SpellSave : this.SavingDifficulty),
+                Targets = targets,
+                Name = this.Name,
+            };
+
+            return template;
         }
 
         #region Properties

@@ -14,7 +14,6 @@
     <Grid>
         <ItemsControl
             Grid.Row="2"
-            Margin="5"
             Grid.IsSharedSizeScope="True"
             x:Name="DamageControl">
             <ItemsControl.ItemTemplate>

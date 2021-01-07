@@ -1,0 +1,137 @@
+﻿<Window x:Class="DDFight.Game.Aggression.Spells.Display.SpellNonAttackCastWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DDFight.Game.Aggression.Spells.Display" xmlns:damagelistcontrols="clr-namespace:DDFight.Controlers.Game.Attacks.DamageListControls" xmlns:converters="clr-namespace:DDFight.Converters" xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes" xmlns:display="clr-namespace:DDFight.Game.Dices.SavingThrow.Display"
+        mc:Ignorable="d"
+        Title="SpellNonAttackCastWindow" Height="450" Width="800"
+        Style="{StaticResource WindowStyle}"
+        x:Name="SpellNonAttackCastWindowControl"
+        KeyDown="SpellNonAttackCastWindowControl_KeyDown">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/ScrollBarStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/ListBoxStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <converters:BoolToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <converters:BoolToReversedVisibilityConverter x:Key="BoolToReversedVisibilityConverter" />
+            <Style TargetType="TextBlock">
+                <Setter Property="TextBlock.Foreground" Value="{StaticResource Light}"/>
+                <Setter Property="TextBlock.FontSize" Value="13" />
+            </Style>
+
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid
+            x:Name="SpellGeneralInfoControl"
+            Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <TextBlock
+                Grid.Row="0"
+                Text="{Binding Name}"
+                FontSize="20"
+                FontWeight="SemiBold"/>
+            <TextBlock
+                Grid.Row="1"
+                Margin="0, 10"
+                Visibility="{Binding HasSavingThrow, Converter={StaticResource BoolToReversedVisibilityConverter}}">
+                Saving Throw: None
+            </TextBlock>
+            <TextBlock
+                Grid.Row="2"
+                Margin="0, 10"
+                Visibility="{Binding HasSavingThrow, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Run Text="Saving Throw: " />
+                <Run Text="{Binding SavingCharacteristic}" />
+                <Run Text="{Binding SavingDifficulty}" />
+                <Run />
+            </TextBlock>
+
+            <damagelistcontrols:DamageTemplateListRollableUserControl 
+                Grid.Row="1"
+                DataContext="{Binding HitDamage}"/>
+
+        </Grid>
+
+
+        <ScrollViewer
+            Grid.Column="1">
+            <ItemsControl
+                Grid.Column="1"
+                x:Name="TargetListControl"
+                VirtualizingPanel.IsVirtualizing="False"
+                Background="{StaticResource Gray}"
+                ItemsSource="{Binding Targets}">
+                <ItemsControl.ItemTemplate> 
+                    <DataTemplate>
+                    
+                        <Border 
+                            BorderBrush="{StaticResource Light}" 
+                            CornerRadius="5" 
+                            Background="{StaticResource LightestGray}"
+                            Margin="5"
+                            Padding="5">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Grid.Style>
+                                    <Style>
+                                        <Setter Property="TextBlock.Foreground" Value="{StaticResource Light}"/>
+                                        <Setter Property="TextBlock.FontSize" Value="13" />
+                                    
+                                    </Style>
+                                </Grid.Style>
+
+                                <TextBlock
+                                    Text="{Binding DisplayName}" 
+                                    Grid.Row="0"
+                                    FontSize="20"
+                                    FontWeight="SemiBold"
+                                    />
+
+                                <Grid
+                                    Grid.Row="1"
+                                    x:Name="SavingGridControl"
+                                    Visibility="{Binding DataContext.HasSavingThrow, ElementName=SpellNonAttackCastWindowControl, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+
+
+                                    <display:SavingThrowRollableDenseUserControl
+                                        x:Name="DenseSavingControl"/>
+
+                                </Grid>
+                            
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</Window>

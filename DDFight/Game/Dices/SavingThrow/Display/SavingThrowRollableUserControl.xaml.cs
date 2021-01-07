@@ -18,10 +18,7 @@ namespace DDFight.Game.Dices.SavingThrow.Display
                 }
                 catch (Exception)
                 {
-                    return new SavingThrow {
-                        Characteristic = CharacteristicsEnum.Dexterity,
-                        Difficulty = 9999,
-                    };
+                    return null;
                 }
             }
         }
@@ -30,24 +27,24 @@ namespace DDFight.Game.Dices.SavingThrow.Display
         {
             InitializeComponent();
             DataContextChanged += SavingThrowRollableUserControl_DataContextChanged;
-            Loaded += SavingThrowRollableUserControl_Loaded;
         }
 
         private void refreshSavingModifier()
         {
-            int modifier = data_context.Target.Characteristics.GetSavingModifier(data_context.Characteristic);
-            CharacteristicTextBlockControl.Text = (data_context.Characteristic + " " + (modifier > 0 ? "+":"" )+ modifier).ToString();
-        }
-
-        private void SavingThrowRollableUserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            refreshSavingModifier();
+            if (data_context != null)
+            {
+                int modifier = data_context.Target.Characteristics.GetSavingModifier(data_context.Characteristic);
+                CharacteristicTextBlockControl.Text = (data_context.Characteristic + " " + (modifier > 0 ? "+" : "") + modifier).ToString();
+            }
         }
 
         private void SavingThrowRollableUserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            data_context.PropertyChanged += Data_context_PropertyChanged;
-            refreshSavingModifier();
+            if (data_context != null)
+            {
+                data_context.PropertyChanged += Data_context_PropertyChanged;
+                refreshSavingModifier();
+            }
         }
 
         private void Data_context_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -70,8 +67,11 @@ namespace DDFight.Game.Dices.SavingThrow.Display
 
         public void RollControl()
         {
-            if (data_context.SavingRoll == 0)
-                data_context.SavingRoll = DiceRoll.Roll("1d20", data_context.AdvantageModifiers.SituationalAdvantage, data_context.AdvantageModifiers.SituationalDisadvantage);
+            if (data_context != null)
+            {
+                if (data_context.SavingRoll == 0)
+                    data_context.SavingRoll = DiceRoll.Roll("1d20", data_context.AdvantageModifiers.SituationalAdvantage, data_context.AdvantageModifiers.SituationalDisadvantage);
+            }
         }
 
         private void RollButtonControl_Click(object sender, RoutedEventArgs e)
