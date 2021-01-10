@@ -78,10 +78,10 @@ namespace DDFight.Game.Dices
             for (int i = 0; i != DiceAmount; i++)
             {
                 int new_val = rand.Next(1, DiceValue + 1);
-                Console.Write(new_val.ToString() + ", ");
+                Console.Write(new_val.ToString() + (i + 1 == DiceAmount ? "" : ", "));
                 result += new_val;
             }
-            Console.WriteLine();
+            Console.WriteLine(" ==> result: " + result.ToString());
             return result;
         }
 
