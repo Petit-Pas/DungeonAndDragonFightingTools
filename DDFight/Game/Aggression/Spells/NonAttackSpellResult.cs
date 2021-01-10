@@ -8,12 +8,58 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
+using System.Windows.Media;
+using System.Windows;
+using DDFight.Game.Dices.SavingThrow;
 
 namespace DDFight.Game.Aggression.Spells
 {
     public class NonAttackSpellResult : INotifyPropertyChanged
     {
 
+        public void Cast(List<SavingThrow> savings = null)
+        {
+            Paragraph paragraph = (Paragraph)Global.Context.UserLogs.Blocks.LastBlock;
+
+            paragraph.Inlines.Add(Extensions.BuildRun(Caster.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+            paragraph.Inlines.Add(Extensions.BuildRun(" casts a lvl ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+            paragraph.Inlines.Add(Extensions.BuildRun(Level.ToString() + " " + Name + "\r\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+
+            foreach (DamageTemplate dmg in HitDamage)
+            {
+                dmg.LastSavingWasSuccesfull = false;
+            }
+            for (int i = 0; i != Targets.Count; i += 1)
+            {
+                if (HasSavingThrow)
+                {
+                    paragraph.Inlines.Add(Extensions.BuildRun(Targets.ElementAt(i).DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                    paragraph.Inlines.Add(Extensions.BuildRun(" (", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                    paragraph.Inlines.Add(Extensions.BuildRun(savings.ElementAt(i).Result + " / " + savings.ElementAt(i).Difficulty, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                    paragraph.Inlines.Add(Extensions.BuildRun(") ==> ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                    if (savings.ElementAt(i).IsSuccesful)
+                    {
+                        foreach (DamageTemplate dmg in HitDamage)
+                        {
+                            dmg.LastSavingWasSuccesfull = true;
+                        }
+                        paragraph.Inlines.Add(Extensions.BuildRun("Resists\r\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                    }
+                    else
+                    {
+                        foreach (DamageTemplate dmg in HitDamage)
+                        {
+                            dmg.LastSavingWasSuccesfull = false;
+                        }
+                        paragraph.Inlines.Add(Extensions.BuildRun("Does not resist\r\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                    }
+                }
+                Targets.ElementAt(i).TakeHitDamage(HitDamage);
+            }
+        }
+
+        #region Properties
         public string Name
         {
             get => _name;
@@ -24,6 +70,17 @@ namespace DDFight.Game.Aggression.Spells
             }
         }
         private string _name = "";
+
+        public int Level
+        {
+            get => _level;
+            set
+            {
+                _level = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private int _level = 0;
 
         public List<DamageTemplate> HitDamage
         {
@@ -102,6 +159,9 @@ namespace DDFight.Game.Aggression.Spells
             }
         }
         private PlayableEntity _caster = null;
+        
+        #endregion Properties
+
 
         #region INotifyPropertyChanged
 

@@ -79,10 +79,18 @@ namespace DDFight.Game.Aggression
         {
             get => _damage;
             set {
+                _damage.PropertyChanged -= _damage_PropertyChanged;
                 _damage = value;
+                _damage.PropertyChanged += _damage_PropertyChanged;
                 NotifyPropertyChanged();
             }
         }
+
+        private void _damage_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            NotifyPropertyChanged("Damage");
+        }
+
         private DiceRoll _damage = new DiceRoll("1d4");
 
         [XmlAttribute]

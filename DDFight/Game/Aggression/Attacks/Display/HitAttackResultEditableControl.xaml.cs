@@ -96,6 +96,20 @@ namespace DDFight.Game.Aggression.Attacks.Display
             }
         }
 
+        public bool IsFullyRolled()
+        {
+            if (data_context.HitRoll == 0)
+                return false;
+            foreach (DamageTemplate dmg in data_context.DamageList)
+            {
+                if (dmg.Damage.LastRoll == 0)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         public void Validate()
         {
             if (this.AreAllChildrenValid())

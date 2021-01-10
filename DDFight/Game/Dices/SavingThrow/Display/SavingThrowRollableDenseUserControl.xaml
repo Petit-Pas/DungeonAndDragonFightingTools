@@ -42,14 +42,16 @@
                 </TextBlock>
                 <CheckBox
                     VerticalAlignment="Center"
-                    Margin="5">
+                    Margin="5"
+                    IsChecked="{Binding AdvantageModifiers.SituationalAdvantage}">
                 </CheckBox>
                 <TextBlock>
                     Disadvantage
                 </TextBlock>
                 <CheckBox
                     VerticalAlignment="Center"
-                    Margin="5">
+                    Margin="5"
+                    IsChecked="{Binding AdvantageModifiers.SituationalDisadvantage}">
                 </CheckBox>
             </StackPanel>
 

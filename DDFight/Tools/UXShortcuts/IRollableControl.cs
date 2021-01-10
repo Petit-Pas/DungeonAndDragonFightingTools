@@ -22,10 +22,27 @@ namespace DDFight.Tools.UXShortcuts
             foreach (IRollableControl ctrl in elem.FindAllChildren<IRollableControl>())
                 ctrl.RollControl();
         }
+        
+        public static bool AreAllRollableChildrenRolled(FrameworkElement elem)
+        {
+            foreach (IRollableControl ctrl in elem.FindAllChildren<IRollableControl>())
+                if (ctrl.IsFullyRolled() == false)
+                    return false;
+            return true;
+        }
     }
 
     public interface IRollableControl
     {
+        /// <summary>
+        ///     Rolls any rollable child control
+        /// </summary>
         void RollControl();
+
+        /// <summary>
+        ///     tells wether there is still any rollable control that hasnt been rolled
+        /// </summary>
+        /// <returns></returns>
+        bool IsFullyRolled();
     }
 }

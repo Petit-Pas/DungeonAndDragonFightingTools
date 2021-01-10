@@ -55,7 +55,8 @@ namespace DDFight.Controlers.InputBoxes
         /// <returns></returns>
         public bool IsValid()
         {
-            return !Validation.GetHasError(IntBox);
+            bool result = !Validation.GetHasError(IntBox);
+            return result;
         }
 
         #endregion

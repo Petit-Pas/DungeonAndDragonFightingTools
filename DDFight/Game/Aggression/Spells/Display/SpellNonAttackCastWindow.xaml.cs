@@ -13,13 +13,11 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace DDFight.Game.Aggression.Spells.Display
 {
     /// <summary>
-    /// Interaction logic for SpellNonAttackCastWindow.xaml
+    ///     Interaction logic for SpellNonAttackCastWindow.xaml
     /// </summary>
     public partial class SpellNonAttackCastWindow : Window, IRollableControl
     {
@@ -27,7 +25,13 @@ namespace DDFight.Game.Aggression.Spells.Display
         {
             InitializeComponent();
 
+            KeyUp += SpellNonAttackCastWindow_KeyUp;
             DataContextChanged += SpellNonAttackCastWindow_DataContextChanged;
+        }
+
+        private void SpellNonAttackCastWindow_KeyUp(object sender, KeyEventArgs e)
+        {
+            refresh_CastButton();
         }
 
         private void SpellNonAttackCastWindow_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -36,11 +40,12 @@ namespace DDFight.Game.Aggression.Spells.Display
                 TargetListControl.LayoutUpdated += TargetListControl_LayoutUpdated;
         }
 
-        private ObservableCollection<SavingThrow> savings = new ObservableCollection<SavingThrow>();
+        private List<SavingThrow> savings = new List<SavingThrow>();
 
         private void TargetListControl_LayoutUpdated(object sender, EventArgs e)
         {
             List<FrameworkElement> list = TargetListControl.GetAllChildrenByName("SavingThrowRollableDenseControl");
+            savings.Clear();
             if (list.Count == data_context.Targets.Count)
             {
                 TargetListControl.LayoutUpdated -= TargetListControl_LayoutUpdated;
@@ -63,6 +68,16 @@ namespace DDFight.Game.Aggression.Spells.Display
             }
         }
 
+        private void refresh_CastButton()
+        {
+            CastButtonControl.IsEnabled = false;
+            if (this.AreAllChildrenValid())
+            {
+                if (this.IsFullyRolled())
+                    CastButtonControl.IsEnabled = true;
+            }
+        }
+
         private NonAttackSpellResult data_context
         {
             get => (NonAttackSpellResult)DataContext;
@@ -70,12 +85,12 @@ namespace DDFight.Game.Aggression.Spells.Display
 
         public void RollControl()
         {
-            foreach (DamageTemplate damageTemplate in data_context.HitDamage)
-            {
-                if (damageTemplate.Damage.LastRoll == 0)
-                    damageTemplate.Damage.Roll();
-            }
             RollableWindowTool.RollRollableChildren(this);
+        }
+
+        public bool IsFullyRolled()
+        {
+            return RollableWindowTool.AreAllRollableChildrenRolled(this);
         }
 
         private void SpellNonAttackCastWindowControl_KeyDown(object sender, KeyEventArgs e)
@@ -85,6 +100,12 @@ namespace DDFight.Game.Aggression.Spells.Display
                 RollControl();
                 e.Handled = true;
             }
+        }
+
+        private void CastButton_Click(object sender, RoutedEventArgs e)
+        {
+            data_context.Cast(savings);
+            this.Close();
         }
     }
 }

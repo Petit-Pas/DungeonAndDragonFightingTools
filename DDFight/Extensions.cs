@@ -197,6 +197,15 @@ namespace DDFight
             return listToClone.Select(item => (T)item.Clone()).ToList();
         }
 
+        public static ObservableCollection<T> ToObservableCollection<T>(this List<T> listToTransform) 
+        {
+            ObservableCollection<T> result = new ObservableCollection<T>();
+
+            foreach (T obj in listToTransform)
+                result.Add(obj);
+            return result;
+        }
+
         public static ObservableCollection<T> Clone<T>(this ObservableCollection<T> listToClone) where T : ICloneable
         {
             return new ObservableCollection<T>(listToClone.Select(item => (T)item.Clone()).ToList());

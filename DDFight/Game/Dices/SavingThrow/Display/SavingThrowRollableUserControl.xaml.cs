@@ -74,6 +74,11 @@ namespace DDFight.Game.Dices.SavingThrow.Display
             }
         }
 
+        public bool IsFullyRolled()
+        {
+            return data_context.SavingRoll != 0;
+        }
+
         private void RollButtonControl_Click(object sender, RoutedEventArgs e)
         {
             RollControl();

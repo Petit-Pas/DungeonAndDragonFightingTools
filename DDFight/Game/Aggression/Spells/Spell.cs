@@ -49,7 +49,7 @@ namespace DDFight.Game.Aggression.Spells
         public NonAttackSpellResult GetNonAttackSpellResult(PlayableEntity caster, ObservableCollection<PlayableEntity> targets)
         {
             NonAttackSpellResult template = new NonAttackSpellResult {
-                HitDamage = this.HitDamage,
+                HitDamage = (List<DamageTemplate>)this.HitDamage.Clone<DamageTemplate>(),
                 AppliedStatusList = this.AppliedStatus,
                 Caster = caster,
                 HasSavingThrow = this.HasSavingThrow,
@@ -57,6 +57,7 @@ namespace DDFight.Game.Aggression.Spells
                 SavingDifficulty = (this.SavingDifficulty == 0 ? caster.SpellSave : this.SavingDifficulty),
                 Targets = targets,
                 Name = this.Name,
+                Level = this.BaseLevel,
             };
 
             return template;

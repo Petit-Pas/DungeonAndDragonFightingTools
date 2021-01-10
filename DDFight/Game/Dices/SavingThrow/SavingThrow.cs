@@ -14,6 +14,19 @@ namespace DDFight.Game.Dices.SavingThrow
         {
         }
 
+        public bool IsSuccesful
+        {
+            get 
+            {
+                return (Result >= Difficulty);
+            }
+        }
+
+        public int Result
+        {
+            get => Modifier + SavingRoll + Target.Characteristics.GetSavingModifier(Characteristic);
+        }
+
         public CharacteristicsEnum Characteristic
         {
             get => _characteristic;

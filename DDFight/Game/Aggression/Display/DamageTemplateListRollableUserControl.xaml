@@ -15,7 +15,8 @@
         <ItemsControl
             Grid.Row="2"
             Grid.IsSharedSizeScope="True"
-            x:Name="DamageControl">
+            x:Name="DamageControl"
+            VirtualizingPanel.IsVirtualizing="False">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <display:DamageTemplateRollableUserControl/>

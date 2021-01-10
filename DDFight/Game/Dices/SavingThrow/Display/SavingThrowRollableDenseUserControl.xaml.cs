@@ -76,5 +76,14 @@ namespace DDFight.Game.Dices.SavingThrow.Display
                 data_context.SavingRoll = DiceRoll.Roll("1d20", data_context.AdvantageModifiers.SituationalAdvantage, data_context.AdvantageModifiers.SituationalDisadvantage);
             }
         }
+
+        public bool IsFullyRolled()
+        {
+            if (data_context.SavingRoll == 0)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }
