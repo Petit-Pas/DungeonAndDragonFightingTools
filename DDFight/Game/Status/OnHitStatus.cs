@@ -199,15 +199,16 @@ namespace DDFight.Game.Status
             RemainingRounds -= 1;
             if (RemainingRounds <= 0)
             {
-                removeStatus();
                 Paragraph paragraph = (Paragraph)Global.Context.UserLogs.Blocks.LastBlock;
-                paragraph.Inlines.Add(Extensions.BuildRun("The Status \"", (Brush)System.Windows.Application.Current.Resources["Light"], 15, FontWeights.Normal));
-                paragraph.Inlines.Add(Extensions.BuildRun(this.Header, (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
-                paragraph.Inlines.Add(Extensions.BuildRun("\" inflicted by ", (Brush)System.Windows.Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                paragraph.Inlines.Add(Extensions.BuildRun("The Status inflicted by ", (Brush)System.Windows.Application.Current.Resources["Light"], 15, FontWeights.Normal));
                 paragraph.Inlines.Add(Extensions.BuildRun(Caster.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
-                paragraph.Inlines.Add(Extensions.BuildRun(" has expired on ", (Brush)System.Windows.Application.Current.Resources["Light"], 15, FontWeights.Normal));
-                paragraph.Inlines.Add(Extensions.BuildRun(Affected.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
-                paragraph.Inlines.Add(Extensions.BuildRun(".\r\n", (Brush)System.Windows.Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                paragraph.Inlines.Add(Extensions.BuildRun(" has expired. ", (Brush)System.Windows.Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                removeStatus();
+
+                // if caster was focused on this, he can now be "un"focused
+                if (this.EndsOnCasterLossOfConcentration && this.Caster.IsFocused && this.Caster == this.Affected)
+                    this.Caster.IsFocused = false;
+
                 return true;
             }
             return false;
@@ -309,16 +310,12 @@ namespace DDFight.Game.Status
         {
             if (this.EndsOnCasterLossOfConcentration && e.PropertyName == "IsFocused" && Caster.IsFocused == false)
             {
-                removeStatus();
                 Paragraph paragraph = (Paragraph)Global.Context.UserLogs.Blocks.LastBlock;
 
                 paragraph.Inlines.Add(Extensions.BuildRun("Due to ", (Brush)System.Windows.Application.Current.Resources["Light"], 15, FontWeights.Normal));
                 paragraph.Inlines.Add(Extensions.BuildRun(Caster.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
                 paragraph.Inlines.Add(Extensions.BuildRun("'s loss of concentration, ", (Brush)System.Windows.Application.Current.Resources["Light"], 15, FontWeights.Normal));
-                paragraph.Inlines.Add(Extensions.BuildRun(Affected.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
-                paragraph.Inlines.Add(Extensions.BuildRun(" is not affected by ", (Brush)System.Windows.Application.Current.Resources["Light"], 15, FontWeights.Normal));
-                paragraph.Inlines.Add(Extensions.BuildRun(this.Header, (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
-                paragraph.Inlines.Add(Extensions.BuildRun(" anymore.\r\n", (Brush)System.Windows.Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                removeStatus();
 
             }
         }
@@ -330,6 +327,13 @@ namespace DDFight.Game.Status
         /// </summary>
         private void removeStatus()
         {
+            Paragraph paragraph = (Paragraph)Global.Context.UserLogs.Blocks.LastBlock;
+
+            paragraph.Inlines.Add(Extensions.BuildRun(Affected.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
+            paragraph.Inlines.Add(Extensions.BuildRun(" is no more affected by ", (Brush)System.Windows.Application.Current.Resources["Light"], 15, FontWeights.Normal));
+            paragraph.Inlines.Add(Extensions.BuildRun(this.Header, (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
+            paragraph.Inlines.Add(Extensions.BuildRun(".\r\n", (Brush)System.Windows.Application.Current.Resources["Light"], 15, FontWeights.Normal));
+
             Affected.CustomVerboseStatusList.List.Remove(this);
             UnregisterToAll();
         }
@@ -362,39 +366,50 @@ namespace DDFight.Game.Status
         /// </summary>
         /// <param name="caster"> the one that tries to apply the status </param>
         /// <param name="target"> the target of the status </param>
-        /// <param name="success"> tells wether or not the application is a success, only used with "false" to tell the OnApplyDamage can be resisted / canceled </param>
-        public void Apply(PlayableEntity caster, PlayableEntity target, bool success = true)
+        /// <param name="application_success"> tells wether or not the application is a success, only used with "false" to tell the OnApplyDamage can be resisted / canceled </param>
+        /// <param name="multiple_application"> tells that a status will be applied more than once ==> to avoid the removal of concentration on every new affected ==> false for the first call, true for the other ones </param>
+        public void Apply(PlayableEntity caster, PlayableEntity target, bool application_success = true, bool multiple_application = false)
         {
-            if (OnApplyDamageList.Count != 0)
+            OnHitStatus applied = (OnHitStatus)this.Clone();
+
+            if (applied.OnApplyDamageList.Count != 0)
             {
-                if (!success)
+                if (!application_success)
                     // the target resisted
-                    foreach (DamageTemplate dmg in OnApplyDamageList)
+                    foreach (DamageTemplate dmg in applied.OnApplyDamageList)
                         dmg.LastSavingWasSuccesfull = true;
                 target.TakeHitDamage(OnApplyDamageList);
             }
-            if (success)
+            if (application_success)
             {
-                target.CustomVerboseStatusList.List.Add(this);
-                this.Caster = caster;
-                this.Affected = target;
-                if (this.EndsOnCasterLossOfConcentration)
+                Paragraph paragraph = (Paragraph)Global.Context.UserLogs.Blocks.LastBlock;
+
+                paragraph.Inlines.Add(Extensions.BuildRun(caster.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                paragraph.Inlines.Add(Extensions.BuildRun(" applies ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                paragraph.Inlines.Add(Extensions.BuildRun(this.Header, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                paragraph.Inlines.Add(Extensions.BuildRun(" on ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                paragraph.Inlines.Add(Extensions.BuildRun(target.DisplayName + "\r\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+
+                target.CustomVerboseStatusList.List.Add(applied);
+                applied.Caster = caster;
+                applied.Affected = target;
+                if ((applied.CanRedoSavingThrow && applied.SavingIsRemadeAtStartOfTurn) ||
+                    (applied.HasAMaximumDuration && !applied.DurationIsCalculatedOnCasterTurn && applied.DurationIsBasedOnStartOfTurn))
+                    target.NewTurnStarted += applied.Affected_NewTurnStarted;
+                if ((applied.CanRedoSavingThrow && applied.SavingIsRemadeAtStartOfTurn == false) ||
+                    (applied.HasAMaximumDuration && !applied.DurationIsCalculatedOnCasterTurn && !applied.DurationIsBasedOnStartOfTurn))
+                    target.TurnEnded += applied.Affected_TurnEnded;
+                if (applied.HasAMaximumDuration && applied.DurationIsCalculatedOnCasterTurn && applied.DurationIsBasedOnStartOfTurn)
+                    caster.NewTurnStarted += applied.Caster_NewTurnStarted;
+                if (applied.HasAMaximumDuration && applied.DurationIsCalculatedOnCasterTurn && !applied.DurationIsBasedOnStartOfTurn)
+                    caster.TurnEnded += applied.Caster_TurnEnded;
+                if (applied.EndsOnCasterLossOfConcentration)
                 {
-                    if (caster.IsFocused == true)
+                    if (caster.IsFocused == true && multiple_application == false)
                         caster.IsFocused = false;
-                    caster.PropertyChanged += this.Caster_PropertyChanged;
+                    caster.PropertyChanged += applied.Caster_PropertyChanged;
                     caster.IsFocused = true;
                 }
-                if ((this.CanRedoSavingThrow && this.SavingIsRemadeAtStartOfTurn) ||
-                    (this.HasAMaximumDuration && !this.DurationIsCalculatedOnCasterTurn && this.DurationIsBasedOnStartOfTurn))
-                    target.NewTurnStarted += this.Affected_NewTurnStarted;
-                if ((this.CanRedoSavingThrow && this.SavingIsRemadeAtStartOfTurn == false) ||
-                    (this.HasAMaximumDuration && !this.DurationIsCalculatedOnCasterTurn && !this.DurationIsBasedOnStartOfTurn))
-                    target.TurnEnded += this.Affected_TurnEnded;
-                if (this.HasAMaximumDuration && this.DurationIsCalculatedOnCasterTurn && this.DurationIsBasedOnStartOfTurn)
-                    caster.NewTurnStarted += Caster_NewTurnStarted;
-                if (this.HasAMaximumDuration && this.DurationIsCalculatedOnCasterTurn && !this.DurationIsBasedOnStartOfTurn)
-                    caster.TurnEnded += Caster_TurnEnded;
             }
         }
 
@@ -414,13 +429,6 @@ namespace DDFight.Game.Status
             else
             {
                 Apply(caster, target);
-                Paragraph paragraph = (Paragraph)Global.Context.UserLogs.Blocks.LastBlock;
-                paragraph.Inlines.Add(Extensions.BuildRun(caster.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-                paragraph.Inlines.Add(Extensions.BuildRun(" applies ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-                paragraph.Inlines.Add(Extensions.BuildRun(Header, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-                paragraph.Inlines.Add(Extensions.BuildRun(" on ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-                paragraph.Inlines.Add(Extensions.BuildRun(target.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-                paragraph.Inlines.Add(Extensions.BuildRun("\r\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
             }
         }
 

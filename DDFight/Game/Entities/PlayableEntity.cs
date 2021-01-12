@@ -395,8 +395,11 @@ namespace DDFight.Game
             get => _isFocused;
             set
             {
-                _isFocused = value;
-                NotifyPropertyChanged();
+                if (_isFocused != value)
+                {
+                    _isFocused = value;
+                    NotifyPropertyChanged();
+                }
             }
         }
         private bool _isFocused;
@@ -624,6 +627,8 @@ namespace DDFight.Game
 
             paragraph.Inlines.Add(Extensions.BuildRun(HpString, (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
             paragraph.Inlines.Add(Extensions.BuildRun(").\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+            if (amount == 0)
+                return;
 
 
             // handles 0 HP

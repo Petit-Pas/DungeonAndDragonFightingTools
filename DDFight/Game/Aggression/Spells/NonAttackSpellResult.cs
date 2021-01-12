@@ -26,12 +26,31 @@ namespace DDFight.Game.Aggression.Spells
             paragraph.Inlines.Add(Extensions.BuildRun(" casts a lvl ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
             paragraph.Inlines.Add(Extensions.BuildRun(Level.ToString() + " " + Name + "\r\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
 
+            if (Targets.Contains(Caster))
+            {
+                // This is to move the Caster at the end of the list, organizing things better for the Log Console if there is a Status
+                Targets.Remove(Caster);
+                Targets.Add(Caster);
+            }
+
+            bool already_applied = false;
+
+            if (this.HasSavingThrow)
+            {
+                foreach (OnHitStatus status in this.AppliedStatusList.List)
+                {
+                    status.ApplySavingCharacteristic = this.SavingCharacteristic;
+                    status.ApplySavingDifficulty = this.SavingDifficulty;
+                }
+            }
             foreach (DamageTemplate dmg in HitDamage)
             {
                 dmg.LastSavingWasSuccesfull = false;
             }
+            
             for (int i = 0; i != Targets.Count; i += 1)
             {
+                // damage lessening if has saving throw
                 if (HasSavingThrow)
                 {
                     paragraph.Inlines.Add(Extensions.BuildRun(Targets.ElementAt(i).DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
@@ -55,7 +74,38 @@ namespace DDFight.Game.Aggression.Spells
                         paragraph.Inlines.Add(Extensions.BuildRun("Does not resist\r\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
                     }
                 }
-                Targets.ElementAt(i).TakeHitDamage(HitDamage);
+                // damage application
+                if (this.HitDamage.Count != 0)
+                    Targets.ElementAt(i).TakeHitDamage(HitDamage);
+
+                // OnHitStatus Application
+                foreach (OnHitStatus status in this.AppliedStatusList.List)
+                {
+                    bool applied = false;
+                    if (this.HasSavingThrow == false)
+                    {
+                        status.Apply(this.Caster, Targets.ElementAt(i), multiple_application: already_applied);
+                        already_applied = true;
+                        applied = true;
+                    }
+                    else if (savings.ElementAt(i).IsSuccesful == false)
+                    {
+                        status.Apply(this.Caster, Targets.ElementAt(i), multiple_application: already_applied);
+                        already_applied = true;
+                        applied = true;
+                    }
+                    else if (this.HasSavingThrow = true && savings.ElementAt(i).IsSuccesful && status.SpellApplicationModifier == ApplicationModifierEnum.Maintained)
+                    {
+                        status.Apply(this.Caster, Targets.ElementAt(i), application_success: false, multiple_application: already_applied);
+                        already_applied = true;
+                        applied = true;
+                    }
+                    if (applied)
+                    {
+                        //paragraph.Inlines.Add(Extensions.BuildRun(Targets.ElementAt(i).DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                        //paragraph.Inlines.Add(Extensions.BuildRun(" ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                    }
+                }
             }
         }
 

@@ -37,7 +37,12 @@ namespace DDFight.Game.Aggression.Spells.Display
         private void SpellNonAttackCastWindow_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (data_context.HasSavingThrow)
+            {
                 TargetListControl.LayoutUpdated += TargetListControl_LayoutUpdated;
+                CastButtonControl.IsEnabled = false;
+            }
+            if (data_context.HitDamage.Count != 0)
+                CastButtonControl.IsEnabled = false;
         }
 
         private List<SavingThrow> savings = new List<SavingThrow>();

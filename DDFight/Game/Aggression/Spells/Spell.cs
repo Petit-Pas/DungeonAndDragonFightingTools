@@ -50,7 +50,7 @@ namespace DDFight.Game.Aggression.Spells
         {
             NonAttackSpellResult template = new NonAttackSpellResult {
                 HitDamage = (List<DamageTemplate>)this.HitDamage.Clone<DamageTemplate>(),
-                AppliedStatusList = this.AppliedStatus,
+                AppliedStatusList = (OnHitStatusList)this.AppliedStatus.Clone(),
                 Caster = caster,
                 HasSavingThrow = this.HasSavingThrow,
                 SavingCharacteristic = this.SavingCharacteristic,

@@ -74,7 +74,6 @@
                 Grid.Row="4"
                 x:Name="CastButtonControl"
                 Click="CastButton_Click"
-                IsEnabled="False"
                 FontSize="18">
                 Cast Spell
             </Button>
