@@ -29,6 +29,7 @@ namespace DDFight.Game.Status.Display
         private void OnHitStatusDamageEditableUserControl_Loaded(object sender, RoutedEventArgs e)
         {
             OnApplyDamageListControl.HeaderTextControl.Text = "On Apply Damage";
+            DotDamageControl.HeaderTextControl.Text = "Dot Damage";
         }
     }
 }

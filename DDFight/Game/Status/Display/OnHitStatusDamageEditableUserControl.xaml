@@ -12,6 +12,7 @@
         Margin="5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -19,12 +20,17 @@
                 
         <damagelistcontrols:DamageTemplateListEditableUserControl
             Grid.Column="0"
-            VerticalAlignment="Top"
-            Width="400"
-            Height="250"
+            Margin="5"
             x:Name="OnApplyDamageListControl"
-            MinWidth="300"
             DataContext="{Binding OnApplyDamageList}"
             HasSavingThrow="True"/>
+
+        <display:DotTemplateListEditableControl
+            Grid.Column="1"
+            Margin="5"
+            x:Name="DotDamageControl"
+            DataContext="{Binding DotDamageList}"/>
+
+
     </Grid>
 </UserControl>

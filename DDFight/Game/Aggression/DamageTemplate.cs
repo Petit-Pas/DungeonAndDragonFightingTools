@@ -117,7 +117,7 @@ namespace DDFight.Game.Aggression
         /// 
         /// </summary>
         /// <param name="propertyName"></param>
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
             if (PropertyChanged != null)
             {
@@ -128,14 +128,19 @@ namespace DDFight.Game.Aggression
 
         #region ICloneable 
 
-        protected DamageTemplate(DamageTemplate to_copy)
+        private void init_copy(DamageTemplate to_copy)
         {
             Damage = (DiceRoll)to_copy.Damage.Clone();
             DamageType = to_copy.DamageType;
             SituationalDamageModifier = to_copy.SituationalDamageModifier;
         }
 
-        public object Clone()
+        protected DamageTemplate(DamageTemplate to_copy)
+        {
+            init_copy(to_copy);
+        }
+
+        public virtual object Clone()
         {
             return new DamageTemplate(this);
         }

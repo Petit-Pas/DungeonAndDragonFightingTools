@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Media;
 using DDFight.Game.Aggression;
 using System.Collections.Generic;
+using DDFight.Game.Aggression.Display;
 
 namespace DDFight.Game.Status
 {
@@ -136,6 +137,42 @@ namespace DDFight.Game.Status
         private List<DamageTemplate> _onApplyDamageList = new List<DamageTemplate> ();
 
         #endregion ApplyDamage
+
+        #region DotDamage
+
+        public List<DotTemplate> DotDamageList
+        {
+            get => _dotDamageList;
+            set
+            {
+                _dotDamageList = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private List<DotTemplate> _dotDamageList = new List<DotTemplate>();
+
+        private void checkDotDamage(bool start, bool caster)
+        {
+            List<DamageTemplate> to_apply = new List<DamageTemplate>();
+            foreach (DotTemplate dot in DotDamageList)
+            {
+                if (dot.TriggersStartOfTurn == start && dot.TriggersOnCastersTurn == caster)
+                    to_apply.Add((DamageTemplate)dot.Clone());
+            }
+            if (to_apply.Count != 0)
+            {
+                DamageTemplateListRollableWindow window = new DamageTemplateListRollableWindow(){ DataContext = to_apply, };
+                window.TitleControl.Text = this.Header + " inflicts damage to " + Affected.DisplayName;
+                window.ShowCentered();
+
+                if (window.Validated)
+                {
+                    Affected.TakeHitDamage(to_apply);
+                }
+            }
+        }
+
+        #endregion DotDamage
 
         #endregion Damage
 
@@ -268,6 +305,8 @@ namespace DDFight.Game.Status
         {
             bool expired = false;
 
+            checkDotDamage(true, false);
+
             if (HasAMaximumDuration && !DurationIsCalculatedOnCasterTurn && DurationIsBasedOnStartOfTurn)
                 expired = removeDuration();
             if (!expired && CanRedoSavingThrow && SavingIsRemadeAtStartOfTurn)
@@ -283,6 +322,8 @@ namespace DDFight.Game.Status
         {
             bool expired = false;
 
+            checkDotDamage(false, false);
+
             if (HasAMaximumDuration && !DurationIsCalculatedOnCasterTurn && !DurationIsBasedOnStartOfTurn)
                 expired = removeDuration();
             if (!expired && CanRedoSavingThrow && !SavingIsRemadeAtStartOfTurn)
@@ -296,12 +337,16 @@ namespace DDFight.Game.Status
 
         private void Caster_TurnEnded(object sender, TurnEndedEventArgs args)
         {
+            checkDotDamage(false, true);
+
             if (HasAMaximumDuration && DurationIsCalculatedOnCasterTurn && !DurationIsBasedOnStartOfTurn)
                 removeDuration();
         }
 
         private void Caster_NewTurnStarted(object sender, StartNewTurnEventArgs args)
         {
+            checkDotDamage(true, true);
+
             if (HasAMaximumDuration && DurationIsCalculatedOnCasterTurn && DurationIsBasedOnStartOfTurn)
                 removeDuration();
         }
@@ -394,14 +439,18 @@ namespace DDFight.Game.Status
                 applied.Caster = caster;
                 applied.Affected = target;
                 if ((applied.CanRedoSavingThrow && applied.SavingIsRemadeAtStartOfTurn) ||
-                    (applied.HasAMaximumDuration && !applied.DurationIsCalculatedOnCasterTurn && applied.DurationIsBasedOnStartOfTurn))
+                    (applied.HasAMaximumDuration && !applied.DurationIsCalculatedOnCasterTurn && applied.DurationIsBasedOnStartOfTurn) ||
+                    applied.DotDamageList.Count != 0)
                     target.NewTurnStarted += applied.Affected_NewTurnStarted;
                 if ((applied.CanRedoSavingThrow && applied.SavingIsRemadeAtStartOfTurn == false) ||
-                    (applied.HasAMaximumDuration && !applied.DurationIsCalculatedOnCasterTurn && !applied.DurationIsBasedOnStartOfTurn))
+                    (applied.HasAMaximumDuration && !applied.DurationIsCalculatedOnCasterTurn && !applied.DurationIsBasedOnStartOfTurn) ||
+                    applied.DotDamageList.Count != 0)
                     target.TurnEnded += applied.Affected_TurnEnded;
-                if (applied.HasAMaximumDuration && applied.DurationIsCalculatedOnCasterTurn && applied.DurationIsBasedOnStartOfTurn)
+                if ((applied.HasAMaximumDuration && applied.DurationIsCalculatedOnCasterTurn && applied.DurationIsBasedOnStartOfTurn) ||
+                    applied.DotDamageList.Count != 0)
                     caster.NewTurnStarted += applied.Caster_NewTurnStarted;
-                if (applied.HasAMaximumDuration && applied.DurationIsCalculatedOnCasterTurn && !applied.DurationIsBasedOnStartOfTurn)
+                if ((applied.HasAMaximumDuration && applied.DurationIsCalculatedOnCasterTurn && !applied.DurationIsBasedOnStartOfTurn) ||
+                    applied.DotDamageList.Count != 0)
                     caster.TurnEnded += applied.Caster_TurnEnded;
                 if (applied.EndsOnCasterLossOfConcentration)
                 {
@@ -498,6 +547,7 @@ namespace DDFight.Game.Status
             DurationIsCalculatedOnCasterTurn = to_copy.DurationIsCalculatedOnCasterTurn;
             DurationIsBasedOnStartOfTurn = to_copy.DurationIsBasedOnStartOfTurn;
             OnApplyDamageList = (List<DamageTemplate>)to_copy.OnApplyDamageList.Clone();
+            DotDamageList = (List<DotTemplate>)to_copy.DotDamageList.Clone();
             HasSpellSaving = to_copy.HasSpellSaving;
             SpellApplicationModifier = to_copy.SpellApplicationModifier;
             SpellSavingWasSuccessful = to_copy.SpellSavingWasSuccessful;

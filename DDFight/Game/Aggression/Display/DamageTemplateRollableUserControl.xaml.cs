@@ -14,7 +14,7 @@ namespace DDFight.Game.Aggression.Display
             get
             {
                 try { return (DamageTemplate)DataContext; }
-                catch (Exception) { return null; }
+                catch (Exception e) { return null; }
             }
         }
 

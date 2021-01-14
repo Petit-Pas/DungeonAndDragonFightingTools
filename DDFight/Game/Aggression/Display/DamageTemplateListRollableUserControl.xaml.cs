@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace DDFight.Controlers.Game.Attacks.DamageListControls
+namespace DDFight.Controlers.Game.Attacks.Display
 {
     /// <summary>
     /// Logique d'interaction pour PlayableDamageListUserControl.xaml
