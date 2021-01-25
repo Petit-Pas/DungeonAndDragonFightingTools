@@ -3,11 +3,11 @@
 namespace DDFight.Game.Aggression.Spells.Display
 {
     /// <summary>
-    /// Logique d'interaction pour SpellEffectEditableUserControl.xaml
+    /// Interaction logic for SpellLevelUpEditableControl.xaml
     /// </summary>
-    public partial class SpellEffectEditableUserControl : UserControl
+    public partial class SpellLevelUpEditableControl : UserControl
     {
-        public SpellEffectEditableUserControl()
+        public SpellLevelUpEditableControl()
         {
             InitializeComponent();
         }

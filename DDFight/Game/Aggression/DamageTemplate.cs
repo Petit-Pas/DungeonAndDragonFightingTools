@@ -3,7 +3,6 @@ using DDFight.Game.Dices;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Windows.Ink;
 using System.Xml.Serialization;
 
 namespace DDFight.Game.Aggression
@@ -16,6 +15,25 @@ namespace DDFight.Game.Aggression
     {
         public DamageTemplate() 
         { 
+        }
+
+        public bool IsSameKind(DamageTemplate template)
+        {
+            if (DamageType == template.DamageType)
+                if (SituationalDamageModifier == template.SituationalDamageModifier)
+                    return true;
+            return false;
+        }
+
+        public void Add(DamageTemplate to_combine)
+        {
+            if (!this.IsSameKind(to_combine))
+                throw new Exception("Trying to combine non likely DamageTemplates");
+            foreach (Dices.Dices dices in to_combine.Damage.DicesList)
+            {
+                this.Damage.AddDice(dices);
+            }
+            this.Damage.Modifier += to_combine.Damage.Modifier;
         }
 
         public DamageTemplate(string damageFormat, DamageTypeEnum damageType)

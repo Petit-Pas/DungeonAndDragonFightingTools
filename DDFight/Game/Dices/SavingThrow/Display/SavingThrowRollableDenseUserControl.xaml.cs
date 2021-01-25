@@ -1,20 +1,8 @@
 ﻿using DDFight.Tools.UXShortcuts;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace DDFight.Game.Dices.SavingThrow.Display
 {
@@ -63,22 +51,30 @@ namespace DDFight.Game.Dices.SavingThrow.Display
 
         private void refreshResult()
         {
-            int result = data_context.Target.Characteristics.GetSavingModifier(data_context.Characteristic) + data_context.SavingRoll + data_context.Modifier;
-            int target = data_context.Difficulty;
+            if (data_context != null)
+            {
+                int result = data_context.Target.Characteristics.GetSavingModifier(data_context.Characteristic) + data_context.SavingRoll + data_context.Modifier;
+                int target = data_context.Difficulty;
 
-            ResultControl.Text = result + "/" + target;
+                ResultControl.Text = result + "/" + target;
+            }
         }
         
         public void RollControl()
         {
-            if (data_context.SavingRoll == 0)
+            if (data_context != null)
             {
-                data_context.SavingRoll = DiceRoll.Roll("1d20", data_context.AdvantageModifiers.SituationalAdvantage, data_context.AdvantageModifiers.SituationalDisadvantage);
+                if (data_context.SavingRoll == 0)
+                {
+                    data_context.SavingRoll = DiceRoll.Roll("1d20", data_context.AdvantageModifiers.SituationalAdvantage, data_context.AdvantageModifiers.SituationalDisadvantage);
+                }
             }
         }
 
         public bool IsFullyRolled()
         {
+            if (data_context == null)
+                return true;
             if (data_context.SavingRoll == 0)
             {
                 return false;

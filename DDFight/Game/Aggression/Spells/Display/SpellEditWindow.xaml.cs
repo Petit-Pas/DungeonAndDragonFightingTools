@@ -1,6 +1,5 @@
 ﻿using DDFight.Resources;
 using DDFight.Windows;
-using System;
 using System.Windows;
 
 namespace DDFight.Game.Aggression.Spells.Display

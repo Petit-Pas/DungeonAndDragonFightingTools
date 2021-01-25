@@ -1,9 +1,5 @@
 ﻿using DDFight.Game;
-using DDFight.Game.Aggression;
-using DDFight.Game.Aggression.Attacks;
-using DDFight.Game.DamageAffinity;
 using DDFight.Resources;
-using System;
 using System.ComponentModel;
 using System.Windows;
 

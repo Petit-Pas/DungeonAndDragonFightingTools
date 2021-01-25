@@ -1,5 +1,4 @@
-﻿using DDFight.Game.Characteristics;
-using DDFight.Tools.UXShortcuts;
+﻿using DDFight.Tools.UXShortcuts;
 using DDFight.ValidationRules;
 using System;
 using System.Windows;

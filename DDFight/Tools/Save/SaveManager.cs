@@ -1,5 +1,4 @@
-﻿using DDFight.Game.Aggression;
-using DDFight.Game.Aggression.Spells;
+﻿using DDFight.Game.Aggression.Spells;
 using System;
 using System.Collections.ObjectModel;
 using System.IO;

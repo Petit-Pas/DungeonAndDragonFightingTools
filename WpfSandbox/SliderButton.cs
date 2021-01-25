@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DDFight.Controlers
+﻿namespace DDFight.Controlers
 {
     public class SliderButton : System.Windows.Controls.Primitives.ToggleButton
     {

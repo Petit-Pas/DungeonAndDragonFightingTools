@@ -18,6 +18,19 @@ namespace DDFight.Game.Dices
                 init();
         }
 
+        public void AddDice(Dices to_add)
+        {
+            foreach (Dices dices in DicesList)
+            {
+                if (dices.DiceValue == to_add.DiceValue)
+                {
+                    dices.DiceAmount += to_add.DiceAmount;
+                    return;
+                }
+            }
+            DicesList.Add(to_add);
+        }
+
         /// <summary>
         ///     Initializes a DiceRoll from an input string (ex: 2d4+1d6+3)
         /// </summary>
@@ -36,11 +49,11 @@ namespace DDFight.Game.Dices
                     {
                         subFormat = format.Substring(0, indexP);
                         format = format.Substring(indexP + 1);
-                        DicesList.Add(new Dices(subFormat));
+                        AddDice(new Dices(subFormat));
                     }
                     else
                     {
-                        DicesList.Add(new Dices(format));
+                        AddDice(new Dices(format));
                         format = "";
                     }
                     indexD = format.IndexOf('d');

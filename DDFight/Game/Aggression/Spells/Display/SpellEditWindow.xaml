@@ -47,6 +47,14 @@
                 </TabItem.Header>
                 <local:SpellEffectEditableUserControl/>
             </TabItem>
+            <TabItem Style="{StaticResource TabItemStyle}">
+                <TabItem.Header>
+                    <TextBlock Style="{StaticResource HeaderTextBlockStyle}">
+                        Level Up
+                    </TextBlock>
+                </TabItem.Header>
+                <local:SpellLevelUpEditableControl/>
+            </TabItem>
         </TabControl>
 
         <Button

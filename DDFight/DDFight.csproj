@@ -86,6 +86,9 @@
       <DependentUpon>DotTemplateListEditableControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Game\Aggression\DotTemplate.cs" />
+    <Compile Include="Game\Aggression\Spells\Display\SpellLevelUpEditableControl.xaml.cs">
+      <DependentUpon>SpellLevelUpEditableControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Game\Aggression\Spells\NonAttackSpellResult.cs" />
     <Compile Include="Game\Aggression\Spells\Display\SpellAttackEditableUserControl.xaml.cs">
       <DependentUpon>SpellAttackEditableUserControl.xaml</DependentUpon>
@@ -419,6 +422,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Game\Aggression\Spells\Display\SpellGeneralInfoUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\Aggression\Spells\Display\SpellLevelUpEditableControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

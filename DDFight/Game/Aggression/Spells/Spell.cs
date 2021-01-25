@@ -6,10 +6,6 @@ using DDFight.Tools;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace DDFight.Game.Aggression.Spells
@@ -24,8 +20,18 @@ namespace DDFight.Game.Aggression.Spells
 
         public void CastSpell(PlayableEntity Caster)
         {
+            int level = 4;
+            int additional_levels = level - this.BaseLevel;
+            int amountTargets = this.AmountTargets;
+
+            if (amountTargets != 0)
+                for (int i = additional_levels; i > 0; i--)
+                {
+                    amountTargets += this.AdditionalTargetPerLevel;
+                }
+
             FightingEntityListSelectableWindow targetWindow = new FightingEntityListSelectableWindow {
-                MaximumSelected = this.AmountTargets,
+                MaximumSelected = amountTargets,
                 CanSelectSameTargetTwice = this.CanSelectSameTargetTwice,
             };
             targetWindow.ShowCentered();
@@ -34,19 +40,19 @@ namespace DDFight.Game.Aggression.Spells
             {
                 if (IsAnAttack)
                 {
-
+                    //TODO implement this
                 }
                 else
                 {
                     SpellNonAttackCastWindow window = new SpellNonAttackCastWindow() { 
-                        DataContext = this.GetNonAttackSpellResult(Caster, targetWindow.Selected) 
+                        DataContext = this.GetNonAttackSpellResult(Caster, targetWindow.Selected, additional_levels) 
                     };
                     window.ShowCentered();
                 }
             }
         }
 
-        public NonAttackSpellResult GetNonAttackSpellResult(PlayableEntity caster, ObservableCollection<PlayableEntity> targets)
+        public NonAttackSpellResult GetNonAttackSpellResult(PlayableEntity caster, ObservableCollection<PlayableEntity> targets, int additional_levels)
         {
             NonAttackSpellResult template = new NonAttackSpellResult {
                 HitDamage = (List<DamageTemplate>)this.HitDamage.Clone<DamageTemplate>(),
@@ -57,9 +63,27 @@ namespace DDFight.Game.Aggression.Spells
                 SavingDifficulty = (this.SavingDifficulty == 0 ? caster.SpellSave : this.SavingDifficulty),
                 Targets = targets,
                 Name = this.Name,
-                Level = this.BaseLevel,
+                Level = this.BaseLevel + additional_levels,
             };
 
+            for (int i = additional_levels; i > 0; i--)
+            {
+                foreach (DamageTemplate damageTemplate in AdditionalHitDamagePerLevel)
+                {
+                    bool added = false;
+                    foreach (DamageTemplate onHitTemplate in template.HitDamage)
+                    {
+                        if (onHitTemplate.IsSameKind(damageTemplate))
+                        {
+                            onHitTemplate.Add(damageTemplate);
+                            added = true;
+                            break;
+                        }
+                    }
+                    if (added == false)
+                        template.HitDamage.Add(damageTemplate);
+                }
+            }
             return template;
         }
 
@@ -98,6 +122,47 @@ namespace DDFight.Game.Aggression.Spells
         }
         private OnHitStatusList _appliedStatus = new OnHitStatusList();
 
+        #region Level
+
+        public bool CanBeCastAtHigherLevel
+        {
+            get => _canBeCastAtHigherLevel;
+            set
+            {
+                if (_canBeCastAtHigherLevel != value)
+                {
+                    _canBeCastAtHigherLevel = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        private bool _canBeCastAtHigherLevel = false;
+
+        public int AdditionalTargetPerLevel
+        {
+            get => _additionalTargetPerLevel;
+            set
+            {
+                if (_additionalTargetPerLevel != value)
+                {
+                    _additionalTargetPerLevel = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        private int _additionalTargetPerLevel = 0;
+
+        public List<DamageTemplate> AdditionalHitDamagePerLevel
+        {
+            get => _additionalHitDamagePerLevel;
+            set
+            {
+                _additionalHitDamagePerLevel = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private List<DamageTemplate> _additionalHitDamagePerLevel = new List<DamageTemplate>();
+
         public int BaseLevel
         {
             get => _baseLevel;
@@ -108,6 +173,8 @@ namespace DDFight.Game.Aggression.Spells
             }
         }
         private int _baseLevel = 0;
+
+        #endregion Level
 
         /// <summary>
         ///     0 means uncapped
@@ -223,6 +290,9 @@ namespace DDFight.Game.Aggression.Spells
             this.SavingDifficulty = to_copy.SavingDifficulty;
             this.HitDamage = (List<DamageTemplate>)to_copy.HitDamage.Clone();
             this.AppliedStatus = (OnHitStatusList)to_copy.AppliedStatus.Clone();
+            this.CanBeCastAtHigherLevel = to_copy.CanBeCastAtHigherLevel;
+            this.AdditionalHitDamagePerLevel = (List<DamageTemplate>)to_copy.AdditionalHitDamagePerLevel.Clone();
+            this.AdditionalTargetPerLevel = to_copy.AdditionalTargetPerLevel;
         }
 
         protected Spell(Spell to_copy) : base(to_copy)

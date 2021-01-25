@@ -1,12 +1,9 @@
-﻿using DDFight.Game;
-using DDFight.Game.Aggression;
-using DDFight.Tools;
+﻿using DDFight.Tools;
 using DDFight.ValidationRules;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Net.NetworkInformation;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;

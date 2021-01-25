@@ -1,0 +1,75 @@
+﻿<UserControl x:Class="DDFight.Game.Aggression.Spells.Display.SpellLevelUpEditableControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DDFight.Game.Aggression.Spells.Display" xmlns:controlers="clr-namespace:DDFight.Controlers" xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes" xmlns:damagelistcontrols="clr-namespace:DDFight.Controlers.Game.Attacks.DamageListControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             >
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/SliderButtonControlStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <StackPanel
+            Margin="5, 0"
+            Grid.Row="0"
+            Orientation="Horizontal">
+            <TextBlock
+                VerticalAlignment="Center">
+                Can the spell be used at a higher level?
+            </TextBlock>
+            <controlers:SliderButton 
+                Style="{StaticResource styleSliderButton}"
+                IsChecked="{Binding CanBeCastAtHigherLevel}"
+                VerticalAlignment="Center"
+                Margin="5, 0"/>
+        </StackPanel>
+
+        <Grid
+            Margin="5"
+            Grid.Row="1"
+            Visibility="{Binding CanBeCastAtHigherLevel,Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackPanel 
+                Orientation="Horizontal"
+                Grid.Row="0">
+                <TextBlock>
+                    Amount of additional targets per level:
+                </TextBlock>
+                <inputboxes:PositiveIntTextBox
+                    Margin="5, 0"
+                    MinWidth="30"
+                    PropertyPath="AdditionalTargetPerLevel">
+                </inputboxes:PositiveIntTextBox>
+            </StackPanel>
+
+            <TextBlock
+                Grid.Row="1">
+                Additional Damage per level:
+            </TextBlock>
+            
+            <damagelistcontrols:DamageTemplateListEditableUserControl
+                Grid.Row="2"
+                HasSavingThrow="True"
+                DataContext="{Binding AdditionalHitDamagePerLevel}"/>
+        </Grid>
+        
+    </Grid>
+    
+</UserControl>

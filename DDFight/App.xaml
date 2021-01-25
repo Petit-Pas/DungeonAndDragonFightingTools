@@ -49,7 +49,7 @@
             <Style TargetType="{x:Type windows:HitAttackTemplateEditWindow}" BasedOn="{StaticResource WindowStyle}"/>
             <Style TargetType="{x:Type windows:MonsterEditWindow}" BasedOn="{StaticResource WindowStyle}"/>
             <Style TargetType="{x:Type windows:StatusMessageWindow}" BasedOn="{StaticResource WindowStyle}"/>
-
+            
             <Style TargetType="{x:Type TextBlock}" x:Key="ErrorMessage" >
                 <Setter Property="Foreground" Value="Red"/>
                 <Setter Property="FontSize" Value="15"/>
