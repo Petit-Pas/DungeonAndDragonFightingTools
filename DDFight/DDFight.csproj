@@ -338,6 +338,9 @@
       <DependentUpon>BlankDiceRollModal.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\ModalWindows\BlankDiceRollModal\BlankDiceRollModalDataContext.cs" />
+    <Compile Include="Windows\ModalWindows\FormWindow\AskPositiveIntWindow.xaml.cs">
+      <DependentUpon>AskPositiveIntWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\ModalWindows\YesNoModal\AskYesNoDataContext.cs" />
     <Compile Include="Windows\ModalWindows\YesNoModal\AskYesNoWindow.xaml.cs">
       <DependentUpon>AskYesNoWindow.xaml</DependentUpon>
@@ -709,6 +712,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\ModalWindows\BlankDiceRollModal\BlankDiceRollModal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ModalWindows\FormWindow\AskPositiveIntWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

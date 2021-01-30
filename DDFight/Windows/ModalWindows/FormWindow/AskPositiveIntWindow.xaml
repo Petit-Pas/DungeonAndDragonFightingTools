@@ -1,0 +1,46 @@
+﻿<Window x:Class="DDFight.Windows.ModalWindows.FormWindow.AskPositiveIntWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DDFight.Windows.ModalWindows.FormWindow"
+        mc:Ignorable="d"
+        Title="AskPositiveIntWindow" Height="200" Width="400"
+        xmlns:input="clr-namespace:DDFight.Controlers.InputBoxes"
+        Style="{StaticResource WindowStyle}"
+        Closing="Window_Closing">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock
+            Grid.Row="0"
+            x:Name="DescriptionTextBoxControl"
+            HorizontalAlignment="Center"
+            Margin="5"
+            Foreground="{StaticResource Light}"
+            FontSize="18">
+            Please enter a positive number
+        </TextBlock>
+        <input:PositiveIntTextBox
+            Grid.Row="1"
+            Margin="5, 0"
+            PropertyPath="Number"
+            MaxWidth="40"
+            KeyUp="PositiveIntTextBox_KeyUp"/>
+
+        <Button
+            x:Name="ValidateButtonControl"
+            Grid.Row="3"
+            HorizontalAlignment="Center"
+            FontSize="25"
+            Padding="10, 5"
+            Margin="5"
+            Click="ValidateButton_Click">
+            Validate
+        </Button>
+    </Grid>
+</Window>

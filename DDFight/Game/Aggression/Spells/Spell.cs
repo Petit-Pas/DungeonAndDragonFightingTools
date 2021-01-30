@@ -3,6 +3,7 @@ using DDFight.Game.Characteristics;
 using DDFight.Game.Fight.Display;
 using DDFight.Game.Status;
 using DDFight.Tools;
+using DDFight.Windows.ModalWindows.FormWindow;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -20,7 +21,14 @@ namespace DDFight.Game.Aggression.Spells
 
         public void CastSpell(PlayableEntity Caster)
         {
-            int level = 4;
+            AskPositiveIntWindow levelWindow = new AskPositiveIntWindow();
+            levelWindow.DescriptionTextBoxControl.Text = "at which level do you wish to cast this spell?";
+            levelWindow.ShowCentered();
+
+            if (levelWindow.Validated == false)
+                return;
+
+            int level = levelWindow.Number;
             int additional_levels = level - this.BaseLevel;
             int amountTargets = this.AmountTargets;
 
