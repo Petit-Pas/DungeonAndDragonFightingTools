@@ -14,84 +14,80 @@
             <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
+
     <Grid
-        Background="{StaticResource Gray}"
-        Margin="5, 15">
+        Margin="5"
+        Grid.Row="0"
+        ShowGridLines="False"
+        Background="{StaticResource Gray}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Grid
-            Margin="5"
-            Grid.Row="0"
-            ShowGridLines="False">
+        <Grid 
+            Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+            Margin="5">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-
-                <TextBlock
+            <TextBlock
                 Grid.Column="0"
                 VerticalAlignment="Center">
                 The Spell has a Saving Throw :
-                </TextBlock>
-                <controlers:SliderButton 
+            </TextBlock>
+            <controlers:SliderButton 
                 Margin="5"
                 Grid.Column="1"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 Style="{StaticResource styleSliderButton}"
                 IsChecked="{Binding HasSavingThrow}"
-                />
+            />
 
-                <characteristics:CharacteristicsListSelectableUserControl
+            <characteristics:CharacteristicsListSelectableUserControl
                 Grid.Row="1" Grid.Column="0"
                 Height="25"
                 PropertyPath="SavingCharacteristic"
                 Visibility="{Binding HasSavingThrow, Converter={StaticResource BoolToVisibilityConverter}}"
-                />
+            />
 
-                <inputboxes:PositiveIntTextBox 
+            <inputboxes:PositiveIntTextBox 
                 Grid.Row="1" Grid.Column="1"
                 Width="40"
                 Margin="5"
                 PropertyPath="SavingDifficulty"
                 Visibility="{Binding HasSavingThrow, Converter={StaticResource BoolToVisibilityConverter}}"
-                />
-
-            </Grid>
-
-            <damagelistcontrols:DamageTemplateListEditableUserControl 
-                Background="{StaticResource LightestGray}"
-                Grid.Column="0" Grid.Row="1"
-                Margin="5"
-                HasSavingThrow="{Binding Path=DataContext.HasSavingThrow, RelativeSource={RelativeSource AncestorType=local:SpellNonAttackEditableUserControl}}"
-                DataContext="{Binding HitDamage}"
             />
-
-            <display:OnHitStatusListEditableUserControl 
-                Background="{StaticResource LightestGray}"
-                Grid.Column="1" Grid.Row="1"
-                Margin="5"
-                DataContext="{Binding AppliedStatus}"
-                HasSavingThrow="{Binding Path=DataContext.HasSavingThrow, RelativeSource={RelativeSource AncestorType=local:SpellNonAttackEditableUserControl}}"
-            />
-
 
         </Grid>
+
+        <damagelistcontrols:DamageTemplateListEditableUserControl 
+            Background="{StaticResource LightestGray}"
+            Grid.Column="0" Grid.Row="1"
+            Margin="5"
+            HasSavingThrow="{Binding Path=DataContext.HasSavingThrow, RelativeSource={RelativeSource AncestorType=local:SpellNonAttackEditableUserControl}}"
+            DataContext="{Binding HitDamage}"
+        />
+
+        <display:OnHitStatusListEditableUserControl 
+            Background="{StaticResource LightestGray}"
+            Grid.Column="1" Grid.Row="1"
+            Margin="5"
+            DataContext="{Binding AppliedStatus}"
+            HasSavingThrow="{Binding Path=DataContext.HasSavingThrow, RelativeSource={RelativeSource AncestorType=local:SpellNonAttackEditableUserControl}}"
+        />
+
+
     </Grid>
 </UserControl>

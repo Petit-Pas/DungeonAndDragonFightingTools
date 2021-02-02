@@ -3,10 +3,82 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:DDFight.Game.Aggression.Spells.Display"
+             xmlns:local="clr-namespace:DDFight.Game.Aggression.Spells.Display" xmlns:damagelistcontrols="clr-namespace:DDFight.Controlers.Game.Attacks.DamageListControls" xmlns:display="clr-namespace:DDFight.Game.Status.Display" xmlns:converters="clr-namespace:DDFight.Converters" xmlns:controlers="clr-namespace:DDFight.Controlers" xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/SliderButtonControlStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <converters:BoolToReversedVisibilityConverter x:Key="BoolToReversedVisibilityConverter" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid
+        Background="{StaticResource Gray}"
+        Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid
+            Grid.Row="0"
+            Margin="5, 5, 5, 5">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <WrapPanel
+                Grid.Row="0">
+                <TextBlock
+                    VerticalAlignment="Center">
+                    The Spell will automatically hit:
+                </TextBlock>
+                <controlers:SliderButton 
+                    Margin="5"
+                    Style="{StaticResource styleSliderButton}" 
+                    IsChecked="{Binding AutomaticalyHits}"/>
+            </WrapPanel>
+
+            <WrapPanel
+                Grid.Row="1"
+                Visibility="{Binding AutomaticalyHits, Converter={StaticResource BoolToReversedVisibilityConverter}}">
+                <TextBlock
+                    VerticalAlignment="Center">
+                    Bonus to hit (0 for default):
+                </TextBlock>
+                <inputboxes:IntTextBox 
+                    Margin="5"
+                    MinWidth="40"
+                    PropertyPath="HitRollBonus"/>
+            </WrapPanel>
+        </Grid>
+        
+        <Grid
+            Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <damagelistcontrols:DamageTemplateListEditableUserControl 
+                Background="{StaticResource LightestGray}"
+                Grid.Column="0" Grid.Row="1"
+                Margin="5"
+                HasSavingThrow="{Binding Path=DataContext.HasSavingThrow, RelativeSource={RelativeSource AncestorType=local:SpellNonAttackEditableUserControl}}"
+                DataContext="{Binding HitDamage}"
+            />
+
+            <display:OnHitStatusListEditableUserControl 
+                Background="{StaticResource LightestGray}"
+                Grid.Column="1" Grid.Row="1"
+                Margin="5"
+                DataContext="{Binding AppliedStatus}"
+                HasSavingThrow="{Binding Path=DataContext.HasSavingThrow, RelativeSource={RelativeSource AncestorType=local:SpellNonAttackEditableUserControl}}"
+            />
+        </Grid>
         
     </Grid>
 </UserControl>

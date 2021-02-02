@@ -59,7 +59,7 @@
             <TextBlock
                 VerticalAlignment="Center"
                 Margin="5">
-                The Spell requires an Attack Roll :
+                The Spell is an "Attack" :
             </TextBlock>
             <controlers:SliderButton 
                 HorizontalAlignment="Left"

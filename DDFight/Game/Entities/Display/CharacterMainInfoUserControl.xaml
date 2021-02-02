@@ -48,6 +48,8 @@
                     <RowDefinition Height="Auto"/>
                     <!-- Spell Save -->
                     <RowDefinition Height="Auto"/>
+                    <!-- Spell Hit Modifier -->
+                    <RowDefinition Height="Auto"/>
                     <!-- Max HPs -->
                     <RowDefinition Height="Auto"/>
                     <!-- Current HPs -->
@@ -103,41 +105,50 @@
                     PropertyPath="SpellSave"
                     Margin="0, 5, 10, 5"/>
 
-                <TextBlock 
+                <TextBlock
                     Grid.Row="4" Grid.Column="0">
+                    Spell Hit Modifier
+                </TextBlock>
+                <input:PositiveIntTextBox
+                    Grid.Row="4" Grid.Column="1"
+                    PropertyPath="SpellHitModifier"
+                    Margin="0, 5, 10, 5"/>
+
+                <TextBlock 
+                    Grid.Row="5" Grid.Column="0">
                     Max HP
                 </TextBlock>
                 <input:PositiveIntTextBox 
                     x:Name="MaxHPBoxUserControl" 
-                    Grid.Row="4" Grid.Column="1" 
+                    Grid.Row="5" Grid.Column="1" 
                     Margin="0, 5, 10, 5" 
                     PropertyPath="MaxHp"/>
 
                 <TextBlock 
-                    Grid.Row="5" Grid.Column="0">
+                    Grid.Row="6" Grid.Column="0">
                     Current HP
                 </TextBlock>
                 <input:IntTextBox 
                     x:Name="HPBoxUserControl" 
-                    Grid.Row="5" Grid.Column="1" 
+                    Grid.Row="6" Grid.Column="1" 
                     Margin="0, 5, 10, 5"
                     PropertyPath="Hp"/>
 
                 <TextBlock
-                    Grid.Row="6">
+                    Grid.Row="7">
                     Temporary HPs
                 </TextBlock>
                 <input:PositiveIntTextBox
-                    Grid.Row="6" Grid.Column="1"
+                    Grid.Row="7" Grid.Column="1"
                     Margin="0, 5, 10, 5"
                     PropertyPath="TempHp"/>
 
                 <TextBlock
-                    Grid.Row="7">
+                    Grid.Row="8">
                     Has Inpiration
                 </TextBlock>
                 <CheckBox
-                    Grid.Row="7" Grid.Column="1"
+                    Grid.Row="8" Grid.Column="1"
                     HorizontalAlignment="Left"
                     IsChecked="{Binding HasInspiration}"/>
 

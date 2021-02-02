@@ -223,6 +223,39 @@ namespace DDFight.Game.Aggression.Spells
         }
         private bool _isAnAttack = false;
 
+        #region Attack_Spell
+        public int HitRollBonus
+        {
+            get => _hitRollBonus;
+            set {
+                if (_hitRollBonus != value)
+                {
+                    _hitRollBonus = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        private int _hitRollBonus = 0;
+
+        /// <summary>
+        ///     this is just there for magic missile :(
+        /// </summary>
+        public bool AutomaticalyHits
+        {
+            get => _automaticalyHits;
+            set
+            {
+                if (_automaticalyHits != value)
+                {
+                    _automaticalyHits = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        private bool _automaticalyHits = false;
+
+        #endregion Attack_Spell
+
         #region SavingThrow
 
         public bool HasSavingThrow
@@ -301,6 +334,7 @@ namespace DDFight.Game.Aggression.Spells
             this.CanBeCastAtHigherLevel = to_copy.CanBeCastAtHigherLevel;
             this.AdditionalHitDamagePerLevel = (List<DamageTemplate>)to_copy.AdditionalHitDamagePerLevel.Clone();
             this.AdditionalTargetPerLevel = to_copy.AdditionalTargetPerLevel;
+            this.HitRollBonus = to_copy.HitRollBonus;
         }
 
         protected Spell(Spell to_copy) : base(to_copy)

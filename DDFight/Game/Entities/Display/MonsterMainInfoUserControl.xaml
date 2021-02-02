@@ -42,6 +42,8 @@
                     <RowDefinition Height="Auto"/>
                     <!-- Spell Save -->
                     <RowDefinition Height="Auto"/>
+                    <!-- Spell Hit Modifier -->
+                    <RowDefinition Height="Auto"/>
                     <!-- Max HPs -->
                     <RowDefinition Height="Auto"/>
                     <!-- Current HPs -->
@@ -52,10 +54,15 @@
                     <ColumnDefinition Width="*"/>
                     <!-- TextBoxes -->
                 </Grid.ColumnDefinitions>
+                <Grid.Resources>
+                    <Style TargetType="{x:Type TextBlock}" >
+                        <Setter Property="Margin" Value="10, 5"/>
+                        <Setter Property="VerticalAlignment" Value="Center" />
+                    </Style>
+                </Grid.Resources>
 
                 <TextBlock 
-                    Grid.Row="0" Grid.Column="0" 
-                    Margin="10, 5">
+                    Grid.Row="0" Grid.Column="0"> 
                     Name
                 </TextBlock>
                 <input:NotEmptyStringTextBox 
@@ -65,8 +72,7 @@
                     PropertyPath="Name"/>
 
                 <TextBlock 
-                    Grid.Row="1" Grid.Column="0" 
-                    Margin="10, 5">
+                    Grid.Row="1" Grid.Column="0">
                     Level
                 </TextBlock>
                 <input:NotEmptyStringTextBox 
@@ -76,8 +82,7 @@
                     PropertyPath="Level"/>
 
                 <TextBlock 
-                    Grid.Row="2" Grid.Column="0" 
-                    Margin="10, 5">
+                    Grid.Row="2" Grid.Column="0">
                     Armor class
                 </TextBlock>
                 <input:PositiveIntTextBox 
@@ -87,34 +92,40 @@
                     PropertyPath="CA"/>
 
                 <TextBlock
-                    Grid.Row="3" Grid.Column="0"
-                    Margin="10, 5">
+                    Grid.Row="3" Grid.Column="0">
                     Spell Save
                 </TextBlock>
                 <input:PositiveIntTextBox
                     Grid.Row="3" Grid.Column="1"
                     PropertyPath="SpellSave"
                     Margin="0, 5, 10, 5"/>
-                
+
+                <TextBlock
+                    Grid.Row="4" Grid.Column="0">
+                    Spell Hit Modifier
+                </TextBlock>
+                <input:PositiveIntTextBox
+                    Grid.Row="4" Grid.Column="1"
+                    PropertyPath="SpellHitModifier"
+                    Margin="0, 5, 10, 5"/>
+
                 <TextBlock 
-                    Grid.Row="4" Grid.Column="0" 
-                    Margin="10, 5">
+                    Grid.Row="5" Grid.Column="0">
                     Max HP
                 </TextBlock>
                 <input:PositiveIntTextBox 
                     x:Name="MaxHPBoxUserControl" 
-                    Grid.Row="4" Grid.Column="1" 
+                    Grid.Row="5" Grid.Column="1" 
                     Margin="0, 5, 10, 5" 
                     PropertyPath="MaxHp"/>
 
                 <TextBlock 
-                    Grid.Row="5" Grid.Column="0"
-                    Margin="10, 5">
+                    Grid.Row="6" Grid.Column="0">
                     Current HP
                 </TextBlock>
                 <input:IntTextBox 
                     x:Name="HPBoxUserControl" 
-                    Grid.Row="5" Grid.Column="1" 
+                    Grid.Row="6" Grid.Column="1" 
                     Margin="0, 5, 10, 5"
                     PropertyPath="Hp"/>
 

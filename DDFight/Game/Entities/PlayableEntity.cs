@@ -173,6 +173,23 @@ namespace DDFight.Game
         private int _spellSave = 10;
 
         /// <summary>
+        ///     The number added to rolls when executing a spell attack
+        /// </summary>
+        [XmlAttribute]
+        public int SpellHitModifier
+        {
+            get => _spellHitModifier;
+            set {
+                if (_spellHitModifier != value)
+                {
+                    _spellHitModifier = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        private int _spellHitModifier = 0;
+
+        /// <summary>
         ///     used to dump a character in log file (in case of crash, it at least gives information back)
         /// </summary>
         internal void Dump()
@@ -760,6 +777,7 @@ namespace DDFight.Game
             Counters = to_copy.Counters.Clone();
             Spells = (SpellsList)to_copy.Spells.Clone();
             TempHp = to_copy.TempHp;
+            SpellHitModifier = to_copy.SpellHitModifier;
         }
 
         /// <summary>
