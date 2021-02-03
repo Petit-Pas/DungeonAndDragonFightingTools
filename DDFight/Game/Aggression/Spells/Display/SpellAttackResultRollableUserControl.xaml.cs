@@ -1,4 +1,5 @@
 ﻿using DDFight.Tools.UXShortcuts;
+using DDFight.ValidationRules;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,7 +22,7 @@ namespace DDFight.Game.Aggression.Spells.Display
     /// <summary>
     /// Interaction logic for SpellAttackResultRollableUserControl.xaml
     /// </summary>
-    public partial class SpellAttackResultRollableUserControl : UserControl, INotifyPropertyChanged
+    public partial class SpellAttackResultRollableUserControl : UserControl, INotifyPropertyChanged, IValidable
     {
         private PlayableEntity data_context
         {
@@ -224,6 +225,18 @@ namespace DDFight.Game.Aggression.Spells.Display
             }
         }
         #endregion
+
+        public bool IsValid()
+        {
+            if (AttackRoll == 0)
+                return false;
+            foreach (DamageTemplate dmg in HitDamage)
+            {
+                if (dmg.Damage.LastRoll == 0)
+                    return false;
+            }
+            return this.AreAllChildrenValid();
+        }
 
     }
 }

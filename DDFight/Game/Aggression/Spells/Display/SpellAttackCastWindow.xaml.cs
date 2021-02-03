@@ -1,4 +1,5 @@
 ﻿using DDFight.Tools.UXShortcuts;
+using DDFight.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,9 +36,17 @@ namespace DDFight.Game.Aggression.Spells.Display
             RollableWindowTool.RollRollableChildren(this);
         }
 
+        private void refresh_CastButton()
+        {
+            CastButtonControl.IsEnabled = false;
+            if (this.AreAllChildrenValid())
+                CastButtonControl.IsEnabled = true;
+        }
+
+
         private void CastButtonControl_Click(object sender, RoutedEventArgs e)
         {
-
+            validated = true;
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -47,6 +56,31 @@ namespace DDFight.Game.Aggression.Spells.Display
                 e.Handled = true;
                 if (!IsFullyRolled())
                     RollControl();
+            }
+        }
+
+        private void Window_KeyUp(object sender, KeyEventArgs e)
+        {
+            refresh_CastButton();
+        }
+
+        private bool validated = false;
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (validated == false)
+            {
+                AskYesNoWindow askYesNoWindow = new AskYesNoWindow() 
+                {
+                    DataContext = new AskYesNoDataContext 
+                    { 
+                        Message = "Are you sure you wish to cancel this spell?"
+                    }
+                };
+                askYesNoWindow.ShowCentered();
+
+                if (((AskYesNoDataContext)askYesNoWindow.DataContext).Yes == false)
+                    e.Cancel = true;
             }
         }
     }
