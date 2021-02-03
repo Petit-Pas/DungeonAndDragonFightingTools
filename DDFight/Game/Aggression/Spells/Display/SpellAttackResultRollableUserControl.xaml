@@ -1,0 +1,109 @@
+﻿<UserControl x:Class="DDFight.Game.Aggression.Spells.Display.SpellAttackResultRollableUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DDFight.Game.Aggression.Spells.Display" xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes" xmlns:display="clr-namespace:DDFight.Controlers.Game.Attacks.Display" xmlns:converters="clr-namespace:DDFight.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/CheckBoxStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <converters:BoolToReversedVisibilityConverter x:Key="BoolToReversedVisibilityConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <WrapPanel
+            Grid.Row="0"
+            DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SpellAttackResultRollableUserControl}}}"
+            Orientation="Horizontal"
+            Visibility="{Binding Spell.AutomaticalyHits, 
+                        RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SpellAttackResultRollableUserControl}}, 
+                        Converter={StaticResource BoolToReversedVisibilityConverter}}">
+            <TextBlock
+                VerticalAlignment="Center">
+                Advantage: 
+            </TextBlock>
+            <CheckBox
+                IsChecked="{Binding HasAdvantage}"
+                Margin="5"/>
+            <TextBlock
+                VerticalAlignment="Center">
+                Disadvantage:
+            </TextBlock>
+            <CheckBox
+                IsChecked="{Binding HasDisAdvantage}"
+                Margin="5"/>
+        </WrapPanel>
+
+        <WrapPanel
+            Grid.Row="1"
+            DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SpellAttackResultRollableUserControl}}}"
+            Visibility="{Binding Spell.AutomaticalyHits, 
+                        RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SpellAttackResultRollableUserControl}}, 
+                        Converter={StaticResource BoolToReversedVisibilityConverter}}">
+            <TextBlock
+                VerticalAlignment="Center">
+                Modifier to Hit:
+            </TextBlock>
+            <inputboxes:IntTextBox 
+                PropertyPath="HitModifier"
+                Width="30"
+                Margin="5, 2"/>
+            <TextBlock
+                VerticalAlignment="Center">
+                Modifier to CA:
+            </TextBlock>
+            <inputboxes:IntTextBox 
+                PropertyPath="CAModifier"
+                Width="30"
+                Margin="5, 2"/>
+        </WrapPanel>
+
+        <WrapPanel
+            Grid.Row="2"
+            Visibility="{Binding Spell.AutomaticalyHits, 
+            RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SpellAttackResultRollableUserControl}}, 
+            Converter={StaticResource BoolToReversedVisibilityConverter}}">
+            <WrapPanel.Resources>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                </Style>
+            </WrapPanel.Resources>
+            <TextBlock>
+                Attack roll: 
+            </TextBlock>
+            <inputboxes:D20Box 
+                Width="30"
+                Margin="5, 2"
+                DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SpellAttackResultRollableUserControl}}}"
+                PropertyPath="AttackRoll"
+                HasAdvantage="{Binding HasAdvantage}"
+                HasDisAdvantage="{Binding HasDisAdvantage}"/>
+            <TextBlock 
+                DataContext="{Binding Spell, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SpellAttackResultRollableUserControl}}}"
+                Text="{Binding ToHitBonus, StringFormat=' + {0}'}"
+                FontWeight="SemiBold"/>
+            <TextBlock 
+                Text="{Binding HitResultString, StringFormat=' ==> {0}'}" 
+                DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SpellAttackResultRollableUserControl}}}"/>
+        </WrapPanel>
+
+        <display:DamageTemplateListRollableUserControl
+            Margin="0, 5"
+            Grid.Row="3"
+            DataContext="{Binding HitDamage, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SpellAttackResultRollableUserControl}}}"
+            Crits="{Binding Crits, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SpellAttackResultRollableUserControl}}}"
+            />
+
+    </Grid>
+</UserControl>

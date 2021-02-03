@@ -20,8 +20,7 @@
         </Style>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid
-        ShowGridLines="True">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>

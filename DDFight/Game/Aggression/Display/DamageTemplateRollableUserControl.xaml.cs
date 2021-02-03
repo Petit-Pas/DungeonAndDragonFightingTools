@@ -1,5 +1,6 @@
 ﻿using DDFight.Tools.UXShortcuts;
 using System;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace DDFight.Game.Aggression.Display
@@ -18,6 +19,17 @@ namespace DDFight.Game.Aggression.Display
             }
         }
 
+        /// <summary>
+        ///     tells wheter the damage are applied with a crit
+        /// </summary>
+        public bool Crits
+        {
+            get { return (bool)this.GetValue(CritProperty); }
+            set { this.SetValue(CritProperty, value); }
+        }
+        public static readonly DependencyProperty CritProperty = DependencyProperty.Register(
+          "Crits", typeof(bool), typeof(DamageTemplateRollableUserControl), new PropertyMetadata(false));
+
         public DamageTemplateRollableUserControl()
         {
             InitializeComponent();
@@ -27,7 +39,7 @@ namespace DDFight.Game.Aggression.Display
         {
             if (data_context != null)
                 if (data_context.Damage.LastRoll == 0)
-                    data_context.Damage.Roll();
+                    data_context.Damage.Roll(Crits);
         }
 
         public bool IsFullyRolled()

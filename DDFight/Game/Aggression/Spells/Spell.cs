@@ -19,10 +19,11 @@ namespace DDFight.Game.Aggression.Spells
 
         public string GetName() { return Name; }
 
-        public void CastSpell(PlayableEntity Caster)
+        public void CastSpell(PlayableEntity caster)
         {
             AskPositiveIntWindow levelWindow = new AskPositiveIntWindow();
             levelWindow.DescriptionTextBoxControl.Text = "at which level do you wish to cast this spell?";
+            levelWindow.Number = this.BaseLevel;
             levelWindow.ShowCentered();
 
             if (levelWindow.Validated == false)
@@ -48,16 +49,55 @@ namespace DDFight.Game.Aggression.Spells
             {
                 if (IsAnAttack)
                 {
-                    //TODO implement this
+                    SpellAttackCastWindow window = new SpellAttackCastWindow()
+                    {
+                        DataContext = this.GetAttackSpellResult(caster, targetWindow.Selected, additional_levels)
+                    };
+                    window.ShowCentered();
                 }
                 else
                 {
                     SpellNonAttackCastWindow window = new SpellNonAttackCastWindow() { 
-                        DataContext = this.GetNonAttackSpellResult(Caster, targetWindow.Selected, additional_levels) 
+                        DataContext = this.GetNonAttackSpellResult(caster, targetWindow.Selected, additional_levels) 
                     };
                     window.ShowCentered();
                 }
             }
+        }
+
+        public AttackSpellResult GetAttackSpellResult(PlayableEntity caster, ObservableCollection<PlayableEntity> targets, int additional_levels)
+        {
+            AttackSpellResult template = new AttackSpellResult
+            {
+                HitDamage = (List<DamageTemplate>)this.HitDamage.Clone<DamageTemplate>(),
+                AppliedStatusList = (OnHitStatusList)this.AppliedStatus.Clone(),
+                Caster = caster,
+                Targets = targets,
+                Name = this.Name,
+                Level = this.BaseLevel + additional_levels,
+                AutomaticalyHits = this.AutomaticalyHits,
+                ToHitBonus = (this.HitRollBonus == 0 ? caster.SpellHitModifier : this.HitRollBonus),
+            };
+
+            for (int i = additional_levels; i > 0; i -= 1)
+            {
+                foreach (DamageTemplate damageTemplate in AdditionalHitDamagePerLevel)
+                {
+                    bool added = false;
+                    foreach (DamageTemplate onHitTemplate in template.HitDamage)
+                    {
+                        if (onHitTemplate.IsSameKind(damageTemplate))
+                        {
+                            onHitTemplate.Add(damageTemplate);
+                            added = true;
+                            break;
+                        }
+                    }
+                    if (added == false)
+                        template.HitDamage.Add(damageTemplate);
+                }
+            }
+            return template;
         }
 
         public NonAttackSpellResult GetNonAttackSpellResult(PlayableEntity caster, ObservableCollection<PlayableEntity> targets, int additional_levels)
@@ -74,7 +114,7 @@ namespace DDFight.Game.Aggression.Spells
                 Level = this.BaseLevel + additional_levels,
             };
 
-            for (int i = additional_levels; i > 0; i--)
+            for (int i = additional_levels; i > 0; i -= 1)
             {
                 foreach (DamageTemplate damageTemplate in AdditionalHitDamagePerLevel)
                 {
@@ -335,6 +375,7 @@ namespace DDFight.Game.Aggression.Spells
             this.AdditionalHitDamagePerLevel = (List<DamageTemplate>)to_copy.AdditionalHitDamagePerLevel.Clone();
             this.AdditionalTargetPerLevel = to_copy.AdditionalTargetPerLevel;
             this.HitRollBonus = to_copy.HitRollBonus;
+            this.AutomaticalyHits = to_copy.AutomaticalyHits;
         }
 
         protected Spell(Spell to_copy) : base(to_copy)

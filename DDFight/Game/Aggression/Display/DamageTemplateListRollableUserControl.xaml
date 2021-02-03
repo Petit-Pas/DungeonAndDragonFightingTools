@@ -3,9 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:DDFight.Controlers.Game.Attacks.DamageListControls"
+             xmlns:local="clr-namespace:DDFight.Controlers.Game.Attacks.Display"
              xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes"
-             xmlns:converters="clr-namespace:DDFight.Converters" xmlns:display="clr-namespace:DDFight.Game.Aggression.Display"
+             xmlns:converters="clr-namespace:DDFight.Converters" 
+             xmlns:display="clr-namespace:DDFight.Game.Aggression.Display"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -19,7 +20,8 @@
             VirtualizingPanel.IsVirtualizing="False">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <display:DamageTemplateRollableUserControl/>
+                    <display:DamageTemplateRollableUserControl
+                        Crits="{Binding Crits, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:DamageTemplateListRollableUserControl}}}"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

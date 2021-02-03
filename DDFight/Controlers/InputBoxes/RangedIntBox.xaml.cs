@@ -95,7 +95,7 @@ namespace DDFight.Controlers.InputBoxes
         ///     /!\ The input event triggers before the check, so we can't just check the Error by hand after each input
         /// </summary>
         /// <returns></returns>
-        public bool IsValid()
+        public virtual bool IsValid()
         {
             return !Validation.GetHasError(IntBox);
         }

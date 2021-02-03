@@ -15,22 +15,25 @@
             VerticalScrollBarVisibility="Auto"
             Background="{StaticResource Gray}">
             <ItemsControl
-                    ItemsSource="{Binding DamageList}">
+                    ItemsSource="{Binding}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <DataTemplate.Resources>
-                            <Style TargetType="Label">
+                            <Style TargetType="TextBlock">
                                 <Setter Property="Foreground" Value="{StaticResource Light}"/>
                                 <Setter Property="FontSize" Value="14" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
                             </Style>
                         </DataTemplate.Resources>
                         <StackPanel 
-                                Orientation="Horizontal">
-                            <Label Content="{Binding Damage}" />
-                            <Label Content="{Binding DamageType}" 
+                            Orientation="Horizontal"
+                            Margin="5">
+                            <TextBlock Text="{Binding Damage}" />
+                            <TextBlock Text="{Binding DamageType}"
+                                       Margin="5"
                                        Foreground="{Binding DamageType, Converter={StaticResource DamageColorConverter}}"
                                        FontWeight="Bold"/>
-                            <Label Content="Damage" />
+                            <TextBlock Text="Damage" />
                         </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

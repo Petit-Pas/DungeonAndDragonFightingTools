@@ -59,6 +59,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controlers\InputBoxes\D20Box.cs" />
     <Compile Include="Controlers\InputBoxes\FilterTextBoxControl.xaml.cs">
       <DependentUpon>FilterTextBoxControl.xaml</DependentUpon>
     </Compile>
@@ -86,6 +87,13 @@
       <DependentUpon>DotTemplateListEditableControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Game\Aggression\DotTemplate.cs" />
+    <Compile Include="Game\Aggression\Spells\AttackSpellResult.cs" />
+    <Compile Include="Game\Aggression\Spells\Display\SpellAttackCastWindow.xaml.cs">
+      <DependentUpon>SpellAttackCastWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Game\Aggression\Spells\Display\SpellAttackResultRollableUserControl.xaml.cs">
+      <DependentUpon>SpellAttackResultRollableUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Game\Aggression\Spells\Display\SpellLevelUpEditableControl.xaml.cs">
       <DependentUpon>SpellLevelUpEditableControl.xaml</DependentUpon>
     </Compile>
@@ -412,7 +420,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Game\Aggression\Spells\Display\SpellAttackCastWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Game\Aggression\Spells\Display\SpellAttackEditableUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\Aggression\Spells\Display\SpellAttackResultRollableUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

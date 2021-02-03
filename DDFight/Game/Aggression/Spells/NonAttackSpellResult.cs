@@ -78,29 +78,20 @@ namespace DDFight.Game.Aggression.Spells
                 // OnHitStatus Application
                 foreach (OnHitStatus status in this.AppliedStatusList.List)
                 {
-                    bool applied = false;
                     if (this.HasSavingThrow == false)
                     {
                         status.Apply(this.Caster, Targets.ElementAt(i), multiple_application: already_applied);
                         already_applied = true;
-                        applied = true;
                     }
                     else if (savings.ElementAt(i).IsSuccesful == false)
                     {
                         status.Apply(this.Caster, Targets.ElementAt(i), multiple_application: already_applied);
                         already_applied = true;
-                        applied = true;
                     }
                     else if (this.HasSavingThrow = true && savings.ElementAt(i).IsSuccesful && status.SpellApplicationModifier == ApplicationModifierEnum.Maintained)
                     {
                         status.Apply(this.Caster, Targets.ElementAt(i), application_success: false, multiple_application: already_applied);
                         already_applied = true;
-                        applied = true;
-                    }
-                    if (applied)
-                    {
-                        //paragraph.Inlines.Add(Extensions.BuildRun(Targets.ElementAt(i).DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-                        //paragraph.Inlines.Add(Extensions.BuildRun(" ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
                     }
                 }
             }

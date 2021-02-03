@@ -1,16 +1,14 @@
-﻿<Window x:Class="DDFight.Game.Aggression.Spells.Display.SpellNonAttackCastWindow"
+﻿<Window x:Class="DDFight.Game.Aggression.Spells.Display.SpellAttackCastWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:converters="clr-namespace:DDFight.Converters"
-        xmlns:display="clr-namespace:DDFight.Game.Dices.SavingThrow.Display" 
-        xmlns:display1="clr-namespace:DDFight.Controlers.Game.Attacks.Display"
+        xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes" 
+        xmlns:converters="clr-namespace:DDFight.Converters" xmlns:display="clr-namespace:DDFight.Controlers.Game.Attacks.Display" xmlns:display1="clr-namespace:DDFight.Controlers.Game.Attacks.DamageListControls" xmlns:display2="clr-namespace:DDFight.Game.Aggression.Spells.Display"
         mc:Ignorable="d"
-        Title="SpellNonAttackCastWindow" Height="450" Width="800"
+        Title="SpellAttackCastWindow" Height="450" Width="800"
         Style="{StaticResource WindowStyle}"
-        x:Name="SpellNonAttackCastWindowControl"
-        KeyDown="SpellNonAttackCastWindowControl_KeyDown">
+        KeyDown="Window_KeyDown">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -23,65 +21,65 @@
                 <Setter Property="TextBlock.Foreground" Value="{StaticResource Light}"/>
                 <Setter Property="TextBlock.FontSize" Value="13" />
             </Style>
-
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition />
-        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <Grid
-            x:Name="SpellGeneralInfoControl"
             Margin="5">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <TextBlock
                 Grid.Row="0"
-                Text="{Binding Name}"
                 FontSize="20"
-                FontWeight="SemiBold"/>
-            
-            <TextBlock
-                Grid.Row="1"
-                Margin="0, 10"
-                Visibility="{Binding HasSavingThrow, Converter={StaticResource BoolToReversedVisibilityConverter}}">
-                Saving Throw: None
-            </TextBlock>
-            <TextBlock
-                Grid.Row="1"
-                Margin="0, 10"
-                Visibility="{Binding HasSavingThrow, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <Run Text="Saving Throw: " />
-                <Run Text="{Binding SavingCharacteristic}" />
-                <Run Text="{Binding SavingDifficulty}" />
-                <Run />
+                FontWeight="SemiBold">
+                <Run Text="{Binding Name}"></Run>
+                <Run Text="lvl"/>
+                <Run Text="{Binding Level}"></Run>
             </TextBlock>
 
-            <display1:DamageTemplateListRollableUserControl 
+            <WrapPanel
+                Grid.Row="1"
+                Margin="0, 10"
+                Visibility="{Binding AutomaticalyHits, Converter={StaticResource BoolToReversedVisibilityConverter}}">
+                <TextBlock>
+                    Hit Bonus: 
+                </TextBlock>
+                <TextBlock 
+                    FontWeight="SemiBold"
+                    Margin="5, 0"
+                    Text="{Binding ToHitBonus, StringFormat='+ {0}'}" />
+            </WrapPanel>
+            <TextBlock
+                Grid.Row="1"
+                Margin="0, 10"
+                Visibility="{Binding AutomaticalyHits, Converter={StaticResource BooleanToVisibilityConverter}}">
+                Will hit anyway
+            </TextBlock>
+
+            <display1:DamageTemplateListReadOnlyUserControl 
                 Grid.Row="2"
                 DataContext="{Binding HitDamage}"/>
 
             <Button
                 Grid.Row="4"
                 x:Name="CastButtonControl"
-                Click="CastButton_Click"
+                Click="CastButtonControl_Click"
                 FontSize="18">
                 Cast Spell
             </Button>
 
         </Grid>
-
 
         <ScrollViewer
             Grid.Column="1"
@@ -92,9 +90,9 @@
                 VirtualizingPanel.IsVirtualizing="False"
                 Background="{StaticResource Gray}"
                 ItemsSource="{Binding Targets}">
-                <ItemsControl.ItemTemplate> 
+                <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                    
+
                         <Border 
                             BorderBrush="{StaticResource Light}" 
                             CornerRadius="5" 
@@ -113,7 +111,7 @@
                                     <Style>
                                         <Setter Property="TextBlock.Foreground" Value="{StaticResource Light}"/>
                                         <Setter Property="TextBlock.FontSize" Value="13" />
-                                    
+
                                     </Style>
                                 </Grid.Style>
 
@@ -124,17 +122,15 @@
                                     FontWeight="SemiBold"
                                     />
 
-                                <display:SavingThrowRollableDenseUserControl
+                                <display2:SpellAttackResultRollableUserControl
                                     Grid.Row="1"
-                                    x:Name="DenseSavingControl"
-                                    Visibility="{Binding DataContext.HasSavingThrow, ElementName=SpellNonAttackCastWindowControl, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                    />
-                            
+                                    Spell="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}} }"/>
                             </Grid>
                         </Border>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
+
     </Grid>
 </Window>
