@@ -1,18 +1,47 @@
-﻿using DDFight.Game.Characteristics;
+﻿using DDFight.Game.Aggression.Attacks;
+using DDFight.Game.Aggression.Spells.Display;
 using DDFight.Game.Status;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Documents;
+using System.Windows.Media;
 
 namespace DDFight.Game.Aggression.Spells
 {
     public class AttackSpellResult : INotifyPropertyChanged
     {
+
+        public void Cast(List<SpellAttackResultRollableUserControl> attacks)
+        {
+            Paragraph paragraph = (Paragraph)Global.Context.UserLogs.Blocks.LastBlock;
+
+            paragraph.Inlines.Add(Extensions.BuildRun(Caster.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+            paragraph.Inlines.Add(Extensions.BuildRun(" casts a lvl ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+            paragraph.Inlines.Add(Extensions.BuildRun(Level.ToString() + " " + Name + "\r\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+
+
+            int index = 0;
+            foreach (PlayableEntity target in Targets)
+            {
+                SpellAttackResultRollableUserControl attack = attacks[index];
+                target.GetAttacked(new HitAttackResult {
+                    DamageList = attack.HitDamage,
+                    HitBonus = this.ToHitBonus,
+                    HitRoll = (uint)attack.AttackRoll,
+                    OnHitStatuses = this.AppliedStatusList,
+                    Owner = Caster,
+                    Target = target,
+                    SituationalHitAttackModifiers = new SituationalHitAttackModifiers{ACModifier = attack.CAModifier, HitModifier = attack.HitModifier},
+                }, Caster);
+                index += 1;
+            }
+        }
+
+
+
         #region Properties
         public string Name
         {

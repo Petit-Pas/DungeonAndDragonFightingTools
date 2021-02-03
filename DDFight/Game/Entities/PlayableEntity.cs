@@ -717,6 +717,11 @@ namespace DDFight.Game
                 tmp.Inlines.Add(Extensions.BuildRun(" Missed!\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
                 hit = false;
             }
+            if (hit == true)
+                foreach (OnHitStatus onHitStatus in result.OnHitStatuses.List)
+                {
+                    onHitStatus.CheckIfApply(result.Owner, result.Target);
+                }
             return hit;
         }
 

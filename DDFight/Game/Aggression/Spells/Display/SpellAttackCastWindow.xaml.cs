@@ -43,10 +43,23 @@ namespace DDFight.Game.Aggression.Spells.Display
                 CastButtonControl.IsEnabled = true;
         }
 
+        private AttackSpellResult data_context
+        {
+            get => (AttackSpellResult)DataContext;
+        }
 
         private void CastButtonControl_Click(object sender, RoutedEventArgs e)
         {
+            List<SpellAttackResultRollableUserControl> attacks = new List<SpellAttackResultRollableUserControl>();
+            foreach (SpellAttackResultRollableUserControl control in this.GetAllChildrenByName("SpellAttackResultRollableUserControl"))
+            {
+                attacks.Add(control);
+            }
+
+            data_context.Cast(attacks);
+
             validated = true;
+            this.Close();
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)

@@ -113,16 +113,7 @@ namespace DDFight.Game.Aggression.Attacks.Display
         public void Validate()
         {
             if (this.AreAllChildrenValid())
-            {
-                bool hit = data_context.Target.GetAttacked(data_context, data_context.Owner);
-                if (hit == true && data_context.OnHitStatuses.List.Count != 0)
-                {
-                    foreach (OnHitStatus onHitStatus in data_context.OnHitStatuses.List)
-                    {
-                        onHitStatus.CheckIfApply(data_context.Owner, data_context.Target);
-                    }
-                }
-            }
+                data_context.Target.GetAttacked(data_context, data_context.Owner);
         }
     }
 }

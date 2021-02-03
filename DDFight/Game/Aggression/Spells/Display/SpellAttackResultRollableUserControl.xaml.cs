@@ -39,7 +39,7 @@ namespace DDFight.Game.Aggression.Spells.Display
 
         private void refresh_result()
         {
-            uint CA = data_context.CA;
+            uint CA = data_context.CA + (uint)this.CAModifier;
             int score = this.HitModifier + this.AttackRoll + this.Spell.ToHitBonus;
             string result = score.ToString() + "/" + CA.ToString();
 
