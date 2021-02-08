@@ -75,17 +75,17 @@
                 <inputboxes:BooleanButton
                     Style="{StaticResource ActionsButtons}"
                     Grid.Column="0"
-                    PropertyPath="HasAction"
+                    Boolean="{Binding HasAction}"
                     Content="A" />
                 <inputboxes:BooleanButton
                     Style="{StaticResource ActionsButtons}"
                     Grid.Column="1"
-                    PropertyPath="HasReaction"
+                    Boolean="{Binding HasReaction, Mode=TwoWay}"
                     Content="R" />
                 <inputboxes:BooleanButton
                     Style="{StaticResource ActionsButtons}"
                     Grid.Column="2"
-                    PropertyPath="HasBonusAction"
+                    Boolean="{Binding HasBonusAction}"
                     Content="B"/>
 
             </Grid>
@@ -132,7 +132,7 @@
                 Background="{StaticResource Light}"
                 Foreground="{StaticResource LightestGray}"
                 FontWeight="SemiBold"
-                PropertyPath="IsFocused"
+                Boolean="{Binding IsFocused}"
                 Content="{Binding IsFocused, Converter={StaticResource BoolCustomStringConverter}, 
                 ConverterParameter=Focused|Not\ Focused}"/>
 

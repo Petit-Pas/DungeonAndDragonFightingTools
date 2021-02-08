@@ -13,7 +13,7 @@ namespace DDFight.Controlers.InputBoxes
     /// <summary>
     ///     Logique d'interaction pour IntTextBox.xaml
     /// </summary>
-    public partial class IntTextBox : UserControl, IFocusable, IValidable, INotifyPropertyChanged
+    public partial class IntTextBox : UserControl, IFocusable, IValidable
     {
         /// <summary>
         ///     Ctor
@@ -29,7 +29,6 @@ namespace DDFight.Controlers.InputBoxes
             set
             {
                 this.SetValue(IntegerProperty, value);
-                NotifyPropertyChanged();
             }
         }
 
@@ -75,26 +74,6 @@ namespace DDFight.Controlers.InputBoxes
         {
             this.IntBox.SelectAll();
         }
-
-        #region INotifyPropertyChanged
-
-        /// <summary>
-        ///     PropertyChanged EventHandler
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="propertyName"></param>
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-        #endregion
 
     }
 }
