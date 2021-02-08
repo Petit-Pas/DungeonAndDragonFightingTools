@@ -56,7 +56,7 @@
                 Modifier to Hit:
             </TextBlock>
             <inputboxes:IntTextBox 
-                PropertyPath="HitModifier"
+                Integer="{Binding HitModifier}"
                 Width="30"
                 Margin="5, 2"/>
             <TextBlock
@@ -64,7 +64,7 @@
                 Modifier to CA:
             </TextBlock>
             <inputboxes:IntTextBox 
-                PropertyPath="CAModifier"
+                Integer="{Binding CAModifier}"
                 Width="30"
                 Margin="5, 2"/>
         </WrapPanel>

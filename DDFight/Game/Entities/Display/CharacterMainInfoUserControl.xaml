@@ -128,11 +128,11 @@
                     Grid.Row="6" Grid.Column="0">
                     Current HP
                 </TextBlock>
-                <input:IntTextBox 
+                <input:IntTextBox
                     x:Name="HPBoxUserControl" 
                     Grid.Row="6" Grid.Column="1" 
                     Margin="0, 5, 10, 5"
-                    PropertyPath="Hp"/>
+                    Integer="{Binding Hp}"/>
 
                 <TextBlock
                     Grid.Row="7">

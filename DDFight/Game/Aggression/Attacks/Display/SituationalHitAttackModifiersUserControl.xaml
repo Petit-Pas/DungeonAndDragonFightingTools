@@ -23,7 +23,7 @@
                 VerticalAlignment="Center"
                 Margin="5, 0"
                 MinWidth="35"
-                PropertyPath="ACModifier"/>
+                Integer="{Binding ACModifier}"/>
             <TextBlock
                 VerticalAlignment="Center">
                 Situational Hit Modifier:
@@ -32,7 +32,7 @@
                 VerticalAlignment="Center"
                 Margin="5, 0"
                 MinWidth="35"
-                PropertyPath="HitModifier"/>
+                Integer="{Binding HitModifier}"/>
         </WrapPanel>
     </Grid>
 </UserControl>

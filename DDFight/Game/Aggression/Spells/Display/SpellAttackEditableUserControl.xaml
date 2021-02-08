@@ -52,7 +52,7 @@
                 <inputboxes:IntTextBox 
                     Margin="5"
                     MinWidth="40"
-                    PropertyPath="HitRollBonus"/>
+                    Integer="{Binding HitRollBonus}"/>
             </WrapPanel>
         </Grid>
         

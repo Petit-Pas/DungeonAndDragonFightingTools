@@ -22,7 +22,7 @@
                 VerticalAlignment="Center"
                 Margin="7, 0"
                 Width="40"
-                PropertyPath="Modifier"/>
+                Integer="{Binding Modifier}"/>
         </WrapPanel>
     </Grid>
 </UserControl>

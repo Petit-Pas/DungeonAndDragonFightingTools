@@ -69,14 +69,15 @@ namespace DDFight.Game.Aggression.Spells.Display
         public static readonly DependencyProperty SpellProperty = DependencyProperty.Register(
           "Spell", typeof(AttackSpellResult), typeof(SpellAttackResultRollableUserControl), new PropertyMetadata(new AttackSpellResult(), new PropertyChangedCallback(OnSpellPropertyChanged)));
 
-        public void RefreshHitDamage()
-        {
-            HitDamage = (List<DamageTemplate>)Spell.HitDamage.Clone();
-        }
-
         private static void OnSpellPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
             ((SpellAttackResultRollableUserControl)sender).RefreshHitDamage();
+        }
+
+
+        public void RefreshHitDamage()
+        {
+            HitDamage = (List<DamageTemplate>)Spell.HitDamage.Clone();
         }
 
         public List<DamageTemplate> HitDamage

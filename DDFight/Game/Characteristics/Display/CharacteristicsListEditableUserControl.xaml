@@ -101,7 +101,7 @@
                             <input:IntTextBox
                                 x:Name="ModifierBox"
                                 Grid.Row="0" Grid.Column="2"
-                                PropertyPath="Modifier">
+                                Integer="{Binding Modifier}">
                             </input:IntTextBox>
                         </Grid>
                     </DataTemplate>

@@ -127,7 +127,7 @@
                     x:Name="HPBoxUserControl" 
                     Grid.Row="6" Grid.Column="1" 
                     Margin="0, 5, 10, 5"
-                    PropertyPath="Hp"/>
+                    Integer="{Binding Hp}"/>
 
             </Grid>
             <characteristics:CharacteristicsListEditableUserControl 

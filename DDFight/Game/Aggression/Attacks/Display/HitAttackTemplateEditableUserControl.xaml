@@ -61,7 +61,7 @@
                 x:Name="HitBonusTextBox"
                 Grid.Row="1" Grid.Column="1"
                 MaxHeight="20"
-                PropertyPath="HitBonus"/>
+                Integer="{Binding HitBonus}"/>
 
             <Label 
                 Grid.Row="2" Grid.Column="0">

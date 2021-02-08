@@ -84,7 +84,7 @@
                     Width="40"
                     Height="20"
                     Margin="5, 0"
-                    PropertyPath="Modifier"
+                    Integer="{Binding Modifier}"
                     VerticalAlignment="Center"
                     />
                 <TextBlock

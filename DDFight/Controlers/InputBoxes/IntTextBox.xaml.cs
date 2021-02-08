@@ -1,6 +1,8 @@
 ﻿using DDFight.Tools;
 using DDFight.ValidationRules;
 using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -11,7 +13,7 @@ namespace DDFight.Controlers.InputBoxes
     /// <summary>
     ///     Logique d'interaction pour IntTextBox.xaml
     /// </summary>
-    public partial class IntTextBox : UserControl, IFocusable, IValidable
+    public partial class IntTextBox : UserControl, IFocusable, IValidable, INotifyPropertyChanged
     {
         /// <summary>
         ///     Ctor
@@ -21,44 +23,19 @@ namespace DDFight.Controlers.InputBoxes
             InitializeComponent();
         }
 
-        /// <summary>
-        ///     The Binded Property (on Path Value)
-        /// </summary>
-        public String PropertyPath
+        public int Integer
         {
-            get { return (String)GetValue(PropertyPathProperty); }
-            set { SetValue(PropertyPathProperty, value); }
-        }
-
-        /// <summary>
-        ///     DependencyProperty for the Binded Property
-        /// </summary>
-        public static readonly DependencyProperty PropertyPathProperty =
-            DependencyProperty.Register(nameof(PropertyPath), typeof(String),
-                typeof(IntTextBox),
-                new FrameworkPropertyMetadata(PropertyPath_PropertyChanged));
-
-        /// <summary>
-        ///     Event handler for 
-        /// </summary>
-        /// <param name="d"></param>
-        /// <param name="e"></param>
-        protected static void PropertyPath_PropertyChanged(DependencyObject d,
-            DependencyPropertyChangedEventArgs e)
-        {
-            var ctl = d as IntTextBox;
-
-            Binding binding = new Binding(ctl.PropertyPath)
+            get { return (int)this.GetValue(IntegerProperty); }
+            set
             {
-                ValidationRules = { new IntRule() },
-
-                //  Optional. With this, the bound property will be updated and validation 
-                //  will be applied on every keystroke. 
-                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
-            };
-
-            ctl.IntBox.SetBinding(TextBox.TextProperty, binding);
+                this.SetValue(IntegerProperty, value);
+                NotifyPropertyChanged();
+            }
         }
+
+        public static readonly DependencyProperty IntegerProperty = DependencyProperty.Register(
+            "Integer", typeof(int), typeof(IntTextBox),
+            new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         #region IIsValidable
 
@@ -98,5 +75,26 @@ namespace DDFight.Controlers.InputBoxes
         {
             this.IntBox.SelectAll();
         }
+
+        #region INotifyPropertyChanged
+
+        /// <summary>
+        ///     PropertyChanged EventHandler
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+        #endregion
+
     }
 }

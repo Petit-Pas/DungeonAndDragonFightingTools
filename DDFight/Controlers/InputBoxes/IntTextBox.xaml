@@ -36,6 +36,16 @@
             Style="{StaticResource TextBoxInError}" 
             KeyDown="IntBox_KeyDown"
             BorderThickness="2"
-            GotFocus="IntBox_GotFocus"/>
+            GotFocus="IntBox_GotFocus"
+            DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:IntTextBox}}}">
+            <TextBox.Text>
+                <Binding Path="Integer" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <validation:IntRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
     </Grid>
 </UserControl>
