@@ -37,7 +37,9 @@
             KeyDown="StringBox_KeyDown"
             GotFocus="StringBox_GotFocus"
             TextWrapping="NoWrap"
-            HorizontalAlignment="Stretch">
+            HorizontalAlignment="Stretch"
+            DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:NotEmptyStringTextBox}}}">
+
             <TextBox.Text>
                 <Binding Path="String" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
