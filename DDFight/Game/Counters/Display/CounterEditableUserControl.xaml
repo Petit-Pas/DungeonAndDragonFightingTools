@@ -41,7 +41,7 @@
                 x:Name="TextBlock"
                 Width="{Binding ElementName=Canvas, Path=ActualWidth}"
                 Grid.Column="1"
-                PropertyPath="Name"
+                String="{Binding Name}"
                 HorizontalAlignment="Stretch"
             />
 

@@ -46,6 +46,5 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-
     </Grid>
 </UserControl>

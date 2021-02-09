@@ -26,10 +26,7 @@ namespace DDFight.Controlers.InputBoxes
         public int Integer
         {
             get { return (int)this.GetValue(IntegerProperty); }
-            set
-            {
-                this.SetValue(IntegerProperty, value);
-            }
+            set { this.SetValue(IntegerProperty, value); }
         }
 
         public static readonly DependencyProperty IntegerProperty = DependencyProperty.Register(

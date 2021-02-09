@@ -26,7 +26,7 @@
             <inputboxes:NotEmptyStringTextBox
                 Grid.Row="0"
                 Grid.Column="0"
-                PropertyPath="Name"/>
+                String="{Binding Name}"/>
             <DockPanel
                 Grid.Row="1"
                 Grid.Column="0">

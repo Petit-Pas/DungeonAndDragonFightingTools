@@ -51,7 +51,7 @@
                 x:Name="NameTextBox"
                 Grid.Row="0" Grid.Column="1"
                 MaxHeight="20"
-                PropertyPath="Name" />
+                String="{Binding Name}" />
 
             <Label
                 Grid.Row="1" Grid.Column="0">

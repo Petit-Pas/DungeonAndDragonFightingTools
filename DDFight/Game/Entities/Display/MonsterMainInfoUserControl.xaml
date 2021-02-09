@@ -69,7 +69,7 @@
                     x:Name="NameBoxUserControl" 
                     Grid.Row="0" Grid.Column="1" 
                     Margin="0, 5, 10, 5"
-                    PropertyPath="Name"/>
+                    String="{Binding Name}"/>
 
                 <TextBlock 
                     Grid.Row="1" Grid.Column="0">
@@ -79,7 +79,7 @@
                     x:Name="LevelBoxUserControl" 
                     Grid.Row="1" Grid.Column="1" 
                     Margin="0, 5, 10, 5"
-                    PropertyPath="Level"/>
+                    String="{Binding Level}"/>
 
                 <TextBlock 
                     Grid.Row="2" Grid.Column="0">

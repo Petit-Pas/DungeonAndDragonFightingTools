@@ -71,7 +71,7 @@
             x:Name="HeaderBox"
             Grid.Row="1" Grid.Column="1"
             MaxHeight="25"
-            PropertyPath="Header"
+            String="{Binding Header}"
             Background="{StaticResource Gray}"
             />
 

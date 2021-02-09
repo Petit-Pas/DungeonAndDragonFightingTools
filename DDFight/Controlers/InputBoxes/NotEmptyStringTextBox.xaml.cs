@@ -18,34 +18,14 @@ namespace DDFight.Controlers.InputBoxes
             InitializeComponent();
         }
 
-        public String PropertyPath
+        public string String
         {
-            get { return (String)GetValue(PropertyPathProperty); }
-            set { SetValue(PropertyPathProperty, value); }
+            get { return (string)this.GetValue(StringProperty); }
+            set { this.SetValue(StringProperty, value); }
         }
-
-        public static readonly DependencyProperty PropertyPathProperty =
-            DependencyProperty.Register(nameof(PropertyPath), typeof(String),
-                typeof(NotEmptyStringTextBox),
-                new FrameworkPropertyMetadata(PropertyPath_PropertyChanged));
-
-        protected static void PropertyPath_PropertyChanged(DependencyObject d,
-            DependencyPropertyChangedEventArgs e)
-        {
-            var ctl = d as NotEmptyStringTextBox;
-
-            var binding = new Binding(ctl.PropertyPath)
-            {
-                ValidationRules = { new NotEmptyStringRule() },
-
-                //  Optional. With this, the bound property will be updated and validation 
-                //  will be applied on every keystroke. 
-                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
-            };
-
-            ctl.StringBox.SetBinding(TextBox.TextProperty, binding);
-
-        }
+        public static DependencyProperty StringProperty = DependencyProperty.Register(
+            "String", typeof(string), typeof(NotEmptyStringTextBox),
+            new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         #region IIsValidable
         

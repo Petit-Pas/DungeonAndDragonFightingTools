@@ -37,6 +37,14 @@
             KeyDown="StringBox_KeyDown"
             GotFocus="StringBox_GotFocus"
             TextWrapping="NoWrap"
-            HorizontalAlignment="Stretch"/>
+            HorizontalAlignment="Stretch">
+            <TextBox.Text>
+                <Binding Path="String" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <validation:NotEmptyStringRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
     </Grid>
 </UserControl>
