@@ -28,7 +28,7 @@
         <input:PositiveIntTextBox
             Grid.Row="1"
             Margin="5, 0"
-            PropertyPath="Number"
+            Integer="{Binding Number}"
             MaxWidth="40"
             KeyUp="PositiveIntTextBox_KeyUp"/>
 

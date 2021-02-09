@@ -478,10 +478,7 @@ namespace DDFight.Game
             Paragraph tmp = (Paragraph) Global.Context.UserLogs.Blocks.LastBlock;
             tmp.Inlines.Add(Extensions.BuildRun(args.Character.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
             tmp.Inlines.Add(Extensions.BuildRun(" starts its turn!\r\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-            if (NewTurnStarted != null)
-            {
-                NewTurnStarted(this, args);
-            }
+            NewTurnStarted?.Invoke(this, args);
         }
 
         public event StartNewTurnEventHandler NewTurnStarted;
@@ -497,10 +494,7 @@ namespace DDFight.Game
 
         public void OnEndTurn(TurnEndedEventArgs args)
         {
-            if (TurnEnded != null)
-            {
-                TurnEnded(this, args);
-            }
+            TurnEnded?.Invoke(this, args);
         }
 
         public event EndTurnEventHandler TurnEnded;
@@ -665,8 +659,10 @@ namespace DDFight.Game
             // handles Concentration Check if required
             if (IsFocused)
             {
-                ConcentrationCheckWindow window = new ConcentrationCheckWindow();
-                window.DataContext = this;
+                ConcentrationCheckWindow window = new ConcentrationCheckWindow
+                {
+                    DataContext = this
+                };
                 window.ShowCentered();
                 if (window.Success == false)
                 {
@@ -747,11 +743,9 @@ namespace DDFight.Game
         /// <param name="propertyName"></param>
         protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
         #endregion
 
         #region IClonable

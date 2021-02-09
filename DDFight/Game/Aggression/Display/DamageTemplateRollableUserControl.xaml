@@ -43,7 +43,7 @@
             <inputboxes:PositiveIntTextBox 
                 MinWidth="40"
                 DataContext="{Binding Damage}"
-                PropertyPath="LastRoll"
+                Integer="{Binding LastRoll}"
                 />
             <Grid
                 Margin="5, 0">

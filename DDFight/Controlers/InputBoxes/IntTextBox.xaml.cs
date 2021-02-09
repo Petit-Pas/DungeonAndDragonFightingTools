@@ -61,8 +61,10 @@ namespace DDFight.Controlers.InputBoxes
         {
             if (e.Key == Key.Return)
             {
-                System.Windows.Input.KeyEventArgs args = new System.Windows.Input.KeyEventArgs(Keyboard.PrimaryDevice, Keyboard.PrimaryDevice.ActiveSource, 0, Key.Tab);
-                args.RoutedEvent = Keyboard.KeyDownEvent;
+                System.Windows.Input.KeyEventArgs args = new System.Windows.Input.KeyEventArgs(Keyboard.PrimaryDevice, Keyboard.PrimaryDevice.ActiveSource, 0, Key.Tab)
+                {
+                    RoutedEvent = Keyboard.KeyDownEvent
+                };
                 InputManager.Current.ProcessInput(args);
             }
         }

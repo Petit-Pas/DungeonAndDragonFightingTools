@@ -65,7 +65,7 @@
                 <input:PositiveIntTextBox 
                     Grid.Column="2" 
                     x:Name="MasteryBonusBox" 
-                    PropertyPath="Characteristics.MasteryBonus"
+                    Integer="{Binding Characteristics.MasteryBonus}"
                     MinWidth="90"
                     HorizontalAlignment="Left"
                     Margin="10,2"

@@ -55,7 +55,7 @@
         </TextBlock>
         <input:PositiveIntTextBox 
             Grid.Row="1" Grid.Column="1"
-            PropertyPath="CurrentValue"
+            Integer="{Binding CurrentValue}"
             Width="40"
             Height="20"
             HorizontalAlignment="Left"/>
@@ -67,7 +67,7 @@
         </TextBlock>
         <input:PositiveIntTextBox 
             Grid.Row="2" Grid.Column="1"
-            PropertyPath="MaxValue"
+            Integer="{Binding MaxValue}"
             Width="40"
             Height="20"
             HorizontalAlignment="Left"/>

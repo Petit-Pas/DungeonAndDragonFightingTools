@@ -16,7 +16,7 @@ namespace DDFight.Controlers.InputBoxes
             TextBoxControl.Text = filterPlaceHolder;
         }
 
-        private string filterPlaceHolder = "Filter...";
+        private readonly string filterPlaceHolder = "Filter...";
 
         private void FilterTextBox_LostFocus(object sender, RoutedEventArgs e)
         {

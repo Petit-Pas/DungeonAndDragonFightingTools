@@ -55,7 +55,7 @@
                 <inputboxes:PositiveIntTextBox
                     Margin="5, 0"
                     MinWidth="30"
-                    PropertyPath="AdditionalTargetPerLevel">
+                    Integer="{Binding AdditionalTargetPerLevel}">
                 </inputboxes:PositiveIntTextBox>
             </StackPanel>
 

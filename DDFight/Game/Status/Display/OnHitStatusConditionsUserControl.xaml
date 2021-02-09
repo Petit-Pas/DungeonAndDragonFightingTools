@@ -88,7 +88,7 @@
             <inputboxes:PositiveIntTextBox
                     Grid.Row="1" Grid.Column="1"
                     Margin="0, 5"
-                    PropertyPath="ApplySavingDifficulty"/>
+                    Integer="{Binding ApplySavingDifficulty}"/>
         </Grid>
 
         <!-- Grid for the loss of concentration -->
@@ -233,7 +233,7 @@
                     HorizontalAlignment="Right"
                     Width="60"
                     Margin="0, 5" 
-                    PropertyPath="RemainingRounds"
+                    Integer="{Binding RemainingRounds}"
                     Visibility="{Binding HasAMaximumDuration, Converter={StaticResource BoolToVisibilityConverter}}"
                     />
             </Grid>

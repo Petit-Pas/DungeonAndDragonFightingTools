@@ -94,7 +94,7 @@
                     x:Name="CABoxUserControl" 
                     Grid.Row="2" Grid.Column="1" 
                     Margin="0, 5, 10, 5" 
-                    PropertyPath="CA"/>
+                    Integer="{Binding CA}"/>
 
                 <TextBlock
                     Grid.Row="3" Grid.Column="0">
@@ -102,7 +102,7 @@
                 </TextBlock>
                 <input:PositiveIntTextBox
                     Grid.Row="3" Grid.Column="1"
-                    PropertyPath="SpellSave"
+                    Integer="{Binding SpellSave}"
                     Margin="0, 5, 10, 5"/>
 
                 <TextBlock
@@ -111,7 +111,7 @@
                 </TextBlock>
                 <input:PositiveIntTextBox
                     Grid.Row="4" Grid.Column="1"
-                    PropertyPath="SpellHitModifier"
+                    Integer="{Binding SpellHitModifier}"
                     Margin="0, 5, 10, 5"/>
 
                 <TextBlock 
@@ -122,7 +122,7 @@
                     x:Name="MaxHPBoxUserControl" 
                     Grid.Row="5" Grid.Column="1" 
                     Margin="0, 5, 10, 5" 
-                    PropertyPath="MaxHp"/>
+                    Integer="{Binding MaxHp}"/>
 
                 <TextBlock 
                     Grid.Row="6" Grid.Column="0">
@@ -141,7 +141,7 @@
                 <input:PositiveIntTextBox
                     Grid.Row="7" Grid.Column="1"
                     Margin="0, 5, 10, 5"
-                    PropertyPath="TempHp"/>
+                    Integer="{Binding TempHp}"/>
 
                 <TextBlock
                     Grid.Row="8">
