@@ -78,9 +78,9 @@
             <inputboxes:RangedIntBox 
                 x:Name="testBox"
                 MinWidth="30"
-                PropertyMin="1"
-                PropertyMax="30"
-                PropertyPath="Difficulty"
+                Min="1"
+                Max="30"
+                Integer="{Binding Difficulty}"
                 DataContext="{Binding ., RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
                 />
         </WrapPanel>
@@ -114,9 +114,9 @@
                 Margin="5"
                 Grid.Row="3"
                 Width="40"
-                PropertyMax="20"
-                PropertyMin="0"
-                PropertyPath="Roll"
+                Max="20"
+                Min="0"
+                Integer="{Binding Roll}"
             />
         </WrapPanel>
 

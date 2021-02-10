@@ -97,10 +97,10 @@
                                         Text="{Binding Name}" 
                                         Foreground="{StaticResource Light}"/>
                                     <inputboxes:RangedIntBox
-                                        PropertyMin="0"
-                                        PropertyMax="20"
+                                        Min="0"
+                                        Max="20"
                                         DataContext="{Binding Entity}"
-                                        PropertyPath="InitiativeRoll"
+                                        Integer="{Binding InitiativeRoll}"
                                         Grid.Column="2"
                                         Grid.Row="0"
                                         Margin="2"/>

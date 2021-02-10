@@ -86,9 +86,9 @@
                     Width="40"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
-                    PropertyMin="0"
-                    PropertyMax="20"
-                    PropertyPath="SavingRoll"/>
+                    Min="0"
+                    Max="20"
+                    Integer="{Binding SavingRoll}"/>
 
                 <Separator
                     Grid.Row="1" Grid.ColumnSpan="2"

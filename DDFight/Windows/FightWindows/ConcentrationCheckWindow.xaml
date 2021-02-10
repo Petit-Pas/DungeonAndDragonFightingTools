@@ -69,9 +69,9 @@
                 Margin="5"
                 Grid.Row="3"
                 Width="40"
-                PropertyMax="20"
-                PropertyMin="0"
-                PropertyPath="Roll"
+                Max="20"
+                Min="0"
+                Integer="{Binding Roll}"
             >
             </inputboxes:RangedIntBox>
 

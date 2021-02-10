@@ -40,53 +40,34 @@ namespace DDFight.Controlers.InputBoxes
         }
         #endregion
 
-        public int PropertyMax
+        public int Integer
         {
-            get { return (int)GetValue(PropertyMaxProperty); }
-            set { SetValue(PropertyMaxProperty, value); }
+            get { return (int)this.GetValue(IntegerProperty);  }
+            set { this.SetValue(IntegerProperty, value); }
+        }
+        public static readonly DependencyProperty IntegerProperty = DependencyProperty.Register(
+            "Integer", typeof(int), typeof(RangedIntBox),
+            new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
+        public int Max
+        {
+            get { return (int)GetValue(MaxProperty); }
+            set { SetValue(MaxProperty, value); }
         }
 
-        public static readonly DependencyProperty PropertyMaxProperty =
-            DependencyProperty.Register(nameof(PropertyMax), typeof(int),
+        public static readonly DependencyProperty MaxProperty =
+            DependencyProperty.Register(nameof(Max), typeof(int),
                 typeof(RangedIntBox));
 
-        public int PropertyMin
+        public int Min
         {
-            get { return (int)GetValue(PropertyMinProperty); }
-            set { SetValue(PropertyMinProperty, value); }
+            get { return (int)GetValue(MinProperty); }
+            set { SetValue(MinProperty, value); }
         }
         
-        public static readonly DependencyProperty PropertyMinProperty =
-            DependencyProperty.Register(nameof(PropertyMin), typeof(int),
+        public static readonly DependencyProperty MinProperty =
+            DependencyProperty.Register(nameof(Min), typeof(int),
                 typeof(RangedIntBox));
-
-        public String PropertyPath
-        {
-            get { return (String)GetValue(PropertyPathProperty); }
-            set { SetValue(PropertyPathProperty, value); }
-        }
-
-        public static readonly DependencyProperty PropertyPathProperty =
-            DependencyProperty.Register(nameof(PropertyPath), typeof(String),
-                typeof(RangedIntBox),
-                new FrameworkPropertyMetadata(PropertyPath_PropertyChanged));
-
-        protected static void PropertyPath_PropertyChanged(DependencyObject d,
-            DependencyPropertyChangedEventArgs e)
-        {
-            var ctl = d as RangedIntBox;
-
-            var binding = new Binding(ctl.PropertyPath)
-            {
-                ValidationRules = { new RangedIntRule { Max=ctl.PropertyMax, Min=ctl.PropertyMin} },
-
-                //  Optional. With this, the bound property will be updated and validation 
-                //  will be applied on every keystroke. 
-                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
-            };
-
-            ctl.IntBox.SetBinding(TextBox.TextProperty, binding);
-        }
 
         #region IIsValidable
 

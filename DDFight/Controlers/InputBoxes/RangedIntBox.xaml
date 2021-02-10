@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DDFight.Controlers.InputBoxes"
              xmlns:converters="clr-namespace:DDFight.Converters"
-             xmlns:validationrules="clr-namespace:DDFight.ValidationRules"
+             xmlns:validationrules="clr-namespace:DDFight.ValidationRules" xmlns:tools="clr-namespace:DDFight.Tools"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              x:Name="Control">
@@ -40,7 +40,19 @@
             KeyDown="IntBox_KeyDown"
             BorderThickness="2"
             GotFocus="IntBox_GotFocus"
-            >
+            DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:RangedIntBox}}}">
+            <TextBox.Resources>
+                <tools:BindingProxy x:Key="TargetProxy" Data="{Binding}"/>
+            </TextBox.Resources>
+            <TextBox.Text>
+                <Binding Path="Integer" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <validationrules:RangedIntRule>
+                            <validationrules:RangedIntRuleBoundaries Min="{Binding Data.Min, Source={StaticResource TargetProxy}}" Max="{Binding Data.Max, Source={StaticResource TargetProxy}}"/>
+                        </validationrules:RangedIntRule>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
         </TextBox>
     </Grid>
 </UserControl>

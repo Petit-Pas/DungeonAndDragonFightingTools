@@ -37,9 +37,9 @@
                     Level
                 </TextBlock>
                 <inputboxes:RangedIntBox
-                    PropertyMin="0"
-                    PropertyMax="9"
-                    PropertyPath="BaseLevel"
+                    Min="0"
+                    Max="9"
+                    Integer="{Binding BaseLevel}"
                     DockPanel.Dock="Right"
                     VerticalAlignment="Top"
                     Margin="10"/>

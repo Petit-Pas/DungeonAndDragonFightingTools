@@ -16,15 +16,15 @@ namespace DDFight.Controlers.InputBoxes
 
         public D20Box() : base()
         {
-            PropertyMin = 0;
-            PropertyMax = 20;
+            Min = 0;
+            Max = 20;
         }
 
         public bool IsFullyRolled()
         {
             try
             {
-                return ((int)DataContext.GetType().GetProperty(PropertyPath).GetValue(DataContext) == 0 ? false : true);
+                return ((int)this.GetValue(IntegerProperty) == 0 ? false : true);
             }
             catch (Exception)
             {
@@ -53,11 +53,7 @@ namespace DDFight.Controlers.InputBoxes
             if (!IsFullyRolled())
             {
                 int rolled = DiceRoll.Roll("1d20", HasAdvantage, HasDisAdvantage);
-                PropertyInfo prop = DataContext.GetType().GetProperty(PropertyPath, BindingFlags.Public | BindingFlags.Instance);
-                if (null != prop && prop.CanWrite)
-                {
-                    prop.SetValue(DataContext, rolled, null);
-                }
+                this.SetValue(IntegerProperty, rolled);
             }
 
         }
