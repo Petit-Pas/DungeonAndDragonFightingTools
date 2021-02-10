@@ -17,7 +17,7 @@ namespace DDFight.Controlers.Characters
 
         private void CharacterMainInfoUserControl_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            NameBoxUserControl.StringBox.Focus();
+            NameBoxUserControl.Focus();
         }
 
         public bool IsValid()

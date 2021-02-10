@@ -31,7 +31,7 @@
         <TextBox 
             Background="{StaticResource Gray}"
             Foreground="{StaticResource Light}"
-            x:Name="StringBox" 
+            x:Name="StringBoxControl" 
             Style="{StaticResource TextBoxInError}" 
             BorderThickness="2"
             KeyDown="StringBox_KeyDown"

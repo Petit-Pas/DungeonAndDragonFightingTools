@@ -17,7 +17,7 @@ namespace DDFight.Controlers.Monsters
 
         private void MonsterMainInfoUserControl_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            NameBoxUserControl.StringBox.Focus();
+            NameBoxUserControl.Focus();
         }
 
         public bool IsValid()

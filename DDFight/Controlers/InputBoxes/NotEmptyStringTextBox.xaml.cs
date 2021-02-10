@@ -36,14 +36,14 @@ namespace DDFight.Controlers.InputBoxes
         /// <returns></returns>
         public bool IsValid()
         {
-            return !Validation.GetHasError(StringBox);
+            return !Validation.GetHasError(StringBoxControl);
         }
 
         #endregion
 
         public void SetFocus()
         {
-            StringBox.Focus();
+            StringBoxControl.Focus();
         }
 
         private void StringBox_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
@@ -60,7 +60,7 @@ namespace DDFight.Controlers.InputBoxes
 
         private void StringBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            this.StringBox.SelectAll();
+            this.StringBoxControl.SelectAll();
         }
     }
 }

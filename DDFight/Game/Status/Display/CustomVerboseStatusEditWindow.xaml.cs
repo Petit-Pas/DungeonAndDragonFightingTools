@@ -24,8 +24,8 @@ namespace DDFight.Game.Status.Display
 
         private void EditCustomVerboseStatusWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            HeaderBox.StringBox.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-            HeaderBox.StringBox.TextChanged += StringBox_TextChanged;
+            HeaderBox.StringBoxControl.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            HeaderBox.StringBoxControl.TextChanged += StringBox_TextChanged;
         }
 
         private void StringBox_TextChanged(object sender, TextChangedEventArgs e)
