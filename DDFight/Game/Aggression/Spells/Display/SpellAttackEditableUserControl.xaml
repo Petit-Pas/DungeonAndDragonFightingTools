@@ -49,7 +49,7 @@
                     VerticalAlignment="Center">
                     Bonus to hit (0 for default):
                 </TextBlock>
-                <inputboxes:IntTextBox 
+                <inputboxes:IntBox 
                     Margin="5"
                     MinWidth="40"
                     Integer="{Binding HitRollBonus}"/>

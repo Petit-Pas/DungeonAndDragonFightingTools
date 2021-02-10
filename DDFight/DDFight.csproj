@@ -259,8 +259,8 @@
     <Compile Include="Controlers\InputBoxes\BooleanButton.xaml.cs">
       <DependentUpon>BooleanButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controlers\InputBoxes\IntTextBox.xaml.cs">
-      <DependentUpon>IntTextBox.xaml</DependentUpon>
+    <Compile Include="Controlers\InputBoxes\IntBox.xaml.cs">
+      <DependentUpon>IntBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controlers\InputBoxes\NotEmptyStringTextBox.xaml.cs">
       <DependentUpon>NotEmptyStringTextBox.xaml</DependentUpon>
@@ -637,7 +637,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controlers\InputBoxes\IntTextBox.xaml">
+    <Page Include="Controlers\InputBoxes\IntBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

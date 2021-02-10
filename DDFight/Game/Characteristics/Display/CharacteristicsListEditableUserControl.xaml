@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Grid.IsSharedSizeScope="True">
     <UserControl.Resources>
-        <Style TargetType="input:IntTextBox">
+        <Style TargetType="input:IntBox">
             <Setter Property="Margin" Value="5,3"></Setter>
         </Style>
         <Style TargetType="input:PositiveIntTextBox">
@@ -98,11 +98,11 @@
                                 Grid.Row="0" Grid.Column="1"
                                 IsChecked="{Binding Mastery}">
                             </CheckBox>
-                            <input:IntTextBox
+                            <input:IntBox
                                 x:Name="ModifierBox"
                                 Grid.Row="0" Grid.Column="2"
                                 Integer="{Binding Modifier}">
-                            </input:IntTextBox>
+                            </input:IntBox>
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

@@ -80,7 +80,7 @@
                     > 
                     + 
                 </TextBlock>
-                <inputboxes:IntTextBox
+                <inputboxes:IntBox
                     Width="40"
                     Height="20"
                     Margin="5, 0"

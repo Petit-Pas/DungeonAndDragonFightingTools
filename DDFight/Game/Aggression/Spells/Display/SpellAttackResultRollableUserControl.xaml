@@ -55,7 +55,7 @@
                 VerticalAlignment="Center">
                 Modifier to Hit:
             </TextBlock>
-            <inputboxes:IntTextBox 
+            <inputboxes:IntBox 
                 Integer="{Binding HitModifier}"
                 Width="30"
                 Margin="5, 2"/>
@@ -63,7 +63,7 @@
                 VerticalAlignment="Center">
                 Modifier to CA:
             </TextBlock>
-            <inputboxes:IntTextBox 
+            <inputboxes:IntBox 
                 Integer="{Binding CAModifier}"
                 Width="30"
                 Margin="5, 2"/>

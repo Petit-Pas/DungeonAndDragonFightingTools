@@ -19,7 +19,7 @@
                 VerticalAlignment="Center">
                 Situational AC Modifier:
             </TextBlock>
-            <inputboxes:IntTextBox 
+            <inputboxes:IntBox 
                 VerticalAlignment="Center"
                 Margin="5, 0"
                 MinWidth="35"
@@ -28,7 +28,7 @@
                 VerticalAlignment="Center">
                 Situational Hit Modifier:
             </TextBlock>
-            <inputboxes:IntTextBox 
+            <inputboxes:IntBox 
                 VerticalAlignment="Center"
                 Margin="5, 0"
                 MinWidth="35"

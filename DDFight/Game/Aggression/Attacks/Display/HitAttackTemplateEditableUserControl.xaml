@@ -57,7 +57,7 @@
                 Grid.Row="1" Grid.Column="0">
                 Bonus to Hits
             </Label>
-            <inputboxes:IntTextBox
+            <inputboxes:IntBox
                 x:Name="HitBonusTextBox"
                 Grid.Row="1" Grid.Column="1"
                 MaxHeight="20"
