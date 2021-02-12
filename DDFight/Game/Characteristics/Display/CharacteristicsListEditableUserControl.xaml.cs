@@ -1,5 +1,6 @@
 ﻿using DDFight.Game;
 using DDFight.Game.Characteristics;
+using DDFight.Tools;
 using DDFight.ValidationRules;
 using System.Collections.Generic;
 using System.Windows;

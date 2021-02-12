@@ -1,5 +1,6 @@
 ﻿using DDFight.Game.Aggression.Attacks;
 using DDFight.Resources;
+using DDFight.Tools;
 using System.Windows;
 
 namespace DDFight.Windows

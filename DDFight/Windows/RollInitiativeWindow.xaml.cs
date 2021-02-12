@@ -2,6 +2,7 @@
 using DDFight.Game.Dices;
 using DDFight.Game.Fight;
 using DDFight.Resources;
+using DDFight.Tools;
 using DDFight.Tools.UXShortcuts;
 using System;
 using System.Collections.ObjectModel;

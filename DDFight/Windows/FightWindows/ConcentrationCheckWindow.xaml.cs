@@ -3,6 +3,7 @@ using DDFight.Game.Aggression.Attacks;
 using DDFight.Game.Characteristics;
 using DDFight.Game.Dices;
 using DDFight.Game.Dices.SavingThrow;
+using DDFight.Tools;
 using DDFight.Tools.UXShortcuts;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;

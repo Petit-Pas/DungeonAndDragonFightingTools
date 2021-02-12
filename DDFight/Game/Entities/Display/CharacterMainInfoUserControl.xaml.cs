@@ -1,4 +1,5 @@
-﻿using DDFight.ValidationRules;
+﻿using DDFight.Tools;
+using DDFight.ValidationRules;
 using System.Windows.Controls;
 
 namespace DDFight.Controlers.Characters

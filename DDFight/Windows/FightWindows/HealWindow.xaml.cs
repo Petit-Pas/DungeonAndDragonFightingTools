@@ -1,5 +1,6 @@
 ﻿using DDFight.Game;
 using DDFight.Game.Dices;
+using DDFight.Tools;
 using System.Windows;
 
 namespace DDFight.Windows.FightWindows

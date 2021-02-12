@@ -13,7 +13,6 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/ScrollBarStyle.xaml" />
-                <ResourceDictionary Source="/Styles/SliderButtonControlStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
             <converter:BoolToReversedBoolConverter x:Key="BoolToReverseConverter"/>

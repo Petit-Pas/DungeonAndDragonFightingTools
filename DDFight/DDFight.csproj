@@ -64,6 +64,7 @@
       <DependentUpon>FilterTextBoxControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controlers\SliderButton.cs" />
+    <Compile Include="Converters\BasicOperationConverter.cs" />
     <Compile Include="Converters\BoolToReversedBoolConverter.cs" />
     <Compile Include="Converters\BoolToReversedVisibilityConverter.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
@@ -139,7 +140,9 @@
     <Compile Include="Game\Status\Display\ApplicationModifierEnumListSelectableUserControl.xaml.cs">
       <DependentUpon>ApplicationModifierEnumListSelectableUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Tools\ArithmeticParser.cs" />
     <Compile Include="Tools\BindingProxy.cs" />
+    <Compile Include="Tools\FrameworkElementExtensions.cs" />
     <Compile Include="Tools\INameable.cs" />
     <Compile Include="Tools\Save\SpellsList.cs" />
     <Compile Include="Game\Counters\Counter.cs" />

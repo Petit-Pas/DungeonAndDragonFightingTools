@@ -1,5 +1,6 @@
 ﻿using DDFight.Game.Dices.SavingThrow;
 using DDFight.Game.Dices.SavingThrow.Display;
+using DDFight.Tools;
 using DDFight.Tools.UXShortcuts;
 using System;
 using System.Collections.Generic;

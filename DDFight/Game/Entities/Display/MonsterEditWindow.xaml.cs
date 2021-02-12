@@ -1,5 +1,6 @@
 ﻿using DDFight.Game;
 using DDFight.Resources;
+using DDFight.Tools;
 using System.ComponentModel;
 using System.Windows;
 

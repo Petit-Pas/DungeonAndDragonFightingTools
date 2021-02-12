@@ -1,4 +1,5 @@
-﻿using DDFight.ValidationRules;
+﻿using DDFight.Tools;
+using DDFight.ValidationRules;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;

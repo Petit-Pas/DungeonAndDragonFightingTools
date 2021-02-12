@@ -1,5 +1,6 @@
 ﻿using DDFight.Game.Dices;
 using DDFight.Game.Status;
+using DDFight.Tools;
 using DDFight.Tools.UXShortcuts;
 using System;
 using System.Windows;

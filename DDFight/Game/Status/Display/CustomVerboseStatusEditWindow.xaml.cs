@@ -1,4 +1,5 @@
-﻿using DDFight.Windows;
+﻿using DDFight.Tools;
+using DDFight.Windows;
 using System.Windows;
 using System.Windows.Controls;
 

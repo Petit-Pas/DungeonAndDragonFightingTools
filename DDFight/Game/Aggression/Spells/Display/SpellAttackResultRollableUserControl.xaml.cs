@@ -1,4 +1,5 @@
-﻿using DDFight.Tools.UXShortcuts;
+﻿using DDFight.Tools;
+using DDFight.Tools.UXShortcuts;
 using DDFight.ValidationRules;
 using System;
 using System.Collections.Generic;
