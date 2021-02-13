@@ -1,5 +1,5 @@
-﻿using DDFight.Game;
-using DDFight.Game.Characteristics;
+﻿using DDFight.Game.Characteristics;
+using DDFight.Game.Entities;
 using DDFight.Tools;
 using DDFight.ValidationRules;
 using System.Collections.Generic;

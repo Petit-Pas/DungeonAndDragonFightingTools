@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using DDFight.Game.Entities;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace DDFight.Game.Aggression.Spells.Display

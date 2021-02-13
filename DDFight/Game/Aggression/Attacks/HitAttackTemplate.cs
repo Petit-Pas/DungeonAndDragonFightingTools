@@ -1,4 +1,5 @@
-﻿using DDFight.Game.Status;
+﻿using DDFight.Game.Entities;
+using DDFight.Game.Status;
 using DDFight.Windows;
 using DDFight.Windows.FightWindows;
 using System;

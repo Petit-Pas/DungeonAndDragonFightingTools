@@ -1,5 +1,6 @@
 ﻿using DDFight.Game.Aggression.Attacks;
 using DDFight.Game.Characteristics;
+using DDFight.Game.Entities;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;

@@ -1,5 +1,6 @@
 ﻿using DDFight.Game.Aggression.Spells.Display;
 using DDFight.Game.Characteristics;
+using DDFight.Game.Entities;
 using DDFight.Game.Fight.Display;
 using DDFight.Game.Status;
 using DDFight.Tools;

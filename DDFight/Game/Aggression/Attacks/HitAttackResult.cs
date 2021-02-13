@@ -1,4 +1,5 @@
-﻿using DDFight.Game.Status;
+﻿using DDFight.Game.Entities;
+using DDFight.Game.Status;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;

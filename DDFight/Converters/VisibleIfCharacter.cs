@@ -1,4 +1,4 @@
-﻿using DDFight.Game;
+﻿using DDFight.Game.Entities;
 using System;
 using System.Globalization;
 using System.Windows;

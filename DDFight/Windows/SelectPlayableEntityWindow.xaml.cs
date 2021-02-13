@@ -1,4 +1,4 @@
-﻿using DDFight.Game;
+﻿using DDFight.Game.Entities;
 using DDFight.Tools;
 using System.Collections.ObjectModel;
 using System.Windows;

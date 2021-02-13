@@ -9,6 +9,7 @@ using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows;
 using DDFight.Game.Dices.SavingThrow;
+using DDFight.Game.Entities;
 
 namespace DDFight.Game.Aggression.Spells
 {

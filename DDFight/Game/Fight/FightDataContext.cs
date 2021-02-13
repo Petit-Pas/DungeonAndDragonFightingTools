@@ -1,4 +1,5 @@
-﻿using DDFight.Game.Fight.FightEvents;
+﻿using DDFight.Game.Entities;
+using DDFight.Game.Fight.FightEvents;
 using DDFight.Tools;
 using System;
 using System.ComponentModel;

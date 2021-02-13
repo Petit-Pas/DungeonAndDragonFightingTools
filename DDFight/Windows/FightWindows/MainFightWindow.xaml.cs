@@ -1,6 +1,7 @@
 ﻿using DDFight.Controlers.InputBoxes;
 using DDFight.Game;
 using DDFight.Game.Aggression.Attacks;
+using DDFight.Game.Entities;
 using DDFight.Game.Fight;
 using System;
 using System.Windows;

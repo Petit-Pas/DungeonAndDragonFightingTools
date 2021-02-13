@@ -1,8 +1,8 @@
-﻿using DDFight.Game;
-using DDFight.Game.Aggression.Attacks;
+﻿using DDFight.Game.Aggression.Attacks;
 using DDFight.Game.Characteristics;
 using DDFight.Game.Dices;
 using DDFight.Game.Dices.SavingThrow;
+using DDFight.Game.Entities;
 using DDFight.Tools;
 using DDFight.Tools.UXShortcuts;
 using System.ComponentModel;

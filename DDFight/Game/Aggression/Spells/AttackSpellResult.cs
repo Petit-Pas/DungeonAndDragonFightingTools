@@ -1,5 +1,6 @@
 ﻿using DDFight.Game.Aggression.Attacks;
 using DDFight.Game.Aggression.Spells.Display;
+using DDFight.Game.Entities;
 using DDFight.Game.Status;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

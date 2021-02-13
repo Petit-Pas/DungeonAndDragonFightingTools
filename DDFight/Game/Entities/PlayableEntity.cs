@@ -20,7 +20,7 @@ using DDFight.Windows.FightWindows;
 using DDFight.Game.Counters;
 using DDFight.Game.Aggression.Spells;
 
-namespace DDFight.Game
+namespace DDFight.Game.Entities
 {
     public class PlayableEntity : ICloneable, INotifyPropertyChanged, ICopyAssignable, INameable
     {

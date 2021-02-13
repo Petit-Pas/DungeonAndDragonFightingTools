@@ -1,4 +1,4 @@
-﻿using DDFight.Game;
+﻿using DDFight.Game.Entities;
 using DDFight.Game.Fight.FightEvents;
 using DDFight.Tools;
 using System;

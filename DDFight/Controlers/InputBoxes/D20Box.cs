@@ -1,12 +1,6 @@
 ﻿using DDFight.Game.Dices;
 using DDFight.Tools.UXShortcuts;
-using DDFight.ValidationRules;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace DDFight.Controlers.InputBoxes

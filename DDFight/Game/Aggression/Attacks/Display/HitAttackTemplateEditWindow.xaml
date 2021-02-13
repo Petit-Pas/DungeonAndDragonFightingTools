@@ -8,7 +8,8 @@
         mc:Ignorable="d"
         Title="EditAAttackTemplate" Height="600" Width="400"
         WindowStartupLocation="CenterOwner"
-        Closing="Window_Closing">
+        Closing="Window_Closing"
+        Style="{StaticResource WindowStyle}">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

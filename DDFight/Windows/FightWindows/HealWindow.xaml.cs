@@ -1,5 +1,5 @@
-﻿using DDFight.Game;
-using DDFight.Game.Dices;
+﻿using DDFight.Game.Dices;
+using DDFight.Game.Entities;
 using DDFight.Tools;
 using System.Windows;
 

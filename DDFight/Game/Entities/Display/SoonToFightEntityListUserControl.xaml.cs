@@ -1,4 +1,5 @@
 ﻿using DDFight.Game;
+using DDFight.Game.Entities;
 using DDFight.Tools;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace DDFight.Controlers
+namespace DDFight.Game.Entities.Display
 {
     /// <summary>
     /// Logique d'interaction pour PrepareFightCharacterList.xaml

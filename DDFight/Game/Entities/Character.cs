@@ -1,9 +1,9 @@
-﻿using DDFight.Game.Status;
-using DDFight.Windows;
+﻿using DDFight.Game.Entities.Display;
+using DDFight.Game.Status;
 using System.Linq;
 using System.Xml.Serialization;
 
-namespace DDFight.Game
+namespace DDFight.Game.Entities
 {
     /// <summary>
     ///     Represents a Character for D&D (not to confound with Monsters)
@@ -71,7 +71,7 @@ namespace DDFight.Game
 
         public override bool OpenEditWindow()
         {
-            CharacterEditWindow window = new CharacterEditWindow();
+            PlayableEntityEditWindow window = new PlayableEntityEditWindow();
             Character temporary = (Character)this.Clone();
             window.DataContext = temporary;
             window.ShowCentered();

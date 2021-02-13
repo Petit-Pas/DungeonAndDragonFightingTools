@@ -133,6 +133,12 @@
     <Compile Include="Game\Dices\SavingThrow\Display\SavingThrowRollableDenseUserControl.xaml.cs">
       <DependentUpon>SavingThrowRollableDenseUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Game\Entities\Display\PlayableEntityEditWindow.xaml.cs">
+      <DependentUpon>PlayableEntityEditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Game\Entities\Display\PlayableEntityMainInfoEditableUserControl.xaml.cs">
+      <DependentUpon>PlayableEntityMainInfoEditableUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Game\Fight\Display\FightingEntityListSelectableWindow.xaml.cs">
       <DependentUpon>FightingEntityListSelectableWindow.xaml</DependentUpon>
     </Compile>
@@ -162,9 +168,6 @@
       <DependentUpon>SavingThrowRollableUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Game\Dices\SavingThrow\SavingThrow.cs" />
-    <Compile Include="Game\Entities\Display\CharacterMainInfoUserControl.xaml.cs">
-      <DependentUpon>CharacterMainInfoUserControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Game\Fight\Display\FightConsoleUserControl.xaml.cs">
       <DependentUpon>FightConsoleUserControl.xaml</DependentUpon>
     </Compile>
@@ -277,9 +280,6 @@
     <Compile Include="Game\Entities\Display\MonsterListEditableUserControl.xaml.cs">
       <DependentUpon>MonsterListEditableUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Game\Entities\Display\MonsterMainInfoUserControl.xaml.cs">
-      <DependentUpon>MonsterMainInfoUserControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Game\Entities\Display\SoonToFightEntityListUserControl.xaml.cs">
       <DependentUpon>SoonToFightEntityListUserControl.xaml</DependentUpon>
     </Compile>
@@ -359,12 +359,6 @@
     </Compile>
     <Compile Include="Game\Aggression\Attacks\Display\HitAttackTemplateEditWindow.xaml.cs">
       <DependentUpon>HitAttackTemplateEditWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Game\Entities\Display\CharacterEditWindow.xaml.cs">
-      <DependentUpon>CharacterEditWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Game\Entities\Display\MonsterEditWindow.xaml.cs">
-      <DependentUpon>MonsterEditWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Game\Status\Display\CustomVerboseStatusEditWindow.xaml.cs">
       <DependentUpon>CustomVerboseStatusEditWindow.xaml</DependentUpon>
@@ -504,7 +498,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Game\Entities\Display\CharacterMainInfoUserControl.xaml">
+    <Page Include="Game\Entities\Display\PlayableEntityEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\Entities\Display\PlayableEntityMainInfoEditableUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -660,10 +658,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Game\Entities\Display\MonsterMainInfoUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Game\Entities\Display\SoonToFightEntityListUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -744,14 +738,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Game\Aggression\Attacks\Display\HitAttackTemplateEditWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Game\Entities\Display\CharacterEditWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Game\Entities\Display\MonsterEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -3,12 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:ctrl="clr-namespace:DDFight.Controlers"
-        xmlns:fight="clr-namespace:DDFight.Controlers.Fight"
-        xmlns:spells="clr-namespace:DDFight.Game.Aggression.Spells.Display"
+        xmlns:spells="clr-namespace:DDFight.Game.Aggression.Spells.Display" 
+        xmlns:display="clr-namespace:DDFight.Game.Entities.Display"
         mc:Ignorable="d"
         Title="Dungeons &amp; Dragons Fighting Tool" Height="450" Width="800"
-        x:Name="Window">
+        x:Name="Window"
+        Style="{StaticResource WindowStyle}">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -37,7 +37,7 @@
                         Characters
                     </TextBlock>
                 </TabItem.Header>
-                <ctrl:CharacterListEditableUserControl x:Name="CharacterListControl"/>
+                <display:CharacterListEditableUserControl x:Name="CharacterListControl"/>
             </TabItem>
             <TabItem Style="{StaticResource TabItemStyle}">
                 <TabItem.Header>
@@ -45,7 +45,7 @@
                         Monsters
                     </TextBlock>
                 </TabItem.Header>
-                <ctrl:MonsterListEditableUserControl x:Name="MonsterListControl"/>
+                <display:MonsterListEditableUserControl x:Name="MonsterListControl"/>
             </TabItem>
             <TabItem Style="{StaticResource TabItemStyle}">
                 <TabItem.Header>
@@ -59,7 +59,7 @@
             
         </TabControl>
 
-        <ctrl:SoonToFightEntityListUserControl 
+        <display:SoonToFightEntityListUserControl 
             Margin="10, 10, 0, 3"
             Grid.Column="1"/>
 

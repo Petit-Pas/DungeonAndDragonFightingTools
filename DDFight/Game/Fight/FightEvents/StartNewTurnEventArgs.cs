@@ -1,4 +1,6 @@
-﻿namespace DDFight.Game.Fight.FightEvents
+﻿using DDFight.Game.Entities;
+
+namespace DDFight.Game.Fight.FightEvents
 {
 
     public delegate void StartNewTurnEventHandler(object sender, StartNewTurnEventArgs args);

@@ -1,10 +1,9 @@
-﻿using DDFight.Game;
-using DDFight.Tools;
+﻿using DDFight.Tools;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace DDFight.Controlers
+namespace DDFight.Game.Entities.Display
 {
     /// <summary>
     /// Interaction logic for CharacterListUserControl.xaml

@@ -1,4 +1,4 @@
-﻿using DDFight.Game;
+﻿using DDFight.Game.Entities;
 using System.Collections.ObjectModel;
 
 namespace DDFight.Tools.Save

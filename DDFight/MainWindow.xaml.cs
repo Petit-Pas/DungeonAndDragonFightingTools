@@ -1,4 +1,5 @@
 ﻿using DDFight.Game;
+using DDFight.Game.Entities;
 using DDFight.Tools;
 using DDFight.Tools.Save;
 using DDFight.Windows;

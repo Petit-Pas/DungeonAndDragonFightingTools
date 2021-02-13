@@ -1,11 +1,6 @@
 ﻿<Application x:Class="DDFight.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:DDFight"
-             xmlns:windows="clr-namespace:DDFight.Windows"
-             xmlns:characteristics="clr-namespace:DDFight.Controlers.Game.Characteristics"
-             xmlns:characters="clr-namespace:DDFight.Controlers.Characters"
-             xmlns:input="clr-namespace:DDFight.Controlers.InputBoxes"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
 
@@ -42,13 +37,6 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-
-            <Style TargetType="{x:Type local:MainWindow}" BasedOn="{StaticResource WindowStyle}"/>
-            <Style TargetType="{x:Type windows:AskYesNoWindow}" BasedOn="{StaticResource WindowStyle}"/>
-            <Style TargetType="{x:Type windows:CharacterEditWindow}" BasedOn="{StaticResource WindowStyle}"/>
-            <Style TargetType="{x:Type windows:HitAttackTemplateEditWindow}" BasedOn="{StaticResource WindowStyle}"/>
-            <Style TargetType="{x:Type windows:MonsterEditWindow}" BasedOn="{StaticResource WindowStyle}"/>
-            <Style TargetType="{x:Type windows:StatusMessageWindow}" BasedOn="{StaticResource WindowStyle}"/>
             
             <Style TargetType="{x:Type TextBlock}" x:Key="ErrorMessage" >
                 <Setter Property="Foreground" Value="Red"/>

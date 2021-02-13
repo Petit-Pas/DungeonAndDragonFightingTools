@@ -11,6 +11,7 @@ using System.Windows.Media;
 using DDFight.Game.Aggression;
 using System.Collections.Generic;
 using DDFight.Game.Aggression.Display;
+using DDFight.Game.Entities;
 
 namespace DDFight.Game.Status
 {

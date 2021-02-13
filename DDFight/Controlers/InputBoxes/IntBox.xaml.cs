@@ -1,11 +1,7 @@
 ﻿using DDFight.Tools;
 using DDFight.ValidationRules;
-using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
 
 namespace DDFight.Controlers.InputBoxes

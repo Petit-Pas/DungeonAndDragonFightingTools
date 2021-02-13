@@ -1,7 +1,7 @@
-﻿using DDFight.Windows;
+﻿using DDFight.Game.Entities.Display;
 using System.Xml.Serialization;
 
-namespace DDFight.Game
+namespace DDFight.Game.Entities
 {
     public class Monster : PlayableEntity
     {
@@ -33,7 +33,7 @@ namespace DDFight.Game
 
         public override bool OpenEditWindow()
         {
-            MonsterEditWindow window = new MonsterEditWindow();
+            PlayableEntityEditWindow  window = new PlayableEntityEditWindow();
             Monster temporary = (Monster)this.Clone();
             window.DataContext = temporary;
 
