@@ -67,7 +67,9 @@
                         </ContextMenu>
                     </ListBox.Resources>
                     <ListBox.ItemContainerStyle>
-                        <Style TargetType="ListBoxItem" BasedOn="{StaticResource ListBoxItemCustomStyle}" />
+                        <Style TargetType="ListBoxItem" BasedOn="{StaticResource ListBoxItemCustomStyle}">
+                            <Setter Property="ContextMenu" Value="{StaticResource CMenu}"/>
+                        </Style>
                     </ListBox.ItemContainerStyle>
                     <ListBox.ItemTemplate>
                         <DataTemplate>
