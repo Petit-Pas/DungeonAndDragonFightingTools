@@ -1,29 +1,17 @@
 ﻿using DDFight.Tools;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-namespace DDFight.Game.Entities.Display
+namespace DDFight.Controlers
 {
     /// <summary>
-    /// Interaction logic for PlayableEntityListEditableUserControl.xaml
+    ///     A Base class to display a list of element by their name with easy access to basic list management (add, delete, update, duplicate)
+    ///     /!\ A member "DisplayName" must be existing for the ListBox to display the element efficiently
     /// </summary>
-    public partial class PlayableEntityListEditableUserControl : UserControl, INotifyPropertyChanged
+    public partial class BaseListEditableUserControl : UserControl, INotifyPropertyChanged
     {
         #region INotifyPropertyChanged
 
@@ -45,13 +33,13 @@ namespace DDFight.Game.Entities.Display
         }
         #endregion
 
-        public PlayableEntityListEditableUserControl()
+        public BaseListEditableUserControl()
         {
             InitializeComponent();
-            Loaded += PlayableEntityListEditableUserControl_Loaded;
+            Loaded += BaseListEditableUserControl_Loaded;
         }
 
-        private void PlayableEntityListEditableUserControl_Loaded(object sender, RoutedEventArgs e)
+        private void BaseListEditableUserControl_Loaded(object sender, RoutedEventArgs e)
         {
             ContextMenu_Populate();
         }
@@ -62,7 +50,7 @@ namespace DDFight.Game.Entities.Display
             set { this.SetValue(ContextMenuCanOpenProperty, value); }
         }
         private static readonly DependencyProperty ContextMenuCanOpenProperty = DependencyProperty.Register(
-            nameof(ContextMenuCanOpen), typeof(bool), typeof(PlayableEntityListEditableUserControl),
+            nameof(ContextMenuCanOpen), typeof(bool), typeof(BaseListEditableUserControl),
             new FrameworkPropertyMetadata(true));
 
         public Visibility ButtonsVisibility
@@ -71,7 +59,7 @@ namespace DDFight.Game.Entities.Display
             set { this.SetValue(ButtonsVisbilityProperty, value); }
         }
         private static readonly DependencyProperty ButtonsVisbilityProperty = DependencyProperty.Register(
-            nameof(ButtonsVisibility), typeof(Visibility), typeof(PlayableEntityListEditableUserControl),
+            nameof(ButtonsVisibility), typeof(Visibility), typeof(BaseListEditableUserControl),
             new FrameworkPropertyMetadata(Visibility.Visible));
 
         public object EntityList
@@ -80,7 +68,7 @@ namespace DDFight.Game.Entities.Display
             set { this.SetValue(EntityListPoprety, value); }
         }
         private static readonly DependencyProperty EntityListPoprety = DependencyProperty.Register(
-            nameof(EntityList), typeof(object), typeof(PlayableEntityListEditableUserControl),
+            nameof(EntityList), typeof(object), typeof(BaseListEditableUserControl),
             new FrameworkPropertyMetadata(null));
 
         #region ContextMenu
@@ -118,19 +106,19 @@ namespace DDFight.Game.Entities.Display
         protected void ContextMenu_Duplicate_Click(object sender, RoutedEventArgs e)
         {
             if (EntityListControl.SelectedIndex != -1)
-                duplicate(EntityListControl.SelectedItem as PlayableEntity);
+                duplicate(EntityListControl.SelectedItem);
         }
 
         protected void ContextMenu_RemoveClick(object sender, RoutedEventArgs e)
         {
             if (EntityListControl.SelectedIndex != -1)
-                remove(EntityListControl.SelectedItem as PlayableEntity);
+                remove(EntityListControl.SelectedItem);
         }
 
         protected void ContextMenu_EditClick(object sender, RoutedEventArgs e)
         {
             if (EntityListControl.SelectedIndex != -1)
-                edit(EntityListControl.SelectedItem as PlayableEntity);
+                edit(EntityListControl.SelectedItem);
         }
 
         #endregion ContextMenu
@@ -161,38 +149,35 @@ namespace DDFight.Game.Entities.Display
         protected virtual void RemoveButtonControl_Click(object sender, RoutedEventArgs e)
         {
             if (EntityListControl.SelectedIndex != -1)
-                remove((PlayableEntity)EntityListControl.SelectedItem);
+                remove(EntityListControl.SelectedItem);
         }
 
         protected virtual void EntityList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (EntityListControl.SelectedItem != null)
-            {
-                PlayableEntity entity = EntityListControl.SelectedItem as PlayableEntity;
-                edit(entity);
-            }
+                edit(EntityListControl.SelectedItem);
         }
 
         #endregion ClickEvents
 
         #region ListControl
 
-        protected virtual void edit(PlayableEntity entity)
+        protected virtual void edit(object obj)
         {
             Logger.Log("WARN: UserControls should override the edit() method as the base one in PlayableEntityListEditableUserControl is empty");
         }
 
-        protected virtual void remove(PlayableEntity entity)
+        protected virtual void remove(object obj)
         {
             Logger.Log("WARN: UserControls should override the remove() method as the base one in PlayableEntityListEditableUserControl is empty");
         }
 
-        protected virtual void duplicate(PlayableEntity entity)
+        protected virtual void duplicate(object obj)
         {
             Logger.Log("WARN: UserControls should override the duplicate() method as the base one in PlayableEntityListEditableUserControl is empty");
         }
 
-        protected virtual void add_new(PlayableEntity entity = null)
+        protected virtual void add_new(object obj = null)
         {
             Logger.Log("WARN: UserControls should override the add_new() method as the base one in PlayableEntityListEditableUserControl is empty");
         }
@@ -204,7 +189,7 @@ namespace DDFight.Game.Entities.Display
             if (e.Key == Key.Delete)
                 if (EntityListControl.SelectedIndex != -1)
                 {
-                    remove(EntityListControl.SelectedItem as PlayableEntity);
+                    remove(EntityListControl.SelectedItem);
                     e.Handled = true;
                 }
         }

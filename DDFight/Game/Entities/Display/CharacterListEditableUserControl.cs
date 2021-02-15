@@ -1,14 +1,11 @@
-﻿using DDFight.Tools.Save;
+﻿using DDFight.Controlers;
+using DDFight.Tools.Save;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace DDFight.Game.Entities.Display
 {
-    public class CharacterListEditableUserControl : PlayableEntityListEditableUserControl
+    public class CharacterListEditableUserControl : BaseListEditableUserControl
     {
         public CharacterListEditableUserControl() : base()
         {
@@ -51,30 +48,34 @@ namespace DDFight.Game.Entities.Display
         }
 
         #region ListControl
-        protected override void edit(PlayableEntity entity)
+        protected override void edit(object obj)
         {
-            if (entity.Edit())
+            Character character = obj as Character;
+            if (character.Edit())
                 data_context.Save();
         }
 
-        protected override void remove(PlayableEntity entity)
+        protected override void remove(object obj)
         {
-            data_context.RemoveCharacter(entity as Character);
+            Character character = obj as Character;
+            data_context.RemoveCharacter(character);
         }
 
-        protected override void duplicate(PlayableEntity entity)
+        protected override void duplicate(object obj)
         {
-            Character new_one = (Character)entity.Clone();
+            Character character = obj as Character;
+            Character new_one = (Character)character.Clone();
             new_one.Name = new_one.Name + " - Copy";
             add_new(new_one);
         }
 
-        protected override void add_new(PlayableEntity entity = null)
+        protected override void add_new(object obj = null)
         {
-            if (entity == null)
-                entity = new Character();
-            if (entity.Edit())
-                data_context.AddCharacter(entity as Character);
+            Character character = obj as Character;
+            if (character == null)
+                character = new Character();
+            if (character.Edit())
+                data_context.AddCharacter(character);
         }
         #endregion ListControl
     }

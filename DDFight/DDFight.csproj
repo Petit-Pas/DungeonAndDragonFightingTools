@@ -138,8 +138,8 @@
     <Compile Include="Game\Entities\Display\PlayableEntityEditWindow.xaml.cs">
       <DependentUpon>PlayableEntityEditWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Game\Entities\Display\PlayableEntityListEditableUserControl.xaml.cs">
-      <DependentUpon>PlayableEntityListEditableUserControl.xaml</DependentUpon>
+    <Compile Include="Controlers\BaseListEditableUserControl.xaml.cs">
+      <DependentUpon>BaseListEditableUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Game\Entities\Display\PlayableEntityMainInfoEditableUserControl.xaml.cs">
       <DependentUpon>PlayableEntityMainInfoEditableUserControl.xaml</DependentUpon>
@@ -500,7 +500,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Game\Entities\Display\PlayableEntityListEditableUserControl.xaml">
+    <Page Include="Controlers\BaseListEditableUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

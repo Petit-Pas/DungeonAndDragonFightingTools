@@ -1,14 +1,11 @@
-﻿using DDFight.Tools.Save;
+﻿using DDFight.Controlers;
+using DDFight.Tools.Save;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace DDFight.Game.Entities.Display
 {
-    public class MonsterListEditableUserControl : PlayableEntityListEditableUserControl
+    public class MonsterListEditableUserControl : BaseListEditableUserControl
     {
         public MonsterListEditableUserControl() : base()
         {
@@ -52,30 +49,35 @@ namespace DDFight.Game.Entities.Display
         }
 
         #region ListControl
-        protected override void edit(PlayableEntity entity)
+        protected override void edit(object obj)
         {
-            if (entity.Edit())
+            Monster monster = obj as Monster;
+            if (monster.Edit())
                 data_context.Save();
         }
 
-        protected override void remove(PlayableEntity entity)
+        protected override void remove(object obj)
         {
-            data_context.RemoveMonster(entity as Monster);
+            Monster monster = obj as Monster;
+
+            data_context.RemoveMonster(monster);
         }
 
-        protected override void duplicate(PlayableEntity entity)
+        protected override void duplicate(object obj)
         {
-            Monster new_one = (Monster)entity.Clone();
+            Monster monster = obj as Monster;
+            Monster new_one = (Monster)monster.Clone();
             new_one.Name = new_one.Name + " - Copy";
             add_new(new_one);
         }
 
-        protected override void add_new(PlayableEntity entity = null)
+        protected override void add_new(object obj = null)
         {
-            if (entity == null)
-                entity = new Monster();
-            if (entity.Edit())
-                data_context.AddMonster(entity as Monster);
+            Monster monster = obj as Monster;
+            if (monster == null)
+                monster = new Monster();
+            if (monster.Edit())
+                data_context.AddMonster(monster);
         }
 
         #endregion ListControl
