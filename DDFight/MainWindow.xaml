@@ -58,7 +58,8 @@
                     </TextBlock>
                 </TabItem.Header>
                 <spells:SpellListEditableUserControl
-                    x:Name="GlobalSpellListControl"/>
+                    x:Name="GlobalSpellListControl"
+                    DataContext="{Binding SpellList}"/>
             </TabItem>
             
         </TabControl>

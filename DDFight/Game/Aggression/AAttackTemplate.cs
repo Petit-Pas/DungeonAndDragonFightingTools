@@ -14,6 +14,12 @@ namespace DDFight.Game.Aggression
 
         #region Properties
 
+        [XmlIgnore]
+        public string DisplayName
+        {
+            get => _name;
+        }
+
         [XmlAttribute]
         public string Name
         {
@@ -22,6 +28,7 @@ namespace DDFight.Game.Aggression
             {
                 _name = value;
                 NotifyPropertyChanged();
+                NotifyPropertyChanged("DisplayName");
             }
         }
         private string _name = "Name";

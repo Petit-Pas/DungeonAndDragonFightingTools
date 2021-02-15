@@ -25,19 +25,44 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <local:SpellListEditableUserControl
+        <TextBlock
             Grid.Row="0"
-            Margin="5, 5, 5, 0"
-            x:Name="AllSpellsControl"
-            />
-
-        <local:SpellListEditableUserControl 
+            Margin="5, 0"
+            FontSize="15"
+            FontWeight="SemiBold">
+            All Spells
+        </TextBlock>
+        <local:SpellListEditableUserControl
             Grid.Row="1"
-            Margin="5"
+            Margin="5, 0"
+            x:Name="AllSpellsControl"/>
+
+        <Separator
+            Grid.Row="2"
+            Background="{StaticResource Indigo}"
+            Margin="-10, 0">
+            <Separator.RenderTransform>
+                <ScaleTransform ScaleY="3"/>
+            </Separator.RenderTransform>
+        </Separator>
+
+        <TextBlock
+            Grid.Row="3"
+            Margin="5, 5, 5, 0"
+            FontSize="15"
+            FontWeight="SemiBold">
+            Your Spells
+        </TextBlock>
+        <local:SpellListEditableUserControl 
+            Grid.Row="4"
+            Margin="5, 0"
             x:Name="EntitySpellsControl"/>
 
     </Grid>

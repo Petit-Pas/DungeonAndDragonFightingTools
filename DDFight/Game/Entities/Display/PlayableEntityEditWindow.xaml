@@ -34,9 +34,9 @@
         </Grid.RowDefinitions>
         <TabControl 
             Grid.Row="0" Grid.ColumnSpan="2"
-            BorderThickness="0"
             Background="{StaticResource LightestGray}"
-            VirtualizingPanel.IsVirtualizing="False">
+            VirtualizingPanel.IsVirtualizing="False"
+            Style="{StaticResource TabControlStyle}">
             <TabItem Style="{StaticResource TabItemStyle}"
                      x:Name="MainControl">
                 <TabItem.Header>

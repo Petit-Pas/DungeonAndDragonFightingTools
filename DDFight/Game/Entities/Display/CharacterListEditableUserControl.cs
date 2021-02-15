@@ -48,28 +48,28 @@ namespace DDFight.Game.Entities.Display
         }
 
         #region ListControl
-        protected override void edit(object obj)
+        public override void edit(object obj)
         {
             Character character = obj as Character;
             if (character.Edit())
                 data_context.Save();
         }
 
-        protected override void remove(object obj)
+        public override void remove(object obj)
         {
             Character character = obj as Character;
             data_context.RemoveCharacter(character);
         }
 
-        protected override void duplicate(object obj)
+        public override void duplicate(object obj)
         {
             Character character = obj as Character;
-            Character new_one = (Character)character.Clone();
+            Character new_one = character.Clone() as Character;
             new_one.Name = new_one.Name + " - Copy";
             add_new(new_one);
         }
 
-        protected override void add_new(object obj = null)
+        public override void add_new(object obj = null)
         {
             Character character = obj as Character;
             if (character == null)

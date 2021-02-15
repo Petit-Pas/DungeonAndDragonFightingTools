@@ -1,4 +1,5 @@
 ﻿using DDFight.Tools;
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -36,11 +37,6 @@ namespace DDFight.Controlers
         public BaseListEditableUserControl()
         {
             InitializeComponent();
-            Loaded += BaseListEditableUserControl_Loaded;
-        }
-
-        private void BaseListEditableUserControl_Loaded(object sender, RoutedEventArgs e)
-        {
             ContextMenu_Populate();
         }
 
@@ -75,7 +71,13 @@ namespace DDFight.Controlers
 
         public ContextMenu ListContextMenu
         {
-            get => _listContextMenu.Items.Count != 0 ? _listContextMenu : null;
+            get {
+                try
+                {
+                    return _listContextMenu.Items.Count != 0 ? _listContextMenu : null;
+                }
+                catch (Exception) { return null; }
+                }
             set
             {
                 _listContextMenu = value;
@@ -162,22 +164,22 @@ namespace DDFight.Controlers
 
         #region ListControl
 
-        protected virtual void edit(object obj)
+        public virtual void edit(object obj)
         {
             Logger.Log("WARN: UserControls should override the edit() method as the base one in PlayableEntityListEditableUserControl is empty");
         }
 
-        protected virtual void remove(object obj)
+        public virtual void remove(object obj)
         {
             Logger.Log("WARN: UserControls should override the remove() method as the base one in PlayableEntityListEditableUserControl is empty");
         }
 
-        protected virtual void duplicate(object obj)
+        public virtual void duplicate(object obj)
         {
             Logger.Log("WARN: UserControls should override the duplicate() method as the base one in PlayableEntityListEditableUserControl is empty");
         }
 
-        protected virtual void add_new(object obj = null)
+        public virtual void add_new(object obj = null)
         {
             Logger.Log("WARN: UserControls should override the add_new() method as the base one in PlayableEntityListEditableUserControl is empty");
         }

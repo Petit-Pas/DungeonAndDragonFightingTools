@@ -341,7 +341,7 @@ namespace DDFight.Game.Aggression.Spells
         [XmlIgnore]
         public bool Validated = false;
 
-        public bool OpenEditWindow()
+        public bool Edit()
         {
             SpellEditWindow window = new SpellEditWindow();
             Spell temporary = (Spell)this.Clone();

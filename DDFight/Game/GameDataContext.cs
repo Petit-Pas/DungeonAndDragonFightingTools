@@ -18,7 +18,15 @@ namespace DDFight.Game
         /// <summary>
         ///     The list of all possible spells encountered
         /// </summary>
-        public SpellsList SpellList = new SpellsList();
+        public SpellsList SpellList
+        {
+            get => _spellList;
+            set {
+                _spellList = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private SpellsList _spellList = new SpellsList();
 
         /// <summary>
         ///     The list of existing character

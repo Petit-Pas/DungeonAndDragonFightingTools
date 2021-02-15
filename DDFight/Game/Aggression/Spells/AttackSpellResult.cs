@@ -9,6 +9,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
+using System.Xml.Serialization;
 
 namespace DDFight.Game.Aggression.Spells
 {
@@ -44,6 +45,7 @@ namespace DDFight.Game.Aggression.Spells
 
 
         #region Properties
+
         public string Name
         {
             get => _name;

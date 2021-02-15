@@ -28,7 +28,7 @@ namespace DDFight.Game.Entities
         {
         }
 
-        public string GetName() { return Name; }
+        public string GetName() { return DisplayName; }
 
         [XmlIgnore]
         public bool Validated = false;

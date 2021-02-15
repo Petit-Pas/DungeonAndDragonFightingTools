@@ -49,21 +49,21 @@ namespace DDFight.Game.Entities.Display
         }
 
         #region ListControl
-        protected override void edit(object obj)
+        public override void edit(object obj)
         {
             Monster monster = obj as Monster;
             if (monster.Edit())
                 data_context.Save();
         }
 
-        protected override void remove(object obj)
+        public override void remove(object obj)
         {
             Monster monster = obj as Monster;
 
             data_context.RemoveMonster(monster);
         }
 
-        protected override void duplicate(object obj)
+        public override void duplicate(object obj)
         {
             Monster monster = obj as Monster;
             Monster new_one = (Monster)monster.Clone();
@@ -71,7 +71,7 @@ namespace DDFight.Game.Entities.Display
             add_new(new_one);
         }
 
-        protected override void add_new(object obj = null)
+        public override void add_new(object obj = null)
         {
             Monster monster = obj as Monster;
             if (monster == null)
