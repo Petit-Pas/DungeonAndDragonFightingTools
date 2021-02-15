@@ -23,12 +23,30 @@ namespace DDFight.Game
         /// <summary>
         ///     The list of existing character
         /// </summary>
-        public CharactersList CharacterList = new CharactersList();
+        public CharactersList CharacterList
+        {
+            get => _characterList;
+            set
+            {
+                _characterList = value;
+                NotifyPropertyChanged();
+            }
+        }
+            private CharactersList _characterList = new CharactersList();
 
         /// <summary>
         ///     The list of all possible ennemies encountered
         /// </summary>
-        public MonstersList MonsterList = new MonstersList();
+        public MonstersList MonsterList
+        {
+            get => _monsterList;
+            set
+            {
+                _monsterList = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private MonstersList _monsterList = new MonstersList();
 
         #region INotifyPropertyChanged
 

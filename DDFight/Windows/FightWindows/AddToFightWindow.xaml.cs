@@ -1,4 +1,5 @@
 ﻿using DDFight.Game.Entities;
+using System;
 using System.Windows;
 using System.Windows.Input;
 
@@ -18,32 +19,19 @@ namespace DDFight.Windows.FightWindows
 
         private void AddToFightWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            CharacterListControl.ItemsSource = Global.Context.CharacterList.Characters;
-            MonsterListControl.ItemsSource = Global.Context.MonsterList.Monsters;
+            CharacterListControl.DataContext = Global.Context.CharacterList;
+            MonsterListControl.DataContext = Global.Context.MonsterList;
 
             FighterListControl.ItemsSource = Global.Context.FightContext.FightersList.Fighters;
         }
 
-        private void CharacterListControl_KeyDown(object sender, KeyEventArgs e)
+        private void FighterListControl_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Right)
+            if (e.Key == Key.Left || e.Key == Key.Delete || e.Key == Key.Back)
             {
-                if (CharacterListControl.SelectedItem != null)
+                if (FighterListControl.SelectedIndex >= 0)
                 {
-                    ((Character)CharacterListControl.SelectedItem).DisplayName = ((Character)CharacterListControl.SelectedItem).Name;
-                    Global.Context.FightContext.FightersList.AddCharacter((Character)CharacterListControl.SelectedItem);
-                }
-            }
-        }
-
-        private void MonsterListControl_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Right)
-            {
-                if (MonsterListControl.SelectedItem != null)
-                {
-                    ((Monster)MonsterListControl.SelectedItem).DisplayName = ((Monster)MonsterListControl.SelectedItem).Name;
-                    Global.Context.FightContext.FightersList.AddMonster((Monster)MonsterListControl.SelectedItem);
+                    Global.Context.FightContext.FightersList.Fighters.RemoveAt(FighterListControl.SelectedIndex);
                 }
             }
         }

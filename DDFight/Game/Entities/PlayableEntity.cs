@@ -45,6 +45,7 @@ namespace DDFight.Game.Entities
                 {
                     _name = value;
                     NotifyPropertyChanged();
+                    NotifyPropertyChanged("DisplayName");
                 }
             }
         }
@@ -56,7 +57,11 @@ namespace DDFight.Game.Entities
         [XmlIgnore]
         public virtual string DisplayName
         {
-            get => _displayName;
+            get {
+                if (_displayName == "DisplayName")                    
+                    return _name;
+                return _displayName;
+            }
             set
             {
                 if (value != _displayName)
@@ -725,7 +730,7 @@ namespace DDFight.Game.Entities
 
         #endregion Fight
 
-        public virtual bool OpenEditWindow()
+        public virtual bool Edit()
         {
             throw new NotImplementedException();
         }
@@ -768,7 +773,6 @@ namespace DDFight.Game.Entities
                 atk.Owner = this;
             }
             CustomVerboseStatusList = (CustomVerboseStatusList)to_copy.CustomVerboseStatusList.Clone();
-            DisplayName = (string)to_copy.DisplayName.Clone();
             TurnOrder = to_copy.TurnOrder;
             InitiativeRoll = to_copy.InitiativeRoll;
             ActionDescription = (string)to_copy.ActionDescription.Clone();

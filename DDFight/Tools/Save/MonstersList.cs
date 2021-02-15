@@ -1,14 +1,46 @@
 ﻿using DDFight.Game.Entities;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace DDFight.Tools.Save
 {
-    public class MonstersList
+    public class MonstersList : INotifyPropertyChanged
     {
+        #region INotifyPropertyChanged
+
+        /// <summary>
+        ///     PropertyChanged EventHandler
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+        #endregion
+
+
         /// <summary>
         ///     The list of Monsters
         /// </summary>
-        public ObservableCollection<Monster> Monsters = new ObservableCollection<Monster>();
+        public ObservableCollection<Monster> Monsters
+        {
+            get => _monsters;
+            set
+            {
+                _monsters = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private ObservableCollection<Monster> _monsters = new ObservableCollection<Monster>();
 
         /// <summary>
         ///     Method to add and save a Monster
@@ -38,7 +70,8 @@ namespace DDFight.Tools.Save
             Monsters.Sort((x, y) => {
                 return x.Name.CompareTo(y.Name);
             });
-            SaveManager.SaveMonsters(this);
+
+            //SaveManager.SaveMonsters(this);
         }
 
         /// <summary>

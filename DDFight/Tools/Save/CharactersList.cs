@@ -13,7 +13,16 @@ namespace DDFight.Tools.Save
         /// <summary>
         ///     The list of characters
         /// </summary>
-        public ObservableCollection<Character> Characters = new ObservableCollection<Character>();
+        public ObservableCollection<Character> Characters
+        {
+            get => _characters;
+            set
+            {
+                _characters = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private ObservableCollection<Character> _characters = new ObservableCollection<Character>();
 
         #region INotifyPropertyChanged
 

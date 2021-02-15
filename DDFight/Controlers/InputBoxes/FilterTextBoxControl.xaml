@@ -17,8 +17,7 @@
         <TextBox
             x:Name="TextBoxControl"
             Background="{StaticResource Gray}"
-            Foreground="{StaticResource Light}"
-            Margin="5">
+            Foreground="{StaticResource Light}">
         </TextBox>
     </Grid>
 </UserControl>

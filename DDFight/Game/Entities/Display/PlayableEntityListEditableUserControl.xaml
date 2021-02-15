@@ -1,0 +1,92 @@
+﻿<UserControl x:Class="DDFight.Game.Entities.Display.PlayableEntityListEditableUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DDFight.Game.Entities.Display" xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes" xmlns:system="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/ListBoxStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/ScrollBarStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid 
+        Background="{StaticResource LightestGray}"
+        x:Name="CharactersGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <inputboxes:FilterTextBoxControl
+            x:Name="FilterControl"
+            KeyUp="FilterTextBox_KeyUp"
+            Margin="0, 5"/>
+
+        <Grid Grid.Row="1" MinWidth="200">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ListBox 
+                Background="{StaticResource Gray}"
+                x:Name="EntityListControl" 
+                ItemsSource="{Binding EntityList, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:PlayableEntityListEditableUserControl}}}"
+                Grid.Column="0" Grid.Row="0"
+                MouseDoubleClick="EntityList_MouseDoubleClick"
+                VirtualizingPanel.IsVirtualizing="False"
+                KeyDown="EntityListControl_KeyDown"
+                ContextMenuOpening="EntityList_ContextMenuOpening">
+
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem" BasedOn="{StaticResource ListBoxItemCustomStyle}">
+                        <Setter Property="ContextMenu" Value="{Binding ListContextMenu, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:PlayableEntityListEditableUserControl}}}"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding DisplayName}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <Grid
+                x:Name="ButtonGrid"
+                Grid.Row="1"
+                Visibility="{Binding ButtonsVisibility, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:PlayableEntityListEditableUserControl}}}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Button 
+                    x:Name="AddButtonControl"
+                    Grid.Column="0" 
+                    Margin="0, 10, 10, 10" 
+                    Click="AddButtonControl_Click"
+                    FontWeight="SemiBold">
+                    Add New
+                </Button>
+                <Button 
+                    x:Name="RemoveButtonControl"
+                    Grid.Column="1" 
+                    Margin="10, 10, 0, 10" 
+                    Click="RemoveButtonControl_Click"
+                    FontWeight="SemiBold">
+                    Remove
+                </Button>
+
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

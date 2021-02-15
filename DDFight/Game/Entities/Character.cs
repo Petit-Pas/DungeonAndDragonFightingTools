@@ -69,7 +69,7 @@ namespace DDFight.Game.Entities
             }
         }
 
-        public override bool OpenEditWindow()
+        public override bool Edit()
         {
             PlayableEntityEditWindow window = new PlayableEntityEditWindow();
             Character temporary = (Character)this.Clone();

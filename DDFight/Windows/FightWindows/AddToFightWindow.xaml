@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DDFight.Windows.FightWindows"
+        xmlns:local="clr-namespace:DDFight.Windows.FightWindows" xmlns:display="clr-namespace:DDFight.Game.Entities.Display"
         mc:Ignorable="d"
         Title="AddToFightWindow" Height="450" Width="800"
         Background="{StaticResource LightestGray}">
@@ -12,6 +12,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/CheckBoxStyle.xaml"/>
                 <ResourceDictionary Source="/Styles/TabControlStyles.xaml"/>
+                <ResourceDictionary Source="/Styles/ListBoxStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -26,73 +27,68 @@
         </Grid.RowDefinitions>
 
         <TabControl
+            Style="{StaticResource TabControlStyle}"
             Margin="5"
             Grid.Column="0"
             Background="{StaticResource LightestGray}">
-            <TabItem Header="Characters">
-                <ListBox 
-                    Margin="5"
-                    Background="{StaticResource Gray}"
-                    x:Name="CharacterListControl" 
-                    DisplayMemberPath="Name"
-                    KeyDown="CharacterListControl_KeyDown">
-                    <ListBox.ItemContainerStyle>
-                        <Style TargetType="ListBoxItem">
-                            <Setter Property="BorderBrush" Value="{StaticResource Light}"/>
-                            <Setter Property="Margin" Value="3"/>
-                            <Setter Property="Foreground" Value="{StaticResource Light}"/>
-                            <Setter Property="BorderThickness" Value="2"/>
-                        </Style>
-                    </ListBox.ItemContainerStyle>
-                </ListBox>
+            <TabItem
+                Style="{StaticResource TabItemStyle}">
+                <TabItem.Header>
+                    <TextBlock Style="{StaticResource HeaderTextBlockStyle}">
+                        Characters
+                    </TextBlock>
+                </TabItem.Header>
+                <display:CharacterListEditableUserControl
+                    x:Name="CharacterListControl"
+                    ButtonsVisibility="Collapsed"
+                    ContextMenuCanOpen="False"/>
+
             </TabItem>
-            <TabItem Header="Monsters">
-                <ListBox 
-                    Margin="5"
-                    Background="{StaticResource Gray}"
+            <TabItem
+                Style="{StaticResource TabItemStyle}">
+                <TabItem.Header>
+                    <TextBlock
+                        Style="{StaticResource HeaderTextBlockStyle}">
+                        Monsters
+                    </TextBlock>
+                </TabItem.Header>
+                <display:MonsterListEditableUserControl
                     x:Name="MonsterListControl"
-                    DisplayMemberPath="Name"
-                    KeyDown="MonsterListControl_KeyDown">
-                    <ListBox.ItemContainerStyle>
-                        <Style TargetType="ListBoxItem">
-                            <Setter Property="BorderBrush" Value="{StaticResource Light}"/>
-                            <Setter Property="Margin" Value="3"/>
-                            <Setter Property="Foreground" Value="{StaticResource Light}"/>
-                            <Setter Property="BorderThickness" Value="2"/>
-                        </Style>
-                    </ListBox.ItemContainerStyle>
-                </ListBox>
+                    ButtonsVisibility="Collapsed"
+                    ContextMenuCanOpen="False"/>
             </TabItem>
         </TabControl>
 
-        <GroupBox
+        <TabControl
             Grid.Column="1"
-            Margin="5">
-            <GroupBox.Header>
-                <TextBlock
-                    Foreground="{StaticResource Light}"
-                    FontSize="15"
-                    FontWeight="SemiBold">
-                    Currently Fighting
-                </TextBlock>
-            </GroupBox.Header>
-            <ListBox 
-                Grid.Column="1"
-                Margin="5"
-                Background="{StaticResource Gray}"
-                x:Name="FighterListControl"
-                DisplayMemberPath="DisplayName">
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem">
-                        <Setter Property="BorderBrush" Value="{StaticResource Light}"/>
-                        <Setter Property="Margin" Value="3"/>
-                        <Setter Property="Foreground" Value="{StaticResource Light}"/>
-                        <Setter Property="BorderThickness" Value="2"/>
-                    </Style>
-                </ListBox.ItemContainerStyle>
-            </ListBox>
-
-        </GroupBox>
+            Style="{StaticResource TabControlStyle}"
+            Background="{StaticResource LightestGray}">
+            <TabItem
+                Style="{StaticResource TabItemStyle}">
+                <TabItem.Header>
+                    <TextBlock
+                        Style="{StaticResource HeaderTextBlockStyle}">
+                        Currently Fighting
+                    </TextBlock>
+                </TabItem.Header>
+                <ListBox 
+                    Grid.Column="1"
+                    Margin="5"
+                    Background="{StaticResource Gray}"
+                    x:Name="FighterListControl"
+                    KeyDown="FighterListControl_KeyDown">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem" BasedOn="{StaticResource ListBoxItemCustomStyle}">
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding DisplayName}" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </TabItem>
+        </TabControl>
 
     </Grid>
 </Window>

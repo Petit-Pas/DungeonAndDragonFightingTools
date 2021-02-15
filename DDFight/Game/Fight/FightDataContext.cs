@@ -15,7 +15,16 @@ namespace DDFight.Game.Fight
         ///     The list of the entities that shall fight when the Fight button is pressed
         /// </summary>
         [XmlIgnore]
-        public FightingCharactersDataContext FightersList = new FightingCharactersDataContext();
+        public FightingCharactersDataContext FightersList
+        {
+            get => _fightersList;
+            set
+            {
+                _fightersList = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private FightingCharactersDataContext _fightersList = new FightingCharactersDataContext();
 
         /// <summary>
         ///     Counts the amount of rounds of a fight

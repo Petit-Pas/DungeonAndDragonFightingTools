@@ -31,7 +31,7 @@ namespace DDFight.Game.Entities
 
         #endregion
 
-        public override bool OpenEditWindow()
+        public override bool Edit()
         {
             PlayableEntityEditWindow  window = new PlayableEntityEditWindow();
             Monster temporary = (Monster)this.Clone();

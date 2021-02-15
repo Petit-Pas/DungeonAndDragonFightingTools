@@ -155,7 +155,7 @@ namespace DDFight.Controlers.Fight
 
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
-            data_context.OpenEditWindow();
+            data_context.Edit();
         }
 
         private void Transform_Click(object sender, RoutedEventArgs e)

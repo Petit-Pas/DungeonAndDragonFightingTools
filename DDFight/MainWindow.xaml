@@ -29,15 +29,17 @@
         </Grid.ColumnDefinitions>
         <TabControl 
             Grid.Row="1"
-            BorderThickness="0"
-            Background="{StaticResource LightestGray}">
+            Style="{StaticResource TabControlStyle}"
+            Background="{StaticResource LightestGray}"
+            Margin="10, 0, 0, 10">
             <TabItem Style="{StaticResource TabItemStyle}">
                 <TabItem.Header>
                     <TextBlock Style="{StaticResource HeaderTextBlockStyle}">
                         Characters
                     </TextBlock>
                 </TabItem.Header>
-                <display:CharacterListEditableUserControl x:Name="CharacterListControl"/>
+                <display:CharacterListEditableUserControl
+                    DataContext="{Binding CharacterList}"/>
             </TabItem>
             <TabItem Style="{StaticResource TabItemStyle}">
                 <TabItem.Header>
@@ -45,7 +47,9 @@
                         Monsters
                     </TextBlock>
                 </TabItem.Header>
-                <display:MonsterListEditableUserControl x:Name="MonsterListControl"/>
+                <display:MonsterListEditableUserControl 
+                    x:Name="MonsterListControl"
+                    DataContext="{Binding MonsterList}"/>
             </TabItem>
             <TabItem Style="{StaticResource TabItemStyle}">
                 <TabItem.Header>
@@ -75,5 +79,6 @@
             Fight
         </Button>
 
+        
     </Grid>
 </Window>

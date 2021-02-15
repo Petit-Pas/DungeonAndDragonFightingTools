@@ -133,8 +133,13 @@
     <Compile Include="Game\Dices\SavingThrow\Display\SavingThrowRollableDenseUserControl.xaml.cs">
       <DependentUpon>SavingThrowRollableDenseUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Game\Entities\Display\CharacterListEditableUserControl.cs" />
+    <Compile Include="Game\Entities\Display\MonsterListEditableUserControl.cs" />
     <Compile Include="Game\Entities\Display\PlayableEntityEditWindow.xaml.cs">
       <DependentUpon>PlayableEntityEditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Game\Entities\Display\PlayableEntityListEditableUserControl.xaml.cs">
+      <DependentUpon>PlayableEntityListEditableUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Game\Entities\Display\PlayableEntityMainInfoEditableUserControl.xaml.cs">
       <DependentUpon>PlayableEntityMainInfoEditableUserControl.xaml</DependentUpon>
@@ -276,9 +281,6 @@
     </Compile>
     <Compile Include="Controlers\InputBoxes\RangedIntBox.xaml.cs">
       <DependentUpon>RangedIntBox.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Game\Entities\Display\MonsterListEditableUserControl.xaml.cs">
-      <DependentUpon>MonsterListEditableUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Game\Entities\Display\SoonToFightEntityListUserControl.xaml.cs">
       <DependentUpon>SoonToFightEntityListUserControl.xaml</DependentUpon>
@@ -494,11 +496,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Game\Entities\Display\CharacterListEditableUserControl.xaml">
+    <Page Include="Game\Entities\Display\PlayableEntityEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Game\Entities\Display\PlayableEntityEditWindow.xaml">
+    <Page Include="Game\Entities\Display\PlayableEntityListEditableUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -654,10 +656,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Game\Entities\Display\MonsterListEditableUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Game\Entities\Display\SoonToFightEntityListUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -685,9 +683,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Game\Entities\Display\CharacterListEditableUserControl.xaml.cs">
-      <DependentUpon>CharacterListEditableUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
