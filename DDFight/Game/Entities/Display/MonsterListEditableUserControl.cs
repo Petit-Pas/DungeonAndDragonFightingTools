@@ -5,7 +5,7 @@ using System.Windows.Input;
 
 namespace DDFight.Game.Entities.Display
 {
-    public class MonsterListEditableUserControl : BaseListEditableUserControl
+    public class MonsterListEditableUserControl : BaseListUserControl
     {
         public MonsterListEditableUserControl() : base()
         {

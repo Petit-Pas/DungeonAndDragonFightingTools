@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DDFight.Game.Entities.Display
 {
-    public class SoonToFightEntityListUserControl : BaseListEditableUserControl
+    public class SoonToFightEntityListUserControl : BaseListUserControl
     {
         public SoonToFightEntityListUserControl() : base ()
         {

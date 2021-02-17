@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DDFight.Game.Aggression.Spells.Display
 {
-    public class SpellListEditableUserControl : BaseListEditableUserControl
+    public class SpellListEditableUserControl : BaseListUserControl
     {
         public SpellListEditableUserControl() : base()
         {

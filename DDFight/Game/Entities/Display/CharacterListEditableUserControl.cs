@@ -5,7 +5,7 @@ using System.Windows.Input;
 
 namespace DDFight.Game.Entities.Display
 {
-    public class CharacterListEditableUserControl : BaseListEditableUserControl
+    public class CharacterListEditableUserControl : BaseListUserControl
     {
         public CharacterListEditableUserControl() : base()
         {

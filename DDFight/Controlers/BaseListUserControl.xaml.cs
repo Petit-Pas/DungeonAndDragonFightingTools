@@ -12,7 +12,7 @@ namespace DDFight.Controlers
     ///     A Base class to display a list of element by their name with easy access to basic list management (add, delete, update, duplicate)
     ///     /!\ A member "DisplayName" must be existing for the ListBox to display the element efficiently
     /// </summary>
-    public partial class BaseListEditableUserControl : UserControl, INotifyPropertyChanged
+    public partial class BaseListUserControl : UserControl, INotifyPropertyChanged
     {
         #region INotifyPropertyChanged
 
@@ -34,52 +34,64 @@ namespace DDFight.Controlers
         }
         #endregion
 
-        public BaseListEditableUserControl()
+        public BaseListUserControl()
         {
             InitializeComponent();
             ContextMenu_Populate();
         }
 
+        /// <summary>
+        ///     Will enable/disable functionalities such as edit/duplicate/remove
+        /// </summary>
         public bool IsEditable
         {
             get { return (bool)this.GetValue(IsEditableProperty); }
             set { this.SetValue(IsEditableProperty, value); }
         }
         private static readonly DependencyProperty IsEditableProperty = DependencyProperty.Register(
-            nameof(IsEditable), typeof(bool), typeof(BaseListEditableUserControl),
+            nameof(IsEditable), typeof(bool), typeof(BaseListUserControl),
             new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.AffectsRender, new PropertyChangedCallback(IsEditableChanged)));
 
         private static void IsEditableChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            BaseListEditableUserControl control = d as BaseListEditableUserControl;
+            BaseListUserControl control = d as BaseListUserControl;
             control.ContextMenu_Populate();
         }
 
+        /// <summary>
+        ///     if set to false, disables the ContextMenu
+        /// </summary>
         public bool ContextMenuCanOpen
         {
             get { return (bool)this.GetValue(ContextMenuCanOpenProperty); }
             set { this.SetValue(ContextMenuCanOpenProperty, value); }
         }
         private static readonly DependencyProperty ContextMenuCanOpenProperty = DependencyProperty.Register(
-            nameof(ContextMenuCanOpen), typeof(bool), typeof(BaseListEditableUserControl),
+            nameof(ContextMenuCanOpen), typeof(bool), typeof(BaseListUserControl),
             new FrameworkPropertyMetadata(true));
 
+        /// <summary>
+        ///     Binded to the Visibility of the Grid containing the add and the remove button
+        /// </summary>
         public Visibility ButtonsVisibility
         {
             get { return (Visibility)this.GetValue(ButtonsVisbilityProperty); }
             set { this.SetValue(ButtonsVisbilityProperty, value); }
         }
         private static readonly DependencyProperty ButtonsVisbilityProperty = DependencyProperty.Register(
-            nameof(ButtonsVisibility), typeof(Visibility), typeof(BaseListEditableUserControl),
+            nameof(ButtonsVisibility), typeof(Visibility), typeof(BaseListUserControl),
             new FrameworkPropertyMetadata(Visibility.Visible));
 
+        /// <summary>
+        ///     The list of entities to display, it should have a DisplayName property
+        /// </summary>
         public object EntityList
         {
             get { return this.GetValue(EntityListPoprety); }
             set { this.SetValue(EntityListPoprety, value); }
         }
         private static readonly DependencyProperty EntityListPoprety = DependencyProperty.Register(
-            nameof(EntityList), typeof(object), typeof(BaseListEditableUserControl),
+            nameof(EntityList), typeof(object), typeof(BaseListUserControl),
             new FrameworkPropertyMetadata(null));
 
         #region ContextMenu
