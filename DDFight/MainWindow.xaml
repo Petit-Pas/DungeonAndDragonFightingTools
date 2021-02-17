@@ -24,8 +24,8 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <TabControl 
             Grid.Row="1"
@@ -39,7 +39,8 @@
                     </TextBlock>
                 </TabItem.Header>
                 <display:CharacterListEditableUserControl
-                    DataContext="{Binding CharacterList}"/>
+                    DataContext="{Binding CharacterList}"
+                    IsEditable="True"/>
             </TabItem>
             <TabItem Style="{StaticResource TabItemStyle}">
                 <TabItem.Header>
@@ -64,15 +65,11 @@
             
         </TabControl>
 
-        <display:SoonToFightEntityListUserControl 
-            Margin="10, 10, 0, 3"
-            Grid.Column="1"/>
-
         <Button
             x:Name="FightButton"
             MaxHeight="100"
             MaxWidth="200"
-            Grid.Column="2"
+            Grid.Column="1"
             FontSize="22"
             FontWeight="Bold"
             Click="FightButton_Click"
@@ -80,6 +77,21 @@
             Fight
         </Button>
 
-        
+        <TabControl
+            Margin="5, 0, 5, 10"
+            Background="{StaticResource LightestGray}"
+            Style="{StaticResource TabControlStyle}"
+            Grid.Column="2">
+            <TabItem Style="{StaticResource TabItemStyle}">
+                <TabItem.Header>
+                    <TextBlock Style="{StaticResource HeaderTextBlockStyle}">
+                        Fighting
+                    </TextBlock>
+                </TabItem.Header>
+                <display:SoonToFightEntityListUserControl 
+                    DataContext="{Binding FightContext.FightersList}"
+                    ButtonsVisibility="Collapsed"/>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

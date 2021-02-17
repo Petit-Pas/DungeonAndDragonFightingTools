@@ -40,6 +40,21 @@ namespace DDFight.Controlers
             ContextMenu_Populate();
         }
 
+        public bool IsEditable
+        {
+            get { return (bool)this.GetValue(IsEditableProperty); }
+            set { this.SetValue(IsEditableProperty, value); }
+        }
+        private static readonly DependencyProperty IsEditableProperty = DependencyProperty.Register(
+            nameof(IsEditable), typeof(bool), typeof(BaseListEditableUserControl),
+            new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.AffectsRender, new PropertyChangedCallback(IsEditableChanged)));
+
+        private static void IsEditableChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            BaseListEditableUserControl control = d as BaseListEditableUserControl;
+            control.ContextMenu_Populate();
+        }
+
         public bool ContextMenuCanOpen
         {
             get { return (bool)this.GetValue(ContextMenuCanOpenProperty); }
@@ -74,13 +89,16 @@ namespace DDFight.Controlers
             get {
                 try
                 {
-                    return _listContextMenu.Items.Count != 0 ? _listContextMenu : null;
+                    return _listContextMenu?.Items.Count != 0 ? _listContextMenu : null;
                 }
                 catch (Exception) { return null; }
                 }
             set
             {
-                _listContextMenu = value;
+                if (value.Items.Count == 0)
+                    _listContextMenu = null;
+                else 
+                    _listContextMenu = value;
                 NotifyPropertyChanged();
             }
         }
@@ -90,51 +108,47 @@ namespace DDFight.Controlers
         {
             ContextMenu menu = new ContextMenu();
 
-            MenuItem edit = new MenuItem { Header = "Edit" };
-            edit.Click += ContextMenu_EditClick;
-            menu.Items.Add(edit);
-
-            MenuItem remove = new MenuItem { Header = "Remove" };
-            remove.Click += ContextMenu_RemoveClick;
-            menu.Items.Add(remove);
-
-            MenuItem duplicate = new MenuItem { Header = "Duplicate" };
-            duplicate.Click += ContextMenu_Duplicate_Click;
-            menu.Items.Add(duplicate);
-
+            if (IsEditable)
+            {
+                MenuItem edit = new MenuItem { Header = "Edit" };
+                edit.Click += ContextMenu_EditClick;
+                menu.Items.Add(edit);
+            }
+            if (IsEditable)
+            {
+                MenuItem remove = new MenuItem { Header = "Remove" };
+                remove.Click += ContextMenu_RemoveClick;
+                menu.Items.Add(remove);
+            }
+            if (IsEditable)
+            {
+                MenuItem duplicate = new MenuItem { Header = "Duplicate" };
+                duplicate.Click += ContextMenu_Duplicate_Click;
+                menu.Items.Add(duplicate);
+            }
+            
             this.ListContextMenu = menu;
         }
 
         protected void ContextMenu_Duplicate_Click(object sender, RoutedEventArgs e)
         {
-            if (EntityListControl.SelectedIndex != -1)
+            if (EntityListControl.SelectedIndex != -1 && IsEditable)
                 duplicate(EntityListControl.SelectedItem);
         }
 
         protected void ContextMenu_RemoveClick(object sender, RoutedEventArgs e)
         {
-            if (EntityListControl.SelectedIndex != -1)
+            if (EntityListControl.SelectedIndex != -1 && IsEditable)
                 remove(EntityListControl.SelectedItem);
         }
 
         protected void ContextMenu_EditClick(object sender, RoutedEventArgs e)
         {
-            if (EntityListControl.SelectedIndex != -1)
+            if (EntityListControl.SelectedIndex != -1 && IsEditable)
                 edit(EntityListControl.SelectedItem);
         }
 
         #endregion ContextMenu
-
-        #region ListChanged
-        public delegate void ListChangedEventHandler();
-        public ListChangedEventHandler ListChanged;
-
-        public void OnListEdited()
-        {
-            this.ListChanged?.Invoke();
-        }
-
-        #endregion ListChanged
 
         private void FilterTextBox_KeyUp(object sender, KeyEventArgs e)
         {
@@ -145,18 +159,19 @@ namespace DDFight.Controlers
 
         protected virtual void AddButtonControl_Click(object sender, RoutedEventArgs e)
         {
-            add_new();
+            if (IsEditable)
+                add_new();
         }
 
         protected virtual void RemoveButtonControl_Click(object sender, RoutedEventArgs e)
         {
-            if (EntityListControl.SelectedIndex != -1)
+            if (EntityListControl.SelectedItem != null && IsEditable)
                 remove(EntityListControl.SelectedItem);
         }
 
         protected virtual void EntityList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (EntityListControl.SelectedItem != null)
+            if (EntityListControl.SelectedItem != null && IsEditable)
                 edit(EntityListControl.SelectedItem);
         }
 
@@ -191,7 +206,8 @@ namespace DDFight.Controlers
             if (e.Key == Key.Delete)
                 if (EntityListControl.SelectedIndex != -1)
                 {
-                    remove(EntityListControl.SelectedItem);
+                    if (IsEditable)
+                        remove(EntityListControl.SelectedItem);
                     e.Handled = true;
                 }
         }

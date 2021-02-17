@@ -133,6 +133,7 @@
     </Compile>
     <Compile Include="Game\Entities\Display\CharacterListEditableUserControl.cs" />
     <Compile Include="Game\Entities\Display\MonsterListEditableUserControl.cs" />
+    <Compile Include="Game\Entities\Display\SoonToFightEntityListUserControl.cs" />
     <Compile Include="Game\Entities\Display\PlayableEntityEditWindow.xaml.cs">
       <DependentUpon>PlayableEntityEditWindow.xaml</DependentUpon>
     </Compile>
@@ -279,9 +280,6 @@
     </Compile>
     <Compile Include="Controlers\InputBoxes\RangedIntBox.xaml.cs">
       <DependentUpon>RangedIntBox.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Game\Entities\Display\SoonToFightEntityListUserControl.xaml.cs">
-      <DependentUpon>SoonToFightEntityListUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\DamageTypeEnumToBrushConverter.cs" />
     <Compile Include="Converters\StringListToStringConverter.cs" />
@@ -647,10 +645,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controlers\InputBoxes\RangedIntBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Game\Entities\Display\SoonToFightEntityListUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -12,7 +12,6 @@ namespace DDFight.Game.Aggression.Spells.Display
         public SpellListEditableUserControl() : base()
         {
             DataContextChanged += SpellListEditableUserControl_DataContextChanged;
-            OnInitialized(null);
         }
 
         private SpellsList data_context

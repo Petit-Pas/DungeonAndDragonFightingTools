@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace SandBox
@@ -94,17 +95,20 @@ namespace SandBox
 
         static void Main(string[] args)
         {
-            Console.WriteLine(ArithmeticParser.EvaluateExpression("4-6-3"));
-            Console.WriteLine(ArithmeticParser.EvaluateExpression("-10-4+3"));
+            List<string> pwdList = new List<string> { "Ib#", "Blo", "F09", "Hkf", "Ev!", "K%2", "Awe", "Cve", "Lee", "J61", "Gvc", "Dde" };
 
-            Console.WriteLine(ArithmeticParser.EvaluateExpression("(1+2)*10*3+1*2*(3+4)")); //44
+            List<string> skillList = new List<string> { ".Net Core", "XAML", "WPF", "ASP MVC", "LINQ" };
 
-            Console.WriteLine(ArithmeticParser.EvaluateExpression("100*5/2"));
-            Console.WriteLine(ArithmeticParser.EvaluateExpression("100*5/2+2"));
 
-            Console.WriteLine(ArithmeticParser.EvaluateExpression("1*(1+2)+3"));
+            List<string> test = pwdList.OrderBy(num => num).ToList();
+            IEnumerable<string> test1 = test.Take(6);
+            string test2 = test1.Aggregate((i, j) => i + j.Substring(1, 2));
+            string test3 = test2.Substring(1);
+            ;
 
-            Console.WriteLine(ArithmeticParser.EvaluateExpression("2+(34)"));
+                string password = pwdList.OrderBy(num => num).ToList().Take(5).Aggregate((i, j) => i + j.Substring(1, 2)).Substring(1);
+
+                Console.WriteLine("Give this password to Nathalie our HR manager: " + password);
 
             Console.ReadKey();
         }

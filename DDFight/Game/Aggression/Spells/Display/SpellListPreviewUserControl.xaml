@@ -21,6 +21,8 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         
+        
+        
         <ListBox
             x:Name="SpellListControl"
             Grid.Row="0" Grid.Column="0"
