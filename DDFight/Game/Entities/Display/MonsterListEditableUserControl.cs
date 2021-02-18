@@ -12,11 +12,11 @@ namespace DDFight.Game.Entities.Display
             DataContextChanged += NewMonsterListEditableUserControl_DataContextChanged;
         }
 
-        private MonstersList data_context
+        private MonsterList data_context
         {
             get
             {
-                try { return (MonstersList)DataContext; }
+                try { return (MonsterList)DataContext; }
                 catch (Exception) { return null; }
             }
         }

@@ -20,6 +20,7 @@ using DDFight.Windows.FightWindows;
 using DDFight.Game.Counters;
 using DDFight.Game.Aggression.Spells;
 using DDFight.Game.Entities.Display;
+using DDFight.Tools.Save;
 
 namespace DDFight.Game.Entities
 {
@@ -280,13 +281,13 @@ namespace DDFight.Game.Entities
 
         [XmlIgnore]
         public bool HasSpells {
-            get => (Spells.Spells.Count != 0);
+            get => (Spells.Elements.Count != 0);
             set {
                 NotifyPropertyChanged();
             }
         }
 
-        public SpellsList Spells
+        public SpellList Spells
         {
             get => _spells;
             set
@@ -296,7 +297,7 @@ namespace DDFight.Game.Entities
                 NotifyPropertyChanged("HasSpells");
             }
         }
-        private SpellsList _spells = new SpellsList();
+        private SpellList _spells = new SpellList();
 
         public ObservableCollection<Counter> Counters
         {
@@ -794,7 +795,7 @@ namespace DDFight.Game.Entities
             ActionDescription = (string)to_copy.ActionDescription.Clone();
             SpecialAbilities = (string)to_copy.SpecialAbilities.Clone();
             Counters = to_copy.Counters.Clone();
-            Spells = (SpellsList)to_copy.Spells.Clone();
+            Spells = (SpellList)to_copy.Spells.Clone();
             TempHp = to_copy.TempHp;
             SpellHitModifier = to_copy.SpellHitModifier;
         }

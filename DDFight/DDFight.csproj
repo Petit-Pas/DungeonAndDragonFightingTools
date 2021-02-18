@@ -159,11 +159,11 @@
     <Compile Include="Tools\IListable.cs" />
     <Compile Include="Tools\INameable.cs" />
     <Compile Include="Tools\NewSaveManager\CharacterList.cs" />
-    <Compile Include="Tools\NewSaveManager\MonstersList.cs" />
+    <Compile Include="Tools\NewSaveManager\MonsterList.cs" />
+    <Compile Include="Tools\NewSaveManager\SpellList.cs" />
     <Compile Include="Tools\NewSaveManager\PlayableEntityList.cs" />
-    <Compile Include="Tools\NewSaveManager\NewSaveManager.cs" />
+    <Compile Include="Tools\NewSaveManager\SaveManager.cs" />
     <Compile Include="Tools\NewSaveManager\GenericList.cs" />
-    <Compile Include="Tools\Save\SpellsList.cs" />
     <Compile Include="Game\Counters\Counter.cs" />
     <Compile Include="Game\Counters\Display\CounterEditableUserControl.xaml.cs">
       <DependentUpon>CounterEditableUserControl.xaml</DependentUpon>
@@ -344,7 +344,6 @@
     <Compile Include="ValidationRules\IValidable.cs" />
     <Compile Include="Tools\INotifyPropertyChangedSub.cs" />
     <Compile Include="Tools\Logger.cs" />
-    <Compile Include="Tools\Save\SaveManager.cs" />
     <Compile Include="ValidationRules\IntRule.cs" />
     <Compile Include="ValidationRules\NotEmptyStringRule.cs" />
     <Compile Include="ValidationRules\PositiveIntRule.cs" />
@@ -815,6 +814,8 @@
     <Resource Include="Resources\checked.png" />
     <Resource Include="Resources\unchecked.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Tools\Save\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

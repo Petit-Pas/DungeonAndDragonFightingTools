@@ -11,7 +11,7 @@ using System.Xml.Serialization;
 
 namespace DDFight.Tools.Save
 {
-    public static class NewSaveManager
+    public static class SaveManager
     {
         private static readonly string main_config_folder = Environment.GetEnvironmentVariable("LocalAppData") + "\\D&DFightTool\\configs\\";
 

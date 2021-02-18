@@ -29,7 +29,7 @@ namespace DDFight.Game
         /// <summary>
         ///     The list of all possible spells encountered
         /// </summary>
-        public SpellsList SpellList
+        public SpellList SpellList
         {
             get => _spellList;
             set {
@@ -37,12 +37,12 @@ namespace DDFight.Game
                 NotifyPropertyChanged();
             }
         }
-        private SpellsList _spellList = new SpellsList();
+        private SpellList _spellList = new SpellList();
 
         /// <summary>
         ///     The list of all possible ennemies encountered
         /// </summary>
-        public MonstersList MonsterList
+        public MonsterList MonsterList
         {
             get => _monsterList;
             set
@@ -51,7 +51,7 @@ namespace DDFight.Game
                 NotifyPropertyChanged();
             }
         }
-        private MonstersList _monsterList = new MonstersList();
+        private MonsterList _monsterList = new MonsterList();
 
         #region INotifyPropertyChanged
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DDFight.Tools.Save;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -10,9 +11,9 @@ namespace DDFight.Game.Aggression.Spells.Display
     /// </summary>
     public partial class SpellListSpellBookUserControl : UserControl
     {
-        private SpellsList data_context
+        private SpellList data_context
         {
-            get => (SpellsList)DataContext;
+            get => (SpellList)DataContext;
         }
 
         public SpellListSpellBookUserControl()
@@ -44,7 +45,7 @@ namespace DDFight.Game.Aggression.Spells.Display
         private void Learn_Click(object sender, RoutedEventArgs e)
         {
             if (AllSpellsControl.EntityListControl.SelectedIndex != -1)
-                data_context.AddSpell(AllSpellsControl.EntityListControl.SelectedItem as Spell);
+                data_context.AddElement(AllSpellsControl.EntityListControl.SelectedItem as Spell);
         }
 
         private void AllSpellList_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -52,7 +53,7 @@ namespace DDFight.Game.Aggression.Spells.Display
             if (e.Key == Key.Enter)
             {
                 if (AllSpellsControl.EntityListControl.SelectedIndex != -1)
-                    data_context.AddSpell((Spell)((Spell)AllSpellsControl.EntityListControl.SelectedItem).Clone());
+                    data_context.AddElement((Spell)((Spell)AllSpellsControl.EntityListControl.SelectedItem).Clone());
                 e.Handled = true;
             }
         }

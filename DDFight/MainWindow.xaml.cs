@@ -1,4 +1,5 @@
 ﻿using DDFight.Game;
+using DDFight.Game.Aggression.Spells;
 using DDFight.Game.Entities;
 using DDFight.Tools;
 using DDFight.Tools.Save;
@@ -24,11 +25,6 @@ namespace DDFight
 
         public static GameDataContext Context = new GameDataContext();
 
-        public static void Save ()
-        {
-            Context.SpellList.Save();
-        }
-
         public static Window CurrentMainWindow { 
             get => Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
         }
@@ -39,39 +35,16 @@ namespace DDFight
     /// </summary>
     public partial class MainWindow : Window
     {
-        private static string config_folder = Environment.GetEnvironmentVariable("LocalAppData") + "\\D&DFightTool\\configs\\";
-
-
-
         public MainWindow()
         {
 
-            // TEMPORARY
-            //Global.Loading = false;
-
-
-            //GenericList<PlayableEntity> genericList = LoadPlayers<PlayableEntity>();
-            //GenericList<PlayableEntity> genericList = new GenericList<PlayableEntity>();
-
-            //genericList.AddElement();
-
-            
-
-
             Logger.Init();
-            SaveManager.Init();
 
-            //Global.Context.CharacterList = SaveManager.LoadPlayers();
-            //Global.Context.MonsterList = SaveManager.LoadMonsters();
-            Global.Context.SpellList = SaveManager.LoadSpells();
-
-            Global.Context.CharacterList = NewSaveManager.LoadGenericList<Character, CharacterList>(NewSaveManager.players_folder);
-            Global.Context.MonsterList = NewSaveManager.LoadGenericList<Monster, MonstersList>(NewSaveManager.monsters_folder);
+            Global.Context.CharacterList = SaveManager.LoadGenericList<Character, CharacterList>(SaveManager.players_folder);
+            Global.Context.MonsterList = SaveManager.LoadGenericList<Monster, MonsterList>(SaveManager.monsters_folder);
+            Global.Context.SpellList = SaveManager.LoadGenericList<Spell, SpellList>(SaveManager.spells_folder);
 
             Global.Loading = false;
-
-            Global.Save();
-
 
             Global.Context.FightContext.FightersList.Fighters.CollectionChanged += FightingCharacters_CollectionChanged;
 

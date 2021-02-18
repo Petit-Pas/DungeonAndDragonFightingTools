@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace DDFight.Tools.Save
 {
-    public class MonstersList : PlayableEntityList<Monster>
+    public class MonsterList : PlayableEntityList<Monster>
     {
-        public MonstersList() : base()
+        public MonsterList() : base()
         {
         }
     }

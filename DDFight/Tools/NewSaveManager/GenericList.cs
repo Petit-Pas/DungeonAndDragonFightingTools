@@ -11,13 +11,17 @@ using System.Xml.Serialization;
 
 namespace DDFight.Tools.Save
 {
-     /// <summary>
-     ///    This class will be used everywhere where a collection is needed, it will allow easy heritance with BaseListUserControl
-     /// </summary>
-     /// <typeparam name="T"></typeparam>
-    public class GenericList<T> : INotifyPropertyChanged
+    /// <summary>
+    ///    This class will be used everywhere where a collection is needed, it will allow easy heritance with BaseListUserControl
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public class GenericList<T> : INotifyPropertyChanged, ICloneable
         where T : class, IListable, new()
     {
+
+        public GenericList()
+        {
+        }
 
         #region UpdateNotifications
 
@@ -47,8 +51,8 @@ namespace DDFight.Tools.Save
         }
 
 
-        public class ListElementChangedArgs : EventArgs 
-        { 
+        public class ListElementChangedArgs : EventArgs
+        {
             public T Element;
             public GenericListOperation Operation;
         }
@@ -87,7 +91,6 @@ namespace DDFight.Tools.Save
         }
         #endregion
 
-        [XmlElement]
         public ObservableCollection<T> Elements
         {
             get => _elements;
@@ -160,8 +163,22 @@ namespace DDFight.Tools.Save
 
         public void SaveAll()
         {
-            NewSaveManager.SaveGenericList<T>(this);
+            SaveManager.SaveGenericList<T>(this);
         }
 
+        private void init_copy(GenericList<T> to_copy)
+        {
+            Elements = to_copy.Elements.Clone();
+        }
+
+        protected GenericList(GenericList<T> to_copy)
+        {
+            init_copy(to_copy);
+        }
+
+        public virtual object Clone()
+        {
+            return new GenericList<T>(this);
+        }
     }
 }
