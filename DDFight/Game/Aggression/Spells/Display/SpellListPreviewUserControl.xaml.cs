@@ -16,22 +16,29 @@ namespace DDFight.Game.Aggression.Spells.Display
 
         public SpellListPreviewUserControl()
         {
+            Initialized += SpellListPreviewUserControl_Initialized;
             InitializeComponent();
+        }
+
+        private void SpellListPreviewUserControl_Initialized(object sender, System.EventArgs e)
+        {
+            SpellListControl.EntityListControl.SelectionChanged += SpellListControl_SelectionChanged;
+            SpellListControl.EntityListControl.MouseDoubleClick += SpellListControl_MouseDoubleClick;
         }
 
         private void SpellListControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (SpellListControl.SelectedIndex != -1)
-                SpellPreviewControl.DataContext = SpellListControl.SelectedItem;
+            if (SpellListControl.EntityListControl.SelectedItem != null)
+                SpellPreviewControl.DataContext = SpellListControl.EntityListControl.SelectedItem;
             else
                 SpellPreviewControl.DataContext = null;
         }
 
         private void SpellListControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (SpellListControl.SelectedIndex != -1) 
+            if (SpellListControl.EntityListControl.SelectedIndex != -1) 
             {
-                Spell spell = (Spell)SpellListControl.SelectedItem;
+                Spell spell = (Spell)SpellListControl.EntityListControl.SelectedItem;
                 spell.CastSpell(data_context);
             }
         }

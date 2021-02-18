@@ -219,8 +219,10 @@ namespace DDFight.Controlers
                 if (EntityListControl.SelectedIndex != -1)
                 {
                     if (IsEditable)
+                    {
                         remove(EntityListControl.SelectedItem);
-                    e.Handled = true;
+                        e.Handled = true;
+                    }
                 }
         }
 

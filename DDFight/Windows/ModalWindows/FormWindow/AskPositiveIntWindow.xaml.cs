@@ -49,7 +49,7 @@ namespace DDFight.Windows.ModalWindows.FormWindow
 
                 if (ctx.Yes)
                 {
-                    Validated = true;
+                    Validated = false;
                 }
                 else
                 {

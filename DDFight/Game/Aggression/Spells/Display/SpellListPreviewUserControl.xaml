@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:DDFight.Game.Aggression.Spells.Display"
+             xmlns:local="clr-namespace:DDFight.Game.Aggression.Spells.Display" xmlns:controlers="clr-namespace:DDFight.Controlers"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              x:Name="SpellListPreviewControl">
@@ -20,25 +20,14 @@
             <ColumnDefinition Width="Auto" MinWidth="200"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        
-        
-        
-        <ListBox
+
+        <local:SpellListEditableUserControl
             x:Name="SpellListControl"
-            Grid.Row="0" Grid.Column="0"
-            ItemsSource="{Binding Spells.Spells}"
-            SelectionChanged="SpellListControl_SelectionChanged"
-            MouseDoubleClick="SpellListControl_MouseDoubleClick">
-            <ListBox.ItemContainerStyle>
-                <Style TargetType="ListBoxItem" BasedOn="{StaticResource ListBoxItemCustomStyle}"/>
-            </ListBox.ItemContainerStyle>
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock 
-                        Text="{Binding Name}"/>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+            DataContext="{Binding Spells}"
+            ButtonsVisibility="Collapsed"
+            IsEditable="False"
+            ContextMenuCanOpen="False"
+            />
 
         <local:SpellPreviewUserControl 
             x:Name="SpellPreviewControl"
