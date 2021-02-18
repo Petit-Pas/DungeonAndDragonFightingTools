@@ -165,7 +165,7 @@ namespace DDFight.Controlers.Fight
             else
             {
                 SelectPlayableEntityWindow window = new SelectPlayableEntityWindow();
-                window.DataContext = Global.Context.MonsterList.Monsters.Clone<PlayableEntity, Monster>();
+                window.DataContext = Global.Context.MonsterList.Elements.Clone<PlayableEntity, Monster>();
                 window.TitleControl.Text = "Select the monster in which to transform";
 
                 window.ShowCentered();

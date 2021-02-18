@@ -39,6 +39,16 @@ namespace DDFight.Game.Fight
             });
         }
 
+        public void AddToFight<T>(T fighter)
+        {
+            if (fighter.GetType() == typeof(Monster))
+                AddMonster(fighter as Monster);
+            else if (fighter.GetType() == typeof(Character))
+                AddCharacter(fighter as Character);
+        }
+
+        //TODO those 2 coming methods should become private
+
         /// <summary>
         ///     Adds a character (only once per character, as its not a copy)
         /// </summary>

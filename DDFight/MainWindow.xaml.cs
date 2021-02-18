@@ -26,8 +26,6 @@ namespace DDFight
 
         public static void Save ()
         {
-            Context.CharacterList.Save();
-            Context.MonsterList.Save();
             Context.SpellList.Save();
         }
 
@@ -63,9 +61,12 @@ namespace DDFight
             Logger.Init();
             SaveManager.Init();
 
-            Global.Context.CharacterList = SaveManager.LoadPlayers();
-            Global.Context.MonsterList = SaveManager.LoadMonsters();
+            //Global.Context.CharacterList = SaveManager.LoadPlayers();
+            //Global.Context.MonsterList = SaveManager.LoadMonsters();
             Global.Context.SpellList = SaveManager.LoadSpells();
+
+            Global.Context.CharacterList = NewSaveManager.LoadGenericList<Character, CharacterList>(NewSaveManager.players_folder);
+            Global.Context.MonsterList = NewSaveManager.LoadGenericList<Monster, MonstersList>(NewSaveManager.monsters_folder);
 
             Global.Loading = false;
 
@@ -115,7 +116,7 @@ namespace DDFight
                     character.GetOutOfFight();
                 }
                 Global.Context.FightContext.Reset();
-                Global.Context.CharacterList.Save();
+                Global.Context.CharacterList.SaveAll();
             }
 
         }

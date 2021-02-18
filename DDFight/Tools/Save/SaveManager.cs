@@ -76,7 +76,7 @@ namespace DDFight.Tools.Save
 
         public static SpellsList LoadSpells()
         {
-            GenericList<Spell> list = NewSaveManager.LoadGenericList<Spell>(NewSaveManager.spells_folder) as GenericList<Spell>;
+            GenericList<Spell> list = NewSaveManager.LoadGenericList<Spell, GenericList<Spell>>(NewSaveManager.spells_folder) as GenericList<Spell>;
 
             XmlSerializer serializer = new XmlSerializer(typeof(SpellsList));
             SpellsList result = new SpellsList(true);
@@ -103,113 +103,5 @@ namespace DDFight.Tools.Save
         }
 
         #endregion Spells
-
-        #region Characters
-
-        /// <summary>
-        ///     Save all the characters
-        /// </summary>
-        /// <param name="characters"></param>
-        public static void SavePlayers(CharactersList characters)
-        {
-            GenericList<Character> list = new GenericList<Character>();
-            foreach (Character entity in characters.Characters)
-            {
-                list.AddElementSilent(entity);
-            }
-            NewSaveManager.SaveGenericList<Character>(list, NewSaveManager.players_folder);
-
-
-            XmlSerializer serializer = new XmlSerializer(typeof(CharactersList));
-            StreamWriter writer = new StreamWriter(characters_config_file);
-
-            serializer.Serialize(writer, characters);
-            writer.Close();
-        }
-
-        /// <summary>
-        ///     Load all the saved characters
-        /// </summary>
-        /// <returns></returns>
-        public static CharactersList LoadPlayers()
-        {
-            GenericList<Character> list = NewSaveManager.LoadGenericList<Character>(NewSaveManager.players_folder) as GenericList<Character>;
-
-            XmlSerializer serializer = new XmlSerializer(typeof(CharactersList));
-            CharactersList result = new CharactersList();
-
-            try
-            {
-                StreamReader reader = new StreamReader(characters_config_file);
-                result = (CharactersList)serializer.Deserialize(reader);
-                reader.Close();
-
-            }
-            catch (FileNotFoundException)
-            {
-                Logger.Log("Could not find the characters save file");
-            }
-            catch (Exception e)
-            {
-                Logger.Log(String.Format("Unknown error while trying to load the characters file: {0}, {1}", e.Message, e.StackTrace));
-            }
-            return result;
-        }
-
-        #endregion Players
-
-        #region Monsters
-
-        /// <summary>
-        ///     Save all the characters
-        /// </summary>
-        /// <param name="characters"></param>
-        public static void SaveMonsters(MonstersList monsters)
-        {
-            GenericList<Monster> list = new GenericList<Monster>();
-            foreach (Monster entity in monsters.Monsters)
-            {
-                list.AddElementSilent(entity);
-            }
-            NewSaveManager.SaveGenericList<Monster>(list, NewSaveManager.monsters_folder);
-
-            XmlSerializer serializer = new XmlSerializer(typeof(MonstersList));
-            StreamWriter writer = new StreamWriter(monsters_config_file);
-
-            serializer.Serialize(writer, monsters);
-            writer.Close();
-        }
-
-        /// <summary>
-        ///     Load all the saved characters
-        /// </summary>
-        /// <returns></returns>
-        public static MonstersList LoadMonsters()
-        {
-            GenericList<Monster> list = NewSaveManager.LoadGenericList<Monster>(NewSaveManager.monsters_folder) as GenericList<Monster>;
-
-            XmlSerializer serializer = new XmlSerializer(typeof(MonstersList));
-            MonstersList result = new MonstersList();
-
-            try
-            {
-                StreamReader reader = new StreamReader(monsters_config_file);
-                result = (MonstersList)serializer.Deserialize(reader);
-                reader.Close();
-                Console.WriteLine("import of monsters went fine");
-                Console.WriteLine("Found {0} monsters to load", result.Monsters.Count);
-            }
-            catch (FileNotFoundException)
-            {
-                Logger.Log("Could not find the characters save file");
-            }
-            catch (Exception e)
-            {
-                Logger.Log(String.Format("Unknown error while trying to load the characters file: {0}, {1}", e.Message, e.StackTrace));
-            }
-            return result;
-        }
-
-        #endregion Monsters
     }
 }

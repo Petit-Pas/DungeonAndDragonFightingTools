@@ -11,9 +11,62 @@ using System.Xml.Serialization;
 
 namespace DDFight.Tools.Save
 {
+     /// <summary>
+     ///    This class will be used everywhere where a collection is needed, it will allow easy heritance with BaseListUserControl
+     /// </summary>
+     /// <typeparam name="T"></typeparam>
     public class GenericList<T> : INotifyPropertyChanged
         where T : class, IListable, new()
     {
+
+        #region UpdateNotifications
+
+        public class ListChangedArgs : EventArgs
+        {
+            public GenericListOperation Operation;
+        }
+
+        public delegate void ListChanged_EventHandler(object sender, ListChangedArgs e);
+
+        public event ListChanged_EventHandler ListChanged;
+
+        protected void OnListChanged(ListChangedArgs e)
+        {
+            if (ListChanged != null)
+            {
+                ListChanged(this, e);
+            }
+        }
+
+        public enum GenericListOperation
+        {
+            Addition,
+            Deletion,
+            Modification,
+            Sort,
+        }
+
+
+        public class ListElementChangedArgs : EventArgs 
+        { 
+            public T Element;
+            public GenericListOperation Operation;
+        }
+
+        public delegate void ListElementChanged_EventHandler(object sender, ListElementChangedArgs e);
+
+        public event ListElementChanged_EventHandler ListElementChanged;
+
+        protected void OnListElementChanged(ListElementChangedArgs e)
+        {
+            if (ListElementChanged != null)
+            {
+                ListElementChanged(this, e);
+            }
+        }
+
+        #endregion UpdateNotifications
+
         #region INotifyPropertyChanged
 
         /// <summary>
@@ -25,7 +78,7 @@ namespace DDFight.Tools.Save
         /// 
         /// </summary>
         /// <param name="propertyName"></param>
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
             if (PropertyChanged != null)
             {
@@ -50,7 +103,7 @@ namespace DDFight.Tools.Save
         {
             if (elem.Edit())
             {
-                NotifyPropertyChanged("Elements");
+                OnListElementChanged(new ListElementChangedArgs { Element = elem, Operation = GenericListOperation.Modification });
                 return true;
             }
             return false;
@@ -59,13 +112,14 @@ namespace DDFight.Tools.Save
         public void RemoveElement(T elem)
         {
             Elements.Remove(elem);
-            NotifyPropertyChanged("Elements");
+            OnListChanged(new ListChangedArgs { Operation = GenericListOperation.Deletion });
+            OnListElementChanged(new ListElementChangedArgs { Element = elem, Operation = GenericListOperation.Deletion });
         }
 
         public void DuplicateElement(T elem)
         {
             T new_one = elem.Clone() as T;
-            new_one.Name = new_one.Name = " - Copy";
+            new_one.Name = new_one.Name + " - Copy";
             AddElement(new_one);
         }
 
@@ -81,7 +135,8 @@ namespace DDFight.Tools.Save
             if (elem.Edit())
             {
                 Elements.Add(elem);
-                NotifyPropertyChanged("Elements");
+                OnListChanged(new ListChangedArgs { Operation = GenericListOperation.Addition });
+                OnListElementChanged(new ListElementChangedArgs { Operation = GenericListOperation.Addition, Element = elem });
             }
         }
 
@@ -96,5 +151,17 @@ namespace DDFight.Tools.Save
             Elements.Add(elem);
             NotifyPropertyChanged("Elements");
         }
+
+        public void SortElements(Comparison<T> comparison)
+        {
+            Elements.Sort(comparison);
+            NotifyPropertyChanged();
+        }
+
+        public void SaveAll()
+        {
+            NewSaveManager.SaveGenericList<T>(this);
+        }
+
     }
 }

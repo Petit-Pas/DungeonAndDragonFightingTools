@@ -15,6 +15,17 @@ namespace DDFight.Game
     /// </summary>
     public class GameDataContext : INotifyPropertyChanged
     {
+        public CharacterList CharacterList
+        {
+            get => _newCharacterList;
+            set
+            {
+                _newCharacterList = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private CharacterList _newCharacterList = new CharacterList();
+
         /// <summary>
         ///     The list of all possible spells encountered
         /// </summary>
@@ -27,20 +38,6 @@ namespace DDFight.Game
             }
         }
         private SpellsList _spellList = new SpellsList();
-
-        /// <summary>
-        ///     The list of existing character
-        /// </summary>
-        public CharactersList CharacterList
-        {
-            get => _characterList;
-            set
-            {
-                _characterList = value;
-                NotifyPropertyChanged();
-            }
-        }
-            private CharactersList _characterList = new CharactersList();
 
         /// <summary>
         ///     The list of all possible ennemies encountered

@@ -1,4 +1,6 @@
-﻿using DDFight.Tools.Save;
+﻿using DDFight.Game.Aggression.Spells;
+using DDFight.Game.Entities;
+using DDFight.Tools.Save;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace DDFight.Tools
+namespace DDFight.Tools.Save
 {
     public static class NewSaveManager
     {
@@ -18,6 +20,17 @@ namespace DDFight.Tools
         public static readonly string monsters_folder = "monsters\\";
 
         public static readonly string spells_folder = "spells\\";
+
+        private static string get_subfolder<T>(T elem)
+        {
+            if (elem.GetType() == typeof(Character))
+                return players_folder;
+            else if (elem.GetType() == typeof(Monster))
+                return monsters_folder;
+            else if (elem.GetType() == typeof(Spell))
+                return spells_folder;
+            return "default\\";
+        }
 
         /// <summary>
         ///     As the config are not in a single file that gets erased every save, this function erases any files unwanted file
@@ -45,6 +58,48 @@ namespace DDFight.Tools
             }
         }
 
+        public static void DeleteUnique<T>(T elem) where T : class, IListable, new()
+        {
+            DeleteUnique<T>(elem, get_subfolder(elem));
+        }
+
+        public static void DeleteUnique<T>(T elem, string subfolder) where T : class, IListable, new ()
+        {
+            string folder_name = main_config_folder + subfolder;
+            string filename = folder_name + elem.Name + ".xml";
+            if (Directory.Exists(folder_name))
+            {
+                if (File.Exists(filename))
+                    File.Delete(filename);
+            }
+        }
+
+        public static void SaveUnique<T>(T elem) where T : class, IListable, new()
+        {
+            SaveUnique<T>(elem, get_subfolder(elem));
+        }
+
+        public static void SaveUnique<T>(T elem, string subfolder) where T : class, IListable, new ()
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(T));
+            string folder_name = main_config_folder + subfolder;
+
+            if (!Directory.Exists(folder_name))
+                Directory.CreateDirectory(folder_name);
+
+            try
+            {
+                StreamWriter writer = new StreamWriter(folder_name + elem.Name + ".xml");
+                serializer.Serialize(writer, elem);
+                writer.Close();
+            }
+            catch (Exception e)
+            {
+                Logger.Log("Exception occured when trying to load " + folder_name + elem.Name);
+                Logger.Log(e.Message);
+            }
+        }
+
         /// <summary>
         ///     Saves a list of element of Type T in a file
         ///     1 file per element
@@ -53,8 +108,13 @@ namespace DDFight.Tools
         /// <typeparam name="T"></typeparam>
         /// <param name="genericList"></param>
         /// <param name="subfolder"></param>
-        public static void SaveGenericList<T>(GenericList<T> genericList, string subfolder) where T : class, IListable, new()
+        public static void SaveGenericList<T>(GenericList<T> genericList, string subfolder = null) where T : class, IListable, new()
         {
+            if (genericList.Elements.Count == 0)
+                return;
+            if (subfolder == null)
+                subfolder = get_subfolder<T>(genericList.Elements[0]);
+
             XmlSerializer serializer = new XmlSerializer(typeof(T));
             string folder_name = main_config_folder + subfolder;
 
@@ -85,10 +145,10 @@ namespace DDFight.Tools
         /// <typeparam name="T"></typeparam>
         /// <param name="subfolder"></param>
         /// <returns></returns>
-        public static GenericList<T> LoadGenericList<T>(string subfolder) where T : class, IListable, new()
+        public static U LoadGenericList<T, U>(string subfolder) where T : class, IListable, new() where U : GenericList<T>, new ()
         {
             XmlSerializer serializer = new XmlSerializer(typeof(T));
-            GenericList<T> result = new GenericList<T>();
+            U result = new U();
 
             if (Directory.Exists(main_config_folder + subfolder))
             {

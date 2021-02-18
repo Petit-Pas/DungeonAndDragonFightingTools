@@ -64,6 +64,7 @@
       <DependentUpon>FilterTextBoxControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controlers\SliderButton.cs" />
+    <Compile Include="Controlers\SpecializedListUserControl.cs" />
     <Compile Include="Converters\BasicOperationConverter.cs" />
     <Compile Include="Converters\BoolToReversedBoolConverter.cs" />
     <Compile Include="Converters\BoolToReversedVisibilityConverter.cs" />
@@ -134,6 +135,7 @@
     </Compile>
     <Compile Include="Game\Entities\Display\CharacterListEditableUserControl.cs" />
     <Compile Include="Game\Entities\Display\MonsterListEditableUserControl.cs" />
+    <Compile Include="Game\Entities\Display\PlayableEntityListUserControl.cs" />
     <Compile Include="Game\Entities\Display\SoonToFightEntityListUserControl.cs" />
     <Compile Include="Game\Entities\Display\PlayableEntityEditWindow.xaml.cs">
       <DependentUpon>PlayableEntityEditWindow.xaml</DependentUpon>
@@ -156,8 +158,11 @@
     <Compile Include="Tools\FrameworkElementExtensions.cs" />
     <Compile Include="Tools\IListable.cs" />
     <Compile Include="Tools\INameable.cs" />
+    <Compile Include="Tools\NewSaveManager\CharacterList.cs" />
+    <Compile Include="Tools\NewSaveManager\MonstersList.cs" />
+    <Compile Include="Tools\NewSaveManager\PlayableEntityList.cs" />
     <Compile Include="Tools\NewSaveManager\NewSaveManager.cs" />
-    <Compile Include="Tools\Save\GenericList.cs" />
+    <Compile Include="Tools\NewSaveManager\GenericList.cs" />
     <Compile Include="Tools\Save\SpellsList.cs" />
     <Compile Include="Game\Counters\Counter.cs" />
     <Compile Include="Game\Counters\Display\CounterEditableUserControl.xaml.cs">
@@ -334,13 +339,11 @@
     <Compile Include="Tools\ICopyAssignable.cs" />
     <Compile Include="Tools\IEventUnregisterable.cs" />
     <Compile Include="Tools\IFocusable.cs" />
-    <Compile Include="Tools\Save\MonstersList.cs" />
     <Compile Include="Tools\UXShortcuts\IRollableControl.cs" />
     <Compile Include="ValidationRules\DiceRollRule.cs" />
     <Compile Include="ValidationRules\IValidable.cs" />
     <Compile Include="Tools\INotifyPropertyChangedSub.cs" />
     <Compile Include="Tools\Logger.cs" />
-    <Compile Include="Tools\Save\CharactersList.cs" />
     <Compile Include="Tools\Save\SaveManager.cs" />
     <Compile Include="ValidationRules\IntRule.cs" />
     <Compile Include="ValidationRules\NotEmptyStringRule.cs" />

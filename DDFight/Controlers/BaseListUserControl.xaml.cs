@@ -179,7 +179,7 @@ namespace DDFight.Controlers
         protected virtual void RemoveButtonControl_Click(object sender, RoutedEventArgs e)
         {
             if (EntityListControl.SelectedItem != null && IsEditable)
-                remove(EntityListControl.SelectedIndex);
+                remove(EntityListControl.SelectedItem);
         }
 
         protected virtual void EntityList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
