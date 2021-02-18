@@ -17,29 +17,28 @@ namespace DDFight.Game.Aggression.Spells.Display
 
         public SpellListSpellBookUserControl()
         {
+            Initialized += SpellListSpellBookUserControl_Initialized;
+            DataContextChanged += SpellListSpellBookUserControl_DataContextChanged;
             InitializeComponent();
 
-            Loaded += SpellListSpellBookUserControl_Loaded;
         }
 
-        static private bool already_loaded = false;
-
-        private void SpellListSpellBookUserControl_Loaded(object sender, RoutedEventArgs e)
+        private void SpellListSpellBookUserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (!already_loaded)
-            {
-                AllSpellsControl.DataContext = Global.Context.SpellList;
-                EntitySpellsControl.DataContext = data_context;
+            EntitySpellsControl.DataContext = data_context;
+        }
 
-                AllSpellsControl.EntityListControl.PreviewKeyDown += AllSpellList_PreviewKeyDown;
-                MenuItem learn = new MenuItem { Header = "Learn this spell" };
-                learn.Click += Learn_Click;
-                AllSpellsControl.ListContextMenu.Items.Add(new Separator());
-                AllSpellsControl.ListContextMenu.Items.Add(learn);
+        private void SpellListSpellBookUserControl_Initialized(object sender, EventArgs e)
+        {
+            AllSpellsControl.DataContext = Global.Context.SpellList;
 
-                AllSpellsControl.ListContextMenu = AllSpellsControl.ListContextMenu;
-                already_loaded = true;
-            }
+            AllSpellsControl.EntityListControl.PreviewKeyDown += AllSpellList_PreviewKeyDown;
+            MenuItem learn = new MenuItem { Header = "Learn this spell" };
+            learn.Click += Learn_Click;
+            AllSpellsControl.ListContextMenu.Items.Add(new Separator());
+            AllSpellsControl.ListContextMenu.Items.Add(learn);
+
+            AllSpellsControl.ListContextMenu = AllSpellsControl.ListContextMenu;
         }
 
         private void Learn_Click(object sender, RoutedEventArgs e)
