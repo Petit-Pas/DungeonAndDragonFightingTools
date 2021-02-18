@@ -65,25 +65,6 @@ namespace DDFight.Game.Aggression.Spells
                 SaveManager.SaveSpells(this);
         }
 
-        /// <summary>
-        ///     Method to replace a spell by a new one
-        /// </summary>
-        /// <param name="to_update"></param>
-        /// <param name="temporary"></param>
-        public void ReplaceSpell(Spell to_replace, Spell new_spell)
-        {
-            for (int i = 0; i != Spells.Count; i += 1)
-            {
-                if (to_replace == Spells[i])
-                {
-                    Spells[i] = new_spell;
-                    break;
-                }
-            }
-            NotifyPropertyChanged("Spells");
-            Save();
-        }
-
         #region INotifyPropertyChanged
 
         /// <summary>
@@ -103,7 +84,6 @@ namespace DDFight.Game.Aggression.Spells
             }
         }
         #endregion
-
 
         #region IClonable
 

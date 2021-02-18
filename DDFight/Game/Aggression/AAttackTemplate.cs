@@ -6,10 +6,15 @@ using System.Xml.Serialization;
 
 namespace DDFight.Game.Aggression
 {
-    public abstract class AAttackTemplate : INotifyPropertyChanged, ICloneable, ICopyAssignable
+    public abstract class AAttackTemplate : INotifyPropertyChanged, ICopyAssignable, IListable
     {
         public AAttackTemplate()
         {
+        }
+
+        public virtual bool Edit()
+        {
+            throw new NotImplementedException("Edit method should be overriden");
         }
 
         #region Properties
@@ -18,6 +23,7 @@ namespace DDFight.Game.Aggression
         public string DisplayName
         {
             get => _name;
+            set { }
         }
 
         [XmlAttribute]

@@ -4,9 +4,12 @@ using DDFight.Tools;
 using DDFight.Tools.Save;
 using DDFight.Windows;
 using DDFight.Windows.FightWindows;
+using System;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Documents;
+using System.Xml.Serialization;
 
 namespace DDFight
 {
@@ -38,8 +41,23 @@ namespace DDFight
     /// </summary>
     public partial class MainWindow : Window
     {
+        private static string config_folder = Environment.GetEnvironmentVariable("LocalAppData") + "\\D&DFightTool\\configs\\";
+
+
+
         public MainWindow()
         {
+
+            // TEMPORARY
+            //Global.Loading = false;
+
+
+            //GenericList<PlayableEntity> genericList = LoadPlayers<PlayableEntity>();
+            //GenericList<PlayableEntity> genericList = new GenericList<PlayableEntity>();
+
+            //genericList.AddElement();
+
+            
 
 
             Logger.Init();
@@ -50,6 +68,9 @@ namespace DDFight
             Global.Context.SpellList = SaveManager.LoadSpells();
 
             Global.Loading = false;
+
+            Global.Save();
+
 
             Global.Context.FightContext.FightersList.Fighters.CollectionChanged += FightingCharacters_CollectionChanged;
 

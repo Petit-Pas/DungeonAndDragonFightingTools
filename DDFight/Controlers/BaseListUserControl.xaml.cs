@@ -1,5 +1,6 @@
 ﻿using DDFight.Tools;
 using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -10,9 +11,9 @@ namespace DDFight.Controlers
 {
     /// <summary>
     ///     A Base class to display a list of element by their name with easy access to basic list management (add, delete, update, duplicate)
-    ///     /!\ A member "DisplayName" must be existing for the ListBox to display the element efficiently
+    ///     /!\ classes to display should inherit the IListable Property
     /// </summary>
-    public partial class BaseListUserControl : UserControl, INotifyPropertyChanged
+    public abstract partial class BaseListUserControl : UserControl, INotifyPropertyChanged
     {
         #region INotifyPropertyChanged
 
@@ -83,7 +84,7 @@ namespace DDFight.Controlers
             new FrameworkPropertyMetadata(Visibility.Visible));
 
         /// <summary>
-        ///     The list of entities to display, it should have a DisplayName property
+        ///     The list of entities to display, it should uinherit the IListable interface
         /// </summary>
         public object EntityList
         {
@@ -145,7 +146,7 @@ namespace DDFight.Controlers
         protected void ContextMenu_Duplicate_Click(object sender, RoutedEventArgs e)
         {
             if (EntityListControl.SelectedIndex != -1 && IsEditable)
-                duplicate(EntityListControl.SelectedItem);
+                duplicate(EntityListControl.SelectedItem as IListable);
         }
 
         protected void ContextMenu_RemoveClick(object sender, RoutedEventArgs e)
@@ -157,7 +158,7 @@ namespace DDFight.Controlers
         protected void ContextMenu_EditClick(object sender, RoutedEventArgs e)
         {
             if (EntityListControl.SelectedIndex != -1 && IsEditable)
-                edit(EntityListControl.SelectedItem);
+                edit(EntityListControl.SelectedItem as IListable);
         }
 
         #endregion ContextMenu
@@ -178,13 +179,13 @@ namespace DDFight.Controlers
         protected virtual void RemoveButtonControl_Click(object sender, RoutedEventArgs e)
         {
             if (EntityListControl.SelectedItem != null && IsEditable)
-                remove(EntityListControl.SelectedItem);
+                remove(EntityListControl.SelectedIndex);
         }
 
         protected virtual void EntityList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (EntityListControl.SelectedItem != null && IsEditable)
-                edit(EntityListControl.SelectedItem);
+                edit(EntityListControl.SelectedItem as IListable);
         }
 
         #endregion ClickEvents

@@ -48,6 +48,7 @@ namespace DDFight.Game.Entities.Display
         }
 
         #region ListControl
+        
         public override void edit(object obj)
         {
             Character character = obj as Character;

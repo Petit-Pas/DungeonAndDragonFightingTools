@@ -49,6 +49,7 @@ namespace DDFight.Game.Entities.Display
         }
 
         #region ListControl
+        
         public override void edit(object obj)
         {
             Monster monster = obj as Monster;

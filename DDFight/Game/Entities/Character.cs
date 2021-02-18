@@ -69,26 +69,13 @@ namespace DDFight.Game.Entities
             }
         }
 
-        public override bool Edit()
+
+
+        private void init_copy(Character to_copy)
         {
-            PlayableEntityEditWindow window = new PlayableEntityEditWindow();
-            Character temporary = (Character)this.Clone();
-            window.DataContext = temporary;
-            window.ShowCentered();
-
-            if (temporary.Validated == true)
-            {
-                this.CopyAssign(temporary);
-                return true;
-            }
-            return false;
+            Level = to_copy.Level;
+            HasInspiration = to_copy.HasInspiration;
         }
-
-    private void init_copy(Character to_copy)
-    {
-        Level = to_copy.Level;
-        HasInspiration = to_copy.HasInspiration;
-    }
 
         #region IClonable
 

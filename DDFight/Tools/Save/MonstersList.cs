@@ -71,7 +71,7 @@ namespace DDFight.Tools.Save
                 return x.Name.CompareTo(y.Name);
             });
 
-            //SaveManager.SaveMonsters(this);
+            SaveManager.SaveMonsters(this);
         }
 
         /// <summary>

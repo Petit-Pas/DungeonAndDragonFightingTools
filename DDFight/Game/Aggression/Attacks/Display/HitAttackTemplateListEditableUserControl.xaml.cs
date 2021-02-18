@@ -47,7 +47,7 @@ namespace DDFight.Controlers.Game.Attacks
         {
             HitAttackTemplate atk = new HitAttackTemplate();
 
-            if (atk.OpenEditWindow())
+            if (atk.Edit())
                 add_attack(atk);
         }
 
@@ -91,7 +91,7 @@ namespace DDFight.Controlers.Game.Attacks
 
         private void update_attack(HitAttackTemplate to_update)
         {
-            to_update.OpenEditWindow();
+            to_update.Edit();
         }
 
         /// <summary>

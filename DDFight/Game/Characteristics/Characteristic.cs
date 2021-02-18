@@ -1,8 +1,4 @@
-﻿// /***********************************************************************************
-//  * ERTMS Solutions
-//  ***********************************************************************************/
-
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Xml.Serialization;

@@ -2,6 +2,7 @@
 {
     public interface INameable
     {
-        string GetName();
+        string DisplayName { get; set; }
+        string Name { get; set; }
     }
 }

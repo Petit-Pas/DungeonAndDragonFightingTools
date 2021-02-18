@@ -12,7 +12,7 @@ using System.Xml.Serialization;
 
 namespace DDFight.Game.Aggression.Spells
 {
-    public class Spell : AAttackTemplate, ICloneable, INameable
+    public class Spell : AAttackTemplate, ICloneable, INameable, IListable
     {
         public Spell () : base()
         {
@@ -341,7 +341,7 @@ namespace DDFight.Game.Aggression.Spells
         [XmlIgnore]
         public bool Validated = false;
 
-        public bool Edit()
+        public override bool Edit()
         {
             SpellEditWindow window = new SpellEditWindow();
             Spell temporary = (Spell)this.Clone();

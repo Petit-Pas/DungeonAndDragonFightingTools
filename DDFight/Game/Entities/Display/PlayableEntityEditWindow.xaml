@@ -10,7 +10,7 @@
         xmlns:game="clr-namespace:DDFight.Game"
         xmlns:counter="clr-namespace:DDFight.Game.Counters.Display"
         xmlns:display="clr-namespace:DDFight.Game.Aggression.Spells.Display" 
-        xmlns:display1="clr-namespace:DDFight.Game.Entities.Display"
+        xmlns:display1="clr-namespace:DDFight.Game.Entities.Display" xmlns:attacks1="clr-namespace:DDFight.Game.Aggression.Attacks.Display"
         Title="Edit Character" Height="750" Width="500"
         WindowStartupLocation="CenterOwner"
         Closing="Window_Closing"
@@ -77,7 +77,39 @@
                         Attacks
                     </TextBlock>
                 </TabItem.Header>
-                <attacks:HitAttackTemplateListEditableUserControl />
+                <Grid
+                    Margin="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock 
+                        Grid.Row="0" Grid.Column="0"
+                        Margin="0"
+                        Foreground="{StaticResource Light}"
+                        FontSize="15"
+                        FontWeight="SemiBold">
+                        Actions Descriptions:
+                    </TextBlock>
+                    <TextBox
+                        Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                        Margin="0 5"
+                        VerticalScrollBarVisibility="Auto"
+                        TextWrapping="Wrap"
+                        AcceptsReturn="True"
+                        AcceptsTab="True"
+                        MaxLines="6"
+                        Text="{Binding ActionDescription}"
+                        Background="{StaticResource Gray}"
+                        Foreground="{StaticResource Light}"
+                    />
+                    <attacks1:HitAttackTemplateListUserControl
+                        Grid.Row="2"
+                    DataContext="{Binding HitAttacks}"/>
+
+                </Grid>
+                
             </TabItem>
 
             <TabItem Style="{StaticResource TabItemStyle}"

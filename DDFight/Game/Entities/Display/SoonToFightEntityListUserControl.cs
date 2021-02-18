@@ -1,5 +1,6 @@
 ﻿using DDFight.Controlers;
 using DDFight.Game.Fight;
+using DDFight.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,7 @@ namespace DDFight.Game.Entities.Display
         }
 
         #region ListControl
+        
         public override void edit(object obj)
         {
             PlayableEntity entity = obj as PlayableEntity;
@@ -54,6 +56,7 @@ namespace DDFight.Game.Entities.Display
         public override void add_new(object obj = null)
         {
         }
+
         #endregion ListControl
 
     }

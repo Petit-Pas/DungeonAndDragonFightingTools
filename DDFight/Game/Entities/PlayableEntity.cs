@@ -19,16 +19,22 @@ using DDFight.Game.Status;
 using DDFight.Windows.FightWindows;
 using DDFight.Game.Counters;
 using DDFight.Game.Aggression.Spells;
+using DDFight.Game.Entities.Display;
 
 namespace DDFight.Game.Entities
 {
-    public class PlayableEntity : ICloneable, INotifyPropertyChanged, ICopyAssignable, INameable
+    public class PlayableEntity : ICloneable, INotifyPropertyChanged, ICopyAssignable, INameable, IListable
     {
         public PlayableEntity()
         {
         }
 
         public string GetName() { return DisplayName; }
+
+        public virtual IListable CloneListable()
+        {
+            return (IListable)this.Clone();
+        }
 
         [XmlIgnore]
         public bool Validated = false;
@@ -732,7 +738,17 @@ namespace DDFight.Game.Entities
 
         public virtual bool Edit()
         {
-            throw new NotImplementedException();
+            PlayableEntityEditWindow window = new PlayableEntityEditWindow();
+            PlayableEntity temporary = (PlayableEntity)this.Clone();
+            window.DataContext = temporary;
+            window.ShowCentered();
+
+            if (temporary.Validated == true)
+            {
+                this.CopyAssign(temporary);
+                return true;
+            }
+            return false;
         }
 
         #region INotifyPropertyChanged

@@ -31,22 +31,6 @@ namespace DDFight.Game.Entities
 
         #endregion
 
-        public override bool Edit()
-        {
-            PlayableEntityEditWindow  window = new PlayableEntityEditWindow();
-            Monster temporary = (Monster)this.Clone();
-            window.DataContext = temporary;
-
-            window.ShowCentered();
-
-            if (temporary.Validated == true)
-            {
-                this.CopyAssign(temporary);
-                return true;
-            }
-            return false;
-        }
-
         #region ICloneable
 
         private void init_copy(Monster to_copy)

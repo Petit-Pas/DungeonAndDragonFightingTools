@@ -89,7 +89,7 @@ namespace DDFight.Game.Aggression.Attacks
             window.ShowCentered();
         }
 
-        public bool OpenEditWindow()
+        public override bool Edit()
         {
             HitAttackTemplateEditWindow window = new HitAttackTemplateEditWindow();
             HitAttackTemplate temporary = (HitAttackTemplate)this.Clone();

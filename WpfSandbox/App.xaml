@@ -4,15 +4,50 @@
              xmlns:local="clr-namespace:WpfSandbox"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+
         <ResourceDictionary>
+
             <SolidColorBrush x:Key="LightestGray" Color="#2e2e2e" />
             <SolidColorBrush x:Key="Gray" Color="#202020" />
             <SolidColorBrush x:Key="Light" Color="#fbf2d4" />
             <SolidColorBrush x:Key="Indigo" Color="#4B0082" />
-            <Color x:Key="RawIndigo"> #4B0082 </Color>
-            <Color x:Key="RawLight"> #fbf2d4 </Color>
-            <Color x:Key="RawGray">#202020 </Color>
-            <Color x:Key="RawLightestGray">#2e2e2e </Color>
+            <SolidColorBrush x:Key="LightIndigo" Color="#6E329B" />
+
+            <Color x:Key="RawLightIndigo">#6E329B</Color>
+            <Color x:Key="RawIndigo">#4B0082</Color>
+            <Color x:Key="RawLight">#fbf2d4</Color>
+            <Color x:Key="RawGray">#202020</Color>
+            <Color x:Key="RawLightestGray">#2e2e2e</Color>
+
+            <Style x:Key="WindowStyle" TargetType="Window">
+                <Setter Property="Background" Value="{StaticResource LightestGray}" />
+            </Style>
+
+            <Style TargetType="Button">
+                <Setter Property="Background" Value="{StaticResource Light}" />
+                <Setter Property="Foreground" Value="{StaticResource LightestGray}"/>
+                <Setter Property="FontWeight" Value="SemiBold"/>
+            </Style>
+
+            <Style TargetType="{x:Type ContentControl}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ContentControl}">
+                            <ContentPresenter Margin="{TemplateBinding Padding}"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style TargetType="{x:Type TextBlock}" x:Key="ErrorMessage" >
+                <Setter Property="Foreground" Value="Red"/>
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="FontWeight" Value="SemiBold" />
+            </Style>
+
+
+
         </ResourceDictionary>
+
     </Application.Resources>
 </Application>

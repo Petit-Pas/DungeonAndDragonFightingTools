@@ -74,6 +74,7 @@
     <Compile Include="Game\Aggression\Attacks\Display\HitAttackResultEditableControl.xaml.cs">
       <DependentUpon>HitAttackResultEditableControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Game\Aggression\Attacks\Display\HitAttackTemplateListUserControl.cs" />
     <Compile Include="Game\Aggression\DamageModifierEnum.cs" />
     <Compile Include="Game\Aggression\Display\DamageModifierEnumListSelectableUserControl.xaml.cs">
       <DependentUpon>DamageModifierEnumListSelectableUserControl.xaml</DependentUpon>
@@ -153,7 +154,10 @@
     <Compile Include="Tools\ArithmeticParser.cs" />
     <Compile Include="Tools\BindingProxy.cs" />
     <Compile Include="Tools\FrameworkElementExtensions.cs" />
+    <Compile Include="Tools\IListable.cs" />
     <Compile Include="Tools\INameable.cs" />
+    <Compile Include="Tools\NewSaveManager\NewSaveManager.cs" />
+    <Compile Include="Tools\Save\GenericList.cs" />
     <Compile Include="Tools\Save\SpellsList.cs" />
     <Compile Include="Game\Counters\Counter.cs" />
     <Compile Include="Game\Counters\Display\CounterEditableUserControl.xaml.cs">

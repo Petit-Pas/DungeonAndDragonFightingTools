@@ -163,7 +163,7 @@ namespace DDFight.Tools
                         if (filter != "")
                         {
                             INameable ctx = (INameable)child.DataContext;
-                            if (!ctx.GetName().ToLower().Contains(filter.ToLower()))
+                            if (!ctx.Name.ToLower().Contains(filter.ToLower()))
                                 child.Visibility = Visibility.Collapsed;
                         }
                     }
