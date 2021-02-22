@@ -29,7 +29,7 @@ namespace DDFight.Game.Entities
         }
         private uint _level = 1;
 
-        #endregion
+        #endregion MonsterProperties
 
         #region ICloneable
 

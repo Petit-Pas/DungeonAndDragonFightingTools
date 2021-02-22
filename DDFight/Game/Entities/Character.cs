@@ -46,8 +46,11 @@ namespace DDFight.Game.Entities
         }
         private uint _level = 1;
 
-        #endregion
+        #endregion CharacterProperties
 
+        /// <summary>
+        ///     Should be called after any fight to reset Character
+        /// </summary>
         public void GetOutOfFight()
         {
             if (IsTransformed)
@@ -69,15 +72,13 @@ namespace DDFight.Game.Entities
             }
         }
 
-
+        #region IClonable
 
         private void init_copy(Character to_copy)
         {
             Level = to_copy.Level;
             HasInspiration = to_copy.HasInspiration;
         }
-
-        #region IClonable
 
         /// <summary>
         ///     Copy Ctor, required for the Clone method to work properly with derived classes
@@ -93,13 +94,14 @@ namespace DDFight.Game.Entities
             return new Character(this);
         }
 
-        #endregion
-
-        public override void CopyAssign (object _to_copy)
+        public override void CopyAssign(object _to_copy)
         {
             base.CopyAssign(_to_copy);
             if (_to_copy.GetType() == this.GetType())
                 init_copy((Character)_to_copy);
         }
+
+        #endregion IClonable
+
     }
 }

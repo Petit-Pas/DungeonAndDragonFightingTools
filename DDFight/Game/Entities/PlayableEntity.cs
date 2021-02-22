@@ -30,17 +30,12 @@ namespace DDFight.Game.Entities
         {
         }
 
-        public string GetName() { return DisplayName; }
-
-        public virtual IListable CloneListable()
-        {
-            return (IListable)this.Clone();
-        }
-
         [XmlIgnore]
         public bool Validated = false;
 
         #region Properties
+
+        #region Properties_Name
 
         [XmlAttribute]
         public string Name
@@ -59,13 +54,14 @@ namespace DDFight.Game.Entities
         private string _name = "Name";
 
         /// <summary>
-        ///     Only used for monsters when they are duplicates in fight, Name will be the same, while DisplayName will be unique
+        ///     Names are not unique when multiple instance of same entities are loaded, display name is there to fix it
         /// </summary>
         [XmlIgnore]
         public virtual string DisplayName
         {
-            get {
-                if (_displayName == "DisplayName")                    
+            get
+            {
+                if (_displayName == "DisplayName")
                     return _name;
                 return _displayName;
             }
@@ -79,6 +75,10 @@ namespace DDFight.Game.Entities
             }
         }
         private string _displayName = "DisplayName";
+
+        #endregion Properties_Name
+
+        #region Properties_Stats
 
         /// <summary>
         ///     Armor Class
@@ -98,6 +98,7 @@ namespace DDFight.Game.Entities
         }
         private uint _cA = 10;
 
+        #region Properties_Stats_Hp
 
         /// <summary>
         ///     Max Hps that this character can have (Temporary Hps not taken into account)
@@ -117,31 +118,11 @@ namespace DDFight.Game.Entities
         }
         private uint _maxHp = 0;
 
-        [XmlIgnore]
-        public string HpString
-        { 
-            get {
-                string result = Hp.ToString();
-
-                if (TempHp != 0)
-                {
-                    result += "(+";
-                    result += TempHp.ToString();
-                    result += ")";
-                }
-                return result;
-            }
-            set
-            {
-                NotifyPropertyChanged();
-            }
-        }
-
         [XmlAttribute]
         public int TempHp
         {
             get => _tempHP;
-            set 
+            set
             {
                 if (value != _tempHP)
                 {
@@ -172,6 +153,10 @@ namespace DDFight.Game.Entities
         }
         private int _hp = 0;
 
+        #endregion Properties_Stats_Hp
+
+        #region Properties_Stats_SpellCastingAbility
+
         [XmlAttribute]
         public int SpellSave
         {
@@ -191,7 +176,8 @@ namespace DDFight.Game.Entities
         public int SpellHitModifier
         {
             get => _spellHitModifier;
-            set {
+            set
+            {
                 if (_spellHitModifier != value)
                 {
                     _spellHitModifier = value;
@@ -201,23 +187,8 @@ namespace DDFight.Game.Entities
         }
         private int _spellHitModifier = 0;
 
-        /// <summary>
-        ///     used to dump a character in log file (in case of crash, it at least gives information back)
-        /// </summary>
-        internal void Dump()
-        {
-            Logger.Log("----------");
-            Logger.Log(DisplayName + " has " + Hp + " hps");
-            if (CustomVerboseStatusList.List.Count != 0)
-            {
-                Logger.Log("it has the statuses: ");
-                foreach (CustomVerboseStatus status in CustomVerboseStatusList.List)
-                {
-                    Logger.Log("\t- " + status.Header);
-                }
-            }
-        }
 
+        #endregion Properties_Stats_SpellCastingAbility
 
         /// <summary>
         ///     The characteristics of the character
@@ -244,132 +215,9 @@ namespace DDFight.Game.Entities
         }
         private DamageTypeAffinityList _damageAffinities = new DamageTypeAffinityList();
 
-        [XmlAttribute]
-        public string ActionDescription
-        {
-            get => _actionDescription;
-            set
-            {
-                _actionDescription = value;
-                NotifyPropertyChanged();
-            }
-        }
-        private string _actionDescription = "";
+        #endregion Properties_Stats
 
-        [XmlAttribute]
-        public string SpecialAbilities
-        {
-            get => _specialAbilities;
-            set
-            {
-                _specialAbilities = value;
-                NotifyPropertyChanged();
-            }
-        }
-        private string _specialAbilities = "";
-
-        public ObservableCollection<HitAttackTemplate> HitAttacks
-        {
-            get => _hitAttacks;
-            set
-            {
-                _hitAttacks = value;
-                NotifyPropertyChanged();
-            }
-        }
-        private ObservableCollection<HitAttackTemplate> _hitAttacks = new ObservableCollection<HitAttackTemplate>();
-
-        [XmlIgnore]
-        public bool HasSpells {
-            get => (Spells.Elements.Count != 0);
-            set {
-                NotifyPropertyChanged();
-            }
-        }
-
-        public SpellList Spells
-        {
-            get => _spells;
-            set
-            {
-                _spells = value;
-                NotifyPropertyChanged();
-                NotifyPropertyChanged("HasSpells");
-            }
-        }
-        private SpellList _spells = new SpellList();
-
-        public ObservableCollection<Counter> Counters
-        {
-            get => _counters;
-            set 
-            {
-                _counters = value;
-                NotifyPropertyChanged();
-            }
-        }
-        private ObservableCollection<Counter> _counters = new ObservableCollection<Counter>();
-
-        #endregion Characteristics
-
-        #region Status
-
-        public CustomVerboseStatusList CustomVerboseStatusList
-        {
-            get => _customVerboseStatusList;
-            set
-            {
-                _customVerboseStatusList = value;
-                NotifyPropertyChanged();
-            }
-        }
-        private CustomVerboseStatusList _customVerboseStatusList = new CustomVerboseStatusList();
-
-        #endregion Status
-
-        #region Fight
-
-        #region Transformation
-
-        [XmlIgnore]
-        /// <summary>
-        ///     Tells wether or not the character is currenlty transformed
-        /// </summary>
-        public bool IsTransformed
-        {
-            get => _isTransformed;
-            set
-            {
-                Console.WriteLine("change is transformed in " + GetType().ToString());
-                _isTransformed = value;
-                NotifyPropertyChanged();
-            }
-        }
-        private bool _isTransformed = false;
-
-        /// <summary>
-        ///     Stored an instance of the actual character (non transformed)
-        /// </summary>
-        private PlayableEntity realOne; 
-
-        public void Transform(PlayableEntity to_transform_into)
-        {
-            realOne = (PlayableEntity)this.Clone();
-            to_transform_into.DisplayName = to_transform_into.Name + " (" + this.DisplayName + ")";
-            this.CopyAssign(to_transform_into);
-            IsTransformed = true;
-            this.DisplayName = to_transform_into.DisplayName;
-        }
-
-        public void TransformBack()
-        {
-            this.CopyAssign(realOne);
-            IsTransformed = false;
-        }
-
-        #endregion Transformation
-
-        #region Actions
+        #region Properties_Actions
 
         /// <summary>
         ///     Tells wether or not he action of the character was consumed
@@ -416,24 +264,81 @@ namespace DDFight.Game.Entities
         }
         private bool _hasReaction = true;
 
-        #endregion Actions
-
-        [XmlIgnore]
-        public bool IsFocused
+        /// <summary>
+        ///     Additional information about the actions that this PlayableEntity can take
+        /// </summary>
+        public string ActionDescription
         {
-            get => _isFocused;
+            get => _actionDescription;
             set
             {
-                if (_isFocused != value)
-                {
-                    _isFocused = value;
-                    NotifyPropertyChanged();
-                }
+                _actionDescription = value;
+                NotifyPropertyChanged();
             }
         }
-        private bool _isFocused;
+        private string _actionDescription = "";
 
-        #region Turns
+        /// <summary>
+        ///     Additional informations about the special abilites that this PlayableEntity can use (in our out of fight)
+        /// </summary>
+        public string SpecialAbilities
+        {
+            get => _specialAbilities;
+            set
+            {
+                _specialAbilities = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private string _specialAbilities = "";
+
+        public ObservableCollection<HitAttackTemplate> HitAttacks
+        {
+            get => _hitAttacks;
+            set
+            {
+                _hitAttacks = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private ObservableCollection<HitAttackTemplate> _hitAttacks = new ObservableCollection<HitAttackTemplate>();
+
+        [XmlIgnore]
+        public bool HasSpells
+        {
+            get => (Spells.Elements.Count != 0);
+            set
+            {
+                NotifyPropertyChanged();
+            }
+        }
+
+        public SpellList Spells
+        {
+            get => _spells;
+            set
+            {
+                _spells = value;
+                NotifyPropertyChanged();
+                NotifyPropertyChanged("HasSpells");
+            }
+        }
+        private SpellList _spells = new SpellList();
+
+        public ObservableCollection<Counter> Counters
+        {
+            get => _counters;
+            set
+            {
+                _counters = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private ObservableCollection<Counter> _counters = new ObservableCollection<Counter>();
+
+        #endregion Properties_Actions
+
+        #region Properties_Turn
 
         /// <summary>
         ///     The initiative rolled for a given fight
@@ -472,6 +377,35 @@ namespace DDFight.Game.Entities
         }
         private uint _turnOrder;
 
+        #endregion Properties_Turn
+
+        [XmlIgnore]
+        public bool IsFocused
+        {
+            get => _isFocused;
+            set
+            {
+                if (_isFocused != value)
+                {
+                    _isFocused = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        private bool _isFocused;
+
+        #endregion Properties
+
+        #region Events
+
+        #region Events_Turn
+
+        public event StartNewTurnEventHandler NewTurnStarted;
+
+        /// <summary>
+        ///     Functions to ask the PlayableEntity to setup eveyrthing for a new turn
+        ///     Will raise the NewTurnStarted event
+        /// </summary>
         public void StartNewTurn()
         {
             HasAction = true;
@@ -487,14 +421,18 @@ namespace DDFight.Game.Entities
         public void OnStartNewTurn(StartNewTurnEventArgs args)
         {
             Global.Context.UserLogs.Blocks.Add(new Paragraph());
-            Paragraph tmp = (Paragraph) Global.Context.UserLogs.Blocks.LastBlock;
+            Paragraph tmp = (Paragraph)Global.Context.UserLogs.Blocks.LastBlock;
             tmp.Inlines.Add(Extensions.BuildRun(args.Character.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
             tmp.Inlines.Add(Extensions.BuildRun(" starts its turn!\r\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
             NewTurnStarted?.Invoke(this, args);
         }
 
-        public event StartNewTurnEventHandler NewTurnStarted;
+        public event EndTurnEventHandler TurnEnded;
 
+        /// <summary>
+        ///     Function called to end the Turn of the PlayableEntity
+        ///     Will raise the OnEndTurn event
+        /// </summary>
         public void EndTurn()
         {
             OnEndTurn(new TurnEndedEventArgs()
@@ -509,9 +447,64 @@ namespace DDFight.Game.Entities
             TurnEnded?.Invoke(this, args);
         }
 
-        public event EndTurnEventHandler TurnEnded;
+        #endregion Events_Turn
 
-        #endregion Turns
+        #endregion Events
+
+        #region AffectingStatus
+
+        public CustomVerboseStatusList CustomVerboseStatusList
+        {
+            get => _customVerboseStatusList;
+            set
+            {
+                _customVerboseStatusList = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private CustomVerboseStatusList _customVerboseStatusList = new CustomVerboseStatusList();
+
+        #endregion AffectingStatus
+
+        #region Transformation
+
+        [XmlIgnore]
+        /// <summary>
+        ///     Tells wether or not the character is currenlty transformed
+        /// </summary>
+        public bool IsTransformed
+        {
+            get => _isTransformed;
+            set
+            {
+                Console.WriteLine("change is transformed in " + GetType().ToString());
+                _isTransformed = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private bool _isTransformed = false;
+
+        /// <summary>
+        ///     Stored an instance of the actual character (non transformed)
+        /// </summary>
+        private PlayableEntity realOne; 
+
+        public void Transform(PlayableEntity to_transform_into)
+        {
+            realOne = (PlayableEntity)this.Clone();
+            to_transform_into.DisplayName = to_transform_into.Name + " (" + this.DisplayName + ")";
+            this.CopyAssign(to_transform_into);
+            IsTransformed = true;
+            this.DisplayName = to_transform_into.DisplayName;
+        }
+
+        public void TransformBack()
+        {
+            this.CopyAssign(realOne);
+            IsTransformed = false;
+        }
+
+        #endregion Transformation
 
         #region HpManagement
 
@@ -555,6 +548,72 @@ namespace DDFight.Game.Entities
 
             Hp += amount;
         }
+
+        public void LooseHp(int amount)
+        {
+            Paragraph paragraph = (Paragraph)Global.Context.UserLogs.Blocks.LastBlock;
+
+            paragraph.Inlines.Add(Extensions.BuildRun("\nTotal: ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+            paragraph.Inlines.Add(Extensions.BuildRun(amount.ToString(), (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+            paragraph.Inlines.Add(Extensions.BuildRun(" damage (", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+            paragraph.Inlines.Add(Extensions.BuildRun(HpString, (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
+            paragraph.Inlines.Add(Extensions.BuildRun(" ==> ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+
+            // handles temp HP
+            if (TempHp != 0)
+            {
+                if (TempHp - amount < 0)
+                {
+                    amount -= TempHp;
+                    TempHp = 0;
+                }
+                else
+                {
+                    TempHp -= amount;
+                    amount = 0;
+                }
+            }
+
+            // removes remaining HPs
+            Hp -= amount;
+
+            paragraph.Inlines.Add(Extensions.BuildRun(HpString, (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
+            paragraph.Inlines.Add(Extensions.BuildRun(").\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+            if (amount == 0)
+                return;
+
+            // handles 0 HP
+            if (Hp <= 0)
+            {
+                Hp = 0;
+                if (IsFocused == true)
+                {
+                    IsFocused = false;
+                    paragraph.Inlines.Add(Extensions.BuildRun(this.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
+                    paragraph.Inlines.Add(Extensions.BuildRun(": Has reached", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                    paragraph.Inlines.Add(Extensions.BuildRun(" 0 Hps", (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
+                    paragraph.Inlines.Add(Extensions.BuildRun(", lost Focus.", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                }
+            }
+
+            // handles Concentration Check if required
+            if (IsFocused)
+            {
+                ConcentrationCheckWindow window = new ConcentrationCheckWindow
+                {
+                    DataContext = this
+                };
+                window.ShowCentered();
+                if (window.Success == false)
+                {
+                    this.IsFocused = false;
+                }
+            }
+        }
+
+        #endregion HpManagement
+
+        #region HitManagement
 
         /// <summary>
         ///     method called when a hit attack lands to compute the damage received
@@ -620,69 +679,12 @@ namespace DDFight.Game.Entities
             LooseHp(total);
         }
 
-        public void LooseHp(int amount)
-        {
-            Paragraph paragraph = (Paragraph)Global.Context.UserLogs.Blocks.LastBlock;
-
-            paragraph.Inlines.Add(Extensions.BuildRun("\nTotal: ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-            paragraph.Inlines.Add(Extensions.BuildRun(amount.ToString(), (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-            paragraph.Inlines.Add(Extensions.BuildRun(" damage (", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-            paragraph.Inlines.Add(Extensions.BuildRun(HpString, (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
-            paragraph.Inlines.Add(Extensions.BuildRun(" ==> ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-
-            // handles temp HP
-            if (TempHp != 0)
-            {
-                if (TempHp - amount < 0)
-                {
-                    amount -= TempHp;
-                    TempHp = 0;
-                }
-                else
-                {
-                    TempHp -= amount;
-                    amount = 0;
-                }
-            }
-
-            // removes remaining HPs
-            Hp -= amount;
-
-            paragraph.Inlines.Add(Extensions.BuildRun(HpString, (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
-            paragraph.Inlines.Add(Extensions.BuildRun(").\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-            if (amount == 0)
-                return;
-
-
-            // handles 0 HP
-            if (Hp <= 0)
-            {
-                Hp = 0;
-                if (IsFocused == true)
-                {
-                    IsFocused = false;
-                    paragraph.Inlines.Add(Extensions.BuildRun(this.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
-                    paragraph.Inlines.Add(Extensions.BuildRun(": Has reached", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-                    paragraph.Inlines.Add(Extensions.BuildRun(" 0 Hps", (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
-                    paragraph.Inlines.Add(Extensions.BuildRun(", lost Focus.", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-                }
-            }
-
-            // handles Concentration Check if required
-            if (IsFocused)
-            {
-                ConcentrationCheckWindow window = new ConcentrationCheckWindow
-                {
-                    DataContext = this
-                };
-                window.ShowCentered();
-                if (window.Success == false)
-                {
-                    this.IsFocused = false;
-                }
-            }
-        }
-
+        /// <summary>
+        ///     Will evaluate if the HitAttack hits and deal damage if so.
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="attacker"></param>
+        /// <returns></returns>
         public bool GetAttacked(HitAttackResult result, PlayableEntity attacker)
         {
             bool hit = false;
@@ -733,9 +735,45 @@ namespace DDFight.Game.Entities
             return hit;
         }
 
-        #endregion HpManagement
+        #endregion HitManagement
 
-        #endregion Fight
+        [XmlIgnore]
+        public string HpString
+        {
+            get
+            {
+                string result = Hp.ToString();
+
+                if (TempHp != 0)
+                {
+                    result += "(+";
+                    result += TempHp.ToString();
+                    result += ")";
+                }
+                return result;
+            }
+            set
+            {
+                NotifyPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        ///     used to dump a character in log file (in case of crash, it at least gives information back)
+        /// </summary>
+        internal void Dump()
+        {
+            Logger.Log("----------");
+            Logger.Log(DisplayName + " has " + Hp + " hps");
+            if (CustomVerboseStatusList.List.Count != 0)
+            {
+                Logger.Log("it has the statuses: ");
+                foreach (CustomVerboseStatus status in CustomVerboseStatusList.List)
+                {
+                    Logger.Log("\t- " + status.Header);
+                }
+            }
+        }
 
         public virtual bool Edit()
         {

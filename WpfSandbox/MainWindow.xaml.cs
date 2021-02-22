@@ -1,15 +1,10 @@
-﻿// // Copyright (c) Microsoft. All rights reserved.
-// // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-
-using DDFight.Controlers;
-using DDFight.Game.Entities;
-using DDFight.Tools;
-using SandBox;
-using System.Collections.ObjectModel;
+﻿using DDFight.Tools;
+using DDFight.Tools.Save;
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Media;
+using WpfSandbox.Types;
 
 namespace BindValidation
 {
@@ -44,13 +39,22 @@ namespace BindValidation
 
         public MainWindow()
         {
-            InitializeComponent();
+
+            Logger.Init();
+
+            DDFight.Tools.Save.GenericList<CharacterType> character_list = SaveManager.LoadGenericList<CharacterType, DDFight.Tools.Save.GenericList<CharacterType>>(SaveManager.players_folder);
+            DDFight.Tools.Save.GenericList<MonsterType> monster_list = SaveManager.LoadGenericList<MonsterType, DDFight.Tools.Save.GenericList<MonsterType>>(SaveManager.monsters_folder);
+            DDFight.Tools.Save.GenericList<SpellType> spell_list = SaveManager.LoadGenericList<SpellType, DDFight.Tools.Save.GenericList<SpellType>>(SaveManager.spells_folder);
 
 
-            GenericList<PlayableEntity> genericList = new GenericList<PlayableEntity>();
 
-            genericList.AddElement();
+            SaveManager.SaveGenericList<CharacterType>(character_list, "test//characters//");
+            SaveManager.SaveGenericList<MonsterType>(monster_list, "test//monsters//");
+            SaveManager.SaveGenericList<SpellType>(spell_list, "test//spells//");
 
+            ;
+
+            throw new NotImplementedException();
 
         }
 

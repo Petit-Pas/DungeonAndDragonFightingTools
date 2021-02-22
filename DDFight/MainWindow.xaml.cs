@@ -1,4 +1,5 @@
 ﻿using DDFight.Game;
+using DDFight.Game.Aggression.Attacks;
 using DDFight.Game.Aggression.Spells;
 using DDFight.Game.Entities;
 using DDFight.Tools;
@@ -45,6 +46,20 @@ namespace DDFight
             Global.Context.SpellList = SaveManager.LoadGenericList<Spell, SpellList>(SaveManager.spells_folder);
 
             Global.Loading = false;
+
+            Global.Context.CharacterList.Elements[0].HitAttacks.Add(new HitAttackTemplate()
+            {
+                Name = "oui",
+                HitBonus = 3,
+                DamageList = new System.Collections.Generic.List<Game.Aggression.DamageTemplate>()
+                {
+                    new Game.Aggression.DamageTemplate()
+                    {
+                        Damage=new Game.Dices.DiceRoll("1d5+3"),
+                    }
+                }
+            }) ;
+            SaveManager.SaveUnique<Character>(Global.Context.CharacterList.Elements[0], "test//");
 
             Global.Context.FightContext.FightersList.Fighters.CollectionChanged += FightingCharacters_CollectionChanged;
 
