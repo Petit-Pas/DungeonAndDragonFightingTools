@@ -50,11 +50,13 @@ namespace DDFight.Windows
             }
             else
             {
-                data_context.Validated = true;
+                this.Validated = true;
                 self_close = true;
                 Close();
             }
         }
+
+        public bool Validated = false;
 
         /// <summary>
         ///     Handler for the click event on the Cancel button
@@ -63,7 +65,7 @@ namespace DDFight.Windows
         /// <param name="e"></param>
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            data_context.Validated = false;
+            this.Validated = false;
             self_close = true;
             Close();
         }
@@ -108,7 +110,7 @@ namespace DDFight.Windows
 
                     if (context.Yes)
                     {
-                        data_context.Validated = true;
+                        this.Validated = true;
                     }
                 }
             }

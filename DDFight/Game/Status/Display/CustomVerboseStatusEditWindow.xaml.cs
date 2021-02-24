@@ -10,6 +10,7 @@ namespace DDFight.Game.Status.Display
     /// </summary>
     public partial class CustomVerboseStatusEditWindow : Window
     {
+        public bool Validated = false;
         public CustomVerboseStatus data_context
         {
             get => (CustomVerboseStatus)DataContext;
@@ -41,7 +42,7 @@ namespace DDFight.Game.Status.Display
         {
             if (this.AreAllChildrenValid())
             {
-                data_context.Validated = true;
+                this.Validated = true;
                 planned_close = true;
                 this.Close();
             }

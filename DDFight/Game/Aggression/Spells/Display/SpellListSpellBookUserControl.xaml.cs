@@ -53,7 +53,7 @@ namespace DDFight.Game.Aggression.Spells.Display
             if (e.Key == Key.Enter)
             {
                 if (AllSpellsControl.EntityListControl.SelectedIndex != -1)
-                    data_context.AddElement((Spell)((Spell)AllSpellsControl.EntityListControl.SelectedItem).Clone());
+                    data_context.AddElementSilent((Spell)((Spell)AllSpellsControl.EntityListControl.SelectedItem).Clone());
                 e.Handled = true;
             }
         }

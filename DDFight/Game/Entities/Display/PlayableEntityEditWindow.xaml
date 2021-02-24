@@ -119,7 +119,7 @@
                         Statuses
                     </TextBlock>
                 </TabItem.Header>
-                <status:CustomVerboseStatusListEditableUserControl 
+                <status:CustomVerboseStatusListUserControl 
                     DataContext="{Binding CustomVerboseStatusList}"/>
             </TabItem>
 

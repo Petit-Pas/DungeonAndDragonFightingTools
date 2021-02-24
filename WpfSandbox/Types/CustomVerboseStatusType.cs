@@ -1,4 +1,5 @@
 ﻿using DDFight;
+using DDFight.Game.Status;
 using DDFight.Game.Status.Display;
 using System;
 using System.Collections.Generic;
@@ -29,6 +30,18 @@ namespace WpfSandbox.Types
                 NotifyPropertyChanged();
             }
         }
+
+        public static CustomVerboseStatus Convert(CustomVerboseStatusType status)
+        {
+            CustomVerboseStatus result = new CustomVerboseStatus()
+            {
+                Description = status.Description,
+                Header = status.Header,
+                ToolTip = status.ToolTip,
+            };
+            return result;
+        }
+
         private string _header = "";
 
         [XmlAttribute]
@@ -121,10 +134,7 @@ namespace WpfSandbox.Types
         /// <param name="propertyName"></param>
         protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
     }

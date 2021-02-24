@@ -73,7 +73,7 @@ namespace DDFight.Game.Fight.Display
         #endregion Filter
         private void FightingEntityListSelectableWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            SelectFromListControl.ItemsSource = Global.Context.FightContext.FightersList.Fighters;
+            SelectFromListControl.ItemsSource = Global.Context.FightContext.FightersList.Elements;
             Selected = new ObservableCollection<PlayableEntity>();
             SelectedListControl.ItemsSource = Selected;
             Selected.CollectionChanged += Selected_CollectionChanged;

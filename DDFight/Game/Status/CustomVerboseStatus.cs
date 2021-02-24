@@ -1,4 +1,5 @@
 ﻿using DDFight.Game.Status.Display;
+using DDFight.Tools;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -6,12 +7,9 @@ using System.Xml.Serialization;
 
 namespace DDFight.Game.Status
 {
-    public class CustomVerboseStatus : INotifyPropertyChanged, ICloneable
+    public class CustomVerboseStatus : INotifyPropertyChanged, IListable
     {
         public CustomVerboseStatus() { }
-
-        [XmlIgnore]
-        public bool Validated = false;
 
         [XmlAttribute]
         // Should be 1 single world
@@ -26,7 +24,7 @@ namespace DDFight.Game.Status
         }
         private string _header = "";
 
-        [XmlAttribute]
+        [XmlElement]
         // Should be a short sentence explaining the condition
         public string ToolTip
         {
@@ -39,7 +37,7 @@ namespace DDFight.Game.Status
         }
         private string _toolTip = "";
 
-        [XmlAttribute]
+        [XmlElement]
         // Should be a long description explaining both condition and the way it gets removed
         public string Description
         {
@@ -51,6 +49,13 @@ namespace DDFight.Game.Status
             }
         }
         private string _description = "";
+
+        #region IListable
+        [XmlIgnore]
+        public string DisplayName { get => Header; set { } }
+        [XmlIgnore]
+        public string Name { get => Header; set { } }
+        #endregion IListable
 
         #region ICloneable
 
@@ -84,7 +89,7 @@ namespace DDFight.Game.Status
         ///     Will open a window to edit this instance
         /// </summary>
         /// <returns> True if the current instance has changed, false otherwise </returns>
-        public virtual bool OpenEditWindow()
+        public virtual bool Edit()
         {
             CustomVerboseStatusEditWindow window = new CustomVerboseStatusEditWindow();
             CustomVerboseStatus dc = (CustomVerboseStatus)this.Clone();
@@ -93,7 +98,7 @@ namespace DDFight.Game.Status
 
             window.ShowCentered();
 
-            if (dc.Validated)
+            if (window.Validated)
             {
                 this.CopyAssign(dc);
                 return true;

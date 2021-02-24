@@ -16,28 +16,11 @@ namespace DDFight.Game.DamageAffinity
 
         private void initAffinities()
         {
-            _damageTypeAffinityList = new List<DamageTypeAffinity>
+            _damageTypeAffinityList = new List<DamageTypeAffinity>();
+            foreach (DamageTypeEnum type in (DamageTypeEnum[]) Enum.GetValues(typeof(DamageTypeEnum)))
             {
-                new DamageTypeAffinity(DamageTypeEnum.Bludgeoning),
-                new DamageTypeAffinity(DamageTypeEnum.Piercing),
-                new DamageTypeAffinity(DamageTypeEnum.Slashing),
-                new DamageTypeAffinity(DamageTypeEnum.Bludgeoning_Silver),
-                new DamageTypeAffinity(DamageTypeEnum.Piercing_Silver),
-                new DamageTypeAffinity(DamageTypeEnum.Slashing_Silver),
-                new DamageTypeAffinity(DamageTypeEnum.Bludgeoning_Magic),
-                new DamageTypeAffinity(DamageTypeEnum.Piercing_Magic),
-                new DamageTypeAffinity(DamageTypeEnum.Slashing_Magic),
-                new DamageTypeAffinity(DamageTypeEnum.Acid),
-                new DamageTypeAffinity(DamageTypeEnum.Cold),
-                new DamageTypeAffinity(DamageTypeEnum.Fire),
-                new DamageTypeAffinity(DamageTypeEnum.Force),
-                new DamageTypeAffinity(DamageTypeEnum.Lightning),
-                new DamageTypeAffinity(DamageTypeEnum.Necrotic),
-                new DamageTypeAffinity(DamageTypeEnum.Poison),
-                new DamageTypeAffinity(DamageTypeEnum.Psychic),
-                new DamageTypeAffinity(DamageTypeEnum.Radiant),
-                new DamageTypeAffinity(DamageTypeEnum.Thunder)
-            };
+                _damageTypeAffinityList.Add(new DamageTypeAffinity(type));
+            }
         }
 
         public DamageTypeAffinity GetAffinity(DamageTypeEnum type)

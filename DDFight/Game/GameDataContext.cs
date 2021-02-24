@@ -1,4 +1,5 @@
 ﻿using DDFight.Game.Aggression.Spells;
+using DDFight.Game.Entities;
 using DDFight.Game.Fight;
 using DDFight.Tools.Save;
 using System.ComponentModel;

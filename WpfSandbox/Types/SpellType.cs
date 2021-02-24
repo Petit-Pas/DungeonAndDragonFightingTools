@@ -1,4 +1,5 @@
 ﻿using DDFight;
+using DDFight.Game.Aggression.Spells;
 using DDFight.Game.Characteristics;
 using DDFight.Tools;
 using System;
@@ -13,6 +14,36 @@ namespace WpfSandbox.Types
     [XmlRoot(ElementName = "Spell")]
     public class SpellType : AAttackTemplateType, ICloneable, INameable, IListable
     {
+
+        public static Spell Convert(SpellType spell)
+        {
+            Spell result = new Spell()
+            {
+                AdditionalHitDamagePerLevel = DamageTemplateType.ConvertList(spell.AdditionalHitDamagePerLevel),
+                AdditionalTargetPerLevel = spell.AdditionalTargetPerLevel,
+                AmountTargets = spell.AmountTargets,
+                AppliedStatus = OnHitStatusListType.Convert(spell.AppliedStatus),
+                AutomaticalyHits = spell.AutomaticalyHits,
+                BaseLevel = spell.BaseLevel,
+                CanBeCastAtHigherLevel = spell.CanBeCastAtHigherLevel,
+                CanSelectSameTargetTwice = spell.CanSelectSameTargetTwice,
+                Description = spell.Description,
+                DisplayName = spell.DisplayName,
+                HasSavingThrow = spell.HasSavingThrow,
+                HitDamage = DamageTemplateType.ConvertList(spell.HitDamage),
+                HitRollBonus = spell.HitRollBonus,
+                IsAnAttack = spell.IsAnAttack,
+                IsCloseRanged = spell.IsCloseRanged,
+                IsLongRanged = spell.IsLongRanged,
+                Name = spell.Name,
+                Range = spell.Range,
+                SavingCharacteristic = spell.SavingCharacteristic,
+                SavingDifficulty = spell.SavingDifficulty,
+            };
+            return result;
+        }
+
+
         public SpellType() : base()
         {
         }
@@ -271,7 +302,7 @@ namespace WpfSandbox.Types
             return false;
         }
 
-        #region ICopyAssignable
+                #region ICopyAssignable
 
         #endregion ICopyAssignable
         #endregion ICloneable

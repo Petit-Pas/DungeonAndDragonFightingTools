@@ -35,7 +35,7 @@ namespace DDFight.Game.Aggression.Spells
 
             if (this.HasSavingThrow)
             {
-                foreach (OnHitStatus status in this.AppliedStatusList.List)
+                foreach (OnHitStatus status in this.AppliedStatusList.Elements)
                 {
                     status.ApplySavingCharacteristic = this.SavingCharacteristic;
                     status.ApplySavingDifficulty = this.SavingDifficulty;
@@ -77,7 +77,7 @@ namespace DDFight.Game.Aggression.Spells
                     Targets.ElementAt(i).TakeHitDamage(HitDamage);
 
                 // OnHitStatus Application
-                foreach (OnHitStatus status in this.AppliedStatusList.List)
+                foreach (OnHitStatus status in this.AppliedStatusList.Elements)
                 {
                     if (this.HasSavingThrow == false)
                     {

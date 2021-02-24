@@ -14,6 +14,26 @@ namespace WpfSandbox.Types
 {
     public class DamageTemplateType : ICloneable, INotifyPropertyChanged
     {
+        public static List<DamageTemplate> ConvertList(IEnumerable<DamageTemplateType> list)
+        {
+            List<DamageTemplate> result = new List<DamageTemplate>();
+            foreach (DamageTemplateType type in list)
+                result.Add(Convert(type));
+            return result;
+        }
+
+        private static DamageTemplate Convert(DamageTemplateType type)
+        {
+            DamageTemplate result = new DamageTemplate()
+            {
+                Damage = type.Damage,
+                DamageType = type.DamageType,
+                LastSavingWasSuccesfull = type.LastSavingWasSuccesfull,
+                SituationalDamageModifier = type.SituationalDamageModifier,
+            };
+            return result;
+        }
+
         public DamageTemplateType()
         {
         }
@@ -140,10 +160,7 @@ namespace WpfSandbox.Types
         /// <param name="propertyName"></param>
         protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
 

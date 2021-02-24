@@ -200,7 +200,7 @@ namespace DDFight.Game.Status.Display
                 //resist
                 paragraph.Inlines.Add(Extensions.BuildRun("Success\r\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
                 data_context.UnregisterToAll();
-                data_context.Affected.CustomVerboseStatusList.List.Remove(data_context);
+                data_context.Affected.CustomVerboseStatusList.RemoveElement(data_context);
             }
             else
             {

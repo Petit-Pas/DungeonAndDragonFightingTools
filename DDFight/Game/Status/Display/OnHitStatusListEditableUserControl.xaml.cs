@@ -32,17 +32,12 @@ namespace DDFight.Game.Status.Display
                 typeof(OnHitStatusListEditableUserControl));
         private void EditableOnHitStatusList_Loaded(object sender, RoutedEventArgs e)
         {
-            StatusListControl.ItemsSource = data_context.List;
+            StatusListControl.ItemsSource = data_context.Elements;
         }
 
         private void AddStatusButton_Click(object sender, RoutedEventArgs e)
         {
-            OnHitStatus _new = new OnHitStatus();
-
-            if (_new.OpenEditWindow() == true)
-            {
-                data_context.List.Add(_new);
-            }
+            data_context.AddElement();
         }
 
         // Keyboard Hanlder
@@ -53,7 +48,7 @@ namespace DDFight.Game.Status.Display
             {
                 if (StatusListControl.SelectedIndex != -1)
                 {
-                    data_context.List.RemoveAt(StatusListControl.SelectedIndex);
+                    data_context.RemoveElement(StatusListControl.SelectedItem as OnHitStatus);
                 }
             }
         }
@@ -65,7 +60,7 @@ namespace DDFight.Game.Status.Display
         {
             if (StatusListControl.SelectedIndex != -1)
             {
-                ((OnHitStatus)StatusListControl.SelectedItem).OpenEditWindow();
+                ((OnHitStatus)StatusListControl.SelectedItem).Edit();
             }
         }
     }

@@ -24,7 +24,7 @@ using DDFight.Tools.Save;
 
 namespace DDFight.Game.Entities
 {
-    public class PlayableEntity : ICloneable, INotifyPropertyChanged, ICopyAssignable, INameable, IListable
+    public class PlayableEntity : IListable
     {
         public PlayableEntity()
         {
@@ -292,7 +292,7 @@ namespace DDFight.Game.Entities
         }
         private string _specialAbilities = "";
 
-        public ObservableCollection<HitAttackTemplate> HitAttacks
+        public HitAttackTemplateList HitAttacks
         {
             get => _hitAttacks;
             set
@@ -301,7 +301,7 @@ namespace DDFight.Game.Entities
                 NotifyPropertyChanged();
             }
         }
-        private ObservableCollection<HitAttackTemplate> _hitAttacks = new ObservableCollection<HitAttackTemplate>();
+        private HitAttackTemplateList _hitAttacks = new HitAttackTemplateList();
 
         [XmlIgnore]
         public bool HasSpells
@@ -325,7 +325,7 @@ namespace DDFight.Game.Entities
         }
         private SpellList _spells = new SpellList();
 
-        public ObservableCollection<Counter> Counters
+        public CounterList Counters
         {
             get => _counters;
             set
@@ -334,7 +334,7 @@ namespace DDFight.Game.Entities
                 NotifyPropertyChanged();
             }
         }
-        private ObservableCollection<Counter> _counters = new ObservableCollection<Counter>();
+        private CounterList _counters = new CounterList();
 
         #endregion Properties_Actions
 
@@ -414,7 +414,7 @@ namespace DDFight.Game.Entities
             OnStartNewTurn(new StartNewTurnEventArgs()
             {
                 Character = this,
-                CharacterIndex = Global.Context.FightContext.FightersList.Fighters.IndexOf(this),
+                CharacterIndex = Global.Context.FightContext.FightersList.Elements.IndexOf(this),
             });
         }
 
@@ -438,7 +438,7 @@ namespace DDFight.Game.Entities
             OnEndTurn(new TurnEndedEventArgs()
             {
                 Character = this,
-                CharacterIndex = Global.Context.FightContext.FightersList.Fighters.IndexOf(this),
+                CharacterIndex = Global.Context.FightContext.FightersList.Elements.IndexOf(this),
             });
         }
 
@@ -493,14 +493,14 @@ namespace DDFight.Game.Entities
         {
             realOne = (PlayableEntity)this.Clone();
             to_transform_into.DisplayName = to_transform_into.Name + " (" + this.DisplayName + ")";
-            this.CopyAssign(to_transform_into);
+            InitCopy(to_transform_into);
             IsTransformed = true;
             this.DisplayName = to_transform_into.DisplayName;
         }
 
         public void TransformBack()
         {
-            this.CopyAssign(realOne);
+            InitCopy(realOne);
             IsTransformed = false;
         }
 
@@ -728,7 +728,7 @@ namespace DDFight.Game.Entities
                 hit = false;
             }
             if (hit == true)
-                foreach (OnHitStatus onHitStatus in result.OnHitStatuses.List)
+                foreach (OnHitStatus onHitStatus in result.OnHitStatuses.Elements)
                 {
                     onHitStatus.CheckIfApply(result.Owner, result.Target);
                 }
@@ -765,10 +765,10 @@ namespace DDFight.Game.Entities
         {
             Logger.Log("----------");
             Logger.Log(DisplayName + " has " + Hp + " hps");
-            if (CustomVerboseStatusList.List.Count != 0)
+            if (CustomVerboseStatusList.Elements.Count != 0)
             {
                 Logger.Log("it has the statuses: ");
-                foreach (CustomVerboseStatus status in CustomVerboseStatusList.List)
+                foreach (CustomVerboseStatus status in CustomVerboseStatusList.Elements)
                 {
                     Logger.Log("\t- " + status.Header);
                 }
@@ -784,7 +784,7 @@ namespace DDFight.Game.Entities
 
             if (temporary.Validated == true)
             {
-                this.CopyAssign(temporary);
+                InitCopy(temporary);
                 return true;
             }
             return false;
@@ -813,7 +813,7 @@ namespace DDFight.Game.Entities
         /// <summary>
         ///     this method is required to completely initialize an instance of this by copying another object
         /// </summary>
-        private void init_copy(PlayableEntity to_copy)
+        protected virtual void InitCopy(PlayableEntity to_copy)
         {
             Name = (string)to_copy.Name.Clone();
             CA = to_copy.CA;
@@ -822,17 +822,17 @@ namespace DDFight.Game.Entities
             SpellSave = to_copy.SpellSave;
             Characteristics = (CharacteristicList)to_copy.Characteristics.Clone();
             DamageAffinities = (DamageTypeAffinityList)to_copy.DamageAffinities.Clone();
-            HitAttacks = to_copy.HitAttacks.Clone();
-            foreach (HitAttackTemplate atk in HitAttacks)
+            HitAttacks = (HitAttackTemplateList)to_copy.HitAttacks.Clone();
+            foreach (HitAttackTemplate atk in HitAttacks.Elements)
             {
                 atk.Owner = this;
             }
-            CustomVerboseStatusList = (CustomVerboseStatusList)to_copy.CustomVerboseStatusList.Clone();
+            CustomVerboseStatusList = to_copy.CustomVerboseStatusList.Clone() as CustomVerboseStatusList;
             TurnOrder = to_copy.TurnOrder;
             InitiativeRoll = to_copy.InitiativeRoll;
             ActionDescription = (string)to_copy.ActionDescription.Clone();
             SpecialAbilities = (string)to_copy.SpecialAbilities.Clone();
-            Counters = to_copy.Counters.Clone();
+            Counters = (CounterList)to_copy.Counters.Clone();
             Spells = (SpellList)to_copy.Spells.Clone();
             TempHp = to_copy.TempHp;
             SpellHitModifier = to_copy.SpellHitModifier;
@@ -844,7 +844,7 @@ namespace DDFight.Game.Entities
         /// <param name=""></param>
         protected PlayableEntity(PlayableEntity to_copy)
         {
-           init_copy(to_copy);
+           InitCopy(to_copy);
         }
 
         /// <summary>
@@ -856,15 +856,6 @@ namespace DDFight.Game.Entities
             return new PlayableEntity(this);
         }
 
-        /// <summary>
-        ///     reinitialize this object by copying the received one
-        /// </summary>
-        /// <param name="_to_copy"></param>
-        public virtual void CopyAssign(object _to_copy)
-        {
-            PlayableEntity to_copy = (PlayableEntity)_to_copy;
-            init_copy(to_copy);
-        }
         #endregion
     }
 }

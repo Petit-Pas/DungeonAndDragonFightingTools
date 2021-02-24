@@ -14,6 +14,34 @@ namespace WpfSandbox.Types
 {
     public class OnHitStatusType : CustomVerboseStatusType, IEventUnregisterable
     {
+
+        public static OnHitStatus Convert(OnHitStatusType status)
+        {
+            OnHitStatus result = new OnHitStatus()
+            {
+                ApplySavingCharacteristic = status.ApplySavingCharacteristic,
+                ApplySavingDifficulty = status.ApplySavingDifficulty,
+                CanRedoSavingThrow = status.CanRedoSavingThrow,
+                Description = status.Description,
+                DisplayName = "",
+                Caster = null,
+                DotDamageList = DotTemplateType.ConvertList(status.DotDamageList),
+                DurationIsBasedOnStartOfTurn = status.DurationIsBasedOnStartOfTurn,
+                DurationIsCalculatedOnCasterTurn = status.DurationIsCalculatedOnCasterTurn,
+                EndsOnCasterLossOfConcentration = status.EndsOnCasterLossOfConcentration,
+                HasAMaximumDuration = status.HasAMaximumDuration,
+                HasApplyCondition = status.HasApplyCondition,
+                HasSpellSaving = status.HasSpellSaving,
+                Header = status.Header,
+                OnApplyDamageList = DamageTemplateType.ConvertList(status.OnApplyDamageList),
+                RemainingRounds = status.RemainingRounds,
+                SavingIsRemadeAtStartOfTurn = status.SavingIsRemadeAtStartOfTurn,
+                SpellApplicationModifier = status.SpellApplicationModifier,
+                SpellSavingWasSuccessful = status.SpellSavingWasSuccessful,
+                ToolTip = status.ToolTip,
+            };
+            return result;
+        }
         public OnHitStatusType()
         {
         }

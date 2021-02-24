@@ -56,16 +56,16 @@ namespace DDFight.Game.Entities
             if (IsTransformed)
                 TransformBack();
             InitiativeRoll = 0;
-            for (int i = 0; i != CustomVerboseStatusList.List.Count; i++)
+            for (int i = 0; i != CustomVerboseStatusList.Elements.Count; i++)
             {
-                CustomVerboseStatus status = CustomVerboseStatusList.List.ElementAt(i);
+                CustomVerboseStatus status = CustomVerboseStatusList.Elements.ElementAt(i);
                 if (status.GetType() == typeof(OnHitStatus))
                 {
                     OnHitStatus onHit = (OnHitStatus)status;
                     if (onHit.HasEndCondition())
                     {
                         onHit.UnregisterToAll();
-                        CustomVerboseStatusList.List.Remove(status);
+                        CustomVerboseStatusList.RemoveElement(status);
                         i--;
                     }
                 }
@@ -74,8 +74,9 @@ namespace DDFight.Game.Entities
 
         #region IClonable
 
-        private void init_copy(Character to_copy)
+        protected virtual void InitCopy(Character to_copy)
         {
+            base.InitCopy(to_copy);
             Level = to_copy.Level;
             HasInspiration = to_copy.HasInspiration;
         }
@@ -86,19 +87,12 @@ namespace DDFight.Game.Entities
         /// <param name=""></param>
         protected Character(Character to_copy) : base(to_copy)
         {
-            init_copy(to_copy);
+            InitCopy(to_copy);
         }
 
         public override object Clone()
         {
             return new Character(this);
-        }
-
-        public override void CopyAssign(object _to_copy)
-        {
-            base.CopyAssign(_to_copy);
-            if (_to_copy.GetType() == this.GetType())
-                init_copy((Character)_to_copy);
         }
 
         #endregion IClonable

@@ -13,7 +13,19 @@ namespace DDFight.Controlers.InputBoxes
     {
         public NotEmptyStringTextBox()
         {
+            Loaded += NotEmptyStringTextBox_Loaded;
+            DataContextChanged += NotEmptyStringTextBox_DataContextChanged;
             InitializeComponent();
+        }
+
+        private void NotEmptyStringTextBox_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            StringBoxControl.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+        }
+
+        private void NotEmptyStringTextBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            StringBoxControl.GetBindingExpression(TextBox.TextProperty).UpdateSource();
         }
 
         public string String

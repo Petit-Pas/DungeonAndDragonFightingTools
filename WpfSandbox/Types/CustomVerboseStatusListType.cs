@@ -1,4 +1,5 @@
 ﻿using DDFight;
+using DDFight.Game.Status;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,6 +14,14 @@ namespace WpfSandbox.Types
 {
     public class CustomVerboseStatusListType : INotifyPropertyChanged, ICloneable
     {
+        public static CustomVerboseStatusList Convert(CustomVerboseStatusListType list)
+        {
+            CustomVerboseStatusList result = new CustomVerboseStatusList();
+            foreach (CustomVerboseStatusType status in list.List)
+                result.AddElementSilent(CustomVerboseStatusType.Convert(status));
+            return result;
+        }
+
         public CustomVerboseStatusListType() { }
 
         [XmlIgnore]

@@ -17,8 +17,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid 
-        Background="{StaticResource LightestGray}"
-        x:Name="CharactersGrid">
+        Background="{StaticResource LightestGray}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>

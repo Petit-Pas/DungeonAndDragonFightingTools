@@ -38,7 +38,7 @@ namespace DDFight.Controlers.Fight
 
         private void FightingCharacterListUserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            FightersControl.ItemsSource = Global.Context.FightContext.FightersList.Fighters;
+            FightersControl.ItemsSource = Global.Context.FightContext.FightersList.Elements;
         }
 
         public void UnregisterToAll()

@@ -19,6 +19,8 @@ namespace DDFight.Game.Aggression
 
         #region Properties
 
+        #region Properties_Name
+
         [XmlIgnore]
         public string DisplayName
         {
@@ -39,8 +41,11 @@ namespace DDFight.Game.Aggression
         }
         private string _name = "Name";
 
-        #region Range
+        #endregion Properties_Name
 
+        #region Properties_Range
+
+        [XmlAttribute]
         public AttackRangeEnum Range
         {
             get => _range;
@@ -91,7 +96,7 @@ namespace DDFight.Game.Aggression
             }
         }
 
-        #endregion
+        #endregion Range_Properties
 
         #endregion Properties
 

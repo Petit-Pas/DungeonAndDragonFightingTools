@@ -131,7 +131,7 @@ namespace DDFight.Tools.Save
         ///     Opposed to AddElementSilent()
         /// </summary>
         /// <param name="elem"></param>
-        public void AddElement(T elem = null)
+        public virtual void AddElement(T elem = null)
         {
             if (elem == null)
                 elem = new T();
@@ -144,7 +144,7 @@ namespace DDFight.Tools.Save
         }
 
         /// <summary>
-        ///     Adds the new element to Elements, opposed to AddElement()
+        ///     Adds the new element to Elements without opening the Edit window, opposed to AddElement()
         /// </summary>
         /// <param name="elem"></param>
         public void AddElementSilent(T elem = null)

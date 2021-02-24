@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DDFight.Tools.Save;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -6,20 +7,9 @@ using System.Xml.Serialization;
 
 namespace DDFight.Game.Status
 {
-    public class OnHitStatusList : INotifyPropertyChanged, ICloneable
+    public class OnHitStatusList : GenericList<OnHitStatus>, INotifyPropertyChanged, ICloneable
     {
-        public OnHitStatusList() { }
-
-        public ObservableCollection<OnHitStatus> List
-        {
-            get => _list;
-            set
-            {
-                _list = value;
-                NotifyPropertyChanged();
-            }
-        }
-        private ObservableCollection<OnHitStatus> _list = new ObservableCollection<OnHitStatus>();
+        public OnHitStatusList() : base() { }
 
         /// <summary>
         ///     Watch out to do the difference with this (set to true if the status is applied after a Saving on a Spell), 
@@ -32,7 +22,7 @@ namespace DDFight.Game.Status
             set
             {
                 _hasSavingThrow = value;
-                foreach (OnHitStatus status in List)
+                foreach (OnHitStatus status in Elements)
                 {
                     status.HasSpellSaving = value;
                 }
@@ -41,39 +31,18 @@ namespace DDFight.Game.Status
         }
         private bool _hasSavingThrow = false;
 
-        #region INotifyPropertyChanged
-
-        /// <summary>
-        ///     PropertyChanged EventHandler
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="propertyName"></param>
-        protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
-        #endregion
-
         public void init_copy(OnHitStatusList to_copy)
         {
-            List = to_copy.List.Clone();
+            Elements = to_copy.Elements.Clone();
             HasSavingThrow = to_copy.HasSavingThrow;
         }
 
-        public OnHitStatusList(OnHitStatusList to_copy)
+        public OnHitStatusList(OnHitStatusList to_copy) : base(to_copy)
         {
             init_copy(to_copy);
         }
 
-        public object Clone()
+        public override object Clone()
         {
             return new OnHitStatusList(this);
         }

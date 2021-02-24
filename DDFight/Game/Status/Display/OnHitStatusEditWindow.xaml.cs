@@ -10,6 +10,8 @@ namespace DDFight.Game.Status.Display
     /// </summary>
     public partial class OnHitStatusEditWindow : Window
     {
+        public bool Validated = false;
+
         public OnHitStatus data_context
         {
             get => (OnHitStatus)DataContext;
@@ -17,11 +19,16 @@ namespace DDFight.Game.Status.Display
 
         public OnHitStatusEditWindow()
         {
+            DataContextChanged += OnHitStatusEditWindow_DataContextChanged;
             InitializeComponent();
-            
         }
 
-        private void StringBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void OnHitStatusEditWindow_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            data_context.PropertyChanged += Data_context_PropertyChanged;
+        }
+
+        private void Data_context_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (this.AreAllChildrenValid())
                 ValidateButtonControl.IsEnabled = true;
@@ -35,7 +42,7 @@ namespace DDFight.Game.Status.Display
         {
             if (this.AreAllChildrenValid())
             {
-                data_context.Validated = true;
+                this.Validated = true;
                 planned_close = true;
                 this.Close();
             }

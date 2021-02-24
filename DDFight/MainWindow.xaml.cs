@@ -41,27 +41,15 @@ namespace DDFight
 
             Logger.Init();
 
-            Global.Context.CharacterList = SaveManager.LoadGenericList<Character, CharacterList>(SaveManager.players_folder);
-            Global.Context.MonsterList = SaveManager.LoadGenericList<Monster, MonsterList>(SaveManager.monsters_folder);
-            Global.Context.SpellList = SaveManager.LoadGenericList<Spell, SpellList>(SaveManager.spells_folder);
+            Global.Context.CharacterList = SaveManager.LoadGenericList<Character, CharacterList>("new_test\\characters\\");
+            Global.Context.MonsterList = SaveManager.LoadGenericList<Monster, MonsterList>("new_test\\monsters\\");
+            Global.Context.SpellList = SaveManager.LoadGenericList<Spell, SpellList>("new_test\\spells\\");
+            Global.Context.SpellList.IsMainSpellList = true;
 
             Global.Loading = false;
 
-            Global.Context.CharacterList.Elements[0].HitAttacks.Add(new HitAttackTemplate()
-            {
-                Name = "oui",
-                HitBonus = 3,
-                DamageList = new System.Collections.Generic.List<Game.Aggression.DamageTemplate>()
-                {
-                    new Game.Aggression.DamageTemplate()
-                    {
-                        Damage=new Game.Dices.DiceRoll("1d5+3"),
-                    }
-                }
-            }) ;
-            SaveManager.SaveUnique<Character>(Global.Context.CharacterList.Elements[0], "test//");
 
-            Global.Context.FightContext.FightersList.Fighters.CollectionChanged += FightingCharacters_CollectionChanged;
+            Global.Context.FightContext.FightersList.Elements.CollectionChanged += FightingCharacters_CollectionChanged;
 
             DataContext = Global.Context;
 
@@ -77,7 +65,7 @@ namespace DDFight
 
         private void FightingCharacters_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            FightButton.IsEnabled = Global.Context.FightContext.FightersList.Fighters.Count >= 2;
+            FightButton.IsEnabled = Global.Context.FightContext.FightersList.Elements.Count >= 2;
         }
 
         private void FightButton_Click(object sender, RoutedEventArgs e)
@@ -99,7 +87,7 @@ namespace DDFight
 
                 // Clean up after a Fight
                 fightWindow.UnregisterAll();
-                foreach (Character character in Global.Context.FightContext.FightersList.Fighters.OfType<Character>())
+                foreach (Character character in Global.Context.FightContext.FightersList.Elements.OfType<Character>())
                 {
                     character.GetOutOfFight();
                 }

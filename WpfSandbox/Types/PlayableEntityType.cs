@@ -352,7 +352,6 @@ namespace WpfSandbox.Types
             get => _isTransformed;
             set
             {
-                Console.WriteLine("change is transformed in " + GetType().ToString());
                 _isTransformed = value;
                 NotifyPropertyChanged();
             }

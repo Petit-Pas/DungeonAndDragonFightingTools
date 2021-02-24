@@ -1,5 +1,7 @@
-﻿using System;
+﻿using DDFight.Game.Counters;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -10,8 +12,26 @@ namespace WpfSandbox.Types
 {
     public class CounterType : INotifyPropertyChanged, ICloneable
     {
-        public CounterType() { }
+        public static CounterList ConvertListCounterType(ObservableCollection<CounterType> list)
+        {
+            CounterList result = new CounterList();
+            foreach (CounterType count in list)
+                result.AddElementSilent(ConvertCounterType(count));
+            return result;
+        }
 
+        public static Counter ConvertCounterType(CounterType to_copy)
+        {
+            Counter result = new Counter()
+            {
+                CurrentValue = to_copy.CurrentValue,
+                MaxValue = to_copy.MaxValue,
+                Name = to_copy.Name,
+            };
+            return result;
+        }
+
+        public CounterType() { }
         public string Name
         {
             get => _name;
@@ -62,10 +82,7 @@ namespace WpfSandbox.Types
         /// <param name="propertyName"></param>
         protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
 

@@ -76,6 +76,7 @@
       <DependentUpon>HitAttackResultEditableControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Game\Aggression\Attacks\Display\HitAttackTemplateListUserControl.cs" />
+    <Compile Include="Game\Aggression\Attacks\HitAttackTemplateList.cs" />
     <Compile Include="Game\Aggression\DamageModifierEnum.cs" />
     <Compile Include="Game\Aggression\Display\DamageModifierEnumListSelectableUserControl.xaml.cs">
       <DependentUpon>DamageModifierEnumListSelectableUserControl.xaml</DependentUpon>
@@ -130,6 +131,7 @@
       <DependentUpon>SpellPreviewUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Game\Aggression\Spells\Spell.cs" />
+    <Compile Include="Game\Counters\CounterList.cs" />
     <Compile Include="Game\Dices\SavingThrow\Display\SavingThrowRollableDenseUserControl.xaml.cs">
       <DependentUpon>SavingThrowRollableDenseUserControl.xaml</DependentUpon>
     </Compile>
@@ -153,15 +155,16 @@
     <Compile Include="Game\Status\Display\ApplicationModifierEnumListSelectableUserControl.xaml.cs">
       <DependentUpon>ApplicationModifierEnumListSelectableUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Game\Status\Display\CustomVerboseStatusListUserControl.cs" />
     <Compile Include="Tools\ArithmeticParser.cs" />
     <Compile Include="Tools\BindingProxy.cs" />
     <Compile Include="Tools\FrameworkElementExtensions.cs" />
     <Compile Include="Tools\IListable.cs" />
     <Compile Include="Tools\INameable.cs" />
-    <Compile Include="Tools\NewSaveManager\CharacterList.cs" />
-    <Compile Include="Tools\NewSaveManager\MonsterList.cs" />
-    <Compile Include="Tools\NewSaveManager\SpellList.cs" />
-    <Compile Include="Tools\NewSaveManager\PlayableEntityList.cs" />
+    <Compile Include="Game\Entities\CharacterList.cs" />
+    <Compile Include="Game\Entities\MonsterList.cs" />
+    <Compile Include="Game\Aggression\Spells\SpellList.cs" />
+    <Compile Include="Game\Entities\PlayableEntityList.cs" />
     <Compile Include="Tools\NewSaveManager\SaveManager.cs" />
     <Compile Include="Tools\NewSaveManager\GenericList.cs" />
     <Compile Include="Game\Counters\Counter.cs" />
@@ -213,9 +216,6 @@
     </Compile>
     <Compile Include="Game\Aggression\Attacks\Display\HitAttackTemplateEditableUserControl.xaml.cs">
       <DependentUpon>HitAttackTemplateEditableUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Game\Aggression\Attacks\Display\HitAttackTemplateListEditableUserControl.xaml.cs">
-      <DependentUpon>HitAttackTemplateListEditableUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Game\Aggression\Display\RangeEditableUserControl.xaml.cs">
       <DependentUpon>RangeEditableUserControl.xaml</DependentUpon>
@@ -314,7 +314,7 @@
     <Compile Include="Game\Fight\FightEvents\EndTurnEventArgs.cs" />
     <Compile Include="Game\Fight\FightEvents\SelectedCharacterEvent.cs" />
     <Compile Include="Game\Fight\FightEvents\StartNewTurnEventArgs.cs" />
-    <Compile Include="Game\Fight\FightingCharactersDataContext.cs" />
+    <Compile Include="Game\Fight\FighterList.cs" />
     <Compile Include="Game\Entities\PlayableEntity.cs" />
     <Compile Include="Game\Entities\Monster.cs" />
     <Compile Include="Game\GameDataContext.cs" />
@@ -334,7 +334,6 @@
     </Compile>
     <Compile Include="Game\Status\OnHitStatus.cs" />
     <Compile Include="Game\Status\OnHitStatusList.cs" />
-    <Compile Include="Game\Status\StatusEndMomentumEnum.cs" />
     <Compile Include="Resources\ResourceManager.cs" />
     <Compile Include="Tools\ICopyAssignable.cs" />
     <Compile Include="Tools\IEventUnregisterable.cs" />
@@ -551,10 +550,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Game\Aggression\Attacks\Display\HitAttackTemplateEditableUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Game\Aggression\Attacks\Display\HitAttackTemplateListEditableUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

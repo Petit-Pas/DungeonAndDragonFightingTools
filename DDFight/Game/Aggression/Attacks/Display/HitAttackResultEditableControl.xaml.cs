@@ -32,7 +32,7 @@ namespace DDFight.Game.Aggression.Attacks.Display
 
         private void HitAttackResultEditableControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            HitAttackTargetComboControl.ItemsSource = Global.Context.FightContext.FightersList.Fighters;
+            HitAttackTargetComboControl.ItemsSource = Global.Context.FightContext.FightersList.Elements;
             HitAttackTargetComboControl.SelectionChanged += HitAttackTargetComboControl_SelectionChanged;
             try
             {

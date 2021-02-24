@@ -20,9 +20,6 @@ namespace DDFight.Game.Aggression.Attacks
         [XmlIgnore]
         public PlayableEntity Owner;
 
-        [XmlIgnore]
-        public bool Validated;
-
         #region Properties
 
         public OnHitStatusList OnHitStatuses {
@@ -96,7 +93,7 @@ namespace DDFight.Game.Aggression.Attacks
             window.DataContext = temporary;
             window.ShowCentered();
 
-            if (temporary.Validated == true)
+            if (window.Validated == true)
             {
                 this.CopyAssign(temporary);
                 return true;

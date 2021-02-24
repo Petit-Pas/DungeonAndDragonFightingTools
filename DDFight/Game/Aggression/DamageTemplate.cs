@@ -1,5 +1,6 @@
 ﻿using DDFight.Game.DamageAffinity;
 using DDFight.Game.Dices;
+using DDFight.Tools;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -120,6 +121,7 @@ namespace DDFight.Game.Aggression
                 NotifyPropertyChanged();
             }
         }
+
         private DamageTypeEnum _damageType = DamageTypeEnum.Force;
 
         #endregion
@@ -161,6 +163,11 @@ namespace DDFight.Game.Aggression
         public virtual object Clone()
         {
             return new DamageTemplate(this);
+        }
+
+        public bool Edit()
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

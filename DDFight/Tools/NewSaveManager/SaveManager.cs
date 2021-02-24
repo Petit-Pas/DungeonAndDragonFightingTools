@@ -148,17 +148,18 @@ namespace DDFight.Tools.Save
 
             foreach (T elem in genericList.Elements)
             {
+                StreamWriter writer = null;
                 try
                 {
-                    StreamWriter writer = new StreamWriter(folder_name + elem.Name + ".xml");
+                    writer = new StreamWriter(folder_name + elem.Name + ".xml");
                     serializer.Serialize(writer, elem);
-                    writer.Close();
                 }
                 catch (Exception e)
                 {
-                    Logger.Log("WARNING: Exception occured when trying to load " + folder_name + elem.Name);
+                    Logger.Log("WARNING: Exception occured when trying to save " + folder_name + elem.Name);
                     Logger.Log(e.Message);
                 }
+                writer?.Close();
             }
             //genericList.Elements.Select(x => x.Name).ToList();
             CleanFolder(subfolder, genericList.Elements.Select(x => folder_name + x.Name + ".xml").ToList());

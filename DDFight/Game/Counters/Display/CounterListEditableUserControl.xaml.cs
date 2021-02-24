@@ -12,9 +12,9 @@ namespace DDFight.Game.Counters.Display
     /// </summary>
     public partial class CounterListEditableUserControl : UserControl, IValidable
     {
-        private ObservableCollection<Counter> data_context 
+        private CounterList data_context 
         {
-            get => (ObservableCollection<Counter>)DataContext;
+            get => (CounterList)DataContext;
         }
 
         public CounterListEditableUserControl()
@@ -24,14 +24,14 @@ namespace DDFight.Game.Counters.Display
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            data_context.Add(new Counter());
+            data_context.AddElementSilent(new Counter());
         }
 
         private void removeSelected()
         {
             if (CounterListControl.SelectedIndex != -1)
             {
-                data_context.RemoveAt(CounterListControl.SelectedIndex);
+                data_context.RemoveElement(CounterListControl.SelectedItem as Counter);
                 RemoveButtonControl.IsEnabled = false;
             }
         }

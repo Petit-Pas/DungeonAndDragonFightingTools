@@ -1,7 +1,10 @@
 ﻿using DDFight.Game.Dices;
 using DDFight.Game.Entities;
 using DDFight.Game.Fight.FightEvents;
+using DDFight.Game.Status;
+using DDFight.Game.Status.Display;
 using DDFight.Tools;
+using DDFight.Tools.Save;
 using DDFight.Windows;
 using DDFight.Windows.FightWindows;
 using DDFight.Windows.ModalWindows.BlankDiceRollModal;
@@ -83,10 +86,11 @@ namespace DDFight.Controlers.Fight
 
         private void ContextTakeDamage_Click(object sender, RoutedEventArgs e)
         {
-            TakeDamageWindow window = new TakeDamageWindow();
-            window.Owner = Window.GetWindow(this);
-
-            window.DataContext = data_context;
+            TakeDamageWindow window = new TakeDamageWindow
+            {
+                Owner = Window.GetWindow(this),
+                DataContext = data_context,
+            };
 
             window.ShowCentered();
         }
@@ -122,17 +126,27 @@ namespace DDFight.Controlers.Fight
 
         private void ContextHeal_Click(object sender, RoutedEventArgs e)
         {
-            HealWindow window = new HealWindow();
-            window.Owner = Window.GetWindow(this);
-
-            window.DataContext = data_context;
+            HealWindow window = new HealWindow
+            {
+                Owner = Window.GetWindow(this),
+                DataContext = data_context,
+            };
 
             window.ShowCentered();
         }
 
         private void ContextManageStatus_Click(object sender, RoutedEventArgs e)
         {
-            data_context.CustomVerboseStatusList.OpenEditWindow();
+            CustomVerboseStatusListEditWindow window = new CustomVerboseStatusListEditWindow();
+            GenericList<CustomVerboseStatus> dc = (GenericList<CustomVerboseStatus>)data_context.CustomVerboseStatusList.Clone();
+
+            window.DataContext = dc;
+
+            window.ShowCentered();
+
+            ;
+
+            //data_context.CustomVerboseStatusList.OpenEditWindow();
         }
 
         private void RemoveFromFight_Click(object sender, RoutedEventArgs e)
@@ -164,10 +178,11 @@ namespace DDFight.Controlers.Fight
                 data_context.TransformBack();
             else
             {
-                SelectPlayableEntityWindow window = new SelectPlayableEntityWindow();
-                window.DataContext = Global.Context.MonsterList.Elements.Clone<PlayableEntity, Monster>();
+                SelectPlayableEntityWindow window = new SelectPlayableEntityWindow
+                {
+                    DataContext = Global.Context.MonsterList.Elements.Clone<PlayableEntity, Monster>(),
+                };
                 window.TitleControl.Text = "Select the monster in which to transform";
-
                 window.ShowCentered();
 
                 if (window.SelectedCharacter != null)
@@ -177,8 +192,10 @@ namespace DDFight.Controlers.Fight
 
         private void SavingThrow_Click(object sender, RoutedEventArgs e)
         {
-            CustomSavingThrowWindow window = new CustomSavingThrowWindow();
-            window.DataContext = this.DataContext;
+            CustomSavingThrowWindow window = new CustomSavingThrowWindow
+            {
+                DataContext = this.DataContext,
+            };
             window.ShowCentered();
         }
 

@@ -33,14 +33,15 @@ namespace DDFight.Game.Entities
 
         #region ICloneable
 
-        private void init_copy(Monster to_copy)
+        protected virtual void InitCopy(Monster to_copy)
         {
+            base.InitCopy(to_copy);
             Level = to_copy.Level;
         }
 
         protected Monster(Monster to_copy) : base(to_copy)
         {
-            init_copy(to_copy);
+            InitCopy(to_copy);
         }
 
         /// <summary>
@@ -50,12 +51,6 @@ namespace DDFight.Game.Entities
         public override object Clone()
         {
             return new Monster(this);
-        }
-
-        public override void CopyAssign(object to_copy)
-        {
-            base.CopyAssign(to_copy);
-            init_copy((Monster)to_copy);
         }
 
         #endregion

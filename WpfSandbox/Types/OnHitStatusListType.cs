@@ -14,6 +14,17 @@ namespace WpfSandbox.Types
 {
     public class OnHitStatusListType : INotifyPropertyChanged, ICloneable
     {
+
+        public static OnHitStatusList Convert(OnHitStatusListType list)
+        {
+            OnHitStatusList result = new OnHitStatusList();
+            foreach (OnHitStatusType status in list.List)
+            {
+                result.AddElementSilent(OnHitStatusType.Convert(status));
+            }
+            return result;
+        }
+        
         public OnHitStatusListType() { }
 
         [XmlArrayItem("OnHitStatus", typeof(OnHitStatusType))]
@@ -61,10 +72,7 @@ namespace WpfSandbox.Types
         /// <param name="propertyName"></param>
         protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         #endregion

@@ -11,6 +11,28 @@ namespace WpfSandbox.Types
     public class DotTemplateType : DamageTemplate, ICloneable
     {
 
+        public static List<DotTemplate> ConvertList(IEnumerable<DotTemplateType> list)
+        {
+            List<DotTemplate> result = new List<DotTemplate>();
+            foreach (DotTemplateType type in list)
+                result.Add(Convert(type));
+            return result;
+        }
+
+        private static DotTemplate Convert(DotTemplateType type)
+        {
+            DotTemplate result = new DotTemplate()
+            {
+                Damage = type.Damage,
+                DamageType = type.DamageType,
+                LastSavingWasSuccesfull = type.LastSavingWasSuccesfull,
+                SituationalDamageModifier = type.SituationalDamageModifier,
+                TriggersOnCastersTurn = type.TriggersOnCastersTurn,
+                TriggersStartOfTurn = type.TriggersStartOfTurn,
+            };
+            return result;
+        }
+
         public DotTemplateType(string damage, DamageTypeEnum damage_type) : base(damage, damage_type) { }
         public DotTemplateType() : base() { }
 

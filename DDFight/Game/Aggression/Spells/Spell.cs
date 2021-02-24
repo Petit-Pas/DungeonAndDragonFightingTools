@@ -18,7 +18,230 @@ namespace DDFight.Game.Aggression.Spells
         {
         }
 
-        public string GetName() { return Name; }
+        #region Properties
+
+        public string Description
+        {
+            get => _description;
+            set
+            {
+                _description = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private string _description = "";
+
+        #region Properties_Level
+
+        [XmlAttribute]
+        public bool CanBeCastAtHigherLevel
+        {
+            get => _canBeCastAtHigherLevel;
+            set
+            {
+                if (_canBeCastAtHigherLevel != value)
+                {
+                    _canBeCastAtHigherLevel = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        private bool _canBeCastAtHigherLevel = false;
+
+        [XmlAttribute]
+        public int AdditionalTargetPerLevel
+        {
+            get => _additionalTargetPerLevel;
+            set
+            {
+                if (_additionalTargetPerLevel != value)
+                {
+                    _additionalTargetPerLevel = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        private int _additionalTargetPerLevel = 0;
+
+        public List<DamageTemplate> AdditionalHitDamagePerLevel
+        {
+            get => _additionalHitDamagePerLevel;
+            set
+            {
+                _additionalHitDamagePerLevel = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private List<DamageTemplate> _additionalHitDamagePerLevel = new List<DamageTemplate>();
+
+        [XmlAttribute]
+        public int BaseLevel
+        {
+            get => _baseLevel;
+            set
+            {
+                _baseLevel = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private int _baseLevel = 0;
+
+        #endregion Properties_Level
+
+        #region Properties_Targets
+
+        /// <summary>
+        ///     0 means uncapped
+        /// </summary>
+        [XmlAttribute]
+        public int AmountTargets
+        {
+            get => _amountTargets;
+            set
+            {
+                _amountTargets = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private int _amountTargets = 0;
+
+        [XmlAttribute]
+        public bool CanSelectSameTargetTwice
+        {
+            get => _canSelectSameTargetTwice;
+            set
+            {
+                _canSelectSameTargetTwice = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private bool _canSelectSameTargetTwice = false;
+
+        #endregion Properties_Targets
+
+        #region Properties_SavingThrow
+
+        [XmlAttribute]
+        public bool HasSavingThrow
+        {
+            get => _hasSavingThrow;
+            set
+            {
+                _hasSavingThrow = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private bool _hasSavingThrow = false;
+
+        [XmlAttribute]
+        public CharacteristicsEnum SavingCharacteristic
+        {
+            get => _savingCharacteristic;
+            set
+            {
+                _savingCharacteristic = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private CharacteristicsEnum _savingCharacteristic = CharacteristicsEnum.Dexterity;
+
+        [XmlAttribute]
+        public int SavingDifficulty
+        {
+            get => _savingDifficulty;
+            set
+            {
+                _savingDifficulty = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private int _savingDifficulty = 0;
+
+        #endregion Properties_SavingThrow
+
+        #region Properties_Attack
+
+        /// <summary>
+        ///     tells wether or not there is an attack roll (opposed to saving throw OR automatic success)
+        /// </summary>
+        [XmlAttribute]
+        public bool IsAnAttack
+        {
+            get => _isAnAttack;
+            set
+            {
+                _isAnAttack = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private bool _isAnAttack = false;
+
+        [XmlAttribute]
+        public int HitRollBonus
+        {
+            get => _hitRollBonus;
+            set
+            {
+                if (_hitRollBonus != value)
+                {
+                    _hitRollBonus = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        private int _hitRollBonus = 0;
+
+        /// <summary>
+        ///     this is just there for magic missile :(
+        /// </summary>
+        [XmlAttribute]
+        public bool AutomaticalyHits
+        {
+            get => _automaticalyHits;
+            set
+            {
+                if (_automaticalyHits != value)
+                {
+                    _automaticalyHits = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        private bool _automaticalyHits = false;
+
+        #endregion Properties_Attack
+
+        #region Properties_SpellEffect
+        
+        public List<DamageTemplate> HitDamage
+        {
+            get => _hitDamage;
+            set
+            {
+                _hitDamage = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private List<DamageTemplate> _hitDamage = new List<DamageTemplate>();
+
+        /// <summary>
+        ///     If the spell is an attack, the status will have their own saving throw
+        ///     If the spell has a saving, the status will share the same saving throw
+        /// </summary>
+        public OnHitStatusList AppliedStatus
+        {
+            get => _appliedStatus;
+            set
+            {
+                _appliedStatus = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private OnHitStatusList _appliedStatus = new OnHitStatusList();
+
+        #endregion Properties_SpellEffect
+
+        #endregion Properties
 
         public void CastSpell(PlayableEntity caster)
         {
@@ -135,206 +358,6 @@ namespace DDFight.Game.Aggression.Spells
             }
             return template;
         }
-
-        #region Properties
-
-        public string Description
-        {
-            get => _description;
-            set
-            {
-                _description = value;
-                NotifyPropertyChanged();
-            }
-        }
-        private string _description = "";
-
-        public List<DamageTemplate> HitDamage
-        {
-            get => _hitDamage;
-            set
-            {
-                _hitDamage = value;
-                NotifyPropertyChanged();
-            }
-        }
-        private List<DamageTemplate> _hitDamage = new List<DamageTemplate>();
-
-        public OnHitStatusList AppliedStatus 
-        {
-            get => _appliedStatus;
-            set
-            {
-                _appliedStatus = value;
-                NotifyPropertyChanged();
-            }
-        }
-        private OnHitStatusList _appliedStatus = new OnHitStatusList();
-
-        #region Level
-
-        public bool CanBeCastAtHigherLevel
-        {
-            get => _canBeCastAtHigherLevel;
-            set
-            {
-                if (_canBeCastAtHigherLevel != value)
-                {
-                    _canBeCastAtHigherLevel = value;
-                    NotifyPropertyChanged();
-                }
-            }
-        }
-        private bool _canBeCastAtHigherLevel = false;
-
-        public int AdditionalTargetPerLevel
-        {
-            get => _additionalTargetPerLevel;
-            set
-            {
-                if (_additionalTargetPerLevel != value)
-                {
-                    _additionalTargetPerLevel = value;
-                    NotifyPropertyChanged();
-                }
-            }
-        }
-        private int _additionalTargetPerLevel = 0;
-
-        public List<DamageTemplate> AdditionalHitDamagePerLevel
-        {
-            get => _additionalHitDamagePerLevel;
-            set
-            {
-                _additionalHitDamagePerLevel = value;
-                NotifyPropertyChanged();
-            }
-        }
-        private List<DamageTemplate> _additionalHitDamagePerLevel = new List<DamageTemplate>();
-
-        public int BaseLevel
-        {
-            get => _baseLevel;
-            set 
-            {
-                _baseLevel = value;
-                NotifyPropertyChanged();
-            }
-        }
-        private int _baseLevel = 0;
-
-        #endregion Level
-
-        /// <summary>
-        ///     0 means uncapped
-        /// </summary>
-        public int AmountTargets
-        {
-            get => _amountTargets;
-            set 
-            {
-                _amountTargets = value;
-                NotifyPropertyChanged();
-            }
-        }
-        private int _amountTargets = 0;
-
-        public bool CanSelectSameTargetTwice
-        {
-            get => _canSelectSameTargetTwice;
-            set
-            {
-                _canSelectSameTargetTwice = value;
-                NotifyPropertyChanged();
-            }
-        }
-        private bool _canSelectSameTargetTwice = false;
-
-        /// <summary>
-        ///     tells wether or not there is an attack roll (opposed to saving throw OR automatic success)
-        /// </summary>
-        public bool IsAnAttack
-        {
-            get => _isAnAttack;
-            set
-            {
-                _isAnAttack = value;
-                NotifyPropertyChanged();
-            }
-        }
-        private bool _isAnAttack = false;
-
-        #region Attack_Spell
-        public int HitRollBonus
-        {
-            get => _hitRollBonus;
-            set {
-                if (_hitRollBonus != value)
-                {
-                    _hitRollBonus = value;
-                    NotifyPropertyChanged();
-                }
-            }
-        }
-        private int _hitRollBonus = 0;
-
-        /// <summary>
-        ///     this is just there for magic missile :(
-        /// </summary>
-        public bool AutomaticalyHits
-        {
-            get => _automaticalyHits;
-            set
-            {
-                if (_automaticalyHits != value)
-                {
-                    _automaticalyHits = value;
-                    NotifyPropertyChanged();
-                }
-            }
-        }
-        private bool _automaticalyHits = false;
-
-        #endregion Attack_Spell
-
-        #region SavingThrow
-
-        public bool HasSavingThrow
-        {
-            get => _hasSavingThrow;
-            set
-            {
-                _hasSavingThrow = value;
-                NotifyPropertyChanged();
-            }
-        }
-        private bool _hasSavingThrow = false;
-
-        public CharacteristicsEnum SavingCharacteristic
-        {
-            get => _savingCharacteristic;
-            set
-            {
-                _savingCharacteristic = value;
-                NotifyPropertyChanged();
-            }
-        }
-        private CharacteristicsEnum _savingCharacteristic = CharacteristicsEnum.Dexterity;
-
-        public int SavingDifficulty
-        {
-            get => _savingDifficulty;
-            set
-            {
-                _savingDifficulty = value;
-                NotifyPropertyChanged();
-            }
-        }
-        private int _savingDifficulty = 0;
-
-        #endregion SavingThrow
-
-        #endregion Properties
 
         #region EditWindow
 

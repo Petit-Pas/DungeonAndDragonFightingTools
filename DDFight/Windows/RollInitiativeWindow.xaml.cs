@@ -47,9 +47,9 @@ namespace DDFight.Windows
 
         public bool Cancelled = true;
 
-        private FightingCharactersDataContext data_context
+        private FighterList data_context
         {
-            get => (FightingCharactersDataContext)DataContext;
+            get => (FighterList)DataContext;
         }
 
         public RollInitiativeWindow()
@@ -63,7 +63,7 @@ namespace DDFight.Windows
         private void RollInitiativeWindow_Loaded(object sender, RoutedEventArgs e)
         {
             contextList = new ObservableCollection<InitiativeCellDataContext>();
-            foreach (PlayableEntity entity in data_context.Fighters)
+            foreach (PlayableEntity entity in data_context.Elements)
             {
                 if (contextList.Any(x => x.Entity.Name == entity.Name))
                 {
@@ -125,7 +125,7 @@ namespace DDFight.Windows
                 this.Cancelled = false;
                 this.Close();
 
-                foreach (PlayableEntity ent in Global.Context.FightContext.FightersList.Fighters)
+                foreach (PlayableEntity ent in Global.Context.FightContext.FightersList.Elements)
                 {
                     Console.WriteLine("{0} has {1}", ent.Name, ent.InitiativeRoll);
                 }
@@ -134,7 +134,7 @@ namespace DDFight.Windows
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
-            foreach (PlayableEntity entity in data_context.Fighters)
+            foreach (PlayableEntity entity in data_context.Elements)
             {
                 if (entity.InitiativeRoll == 0)
                 {

@@ -22,7 +22,7 @@ namespace DDFight.Windows.FightWindows
             CharacterListControl.DataContext = Global.Context.CharacterList;
             MonsterListControl.DataContext = Global.Context.MonsterList;
 
-            FighterListControl.ItemsSource = Global.Context.FightContext.FightersList.Fighters;
+            FighterListControl.ItemsSource = Global.Context.FightContext.FightersList.Elements;
         }
 
         private void FighterListControl_KeyDown(object sender, KeyEventArgs e)
@@ -31,7 +31,7 @@ namespace DDFight.Windows.FightWindows
             {
                 if (FighterListControl.SelectedIndex >= 0)
                 {
-                    Global.Context.FightContext.FightersList.Fighters.RemoveAt(FighterListControl.SelectedIndex);
+                    Global.Context.FightContext.FightersList.RemoveElement(FighterListControl.SelectedItem as PlayableEntity);
                 }
             }
         }

@@ -1,23 +1,11 @@
-﻿using DDFight;
-using DDFight.Game.Aggression.Spells;
-using DDFight.Tools.Save;
-using System;
+﻿using DDFight.Tools.Save;
+using System.Xml.Serialization;
 
-namespace WpfSandbox.Types
+namespace DDFight.Game.Aggression.Spells
 {
-    public class SpellListType : GenericList<SpellType>
+    public class SpellList : GenericList<Spell>
     {
-
-        public static SpellList Convert(SpellListType list)
-        {
-            SpellList result = new SpellList();
-            foreach (SpellType spell in list.Elements)
-                result.AddElementSilent(SpellType.Convert(spell));
-            return result;
-        }
-
-
-        public SpellListType()
+        public SpellList()
         {
             IsMainSpellList = false;
             init_handlers();
@@ -25,14 +13,18 @@ namespace WpfSandbox.Types
 
         public void init_handlers()
         {
+            this.ListChanged += NewPlayableEntityList_ListChanged;
+            this.ListElementChanged += NewPlayableList_ListElementChanged;
+
         }
 
-        public SpellListType(bool isMainSpellList = false)
+        public SpellList(bool isMainSpellList = false)
         {
             this.IsMainSpellList = isMainSpellList;
             init_handlers();
         }
 
+        [XmlIgnore]
         public bool IsMainSpellList = false;
 
         private void NewPlayableList_ListElementChanged(object sender, ListElementChangedArgs e)
@@ -42,15 +34,15 @@ namespace WpfSandbox.Types
                 {
                     case GenericListOperation.Addition:
                         if (IsMainSpellList)
-                            SaveManager.SaveUnique<SpellType>(e.Element);
+                            SaveManager.SaveUnique<Spell>(e.Element);
                         break;
                     case GenericListOperation.Deletion:
                         if (IsMainSpellList)
-                            SaveManager.DeleteUnique<SpellType>(e.Element);
+                            SaveManager.DeleteUnique<Spell>(e.Element);
                         break;
                     case GenericListOperation.Modification:
                         if (IsMainSpellList)
-                            SaveManager.SaveUnique<SpellType>(e.Element);
+                            SaveManager.SaveUnique<Spell>(e.Element);
                         break;
                     case GenericListOperation.Sort:
                         break;
@@ -78,12 +70,12 @@ namespace WpfSandbox.Types
             }
         }
 
-        private void init_copy(SpellListType to_copy)
+        private void init_copy(SpellList to_copy)
         {
             IsMainSpellList = to_copy.IsMainSpellList;
         }
 
-        public SpellListType(SpellListType to_copy) : base(to_copy)
+        public SpellList(SpellList to_copy) : base(to_copy)
         {
             init_copy(to_copy);
             init_handlers();
@@ -91,7 +83,7 @@ namespace WpfSandbox.Types
 
         public override object Clone()
         {
-            return new SpellListType(this);
+            return new SpellList(this);
         }
 
     }

@@ -18,7 +18,7 @@ namespace DDFight.Game.Entities.Display
 
         private void refresh_entityList()
         {
-            EntityList = data_context?.Fighters;
+            EntityList = data_context?.Elements;
         }
 
         private void NewSoonToFightEntityListUserControl_DataContextChanged(object sender, System.Windows.DependencyPropertyChangedEventArgs e)
@@ -26,11 +26,11 @@ namespace DDFight.Game.Entities.Display
             refresh_entityList();
         }
 
-        private FightingCharactersDataContext data_context
+        private FighterList data_context
         {
             get
             {
-                try { return (FightingCharactersDataContext)DataContext; }
+                try { return (FighterList)DataContext; }
                 catch (Exception) { return null; }
             }
         }
@@ -46,7 +46,7 @@ namespace DDFight.Game.Entities.Display
         public override void remove(object obj)
         {
             PlayableEntity entity = obj as PlayableEntity;
-            data_context.Fighters.Remove(entity);
+            data_context.RemoveElement(entity);
         }
 
         public override void duplicate(object obj)

@@ -1,5 +1,6 @@
 ﻿using DDFight;
 using DDFight.Game.Aggression;
+using DDFight.Game.Aggression.Attacks;
 using DDFight.Game.Status;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,29 @@ namespace WpfSandbox.Types
     [XmlRoot(elementName: "HitAttackTemplate")]
     public class HitAttackTemplateType : AAttackTemplateType
     {
+        public static HitAttackTemplateList ConvertList(IEnumerable<HitAttackTemplateType> list)
+        {
+            HitAttackTemplateList result = new HitAttackTemplateList();
+            foreach (HitAttackTemplateType atk in list)
+                result.AddElementSilent(Convert(atk));
+            return result;
+        }
 
+        public static HitAttackTemplate Convert(HitAttackTemplateType attack)
+        {
+            HitAttackTemplate result = new HitAttackTemplate()
+            {
+                DamageList = DamageTemplateType.ConvertList(attack.DamageList),
+                DisplayName = attack.DisplayName,
+                HitBonus = attack.HitBonus,
+                IsCloseRanged = attack.IsCloseRanged,
+                IsLongRanged = attack.IsLongRanged,
+                Name = attack.Name,
+                OnHitStatuses = OnHitStatusListType.Convert(attack.OnHitStatuses),
+            };
+
+            return result;
+        }
         public HitAttackTemplateType() { }
 
         #region Properties
