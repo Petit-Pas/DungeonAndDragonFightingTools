@@ -24,7 +24,7 @@ using DDFight.Tools.Save;
 
 namespace DDFight.Game.Entities
 {
-    public class PlayableEntity : IListable
+    public class PlayableEntity : INameable, IWindowEditable, ICloneable, INotifyPropertyChanged
     {
         public PlayableEntity()
         {
@@ -477,7 +477,6 @@ namespace DDFight.Game.Entities
             get => _isTransformed;
             set
             {
-                Console.WriteLine("change is transformed in " + GetType().ToString());
                 _isTransformed = value;
                 NotifyPropertyChanged();
             }
@@ -620,7 +619,7 @@ namespace DDFight.Game.Entities
         /// </summary>
         /// <param name="damages"></param>
         // TODO Might need to rename this
-        public void TakeHitDamage(List<DamageTemplate> damages)
+        public void TakeHitDamage(DamageTemplateList damages)
         {
             int i = 1;
             int total = 0;
@@ -631,7 +630,7 @@ namespace DDFight.Game.Entities
             paragraph.Inlines.Add(Extensions.BuildRun(" takes ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
 
 
-            foreach (DamageTemplate dmg in damages)
+            foreach (DamageTemplate dmg in damages.Elements)
             {
                 int damage_value = 0;
                 DamageAffinityEnum affinity = this.DamageAffinities.GetAffinity(dmg.DamageType).Affinity;
@@ -669,10 +668,10 @@ namespace DDFight.Game.Entities
                     dmg.LastSavingWasSuccesfull = false;
                 }
 
-                if (i == damages.Count && i != 1)
+                if (i == damages.Elements.Count && i != 1)
                     paragraph.Inlines.Add(Extensions.BuildRun("and ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
                 paragraph.Inlines.Add(Extensions.BuildRun(damage_value.ToString() + " " +  dmg.DamageType.ToString(), (Brush)DamageTypeEnumToBrushConverter.StaticConvert(dmg.DamageType), 15, FontWeights.Bold));
-                paragraph.Inlines.Add(Extensions.BuildRun(i == damages.Count ? " damage" : " damage, ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                paragraph.Inlines.Add(Extensions.BuildRun(i == damages.Elements.Count ? " damage" : " damage, ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
                 total += damage_value;
                 i += 1;
             }
@@ -775,7 +774,7 @@ namespace DDFight.Game.Entities
             }
         }
 
-        public virtual bool Edit()
+        public virtual bool OpenEditWindow()
         {
             PlayableEntityEditWindow window = new PlayableEntityEditWindow();
             PlayableEntity temporary = (PlayableEntity)this.Clone();

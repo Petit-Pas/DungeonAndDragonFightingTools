@@ -40,7 +40,7 @@ namespace DDFight.Game.Entities.Display
         public override void edit(object obj)
         {
             PlayableEntity entity = obj as PlayableEntity;
-            entity.Edit();
+            entity.OpenEditWindow();
         }
 
         public override void remove(object obj)

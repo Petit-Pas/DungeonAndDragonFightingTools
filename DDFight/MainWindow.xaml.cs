@@ -41,9 +41,9 @@ namespace DDFight
 
             Logger.Init();
 
-            Global.Context.CharacterList = SaveManager.LoadGenericList<Character, CharacterList>("new_test\\characters\\");
-            Global.Context.MonsterList = SaveManager.LoadGenericList<Monster, MonsterList>("new_test\\monsters\\");
-            Global.Context.SpellList = SaveManager.LoadGenericList<Spell, SpellList>("new_test\\spells\\");
+            Global.Context.CharacterList = SaveManager.LoadGenericList<Character, CharacterList>(SaveManager.players_folder);
+            Global.Context.MonsterList = SaveManager.LoadGenericList<Monster, MonsterList>(SaveManager.monsters_folder);
+            Global.Context.SpellList = SaveManager.LoadGenericList<Spell, SpellList>(SaveManager.spells_folder);
             Global.Context.SpellList.IsMainSpellList = true;
 
             Global.Loading = false;
@@ -92,7 +92,8 @@ namespace DDFight
                     character.GetOutOfFight();
                 }
                 Global.Context.FightContext.Reset();
-                Global.Context.CharacterList.SaveAll();
+                GenericList<Character>.SaveAll<Character>(Global.Context.CharacterList);
+                //Global.Context.CharacterList.SaveAll();
             }
 
         }

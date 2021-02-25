@@ -169,7 +169,7 @@ namespace DDFight.Controlers.Fight
 
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
-            data_context.Edit();
+            data_context.OpenEditWindow();
         }
 
         private void Transform_Click(object sender, RoutedEventArgs e)

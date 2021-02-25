@@ -12,5 +12,14 @@ namespace DDFight.Game.Aggression
         public DamageTemplateList() : base()
         {
         }
+
+        public DamageTemplateList(DamageTemplateList to_copy) : base(to_copy)
+        {
+        }
+
+        public override object Clone()
+        {
+            return new DamageTemplateList(this);
+        }
     }
 }

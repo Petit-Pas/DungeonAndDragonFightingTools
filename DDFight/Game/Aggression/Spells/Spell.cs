@@ -8,11 +8,12 @@ using DDFight.Windows.ModalWindows.FormWindow;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Xml.Serialization;
 
 namespace DDFight.Game.Aggression.Spells
 {
-    public class Spell : AAttackTemplate, ICloneable, INameable, IListable
+    public class Spell : AAttackTemplate, ICloneable, INameable, INotifyPropertyChanged, IWindowEditable
     {
         public Spell () : base()
         {
@@ -63,7 +64,7 @@ namespace DDFight.Game.Aggression.Spells
         }
         private int _additionalTargetPerLevel = 0;
 
-        public List<DamageTemplate> AdditionalHitDamagePerLevel
+        public DamageTemplateList AdditionalHitDamagePerLevel
         {
             get => _additionalHitDamagePerLevel;
             set
@@ -72,7 +73,7 @@ namespace DDFight.Game.Aggression.Spells
                 NotifyPropertyChanged();
             }
         }
-        private List<DamageTemplate> _additionalHitDamagePerLevel = new List<DamageTemplate>();
+        private DamageTemplateList _additionalHitDamagePerLevel = new DamageTemplateList();
 
         [XmlAttribute]
         public int BaseLevel
@@ -213,7 +214,7 @@ namespace DDFight.Game.Aggression.Spells
 
         #region Properties_SpellEffect
         
-        public List<DamageTemplate> HitDamage
+        public DamageTemplateList HitDamage
         {
             get => _hitDamage;
             set
@@ -222,7 +223,7 @@ namespace DDFight.Game.Aggression.Spells
                 NotifyPropertyChanged();
             }
         }
-        private List<DamageTemplate> _hitDamage = new List<DamageTemplate>();
+        private DamageTemplateList _hitDamage = new DamageTemplateList();
 
         /// <summary>
         ///     If the spell is an attack, the status will have their own saving throw
@@ -293,7 +294,7 @@ namespace DDFight.Game.Aggression.Spells
         {
             AttackSpellResult template = new AttackSpellResult
             {
-                HitDamage = (List<DamageTemplate>)this.HitDamage.Clone<DamageTemplate>(),
+                HitDamage = (DamageTemplateList)this.HitDamage.Clone(),
                 AppliedStatusList = (OnHitStatusList)this.AppliedStatus.Clone(),
                 Caster = caster,
                 Targets = targets,
@@ -305,10 +306,10 @@ namespace DDFight.Game.Aggression.Spells
 
             for (int i = additional_levels; i > 0; i -= 1)
             {
-                foreach (DamageTemplate damageTemplate in AdditionalHitDamagePerLevel)
+                foreach (DamageTemplate damageTemplate in AdditionalHitDamagePerLevel.Elements)
                 {
                     bool added = false;
-                    foreach (DamageTemplate onHitTemplate in template.HitDamage)
+                    foreach (DamageTemplate onHitTemplate in template.HitDamage.Elements)
                     {
                         if (onHitTemplate.IsSameKind(damageTemplate))
                         {
@@ -318,7 +319,7 @@ namespace DDFight.Game.Aggression.Spells
                         }
                     }
                     if (added == false)
-                        template.HitDamage.Add(damageTemplate);
+                        template.HitDamage.AddElementSilent(damageTemplate);
                 }
             }
             return template;
@@ -327,7 +328,7 @@ namespace DDFight.Game.Aggression.Spells
         public NonAttackSpellResult GetNonAttackSpellResult(PlayableEntity caster, ObservableCollection<PlayableEntity> targets, int additional_levels)
         {
             NonAttackSpellResult template = new NonAttackSpellResult {
-                HitDamage = (List<DamageTemplate>)this.HitDamage.Clone<DamageTemplate>(),
+                HitDamage = (DamageTemplateList)this.HitDamage.Clone(),
                 AppliedStatusList = (OnHitStatusList)this.AppliedStatus.Clone(),
                 Caster = caster,
                 HasSavingThrow = this.HasSavingThrow,
@@ -340,10 +341,10 @@ namespace DDFight.Game.Aggression.Spells
 
             for (int i = additional_levels; i > 0; i -= 1)
             {
-                foreach (DamageTemplate damageTemplate in AdditionalHitDamagePerLevel)
+                foreach (DamageTemplate damageTemplate in AdditionalHitDamagePerLevel.Elements)
                 {
                     bool added = false;
-                    foreach (DamageTemplate onHitTemplate in template.HitDamage)
+                    foreach (DamageTemplate onHitTemplate in template.HitDamage.Elements)
                     {
                         if (onHitTemplate.IsSameKind(damageTemplate))
                         {
@@ -353,7 +354,7 @@ namespace DDFight.Game.Aggression.Spells
                         }
                     }
                     if (added == false)
-                        template.HitDamage.Add(damageTemplate);
+                        template.HitDamage.AddElementSilent(damageTemplate);
                 }
             }
             return template;
@@ -364,7 +365,7 @@ namespace DDFight.Game.Aggression.Spells
         [XmlIgnore]
         public bool Validated = false;
 
-        public override bool Edit()
+        public override bool OpenEditWindow()
         {
             SpellEditWindow window = new SpellEditWindow();
             Spell temporary = (Spell)this.Clone();
@@ -393,10 +394,10 @@ namespace DDFight.Game.Aggression.Spells
             this.HasSavingThrow = to_copy.HasSavingThrow;
             this.SavingCharacteristic = to_copy.SavingCharacteristic;
             this.SavingDifficulty = to_copy.SavingDifficulty;
-            this.HitDamage = (List<DamageTemplate>)to_copy.HitDamage.Clone();
+            this.HitDamage = (DamageTemplateList)to_copy.HitDamage.Clone();
             this.AppliedStatus = (OnHitStatusList)to_copy.AppliedStatus.Clone();
             this.CanBeCastAtHigherLevel = to_copy.CanBeCastAtHigherLevel;
-            this.AdditionalHitDamagePerLevel = (List<DamageTemplate>)to_copy.AdditionalHitDamagePerLevel.Clone();
+            this.AdditionalHitDamagePerLevel = (DamageTemplateList)to_copy.AdditionalHitDamagePerLevel.Clone();
             this.AdditionalTargetPerLevel = to_copy.AdditionalTargetPerLevel;
             this.HitRollBonus = to_copy.HitRollBonus;
             this.AutomaticalyHits = to_copy.AutomaticalyHits;

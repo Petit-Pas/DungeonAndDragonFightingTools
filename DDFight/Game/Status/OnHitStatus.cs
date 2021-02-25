@@ -85,7 +85,7 @@ namespace DDFight.Game.Status
 
         #region Properties_Damage_OnApply
 
-        public List<DamageTemplate> OnApplyDamageList
+        public DamageTemplateList OnApplyDamageList
         {
             get => _onApplyDamageList;
             set
@@ -94,13 +94,13 @@ namespace DDFight.Game.Status
                 NotifyPropertyChanged();
             }
         }
-        private List<DamageTemplate> _onApplyDamageList = new List<DamageTemplate>();
+        private DamageTemplateList _onApplyDamageList = new DamageTemplateList();
 
         #endregion Properties_Damage_OnApply
 
         #region Properties_Damage_Dot
 
-        public List<DotTemplate> DotDamageList
+        public DotTemplateList DotDamageList
         {
             get => _dotDamageList;
             set
@@ -109,7 +109,7 @@ namespace DDFight.Game.Status
                 NotifyPropertyChanged();
             }
         }
-        private List<DotTemplate> _dotDamageList = new List<DotTemplate>();
+        private DotTemplateList _dotDamageList = new DotTemplateList();
 
         #endregion Properties_Damage_Dot
 
@@ -286,13 +286,13 @@ namespace DDFight.Game.Status
         /// <param name="caster"> true if its caster's turn, false otherwise </param>
         private void checkDotDamage(bool start, bool caster)
         {
-            List<DamageTemplate> to_apply = new List<DamageTemplate>();
-            foreach (DotTemplate dot in DotDamageList)
+            DamageTemplateList to_apply = new DamageTemplateList();
+            foreach (DotTemplate dot in DotDamageList.Elements)
             {
                 if (dot.TriggersStartOfTurn == start && dot.TriggersOnCastersTurn == caster)
-                    to_apply.Add((DamageTemplate)dot.Clone());
+                    to_apply.AddElementSilent((DamageTemplate)dot.Clone());
             }
-            if (to_apply.Count != 0)
+            if (to_apply.Elements.Count != 0)
             {
                 DamageTemplateListRollableWindow window = new DamageTemplateListRollableWindow() { DataContext = to_apply, };
                 window.TitleControl.Text = this.Header + " inflicts damage to " + Affected.DisplayName;
@@ -480,11 +480,11 @@ namespace DDFight.Game.Status
         {
             OnHitStatus applied = (OnHitStatus)this.Clone();
 
-            if (applied.OnApplyDamageList.Count != 0)
+            if (applied.OnApplyDamageList.Elements.Count != 0)
             {
                 if (!application_success)
                     // the target resisted
-                    foreach (DamageTemplate dmg in applied.OnApplyDamageList)
+                    foreach (DamageTemplate dmg in applied.OnApplyDamageList.Elements)
                         dmg.LastSavingWasSuccesfull = true;
                 target.TakeHitDamage(OnApplyDamageList);
             }
@@ -503,17 +503,17 @@ namespace DDFight.Game.Status
                 applied.Affected = target;
                 if ((applied.CanRedoSavingThrow && applied.SavingIsRemadeAtStartOfTurn) ||
                     (applied.HasAMaximumDuration && !applied.DurationIsCalculatedOnCasterTurn && applied.DurationIsBasedOnStartOfTurn) ||
-                    applied.DotDamageList.Count != 0)
+                    applied.DotDamageList.Elements.Count != 0)
                     target.NewTurnStarted += applied.Affected_NewTurnStarted;
                 if ((applied.CanRedoSavingThrow && applied.SavingIsRemadeAtStartOfTurn == false) ||
                     (applied.HasAMaximumDuration && !applied.DurationIsCalculatedOnCasterTurn && !applied.DurationIsBasedOnStartOfTurn) ||
-                    applied.DotDamageList.Count != 0)
+                    applied.DotDamageList.Elements.Count != 0)
                     target.TurnEnded += applied.Affected_TurnEnded;
                 if ((applied.HasAMaximumDuration && applied.DurationIsCalculatedOnCasterTurn && applied.DurationIsBasedOnStartOfTurn) ||
-                    applied.DotDamageList.Count != 0)
+                    applied.DotDamageList.Elements.Count != 0)
                     caster.NewTurnStarted += applied.Caster_NewTurnStarted;
                 if ((applied.HasAMaximumDuration && applied.DurationIsCalculatedOnCasterTurn && !applied.DurationIsBasedOnStartOfTurn) ||
-                    applied.DotDamageList.Count != 0)
+                    applied.DotDamageList.Elements.Count != 0)
                     caster.TurnEnded += applied.Caster_TurnEnded;
                 if (applied.EndsOnCasterLossOfConcentration)
                 {
@@ -548,7 +548,7 @@ namespace DDFight.Game.Status
         ///     Will open an edit window to updates the status
         /// </summary>
         /// <returns></returns>
-        public override bool Edit()
+        public override bool OpenEditWindow()
         {
 
             OnHitStatusEditWindow window = new OnHitStatusEditWindow();
@@ -585,8 +585,8 @@ namespace DDFight.Game.Status
             HasAMaximumDuration = to_copy.HasAMaximumDuration;
             DurationIsCalculatedOnCasterTurn = to_copy.DurationIsCalculatedOnCasterTurn;
             DurationIsBasedOnStartOfTurn = to_copy.DurationIsBasedOnStartOfTurn;
-            OnApplyDamageList = (List<DamageTemplate>)to_copy.OnApplyDamageList.Clone();
-            DotDamageList = (List<DotTemplate>)to_copy.DotDamageList.Clone();
+            OnApplyDamageList = (DamageTemplateList)to_copy.OnApplyDamageList.Clone();
+            DotDamageList = (DotTemplateList)to_copy.DotDamageList.Clone();
             HasSpellSaving = to_copy.HasSpellSaving;
             SpellApplicationModifier = to_copy.SpellApplicationModifier;
             SpellSavingWasSuccessful = to_copy.SpellSavingWasSuccessful;

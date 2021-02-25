@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace DDFight.Controlers
 {
     public class SpecializedListUserControl<T> : BaseListUserControl
-        where T : class, IListable, new()
+        where T : class, ICloneable, new()
     {
         public SpecializedListUserControl() : base ()
         {

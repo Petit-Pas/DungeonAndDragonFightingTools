@@ -11,11 +11,11 @@ namespace WpfSandbox.Types
     public class DotTemplateType : DamageTemplate, ICloneable
     {
 
-        public static List<DotTemplate> ConvertList(IEnumerable<DotTemplateType> list)
+        public static DotTemplateList ConvertList(IEnumerable<DotTemplateType> list)
         {
-            List<DotTemplate> result = new List<DotTemplate>();
+            DotTemplateList result = new DotTemplateList();
             foreach (DotTemplateType type in list)
-                result.Add(Convert(type));
+                result.AddElementSilent(Convert(type));
             return result;
         }
 

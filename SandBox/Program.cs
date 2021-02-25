@@ -10,11 +10,8 @@ namespace SandBox
     {
         static void Main(string[] args)
         {
-            GenericList<PlayableEntity> genericList = new GenericList<PlayableEntity>();
 
-            genericList.AddElement();
-
-
+            
         }
     }
 }

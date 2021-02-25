@@ -14,11 +14,11 @@ namespace WpfSandbox.Types
 {
     public class DamageTemplateType : ICloneable, INotifyPropertyChanged
     {
-        public static List<DamageTemplate> ConvertList(IEnumerable<DamageTemplateType> list)
+        public static DamageTemplateList ConvertList(IEnumerable<DamageTemplateType> list)
         {
-            List<DamageTemplate> result = new List<DamageTemplate>();
+            DamageTemplateList result = new DamageTemplateList();
             foreach (DamageTemplateType type in list)
-                result.Add(Convert(type));
+                result.AddElementSilent(Convert(type));
             return result;
         }
 

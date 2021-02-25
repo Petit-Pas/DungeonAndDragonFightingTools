@@ -13,9 +13,9 @@ namespace DDFight.Game.Aggression.Display
     /// </summary>
     public partial class DotTemplateListEditableControl : UserControl, INotifyPropertyChanged
     {
-        private List<DotTemplate> data_context
+        private DotTemplateList data_context
         {
-            get => (List<DotTemplate>)this.DataContext;
+            get => (DotTemplateList)this.DataContext;
         }
 
         public DotTemplateListEditableControl()
@@ -32,17 +32,12 @@ namespace DDFight.Game.Aggression.Display
 
         private void refresh_damage_list()
         {
-            List<DotTemplate> list = new List<DotTemplate>();
-            foreach (DotTemplate tmp in data_context)
-            {
-                list.Add(tmp);
-            }
-            DamageListView.ItemsSource = list;
+            DamageListView.ItemsSource = data_context.Elements;
         }
 
         private void AddDamage_Button_Click(object sender, RoutedEventArgs e)
         {
-            data_context.Add(new DotTemplate("1d4", DamageTypeEnum.Force));
+            data_context.AddElementSilent(new DotTemplate("1d4", DamageTypeEnum.Force));
             refresh_damage_list();
         }
 

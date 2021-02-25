@@ -112,9 +112,9 @@ namespace BindValidation
 
             Logger.Init();
 
-            DDFight.Tools.Save.GenericList<CharacterType> character_list = SaveManager.LoadGenericList<CharacterType, DDFight.Tools.Save.GenericList<CharacterType>>(SaveManager.players_folder);
-            DDFight.Tools.Save.GenericList<MonsterType> monster_list = SaveManager.LoadGenericList<MonsterType, DDFight.Tools.Save.GenericList<MonsterType>>(SaveManager.monsters_folder);
-            DDFight.Tools.Save.GenericList<SpellType> spell_list = SaveManager.LoadGenericList<SpellType, DDFight.Tools.Save.GenericList<SpellType>>(SaveManager.spells_folder);
+            DDFight.Tools.Save.GenericList<CharacterType> character_list = SaveManager.LoadGenericList<CharacterType, DDFight.Tools.Save.GenericList<CharacterType>>("trash//"+ SaveManager.players_folder);
+            DDFight.Tools.Save.GenericList<MonsterType> monster_list = SaveManager.LoadGenericList<MonsterType, DDFight.Tools.Save.GenericList<MonsterType>>("trash//" + SaveManager.monsters_folder);
+            DDFight.Tools.Save.GenericList<SpellType> spell_list = SaveManager.LoadGenericList<SpellType, DDFight.Tools.Save.GenericList<SpellType>>("trash//" + SaveManager.spells_folder);
 
 
             DDFight.Tools.Save.GenericList<Character> new_character_list = new DDFight.Tools.Save.GenericList<Character>();
@@ -136,9 +136,9 @@ namespace BindValidation
             }
 
 
-            SaveManager.SaveGenericList<Character>(new_character_list, "new_test//characters//");
-            SaveManager.SaveGenericList<Monster>(new_monster_list, "new_test//monsters//");
-            SaveManager.SaveGenericList<Spell>(new_spell_list, "new_test//spells//");
+            SaveManager.SaveGenericList<Character>(new_character_list, SaveManager.players_folder);
+            SaveManager.SaveGenericList<Monster>(new_monster_list, SaveManager.monsters_folder);
+            SaveManager.SaveGenericList<Spell>(new_spell_list, SaveManager.spells_folder);
 
 
             /*SaveManager.SaveGenericList<CharacterType>(character_list, "test//characters//");

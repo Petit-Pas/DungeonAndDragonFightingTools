@@ -78,6 +78,7 @@
     <Compile Include="Game\Aggression\Attacks\Display\HitAttackTemplateListUserControl.cs" />
     <Compile Include="Game\Aggression\Attacks\HitAttackTemplateList.cs" />
     <Compile Include="Game\Aggression\DamageModifierEnum.cs" />
+    <Compile Include="Game\Aggression\DamageTemplateList.cs" />
     <Compile Include="Game\Aggression\Display\DamageModifierEnumListSelectableUserControl.xaml.cs">
       <DependentUpon>DamageModifierEnumListSelectableUserControl.xaml</DependentUpon>
     </Compile>
@@ -91,6 +92,7 @@
       <DependentUpon>DotTemplateListEditableControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Game\Aggression\DotTemplate.cs" />
+    <Compile Include="Game\Aggression\DotTemplateList.cs" />
     <Compile Include="Game\Aggression\Spells\AttackSpellResult.cs" />
     <Compile Include="Game\Aggression\Spells\Display\SpellListEditableUserControl.cs" />
     <Compile Include="Game\Aggression\Spells\Display\SpellAttackCastWindow.xaml.cs">
@@ -159,12 +161,12 @@
     <Compile Include="Tools\ArithmeticParser.cs" />
     <Compile Include="Tools\BindingProxy.cs" />
     <Compile Include="Tools\FrameworkElementExtensions.cs" />
-    <Compile Include="Tools\IListable.cs" />
     <Compile Include="Tools\INameable.cs" />
     <Compile Include="Game\Entities\CharacterList.cs" />
     <Compile Include="Game\Entities\MonsterList.cs" />
     <Compile Include="Game\Aggression\Spells\SpellList.cs" />
     <Compile Include="Game\Entities\PlayableEntityList.cs" />
+    <Compile Include="Tools\IWindowEditable.cs" />
     <Compile Include="Tools\NewSaveManager\SaveManager.cs" />
     <Compile Include="Tools\NewSaveManager\GenericList.cs" />
     <Compile Include="Game\Counters\Counter.cs" />

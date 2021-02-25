@@ -17,7 +17,7 @@ namespace WpfSandbox.Types
  /// </summary>
  /// <typeparam name="T"></typeparam>
     public class GenericList<T> : INotifyPropertyChanged, ICloneable
-        where T : class, IListable, new()
+        where T : class, ICloneable, new()
     {
 
         public GenericList()
@@ -107,11 +107,7 @@ namespace WpfSandbox.Types
 
         public bool EditElement(T elem)
         {
-            if (elem.Edit())
-            {
-                OnListElementChanged(new ListElementChangedArgs { Element = elem, Operation = GenericListOperation.Modification });
-                return true;
-            }
+            
             return false;
         }
 
@@ -125,7 +121,7 @@ namespace WpfSandbox.Types
         public void DuplicateElement(T elem)
         {
             T new_one = elem.Clone() as T;
-            new_one.Name = new_one.Name + " - Copy";
+//            new_one.Name = new_one.Name + " - Copy";
             AddElement(new_one);
         }
 
@@ -138,12 +134,7 @@ namespace WpfSandbox.Types
         {
             if (elem == null)
                 elem = new T();
-            if (elem.Edit())
-            {
-                Elements.Add(elem);
-                OnListChanged(new ListChangedArgs { Operation = GenericListOperation.Addition });
-                OnListElementChanged(new ListElementChangedArgs { Operation = GenericListOperation.Addition, Element = elem });
-            }
+            
         }
 
         /// <summary>

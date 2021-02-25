@@ -17,7 +17,7 @@ namespace DDFight.Windows.FightWindows
             get => (PlayableEntity)DataContext;
         }
 
-        List<DamageTemplate> damage_list = new List<DamageTemplate>();
+        DamageTemplateList damage_list = new DamageTemplateList();
 
         public TakeDamageWindow()
         {
@@ -41,7 +41,7 @@ namespace DDFight.Windows.FightWindows
 
             if (damage_list.Count != 0)
             {
-                foreach (DamageTemplate dmg in damage_list)
+                foreach (DamageTemplate dmg in damage_list.Elements)
                 {
                     dmg.Damage.Roll();
                 }

@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace DDFight.Game.Status
 {
-    public class CustomVerboseStatus : INotifyPropertyChanged, IListable
+    public class CustomVerboseStatus : INotifyPropertyChanged, ICloneable, IWindowEditable, INameable
     {
         public CustomVerboseStatus() { }
 
@@ -89,7 +89,7 @@ namespace DDFight.Game.Status
         ///     Will open a window to edit this instance
         /// </summary>
         /// <returns> True if the current instance has changed, false otherwise </returns>
-        public virtual bool Edit()
+        public virtual bool OpenEditWindow()
         {
             CustomVerboseStatusEditWindow window = new CustomVerboseStatusEditWindow();
             CustomVerboseStatus dc = (CustomVerboseStatus)this.Clone();

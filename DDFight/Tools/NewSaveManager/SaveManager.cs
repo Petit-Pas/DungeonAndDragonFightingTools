@@ -58,12 +58,12 @@ namespace DDFight.Tools.Save
             }
         }
 
-        public static void DeleteUnique<T>(T elem) where T : class, IListable, new()
+        public static void DeleteUnique<T>(T elem) where T : class, INameable, new()
         {
             DeleteUnique<T>(elem, get_subfolder(elem));
         }
 
-        public static void DeleteUnique<T>(T elem, string subfolder) where T : class, IListable, new ()
+        public static void DeleteUnique<T>(T elem, string subfolder) where T : class, INameable, new ()
         {
             string folder_name = main_config_folder + subfolder;
             string filename = folder_name + elem.Name + ".xml";
@@ -133,7 +133,7 @@ namespace DDFight.Tools.Save
         /// <typeparam name="T"></typeparam>
         /// <param name="genericList"></param>
         /// <param name="subfolder"></param>
-        public static void SaveGenericList<T>(GenericList<T> genericList, string subfolder = null) where T : class, IListable, new()
+        public static void SaveGenericList<T>(GenericList<T> genericList, string subfolder = null) where T : class, ICloneable, INameable, new()
         {
             if (genericList.Elements.Count == 0)
                 return;
@@ -171,7 +171,7 @@ namespace DDFight.Tools.Save
         /// <typeparam name="T"></typeparam>
         /// <param name="subfolder"></param>
         /// <returns></returns>
-        public static U LoadGenericList<T, U>(string subfolder) where T : class, IListable, new() where U : GenericList<T>, new ()
+        public static U LoadGenericList<T, U>(string subfolder) where T : class, INameable, ICloneable, new() where U : GenericList<T>, new ()
         {
             XmlSerializer serializer = new XmlSerializer(typeof(T));
             U result = new U();

@@ -41,7 +41,7 @@ namespace DDFight.Game.Aggression.Attacks
         }
         private uint _hitRoll = 0;
 
-        public List<DamageTemplate> DamageList
+        public DamageTemplateList DamageList
         {
             get => _damageTemplate;
             set
@@ -50,7 +50,7 @@ namespace DDFight.Game.Aggression.Attacks
                 NotifyPropertyChanged();
             }
         }
-        private List<DamageTemplate> _damageTemplate;
+        private DamageTemplateList _damageTemplate = new DamageTemplateList();
 
         public int HitBonus
         {

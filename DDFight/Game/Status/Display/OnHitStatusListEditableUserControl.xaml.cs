@@ -60,7 +60,7 @@ namespace DDFight.Game.Status.Display
         {
             if (StatusListControl.SelectedIndex != -1)
             {
-                ((OnHitStatus)StatusListControl.SelectedItem).Edit();
+                ((OnHitStatus)StatusListControl.SelectedItem).OpenEditWindow();
             }
         }
     }

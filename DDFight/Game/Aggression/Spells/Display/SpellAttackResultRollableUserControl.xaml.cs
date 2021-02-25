@@ -67,10 +67,10 @@ namespace DDFight.Game.Aggression.Spells.Display
 
         public void RefreshHitDamage()
         {
-            HitDamage = (List<DamageTemplate>)Spell.HitDamage.Clone();
+            HitDamage = (DamageTemplateList)Spell.HitDamage.Clone();
         }
 
-        public List<DamageTemplate> HitDamage
+        public DamageTemplateList HitDamage
         {
             get => _hitDamage;
             set
@@ -79,7 +79,7 @@ namespace DDFight.Game.Aggression.Spells.Display
                 NotifyPropertyChanged();
             }
         }
-        private List<DamageTemplate> _hitDamage = new List<DamageTemplate>();
+        private DamageTemplateList _hitDamage = new DamageTemplateList();
 
 
         public int AttackRoll
@@ -221,7 +221,7 @@ namespace DDFight.Game.Aggression.Spells.Display
         {
             if (AttackRoll == 0)
                 return false;
-            foreach (DamageTemplate dmg in HitDamage)
+            foreach (DamageTemplate dmg in HitDamage.Elements)
             {
                 if (dmg.Damage.LastRoll == 0)
                     return false;

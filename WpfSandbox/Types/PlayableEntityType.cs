@@ -10,7 +10,7 @@ using System.Xml.Serialization;
 
 namespace WpfSandbox.Types
 {
-    public class PlayableEntityType : IListable
+    public class PlayableEntityType : INameable, IWindowEditable, ICloneable, INotifyPropertyChanged
     {
         #region INotifyPropertyChanged
 
@@ -43,7 +43,7 @@ namespace WpfSandbox.Types
 
         #endregion
 
-        public bool Edit()
+        public bool OpenEditWindow()
         {
             throw new NotImplementedException();
         }

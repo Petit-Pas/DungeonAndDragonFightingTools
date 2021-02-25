@@ -1,4 +1,5 @@
 ﻿using DDFight;
+using DDFight.Game.Aggression;
 using DDFight.Game.Aggression.Spells;
 using DDFight.Game.Characteristics;
 using DDFight.Tools;
@@ -12,14 +13,14 @@ using System.Xml.Serialization;
 namespace WpfSandbox.Types
 {
     [XmlRoot(ElementName = "Spell")]
-    public class SpellType : AAttackTemplateType, ICloneable, INameable, IListable
+    public class SpellType : AAttackTemplateType, ICloneable, INameable, IWindowEditable
     {
 
         public static Spell Convert(SpellType spell)
         {
             Spell result = new Spell()
             {
-                AdditionalHitDamagePerLevel = DamageTemplateType.ConvertList(spell.AdditionalHitDamagePerLevel),
+                AdditionalHitDamagePerLevel = (DamageTemplateList) DamageTemplateType.ConvertList(spell.AdditionalHitDamagePerLevel),
                 AdditionalTargetPerLevel = spell.AdditionalTargetPerLevel,
                 AmountTargets = spell.AmountTargets,
                 AppliedStatus = OnHitStatusListType.Convert(spell.AppliedStatus),
@@ -297,7 +298,7 @@ namespace WpfSandbox.Types
             return new SpellType(this);
         }
 
-        public bool Edit()
+        public bool OpenEditWindow()
         {
             return false;
         }

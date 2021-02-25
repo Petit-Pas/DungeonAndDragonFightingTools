@@ -16,10 +16,13 @@ repos court / long
 les validations des EditXXXWindow sont buggées
 
 
-les events sont toujours buggés quand on ajoute qqun dans le combat
+les events sont toujours buggés quand on ajoute qqun dans le combat 
 
 Changer les messages de confirmation de fenetres
 
 Ajouter les compétences en plus des DC
 
 Ajouter les résistances / immunités aux statuts
+
+
+Mieux séparer les interfaces IWindowEditable, INameable, etc..

@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 
 namespace DDFight.Game.Counters
 {
-    public class Counter : INotifyPropertyChanged, ICloneable, IListable
+    public class Counter : INotifyPropertyChanged, ICloneable, INameable
     {
         public Counter() { }
 
@@ -114,7 +114,7 @@ namespace DDFight.Game.Counters
             init_copy(to_copy);
         }
 
-        public bool Edit()
+        public bool OpenEditWindow()
         {
             Logger.Log("Warning : trying to call Edit() on Counter class");
             return false;

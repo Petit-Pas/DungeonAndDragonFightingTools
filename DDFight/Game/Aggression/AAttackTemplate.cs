@@ -6,13 +6,13 @@ using System.Xml.Serialization;
 
 namespace DDFight.Game.Aggression
 {
-    public abstract class AAttackTemplate : INotifyPropertyChanged, ICopyAssignable, IListable
+    public abstract class AAttackTemplate : INotifyPropertyChanged, ICopyAssignable, INameable, IWindowEditable
     {
         public AAttackTemplate()
         {
         }
 
-        public virtual bool Edit()
+        public virtual bool OpenEditWindow()
         {
             throw new NotImplementedException("Edit method should be overriden");
         }

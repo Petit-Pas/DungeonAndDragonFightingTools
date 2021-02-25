@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace DDFight.Game.Status
 {
-    public class CustomVerboseStatusList : GenericList<CustomVerboseStatus>, INotifyPropertyChanged
+    public class CustomVerboseStatusList : GenericList<CustomVerboseStatus>
     {
         public CustomVerboseStatusList() : base()
         { }

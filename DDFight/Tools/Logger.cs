@@ -33,5 +33,10 @@ namespace DDFight.Tools
             writer.WriteLine(to_log);
             writer.Flush();
         }
+
+        public static void CleanUp()
+        {
+            writer.Close();
+        }
     }
 }

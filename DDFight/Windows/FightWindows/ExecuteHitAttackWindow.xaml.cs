@@ -27,7 +27,7 @@ namespace DDFight.Windows.FightWindows
         private void unsubscribe()
         {
             attackResult.PropertyChanged -= AttackResult_PropertyChanged;
-            foreach (DamageTemplate dmg in attackResult.DamageList)
+            foreach (DamageTemplate dmg in attackResult.DamageList.Elements)
             {
                 dmg.Damage.PropertyChanged -= AttackResult_PropertyChanged;
             }
@@ -36,7 +36,7 @@ namespace DDFight.Windows.FightWindows
         private void subscribe()
         {
             attackResult.PropertyChanged += AttackResult_PropertyChanged;
-            foreach (DamageTemplate dmg in attackResult.DamageList)
+            foreach (DamageTemplate dmg in attackResult.DamageList.Elements)
             {
                 dmg.Damage.PropertyChanged += AttackResult_PropertyChanged;
             }
@@ -62,7 +62,7 @@ namespace DDFight.Windows.FightWindows
             ValidateAndResetButtonControl.IsEnabled = false;
             if (attackResult.HitRoll == 0)
                 RollButtonControl.IsEnabled = true;
-            foreach (DamageTemplate dmg in attackResult.DamageList)
+            foreach (DamageTemplate dmg in attackResult.DamageList.Elements)
             {
                 if (dmg.Damage.LastRoll == 0)
                     RollButtonControl.IsEnabled = true;
