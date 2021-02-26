@@ -9,16 +9,12 @@ namespace DDFight.Game.Entities.Display
     {
         public CharacterListEditableUserControl() : base()
         {
-            DataContextChanged += NewCharacterListEditableUserControl_DataContextChanged;
+            DataContextChanged += CharacterListEditableUserControl_DataContextChanged;
         }
 
         private CharacterList data_context
         {
-            get 
-            {
-                try { return (CharacterList)DataContext; }
-                catch (Exception) { return null; }
-            }
+            get => DataContext as CharacterList;
         }
 
         private void refresh_entityList()
@@ -26,7 +22,7 @@ namespace DDFight.Game.Entities.Display
             EntityList = data_context?.Elements;
         }
 
-        private void NewCharacterListEditableUserControl_DataContextChanged(object sender, System.Windows.DependencyPropertyChangedEventArgs e)
+        private void CharacterListEditableUserControl_DataContextChanged(object sender, System.Windows.DependencyPropertyChangedEventArgs e)
         {
             refresh_entityList();
         }       

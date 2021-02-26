@@ -28,7 +28,7 @@ namespace DDFight.Game.Entities.Display
                     e.Handled = true;
                     if (EntityListControl.SelectedIndex != -1)
                     {
-                        Global.Context.FightContext.FightersList.AddElement(EntityListControl.SelectedItem as T);
+                        Global.Context.FightContext.FightersList.AddElementSilent(EntityListControl.SelectedItem as T);
                     }
                 }
             }

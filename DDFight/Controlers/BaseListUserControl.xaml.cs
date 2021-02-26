@@ -100,11 +100,14 @@ namespace DDFight.Controlers
         public ContextMenu ListContextMenu
         {
             get {
-                try
-                {
-                    return _listContextMenu?.Items.Count != 0 ? _listContextMenu : null;
-                }
-                catch (Exception) { return null; }
+                    try
+                    {
+                        return _listContextMenu?.Items.Count != 0 ? _listContextMenu : null;
+                    }
+                    catch (Exception) 
+                    {
+                        return null; 
+                    }
                 }
             set
             {

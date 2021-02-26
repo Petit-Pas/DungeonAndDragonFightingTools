@@ -13,7 +13,7 @@ namespace DDFight.Game.Entities.Display
     {
         public SoonToFightEntityListUserControl() : base ()
         {
-            DataContextChanged += NewSoonToFightEntityListUserControl_DataContextChanged;
+            DataContextChanged += SoonToFightEntityListUserControl_DataContextChanged;
         }
 
         private void refresh_entityList()
@@ -21,18 +21,14 @@ namespace DDFight.Game.Entities.Display
             EntityList = data_context?.Elements;
         }
 
-        private void NewSoonToFightEntityListUserControl_DataContextChanged(object sender, System.Windows.DependencyPropertyChangedEventArgs e)
+        private void SoonToFightEntityListUserControl_DataContextChanged(object sender, System.Windows.DependencyPropertyChangedEventArgs e)
         {
             refresh_entityList();
         }
 
         private FighterList data_context
         {
-            get
-            {
-                try { return (FighterList)DataContext; }
-                catch (Exception) { return null; }
-            }
+            get => DataContext as FighterList;
         }
 
         #region ListControl

@@ -37,7 +37,7 @@ namespace DDFight.Controlers.Game.Attacks.Display
         {
             try
             {
-                DamageControl.ItemsSource = data_context;
+                DamageControl.ItemsSource = data_context.Elements;
             }
             catch { }
         }
