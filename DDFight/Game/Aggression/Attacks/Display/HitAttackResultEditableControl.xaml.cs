@@ -15,14 +15,21 @@ namespace DDFight.Game.Aggression.Attacks.Display
     {
         private HitAttackResult data_context
         {
-            get => (HitAttackResult)DataContext;
+            get => DataContext as HitAttackResult;
         }
 
         public HitAttackResultEditableControl()
         {
-            InitializeComponent();
             DataContextChanged += HitAttackResultEditableControl_DataContextChanged;
             Loaded += HitAttackResultEditableControl_Loaded;
+            Initialized += HitAttackResultEditableControl_Initialized;
+            InitializeComponent();
+        }
+
+        private void HitAttackResultEditableControl_Initialized(object sender, EventArgs e)
+        {
+            HitAttackTargetComboControl.ItemsSource = Global.Context.FightContext.FightersList.Elements;
+            HitAttackTargetComboControl.SelectionChanged += HitAttackTargetComboControl_SelectionChanged;
         }
 
         private void HitAttackResultEditableControl_Loaded(object sender, RoutedEventArgs e)
@@ -32,19 +39,14 @@ namespace DDFight.Game.Aggression.Attacks.Display
 
         private void HitAttackResultEditableControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            HitAttackTargetComboControl.ItemsSource = Global.Context.FightContext.FightersList.Elements;
-            HitAttackTargetComboControl.SelectionChanged += HitAttackTargetComboControl_SelectionChanged;
-            try
-            {
+            if (data_context != null)
+            { 
                 data_context.PropertyChanged += Data_context_PropertyChanged;
                 data_context.SituationalHitAttackModifiers.PropertyChanged += SituationalHitAttackModifiers_PropertyChanged;
                 if (HitAttackTargetComboControl.SelectedIndex != -1)
                     data_context.Target = (PlayableEntity)HitAttackTargetComboControl.SelectedItem;
                 refresh_hit();
                 refresh_hit_target();
-            }
-            catch (Exception)
-            {
             }
         }
 

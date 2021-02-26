@@ -498,7 +498,7 @@ namespace DDFight.Game.Status
                 paragraph.Inlines.Add(Extensions.BuildRun(" on ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
                 paragraph.Inlines.Add(Extensions.BuildRun(target.DisplayName + "\r\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
 
-                target.CustomVerboseStatusList.AddElement(applied);
+                target.CustomVerboseStatusList.AddElementSilent(applied);
                 applied.Caster = caster;
                 applied.Affected = target;
                 if ((applied.CanRedoSavingThrow && applied.SavingIsRemadeAtStartOfTurn) ||

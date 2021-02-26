@@ -13,15 +13,26 @@ namespace DDFight.Windows.FightWindows
     {
         public HitAttackTemplate data_context
         {
-            get => (HitAttackTemplate)DataContext;
+            get => DataContext as HitAttackTemplate;
         }
 
         public HitAttackResult attackResult;
 
         public ExecuteHitAttackWindow()
         {
+            DataContextChanged += ExecuteHitAttackWindow_DataContextChanged;
             InitializeComponent();
-            Loaded += ExecuteHitAttackWindow_Loaded;
+        }
+
+        private void ExecuteHitAttackWindow_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (data_context != null)
+            {
+                attackResult = data_context.GetResultTemplate();
+                AttackControl.DataContext = attackResult;
+                subscribe();
+                refresh_buttons();
+            }
         }
 
         private void unsubscribe()
@@ -40,14 +51,6 @@ namespace DDFight.Windows.FightWindows
             {
                 dmg.Damage.PropertyChanged += AttackResult_PropertyChanged;
             }
-        }
-
-        private void ExecuteHitAttackWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            attackResult = data_context.GetResultTemplate();
-            AttackControl.DataContext = attackResult;
-            subscribe();
-            refresh_buttons();
         }
 
         private void AttackResult_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
