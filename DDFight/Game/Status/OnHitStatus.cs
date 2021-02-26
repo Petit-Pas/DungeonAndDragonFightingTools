@@ -478,16 +478,18 @@ namespace DDFight.Game.Status
         /// <param name="multiple_application"> tells that a status will be applied more than once ==> to avoid the removal of concentration on every new affected ==> false for the first call, true for the other ones </param>
         public void Apply(PlayableEntity caster, PlayableEntity target, bool application_success = true, bool multiple_application = false)
         {
-            OnHitStatus applied = (OnHitStatus)this.Clone();
 
-            if (applied.OnApplyDamageList.Elements.Count != 0)
+            // Damages are applied from the class itself
+            if (OnApplyDamageList.Elements.Count != 0)
             {
-                if (!application_success)
-                    // the target resisted
-                    foreach (DamageTemplate dmg in applied.OnApplyDamageList.Elements)
-                        dmg.LastSavingWasSuccesfull = true;
+                foreach (DamageTemplate dmg in OnApplyDamageList.Elements)
+                    dmg.LastSavingWasSuccesfull = !application_success;
                 target.TakeHitDamage(OnApplyDamageList);
             }
+
+            // the applied status is a copy
+            OnHitStatus applied = (OnHitStatus)this.Clone();
+
             if (application_success)
             {
                 Paragraph paragraph = (Paragraph)Global.Context.UserLogs.Blocks.LastBlock;
