@@ -14,11 +14,7 @@ namespace DDFight.Game.Entities.Display
 
         private MonsterList data_context
         {
-            get
-            {
-                try { return (MonsterList)DataContext; }
-                catch (Exception) { return null; }
-            }
+            get => DataContext as MonsterList;
         }
 
         private void refresh_entityList()

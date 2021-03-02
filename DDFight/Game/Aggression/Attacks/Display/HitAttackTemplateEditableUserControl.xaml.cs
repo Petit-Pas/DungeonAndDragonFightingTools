@@ -10,11 +10,6 @@ namespace DDFight.Controlers.Game.Attacks
     /// </summary>
     public partial class HitAttackTemplateEditableUserControl : UserControl, IValidable
     {
-        private HitAttackTemplate _dataContext
-        {
-            get => (HitAttackTemplate)this.DataContext;
-        }
-
         public HitAttackTemplateEditableUserControl()
         {
             InitializeComponent();

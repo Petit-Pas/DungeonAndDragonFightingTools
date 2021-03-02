@@ -9,19 +9,26 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <ObjectDataProvider x:Key="DataFromEnum" MethodName="GetValues"
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/ComboBoxStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <ObjectDataProvider x:Key="DataFromEnum" MethodName="GetValues"
                             ObjectType="{x:Type System:Enum}">
-            <ObjectDataProvider.MethodParameters>
-                <x:Type TypeName="enum:DamageTypeEnum"/>
-            </ObjectDataProvider.MethodParameters>
-        </ObjectDataProvider>
+                <ObjectDataProvider.MethodParameters>
+                    <x:Type TypeName="enum:DamageTypeEnum"/>
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
+
+        </ResourceDictionary>
     </UserControl.Resources>
     <Grid
         Background="{StaticResource LightestGray}">
         <ComboBox 
             x:Name="_ComboBox" 
-            ItemsSource="{Binding Source={StaticResource DataFromEnum}}">
-            <ComboBox.Resources>
+            ItemsSource="{Binding Source={StaticResource DataFromEnum}}"
+            Style="{StaticResource ComboBoxStyle}">
+            <!--ComboBox.Resources>
                 <Style TargetType="TextBlock">
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ComboBoxItem}}" Value="True">
@@ -30,17 +37,17 @@
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
-            </ComboBox.Resources>
+            </ComboBox.Resources-->
             <ComboBox.ItemContainerStyle>
-                <Style TargetType="ComboBoxItem">
-                    <Style.Triggers>
+                <Style TargetType="ComboBoxItem" BasedOn="{StaticResource ComboBoxItemStyle}"/>
+                <!--<Style.Triggers>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="Background" Value="Red" />
                         </Trigger>
                     </Style.Triggers>
                     <Setter Property="Background" Value="{StaticResource LightestGray}" />
                     <Setter Property="Foreground" Value="{StaticResource Light}"/>
-                </Style>
+                </Style>-->
             </ComboBox.ItemContainerStyle>
         </ComboBox>
     </Grid>

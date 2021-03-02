@@ -74,7 +74,7 @@ namespace DDFight.Game.Status.Display
         {
             refresh_saving_control();
             refresh_validate_button();
-            foreach (DamageTemplate dmg in data_context.OnApplyDamageList)
+            foreach (DamageTemplate dmg in data_context.OnApplyDamageList.Elements)
             {
                 dmg.Damage.PropertyChanged += Dmg_PropertyChanged;
             }
@@ -95,7 +95,7 @@ namespace DDFight.Game.Status.Display
             ValidateButtonControl.IsEnabled = true;
             if (((SavingThrow)SavingThrowControl.DataContext).SavingRoll == 0)
                 ValidateButtonControl.IsEnabled = false;
-            foreach (DamageTemplate dmg in data_context.OnApplyDamageList)
+            foreach (DamageTemplate dmg in data_context.OnApplyDamageList.Elements)
             {
                 if (dmg.Damage.LastRoll == 0)
                     ValidateButtonControl.IsEnabled = false;
@@ -200,7 +200,7 @@ namespace DDFight.Game.Status.Display
                 //resist
                 paragraph.Inlines.Add(Extensions.BuildRun("Success\r\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
                 data_context.UnregisterToAll();
-                data_context.Affected.CustomVerboseStatusList.List.Remove(data_context);
+                data_context.Affected.CustomVerboseStatusList.RemoveElement(data_context);
             }
             else
             {
@@ -229,7 +229,7 @@ namespace DDFight.Game.Status.Display
             {
                 RollableWindowTool.RollRollableChildren(this);
                 e.Handled = true;
-                foreach (DamageTemplate dmg in data_context.OnApplyDamageList)
+                foreach (DamageTemplate dmg in data_context.OnApplyDamageList.Elements)
                 {
                     if (dmg.Damage.LastRoll == 0)
                         dmg.Damage.Roll();

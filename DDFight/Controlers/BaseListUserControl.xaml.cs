@@ -100,11 +100,14 @@ namespace DDFight.Controlers
         public ContextMenu ListContextMenu
         {
             get {
-                try
-                {
-                    return _listContextMenu?.Items.Count != 0 ? _listContextMenu : null;
-                }
-                catch (Exception) { return null; }
+                    try
+                    {
+                        return _listContextMenu?.Items.Count != 0 ? _listContextMenu : null;
+                    }
+                    catch (Exception) 
+                    {
+                        return null; 
+                    }
                 }
             set
             {
@@ -146,7 +149,7 @@ namespace DDFight.Controlers
         protected void ContextMenu_Duplicate_Click(object sender, RoutedEventArgs e)
         {
             if (EntityListControl.SelectedIndex != -1 && IsEditable)
-                duplicate(EntityListControl.SelectedItem as IListable);
+                duplicate(EntityListControl.SelectedItem);
         }
 
         protected void ContextMenu_RemoveClick(object sender, RoutedEventArgs e)
@@ -158,7 +161,7 @@ namespace DDFight.Controlers
         protected void ContextMenu_EditClick(object sender, RoutedEventArgs e)
         {
             if (EntityListControl.SelectedIndex != -1 && IsEditable)
-                edit(EntityListControl.SelectedItem as IListable);
+                edit(EntityListControl.SelectedItem);
         }
 
         #endregion ContextMenu
@@ -185,7 +188,7 @@ namespace DDFight.Controlers
         protected virtual void EntityList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (EntityListControl.SelectedItem != null && IsEditable)
-                edit(EntityListControl.SelectedItem as IListable);
+                edit(EntityListControl.SelectedItem);
         }
 
         #endregion ClickEvents

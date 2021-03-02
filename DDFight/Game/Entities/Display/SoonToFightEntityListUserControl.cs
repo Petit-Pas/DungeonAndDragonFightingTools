@@ -13,26 +13,22 @@ namespace DDFight.Game.Entities.Display
     {
         public SoonToFightEntityListUserControl() : base ()
         {
-            DataContextChanged += NewSoonToFightEntityListUserControl_DataContextChanged;
+            DataContextChanged += SoonToFightEntityListUserControl_DataContextChanged;
         }
 
         private void refresh_entityList()
         {
-            EntityList = data_context?.Fighters;
+            EntityList = data_context?.Elements;
         }
 
-        private void NewSoonToFightEntityListUserControl_DataContextChanged(object sender, System.Windows.DependencyPropertyChangedEventArgs e)
+        private void SoonToFightEntityListUserControl_DataContextChanged(object sender, System.Windows.DependencyPropertyChangedEventArgs e)
         {
             refresh_entityList();
         }
 
-        private FightingCharactersDataContext data_context
+        private FighterList data_context
         {
-            get
-            {
-                try { return (FightingCharactersDataContext)DataContext; }
-                catch (Exception) { return null; }
-            }
+            get => DataContext as FighterList;
         }
 
         #region ListControl
@@ -40,13 +36,13 @@ namespace DDFight.Game.Entities.Display
         public override void edit(object obj)
         {
             PlayableEntity entity = obj as PlayableEntity;
-            entity.Edit();
+            entity.OpenEditWindow();
         }
 
         public override void remove(object obj)
         {
             PlayableEntity entity = obj as PlayableEntity;
-            data_context.Fighters.Remove(entity);
+            data_context.RemoveElement(entity);
         }
 
         public override void duplicate(object obj)

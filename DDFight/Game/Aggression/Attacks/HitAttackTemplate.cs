@@ -20,9 +20,6 @@ namespace DDFight.Game.Aggression.Attacks
         [XmlIgnore]
         public PlayableEntity Owner;
 
-        [XmlIgnore]
-        public bool Validated;
-
         #region Properties
 
         public OnHitStatusList OnHitStatuses {
@@ -53,7 +50,7 @@ namespace DDFight.Game.Aggression.Attacks
         /// <summary>
         ///     The list of damage that the attack will inflict if it lands
         /// </summary>
-        public List<DamageTemplate> DamageList
+        public DamageTemplateList DamageList
         {
             get => _damage;
             set {
@@ -61,7 +58,7 @@ namespace DDFight.Game.Aggression.Attacks
                 NotifyPropertyChanged();
             }
         }
-        private List<DamageTemplate> _damage = new List<DamageTemplate> ();
+        private DamageTemplateList _damage = new DamageTemplateList();
 
         #endregion Properties
         
@@ -69,7 +66,7 @@ namespace DDFight.Game.Aggression.Attacks
         {
             return new HitAttackResult()
             {
-                DamageList = (List<DamageTemplate>)DamageList.Clone(),
+                DamageList = (DamageTemplateList)DamageList.Clone(),
                 HitRoll = 0,
                 HitBonus = HitBonus,
                 Target = null,
@@ -89,14 +86,14 @@ namespace DDFight.Game.Aggression.Attacks
             window.ShowCentered();
         }
 
-        public override bool Edit()
+        public override bool OpenEditWindow()
         {
             HitAttackTemplateEditWindow window = new HitAttackTemplateEditWindow();
             HitAttackTemplate temporary = (HitAttackTemplate)this.Clone();
             window.DataContext = temporary;
             window.ShowCentered();
 
-            if (temporary.Validated == true)
+            if (window.Validated == true)
             {
                 this.CopyAssign(temporary);
                 return true;
@@ -109,7 +106,7 @@ namespace DDFight.Game.Aggression.Attacks
         private void init_copy(HitAttackTemplate to_copy)
         {
             HitBonus = to_copy.HitBonus;
-            DamageList = (List<DamageTemplate>)to_copy.DamageList.Clone();
+            DamageList = (DamageTemplateList)to_copy.DamageList.Clone();
             OnHitStatuses = (OnHitStatusList)to_copy.OnHitStatuses.Clone();
         }
 

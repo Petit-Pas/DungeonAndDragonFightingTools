@@ -24,7 +24,7 @@ namespace DDFight.Controlers.Game.Attacks
 
         private void DetailsListHitAttackTemplateUserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            AttackListControl.ItemsSource = data_context.HitAttacks;
+            AttackListControl.ItemsSource = data_context.HitAttacks.Elements;
             DetailControl.DataContext = null;
             DetailControl.Visibility = Visibility.Collapsed;
             data_context.PropertyChanged += Data_context_PropertyChanged;
@@ -33,13 +33,13 @@ namespace DDFight.Controlers.Game.Attacks
         private void Data_context_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "HitAttacks")
-                AttackListControl.ItemsSource = data_context.HitAttacks;
+                AttackListControl.ItemsSource = data_context.HitAttacks.Elements;
         }
 
         private void DetailsListHitAttackTemplateUserControl_Loaded(object sender, RoutedEventArgs e)
         {
             if (data_context != null)
-                AttackListControl.ItemsSource = data_context.HitAttacks;
+                AttackListControl.ItemsSource = data_context.HitAttacks.Elements;
         }
 
         private void AttackListControl_SelectionChanged(object sender, SelectionChangedEventArgs e)

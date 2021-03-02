@@ -15,7 +15,7 @@ namespace DDFight.Game.Fight
         ///     The list of the entities that shall fight when the Fight button is pressed
         /// </summary>
         [XmlIgnore]
-        public FightingCharactersDataContext FightersList
+        public FighterList FightersList
         {
             get => _fightersList;
             set
@@ -24,7 +24,7 @@ namespace DDFight.Game.Fight
                 NotifyPropertyChanged();
             }
         }
-        private FightingCharactersDataContext _fightersList = new FightingCharactersDataContext();
+        private FighterList _fightersList = new FighterList();
 
         /// <summary>
         ///     Counts the amount of rounds of a fight
@@ -61,15 +61,15 @@ namespace DDFight.Game.Fight
             Console.WriteLine("Next Turn");
             if (TurnIndex != -1)
             {
-                Global.Context.FightContext.FightersList.Fighters.ElementAt((int)TurnIndex).EndTurn();
+                Global.Context.FightContext.FightersList.Elements.ElementAt((int)TurnIndex).EndTurn();
                 OnEndTurn(new TurnEndedEventArgs()
                 {
-                    Character = Global.Context.FightContext.FightersList.Fighters.ElementAt((int)TurnIndex),
+                    Character = Global.Context.FightContext.FightersList.Elements.ElementAt((int)TurnIndex),
                     CharacterIndex = (int)TurnIndex,
                 });
             }
             int newTurn = TurnIndex + 1;
-            if (newTurn >= FightersList.Fighters.Count())
+            if (newTurn >= FightersList.Elements.Count())
             {
                 TurnIndex = 0;
                 RoundCount += 1;
@@ -78,7 +78,7 @@ namespace DDFight.Game.Fight
             {
                 TurnIndex = newTurn;
             }
-            PlayableEntity tmp = Global.Context.FightContext.FightersList.Fighters.ElementAt((int)TurnIndex);
+            PlayableEntity tmp = Global.Context.FightContext.FightersList.Elements.ElementAt((int)TurnIndex);
             tmp.StartNewTurn();
             OnStartNewTurn(new StartNewTurnEventArgs() 
             { 
@@ -114,7 +114,7 @@ namespace DDFight.Game.Fight
             Logger.Log("==============================");
             Logger.Log("End of the turn of " + CurrentlyPlaying.DisplayName);
             Logger.Log("");
-            foreach (PlayableEntity tmp in FightersList.Fighters)
+            foreach (PlayableEntity tmp in FightersList.Elements)
             {
                 tmp.Dump();
             }
@@ -137,11 +137,11 @@ namespace DDFight.Game.Fight
         {
             get
             {
-                if (FightersList.Fighters.Count == 0)
+                if (FightersList.Elements.Count == 0)
                     return null;
-                if (TurnIndex < 0 || TurnIndex >= FightersList.Fighters.Count)
+                if (TurnIndex < 0 || TurnIndex >= FightersList.Elements.Count)
                     return null;
-                return FightersList.Fighters.ElementAt(TurnIndex);
+                return FightersList.Elements.ElementAt(TurnIndex);
             }
         }
 
@@ -164,7 +164,7 @@ namespace DDFight.Game.Fight
                 wasPlaying = true;
 
             // modifies the turn order of the character that were playing after the removed character
-            foreach (PlayableEntity tmp in FightersList.Fighters)
+            foreach (PlayableEntity tmp in FightersList.Elements)
             {
                 if (tmp.TurnOrder > to_remove.TurnOrder)
                     tmp.TurnOrder -= 1;
@@ -181,7 +181,7 @@ namespace DDFight.Game.Fight
             {
                 TurnIndex -= 1;
             }
-            FightersList.Fighters.Remove(to_remove);
+            FightersList.RemoveElement(to_remove);
         }
 
         #endregion turn
@@ -210,7 +210,7 @@ namespace DDFight.Game.Fight
         {
             TurnIndex = -1;
             RoundCount = 0;
-            FightersList.Fighters.Clear();
+            FightersList.Elements.Clear();
         }
 
     }

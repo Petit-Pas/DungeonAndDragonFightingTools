@@ -10,9 +10,9 @@ namespace DDFight.Controlers.Game.Attacks.Display
     /// </summary>
     public partial class DamageTemplateListRollableUserControl : UserControl
     {
-        private List<DamageTemplate> data_context
+        private DamageTemplateList data_context
         {
-            get => (List<DamageTemplate>)DataContext;
+            get => (DamageTemplateList)DataContext;
         }
 
         public DamageTemplateListRollableUserControl()
@@ -37,7 +37,7 @@ namespace DDFight.Controlers.Game.Attacks.Display
         {
             try
             {
-                DamageControl.ItemsSource = data_context;
+                DamageControl.ItemsSource = data_context.Elements;
             }
             catch { }
         }

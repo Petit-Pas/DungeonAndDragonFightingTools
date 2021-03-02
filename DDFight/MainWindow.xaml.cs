@@ -1,4 +1,5 @@
 ﻿using DDFight.Game;
+using DDFight.Game.Aggression.Attacks;
 using DDFight.Game.Aggression.Spells;
 using DDFight.Game.Entities;
 using DDFight.Tools;
@@ -43,10 +44,12 @@ namespace DDFight
             Global.Context.CharacterList = SaveManager.LoadGenericList<Character, CharacterList>(SaveManager.players_folder);
             Global.Context.MonsterList = SaveManager.LoadGenericList<Monster, MonsterList>(SaveManager.monsters_folder);
             Global.Context.SpellList = SaveManager.LoadGenericList<Spell, SpellList>(SaveManager.spells_folder);
+            Global.Context.SpellList.IsMainSpellList = true;
 
             Global.Loading = false;
 
-            Global.Context.FightContext.FightersList.Fighters.CollectionChanged += FightingCharacters_CollectionChanged;
+
+            Global.Context.FightContext.FightersList.Elements.CollectionChanged += FightingCharacters_CollectionChanged;
 
             DataContext = Global.Context;
 
@@ -62,7 +65,7 @@ namespace DDFight
 
         private void FightingCharacters_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            FightButton.IsEnabled = Global.Context.FightContext.FightersList.Fighters.Count >= 2;
+            FightButton.IsEnabled = Global.Context.FightContext.FightersList.Elements.Count >= 2;
         }
 
         private void FightButton_Click(object sender, RoutedEventArgs e)
@@ -84,12 +87,13 @@ namespace DDFight
 
                 // Clean up after a Fight
                 fightWindow.UnregisterAll();
-                foreach (Character character in Global.Context.FightContext.FightersList.Fighters.OfType<Character>())
+                foreach (Character character in Global.Context.FightContext.FightersList.Elements.OfType<Character>())
                 {
                     character.GetOutOfFight();
                 }
                 Global.Context.FightContext.Reset();
-                Global.Context.CharacterList.SaveAll();
+                GenericList<Character>.SaveAll<Character>(Global.Context.CharacterList);
+                //Global.Context.CharacterList.SaveAll();
             }
 
         }

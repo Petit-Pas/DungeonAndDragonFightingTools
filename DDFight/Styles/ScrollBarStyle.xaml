@@ -700,7 +700,13 @@
                                             <Setter Property="Control.Template">
                                                 <Setter.Value>
                                                     <ControlTemplate TargetType="{x:Type Thumb}">
-                                                        <Border Name="rectangle" CornerRadius="5" BorderThickness="0" BorderBrush="{StaticResource Light}" Background="{StaticResource Light}" Width="{TemplateBinding FrameworkElement.Width}" Height="{TemplateBinding FrameworkElement.Height}" SnapsToDevicePixels="True"/>
+                                                        <Border BorderBrush="{StaticResource Gray}" Background="{StaticResource Gray}"
+                                                                CornerRadius="0">
+                                                        <Border Name="rectangle" CornerRadius="5" BorderThickness="0" 
+                                                                BorderBrush="{StaticResource Light}" Background="{StaticResource Light}" 
+                                                                Width="{TemplateBinding FrameworkElement.Width}" 
+                                                                Height="{TemplateBinding FrameworkElement.Height}" SnapsToDevicePixels="True"/>
+                                                        </Border>
                                                         <ControlTemplate.Triggers>
                                                             <Trigger Property="UIElement.IsMouseOver" Value="True">
                                                                 <Setter Property="Background" TargetName="rectangle" Value="{StaticResource Indigo}" />

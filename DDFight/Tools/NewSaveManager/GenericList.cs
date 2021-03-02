@@ -1,5 +1,6 @@
 ﻿using DDFight.Tools;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -16,7 +17,7 @@ namespace DDFight.Tools.Save
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class GenericList<T> : INotifyPropertyChanged, ICloneable
-        where T : class, IListable, new()
+        where T : class, ICloneable, new()
     {
 
         public GenericList()
@@ -104,12 +105,20 @@ namespace DDFight.Tools.Save
 
         public bool EditElement(T elem)
         {
-            if (elem.Edit())
+            if (elem is IWindowEditable)
             {
-                OnListElementChanged(new ListElementChangedArgs { Element = elem, Operation = GenericListOperation.Modification });
-                return true;
+                if (((IWindowEditable)elem).OpenEditWindow())
+                {
+                    OnListElementChanged(new ListElementChangedArgs { Element = elem, Operation = GenericListOperation.Modification });
+                    return true;
+                }
             }
             return false;
+        }
+
+        public void RemoveAt(int index)
+        {
+            Elements.RemoveAt(index);
         }
 
         public void RemoveElement(T elem)
@@ -122,7 +131,10 @@ namespace DDFight.Tools.Save
         public void DuplicateElement(T elem)
         {
             T new_one = elem.Clone() as T;
-            new_one.Name = new_one.Name + " - Copy";
+            if (elem is INameable)
+            {
+                ((INameable)new_one).Name = ((INameable)new_one).Name + " - Copy";
+            }
             AddElement(new_one);
         }
 
@@ -131,20 +143,25 @@ namespace DDFight.Tools.Save
         ///     Opposed to AddElementSilent()
         /// </summary>
         /// <param name="elem"></param>
-        public void AddElement(T elem = null)
+        public virtual void AddElement(T elem = null)
         {
             if (elem == null)
                 elem = new T();
-            if (elem.Edit())
+            if (elem is IWindowEditable)
             {
-                Elements.Add(elem);
-                OnListChanged(new ListChangedArgs { Operation = GenericListOperation.Addition });
-                OnListElementChanged(new ListElementChangedArgs { Operation = GenericListOperation.Addition, Element = elem });
+                if (((IWindowEditable)elem).OpenEditWindow())
+                {
+                    AddElementSilent(elem);
+                }
+            }
+            else
+            {
+                AddElementSilent(elem);
             }
         }
 
         /// <summary>
-        ///     Adds the new element to Elements, opposed to AddElement()
+        ///     Adds the new element to Elements without opening the Edit window, opposed to AddElement()
         /// </summary>
         /// <param name="elem"></param>
         public void AddElementSilent(T elem = null)
@@ -152,7 +169,8 @@ namespace DDFight.Tools.Save
             if (elem == null)
                 elem = new T();
             Elements.Add(elem);
-            NotifyPropertyChanged("Elements");
+            OnListChanged(new ListChangedArgs { Operation = GenericListOperation.Addition });
+            OnListElementChanged(new ListElementChangedArgs { Operation = GenericListOperation.Addition, Element = elem });
         }
 
         public void SortElements(Comparison<T> comparison)
@@ -161,9 +179,10 @@ namespace DDFight.Tools.Save
             NotifyPropertyChanged();
         }
 
-        public void SaveAll()
+        public static void SaveAll<U>(GenericList<U> list)
+            where U : class, INameable, ICloneable, new()
         {
-            SaveManager.SaveGenericList<T>(this);
+            SaveManager.SaveGenericList<U>(list);
         }
 
         private void init_copy(GenericList<T> to_copy)
@@ -180,5 +199,8 @@ namespace DDFight.Tools.Save
         {
             return new GenericList<T>(this);
         }
+
+        public int Count
+        { get => Elements.Count; }
     }
 }

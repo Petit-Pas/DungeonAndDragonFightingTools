@@ -13,9 +13,9 @@ namespace DDFight.Game.Aggression.Display
     {
         public bool Validated = false;
 
-        private List<DamageTemplate> data_context
+        private DamageTemplateList data_context
         {
-            get => (List<DamageTemplate>)DataContext;
+            get => (DamageTemplateList)DataContext;
         }
 
         public DamageTemplateListRollableWindow()
@@ -27,7 +27,7 @@ namespace DDFight.Game.Aggression.Display
 
         private void DamageTemplateListRollableWindow_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            foreach (DamageTemplate dmg in data_context)
+            foreach (DamageTemplate dmg in data_context.Elements)
             {
                 dmg.PropertyChanged += Dmg_PropertyChanged;
             }

@@ -68,7 +68,7 @@ namespace DDFight.Game.Aggression.Spells
         }
         private int _level = 0;
 
-        public List<DamageTemplate> HitDamage
+        public DamageTemplateList HitDamage
         {
             get => _hitDamage;
             set
@@ -77,7 +77,7 @@ namespace DDFight.Game.Aggression.Spells
                 NotifyPropertyChanged();
             }
         }
-        private List<DamageTemplate> _hitDamage = new List<DamageTemplate>();
+        private DamageTemplateList _hitDamage = new DamageTemplateList();
 
         public bool AutomaticalyHits
         {

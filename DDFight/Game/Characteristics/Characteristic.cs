@@ -81,19 +81,6 @@ namespace DDFight.Game.Characteristics
 
         #endregion
 
-        #region INotifyPropertyChangedSub
-
-        /// <summary>
-        ///     Subscribes the given event handler to this + all nested classes' PropertyChanged events
-        /// </summary>
-        /// <param name="handler"></param>
-        public void PropertyChangedSubscript(PropertyChangedEventHandler handler)
-        {
-            this.PropertyChanged += handler;
-        }
-
-        #endregion
-
         #region INotifyPropertyChanged
 
         /// <summary>

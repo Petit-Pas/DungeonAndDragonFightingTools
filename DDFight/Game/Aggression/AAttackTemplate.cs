@@ -6,18 +6,20 @@ using System.Xml.Serialization;
 
 namespace DDFight.Game.Aggression
 {
-    public abstract class AAttackTemplate : INotifyPropertyChanged, ICopyAssignable, IListable
+    public abstract class AAttackTemplate : INotifyPropertyChanged, ICopyAssignable, INameable, IWindowEditable
     {
         public AAttackTemplate()
         {
         }
 
-        public virtual bool Edit()
+        public virtual bool OpenEditWindow()
         {
             throw new NotImplementedException("Edit method should be overriden");
         }
 
         #region Properties
+
+        #region Properties_Name
 
         [XmlIgnore]
         public string DisplayName
@@ -39,8 +41,11 @@ namespace DDFight.Game.Aggression
         }
         private string _name = "Name";
 
-        #region Range
+        #endregion Properties_Name
 
+        #region Properties_Range
+
+        [XmlAttribute]
         public AttackRangeEnum Range
         {
             get => _range;
@@ -91,7 +96,7 @@ namespace DDFight.Game.Aggression
             }
         }
 
-        #endregion
+        #endregion Range_Properties
 
         #endregion Properties
 

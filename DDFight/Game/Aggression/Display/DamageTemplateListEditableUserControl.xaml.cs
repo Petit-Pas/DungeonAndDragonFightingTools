@@ -14,9 +14,9 @@ namespace DDFight.Controlers.Game.Attacks.DamageListControls
     /// </summary>
     public partial class DamageTemplateListEditableUserControl : UserControl, INotifyPropertyChanged
     {
-        private List<DamageTemplate> data_context
+        private DamageTemplateList data_context
         {
-            get => (List<DamageTemplate>)this.DataContext;
+            get => (DamageTemplateList)this.DataContext;
         }
 
         public bool HasSavingThrow
@@ -43,17 +43,12 @@ namespace DDFight.Controlers.Game.Attacks.DamageListControls
 
         private void refresh_damage_list()
         {
-            List<DamageTemplate> list = new List<DamageTemplate>();
-            foreach (DamageTemplate tmp in data_context)
-            {
-                list.Add(tmp);
-            }
-            DamageListView.ItemsSource = list;
+            DamageListView.ItemsSource = data_context.Elements;
         }
 
         private void AddDamage_Button_Click(object sender, RoutedEventArgs e)
         {
-            data_context.Add(new DamageTemplate("1d4", DamageTypeEnum.Force));
+            data_context.AddElementSilent(new DamageTemplate("1d4", DamageTypeEnum.Force));
             refresh_damage_list();
         }
 

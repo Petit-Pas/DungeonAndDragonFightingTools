@@ -1,13 +1,16 @@
-﻿using System;
+﻿using DDFight.Tools;
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Xml.Serialization;
 
 namespace DDFight.Game.Counters
 {
-    public class Counter : INotifyPropertyChanged, ICloneable
+    public class Counter : INotifyPropertyChanged, ICloneable, INameable
     {
         public Counter() { }
 
+        [XmlAttribute]
         public string Name
         {
             get => _name;
@@ -22,6 +25,7 @@ namespace DDFight.Game.Counters
         /// <summary>
         ///     The maximum of the value, 0 for no maximum value
         /// </summary>
+        [XmlAttribute]
         public int MaxValue 
         {
             get => _maxValue;
@@ -33,6 +37,7 @@ namespace DDFight.Game.Counters
         }
         private int _maxValue = 0;
 
+        [XmlAttribute]
         public int CurrentValue
         {
             get => _currentValue;
@@ -42,6 +47,10 @@ namespace DDFight.Game.Counters
                 NotifyPropertyChanged();
             }
         }
+
+        [XmlIgnore]
+        public string DisplayName { get => Name; set { } }
+
         private int _currentValue = 0;
 
 
@@ -103,6 +112,12 @@ namespace DDFight.Game.Counters
         {
             Counter to_copy = (Counter)_to_copy;
             init_copy(to_copy);
+        }
+
+        public bool OpenEditWindow()
+        {
+            Logger.Log("Warning : trying to call Edit() on Counter class");
+            return false;
         }
         #endregion
     }

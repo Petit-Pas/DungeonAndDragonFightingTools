@@ -35,13 +35,13 @@ namespace DDFight.Game.Aggression.Spells
 
             if (this.HasSavingThrow)
             {
-                foreach (OnHitStatus status in this.AppliedStatusList.List)
+                foreach (OnHitStatus status in this.AppliedStatusList.Elements)
                 {
                     status.ApplySavingCharacteristic = this.SavingCharacteristic;
                     status.ApplySavingDifficulty = this.SavingDifficulty;
                 }
             }
-            foreach (DamageTemplate dmg in HitDamage)
+            foreach (DamageTemplate dmg in HitDamage.Elements)
             {
                 dmg.LastSavingWasSuccesfull = false;
             }
@@ -57,7 +57,7 @@ namespace DDFight.Game.Aggression.Spells
                     paragraph.Inlines.Add(Extensions.BuildRun(") ==> ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
                     if (savings.ElementAt(i).IsSuccesful)
                     {
-                        foreach (DamageTemplate dmg in HitDamage)
+                        foreach (DamageTemplate dmg in HitDamage.Elements)
                         {
                             dmg.LastSavingWasSuccesfull = true;
                         }
@@ -65,7 +65,7 @@ namespace DDFight.Game.Aggression.Spells
                     }
                     else
                     {
-                        foreach (DamageTemplate dmg in HitDamage)
+                        foreach (DamageTemplate dmg in HitDamage.Elements)
                         {
                             dmg.LastSavingWasSuccesfull = false;
                         }
@@ -77,7 +77,7 @@ namespace DDFight.Game.Aggression.Spells
                     Targets.ElementAt(i).TakeHitDamage(HitDamage);
 
                 // OnHitStatus Application
-                foreach (OnHitStatus status in this.AppliedStatusList.List)
+                foreach (OnHitStatus status in this.AppliedStatusList.Elements)
                 {
                     if (this.HasSavingThrow == false)
                     {
@@ -121,7 +121,7 @@ namespace DDFight.Game.Aggression.Spells
         }
         private int _level = 0;
 
-        public List<DamageTemplate> HitDamage
+        public DamageTemplateList HitDamage
         {
             get => _hitDamage;
             set
@@ -130,7 +130,7 @@ namespace DDFight.Game.Aggression.Spells
                 NotifyPropertyChanged();
             }
         }
-        private List<DamageTemplate> _hitDamage = new List<DamageTemplate>();
+        private DamageTemplateList _hitDamage = new DamageTemplateList();
 
         public OnHitStatusList AppliedStatusList
         {

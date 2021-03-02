@@ -13,21 +13,32 @@ namespace DDFight.Windows.FightWindows
     {
         public HitAttackTemplate data_context
         {
-            get => (HitAttackTemplate)DataContext;
+            get => DataContext as HitAttackTemplate;
         }
 
         public HitAttackResult attackResult;
 
         public ExecuteHitAttackWindow()
         {
+            DataContextChanged += ExecuteHitAttackWindow_DataContextChanged;
             InitializeComponent();
-            Loaded += ExecuteHitAttackWindow_Loaded;
+        }
+
+        private void ExecuteHitAttackWindow_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (data_context != null)
+            {
+                attackResult = data_context.GetResultTemplate();
+                AttackControl.DataContext = attackResult;
+                subscribe();
+                refresh_buttons();
+            }
         }
 
         private void unsubscribe()
         {
             attackResult.PropertyChanged -= AttackResult_PropertyChanged;
-            foreach (DamageTemplate dmg in attackResult.DamageList)
+            foreach (DamageTemplate dmg in attackResult.DamageList.Elements)
             {
                 dmg.Damage.PropertyChanged -= AttackResult_PropertyChanged;
             }
@@ -36,18 +47,10 @@ namespace DDFight.Windows.FightWindows
         private void subscribe()
         {
             attackResult.PropertyChanged += AttackResult_PropertyChanged;
-            foreach (DamageTemplate dmg in attackResult.DamageList)
+            foreach (DamageTemplate dmg in attackResult.DamageList.Elements)
             {
                 dmg.Damage.PropertyChanged += AttackResult_PropertyChanged;
             }
-        }
-
-        private void ExecuteHitAttackWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            attackResult = data_context.GetResultTemplate();
-            AttackControl.DataContext = attackResult;
-            subscribe();
-            refresh_buttons();
         }
 
         private void AttackResult_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -62,7 +65,7 @@ namespace DDFight.Windows.FightWindows
             ValidateAndResetButtonControl.IsEnabled = false;
             if (attackResult.HitRoll == 0)
                 RollButtonControl.IsEnabled = true;
-            foreach (DamageTemplate dmg in attackResult.DamageList)
+            foreach (DamageTemplate dmg in attackResult.DamageList.Elements)
             {
                 if (dmg.Damage.LastRoll == 0)
                     RollButtonControl.IsEnabled = true;

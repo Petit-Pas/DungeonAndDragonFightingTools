@@ -17,11 +17,7 @@ namespace DDFight.Game.Aggression.Spells.Display
 
         private SpellList data_context
         {
-            get
-            {
-                try { return DataContext as SpellList; }
-                catch (Exception) { return null; }
-            }
+            get => DataContext as SpellList;
         }
 
         private void refresh_entityList()

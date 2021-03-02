@@ -1,5 +1,6 @@
 ﻿using DDFight.Game.DamageAffinity;
 using System;
+using System.Xml.Serialization;
 
 namespace DDFight.Game.Aggression
 {
@@ -12,6 +13,7 @@ namespace DDFight.Game.Aggression
         /// <summary>
         ///     opposed to end of turn
         /// </summary>
+        [XmlAttribute]
         public bool TriggersStartOfTurn
         {
             get => _triggersStartOfTurn;
@@ -26,6 +28,7 @@ namespace DDFight.Game.Aggression
         }
         private bool _triggersStartOfTurn = true;
 
+        [XmlAttribute]
         public bool TriggersOnCastersTurn
         {
             get => _triggersOnCastersTurn;

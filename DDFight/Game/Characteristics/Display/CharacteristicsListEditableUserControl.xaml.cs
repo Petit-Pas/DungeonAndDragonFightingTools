@@ -25,12 +25,7 @@ namespace DDFight.Controlers.Game.Characteristics
 
         private void EditableCharacteristicsList_Loaded(object sender, RoutedEventArgs e)
         {
-            List<Characteristic> items = new List<Characteristic>();
-            foreach (Characteristic dc in _dataContext.Characteristics.CharacteristicsList)
-            {
-                items.Add(dc);
-            }
-            CharacteristicsListView.ItemsSource = items;
+            CharacteristicsListView.ItemsSource = _dataContext.Characteristics.CharacteristicsList;
         }
         
         public bool IsValid()

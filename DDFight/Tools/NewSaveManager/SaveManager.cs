@@ -13,7 +13,7 @@ namespace DDFight.Tools.Save
 {
     public static class SaveManager
     {
-        private static readonly string main_config_folder = Environment.GetEnvironmentVariable("LocalAppData") + "\\D&DFightTool\\configs\\";
+        public static readonly string main_config_folder = Environment.GetEnvironmentVariable("LocalAppData") + "\\D&DFightTool\\configs\\";
 
         public static readonly string players_folder = "players\\";
 
@@ -58,12 +58,12 @@ namespace DDFight.Tools.Save
             }
         }
 
-        public static void DeleteUnique<T>(T elem) where T : class, IListable, new()
+        public static void DeleteUnique<T>(T elem) where T : class, INameable, new()
         {
             DeleteUnique<T>(elem, get_subfolder(elem));
         }
 
-        public static void DeleteUnique<T>(T elem, string subfolder) where T : class, IListable, new ()
+        public static void DeleteUnique<T>(T elem, string subfolder) where T : class, INameable, new ()
         {
             string folder_name = main_config_folder + subfolder;
             string filename = folder_name + elem.Name + ".xml";
@@ -74,12 +74,12 @@ namespace DDFight.Tools.Save
             }
         }
 
-        public static void SaveUnique<T>(T elem) where T : class, IListable, new()
+        public static void SaveUnique<T>(T elem) where T : class, INameable, new()
         {
             SaveUnique<T>(elem, get_subfolder(elem));
         }
 
-        public static void SaveUnique<T>(T elem, string subfolder) where T : class, IListable, new ()
+        public static void SaveUnique<T>(T elem, string subfolder) where T : class, INameable, new ()
         {
             XmlSerializer serializer = new XmlSerializer(typeof(T));
             string folder_name = main_config_folder + subfolder;
@@ -95,9 +95,34 @@ namespace DDFight.Tools.Save
             }
             catch (Exception e)
             {
-                Logger.Log("Exception occured when trying to load " + folder_name + elem.Name);
+                Logger.Log("WARNING: Exception occured when trying to save " + folder_name + elem.Name);
                 Logger.Log(e.Message);
             }
+        }
+
+        public static T LoadUnique<T>(string fileName) where T : class, new()
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(T));
+            T result;
+
+            if (File.Exists(fileName))
+            {
+                try
+                {
+                    StreamReader reader = new StreamReader(fileName);
+                    result = serializer.Deserialize(reader) as T;
+                    reader.Close();
+                    return result;
+                }
+                catch (Exception e)
+                {
+                    Logger.Log("WARNING: Exception occured when trying to load " + fileName);
+                    Logger.Log(e.Message);
+                }
+            }
+            else
+                Logger.Log("Could not find file " + fileName);
+            return null;
         }
 
         /// <summary>
@@ -108,7 +133,7 @@ namespace DDFight.Tools.Save
         /// <typeparam name="T"></typeparam>
         /// <param name="genericList"></param>
         /// <param name="subfolder"></param>
-        public static void SaveGenericList<T>(GenericList<T> genericList, string subfolder = null) where T : class, IListable, new()
+        public static void SaveGenericList<T>(GenericList<T> genericList, string subfolder = null) where T : class, ICloneable, INameable, new()
         {
             if (genericList.Elements.Count == 0)
                 return;
@@ -123,19 +148,20 @@ namespace DDFight.Tools.Save
 
             foreach (T elem in genericList.Elements)
             {
+                StreamWriter writer = null;
                 try
                 {
-                    StreamWriter writer = new StreamWriter(folder_name + elem.Name + ".xml");
+                    writer = new StreamWriter(folder_name + elem.Name + ".xml");
                     serializer.Serialize(writer, elem);
-                    writer.Close();
                 }
                 catch (Exception e)
                 {
-                    Logger.Log("Exception occured when trying to load " + folder_name + elem.Name);
+                    Logger.Log("WARNING: Exception occured when trying to save " + folder_name + elem.Name);
                     Logger.Log(e.Message);
                 }
+                writer?.Close();
             }
-            genericList.Elements.Select(x => x.Name).ToList();
+            //genericList.Elements.Select(x => x.Name).ToList();
             CleanFolder(subfolder, genericList.Elements.Select(x => folder_name + x.Name + ".xml").ToList());
         }
 
@@ -145,7 +171,7 @@ namespace DDFight.Tools.Save
         /// <typeparam name="T"></typeparam>
         /// <param name="subfolder"></param>
         /// <returns></returns>
-        public static U LoadGenericList<T, U>(string subfolder) where T : class, IListable, new() where U : GenericList<T>, new ()
+        public static U LoadGenericList<T, U>(string subfolder) where T : class, INameable, ICloneable, new() where U : GenericList<T>, new ()
         {
             XmlSerializer serializer = new XmlSerializer(typeof(T));
             U result = new U();
@@ -164,7 +190,7 @@ namespace DDFight.Tools.Save
                     }
                     catch (Exception e)
                     {
-                        Logger.Log("Exception occured when trying to load " + fileName);
+                        Logger.Log("WARNING: Exception occured when trying to load " + fileName);
                         Logger.Log(e.Message);
                     }
                 }

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using DDFight.Tools;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -23,17 +24,12 @@ namespace DDFight.Game.Status.Display
 
         private void EditableCustomVerboseStatusList_Loaded(object sender, RoutedEventArgs e)
         {
-            StatusListControl.ItemsSource = data_context.List;
+            StatusListControl.ItemsSource = data_context.Elements;
         }
 
         private void AddStatusButton_Click(object sender, RoutedEventArgs e)
         {
-            CustomVerboseStatus _new = new CustomVerboseStatus();
-
-            if (_new.OpenEditWindow() == true)
-            {
-                data_context.List.Add(_new);
-            }
+            data_context.AddElement();
         }
 
         // Keyboard Hanlder
@@ -44,7 +40,7 @@ namespace DDFight.Game.Status.Display
             {
                 if (StatusListControl.SelectedIndex != -1)
                 {
-                    data_context.List.RemoveAt(StatusListControl.SelectedIndex);
+                    data_context.RemoveElement((CustomVerboseStatus)StatusListControl.SelectedItem);
                 }
             }
         }
@@ -56,7 +52,7 @@ namespace DDFight.Game.Status.Display
         {
             if (StatusListControl.SelectedIndex != -1)
             {
-                ((CustomVerboseStatus)StatusListControl.SelectedItem).OpenEditWindow();
+                data_context.EditElement((CustomVerboseStatus)StatusListControl.SelectedItem);
             }
         }
     }
