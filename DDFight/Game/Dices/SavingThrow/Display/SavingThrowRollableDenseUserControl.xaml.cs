@@ -18,7 +18,7 @@ namespace DDFight.Game.Dices.SavingThrow.Display
             {
                 try
                 {
-                    return (SavingThrow)DataContext;
+                    return DataContext as SavingThrow;
                 }
                 catch (Exception)
                 {

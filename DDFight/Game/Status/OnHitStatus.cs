@@ -469,7 +469,6 @@ namespace DDFight.Game.Status
 
         /// <summary>
         ///     A function that applies this status to the given target
-        ///     
         ///     it will register to any required event for the status to automatically ends
         /// </summary>
         /// <param name="caster"> the one that tries to apply the status </param>

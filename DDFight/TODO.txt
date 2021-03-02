@@ -1,12 +1,7 @@
-﻿Think about a way to implement temporary Hps properly
-
-Check for // HERE comments 
+﻿Check for // HERE comments 
 
 should have possibility to add minus sign in DiceRolls
 
-Any function that use llist.SelectedItem should have a null protection
-
-//////
 
 Make the save as a 2 part step, so that if it crashes midway, I have a backup
 
@@ -14,9 +9,6 @@ save a chaque tour
 repos court / long
 
 les validations des EditXXXWindow sont buggées
-
-
-les events sont toujours buggés quand on ajoute qqun dans le combat 
 
 Changer les messages de confirmation de fenetres
 
@@ -26,3 +18,4 @@ Ajouter les résistances / immunités aux statuts
 
 1D20+3 par exmeple ok en dmg
 10 not ok en damage, car il essaie de roll un dé quoi qu'il arrive, donc pas validable tant que le dé reste à 0
+Validations d'une attaque devrait pouvoir etre faite si l'attaque rate mais que les degats ne sont pas calulés
