@@ -18,4 +18,10 @@ Ajouter les résistances / immunités aux statuts
 
 1D20+3 par exmeple ok en dmg
 10 not ok en damage, car il essaie de roll un dé quoi qu'il arrive, donc pas validable tant que le dé reste à 0
+
 Validations d'une attaque devrait pouvoir etre faite si l'attaque rate mais que les degats ne sont pas calulés
+
+Mouseover sur un lancé de dé affiche les résultats
+
+separer DamageTemplate et DamageTemplateResult => utiliser une propriété dans DamageTemplateResult pour dire s'il a été roll 
+(utilse en cas de 1d4-1 qui ferait 0 par exemple, pour eviter qu'il soit considéré comme non roll)

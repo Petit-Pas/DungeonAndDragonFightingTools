@@ -40,7 +40,7 @@
                     FontWeight="SemiBold"
                     Text="{Binding ToRollDamage}" />
             </Grid>
-            <inputboxes:PositiveIntTextBox 
+            <inputboxes:IntBox 
                 MinWidth="40"
                 DataContext="{Binding Damage}"
                 Integer="{Binding LastRoll}"

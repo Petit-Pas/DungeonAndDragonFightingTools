@@ -633,39 +633,42 @@ namespace DDFight.Game.Entities
             foreach (DamageTemplate dmg in damages.Elements)
             {
                 int damage_value = 0;
-                DamageAffinityEnum affinity = this.DamageAffinities.GetAffinity(dmg.DamageType).Affinity;
+                if (dmg.Damage.LastResult > 0)
+                {
+                    DamageAffinityEnum affinity = this.DamageAffinities.GetAffinity(dmg.DamageType).Affinity;
 
-                // damage resistance / weakness
-                switch (affinity)
-                {
-                    case DamageAffinityEnum.Neutral:
-                        damage_value = dmg.Damage.LastResult;
-                        break;
-                    case DamageAffinityEnum.Resistant:
-                        damage_value = dmg.Damage.LastResult / 2;
-                        break;
-                    case DamageAffinityEnum.Immune:
-                        damage_value = 0;
-                        break;
-                    case DamageAffinityEnum.Weak:
-                        damage_value = dmg.Damage.LastResult * 2;
-                        break;
-                }
-                if (dmg.LastSavingWasSuccesfull)
-                {
-                    // Situational damage modifiers (such as a saving throw that could divide damge by 2)
-                    switch (dmg.SituationalDamageModifier)
+                    // damage resistance / weakness
+                    switch (affinity)
                     {
-                        case DamageModifierEnum.Halved:
-                            damage_value /= 2;
+                        case DamageAffinityEnum.Neutral:
+                            damage_value = dmg.Damage.LastResult;
                             break;
-                        case DamageModifierEnum.Canceled:
+                        case DamageAffinityEnum.Resistant:
+                            damage_value = dmg.Damage.LastResult / 2;
+                            break;
+                        case DamageAffinityEnum.Immune:
                             damage_value = 0;
                             break;
-                        default:
+                        case DamageAffinityEnum.Weak:
+                            damage_value = dmg.Damage.LastResult * 2;
                             break;
                     }
-                    dmg.LastSavingWasSuccesfull = false;
+                    if (dmg.LastSavingWasSuccesfull)
+                    {
+                        // Situational damage modifiers (such as a saving throw that could divide damge by 2)
+                        switch (dmg.SituationalDamageModifier)
+                        {
+                            case DamageModifierEnum.Halved:
+                                damage_value /= 2;
+                                break;
+                            case DamageModifierEnum.Canceled:
+                                damage_value = 0;
+                                break;
+                            default:
+                                break;
+                        }
+                        dmg.LastSavingWasSuccesfull = false;
+                    }
                 }
 
                 if (i == damages.Elements.Count && i != 1)

@@ -1,8 +1,10 @@
 ﻿using DDFight.Tools;
+using DDFight.ValidationRules;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 using System.Xml.Serialization;
 
 namespace DDFight.Game.Dices
@@ -31,42 +33,46 @@ namespace DDFight.Game.Dices
             DicesList.Add(to_add);
         }
 
+        public static Regex rgx = new Regex(@"^((?:[0-9]+)|(?:[0-9]+d[0-9]+))((?:(?:\+|\-)[0-9]+)|(?:(?:\+|\-)[0-9]+d[0-9]+))*$", RegexOptions.IgnoreCase);
+
         /// <summary>
         ///     Initializes a DiceRoll from an input string (ex: 2d4+1d6+3)
         /// </summary>
         /// <param name="format"></param>
         public DiceRoll(string format)
         {
+            format.Replace("D", "d");
             DicesList = new List<Dices>();
-            try
-            {
-                int indexD = format.IndexOf('d');
-                while (indexD != -1)
+
+            Match match = rgx.Match(format);
+            if (match.Success)
+                try
                 {
-                    int indexP = format.IndexOf('+');
-                    string subFormat;
-                    if (indexP != -1)
+                    for (int i = 1; i != match.Groups.Count; i += 1)
                     {
-                        subFormat = format.Substring(0, indexP);
-                        format = format.Substring(indexP + 1);
-                        AddDice(new Dices(subFormat));
+                        foreach (Capture capture in match.Groups[i].Captures)
+                        {
+                            string captured = capture.ToString();
+                            if (captured.Length > 0)
+                                if (captured.Contains("d"))
+                                {
+                                    AddDice(new Dices(captured));
+                                }
+                                else
+                                {
+                                    Modifier += Int32.Parse(captured);
+                                }
+                        }
                     }
-                    else
-                    {
-                        AddDice(new Dices(format));
-                        format = "";
-                    }
-                    indexD = format.IndexOf('d');
                 }
-                if (format.Length != 0)
+                catch (Exception e)
                 {
-                    Modifier = Int32.Parse(format);
+                    Logger.Log("WARNING: wrong format for constructor format in DiceRoll(string): " + format);
+                    Logger.Log(e.GetType().ToString());
+                    Logger.Log(e.Message);
                 }
-            }
-            catch (Exception)
-            {
-                Logger.Log("WARNING: wrong format for constructor format in DiceRoll(string): " + format);
-            }
+                else 
+                    Logger.Log("WARNING: wrong format for constructor format in DiceRoll(string): " + format);
         }
 
         private void init()
@@ -86,11 +92,13 @@ namespace DDFight.Game.Dices
             {
                 foreach (Dices d in DicesList)
                 {
-                    format = format + d.ToString() + "+";
+                    string new_dice = d.ToString();
+                    if (new_dice.StartsWith("-") || format.Length == 0)
+                        format = format + new_dice;
+                    else
+                        format = format + "+" + new_dice;
                 }
             }
-            if (format.EndsWith("+"))
-                format = format.Substring(0, format.Length - 1);
             return format;
         }
 
@@ -100,22 +108,11 @@ namespace DDFight.Game.Dices
         /// <returns></returns>
         public override string ToString()
         {
-            string format = "";
+            string format = RollTemplateToString();
 
-            if (DicesList != null)
-            {
-                foreach (Dices d in DicesList)
-                {
-                    format = format + d.ToString() + "+";
-                }
-            }
-            if (format.Length != 0)
-            {
-                format = format.Substring(0, format.Length - 1);
-            }
             if (Modifier != 0)
             {
-                if (format != "")
+                if (format != "" && Modifier > 0)
                     format += '+';
                 format = format + Modifier.ToString();
             }
@@ -169,12 +166,12 @@ namespace DDFight.Game.Dices
         {
             int result = 0;
 
-            foreach(Dices dice in DicesList)
+            foreach (Dices dice in DicesList)
             {
-                // in case of critical, the dices are rolled twice, but not the bonus to damage (with 1d4+2, a critical shall roll 2d4+2, and not 2d4+4)
-                if (dice.ToString().Contains("d") && critical == true)
-                    result += dice.Roll();
+                // in case of critical, the dices are rolled twice (with 1d4+2, a critical shall roll 2d4+2)
                 result += dice.Roll();
+                if (critical == true)
+                    result += dice.Roll();
             }
             LastRoll = result;
         }

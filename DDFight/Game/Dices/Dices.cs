@@ -22,8 +22,11 @@ namespace DDFight.Game.Dices
         {
             try
             {
-                DiceAmount = Int32.Parse(format.Substring(0, format.IndexOf('d')));
-                DiceValue = Int32.Parse(format.Substring(format.IndexOf('d') + 1));
+                int d_index = format.IndexOf('d');
+                string diceAmount = format.Substring(0, d_index);
+                string diceValue = format.Substring(d_index + 1);
+                DiceAmount = Int32.Parse(diceAmount);
+                DiceValue = Int32.Parse(diceValue);
             }
             catch (Exception) 
             {
@@ -75,12 +78,13 @@ namespace DDFight.Game.Dices
             int result = 0;
 
             Console.Write("rolling " + DiceAmount.ToString() + " " + DiceValue.ToString() + ": ");
-            for (int i = 0; i != DiceAmount; i++)
+            for (int i = 0; i != Math.Abs(DiceAmount); i++)
             {
                 int new_val = rand.Next(1, DiceValue + 1);
                 Console.Write(new_val.ToString() + (i + 1 == DiceAmount ? "" : ", "));
                 result += new_val;
             }
+            result = DiceAmount > 0 ? result : - result;
             Console.WriteLine(" ==> result: " + result.ToString());
             return result;
         }
