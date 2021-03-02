@@ -11,6 +11,8 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "DDFightInstaller", "DDFight
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfSandbox", "WpfSandbox\WpfSandbox.csproj", "{39AF7849-547C-433E-8E5F-A0ED601BEEDD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreUnitTest", "CoreUnitTest\CoreUnitTest.csproj", "{0DA284E3-07B4-46E4-BD95-AF20DC56C4BA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{39AF7849-547C-433E-8E5F-A0ED601BEEDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39AF7849-547C-433E-8E5F-A0ED601BEEDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39AF7849-547C-433E-8E5F-A0ED601BEEDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DA284E3-07B4-46E4-BD95-AF20DC56C4BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DA284E3-07B4-46E4-BD95-AF20DC56C4BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DA284E3-07B4-46E4-BD95-AF20DC56C4BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DA284E3-07B4-46E4-BD95-AF20DC56C4BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
