@@ -19,7 +19,7 @@
                 ScrollViewer.VerticalScrollBarVisibility="Auto"
                 Background="{StaticResource LightestGray}"
                 x:Name="ItemsControlControl"
-                ItemsSource="{Binding List}">
+                ItemsSource="{Binding Elements}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <TextBlock 

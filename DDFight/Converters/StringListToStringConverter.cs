@@ -20,6 +20,7 @@ namespace DDFight.Converters
             return result;
         }
 
+        // TODO should use split() instead 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             // from string to List<string>

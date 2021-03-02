@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using System.Windows;
 
 namespace DDFight.Game.Status.Display
 {
@@ -9,7 +10,20 @@ namespace DDFight.Game.Status.Display
     {
         public OnHitStatusListPreviewUserControl()
         {
+            DataContextChanged += OnHitStatusListPreviewUserControl_DataContextChanged;
             InitializeComponent();
+        }
+
+        private OnHitStatusList data_context
+        {
+            get => DataContext as OnHitStatusList;
+        }
+
+        private void OnHitStatusListPreviewUserControl_DataContextChanged(object sender, System.Windows.DependencyPropertyChangedEventArgs e)
+        {
+            Visibility = Visibility.Collapsed;
+            if (data_context?.Elements.Count != 0)
+                Visibility = Visibility.Visible;
         }
     }
 }
