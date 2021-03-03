@@ -58,16 +58,9 @@ namespace DDFight.Game.Status.Display
             Target = target;
             Applicant = applicant;
             this.first_application = first_application;
-            Loaded += OnHitStatusApplyWindow_Loaded;
 
             InitializeComponent();
             DataContextChanged += OnHitStatusApplyWindow_DataContextChanged;
-        }
-
-        private void OnHitStatusApplyWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (!this.first_application)
-                OnApplyDamageControl.Visibility = Visibility.Hidden;
         }
 
         private void OnHitStatusApplyWindow_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)

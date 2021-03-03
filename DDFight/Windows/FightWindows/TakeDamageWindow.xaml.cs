@@ -41,11 +41,12 @@ namespace DDFight.Windows.FightWindows
 
             if (damage_list.Count != 0)
             {
-                foreach (DamageTemplate dmg in damage_list.Elements)
+                DamageResultList dmgs = damage_list.GetResultList();
+                foreach (DamageResult dmg in dmgs.Elements)
                 {
                     dmg.Damage.Roll();
                 }
-                data_context.TakeHitDamage(damage_list);
+                data_context.TakeHitDamage(dmgs);
             }
             this.Close();
         }

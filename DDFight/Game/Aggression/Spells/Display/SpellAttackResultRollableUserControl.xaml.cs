@@ -29,12 +29,16 @@ namespace DDFight.Game.Aggression.Spells.Display
 
         private void refresh_result()
         {
-            uint CA = data_context.CA + (uint)this.CAModifier;
-            int score = this.HitModifier + this.AttackRoll + this.Spell.ToHitBonus;
-            string result = score.ToString() + "/" + CA.ToString();
+            if (data_context != null)
+            {
+                uint CA = data_context.CA + (uint)this.CAModifier;
+                int score = this.HitModifier + this.AttackRoll + this.Spell.ToHitBonus;
+                string result = score.ToString() + "/" + CA.ToString();
 
-            Hits = CA <= score ? true : false;
-            HitResultString = result;
+
+                Hits = CA <= score ? true : false;
+                HitResultString = result;
+            }
         }
 
         private void SpellAttackResultRollableUserControl_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -67,10 +71,10 @@ namespace DDFight.Game.Aggression.Spells.Display
 
         public void RefreshHitDamage()
         {
-            HitDamage = (DamageTemplateList)Spell.HitDamage.Clone();
+            HitDamage = (DamageResultList)Spell.HitDamage.Clone();
         }
 
-        public DamageTemplateList HitDamage
+        public DamageResultList HitDamage
         {
             get => _hitDamage;
             set
@@ -79,7 +83,7 @@ namespace DDFight.Game.Aggression.Spells.Display
                 NotifyPropertyChanged();
             }
         }
-        private DamageTemplateList _hitDamage = new DamageTemplateList();
+        private DamageResultList _hitDamage = new DamageResultList();
 
 
         public int AttackRoll
@@ -221,7 +225,7 @@ namespace DDFight.Game.Aggression.Spells.Display
         {
             if (AttackRoll == 0)
                 return false;
-            foreach (DamageTemplate dmg in HitDamage.Elements)
+            foreach (DamageResult dmg in HitDamage.Elements)
             {
                 if (dmg.Damage.LastRoll == 0)
                     return false;

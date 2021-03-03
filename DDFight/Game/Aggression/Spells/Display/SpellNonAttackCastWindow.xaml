@@ -68,7 +68,7 @@
                 <Run />
             </TextBlock>
 
-            <display1:DamageTemplateListRollableUserControl 
+            <display1:DamageResultListRollableUserControl 
                 Grid.Row="2"
                 DataContext="{Binding HitDamage}"/>
 

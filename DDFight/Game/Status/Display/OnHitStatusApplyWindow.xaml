@@ -32,7 +32,6 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         
         <WrapPanel
@@ -86,11 +85,6 @@
             x:Name="SavingThrowControl"
             HorizontalAlignment="Center"
             Visibility="Collapsed"/>
-
-        <display1:DamageTemplateListRollableUserControl
-            x:Name="OnApplyDamageControl"
-            Grid.Row="4"
-            DataContext="{Binding OnApplyDamageList}"/>
 
         <Grid
             Grid.Row="5"

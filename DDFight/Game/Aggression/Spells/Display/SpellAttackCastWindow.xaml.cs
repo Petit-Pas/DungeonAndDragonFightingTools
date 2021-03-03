@@ -43,9 +43,7 @@ namespace DDFight.Game.Aggression.Spells.Display
         {
             List<SpellAttackResultRollableUserControl> attacks = new List<SpellAttackResultRollableUserControl>();
             foreach (SpellAttackResultRollableUserControl control in this.GetAllChildrenByName("SpellAttackResultRollableUserControl"))
-            {
                 attacks.Add(control);
-            }
 
             data_context.Cast(attacks);
 

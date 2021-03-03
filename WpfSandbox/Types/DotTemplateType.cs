@@ -25,7 +25,6 @@ namespace WpfSandbox.Types
             {
                 Damage = type.Damage,
                 DamageType = type.DamageType,
-                LastSavingWasSuccesfull = type.LastSavingWasSuccesfull,
                 SituationalDamageModifier = type.SituationalDamageModifier,
                 TriggersOnCastersTurn = type.TriggersOnCastersTurn,
                 TriggersStartOfTurn = type.TriggersStartOfTurn,

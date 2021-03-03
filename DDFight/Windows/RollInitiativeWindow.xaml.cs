@@ -124,11 +124,6 @@ namespace DDFight.Windows
                 }
                 this.Cancelled = false;
                 this.Close();
-
-                foreach (PlayableEntity ent in Global.Context.FightContext.FightersList.Elements)
-                {
-                    Console.WriteLine("{0} has {1}", ent.Name, ent.InitiativeRoll);
-                }
             }
         }
 

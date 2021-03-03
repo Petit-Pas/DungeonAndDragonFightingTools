@@ -41,7 +41,7 @@ namespace DDFight.Game.Aggression.Spells
                     status.ApplySavingDifficulty = this.SavingDifficulty;
                 }
             }
-            foreach (DamageTemplate dmg in HitDamage.Elements)
+            foreach (DamageResult dmg in HitDamage.Elements)
             {
                 dmg.LastSavingWasSuccesfull = false;
             }
@@ -57,7 +57,7 @@ namespace DDFight.Game.Aggression.Spells
                     paragraph.Inlines.Add(Extensions.BuildRun(") ==> ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
                     if (savings.ElementAt(i).IsSuccesful)
                     {
-                        foreach (DamageTemplate dmg in HitDamage.Elements)
+                        foreach (DamageResult dmg in HitDamage.Elements)
                         {
                             dmg.LastSavingWasSuccesfull = true;
                         }
@@ -65,7 +65,7 @@ namespace DDFight.Game.Aggression.Spells
                     }
                     else
                     {
-                        foreach (DamageTemplate dmg in HitDamage.Elements)
+                        foreach (DamageResult dmg in HitDamage.Elements)
                         {
                             dmg.LastSavingWasSuccesfull = false;
                         }
@@ -121,7 +121,7 @@ namespace DDFight.Game.Aggression.Spells
         }
         private int _level = 0;
 
-        public DamageTemplateList HitDamage
+        public DamageResultList HitDamage
         {
             get => _hitDamage;
             set
@@ -130,7 +130,7 @@ namespace DDFight.Game.Aggression.Spells
                 NotifyPropertyChanged();
             }
         }
-        private DamageTemplateList _hitDamage = new DamageTemplateList();
+        private DamageResultList _hitDamage = new DamageResultList();
 
         public OnHitStatusList AppliedStatusList
         {
@@ -200,7 +200,6 @@ namespace DDFight.Game.Aggression.Spells
         private PlayableEntity _caster = null;
         
         #endregion Properties
-
 
         #region INotifyPropertyChanged
 

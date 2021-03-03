@@ -66,14 +66,14 @@ namespace DDFight.Game.Aggression.Attacks
         {
             return new HitAttackResult()
             {
-                DamageList = (DamageTemplateList)DamageList.Clone(),
+                DamageList = DamageList.GetResultList(),
                 HitRoll = 0,
                 HitBonus = HitBonus,
                 Target = null,
                 SituationalHitAttackModifiers = new SituationalHitAttackModifiers(),
                 SituationalAdvantageModifiers = new SituationalAdvantageModifiers(),
                 Owner = this.Owner,
-                OnHitStatuses = (OnHitStatusList)this.OnHitStatuses.Clone(),
+                OnHitStatuses = this.OnHitStatuses,
             };
         }
 

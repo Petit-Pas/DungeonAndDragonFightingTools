@@ -1,22 +1,19 @@
-﻿using DDFight.Tools.UXShortcuts;
+﻿using DDFight.Game.Aggression;
+using DDFight.Tools.UXShortcuts;
 using System;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace DDFight.Game.Aggression.Display
+namespace DDFight.Controlers.Game.Attacks.Display
 {
     /// <summary>
     /// Logique d'interaction pour DamageTemplateRollableUserControl.xaml
     /// </summary>
-    public partial class DamageTemplateRollableUserControl : UserControl, IRollableControl
+    public partial class DamageResultRollableUserControl : UserControl, IRollableControl
     {
-        private DamageTemplate data_context
+        private DamageResult data_context
         {
-            get
-            {
-                try { return (DamageTemplate)DataContext; }
-                catch (Exception) { return null; }
-            }
+            get => DataContext as DamageResult;
         }
 
         /// <summary>
@@ -28,9 +25,9 @@ namespace DDFight.Game.Aggression.Display
             set { this.SetValue(CritProperty, value); }
         }
         public static readonly DependencyProperty CritProperty = DependencyProperty.Register(
-          "Crits", typeof(bool), typeof(DamageTemplateRollableUserControl), new PropertyMetadata(false));
+          "Crits", typeof(bool), typeof(DamageResultRollableUserControl), new PropertyMetadata(false));
 
-        public DamageTemplateRollableUserControl()
+        public DamageResultRollableUserControl()
         {
             InitializeComponent();
         }

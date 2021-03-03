@@ -18,25 +18,6 @@ namespace DDFight.Game.Aggression
         { 
         }
 
-        public bool IsSameKind(DamageTemplate template)
-        {
-            if (DamageType == template.DamageType)
-                if (SituationalDamageModifier == template.SituationalDamageModifier)
-                    return true;
-            return false;
-        }
-
-        public void Add(DamageTemplate to_combine)
-        {
-            if (!this.IsSameKind(to_combine))
-                throw new Exception("Trying to combine non likely DamageTemplates");
-            foreach (Dices.Dices dices in to_combine.Damage.DicesList)
-            {
-                this.Damage.AddDice(dices);
-            }
-            this.Damage.Modifier += to_combine.Damage.Modifier;
-        }
-
         public DamageTemplate(string damageFormat, DamageTypeEnum damageType)
         {
             Damage = new DiceRoll(damageFormat);
@@ -44,36 +25,6 @@ namespace DDFight.Game.Aggression
         }
 
         #region Properties
-            
-        public string ToRollDamage
-        {
-            get => Damage.RollTemplateToString();
-        }
-
-        public string ToRollBonus
-        {
-            get
-            {
-                int tmp = Damage.Modifier;
-                return (tmp >= 0 ? ("+" + tmp.ToString()) : tmp.ToString());
-            }
-        }
-
-        /// <summary>
-        ///     Set to true when SituationalDamageModifier should be taken into account
-        ///     Should always be resetted to false after use
-        /// </summary>
-        [XmlIgnore]
-        public bool LastSavingWasSuccesfull
-        {
-            get => _lastSavingWasSuccesfull;
-            set
-            {
-                _lastSavingWasSuccesfull = value;
-                NotifyPropertyChanged();
-            }
-        }
-        private bool _lastSavingWasSuccesfull = false;
 
         /// <summary>
         ///     Can be used to determine what happens in case of a successful saving Throw (OnHitStatus damage, spells, etc...)

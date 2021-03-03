@@ -110,7 +110,7 @@
                 </TextBlock>
             </WrapPanel>
 
-            <display:DamageTemplateListRollableUserControl
+            <display:DamageResultListRollableUserControl
                 Grid.Row="4"
                 Margin="5"
                 x:Name="DamageControl"

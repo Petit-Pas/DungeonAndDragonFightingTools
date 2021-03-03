@@ -98,7 +98,7 @@
                 DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SpellAttackResultRollableUserControl}}}"/>
         </WrapPanel>
 
-        <display:DamageTemplateListRollableUserControl
+        <display:DamageResultListRollableUserControl
             Margin="0, 5"
             Grid.Row="3"
             DataContext="{Binding HitDamage, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SpellAttackResultRollableUserControl}}}"

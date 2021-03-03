@@ -2,6 +2,7 @@
 using DDFight.Game.Aggression.Spells.Display;
 using DDFight.Game.Entities;
 using DDFight.Game.Status;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -42,8 +43,6 @@ namespace DDFight.Game.Aggression.Spells
             }
         }
 
-
-
         #region Properties
 
         public string Name
@@ -68,7 +67,7 @@ namespace DDFight.Game.Aggression.Spells
         }
         private int _level = 0;
 
-        public DamageTemplateList HitDamage
+        public DamageResultList HitDamage
         {
             get => _hitDamage;
             set
@@ -77,7 +76,7 @@ namespace DDFight.Game.Aggression.Spells
                 NotifyPropertyChanged();
             }
         }
-        private DamageTemplateList _hitDamage = new DamageTemplateList();
+        private DamageResultList _hitDamage = new DamageResultList();
 
         public bool AutomaticalyHits
         {

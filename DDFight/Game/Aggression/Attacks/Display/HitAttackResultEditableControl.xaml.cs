@@ -90,7 +90,7 @@ namespace DDFight.Game.Aggression.Attacks.Display
         {
             if (data_context.HitRoll == 0)
                 data_context.HitRoll = (uint)DiceRoll.Roll("1d20", data_context.SituationalAdvantageModifiers.SituationalAdvantage, data_context.SituationalAdvantageModifiers.SituationalDisadvantage);
-            foreach (DamageTemplate dmg in data_context.DamageList.Elements)
+            foreach (DamageResult dmg in data_context.DamageList.Elements)
             {
                 if (dmg.Damage.LastRoll == 0)
                 {
@@ -103,7 +103,7 @@ namespace DDFight.Game.Aggression.Attacks.Display
         {
             if (data_context.HitRoll == 0)
                 return false;
-            foreach (DamageTemplate dmg in data_context.DamageList.Elements)
+            foreach (DamageResult dmg in data_context.DamageList.Elements)
             {
                 if (dmg.Damage.LastRoll == 0)
                 {

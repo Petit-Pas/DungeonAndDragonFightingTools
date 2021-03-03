@@ -78,15 +78,17 @@
     <Compile Include="Game\Aggression\Attacks\Display\HitAttackTemplateListUserControl.cs" />
     <Compile Include="Game\Aggression\Attacks\HitAttackTemplateList.cs" />
     <Compile Include="Game\Aggression\DamageModifierEnum.cs" />
+    <Compile Include="Game\Aggression\DamageResult.cs" />
+    <Compile Include="Game\Aggression\DamageResultList.cs" />
     <Compile Include="Game\Aggression\DamageTemplateList.cs" />
     <Compile Include="Game\Aggression\Display\DamageModifierEnumListSelectableUserControl.xaml.cs">
       <DependentUpon>DamageModifierEnumListSelectableUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Game\Aggression\Display\DamageTemplateListRollableWindow.xaml.cs">
-      <DependentUpon>DamageTemplateListRollableWindow.xaml</DependentUpon>
+    <Compile Include="Game\Aggression\Display\DamageResultListRollableWindow.xaml.cs">
+      <DependentUpon>DamageResultListRollableWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Game\Aggression\Display\DamageTemplateRollableUserControl.xaml.cs">
-      <DependentUpon>DamageTemplateRollableUserControl.xaml</DependentUpon>
+    <Compile Include="Game\Aggression\Display\DamageResultRollableUserControl.xaml.cs">
+      <DependentUpon>DamageResultRollableUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Game\Aggression\Display\DotTemplateListEditableControl.xaml.cs">
       <DependentUpon>DotTemplateListEditableControl.xaml</DependentUpon>
@@ -204,8 +206,8 @@
     <Compile Include="Game\Aggression\Display\DamageTemplateListEditableUserControl.xaml.cs">
       <DependentUpon>DamageTemplateListEditableUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Game\Aggression\Display\DamageTemplateListRollableUserControl.xaml.cs">
-      <DependentUpon>DamageTemplateListRollableUserControl.xaml</DependentUpon>
+    <Compile Include="Game\Aggression\Display\DamageResultListRollableUserControl.xaml.cs">
+      <DependentUpon>DamageResultListRollableUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Game\Aggression\Display\DamageTemplateListReadOnlyUserControl.xaml.cs">
       <DependentUpon>DamageTemplateListReadOnlyUserControl.xaml</DependentUpon>
@@ -411,11 +413,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Game\Aggression\Display\DamageTemplateListRollableWindow.xaml">
+    <Page Include="Game\Aggression\Display\DamageResultListRollableWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Game\Aggression\Display\DamageTemplateRollableUserControl.xaml">
+    <Page Include="Game\Aggression\Display\DamageResultRollableUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -535,7 +537,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Game\Aggression\Display\DamageTemplateListRollableUserControl.xaml">
+    <Page Include="Game\Aggression\Display\DamageResultListRollableUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

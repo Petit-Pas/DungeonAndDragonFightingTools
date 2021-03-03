@@ -9,27 +9,30 @@ namespace DDFight.Game.Aggression.Display
     /// <summary>
     /// Interaction logic for DamageTemplateListRollableWindow.xaml
     /// </summary>
-    public partial class DamageTemplateListRollableWindow : Window
+    public partial class DamageResultListRollableWindow : Window
     {
         public bool Validated = false;
 
-        private DamageTemplateList data_context
+        private DamageResultList data_context
         {
-            get => (DamageTemplateList)DataContext;
+            get => DataContext as DamageResultList;
         }
 
-        public DamageTemplateListRollableWindow()
+        public DamageResultListRollableWindow()
         {
+            DataContextChanged += DamageResultListRollableWindow_DataContextChanged;
             InitializeComponent();
             ValidateButton.IsEnabled = false;
-            DataContextChanged += DamageTemplateListRollableWindow_DataContextChanged;
         }
 
-        private void DamageTemplateListRollableWindow_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private void DamageResultListRollableWindow_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            foreach (DamageTemplate dmg in data_context.Elements)
+            if (data_context != null)
             {
-                dmg.PropertyChanged += Dmg_PropertyChanged;
+                foreach (DamageResult dmg in data_context.Elements)
+                {
+                    dmg.PropertyChanged += Dmg_PropertyChanged;
+                }
             }
         }
 

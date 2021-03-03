@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace DDFight.Game.Aggression.Attacks
@@ -44,6 +45,12 @@ namespace DDFight.Game.Aggression.Attacks
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
+        }
+
+        internal void Reset()
+        {
+            this.SituationalAdvantage = false;
+            this.SituationalDisadvantage = false;
         }
         #endregion
 

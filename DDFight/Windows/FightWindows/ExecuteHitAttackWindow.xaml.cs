@@ -38,7 +38,7 @@ namespace DDFight.Windows.FightWindows
         private void unsubscribe()
         {
             attackResult.PropertyChanged -= AttackResult_PropertyChanged;
-            foreach (DamageTemplate dmg in attackResult.DamageList.Elements)
+            foreach (DamageResult dmg in attackResult.DamageList.Elements)
             {
                 dmg.Damage.PropertyChanged -= AttackResult_PropertyChanged;
             }
@@ -47,7 +47,7 @@ namespace DDFight.Windows.FightWindows
         private void subscribe()
         {
             attackResult.PropertyChanged += AttackResult_PropertyChanged;
-            foreach (DamageTemplate dmg in attackResult.DamageList.Elements)
+            foreach (DamageResult dmg in attackResult.DamageList.Elements)
             {
                 dmg.Damage.PropertyChanged += AttackResult_PropertyChanged;
             }
@@ -65,7 +65,7 @@ namespace DDFight.Windows.FightWindows
             ValidateAndResetButtonControl.IsEnabled = false;
             if (attackResult.HitRoll == 0)
                 RollButtonControl.IsEnabled = true;
-            foreach (DamageTemplate dmg in attackResult.DamageList.Elements)
+            foreach (DamageResult dmg in attackResult.DamageList.Elements)
             {
                 if (dmg.Damage.LastRoll == 0)
                     RollButtonControl.IsEnabled = true;
@@ -92,10 +92,7 @@ namespace DDFight.Windows.FightWindows
         private void ValidateAndResetButtonControl_Click(object sender, RoutedEventArgs e)
         {
             AttackControl.Validate();
-            unsubscribe();
-            attackResult = data_context.GetResultTemplate();
-            AttackControl.DataContext = attackResult;
-            subscribe();
+            attackResult.Reset();
             refresh_buttons();
         }
 
@@ -106,6 +103,11 @@ namespace DDFight.Windows.FightWindows
                 RollButtonControl_Click(sender, null);
                 e.Handled = true;
             }
+        }
+
+        private void ResetButtonControl_Click(object sender, RoutedEventArgs e)
+        {
+            attackResult.Reset();
         }
     }
 }

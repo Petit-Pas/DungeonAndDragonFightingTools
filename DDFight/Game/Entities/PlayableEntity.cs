@@ -619,7 +619,7 @@ namespace DDFight.Game.Entities
         /// </summary>
         /// <param name="damages"></param>
         // TODO Might need to rename this
-        public void TakeHitDamage(DamageTemplateList damages)
+        public void TakeHitDamage(DamageResultList damages)
         {
             int i = 1;
             int total = 0;
@@ -630,7 +630,7 @@ namespace DDFight.Game.Entities
             paragraph.Inlines.Add(Extensions.BuildRun(" takes ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
 
 
-            foreach (DamageTemplate dmg in damages.Elements)
+            foreach (DamageResult dmg in damages.Elements)
             {
                 int damage_value = 0;
                 if (dmg.Damage.LastResult > 0)

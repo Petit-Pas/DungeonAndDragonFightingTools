@@ -25,3 +25,7 @@ Mouseover sur un lancé de dé affiche les résultats
 
 separer DamageTemplate et DamageTemplateResult => utiliser une propriété dans DamageTemplateResult pour dire s'il a été roll 
 (utilse en cas de 1d4-1 qui ferait 0 par exemple, pour eviter qu'il soit considéré comme non roll)
+
+Tester le comportement d'un statut qui peut se re DC au debut d'un tour et qui inflige des degats au début du tour (ordre)
+
+Remettre les degats à l'impact d'un statut OnHitStatus l 484 (y a un todo)

@@ -102,6 +102,11 @@ namespace DDFight.Game.Dices
             return format;
         }
 
+        public void Reset()
+        {
+            LastRoll = 0;
+        }
+
         /// <summary>
         ///     Converts this object to a string (opposite so ctor(string))
         /// </summary>

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace DDFight.Game.Aggression.Attacks
@@ -10,25 +11,25 @@ namespace DDFight.Game.Aggression.Attacks
         /// </summary>
         public int HitModifier
         {
-            get => _situationalHitModifier;
+            get => _hitModifier;
             set
             {
-                _situationalHitModifier = value;
+                _hitModifier = value;
                 NotifyPropertyChanged();
             }
         }
-        private int _situationalHitModifier;
+        private int _hitModifier;
 
         public int ACModifier
         {
-            get => _situationalACModifier;
+            get => _ACModifier;
             set
             {
-                _situationalACModifier = value;
+                _ACModifier = value;
                 NotifyPropertyChanged();
             }
         }
-        private int _situationalACModifier;
+        private int _ACModifier;
 
         #region INotifyPropertyChanged
 
@@ -47,6 +48,12 @@ namespace DDFight.Game.Aggression.Attacks
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
+        }
+
+        public void Reset()
+        {
+            this.ACModifier = 0;
+            this.HitModifier = 0;
         }
         #endregion
 

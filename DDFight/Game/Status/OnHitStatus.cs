@@ -286,15 +286,15 @@ namespace DDFight.Game.Status
         /// <param name="caster"> true if its caster's turn, false otherwise </param>
         private void checkDotDamage(bool start, bool caster)
         {
-            DamageTemplateList to_apply = new DamageTemplateList();
+            DamageResultList to_apply = new DamageResultList();
             foreach (DotTemplate dot in DotDamageList.Elements)
             {
                 if (dot.TriggersStartOfTurn == start && dot.TriggersOnCastersTurn == caster)
-                    to_apply.AddElementSilent((DamageTemplate)dot.Clone());
+                    to_apply.AddElementSilent(new DamageResult(dot));
             }
             if (to_apply.Elements.Count != 0)
             {
-                DamageTemplateListRollableWindow window = new DamageTemplateListRollableWindow() { DataContext = to_apply, };
+                DamageResultListRollableWindow window = new DamageResultListRollableWindow() { DataContext = to_apply, };
                 window.TitleControl.Text = this.Header + " inflicts damage to " + Affected.DisplayName;
                 window.ShowCentered();
 
@@ -478,16 +478,19 @@ namespace DDFight.Game.Status
         public void Apply(PlayableEntity caster, PlayableEntity target, bool application_success = true, bool multiple_application = false)
         {
 
-            // Damages are applied from the class itself
-            if (OnApplyDamageList.Elements.Count != 0)
-            {
-                foreach (DamageTemplate dmg in OnApplyDamageList.Elements)
-                    dmg.LastSavingWasSuccesfull = !application_success;
-                target.TakeHitDamage(OnApplyDamageList);
-            }
-
             // the applied status is a copy
             OnHitStatus applied = (OnHitStatus)this.Clone();
+
+            if (applied.OnApplyDamageList.Elements.Count != 0)
+            {
+                DamageResultList onApplyDamageList = OnApplyDamageList.GetResultList();
+                foreach (DamageResult dmg in onApplyDamageList.Elements)
+                    dmg.LastSavingWasSuccesfull = !application_success;
+                DamageResultListRollableWindow window = new DamageResultListRollableWindow() { DataContext=onApplyDamageList, };
+                window.ShowCentered();
+                if (window.Validated)
+                    target.TakeHitDamage(onApplyDamageList);
+            }
 
             if (application_success)
             {

@@ -1,5 +1,4 @@
-﻿using DDFight.Game.Aggression;
-using DDFight.Game.DamageAffinity;
+﻿using DDFight.Game.DamageAffinity;
 using DDFight.Game.Dices;
 using System;
 using System.Collections.Generic;
@@ -10,34 +9,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace WpfSandbox.Types
+namespace DDFight.Game.Aggression
 {
-    public class DamageTemplateType : ICloneable, INotifyPropertyChanged
+    public class DamageResult : ICloneable, INotifyPropertyChanged
     {
-        public static DamageTemplateList ConvertList(IEnumerable<DamageTemplateType> list)
-        {
-            DamageTemplateList result = new DamageTemplateList();
-            foreach (DamageTemplateType type in list)
-                result.AddElementSilent(Convert(type));
-            return result;
-        }
-
-        private static DamageTemplate Convert(DamageTemplateType type)
-        {
-            DamageTemplate result = new DamageTemplate()
-            {
-                Damage = type.Damage,
-                DamageType = type.DamageType,
-                SituationalDamageModifier = type.SituationalDamageModifier,
-            };
-            return result;
-        }
-
-        public DamageTemplateType()
+        public DamageResult()
         {
         }
 
-        public bool IsSameKind(DamageTemplateType template)
+        public bool IsSameKind(DamageTemplate template)
         {
             if (DamageType == template.DamageType)
                 if (SituationalDamageModifier == template.SituationalDamageModifier)
@@ -45,24 +25,17 @@ namespace WpfSandbox.Types
             return false;
         }
 
-        public void Add(DamageTemplateType to_combine)
+        public void Add(DamageTemplate to_combine)
         {
             if (!this.IsSameKind(to_combine))
-                throw new Exception("Trying to combine non likely DamageTemplates");
-            foreach (Dices dices in to_combine.Damage.DicesList)
+                throw new Exception("Trying to combine non likely DamageTemplates, try using DamageTemplate.IsSameKind() before calling DamageTemplate.Add()");
+            foreach (Dices.Dices dices in to_combine.Damage.DicesList)
             {
                 this.Damage.AddDice(dices);
             }
             this.Damage.Modifier += to_combine.Damage.Modifier;
         }
 
-        public DamageTemplateType(string damageFormat, DamageTypeEnum damageType)
-        {
-            Damage = new DiceRoll(damageFormat);
-            DamageType = damageType;
-        }
-
-        #region Properties
 
         public string ToRollDamage
         {
@@ -82,7 +55,6 @@ namespace WpfSandbox.Types
         ///     Set to true when SituationalDamageModifier should be taken into account
         ///     Should always be resetted to false after use
         /// </summary>
-        [XmlIgnore]
         public bool LastSavingWasSuccesfull
         {
             get => _lastSavingWasSuccesfull;
@@ -97,7 +69,6 @@ namespace WpfSandbox.Types
         /// <summary>
         ///     Can be used to determine what happens in case of a successful saving Throw (OnHitStatus damage, spells, etc...)
         /// </summary>
-        [XmlAttribute]
         public DamageModifierEnum SituationalDamageModifier
         {
             get => _temporaryDamageModifier;
@@ -108,7 +79,6 @@ namespace WpfSandbox.Types
             }
         }
         private DamageModifierEnum _temporaryDamageModifier = DamageModifierEnum.Normal;
-
 
         /// <summary>
         ///     The dices to throw
@@ -124,15 +94,23 @@ namespace WpfSandbox.Types
                 NotifyPropertyChanged();
             }
         }
+        private DiceRoll _damage = new DiceRoll("1d4");
 
+        /// <summary>
+        ///     links the changes in the DiceRoll to the NotifyPropertyChanged of the DamageResult
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void _damage_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             NotifyPropertyChanged("Damage");
         }
 
-        private DiceRoll _damage = new DiceRoll("1d4");
+        public void Reset()
+        {
+            Damage.Reset();
+        }
 
-        [XmlAttribute]
         public DamageTypeEnum DamageType
         {
             get => _damageType;
@@ -142,9 +120,33 @@ namespace WpfSandbox.Types
                 NotifyPropertyChanged();
             }
         }
+
         private DamageTypeEnum _damageType = DamageTypeEnum.Force;
 
-        #endregion
+
+        private void init_copy(DamageResult to_copy)
+        {
+            this.LastSavingWasSuccesfull = to_copy.LastSavingWasSuccesfull;
+            this.SituationalDamageModifier = to_copy.SituationalDamageModifier;
+            this.Damage = (DiceRoll)to_copy.Damage.Clone();
+            this.DamageType = to_copy.DamageType;
+        }
+        public DamageResult(DamageTemplate template)
+        {
+            this.SituationalDamageModifier = template.SituationalDamageModifier;
+            this.Damage = (DiceRoll)template.Damage.Clone();
+            this.DamageType = template.DamageType;
+        }
+
+        public DamageResult(DamageResult to_copy)
+        {
+            init_copy(to_copy);
+        }
+
+        public object Clone()
+        {
+            return new DamageResult(this);
+        }
 
         #region INotifyPropertyChanged
 
@@ -159,30 +161,12 @@ namespace WpfSandbox.Types
         /// <param name="propertyName"></param>
         protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
         #endregion
 
-        #region ICloneable 
-
-        private void init_copy(DamageTemplateType to_copy)
-        {
-            Damage = (DiceRoll)to_copy.Damage.Clone();
-            DamageType = to_copy.DamageType;
-            SituationalDamageModifier = to_copy.SituationalDamageModifier;
-        }
-
-        protected DamageTemplateType(DamageTemplateType to_copy)
-        {
-            init_copy(to_copy);
-        }
-
-        public virtual object Clone()
-        {
-            return new DamageTemplateType(this);
-        }
-
-        #endregion
     }
 }
-

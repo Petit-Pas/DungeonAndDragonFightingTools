@@ -294,8 +294,8 @@ namespace DDFight.Game.Aggression.Spells
         {
             AttackSpellResult template = new AttackSpellResult
             {
-                HitDamage = (DamageTemplateList)this.HitDamage.Clone(),
-                AppliedStatusList = (OnHitStatusList)this.AppliedStatus.Clone(),
+                HitDamage = this.HitDamage.GetResultList(),
+                AppliedStatusList = this.AppliedStatus,
                 Caster = caster,
                 Targets = targets,
                 Name = this.Name,
@@ -309,7 +309,7 @@ namespace DDFight.Game.Aggression.Spells
                 foreach (DamageTemplate damageTemplate in AdditionalHitDamagePerLevel.Elements)
                 {
                     bool added = false;
-                    foreach (DamageTemplate onHitTemplate in template.HitDamage.Elements)
+                    foreach (DamageResult onHitTemplate in template.HitDamage.Elements)
                     {
                         if (onHitTemplate.IsSameKind(damageTemplate))
                         {
@@ -319,7 +319,7 @@ namespace DDFight.Game.Aggression.Spells
                         }
                     }
                     if (added == false)
-                        template.HitDamage.AddElementSilent(damageTemplate);
+                        template.HitDamage.AddElementSilent(new DamageResult(damageTemplate));
                 }
             }
             return template;
@@ -328,8 +328,8 @@ namespace DDFight.Game.Aggression.Spells
         public NonAttackSpellResult GetNonAttackSpellResult(PlayableEntity caster, ObservableCollection<PlayableEntity> targets, int additional_levels)
         {
             NonAttackSpellResult template = new NonAttackSpellResult {
-                HitDamage = (DamageTemplateList)this.HitDamage.Clone(),
-                AppliedStatusList = (OnHitStatusList)this.AppliedStatus.Clone(),
+                HitDamage = this.HitDamage.GetResultList(),
+                AppliedStatusList = this.AppliedStatus,
                 Caster = caster,
                 HasSavingThrow = this.HasSavingThrow,
                 SavingCharacteristic = this.SavingCharacteristic,
@@ -344,7 +344,7 @@ namespace DDFight.Game.Aggression.Spells
                 foreach (DamageTemplate damageTemplate in AdditionalHitDamagePerLevel.Elements)
                 {
                     bool added = false;
-                    foreach (DamageTemplate onHitTemplate in template.HitDamage.Elements)
+                    foreach (DamageResult onHitTemplate in template.HitDamage.Elements)
                     {
                         if (onHitTemplate.IsSameKind(damageTemplate))
                         {
@@ -354,7 +354,7 @@ namespace DDFight.Game.Aggression.Spells
                         }
                     }
                     if (added == false)
-                        template.HitDamage.AddElementSilent(damageTemplate);
+                        template.HitDamage.AddElementSilent(new DamageResult(damageTemplate));
                 }
             }
             return template;

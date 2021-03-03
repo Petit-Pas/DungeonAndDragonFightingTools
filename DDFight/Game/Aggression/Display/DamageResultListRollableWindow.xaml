@@ -1,4 +1,4 @@
-﻿<Window x:Class="DDFight.Game.Aggression.Display.DamageTemplateListRollableWindow"
+﻿<Window x:Class="DDFight.Game.Aggression.Display.DamageResultListRollableWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -27,7 +27,7 @@
             Damage
         </TextBlock>
         
-        <display:DamageTemplateListRollableUserControl
+        <display:DamageResultListRollableUserControl
             Grid.Row="1"/>
 
         <Button

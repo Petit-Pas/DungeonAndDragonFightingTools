@@ -1,5 +1,6 @@
 ﻿using DDFight.Game.Entities;
 using DDFight.Game.Status;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -41,16 +42,16 @@ namespace DDFight.Game.Aggression.Attacks
         }
         private uint _hitRoll = 0;
 
-        public DamageTemplateList DamageList
+        public DamageResultList DamageList
         {
-            get => _damageTemplate;
+            get => _damageList;
             set
             {
-                _damageTemplate = value;
+                _damageList = value;
                 NotifyPropertyChanged();
             }
         }
-        private DamageTemplateList _damageTemplate = new DamageTemplateList();
+        private DamageResultList _damageList = new DamageResultList();
 
         public int HitBonus
         {
@@ -113,6 +114,17 @@ namespace DDFight.Game.Aggression.Attacks
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
+        }
+
+        public void Reset()
+        {
+            foreach (DamageResult dmg in DamageList.Elements)
+            {
+                dmg.Reset();
+            }
+            this.SituationalHitAttackModifiers.Reset();
+            this.SituationalAdvantageModifiers.Reset();
+            this.HitRoll = 0;
         }
         #endregion
 

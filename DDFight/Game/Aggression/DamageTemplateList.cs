@@ -21,5 +21,16 @@ namespace DDFight.Game.Aggression
         {
             return new DamageTemplateList(this);
         }
+
+        public DamageResultList GetResultList()
+        {
+            DamageResultList result = new DamageResultList();
+
+            foreach (DamageTemplate template in Elements)
+            {
+                result.AddElementSilent(new DamageResult(template));
+            }
+            return result;
+        }
     }
 }
