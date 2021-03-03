@@ -11,6 +11,23 @@ namespace CoreUnitTest
         {
         }
 
+        private void test(string format, string soluce)
+        {
+            try
+            {
+                DiceRoll test = new DiceRoll(format);
+                Console.WriteLine(format);
+                Console.WriteLine(test.ToString());
+                Assert.IsTrue(test.ToString() == soluce);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.GetType().ToString());
+                Console.WriteLine(e.Message);
+                Assert.Fail();
+            }
+        }
+
         private void test(string format)
         {
             try
@@ -25,6 +42,13 @@ namespace CoreUnitTest
                 Console.WriteLine(e.Message);
                 Assert.Fail();
             }
+        }
+
+        [Test]
+        public void TestCombination()
+        {
+            test("1d6+1d6+1+1", "2d6+2");
+            test("2d6-1d6", "1d6");
         }
 
         [Test]
