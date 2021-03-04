@@ -63,7 +63,7 @@ namespace DDFight.Windows.FightWindows
             RollButtonControl.IsEnabled = false;
             ValidateAndExitButtonControl.IsEnabled = false;
             ValidateAndResetButtonControl.IsEnabled = false;
-            if (attackResult.HitRoll == 0)
+            if (attackResult.RollResult.AttackRoll == 0)
                 RollButtonControl.IsEnabled = true;
             foreach (DamageResult dmg in attackResult.DamageList.Elements)
             {

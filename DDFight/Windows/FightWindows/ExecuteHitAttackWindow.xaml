@@ -9,7 +9,7 @@
         xmlns:damagelistcontrols="clr-namespace:DDFight.Controlers.Game.Attacks.DamageListControls"
         xmlns:situationalmodifiers="clr-namespace:DDFight.Controlers.Game.Attacks.SituationalModifiers" xmlns:display="clr-namespace:DDFight.Game.Aggression.Attacks.Display"
         mc:Ignorable="d"
-        Title="{Binding Name}" Height="450" Width="500"
+        Title="{Binding Name}" Height="500" Width="500"
         Style="{StaticResource ResourceKey=WindowStyle}"
         x:Name="Window"
         WindowStartupLocation="CenterOwner"

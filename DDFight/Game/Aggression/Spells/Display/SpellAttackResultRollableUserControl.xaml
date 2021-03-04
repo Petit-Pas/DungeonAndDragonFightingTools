@@ -26,7 +26,7 @@
             Grid.Row="0"
             DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SpellAttackResultRollableUserControl}}}"
             Orientation="Horizontal"
-            Visibility="{Binding Spell.AutomaticalyHits, 
+            Visibility="{Binding SpellResult.AutomaticalyHits, 
                         RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SpellAttackResultRollableUserControl}}, 
                         Converter={StaticResource BoolToReversedVisibilityConverter}}">
             <TextBlock
@@ -34,21 +34,21 @@
                 Advantage: 
             </TextBlock>
             <CheckBox
-                IsChecked="{Binding HasAdvantage}"
+                IsChecked="{Binding RollResult.AdvantageModifiers.SituationalAdvantage}"
                 Margin="5"/>
             <TextBlock
                 VerticalAlignment="Center">
                 Disadvantage:
             </TextBlock>
             <CheckBox
-                IsChecked="{Binding HasDisAdvantage}"
+                IsChecked="{Binding RollResult.AdvantageModifiers.SituationalDisadvantage}"
                 Margin="5"/>
         </WrapPanel>
 
         <WrapPanel
             Grid.Row="1"
             DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SpellAttackResultRollableUserControl}}}"
-            Visibility="{Binding Spell.AutomaticalyHits, 
+            Visibility="{Binding SpellResult.AutomaticalyHits, 
                         RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SpellAttackResultRollableUserControl}}, 
                         Converter={StaticResource BoolToReversedVisibilityConverter}}">
             <TextBlock
@@ -56,7 +56,7 @@
                 Modifier to Hit:
             </TextBlock>
             <inputboxes:IntBox 
-                Integer="{Binding HitModifier}"
+                Integer="{Binding RollResult.HitModifiers.HitModifier}"
                 Width="30"
                 Margin="5, 2"/>
             <TextBlock
@@ -64,14 +64,14 @@
                 Modifier to CA:
             </TextBlock>
             <inputboxes:IntBox 
-                Integer="{Binding CAModifier}"
+                Integer="{Binding RollResult.HitModifiers.ACModifier}"
                 Width="30"
                 Margin="5, 2"/>
         </WrapPanel>
 
         <WrapPanel
             Grid.Row="2"
-            Visibility="{Binding Spell.AutomaticalyHits, 
+            Visibility="{Binding SpellResult.AutomaticalyHits, 
             RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SpellAttackResultRollableUserControl}}, 
             Converter={StaticResource BoolToReversedVisibilityConverter}}">
             <WrapPanel.Resources>
@@ -83,26 +83,22 @@
                 Attack roll: 
             </TextBlock>
             <inputboxes:D20Box 
+                x:Name="AttackRollBoxControl"
                 Width="30"
                 Margin="5, 2"
                 DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SpellAttackResultRollableUserControl}}}"
-                Integer="{Binding AttackRoll}"
-                HasAdvantage="{Binding HasAdvantage}"
-                HasDisAdvantage="{Binding HasDisAdvantage}"/>
+                Integer="{Binding RollResult.AttackRoll}"
+                HasAdvantage="{Binding RollResult.AdvantageModifiers.SituationalAdvantage}"
+                HasDisAdvantage="{Binding RollResult.AdvantageModifiers.SituationalDisadvantage}"/>
             <TextBlock 
-                DataContext="{Binding Spell, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SpellAttackResultRollableUserControl}}}"
-                Text="{Binding ToHitBonus, StringFormat=' + {0}'}"
-                FontWeight="SemiBold"/>
-            <TextBlock 
-                Text="{Binding HitResultString, StringFormat=' ==> {0}'}" 
-                DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SpellAttackResultRollableUserControl}}}"/>
+                Text="{Binding Path=RollResult.Description, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:SpellAttackResultRollableUserControl}}}"/>
         </WrapPanel>
 
         <display:DamageResultListRollableUserControl
             Margin="0, 5"
             Grid.Row="3"
             DataContext="{Binding HitDamage, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SpellAttackResultRollableUserControl}}}"
-            Crits="{Binding Crits, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SpellAttackResultRollableUserControl}}}"
+            Crits="{Binding Crits, ElementName=AttackRollBoxControl}"
             />
 
     </Grid>

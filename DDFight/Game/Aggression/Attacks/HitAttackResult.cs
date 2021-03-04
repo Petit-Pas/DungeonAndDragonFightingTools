@@ -15,6 +15,7 @@ namespace DDFight.Game.Aggression.Attacks
             set
             {
                 _owner = value;
+                this.RollResult.Caster = value;
                 NotifyPropertyChanged();
             }
         }
@@ -22,25 +23,9 @@ namespace DDFight.Game.Aggression.Attacks
 
         public PlayableEntity Target
         {
-            get => _target;
-            set
-            {
-                _target = value;
-                NotifyPropertyChanged();
-            }
+            get => RollResult.Target;
+            set => RollResult.Target = value;
         }
-        private PlayableEntity _target = null;
-
-        public uint HitRoll
-        {
-            get => _hitRoll;
-            set
-            {
-                _hitRoll = value;
-                NotifyPropertyChanged();
-            }
-        }
-        private uint _hitRoll = 0;
 
         public DamageResultList DamageList
         {
@@ -53,17 +38,6 @@ namespace DDFight.Game.Aggression.Attacks
         }
         private DamageResultList _damageList = new DamageResultList();
 
-        public int HitBonus
-        {
-            get => _hitBonus;
-            set
-            {
-                _hitBonus = value;
-                NotifyPropertyChanged();
-            }
-        }
-        private int _hitBonus;
-
         public OnHitStatusList OnHitStatuses
         {
             get => _onHitStatuses;
@@ -75,27 +49,17 @@ namespace DDFight.Game.Aggression.Attacks
         }
         private OnHitStatusList _onHitStatuses = new OnHitStatusList();
 
-        public SituationalHitAttackModifiers SituationalHitAttackModifiers
+        public AttackRollResult RollResult
         {
-            get => _situationalHitAttackModifiers;
+            get => _rollResult;
             set
             {
-                _situationalHitAttackModifiers = value;
+                _rollResult = value;
                 NotifyPropertyChanged();
             }
         }
-        private SituationalHitAttackModifiers _situationalHitAttackModifiers;
+        private AttackRollResult _rollResult = new AttackRollResult();
 
-        public SituationalAdvantageModifiers SituationalAdvantageModifiers
-        {
-            get => _situationalAdvantageModifiers;
-            set
-            {
-                _situationalAdvantageModifiers = value;
-                NotifyPropertyChanged();
-            }
-        }
-        private SituationalAdvantageModifiers _situationalAdvantageModifiers;
 
         #region INotifyPropertyChanged
 
@@ -122,9 +86,7 @@ namespace DDFight.Game.Aggression.Attacks
             {
                 dmg.Reset();
             }
-            this.SituationalHitAttackModifiers.Reset();
-            this.SituationalAdvantageModifiers.Reset();
-            this.HitRoll = 0;
+            this.RollResult.Reset();
         }
         #endregion
 

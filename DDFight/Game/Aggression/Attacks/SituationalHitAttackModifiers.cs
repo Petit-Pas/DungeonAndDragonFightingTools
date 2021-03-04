@@ -4,8 +4,20 @@ using System.Runtime.CompilerServices;
 
 namespace DDFight.Game.Aggression.Attacks
 {
-    public class SituationalHitAttackModifiers : INotifyPropertyChanged
+    public class SituationalHitAttackModifiers : INotifyPropertyChanged, ICloneable
     {
+        public SituationalHitAttackModifiers() { }
+
+        private void init_copy(SituationalHitAttackModifiers to_copy)
+        {
+            this.ACModifier = to_copy.ACModifier;
+            this.HitModifier = to_copy.HitModifier;
+        }
+
+        public SituationalHitAttackModifiers(SituationalHitAttackModifiers to_copy) { init_copy(to_copy); }
+
+        public object Clone() { return new SituationalHitAttackModifiers(this); }
+
         /// <summary>
         ///     can be provided by various elements, such as cover
         /// </summary>

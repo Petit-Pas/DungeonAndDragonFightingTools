@@ -1,4 +1,5 @@
-﻿using DDFight.Game.Entities;
+﻿using DDFight.Game.Aggression.Attacks;
+using DDFight.Game.Entities;
 using DDFight.Tools;
 using DDFight.ValidationRules;
 using System.Collections.Generic;
@@ -22,57 +23,48 @@ namespace DDFight.Game.Aggression.Spells.Display
         public SpellAttackResultRollableUserControl()
         {
             InitializeComponent();
-
-            DataContextChanged += SpellAttackResultRollableUserControl_DataContextChanged;
-            this.PropertyChanged += SpellAttackResultRollableUserControl_PropertyChanged;
         }
 
-        private void refresh_result()
+        public AttackSpellResult SpellResult
         {
-            if (data_context != null)
-            {
-                uint CA = data_context.CA + (uint)this.CAModifier;
-                int score = this.HitModifier + this.AttackRoll + this.Spell.ToHitBonus;
-                string result = score.ToString() + "/" + CA.ToString();
-
-
-                Hits = CA <= score ? true : false;
-                HitResultString = result;
-            }
-        }
-
-        private void SpellAttackResultRollableUserControl_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            refresh_result();
-        }
-
-        private void SpellAttackResultRollableUserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            refresh_result();
-        }
-
-        public AttackSpellResult Spell
-        {
-            get { return (AttackSpellResult)this.GetValue(SpellProperty); }
+            get { return (AttackSpellResult)this.GetValue(SpellResultProperty); }
             set 
             {
-                this.SetValue(SpellProperty, value);
+                this.SetValue(SpellResultProperty, value);
                 NotifyPropertyChanged();
             }
         }
-        public static readonly DependencyProperty SpellProperty = DependencyProperty.Register(
-          "Spell", typeof(AttackSpellResult), typeof(SpellAttackResultRollableUserControl), new PropertyMetadata(new AttackSpellResult(), new PropertyChangedCallback(OnSpellPropertyChanged)));
+        public static readonly DependencyProperty SpellResultProperty = DependencyProperty.Register(
+          nameof(SpellResult), typeof(AttackSpellResult), typeof(SpellAttackResultRollableUserControl), new PropertyMetadata(new AttackSpellResult(), new PropertyChangedCallback(OnSpellPropertyChanged)));
 
         private static void OnSpellPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
             ((SpellAttackResultRollableUserControl)sender).RefreshHitDamage();
+            ((SpellAttackResultRollableUserControl)sender).RefreshHitResult();
         }
 
+        public void RefreshHitResult()
+        {
+            // the same AttackSpellResult serves all such controls, so we duplicate the important data
+            RollResult = (AttackRollResult)SpellResult.RollResult.Clone();
+            RollResult.Target = this.data_context;
+        }
 
         public void RefreshHitDamage()
         {
-            HitDamage = (DamageResultList)Spell.HitDamage.Clone();
+            HitDamage = (DamageResultList)SpellResult.HitDamage.Clone();
         }
+
+        public AttackRollResult RollResult
+        {
+            get => _rollResult;
+            set
+            {
+                _rollResult = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private AttackRollResult _rollResult = null;
 
         public DamageResultList HitDamage
         {
@@ -84,122 +76,6 @@ namespace DDFight.Game.Aggression.Spells.Display
             }
         }
         private DamageResultList _hitDamage = new DamageResultList();
-
-
-        public int AttackRoll
-        {
-            get => _attackRoll;
-            set
-            {
-                if (_attackRoll != value)
-                {
-                    _attackRoll = value;
-                    NotifyPropertyChanged();
-                    if (_attackRoll == 20)
-                        Crits = true;
-                    else
-                        Crits = false;
-                }
-            }
-        }
-        private int _attackRoll = 0;
-
-        public bool Crits
-        {
-            get => _crits;
-            set
-            {
-                if (_crits != value)
-                {
-                    _crits = value;
-                    NotifyPropertyChanged();
-                }
-            }
-        }
-        private bool _crits = false;
-
-        public int CAModifier
-        {
-            get => _caModifier;
-            set
-            {
-                if (_caModifier != value)
-                {
-                    _caModifier = value;
-                    NotifyPropertyChanged();
-                }
-            }
-        }
-        private int _caModifier = 0;
-
-        public int HitModifier
-        {
-            get => _hitModifier;
-            set
-            {
-                if (_hitModifier != value)
-                {
-                    _hitModifier = value;
-                    NotifyPropertyChanged();
-                }
-            }
-        }
-        private int _hitModifier = 0;
-
-        public bool HasAdvantage
-        {
-            get => _hasAdvantage;
-            set
-            {
-                if (_hasAdvantage != value)
-                {
-                    _hasAdvantage = value;
-                    NotifyPropertyChanged();
-                }
-            }
-        }
-        private bool _hasAdvantage = false;
-
-        public bool HasDisAdvantage
-        {
-            get => _hasDisAdvantage;
-            set
-            {
-                if (_hasDisAdvantage != value)
-                {
-                    _hasDisAdvantage = value;
-                    NotifyPropertyChanged();
-                }
-            }
-        }
-        private bool _hasDisAdvantage = false;
-
-        public bool Hits
-        {
-            get => _hits;
-            set
-            {
-                if (_hits != value)
-                {
-                    _hits = value;
-                    NotifyPropertyChanged();
-                }
-            }
-        }
-        private bool _hits = false;
-
-        public string HitResultString {
-            get => _hitResultString;
-            set
-            {
-                if (_hitResultString != value)
-                {
-                    _hitResultString = value;
-                    NotifyPropertyChanged();
-                }
-            }
-        }
-        private string _hitResultString = "0/0";
 
         #region INotifyPropertyChanged
 
@@ -223,7 +99,9 @@ namespace DDFight.Game.Aggression.Spells.Display
 
         public bool IsValid()
         {
-            if (AttackRoll == 0)
+            if (RollResult == null)
+                return false;
+            if (RollResult.AttackRoll == 0)
                 return false;
             foreach (DamageResult dmg in HitDamage.Elements)
             {

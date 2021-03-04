@@ -32,18 +32,26 @@ namespace DDFight.Game.Aggression.Spells
                 SpellAttackResultRollableUserControl attack = attacks[index];
                 target.GetAttacked(new HitAttackResult {
                     DamageList = attack.HitDamage,
-                    HitBonus = this.ToHitBonus,
-                    HitRoll = (uint)attack.AttackRoll,
+                    RollResult = attack.RollResult,
                     OnHitStatuses = this.AppliedStatusList,
                     Owner = Caster,
-                    Target = target,
-                    SituationalHitAttackModifiers = new SituationalHitAttackModifiers{ACModifier = attack.CAModifier, HitModifier = attack.HitModifier},
                 }, Caster);
                 index += 1;
             }
         }
 
         #region Properties
+
+        public AttackRollResult RollResult
+        {
+            get => _rollResult;
+            set
+            {
+                _rollResult = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private AttackRollResult _rollResult = new AttackRollResult();
 
         public string Name
         {

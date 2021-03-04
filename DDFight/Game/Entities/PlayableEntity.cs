@@ -689,52 +689,26 @@ namespace DDFight.Game.Entities
         /// <returns></returns>
         public bool GetAttacked(HitAttackResult result, PlayableEntity attacker)
         {
-            bool hit = false;
             Paragraph tmp = (Paragraph)Global.Context.UserLogs.Blocks.LastBlock;
 
             tmp.Inlines.Add(Extensions.BuildRun(attacker.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
             tmp.Inlines.Add(Extensions.BuildRun(" attacks ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
             tmp.Inlines.Add(Extensions.BuildRun(this.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
             tmp.Inlines.Add(Extensions.BuildRun(". ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-            tmp.Inlines.Add(Extensions.BuildRun((result.HitRoll + result.HitBonus + result.SituationalHitAttackModifiers.HitModifier).ToString(), (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-            tmp.Inlines.Add(Extensions.BuildRun("/", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-            tmp.Inlines.Add(Extensions.BuildRun((result.SituationalHitAttackModifiers.ACModifier + this.CA).ToString(), (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-            tmp.Inlines.Add(Extensions.BuildRun(" ==> ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+            tmp.Inlines.Add(Extensions.BuildRun(result.RollResult.Description, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+            tmp.Inlines.Add(Extensions.BuildRun("\r\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
 
-            // Critical Miss
-            if (result.HitRoll == 1)
+            if (result.RollResult.Hits)
             {
-                tmp.Inlines.Add(Extensions.BuildRun(" Critical Miss!\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-                hit = false;
-            }
-
-            // Critical Hit
-            else if (result.HitRoll >= 20)
-            {
-                tmp.Inlines.Add(Extensions.BuildRun(" Critical Hit!\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
                 TakeHitDamage(result.DamageList);
-                hit = true;
-            }
-
-            // if the character gets hit with a normal hit
-            else if (result.HitRoll + result.HitBonus + result.SituationalHitAttackModifiers.HitModifier >= result.SituationalHitAttackModifiers.ACModifier + this.CA)
-            {
-                tmp.Inlines.Add(Extensions.BuildRun(" Hit!\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-                TakeHitDamage(result.DamageList);
-                hit = true;
-            }
-            // If the character can avoid / block the attack
-            else
-            {
-                tmp.Inlines.Add(Extensions.BuildRun(" Missed!\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-                hit = false;
-            }
-            if (hit == true)
                 foreach (OnHitStatus onHitStatus in result.OnHitStatuses.Elements)
                 {
                     onHitStatus.CheckIfApply(result.Owner, result.Target);
                 }
-            return hit;
+                return true;
+            }
+            else
+                return false;
         }
 
         #endregion HitManagement

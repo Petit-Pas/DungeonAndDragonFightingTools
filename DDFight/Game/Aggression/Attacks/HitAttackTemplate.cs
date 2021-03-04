@@ -67,11 +67,13 @@ namespace DDFight.Game.Aggression.Attacks
             return new HitAttackResult()
             {
                 DamageList = DamageList.GetResultList(),
-                HitRoll = 0,
-                HitBonus = HitBonus,
-                Target = null,
-                SituationalHitAttackModifiers = new SituationalHitAttackModifiers(),
-                SituationalAdvantageModifiers = new SituationalAdvantageModifiers(),
+                RollResult = new AttackRollResult
+                {
+                    BaseRollModifier = HitBonus,
+                    Caster = this.Owner,
+                    HitModifiers = new SituationalHitAttackModifiers(),
+                    AdvantageModifiers = new SituationalAdvantageModifiers(),
+                },
                 Owner = this.Owner,
                 OnHitStatuses = this.OnHitStatuses,
             };

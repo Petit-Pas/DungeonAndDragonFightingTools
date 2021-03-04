@@ -25,7 +25,8 @@ namespace DDFight.Controlers.Game.Attacks.Display
             set { this.SetValue(CritProperty, value); }
         }
         public static readonly DependencyProperty CritProperty = DependencyProperty.Register(
-          "Crits", typeof(bool), typeof(DamageResultRollableUserControl), new PropertyMetadata(false));
+          "Crits", typeof(bool), typeof(DamageResultRollableUserControl), 
+          new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public DamageResultRollableUserControl()
         {

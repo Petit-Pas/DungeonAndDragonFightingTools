@@ -72,6 +72,7 @@
     <Compile Include="Converters\IntEqualToZeroToVisibility.cs" />
     <Compile Include="Converters\IntGreaterThanZeroToVisibility.cs" />
     <Compile Include="Converters\VisibleIfCharacter.cs" />
+    <Compile Include="Game\Aggression\Attacks\AttackRollResult.cs" />
     <Compile Include="Game\Aggression\Attacks\Display\HitAttackResultEditableControl.xaml.cs">
       <DependentUpon>HitAttackResultEditableControl.xaml</DependentUpon>
     </Compile>

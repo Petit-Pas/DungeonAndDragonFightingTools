@@ -17,7 +17,6 @@ namespace DDFight.Controlers.Game.Attacks.Display
 
         public DamageResultListRollableUserControl()
         {
-            DataContextChanged += DamageResultListRollableUserControl_DataContextChanged;
             InitializeComponent();
         }
 
@@ -30,12 +29,7 @@ namespace DDFight.Controlers.Game.Attacks.Display
             set { this.SetValue(CritProperty, value); }
         }
         public static readonly DependencyProperty CritProperty = DependencyProperty.Register(
-          "Crits", typeof(bool), typeof(DamageResultListRollableUserControl), new PropertyMetadata(false));
-
-        private void DamageResultListRollableUserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            /*if (data_context != null)
-                DamageControl.ItemsSource = data_context.Elements;*/
-        }
+          "Crits", typeof(bool), typeof(DamageResultListRollableUserControl), 
+          new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
     }
 }

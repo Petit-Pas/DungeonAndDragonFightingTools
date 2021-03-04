@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DDFight.Game.Aggression.Attacks.Display" xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes" xmlns:situationalmodifiers="clr-namespace:DDFight.Controlers.Game.Attacks.SituationalModifiers" xmlns:damagelistcontrols="clr-namespace:DDFight.Controlers.Game.Attacks.DamageListControls" xmlns:display="clr-namespace:DDFight.Controlers.Game.Attacks.Display"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="500" d:DesignWidth="800">
     <GroupBox
         x:Name="AttackGroupBoxControl"
         Background="{StaticResource Gray}"
@@ -29,14 +29,13 @@
                 <!-- Hit result -->
                 <RowDefinition Height="Auto" />
                 <!-- Damage control -->
-                <RowDefinition Height="Auto" />
-                <!-- Errors Control -->
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
             </Grid.ColumnDefinitions>
+            
             <WrapPanel 
                 Grid.Row="0"
-                Margin="10, 5"
+                Margin="5"
                 Orientation="Horizontal">
                 <WrapPanel.Resources>
                     <Style TargetType="TextBlock">
@@ -60,70 +59,41 @@
                     VerticalAlignment="Center">
                     With an attack roll of:
                 </TextBlock>
-                <inputboxes:RangedIntBox
-                    x:Name="HitRollControl"
-                    Margin="0, 0, 5, 0"
-                    Min="0" Max="20"
-                    Integer="{Binding HitRoll}"
+                <inputboxes:D20Box
+                    x:Name="AttackRollBoxControl"
+                    Integer="{Binding RollResult.AttackRoll}"
+                    Margin="0 0 5 0"
                     MinWidth="35"/>
                 <TextBlock 
                     Margin="0, 0, 5, 0"
                     FontWeight="Bold"
                     VerticalAlignment="Center"
-                    Text="{Binding HitBonus, StringFormat={}{0:+#;-#;''}}"/>
+                    Text="{Binding RollResult.BaseRollModifier, StringFormat={}{0:+#;-#;''}}"/>
             </WrapPanel>
             
             <situationalmodifiers:SituationalHitAttackModifiersUserControl                                 
                 Grid.Row="1"
-                Margin="10, 5"
-                DataContext="{Binding SituationalHitAttackModifiers}"/>
+                Margin="5"
+                DataContext="{Binding Path=RollResult.HitModifiers}"/>
 
             <situationalmodifiers:SituationalAdvantageModifiersUserControl
                 Grid.Row="2" 
-                Margin="10, 5"
-                DataContext="{Binding SituationalAdvantageModifiers}"/>
+                Margin="5"
+                DataContext="{Binding Path=RollResult.AdvantageModifiers}"/>
 
-            <WrapPanel
+            <TextBlock 
                 Grid.Row="3"
-                Margin="10, 5"
-                Orientation="Horizontal">
-                <WrapPanel.Resources>
-                    <Style TargetType="TextBlock">
-                        <Setter Property="Foreground" Value="{StaticResource Light}"/>
-                    </Style>
-                </WrapPanel.Resources>
-                <TextBlock>
-                    Hit result:
-                </TextBlock>
-                <TextBlock
-                    x:Name="HitResultControl"
-                    Margin="5, 0, 0, 0">
-                    0
-                </TextBlock>
-                <TextBlock
-                    Margin="5, 0">
-                    /
-                </TextBlock>
-                <TextBlock
-                    x:Name="HitTargetControl">
-                    0
-                </TextBlock>
-            </WrapPanel>
+                Margin="5"
+                Foreground="{StaticResource Light}"
+                Text="{Binding RollResult.Description, StringFormat='{}Hit Result: {0}'}" 
+                FontWeight="SemiBold"/>
 
             <display:DamageResultListRollableUserControl
                 Grid.Row="4"
-                Margin="5"
+                Margin="5, 10"
                 x:Name="DamageControl"
-                DataContext="{Binding DamageList}"/>
-
-            <TextBlock
-                x:Name="ErrorTextblockControl"
-                Margin="5"
-                Grid.Row="5"
-                Foreground="Red"
-                Visibility="Collapsed" 
-                TextAlignment="Center"
-                FontSize="14"/>
+                DataContext="{Binding DamageList}"
+                Crits="{Binding Crits, ElementName=AttackRollBoxControl}"/>
 
             </Grid>
     </GroupBox>

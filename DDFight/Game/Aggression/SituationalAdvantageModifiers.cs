@@ -4,8 +4,21 @@ using System.Runtime.CompilerServices;
 
 namespace DDFight.Game.Aggression.Attacks
 {
-    public class SituationalAdvantageModifiers : INotifyPropertyChanged
+    public class SituationalAdvantageModifiers : INotifyPropertyChanged, ICloneable
     {
+
+        public SituationalAdvantageModifiers() { }
+
+        private void init_copy(SituationalAdvantageModifiers to_copy)
+        {
+            this.SituationalAdvantage = to_copy.SituationalAdvantage;
+            this.SituationalDisadvantage = to_copy.SituationalDisadvantage;
+        }
+
+        public SituationalAdvantageModifiers(SituationalAdvantageModifiers to_copy) { init_copy(to_copy); }
+
+        public object Clone() { return new SituationalAdvantageModifiers(this); }
+
         public bool SituationalAdvantage
         {
             get => _situationalAdvantage;

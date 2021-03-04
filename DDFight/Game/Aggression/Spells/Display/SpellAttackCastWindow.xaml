@@ -128,7 +128,7 @@
                                 <display2:SpellAttackResultRollableUserControl
                                     x:Name="SpellAttackResultRollableUserControl"
                                     Grid.Row="1"
-                                    Spell="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}} }"/>
+                                    SpellResult="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}} }"/>
                             </Grid>
                         </Border>
                     </DataTemplate>

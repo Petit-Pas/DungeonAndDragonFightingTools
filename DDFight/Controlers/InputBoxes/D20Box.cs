@@ -14,6 +14,17 @@ namespace DDFight.Controlers.InputBoxes
             Max = 20;
         }
 
+        /// <summary>
+        ///     Updating the Crit Property
+        /// </summary>
+        protected override void integer_property_updated()
+        {
+            if (Crits == false && Integer == 20)
+                Crits = true;
+            else if (Crits == true && Integer != 20)
+                Crits = false;
+        }
+
         public bool IsFullyRolled()
         {
             try
@@ -25,6 +36,15 @@ namespace DDFight.Controlers.InputBoxes
                 return true;
             }
         }
+
+        public bool Crits
+        {
+            get { return (bool)this.GetValue(CritProperty); }
+            set { this.SetValue(CritProperty, value); }
+        }
+        public static readonly DependencyProperty CritProperty = DependencyProperty.Register(
+          nameof(Crits), typeof(bool), typeof(D20Box), 
+          new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public bool HasAdvantage
         {
@@ -49,7 +69,6 @@ namespace DDFight.Controlers.InputBoxes
                 int rolled = DiceRoll.Roll("1d20", HasAdvantage, HasDisAdvantage);
                 this.SetValue(IntegerProperty, rolled);
             }
-
         }
 
         public override bool IsValid()

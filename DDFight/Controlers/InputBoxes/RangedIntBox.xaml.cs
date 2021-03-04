@@ -17,7 +17,7 @@ namespace DDFight.Controlers.InputBoxes
         {
             InitializeComponent();
         }
-        
+
         #region INotifyPropertyChanged
 
         /// <summary>
@@ -40,12 +40,25 @@ namespace DDFight.Controlers.InputBoxes
 
         public int Integer
         {
-            get { return (int)this.GetValue(IntegerProperty);  }
+            get { return (int)this.GetValue(IntegerProperty); }
             set { this.SetValue(IntegerProperty, value); }
         }
         public static readonly DependencyProperty IntegerProperty = DependencyProperty.Register(
             "Integer", typeof(int), typeof(RangedIntBox),
-            new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+            new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(onIntegerPropertyChanged)));
+
+        protected virtual void integer_property_updated() 
+        { 
+        }
+
+        private static void onIntegerPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            RangedIntBox control = d as RangedIntBox;
+            if (control != null)
+            {
+                control.integer_property_updated();
+            }
+        }
 
         public int Max
         {
