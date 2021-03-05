@@ -19,6 +19,8 @@ namespace DDFight.Controlers.Fight
             get => (PlayableEntity)DataContext;
         }
 
+
+        // TODO events handled in a weird way
         public FightingEntityActionsUserControl()
         {
             DataContext = null;

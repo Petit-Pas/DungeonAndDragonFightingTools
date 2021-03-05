@@ -1,10 +1,10 @@
-﻿<UserControl x:Class="DDFight.Controlers.Game.Attacks.HitAttackTemplateListPreviewUserControl"
+﻿<UserControl x:Class="DDFight.Game.Fight.Display.FightingEntityAttackListPreviewUserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DDFight.Controlers.Game.Attacks"
-             xmlns:converters="clr-namespace:DDFight.Converters"
+             xmlns:converters="clr-namespace:DDFight.Converters" xmlns:display="clr-namespace:DDFight.Game.Fight.Display"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -34,24 +34,10 @@
                 </TextBlock>
             </ScrollViewer>
 
-
-        <ListBox
-                Grid.Column="1" Grid.Row="1"
-                SelectionChanged="AttackListControl_SelectionChanged"
-                x:Name="AttackListControl"
-                Margin="5, 10, 5, 0"
-                Background="{StaticResource Gray}"
-                DisplayMemberPath="Name"
-                MouseDoubleClick="AttackListControl_MouseDoubleClick">
-            <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem">
-                        <Setter Property="BorderBrush" Value="{StaticResource Light}"/>
-                        <Setter Property="Margin" Value="3"/>
-                        <Setter Property="Foreground" Value="{StaticResource Light}"/>
-                        <Setter Property="BorderThickness" Value="2"/>
-                    </Style>
-                </ListBox.ItemContainerStyle>
-            </ListBox>
+            <display:FightingEntityHitAttackTemplateListUserControl
+                Grid.Column="1"
+                x:Name="HitAttackTemplateListControl"
+                DataContext="{Binding HitAttacks}"/>
 
             <local:HitAttackTemplateDetailsPreviewUserControl 
                 x:Name="DetailControl"

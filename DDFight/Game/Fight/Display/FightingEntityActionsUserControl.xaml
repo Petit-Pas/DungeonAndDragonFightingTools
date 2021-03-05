@@ -7,7 +7,7 @@
              xmlns:fight="clr-namespace:DDFight.Controlers.Game.Attacks"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:counter="clr-namespace:DDFight.Game.Counters.Display" 
-             xmlns:converters="clr-namespace:DDFight.Converters" xmlns:display="clr-namespace:DDFight.Game.Aggression.Spells.Display"
+             xmlns:converters="clr-namespace:DDFight.Converters" xmlns:display="clr-namespace:DDFight.Game.Aggression.Spells.Display" xmlns:display1="clr-namespace:DDFight.Game.Fight.Display"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -73,7 +73,7 @@
                             Attacks
                         </TextBlock>
                     </TabItem.Header>
-                    <fight:HitAttackTemplateListPreviewUserControl 
+                    <display1:FightingEntityAttackListPreviewUserControl
                         x:Name="AttacksListControl"/>
                 </TabItem>
                 <TabItem Style="{StaticResource TabItemStyle}"

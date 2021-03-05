@@ -153,6 +153,7 @@
     <Compile Include="Game\Entities\Display\PlayableEntityMainInfoEditableUserControl.xaml.cs">
       <DependentUpon>PlayableEntityMainInfoEditableUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Game\Fight\Display\FightingEntityHitAttackTemplateListUserControl.cs" />
     <Compile Include="Game\Fight\Display\FightingEntityListSelectableWindow.xaml.cs">
       <DependentUpon>FightingEntityListSelectableWindow.xaml</DependentUpon>
     </Compile>
@@ -216,8 +217,8 @@
     <Compile Include="Game\Aggression\Attacks\Display\HitAttackTemplateDetailsPreviewUserControl.xaml.cs">
       <DependentUpon>HitAttackTemplateDetailsPreviewUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Game\Aggression\Attacks\Display\HitAttackTemplateListPreviewUserControl.xaml.cs">
-      <DependentUpon>HitAttackTemplateListPreviewUserControl.xaml</DependentUpon>
+    <Compile Include="Game\Fight\Display\FightingEntityAttackListPreviewUserControl.xaml.cs">
+      <DependentUpon>FightingEntityAttackListPreviewUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Game\Aggression\Attacks\Display\HitAttackTemplateEditableUserControl.xaml.cs">
       <DependentUpon>HitAttackTemplateEditableUserControl.xaml</DependentUpon>
@@ -550,7 +551,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Game\Aggression\Attacks\Display\HitAttackTemplateListPreviewUserControl.xaml">
+    <Page Include="Game\Fight\Display\FightingEntityAttackListPreviewUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
