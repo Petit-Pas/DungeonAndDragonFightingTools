@@ -1,4 +1,5 @@
-﻿using DDFight.Game.Entities;
+﻿using DDFight.Game.Aggression.Attacks;
+using DDFight.Game.Entities;
 using DDFight.Tools.UXShortcuts;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DDFight.Game.Aggression.Attacks
+namespace DDFight.Game.Aggression
 {
     public class AttackRollResult : INotifyPropertyChanged, ICloneable
     {
@@ -22,7 +23,7 @@ namespace DDFight.Game.Aggression.Attacks
             this.AttackRoll = to_copy.AttackRoll;
             this.BaseRollModifier = to_copy.BaseRollModifier;
             this.Caster = to_copy.Caster;
-            this.HitModifiers = to_copy.HitModifiers.Clone() as SituationalHitAttackModifiers;
+            this.HitModifiers = to_copy.HitModifiers.Clone() as SituationalAttackRollModifiers;
             this.Target = to_copy.Target;
         }
 
@@ -106,7 +107,7 @@ namespace DDFight.Game.Aggression.Attacks
         }
         private SituationalAdvantageModifiers _advantageModifiers = new SituationalAdvantageModifiers();
 
-        public SituationalHitAttackModifiers HitModifiers
+        public SituationalAttackRollModifiers HitModifiers
         {
             get => _hitModifiers;
             set
@@ -117,7 +118,7 @@ namespace DDFight.Game.Aggression.Attacks
                 NotifyPropertyChanged();
             }
         }
-        private SituationalHitAttackModifiers _hitModifiers = new SituationalHitAttackModifiers();
+        private SituationalAttackRollModifiers _hitModifiers = new SituationalAttackRollModifiers();
 
         private void _hitModifiers_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {

@@ -72,7 +72,7 @@
     <Compile Include="Converters\IntEqualToZeroToVisibility.cs" />
     <Compile Include="Converters\IntGreaterThanZeroToVisibility.cs" />
     <Compile Include="Converters\VisibleIfCharacter.cs" />
-    <Compile Include="Game\Aggression\Attacks\AttackRollResult.cs" />
+    <Compile Include="Game\Aggression\AttackRollResult.cs" />
     <Compile Include="Game\Aggression\Attacks\Display\HitAttackResultEditableControl.xaml.cs">
       <DependentUpon>HitAttackResultEditableControl.xaml</DependentUpon>
     </Compile>
@@ -305,7 +305,7 @@
     <Compile Include="Game\Aggression\Attacks\HitAttackResult.cs" />
     <Compile Include="Game\Aggression\Attacks\HitAttackTemplate.cs" />
     <Compile Include="Game\Aggression\SituationalAdvantageModifiers.cs" />
-    <Compile Include="Game\Aggression\Attacks\SituationalHitAttackModifiers.cs" />
+    <Compile Include="Game\Aggression\SituationalAttackRollModifiers.cs" />
     <Compile Include="Game\Aggression\DamageTemplate.cs" />
     <Compile Include="Game\Characteristics\Characteristic.cs" />
     <Compile Include="Game\Characteristics\CharacteristicList.cs" />

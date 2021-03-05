@@ -2,21 +2,21 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace DDFight.Game.Aggression.Attacks
+namespace DDFight.Game.Aggression
 {
-    public class SituationalHitAttackModifiers : INotifyPropertyChanged, ICloneable
+    public class SituationalAttackRollModifiers : INotifyPropertyChanged, ICloneable
     {
-        public SituationalHitAttackModifiers() { }
+        public SituationalAttackRollModifiers() { }
 
-        private void init_copy(SituationalHitAttackModifiers to_copy)
+        private void init_copy(SituationalAttackRollModifiers to_copy)
         {
             this.ACModifier = to_copy.ACModifier;
             this.HitModifier = to_copy.HitModifier;
         }
 
-        public SituationalHitAttackModifiers(SituationalHitAttackModifiers to_copy) { init_copy(to_copy); }
+        public SituationalAttackRollModifiers(SituationalAttackRollModifiers to_copy) { init_copy(to_copy); }
 
-        public object Clone() { return new SituationalHitAttackModifiers(this); }
+        public object Clone() { return new SituationalAttackRollModifiers(this); }
 
         /// <summary>
         ///     can be provided by various elements, such as cover

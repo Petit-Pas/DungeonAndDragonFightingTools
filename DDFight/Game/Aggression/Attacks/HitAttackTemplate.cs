@@ -71,7 +71,7 @@ namespace DDFight.Game.Aggression.Attacks
                 {
                     BaseRollModifier = HitBonus,
                     Caster = this.Owner,
-                    HitModifiers = new SituationalHitAttackModifiers(),
+                    HitModifiers = new SituationalAttackRollModifiers(),
                     AdvantageModifiers = new SituationalAdvantageModifiers(),
                 },
                 Owner = this.Owner,
