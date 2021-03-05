@@ -73,20 +73,41 @@ namespace DDFight.Game.Dices
 
         #endregion
 
-        public int Roll()
+        public int Roll(bool critical = false)
         {
             int result = 0;
+            string output = "";
 
             Console.Write("rolling " + DiceAmount.ToString() + " " + DiceValue.ToString() + ": ");
-            for (int i = 0; i != Math.Abs(DiceAmount); i++)
+            for (int i = 0; i != Math.Abs(DiceAmount) * (critical ? 2 : 1); i++)
             {
                 int new_val = rand.Next(1, DiceValue + 1);
                 Console.Write(new_val.ToString() + (i + 1 == DiceAmount ? "" : ", "));
+                output =  output + (output.Length == 0 ? "" : ", ") + new_val.ToString();
                 result += new_val;
             }
             result = DiceAmount > 0 ? result : - result;
             Console.WriteLine(" ==> result: " + result.ToString());
+
+            output = this.ToString() + (critical ? " (crit) " : "") + " => " + output + " (" + result + ")";
+            RolledDices = output;
             return result;
+        }
+
+        public string RolledDices
+        {
+            get => _rolledDices;
+            set
+            {
+                _rolledDices = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private string _rolledDices = "";
+
+        public void Reset()
+        {
+            RolledDices = "";
         }
 
         #region INotifyPropertyChanged

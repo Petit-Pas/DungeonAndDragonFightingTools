@@ -105,6 +105,10 @@ namespace DDFight.Game.Dices
         public void Reset()
         {
             LastRoll = 0;
+            foreach (Dices dice in DicesList)
+            {
+                dice.Reset();
+            }
         }
 
         /// <summary>
@@ -133,6 +137,13 @@ namespace DDFight.Game.Dices
             get => _lastRoll;
             set
             {
+                if (!has_been_rolled)
+                {
+                    foreach (Dices dice in DicesList)
+                    {
+                        dice.Reset();
+                    }
+                }
                 _lastRoll = value;
                 NotifyPropertyChanged();
             }
@@ -167,18 +178,24 @@ namespace DDFight.Game.Dices
             return dice.LastResult;
         }
 
+
+        /// <summary>
+        ///     will allow to make a difference between setting this.LastResult through user input or through Roll() method
+        ///     will be used to display (or not) the ToolTip on DamareResultRollableUserControl
+        /// </summary>
+        private bool has_been_rolled = false;
+
         public void Roll(bool critical = false)
         {
             int result = 0;
 
             foreach (Dices dice in DicesList)
             {
-                // in case of critical, the dices are rolled twice (with 1d4+2, a critical shall roll 2d4+2)
-                result += dice.Roll();
-                if (critical == true)
-                    result += dice.Roll();
+                result += dice.Roll(critical);
             }
+            has_been_rolled = true;
             LastRoll = result;
+            has_been_rolled = false;
         }
 
         #region Properties 

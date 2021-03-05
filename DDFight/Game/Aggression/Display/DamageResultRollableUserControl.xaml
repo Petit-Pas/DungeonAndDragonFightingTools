@@ -8,54 +8,61 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <converters:DamageTypeEnumToBrushConverter x:Key="DamageColorConverter" />
+        <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
     </UserControl.Resources>
     <Grid>
         <WrapPanel
             Margin="0, 5"
             Orientation="Horizontal">
-            <Grid
-                Margin="0, 0, 5, 0">
+            <Grid>
+                <Grid.ToolTip>
+                    <ToolTip
+                        Visibility="{Binding Damage.DicesList[0].RolledDices, Converter={StaticResource StringToVisibilityConverter}}"
+                        Background="{StaticResource Gray}">
+                        <ItemsControl
+                            DisplayMemberPath="RolledDices"
+                            ItemsSource="{Binding Damage.DicesList}"
+                            Foreground="{StaticResource Light}">
+                        </ItemsControl>
+                    </ToolTip>
+                </Grid.ToolTip>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition 
-                        SharedSizeGroup="DamageTypeColumn" />
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="DamageTypeColumn" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="Damage"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock 
+                
+                <TextBlock
+                    Grid.Column="0"
                     Text="{Binding DamageType}" 
                     FontWeight="SemiBold"
                     Foreground="{Binding DamageType, Converter={StaticResource DamageColorConverter}}"/>
-            </Grid>
-            <TextBlock 
-                Margin="0, 0, 5, 0"
-                Foreground="{StaticResource Light}">
-                Damage :
-            </TextBlock>
-            <Grid
-                Margin="5, 0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition 
-                        SharedSizeGroup="TemplateColumn"/>
-                </Grid.ColumnDefinitions>
+
                 <TextBlock 
+                    Grid.Column="1"
+                    Text="Damage: "
+                    Margin="5, 0, 5, 0"
+                    Foreground="{StaticResource Light}"/>
+
+                <TextBlock 
+                    Grid.Column="2"
                     Foreground="{StaticResource Light}"
                     FontWeight="SemiBold"
-                    Text="{Binding ToRollDamage}" />
+                    Text="{Binding ToRollDamage}" />                
             </Grid>
+            
             <inputboxes:IntBox 
+                Margin="5 0"
+                ToolTipService.IsEnabled="False"
                 MinWidth="40"
                 DataContext="{Binding Damage}"
                 Integer="{Binding LastRoll}"
                 />
-            <Grid
-                Margin="5, 0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition 
-                        SharedSizeGroup="ModifierColumn"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock 
-                    Foreground="{StaticResource Light}"
-                    FontWeight="Bold"
-                    Text="{Binding ToRollBonus}" />
-            </Grid>
+
+            <TextBlock 
+                Foreground="{StaticResource Light}"
+                FontWeight="Bold"
+                Text="{Binding ToRollBonus}" />
         </WrapPanel>
     </Grid>
 </UserControl>
