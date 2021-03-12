@@ -8,17 +8,17 @@ using System.Windows.Data;
 namespace DDFight.Converters
 {
 
-    public class BasicOperationConverter : IMultiValueConverter
+    public class BasicOperationConverter : IMultiValueConverter, IValueConverter
     {
 
-        private int _convert(List<int> operands, string expression, int default_value)
+        private int _convert(List<int> operands, string expression, double default_value)
         {
             int amount_operands = expression.Count((c) => c == 'x');
 
             if (amount_operands != operands.Count)
             {
                 Logger.Log(String.Format("WARN: amount of operands didnt match in operation {0} in BasicOperationConverter", expression));
-                return default_value;
+                return (int)default_value;
             }
 
             foreach (int operand in operands)
@@ -46,7 +46,7 @@ namespace DDFight.Converters
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             List<int> operands = new List<int>();
-            int default_value = 1;
+            double default_value = 1.0;
 
             try
             {
@@ -67,6 +67,31 @@ namespace DDFight.Converters
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            List<int> operands = new List<int>();
+            double default_value = 1.0;
+
+            try
+            {
+                string[] result = ((string)parameter).Split('|');
+                default_value = result.Length > 1 ? Int32.Parse(result[1]) : default_value;
+                string expression = result[0];
+                operands.Add((int)((double)value));
+                return (double)_convert(operands, expression, default_value);
+            }
+            catch (Exception e)
+            {
+                Logger.Log("WARN: exception in BasicOperationConverter.Convert(): " + e.Message);
+                return default_value;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }

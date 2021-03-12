@@ -1,0 +1,74 @@
+﻿<UserControl x:Class="WpfSandbox.SpellLevelSelector"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfSandbox" 
+             xmlns:converters="clr-namespace:DDFight.Converters;assembly=DDFight"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/TriangleRadioButtonStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <converters:BasicOperationConverter x:Key="OperationConverter"/>
+            <PathGeometry x:Key="TriangleRadioButtonPath">
+                <PathGeometry.Figures>
+                    <PathFigure StartPoint="0 0">
+                        <PathFigure.Segments>
+                            <LineSegment Point="90 -30"/>
+                            <ArcSegment RotationAngle="0" 
+                                        SweepDirection="Clockwise" 
+                                        IsLargeArc="False"
+                                        Size="25 55"
+                                        Point="90 30"/>
+                            <LineSegment Point="0 0"/>
+                        </PathFigure.Segments>
+                    </PathFigure>
+                </PathGeometry.Figures>
+            </PathGeometry>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Canvas
+        Background="Red"
+        local:TriangleRadioButtonProperties.PathGeometry="{StaticResource TriangleRadioButtonPath}">
+        
+        <local:TriangleRadioButton
+            Angle="-37.5"
+            Style="{StaticResource TriangleRadioButton}"
+            IsChecked="{Binding Button1, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:SpellLevelSelector}}}">
+        </local:TriangleRadioButton>
+
+        <local:TriangleRadioButton
+            Angle="0"
+            Style="{StaticResource TriangleRadioButton}"
+            IsChecked="{Binding Button2, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:SpellLevelSelector}}}">
+        </local:TriangleRadioButton>
+
+        <local:TriangleRadioButton
+            Angle="37.5"
+            Style="{StaticResource TriangleRadioButton}"
+            IsChecked="{Binding Button3, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:SpellLevelSelector}}}">
+        </local:TriangleRadioButton>
+
+        <Grid
+            Width="{Binding ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Canvas}}}" 
+            Height="{Binding ActualHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Canvas}}}">
+            <Ellipse
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Fill="Green"
+                Width="100"
+                Height="100">
+            </Ellipse>
+            <TextBlock
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center">
+                oui
+            </TextBlock>
+        </Grid>
+    </Canvas>
+</UserControl>

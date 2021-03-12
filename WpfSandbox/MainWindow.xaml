@@ -4,16 +4,31 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BindValidation"
-        xmlns:wpfsandbox="clr-namespace:WpfSandbox"
+        xmlns:wpfsandbox="clr-namespace:WpfSandbox" 
         mc:Ignorable="d"
         Title="MainWindow"
         Width="650" Height="400"
         Background="{StaticResource LightestGray}">
     <Window.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-            </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
 
+    <Grid
+        ShowGridLines="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <wpfsandbox:SpellLevelSelector 
+            Grid.Row="1"
+            Grid.Column="0"/>
+
+    </Grid>
+    
 </Window>
