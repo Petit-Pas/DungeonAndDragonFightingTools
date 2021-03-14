@@ -45,6 +45,11 @@ namespace DDFight.Tools
             string left;
             string right;
 
+            expr = expr.Replace("--", "+");
+            expr = expr.Replace("-+", "-");
+            expr = expr.Replace("+-", "-");
+            expr = expr.Replace("++", "+");
+
             // parenthesis handling are made out of LL parser to make the parser grammar significantly easier
             while (expr.Contains('('))
                 expr = handle_parenthesis(expr);
@@ -55,7 +60,11 @@ namespace DDFight.Tools
                 op = expr.Last<char>((c) => (c == '+' || c == '-'));
                 op_index = (expr.LastIndexOf('+') > expr.LastIndexOf('-') ? expr.LastIndexOf('+') : expr.LastIndexOf('-'));
 
-                left = expr.Substring(0, op_index);
+                if (op_index == 0)
+                    // handles +2 or -2 as operations 0+2 or 0-2
+                    left = "0";
+                else
+                    left = expr.Substring(0, op_index);
                 right = expr.Substring(op_index + 1);
 
                 switch (op)

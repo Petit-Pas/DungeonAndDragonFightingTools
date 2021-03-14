@@ -34,12 +34,31 @@
 
     <Canvas
         Background="Red"
-        local:TriangleRadioButtonProperties.PathGeometry="{StaticResource TriangleRadioButtonPath}">
-        
+        local:TriangleRadioButtonProperties.PathGeometry="{StaticResource TriangleRadioButtonPath}"
+        local:TriangleRadioButtonProperties.BaseColorBrush="{StaticResource Gray}"
+        local:TriangleRadioButtonProperties.SelectedColorBrush="{StaticResource Indigo}"
+        local:TriangleRadioButtonProperties.DisabledColorBrush="{StaticResource LightestGray}"
+        local:TriangleRadioButtonProperties.HoverColorBrush="{StaticResource LightIndigo}"
+        local:TriangleRadioButtonProperties.BorderBaseColorBrush="{StaticResource Light}">
+
+        <local:TriangleRadioButton
+            Angle="-150"
+            Style="{StaticResource TriangleRadioButton}"
+            IsChecked="{Binding Button3, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:SpellLevelSelector}}}">
+        </local:TriangleRadioButton>
+
+        <local:TriangleRadioButton
+            Angle="-75"
+            Style="{StaticResource TriangleRadioButton}"
+            IsChecked="{Binding Button1, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:SpellLevelSelector}}}"
+            >
+        </local:TriangleRadioButton>
+
         <local:TriangleRadioButton
             Angle="-37.5"
             Style="{StaticResource TriangleRadioButton}"
-            IsChecked="{Binding Button1, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:SpellLevelSelector}}}">
+            IsChecked="{Binding Button1, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:SpellLevelSelector}}}"
+            >
         </local:TriangleRadioButton>
 
         <local:TriangleRadioButton
@@ -50,9 +69,23 @@
 
         <local:TriangleRadioButton
             Angle="37.5"
+            IsEnabled="False"
             Style="{StaticResource TriangleRadioButton}"
             IsChecked="{Binding Button3, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:SpellLevelSelector}}}">
         </local:TriangleRadioButton>
+
+        <local:TriangleRadioButton
+            Angle="75"
+            Style="{StaticResource TriangleRadioButton}"
+            IsChecked="{Binding Button3, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:SpellLevelSelector}}}">
+        </local:TriangleRadioButton>
+
+        <local:TriangleRadioButton
+            Angle="150"
+            Style="{StaticResource TriangleRadioButton}"
+            IsChecked="{Binding Button3, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:SpellLevelSelector}}}">
+        </local:TriangleRadioButton>
+
 
         <Grid
             Width="{Binding ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Canvas}}}" 

@@ -69,15 +69,103 @@ namespace WpfSandbox
 
         private void TriangleRadioButton_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            Scale = 1.1;
+            if (IsEnabled)
+                Scale = 1.1;
         }
     }
 
     /// <summary>
     ///     Contains properties that will be used for a collection of TriangleRadioButtons
     /// </summary>
-    public static class TriangleRadioButtonProperties
+    public class TriangleRadioButtonProperties
     {
+        #region Colors
+
+        public static void SetBorderBaseColorBrush(DependencyObject obj, Brush value)
+        {
+            obj.SetValue(BorderBaseColorBrushProperty, value);
+        }
+        public static Brush GetBorderBaseColorBrush(DependencyObject obj)
+        {
+            return (Brush)obj.GetValue(BorderBaseColorBrushProperty);
+        }
+        public static readonly DependencyProperty BorderBaseColorBrushProperty =
+            DependencyProperty.RegisterAttached(
+                "BorderBaseColorBrush",
+                typeof(Brush),
+                typeof(TriangleRadioButtonProperties),
+                new FrameworkPropertyMetadata(Brushes.Gray,
+                    FrameworkPropertyMetadataOptions.Inherits));
+
+        public static void SetDisabledColorBrush(DependencyObject obj, Brush value)
+        {
+            obj.SetValue(DisabledColorBrushProperty, value);
+        }
+        public static Brush GetDisabledColorBrush(DependencyObject obj)
+        {
+            return (Brush)obj.GetValue(DisabledColorBrushProperty);
+        }
+        public static readonly DependencyProperty DisabledColorBrushProperty =
+            DependencyProperty.RegisterAttached(
+                "DisabledColorBrush",
+                typeof(Brush),
+                typeof(TriangleRadioButtonProperties),
+                new FrameworkPropertyMetadata(Brushes.Gray,
+                    FrameworkPropertyMetadataOptions.Inherits));
+
+
+        public static void SetHoverColorBrush(DependencyObject obj, Brush value)
+        {
+            obj.SetValue(HoverColorBrushProperty, value);
+        }
+        public static Brush GetHoverColorBrush(DependencyObject obj)
+        {
+            return (Brush)obj.GetValue(HoverColorBrushProperty);
+        }
+        public static readonly DependencyProperty HoverColorBrushProperty =
+            DependencyProperty.RegisterAttached(
+                "HoverColorBrush",
+                typeof(Brush),
+                typeof(TriangleRadioButtonProperties),
+                new FrameworkPropertyMetadata(Brushes.LightGreen,
+                    FrameworkPropertyMetadataOptions.Inherits));
+
+        public static void SetSelectedColorBrush(DependencyObject obj, Brush value)
+        {
+            obj.SetValue(SelectedColorBrushProperty, value);
+        }
+        public static Brush GetSelectedColorBrush(DependencyObject obj)
+        {
+            return (Brush)obj.GetValue(SelectedColorBrushProperty);
+        }
+        public static readonly DependencyProperty SelectedColorBrushProperty =
+            DependencyProperty.RegisterAttached(
+                "SelectedColorBrush",
+                typeof(Brush),
+                typeof(TriangleRadioButtonProperties),
+                new FrameworkPropertyMetadata(Brushes.Green,
+                    FrameworkPropertyMetadataOptions.Inherits));
+
+        public static void SetBaseColorBrush(DependencyObject obj, Brush value)
+        {
+            obj.SetValue(BaseColorBrushProperty, value);
+        }
+        public static Brush GetBaseColorBrush(DependencyObject obj)
+        {
+            return (Brush)obj.GetValue(BaseColorBrushProperty);
+        }
+        public static readonly DependencyProperty BaseColorBrushProperty =
+            DependencyProperty.RegisterAttached(
+                "BaseColorBrush",
+                typeof(Brush),
+                typeof(TriangleRadioButtonProperties),
+                new FrameworkPropertyMetadata(Brushes.Black, 
+                    FrameworkPropertyMetadataOptions.Inherits));
+        
+        #endregion Colors
+
+        #region PathGeometryProperty
+
         public static PathGeometry GetPathGeometry(DependencyObject obj)
         {
             return (PathGeometry)obj.GetValue(PathGeometryProperty);
@@ -94,5 +182,7 @@ namespace WpfSandbox
                 typeof(PathGeometry),
                 typeof(TriangleRadioButtonProperties),
                 new FrameworkPropertyMetadata(new PathGeometry(), FrameworkPropertyMetadataOptions.Inherits));
+
+        #endregion PathGeometryProperty
     }
 }
