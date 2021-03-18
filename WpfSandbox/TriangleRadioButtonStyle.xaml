@@ -7,8 +7,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:TriangleRadioButton}">
-                    <Grid
-                        ShowGridLines="True">
+                    <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition />
                         </Grid.RowDefinitions>
@@ -19,38 +18,36 @@
                         <Grid.RenderTransform>
                             <TransformGroup>
                                 <TranslateTransform 
-                                        X="{Binding Path=ActualWidth, 
-                                            RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Canvas}}, 
-                                            Converter={StaticResource ResourceKey=OperationConverter}, ConverterParameter='x/2'}"
-                                        Y="{Binding Path=ActualHeight, 
-                                            RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Canvas}}, 
-                                            Converter={StaticResource ResourceKey=OperationConverter}, ConverterParameter='x/2'}"/>
-
+                                    X="{Binding Path=ActualWidth, 
+                                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Canvas}}, 
+                                        Converter={StaticResource ResourceKey=OperationConverter}, ConverterParameter='x/2'}"
+                                    Y="{Binding Path=ActualHeight, 
+                                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Canvas}}, 
+                                        Converter={StaticResource ResourceKey=OperationConverter}, ConverterParameter='x/2'}"/>
                                 <RotateTransform 
-                                        Angle="{Binding Path=Angle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:TriangleRadioButton}}}"
-                                        CenterX="{Binding Path=ActualWidth, 
-                                            RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Canvas}}, 
-                                            Converter={StaticResource ResourceKey=OperationConverter}, ConverterParameter='x/2'}"
-                                        CenterY="{Binding Path=ActualHeight, 
-                                            RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Canvas}}, 
-                                            Converter={StaticResource ResourceKey=OperationConverter}, ConverterParameter='x/2'}"/>
-
+                                    Angle="{Binding Path=Angle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:TriangleRadioButton}}}"
+                                    CenterX="{Binding Path=ActualWidth, 
+                                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Canvas}}, 
+                                        Converter={StaticResource ResourceKey=OperationConverter}, ConverterParameter='x/2'}"
+                                    CenterY="{Binding Path=ActualHeight, 
+                                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Canvas}}, 
+                                        Converter={StaticResource ResourceKey=OperationConverter}, ConverterParameter='x/2'}"/>
                                 <ScaleTransform 
-                                        ScaleX="{Binding Scale, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:TriangleRadioButton}}}" 
-                                        ScaleY="{Binding Scale, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:TriangleRadioButton}}}" 
-                                        CenterX="{Binding Path=ActualWidth, 
-                                            RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Canvas}}, 
-                                            Converter={StaticResource ResourceKey=OperationConverter}, ConverterParameter='x/2'}"
-                                        CenterY="{Binding Path=ActualHeight, 
-                                            RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Canvas}}, 
-                                            Converter={StaticResource ResourceKey=OperationConverter}, ConverterParameter='x/2'}"/>
+                                    ScaleX="{Binding Scale, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:TriangleRadioButton}}}" 
+                                    ScaleY="{Binding Scale, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:TriangleRadioButton}}}" 
+                                    CenterX="{Binding Path=ActualWidth, 
+                                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Canvas}}, 
+                                        Converter={StaticResource ResourceKey=OperationConverter}, ConverterParameter='x/2'}"
+                                    CenterY="{Binding Path=ActualHeight, 
+                                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Canvas}}, 
+                                        Converter={StaticResource ResourceKey=OperationConverter}, ConverterParameter='x/2'}"/>
                             </TransformGroup>
                         </Grid.RenderTransform>
                         <TextBlock 
                             Grid.Row="0"
                             Grid.Column="0"
                             Panel.ZIndex="20"
-                            FontSize="20"
+                            FontSize="{Binding Path=(local:TriangleRadioButtonProperties.LabelFontSize), RelativeSource={RelativeSource TemplatedParent}}"
                             Foreground="{StaticResource Light}"
                             >
                             <TextBlock.RenderTransform>
@@ -65,10 +62,16 @@
                                         CenterY="{Binding Path=ActualHeight, 
                                             RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TextBlock}}, 
                                             Converter={StaticResource ResourceKey=OperationConverter}, ConverterParameter='x/2'}"/>
-                                    <TranslateTransform X="55" Y="-15"/>
+                                    <TranslateTransform 
+                                        X="{Binding Path=(local:TriangleRadioButtonProperties.LabelXOffset), 
+                                            RelativeSource={RelativeSource TemplatedParent}}" 
+                                        Y="{Binding Path=(local:TriangleRadioButtonProperties.LabelYOffset),
+                                            RelativeSource={RelativeSource TemplatedParent}}"/>
                                 </TransformGroup>
                             </TextBlock.RenderTransform>
-                             Lvl 1
+                            <TextBlock.Text>
+                                <Binding Path="Label" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType={x:Type local:TriangleRadioButton}}"/>
+                            </TextBlock.Text>
                         </TextBlock>
                         <Path 
                             Grid.Row="0"

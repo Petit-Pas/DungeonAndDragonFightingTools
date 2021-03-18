@@ -39,14 +39,25 @@ namespace WpfSandbox
             this.MouseLeave += TriangleRadioButton_MouseLeave;
         }
 
+        public string Label
+        {
+            get { return (string)GetValue(LabelProperty); }
+            set { SetValue(LabelProperty, value); }
+        }
+        public static readonly DependencyProperty LabelProperty =
+            DependencyProperty.Register(
+                nameof(Label),
+                typeof(string),
+                typeof(TriangleRadioButton),
+                new FrameworkPropertyMetadata("XX"));
+
         public double Angle
         {
             get { return (double)GetValue(AngleProperty); }
             set { SetValue(AngleProperty, value); }
         }
-
         public static readonly DependencyProperty AngleProperty =
-            DependencyProperty.RegisterAttached(
+            DependencyProperty.Register(
                 nameof(Angle),
                 typeof(double),
                 typeof(TriangleRadioButton),
@@ -161,21 +172,63 @@ namespace WpfSandbox
                 typeof(TriangleRadioButtonProperties),
                 new FrameworkPropertyMetadata(Brushes.Black, 
                     FrameworkPropertyMetadataOptions.Inherits));
-        
+
         #endregion Colors
 
         #region PathGeometryProperty
+        public static int GetLabelFontSize(DependencyObject obj)
+        {
+            return (int)obj.GetValue(LabelFontSizeProperty);
+        }
+        public static void SetLabelFontSize(DependencyObject obj, int value)
+        {
+            obj.SetValue(LabelFontSizeProperty, value);
+        }
+        public static readonly DependencyProperty LabelFontSizeProperty =
+            DependencyProperty.RegisterAttached(
+                "LabelFontSize",
+                typeof(int),
+                typeof(TriangleRadioButtonProperties),
+                new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.Inherits));
+
+        public static double GetLabelYOffset(DependencyObject obj)
+        {
+            return (double)obj.GetValue(LabelYOffsetProperty);
+        }
+        public static void SetLabelYOffset(DependencyObject obj, double value)
+        {
+            obj.SetValue(LabelYOffsetProperty, value);
+        }
+        public static readonly DependencyProperty LabelYOffsetProperty =
+            DependencyProperty.RegisterAttached(
+                "LabelYOffset",
+                typeof(double),
+                typeof(TriangleRadioButtonProperties),
+                new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.Inherits));
+
+        public static double GetLabelXOffset(DependencyObject obj)
+        {
+            return (double)obj.GetValue(LabelXOffsetProperty);
+        }
+        public static void SetLabelXOffset(DependencyObject obj, double value)
+        {
+            obj.SetValue(LabelXOffsetProperty, value);
+        }
+        public static readonly DependencyProperty LabelXOffsetProperty =
+            DependencyProperty.RegisterAttached(
+                "LabelXOffset",
+                typeof(double),
+                typeof(TriangleRadioButtonProperties),
+                new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.Inherits));
 
         public static PathGeometry GetPathGeometry(DependencyObject obj)
         {
             return (PathGeometry)obj.GetValue(PathGeometryProperty);
         }
-
         public static void SetPathGeometry(DependencyObject obj, double value)
         {
             obj.SetValue(PathGeometryProperty, value);
         }
-
         public static readonly DependencyProperty PathGeometryProperty =
             DependencyProperty.RegisterAttached(
                 "PathGeometry",
