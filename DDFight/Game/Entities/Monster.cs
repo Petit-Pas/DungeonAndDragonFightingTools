@@ -33,10 +33,12 @@ namespace DDFight.Game.Entities
 
         #region ICloneable
 
-        protected virtual void InitCopy(Monster to_copy)
+        protected override void InitCopy(PlayableEntity to_copy)
         {
-            base.InitCopy(to_copy);
-            Level = to_copy.Level;
+            Monster copy_monster = to_copy as Monster;
+
+            base.InitCopy(copy_monster);
+            Level = copy_monster.Level;
         }
 
         protected Monster(Monster to_copy) : base(to_copy)

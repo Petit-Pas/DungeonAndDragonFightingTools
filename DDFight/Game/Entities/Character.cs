@@ -74,11 +74,13 @@ namespace DDFight.Game.Entities
 
         #region IClonable
 
-        protected virtual void InitCopy(Character to_copy)
+        protected override void InitCopy(PlayableEntity to_copy)
         {
-            base.InitCopy(to_copy);
-            Level = to_copy.Level;
-            HasInspiration = to_copy.HasInspiration;
+            Character copy_character = to_copy as Character;
+
+            base.InitCopy(copy_character);
+            Level = copy_character.Level;
+            HasInspiration = copy_character.HasInspiration;
         }
 
         /// <summary>

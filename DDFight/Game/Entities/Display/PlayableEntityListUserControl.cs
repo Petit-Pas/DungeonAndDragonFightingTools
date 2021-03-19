@@ -15,8 +15,6 @@ namespace DDFight.Game.Entities.Display
         {
         }
 
-
-
         protected override void EntityListControl_KeyDown(object sender, KeyEventArgs e)
         {
             base.EntityListControl_KeyDown(sender, e);

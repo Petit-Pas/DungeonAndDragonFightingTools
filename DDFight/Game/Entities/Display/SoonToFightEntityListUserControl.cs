@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace DDFight.Game.Entities.Display
 {
@@ -31,8 +32,19 @@ namespace DDFight.Game.Entities.Display
             get => DataContext as FighterList;
         }
 
+        protected override void EntityListControl_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Left)
+            {
+                remove(EntityListControl.SelectedItem);
+                e.Handled = true;
+            }
+            else
+                base.EntityListControl_KeyDown(sender, e);
+        }
+
         #region ListControl
-        
+
         public override void edit(object obj)
         {
             PlayableEntity entity = obj as PlayableEntity;
