@@ -1,0 +1,62 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:WpfCustomControlLibrary.CardControls">
+    <Style TargetType="{x:Type local:ButtonCardControl}" x:Key="ButtonCardStyle">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:ButtonCardControl}">
+                    <Grid
+                        x:Name="TemplateGridControl"
+                        DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonCardControl}}"
+                        Margin="13">
+                        <Border 
+                            x:Name="BorderControl"
+                            CornerRadius="4" 
+                            BorderThickness="1" 
+                            >
+                            <Border.Effect>
+                                <DropShadowEffect Color="{Binding ShadowColor}">
+                                </DropShadowEffect>
+                            </Border.Effect>
+                            <Border.Style>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="BorderBrush" Value="{Binding BorderColor}" />
+                                    <Setter Property="Background" Value="{Binding CardColor}" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Grid}}}" Value="True">
+                                            <Setter Property="BorderBrush" Value="{Binding HoverBorderColor}" />
+                                            <Setter Property="Background" Value="{Binding HoverBackgroundColor}" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding IsPressed, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:ButtonCardControl}}}" Value="True">
+                                            <Setter Property="BorderBrush" Value="{Binding ClickBorderColor}" />
+                                            <Setter Property="Background" Value="{Binding ClickBackgroundColor}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                        </Border>
+                        <Border>
+                            <ContentPresenter />
+                        </Border>
+                        <Grid.Style>
+                            <Style TargetType="{x:Type Grid}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="RenderTransform">
+                                            <Setter.Value>
+                                                <TranslateTransform X="1" Y="1" />
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Grid.Style>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+</ResourceDictionary>

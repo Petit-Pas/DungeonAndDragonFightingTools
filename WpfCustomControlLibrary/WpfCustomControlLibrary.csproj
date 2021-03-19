@@ -4,19 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{39AF7849-547C-433E-8E5F-A0ED601BEEDD}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
-    <RootNamespace>WpfSandbox</RootNamespace>
-    <AssemblyName>WpfSandbox</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <ProjectGuid>{3578FCFC-1A40-45B7-B2B8-7EECC3F8D6CF}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <RootNamespace>WpfCustomControlLibrary</RootNamespace>
+    <AssemblyName>WpfCustomControlLibrary</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -26,7 +24,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -51,49 +48,22 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Compile Include="SpellLevelSelector.xaml.cs">
-      <DependentUpon>SpellLevelSelector.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="TriangleRadioButton.cs" />
-    <Compile Include="Types\AAttackTemplateType.cs" />
-    <Compile Include="Types\CharacterType.cs" />
-    <Compile Include="Types\CounterType.cs" />
-    <Compile Include="Types\CustomVerboseStatusListType.cs" />
-    <Compile Include="Types\CustomVerboseStatusType.cs" />
-    <Compile Include="Types\DamageTemplateType.cs" />
-    <Compile Include="Types\DotTemplateType.cs" />
-    <Compile Include="Types\GenericList.cs" />
-    <Compile Include="Types\HitAttackTemplateType.cs" />
-    <Compile Include="Types\MonsterType.cs" />
-    <Compile Include="Types\OnHitStatusListType.cs" />
-    <Compile Include="Types\OnHitStatusType.cs" />
-    <Compile Include="Types\PlayableEntityType.cs" />
-    <Compile Include="Types\SpellListType.cs" />
-    <Compile Include="Types\SpellType.cs" />
-    <Page Include="MainWindow.xaml">
+    <Page Include="CardControls\ButtonCardStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Page Include="SpellLevelSelector.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="CardControls\DownCardStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="TriangleRadioButtonStyle.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="CardControls\UpCardStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="CardControls\BaseCardControl.cs" />
+    <Compile Include="CardControls\ButtonCardControl.cs" />
+    <Compile Include="CardControls\DownCardControl.cs" />
+    <Compile Include="CardControls\UpCardControl.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -113,24 +83,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DDFight\DDFight.csproj">
-      <Project>{1c1db3c2-0db0-40d2-a950-0f4083d1ec03}</Project>
-      <Name>DDFight</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WpfCustomControlLibrary\WpfCustomControlLibrary.csproj">
-      <Project>{3578fcfc-1a40-45b7-b2b8-7eecc3f8d6cf}</Project>
-      <Name>WpfCustomControlLibrary</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

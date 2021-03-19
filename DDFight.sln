@@ -16,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfCustomControlLibrary", "WpfCustomControlLibrary\WpfCustomControlLibrary.csproj", "{3578FCFC-1A40-45B7-B2B8-7EECC3F8D6CF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,10 @@ Global
 		{0DA284E3-07B4-46E4-BD95-AF20DC56C4BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DA284E3-07B4-46E4-BD95-AF20DC56C4BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DA284E3-07B4-46E4-BD95-AF20DC56C4BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3578FCFC-1A40-45B7-B2B8-7EECC3F8D6CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3578FCFC-1A40-45B7-B2B8-7EECC3F8D6CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3578FCFC-1A40-45B7-B2B8-7EECC3F8D6CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3578FCFC-1A40-45B7-B2B8-7EECC3F8D6CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

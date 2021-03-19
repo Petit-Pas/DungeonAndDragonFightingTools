@@ -5,17 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BindValidation"
         xmlns:wpfsandbox="clr-namespace:WpfSandbox" 
+        xmlns:wpfsandbox1="clr-namespace:WpfCustomControlLibrary.CardControls;assembly=WpfCustomControlLibrary"
         mc:Ignorable="d"
         Title="MainWindow"
         Width="650" Height="400"
         Background="{StaticResource LightestGray}">
     <Window.Resources>
         <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
 
     <Grid
-        ShowGridLines="False">
+        ShowGridLines="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -25,6 +28,51 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+
+        <Button Grid.Row="2" Grid.Column="0"></Button>
+
+        <wpfsandbox1:DownCardControl 
+            Grid.Row="0" Grid.Column="0">
+            <TextBlock
+                FontSize="15"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                FontWeight="SemiBold"
+                Foreground="{StaticResource Light}">
+                Oui bonjour
+            </TextBlock>
+
+        </wpfsandbox1:DownCardControl>
+
+        <wpfsandbox1:UpCardControl 
+            Grid.Row="0" Grid.Column="1"
+            CardColor="{StaticResource LightestGray}"
+            BorderColor="{StaticResource Gray}">
+            <TextBlock
+                FontSize="15"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                FontWeight="SemiBold"
+                Foreground="{StaticResource Light}">
+                Oui bonjour
+            </TextBlock>
+        </wpfsandbox1:UpCardControl>
+
+        <wpfsandbox1:ButtonCardControl
+            Grid.Row="2"
+            Grid.Column="1"
+            Click="ButtonCardControl_Click"
+            Foreground="{StaticResource Indigo}">
+            <TextBlock
+                FontSize="15"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                FontWeight="SemiBold"
+                Foreground="{StaticResource Light}">
+                Bonjour
+            </TextBlock>
+        </wpfsandbox1:ButtonCardControl>
+        
         <wpfsandbox:SpellLevelSelector 
             Grid.Row="1"
             Grid.Column="0"/>
