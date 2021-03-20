@@ -16,7 +16,7 @@ namespace DDFight.Windows.FightWindows
             get => DataContext as HitAttackTemplate;
         }
 
-        public HitAttackResult attackResult;
+        public HitAttackResult attackResult = null;
 
         public ExecuteHitAttackWindow()
         {
@@ -28,6 +28,7 @@ namespace DDFight.Windows.FightWindows
         {
             if (data_context != null)
             {
+                unsubscribe();
                 attackResult = data_context.GetResultTemplate();
                 AttackControl.DataContext = attackResult;
                 subscribe();
@@ -37,19 +38,25 @@ namespace DDFight.Windows.FightWindows
 
         private void unsubscribe()
         {
-            attackResult.PropertyChanged -= AttackResult_PropertyChanged;
-            foreach (DamageResult dmg in attackResult.DamageList.Elements)
+            if (attackResult != null)
             {
-                dmg.Damage.PropertyChanged -= AttackResult_PropertyChanged;
+                attackResult.PropertyChanged -= AttackResult_PropertyChanged;
+                foreach (DamageResult dmg in attackResult.DamageList.Elements)
+                {
+                    dmg.Damage.PropertyChanged -= AttackResult_PropertyChanged;
+                }
             }
         }
 
         private void subscribe()
         {
-            attackResult.PropertyChanged += AttackResult_PropertyChanged;
-            foreach (DamageResult dmg in attackResult.DamageList.Elements)
+            if (attackResult != null)
             {
-                dmg.Damage.PropertyChanged += AttackResult_PropertyChanged;
+                attackResult.PropertyChanged += AttackResult_PropertyChanged;
+                foreach (DamageResult dmg in attackResult.DamageList.Elements)
+                {
+                    dmg.Damage.PropertyChanged += AttackResult_PropertyChanged;
+                }
             }
         }
 

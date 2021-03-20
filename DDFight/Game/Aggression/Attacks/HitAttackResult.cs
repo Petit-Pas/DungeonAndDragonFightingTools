@@ -24,7 +24,11 @@ namespace DDFight.Game.Aggression.Attacks
         public PlayableEntity Target
         {
             get => RollResult.Target;
-            set => RollResult.Target = value;
+            set 
+            {
+                RollResult.Target = value;
+                NotifyPropertyChanged();
+            }
         }
 
         public DamageResultList DamageList
