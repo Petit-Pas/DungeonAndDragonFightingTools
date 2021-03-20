@@ -42,9 +42,9 @@ namespace DDFight.Game.Aggression.Attacks.Display
             if (data_context != null)
             {
                 if (HitAttackTargetComboControl.SelectedIndex != -1)
-                    data_context.RollResult.Target = (PlayableEntity)HitAttackTargetComboControl.SelectedItem;
+                    data_context.Target = (PlayableEntity)HitAttackTargetComboControl.SelectedItem;
                 else
-                    data_context.RollResult.Target = null;
+                    data_context.Target = null;
             }
         }
 
@@ -53,9 +53,9 @@ namespace DDFight.Game.Aggression.Attacks.Display
             if (data_context != null)
             {
                 if (HitAttackTargetComboControl.SelectedIndex != -1)
-                    data_context.RollResult.Target = (PlayableEntity)HitAttackTargetComboControl.SelectedItem;
+                    data_context.Target = (PlayableEntity)HitAttackTargetComboControl.SelectedItem;
                 else
-                    data_context.RollResult.Target = null;
+                    data_context.Target = null;
             }
         }
 

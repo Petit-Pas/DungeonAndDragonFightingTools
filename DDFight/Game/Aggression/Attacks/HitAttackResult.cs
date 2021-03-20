@@ -27,6 +27,7 @@ namespace DDFight.Game.Aggression.Attacks
             set 
             {
                 RollResult.Target = value;
+                this.RollResult.Target = value;
                 NotifyPropertyChanged();
             }
         }
