@@ -843,9 +843,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BaseToolsLibrary\BaseToolsLibrary.csproj">
+    <ProjectReference Include="..\BaseToolsLibrary\[10]-BaseToolsLibrary.csproj">
       <Project>{47d47e7e-85c8-4a4e-91d5-019e64072b1e}</Project>
-      <Name>BaseToolsLibrary</Name>
+      <Name>[10]-BaseToolsLibrary</Name>
     </ProjectReference>
     <ProjectReference Include="..\WpfCustomControlLibrary\WpfCustomControlLibrary.csproj">
       <Project>{3578fcfc-1a40-45b7-b2b8-7eecc3f8d6cf}</Project>
