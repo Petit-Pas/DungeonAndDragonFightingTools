@@ -48,6 +48,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CircularSelector\CircularSelectorRadioButtonControl.cs" />
     <Page Include="CardControls\ButtonCardStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -64,8 +65,25 @@
     <Compile Include="CardControls\ButtonCardControl.cs" />
     <Compile Include="CardControls\DownCardControl.cs" />
     <Compile Include="CardControls\UpCardControl.cs" />
+    <Page Include="CircularSelector\CircularSelectorImportFile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CircularSelector\CircularSelectorRadioButtonGeometryPaths.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CircularSelector\CircularSelectorRadioButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CircularSelector\CircularSelectorCenterStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CircularSelector\CircularSelectorCenterControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -87,6 +105,16 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BaseToolsLibrary\BaseToolsLibrary.csproj">
+      <Project>{47d47e7e-85c8-4a4e-91d5-019e64072b1e}</Project>
+      <Name>BaseToolsLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WpfToolsLibrary\WpfToolsLibrary.csproj">
+      <Project>{84709264-0a0b-4c58-a52f-ba8ade84ab74}</Project>
+      <Name>WpfToolsLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

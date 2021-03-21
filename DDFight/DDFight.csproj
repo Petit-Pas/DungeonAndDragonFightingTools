@@ -80,7 +80,6 @@
     </Compile>
     <Compile Include="Controlers\SliderButton.cs" />
     <Compile Include="Controlers\SpecializedListUserControl.cs" />
-    <Compile Include="Converters\BasicOperationConverter.cs" />
     <Compile Include="Converters\BoolToReversedBoolConverter.cs" />
     <Compile Include="Converters\BoolToReversedVisibilityConverter.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
@@ -177,7 +176,6 @@
       <DependentUpon>ApplicationModifierEnumListSelectableUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Game\Status\Display\CustomVerboseStatusListUserControl.cs" />
-    <Compile Include="Tools\ArithmeticParser.cs" />
     <Compile Include="Tools\BindingProxy.cs" />
     <Compile Include="Tools\FrameworkElementExtensions.cs" />
     <Compile Include="Tools\INameable.cs" />
@@ -845,9 +843,17 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BaseToolsLibrary\BaseToolsLibrary.csproj">
+      <Project>{47d47e7e-85c8-4a4e-91d5-019e64072b1e}</Project>
+      <Name>BaseToolsLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WpfCustomControlLibrary\WpfCustomControlLibrary.csproj">
       <Project>{3578fcfc-1a40-45b7-b2b8-7eecc3f8d6cf}</Project>
       <Name>WpfCustomControlLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WpfToolsLibrary\WpfToolsLibrary.csproj">
+      <Project>{84709264-0a0b-4c58-a52f-ba8ade84ab74}</Project>
+      <Name>WpfToolsLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -3,6 +3,8 @@ using System.IO;
 
 namespace DDFight.Tools
 {
+
+    //TODO update with Singleton
     public static class Logger
     {
         private static string config_folder = Environment.GetEnvironmentVariable("LocalAppData") + "\\D&DFightTool\\";

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace DDFight.Tools
+namespace BaseToolsLibrary.Math
 {
     public static class ArithmeticParser
     {

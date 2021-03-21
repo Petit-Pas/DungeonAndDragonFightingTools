@@ -9,9 +9,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace WpfSandbox
+namespace WpfCustomControlLibrary.CircularSelector
 {
-    public class TriangleRadioButton : RadioButton, INotifyPropertyChanged
+    public class CircularSelectorRadioButtonControl : RadioButton, INotifyPropertyChanged
     {
         #region INotifyPropertyChanged
 
@@ -33,7 +33,7 @@ namespace WpfSandbox
         }
         #endregion
 
-        public TriangleRadioButton() : base()
+        public CircularSelectorRadioButtonControl() : base()
         {
             this.MouseEnter += TriangleRadioButton_MouseEnter;
             this.MouseLeave += TriangleRadioButton_MouseLeave;
@@ -48,7 +48,7 @@ namespace WpfSandbox
             DependencyProperty.Register(
                 nameof(Label),
                 typeof(string),
-                typeof(TriangleRadioButton),
+                typeof(CircularSelectorRadioButtonControl),
                 new FrameworkPropertyMetadata("XX"));
 
         public double Angle
@@ -60,7 +60,7 @@ namespace WpfSandbox
             DependencyProperty.Register(
                 nameof(Angle),
                 typeof(double),
-                typeof(TriangleRadioButton),
+                typeof(CircularSelectorRadioButtonControl),
                 new FrameworkPropertyMetadata(0.0));
 
         public double Scale
@@ -83,6 +83,7 @@ namespace WpfSandbox
             if (IsEnabled)
                 Scale = 1.1;
         }
+
     }
 
     /// <summary>
@@ -170,12 +171,11 @@ namespace WpfSandbox
                 "BaseColorBrush",
                 typeof(Brush),
                 typeof(TriangleRadioButtonProperties),
-                new FrameworkPropertyMetadata(Brushes.Black, 
+                new FrameworkPropertyMetadata(Brushes.Black,
                     FrameworkPropertyMetadataOptions.Inherits));
 
         #endregion Colors
 
-        #region PathGeometryProperty
         public static int GetLabelFontSize(DependencyObject obj)
         {
             return (int)obj.GetValue(LabelFontSizeProperty);
@@ -221,7 +221,9 @@ namespace WpfSandbox
                 typeof(TriangleRadioButtonProperties),
                 new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.Inherits));
 
-        public static PathGeometry GetPathGeometry(DependencyObject obj)
+        #region PathGeometryProperty
+
+        /*public static PathGeometry GetPathGeometry(DependencyObject obj)
         {
             return (PathGeometry)obj.GetValue(PathGeometryProperty);
         }
@@ -235,7 +237,7 @@ namespace WpfSandbox
                 typeof(PathGeometry),
                 typeof(TriangleRadioButtonProperties),
                 new FrameworkPropertyMetadata(new PathGeometry(), FrameworkPropertyMetadataOptions.Inherits));
-
+        */
         #endregion PathGeometryProperty
     }
 }

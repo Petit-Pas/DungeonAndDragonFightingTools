@@ -1,0 +1,9 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:WpfCustomControlLibrary.CircularSelector">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="CircularSelectorCenterStyle.xaml"/>
+        <ResourceDictionary Source="CircularSelectorRadioButtonGeometryPaths.xaml"/>
+        <ResourceDictionary Source="CircularSelectorRadioButtonStyle.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

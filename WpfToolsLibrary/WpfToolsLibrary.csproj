@@ -4,19 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{39AF7849-547C-433E-8E5F-A0ED601BEEDD}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
-    <RootNamespace>WpfSandbox</RootNamespace>
-    <AssemblyName>WpfSandbox</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <ProjectGuid>{84709264-0A0B-4C58-A52F-BA8ADE84AB74}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <RootNamespace>WpfToolsLibrary</RootNamespace>
+    <AssemblyName>WpfToolsLibrary</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -26,7 +24,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -51,39 +48,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Compile Include="Types\AAttackTemplateType.cs" />
-    <Compile Include="Types\CharacterType.cs" />
-    <Compile Include="Types\CounterType.cs" />
-    <Compile Include="Types\CustomVerboseStatusListType.cs" />
-    <Compile Include="Types\CustomVerboseStatusType.cs" />
-    <Compile Include="Types\DamageTemplateType.cs" />
-    <Compile Include="Types\DotTemplateType.cs" />
-    <Compile Include="Types\GenericList.cs" />
-    <Compile Include="Types\HitAttackTemplateType.cs" />
-    <Compile Include="Types\MonsterType.cs" />
-    <Compile Include="Types\OnHitStatusListType.cs" />
-    <Compile Include="Types\OnHitStatusType.cs" />
-    <Compile Include="Types\PlayableEntityType.cs" />
-    <Compile Include="Types\SpellListType.cs" />
-    <Compile Include="Types\SpellType.cs" />
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
+    <Compile Include="Converters\BasicOperationConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -101,27 +66,15 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DDFight\DDFight.csproj">
-      <Project>{1c1db3c2-0db0-40d2-a950-0f4083d1ec03}</Project>
-      <Name>DDFight</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WpfCustomControlLibrary\WpfCustomControlLibrary.csproj">
-      <Project>{3578fcfc-1a40-45b7-b2b8-7eecc3f8d6cf}</Project>
-      <Name>WpfCustomControlLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WpfToolsLibrary\WpfToolsLibrary.csproj">
-      <Project>{84709264-0a0b-4c58-a52f-ba8ade84ab74}</Project>
-      <Name>WpfToolsLibrary</Name>
+    <ProjectReference Include="..\BaseToolsLibrary\BaseToolsLibrary.csproj">
+      <Project>{47d47e7e-85c8-4a4e-91d5-019e64072b1e}</Project>
+      <Name>BaseToolsLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

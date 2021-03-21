@@ -18,6 +18,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfCustomControlLibrary", "WpfCustomControlLibrary\WpfCustomControlLibrary.csproj", "{3578FCFC-1A40-45B7-B2B8-7EECC3F8D6CF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseToolsLibrary", "BaseToolsLibrary\BaseToolsLibrary.csproj", "{47D47E7E-85C8-4A4E-91D5-019E64072B1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfToolsLibrary", "WpfToolsLibrary\WpfToolsLibrary.csproj", "{84709264-0A0B-4C58-A52F-BA8ADE84AB74}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +48,14 @@ Global
 		{3578FCFC-1A40-45B7-B2B8-7EECC3F8D6CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3578FCFC-1A40-45B7-B2B8-7EECC3F8D6CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3578FCFC-1A40-45B7-B2B8-7EECC3F8D6CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47D47E7E-85C8-4A4E-91D5-019E64072B1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47D47E7E-85C8-4A4E-91D5-019E64072B1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47D47E7E-85C8-4A4E-91D5-019E64072B1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47D47E7E-85C8-4A4E-91D5-019E64072B1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84709264-0A0B-4C58-A52F-BA8ADE84AB74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84709264-0A0B-4C58-A52F-BA8ADE84AB74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84709264-0A0B-4C58-A52F-BA8ADE84AB74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84709264-0A0B-4C58-A52F-BA8ADE84AB74}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

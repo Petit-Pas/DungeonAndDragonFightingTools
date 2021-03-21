@@ -1,11 +1,12 @@
-﻿using DDFight.Tools;
+﻿using BaseToolsLibrary.Extensions;
+using BaseToolsLibrary.Math;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Data;
 
-namespace DDFight.Converters
+namespace WpfToolsLibrary.Converters
 {
 
     public class BasicOperationConverter : IMultiValueConverter, IValueConverter
@@ -17,7 +18,7 @@ namespace DDFight.Converters
 
             if (amount_operands != operands.Count)
             {
-                Logger.Log(String.Format("WARN: amount of operands didnt match in operation {0} in BasicOperationConverter", expression));
+                Console.WriteLine(String.Format("WARN: amount of operands didnt match in operation {0} in BasicOperationConverter", expression));
                 return (int)default_value;
             }
 
@@ -61,7 +62,7 @@ namespace DDFight.Converters
             }
             catch (Exception e) 
             {
-                Logger.Log("WARN: exception in BasicOperationConverter.Convert(): " + e.Message);
+                Console.WriteLine("WARN: exception in BasicOperationConverter.Convert(): " + e.Message);
                 return default_value; 
             }
         }
@@ -86,7 +87,7 @@ namespace DDFight.Converters
             }
             catch (Exception e)
             {
-                Logger.Log("WARN: exception in BasicOperationConverter.Convert(): " + e.Message);
+                Console.WriteLine("WARN: exception in BasicOperationConverter.Convert(): " + e.Message);
                 return default_value;
             }
         }

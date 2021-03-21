@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BindValidation"
         xmlns:wpfsandbox="clr-namespace:WpfSandbox" 
-        xmlns:wpfsandbox1="clr-namespace:WpfCustomControlLibrary.CardControls;assembly=WpfCustomControlLibrary"
+        xmlns:wpfsandbox1="clr-namespace:WpfCustomControlLibrary.CardControls;assembly=WpfCustomControlLibrary" xmlns:circularselector="clr-namespace:WpfCustomControlLibrary.CircularSelector;assembly=WpfCustomControlLibrary"
         mc:Ignorable="d"
         Title="MainWindow"
         Width="650" Height="400"
@@ -13,12 +13,13 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/WpfCustomControlLibrary;component/CircularSelector/CircularSelectorImportFile.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
 
     <Grid
-        ShowGridLines="True">
+        ShowGridLines="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -72,10 +73,80 @@
                 Bonjour
             </TextBlock>
         </wpfsandbox1:ButtonCardControl>
-        
-        <wpfsandbox:SpellLevelSelector 
-            Grid.Row="1"
-            Grid.Column="0"/>
+
+        <circularselector:CircularSelectorCenterControl
+            Grid.Row="1" Grid.Column="1"
+            circularselector:CircularSelectorCenterControl.PathGeometry="{StaticResource CircularSelectorRadioButtonSmallTriangle}"
+            circularselector:CircularSelectorCenterControl.BaseColorBrush="{StaticResource LightestGray}"
+            circularselector:CircularSelectorCenterControl.SelectedColorBrush="{StaticResource Indigo}"
+            circularselector:CircularSelectorCenterControl.DisabledColorBrush="{StaticResource Gray}"
+            circularselector:CircularSelectorCenterControl.HoverColorBrush="{StaticResource LightIndigo}"
+            circularselector:CircularSelectorCenterControl.BorderBaseColorBrush="{StaticResource Light}"
+            circularselector:CircularSelectorCenterControl.LabelXOffset="5"
+            circularselector:CircularSelectorCenterControl.LabelYOffset="0"
+            circularselector:CircularSelectorCenterControl.LabelFontSize="18"            
+            >
+
+            <Grid>
+            <circularselector:CircularSelectorRadioButtonControl
+            Angle="-240"
+            Style="{StaticResource CircularSelectorRadioButtonControlStyle}"
+            IsChecked="True"
+            Label="Lvl 1"
+            />
+
+            <circularselector:CircularSelectorRadioButtonControl
+            Angle="-202.5"
+            Style="{StaticResource CircularSelectorRadioButtonControlStyle}"
+            Label="Lvl 2"
+            />
+
+            <circularselector:CircularSelectorRadioButtonControl
+            Angle="-165"
+            Style="{StaticResource CircularSelectorRadioButtonControlStyle}"
+            Label="Lvl 3"
+            />
+
+            <circularselector:CircularSelectorRadioButtonControl
+            Angle="-127.5"
+            Style="{StaticResource CircularSelectorRadioButtonControlStyle}"
+            Label="Lvl 4"
+            />
+
+            <circularselector:CircularSelectorRadioButtonControl
+            Angle="-90"
+            Style="{StaticResource CircularSelectorRadioButtonControlStyle}"
+            Label="Lvl 5"
+            />
+
+            <circularselector:CircularSelectorRadioButtonControl
+            Angle="-52.5"
+            Style="{StaticResource CircularSelectorRadioButtonControlStyle}"
+            Label="Lvl 6"
+            />
+
+            <circularselector:CircularSelectorRadioButtonControl
+            Angle="-15"
+            IsEnabled="False"
+            Style="{StaticResource CircularSelectorRadioButtonControlStyle}"
+            Label="Lvl 7"
+            />
+
+            <circularselector:CircularSelectorRadioButtonControl
+            Angle="22.5"
+            Style="{StaticResource CircularSelectorRadioButtonControlStyle}"
+            Label="Lvl 8"
+            />
+
+            <circularselector:CircularSelectorRadioButtonControl
+            Angle="60"
+            Style="{StaticResource CircularSelectorRadioButtonControlStyle}"
+            Label="Lvl 9"
+            />
+                
+            </Grid>
+            
+        </circularselector:CircularSelectorCenterControl>
 
     </Grid>
     
