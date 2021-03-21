@@ -23,7 +23,7 @@ namespace DDFight.Controlers.Fight
         public PlayableEntity data_context
         {
             get {
-                return (PlayableEntity)DataContext;
+                return DataContext as PlayableEntity;
             }
         }
         public FightingEntityTileUserControl()
@@ -71,17 +71,27 @@ namespace DDFight.Controlers.Fight
 
         private void RegisterToAll()
         {
-            data_context.NewTurnStarted += Data_context_NewTurnStarted;
-            data_context.TurnEnded += Data_context_TurnEnded;
-            Global.Context.FightContext.CharacterSelected += FightContext_CharacterSelected;
+            if (data_context == null)
+                Logger.Log($"WARN: Null DataContext found in {this.GetType()}.RegisterToALl()");
+            else
+            {
+                data_context.NewTurnStarted += Data_context_NewTurnStarted;
+                data_context.TurnEnded += Data_context_TurnEnded;
+                Global.Context.FightContext.CharacterSelected += FightContext_CharacterSelected;
+            }
         }
 
         public void UnregisterToAll()
         {
-            this.UnregisterAll();
-            data_context.NewTurnStarted -= Data_context_NewTurnStarted;
-            data_context.TurnEnded -= Data_context_TurnEnded;
-            Global.Context.FightContext.CharacterSelected -= FightContext_CharacterSelected;
+            if (data_context == null)
+                Logger.Log($"WARN: Null DataContext found in {this.GetType()}.UnregisterToALl()");
+            else
+            {
+                this.UnregisterAllChildren();
+                data_context.NewTurnStarted -= Data_context_NewTurnStarted;
+                data_context.TurnEnded -= Data_context_TurnEnded;
+                Global.Context.FightContext.CharacterSelected -= FightContext_CharacterSelected;
+            }
         }
 
         private void ContextTakeDamage_Click(object sender, RoutedEventArgs e)
