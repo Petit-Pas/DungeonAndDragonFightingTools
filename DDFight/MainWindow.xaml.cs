@@ -86,7 +86,7 @@ namespace DDFight
                 fightWindow.ShowCentered();
 
                 // Clean up after a Fight
-                fightWindow.UnregisterAll();
+                fightWindow.UnregisterAllChildren();
                 foreach (Character character in Global.Context.FightContext.FightersList.Elements.OfType<Character>())
                 {
                     character.GetOutOfFight();

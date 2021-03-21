@@ -21,7 +21,7 @@ namespace DDFight.Controlers.Fight
 
         private void FightersList_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            this.UnregisterAll();
+            this.UnregisterAllChildren();
         }
 
         private void FightersControl_LayoutUpdated(object sender, EventArgs e)

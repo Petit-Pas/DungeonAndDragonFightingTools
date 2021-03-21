@@ -10,20 +10,6 @@ namespace DDFight.Tools
 {
     public static class FrameworkElementExtensions
     {
-        #region Animation
-
-        public static void Translate(this FrameworkElement elem, TimeSpan duration, int x = 0, int y = 0)
-        {
-            DoubleAnimation x_animation = new DoubleAnimation(x, duration);
-            DoubleAnimation y_animation = new DoubleAnimation(y, duration);
-
-            //elem.BeginAnimation(, x_animation);
-            //elem.BeginAnimation(, y_animation);
-
-        }
-
-        #endregion Animation
-
         /// <summary>
         ///     Checks if all the IValidable children are Valid (elem.IsValid())
         /// </summary>
@@ -46,7 +32,7 @@ namespace DDFight.Tools
             return true;
         }
 
-        public static void UnregisterAll(this FrameworkElement element)
+        public static void UnregisterAllChildren(this FrameworkElement element)
         {
             if (element == null)
                 return;
@@ -57,7 +43,7 @@ namespace DDFight.Tools
                 {
                     ((IEventUnregisterable)child).UnregisterToAll();
                 }
-                child.UnregisterAll();
+                child.UnregisterAllChildren();
             }
         }
 
