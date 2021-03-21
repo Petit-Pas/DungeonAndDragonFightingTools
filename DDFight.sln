@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDFight", "DDFight\DDFight.csproj", "{1C1DB3C2-0DB0-40D2-A950-0F4083D1EC03}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "[30]-DDFight", "DDFight\[30]-DDFight.csproj", "{1C1DB3C2-0DB0-40D2-A950-0F4083D1EC03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "[98]-SandBox", "SandBox\[98]-SandBox.csproj", "{23E4798D-10DE-41F9-B5EC-72F2634DF188}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "[90]-SandBox", "SandBox\[90]-SandBox.csproj", "{23E4798D-10DE-41F9-B5EC-72F2634DF188}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "[99]-WpfSandbox", "WpfSandbox\[99]-WpfSandbox.csproj", "{39AF7849-547C-433E-8E5F-A0ED601BEEDD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "[91]-WpfSandbox", "WpfSandbox\[91]-WpfSandbox.csproj", "{39AF7849-547C-433E-8E5F-A0ED601BEEDD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreUnitTest", "CoreUnitTest\CoreUnitTest.csproj", "{0DA284E3-07B4-46E4-BD95-AF20DC56C4BA}"
 EndProject
@@ -16,11 +16,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfCustomControlLibrary", "WpfCustomControlLibrary\WpfCustomControlLibrary.csproj", "{3578FCFC-1A40-45B7-B2B8-7EECC3F8D6CF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "[20]-WpfCustomControlLibrary", "WpfCustomControlLibrary\[20]-WpfCustomControlLibrary.csproj", "{3578FCFC-1A40-45B7-B2B8-7EECC3F8D6CF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "[10]-BaseToolsLibrary", "BaseToolsLibrary\[10]-BaseToolsLibrary.csproj", "{47D47E7E-85C8-4A4E-91D5-019E64072B1E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfToolsLibrary", "WpfToolsLibrary\WpfToolsLibrary.csproj", "{84709264-0A0B-4C58-A52F-BA8ADE84AB74}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "[11]-WpfToolsLibrary", "WpfToolsLibrary\[11]-WpfToolsLibrary.csproj", "{84709264-0A0B-4C58-A52F-BA8ADE84AB74}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

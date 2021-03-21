@@ -50,9 +50,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DDFight\DDFight.csproj">
+    <ProjectReference Include="..\DDFight\[30]-DDFight.csproj">
       <Project>{1c1db3c2-0db0-40d2-a950-0f4083d1ec03}</Project>
-      <Name>DDFight</Name>
+      <Name>[30]-DDFight</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -847,13 +847,13 @@
       <Project>{47d47e7e-85c8-4a4e-91d5-019e64072b1e}</Project>
       <Name>[10]-BaseToolsLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WpfCustomControlLibrary\WpfCustomControlLibrary.csproj">
+    <ProjectReference Include="..\WpfCustomControlLibrary\[20]-WpfCustomControlLibrary.csproj">
       <Project>{3578fcfc-1a40-45b7-b2b8-7eecc3f8d6cf}</Project>
-      <Name>WpfCustomControlLibrary</Name>
+      <Name>[20]-WpfCustomControlLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WpfToolsLibrary\WpfToolsLibrary.csproj">
+    <ProjectReference Include="..\WpfToolsLibrary\[11]-WpfToolsLibrary.csproj">
       <Project>{84709264-0a0b-4c58-a52f-ba8ade84ab74}</Project>
-      <Name>WpfToolsLibrary</Name>
+      <Name>[11]-WpfToolsLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

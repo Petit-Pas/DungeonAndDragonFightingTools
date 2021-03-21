@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DDFight\DDFight.csproj" />
+    <ProjectReference Include="..\DDFight\[30]-DDFight.csproj" />
   </ItemGroup>
 
 </Project>
