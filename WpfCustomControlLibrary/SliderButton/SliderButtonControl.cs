@@ -89,7 +89,14 @@ namespace WpfCustomControlLibrary.SliderButton
             left_side.Fill = brush;
 
             brush.BeginAnimation(SolidColorBrush.ColorProperty, color_animation);
-
+            
+            //shadow
+            DropShadowEffect shadow = this.Template.FindName("SliderButton_ShadowControl", this) as DropShadowEffect;
+            ColorAnimation shadow_animation = new ColorAnimation(
+                (Color)Application.Current.Resources["RawGray"],
+                (Color)Application.Current.Resources["RawIndigo"],
+                TimeSpan.FromSeconds(0.25));
+            shadow.BeginAnimation(DropShadowEffect.ColorProperty, shadow_animation);
         }
 
         private void SliderButton_Checked(object sender, RoutedEventArgs e)
@@ -126,6 +133,13 @@ namespace WpfCustomControlLibrary.SliderButton
             left_side.Fill = brush;
 
             brush.BeginAnimation(SolidColorBrush.ColorProperty, color_animation);
+
+            DropShadowEffect shadow = this.Template.FindName("SliderButton_ShadowControl", this) as DropShadowEffect;
+            ColorAnimation shadow_animation = new ColorAnimation(
+                (Color)Application.Current.Resources["RawIndigo"],
+                (Color)Application.Current.Resources["RawGray"],
+                TimeSpan.FromSeconds(0.25));
+            shadow.BeginAnimation(DropShadowEffect.ColorProperty, shadow_animation);
         }
 
         public int LabelFontSize
