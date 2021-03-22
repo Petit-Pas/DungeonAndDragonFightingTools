@@ -3,13 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:DDFight.Game.Aggression.Spells.Display" xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes" xmlns:characteristics="clr-namespace:DDFight.Controlers.Game.Characteristics" xmlns:converters="clr-namespace:DDFight.Converters" xmlns:controlers="clr-namespace:DDFight.Controlers" xmlns:damagelistcontrols="clr-namespace:DDFight.Controlers.Game.Attacks.DamageListControls" xmlns:display="clr-namespace:DDFight.Game.Status.Display"
+             xmlns:local="clr-namespace:DDFight.Game.Aggression.Spells.Display" xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes" xmlns:characteristics="clr-namespace:DDFight.Controlers.Game.Characteristics" xmlns:converters="clr-namespace:DDFight.Converters" xmlns:controlers="clr-namespace:DDFight.Controlers" xmlns:damagelistcontrols="clr-namespace:DDFight.Controlers.Game.Attacks.DamageListControls" xmlns:display="clr-namespace:DDFight.Game.Status.Display" xmlns:sliderbutton="clr-namespace:WpfCustomControlLibrary.SliderButton;assembly=WpfCustomControlLibrary"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="400">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Styles/SliderButtonControlStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
         </ResourceDictionary>
@@ -46,12 +45,11 @@
                 VerticalAlignment="Center">
                 The Spell has a Saving Throw :
             </TextBlock>
-            <controlers:SliderButton 
+            <sliderbutton:SliderButtonControl 
                 Margin="5"
                 Grid.Column="1"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
-                Style="{StaticResource styleSliderButton}"
                 IsChecked="{Binding HasSavingThrow}"
             />
 

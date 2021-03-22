@@ -78,7 +78,6 @@
     <Compile Include="Controlers\InputBoxes\FilterTextBoxControl.xaml.cs">
       <DependentUpon>FilterTextBoxControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controlers\SliderButton.cs" />
     <Compile Include="Controlers\SpecializedListUserControl.cs" />
     <Compile Include="Converters\BoolToReversedBoolConverter.cs" />
     <Compile Include="Converters\BoolToReversedVisibilityConverter.cs" />
@@ -721,10 +720,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\ScrollBarStyle.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Styles\SliderButtonControlStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

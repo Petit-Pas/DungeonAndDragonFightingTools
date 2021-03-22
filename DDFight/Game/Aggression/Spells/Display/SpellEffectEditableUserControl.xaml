@@ -3,13 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:DDFight.Game.Aggression.Spells.Display" xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes" xmlns:converter="clr-namespace:DDFight.Converters" xmlns:controlers="clr-namespace:DDFight.Controlers"
+             xmlns:local="clr-namespace:DDFight.Game.Aggression.Spells.Display" 
+             xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes" 
+             xmlns:converter="clr-namespace:DDFight.Converters" 
+             xmlns:controlers="clr-namespace:DDFight.Controlers"
+             xmlns:sliderbutton="clr-namespace:WpfCustomControlLibrary.SliderButton;assembly=WpfCustomControlLibrary"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Styles/SliderButtonControlStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <converter:BoolToReversedVisibilityConverter x:Key="BoolToReversedVisibilityBoolConverter"/>
             <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
@@ -45,10 +48,9 @@
                 Margin="5">
                 Same target can be selected more than once
             </TextBlock>
-            <controlers:SliderButton 
+            <sliderbutton:SliderButtonControl 
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
-                Style="{StaticResource styleSliderButton}"
                 IsChecked="{Binding CanSelectSameTargetTwice}"
              />
         </DockPanel>
@@ -61,10 +63,9 @@
                 Margin="5">
                 The Spell is an "Attack" :
             </TextBlock>
-            <controlers:SliderButton 
+            <sliderbutton:SliderButtonControl
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
-                Style="{StaticResource styleSliderButton}"
                 IsChecked="{Binding IsAnAttack}"
                 />
         </DockPanel>

@@ -3,13 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:DDFight.Game.Aggression.Spells.Display" xmlns:damagelistcontrols="clr-namespace:DDFight.Controlers.Game.Attacks.DamageListControls" xmlns:display="clr-namespace:DDFight.Game.Status.Display" xmlns:converters="clr-namespace:DDFight.Converters" xmlns:controlers="clr-namespace:DDFight.Controlers" xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes"
+             xmlns:local="clr-namespace:DDFight.Game.Aggression.Spells.Display" xmlns:damagelistcontrols="clr-namespace:DDFight.Controlers.Game.Attacks.DamageListControls" xmlns:display="clr-namespace:DDFight.Game.Status.Display" xmlns:converters="clr-namespace:DDFight.Converters" xmlns:controlers="clr-namespace:DDFight.Controlers" 
+             xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes" 
+             xmlns:sliderbutton="clr-namespace:WpfCustomControlLibrary.SliderButton;assembly=WpfCustomControlLibrary"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Styles/SliderButtonControlStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <converters:BoolToReversedVisibilityConverter x:Key="BoolToReversedVisibilityConverter" />
         </ResourceDictionary>
@@ -36,9 +37,8 @@
                     VerticalAlignment="Center">
                     The Spell will automatically hit:
                 </TextBlock>
-                <controlers:SliderButton 
+                <sliderbutton:SliderButtonControl
                     Margin="5"
-                    Style="{StaticResource styleSliderButton}" 
                     IsChecked="{Binding AutomaticalyHits}"/>
             </WrapPanel>
 
