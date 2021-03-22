@@ -97,7 +97,7 @@
                             Stroke="{Binding Path=(local:CircularSelectorCenterControl.BorderBaseColorBrush), RelativeSource={RelativeSource TemplatedParent}}"
                             Data="{Binding Path=(local:CircularSelectorCenterControl.PathGeometry), RelativeSource={RelativeSource TemplatedParent}}">
                             <Path.Effect>
-                                <DropShadowEffect Direction="1" Color="{StaticResource RawIndigo}" BlurRadius="12" ></DropShadowEffect>
+                                <DropShadowEffect Direction="0" Color="{StaticResource RawIndigo}" BlurRadius="12" ShadowDepth="2" ></DropShadowEffect>
                             </Path.Effect>
                         </Path>
                     </Grid>
