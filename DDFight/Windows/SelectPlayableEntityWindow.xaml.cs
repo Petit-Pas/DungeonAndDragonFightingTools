@@ -47,7 +47,7 @@ namespace DDFight.Windows
 
         private void FilterTextBox_KeyUp(object sender, KeyEventArgs e)
         {
-            CharacterListControl.FilterINameableListBox(FilterControl.TextBoxControl.Text);
+            CharacterListControl.FilterINameableListBox(FilterControl.Text);
         }
     }
 }

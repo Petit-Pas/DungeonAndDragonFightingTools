@@ -168,7 +168,7 @@ namespace DDFight.Controlers
 
         private void FilterTextBox_KeyUp(object sender, KeyEventArgs e)
         {
-            EntityListControl.FilterINameableListBox(FilterControl.TextBoxControl.Text);
+            EntityListControl.FilterINameableListBox(FilterControl.Text);
         }
 
         #region ClickEvents

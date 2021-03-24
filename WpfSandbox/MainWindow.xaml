@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BindValidation"
         xmlns:wpfsandbox="clr-namespace:WpfSandbox" 
-        xmlns:wpfsandbox1="clr-namespace:WpfCustomControlLibrary.CardControls;assembly=WpfCustomControlLibrary" xmlns:circularselector="clr-namespace:WpfCustomControlLibrary.CircularSelector;assembly=WpfCustomControlLibrary"
+        xmlns:wpfsandbox1="clr-namespace:WpfCustomControlLibrary.CardControls;assembly=WpfCustomControlLibrary" xmlns:circularselector="clr-namespace:WpfCustomControlLibrary.CircularSelector;assembly=WpfCustomControlLibrary" xmlns:filtertextbox="clr-namespace:WpfCustomControlLibrary.InputControls.FilterTextBox;assembly=WpfCustomControlLibrary" xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes;assembly=DDFight"
         mc:Ignorable="d"
         Title="MainWindow"
         Width="650" Height="400"
@@ -14,6 +14,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/WpfCustomControlLibrary;component/CircularSelector/CircularSelectorImportFile.xaml"/>
+                <ResourceDictionary Source="/WpfCustomControlLibrary;component/InputControls/FilterTextBox/FilterTextBoxStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -30,49 +31,16 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Button Grid.Row="2" Grid.Column="0"></Button>
 
-        <wpfsandbox1:DownCardControl 
-            Grid.Row="0" Grid.Column="0">
-            <TextBlock
-                FontSize="15"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                FontWeight="SemiBold"
-                Foreground="{StaticResource Light}">
-                Oui bonjour
-            </TextBlock>
+        <filtertextbox:FilterTextBoxControl
+            Grid.Row="1" Grid.Column="0" 
+            VerticalAlignment="Center" HorizontalAlignment="Center"
+            Width="150"
+            Style="{StaticResource FilterTextBoxStyle}"
+            />
 
-        </wpfsandbox1:DownCardControl>
 
-        <wpfsandbox1:UpCardControl 
-            Grid.Row="0" Grid.Column="1"
-            CardColor="{StaticResource LightestGray}"
-            BorderColor="{StaticResource Gray}">
-            <TextBlock
-                FontSize="15"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                FontWeight="SemiBold"
-                Foreground="{StaticResource Light}">
-                Oui bonjour
-            </TextBlock>
-        </wpfsandbox1:UpCardControl>
 
-        <wpfsandbox1:ButtonCardControl
-            Grid.Row="2"
-            Grid.Column="1"
-            Click="ButtonCardControl_Click"
-            Foreground="{StaticResource Indigo}">
-            <TextBlock
-                FontSize="15"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                FontWeight="SemiBold"
-                Foreground="{StaticResource Light}">
-                Bonjour
-            </TextBlock>
-        </wpfsandbox1:ButtonCardControl>
 
         <circularselector:CircularSelectorCenterControl
             Grid.Row="1" Grid.Column="1"
