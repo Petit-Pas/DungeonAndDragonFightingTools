@@ -1,5 +1,4 @@
 ﻿using DDFight.Tools;
-using DDFight.ValidationRules;
 using System.Windows.Controls;
 using WpfToolsLibrary.ValidationRules;
 

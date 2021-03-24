@@ -1,8 +1,5 @@
-﻿using DDFight.Game.Aggression.Attacks;
-using DDFight.Game.Entities;
+﻿using DDFight.Game.Entities;
 using DDFight.Tools;
-using DDFight.ValidationRules;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;

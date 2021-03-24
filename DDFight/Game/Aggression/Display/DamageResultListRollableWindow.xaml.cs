@@ -1,6 +1,5 @@
 ﻿using DDFight.Tools.UXShortcuts;
 using DDFight.Windows;
-using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
 

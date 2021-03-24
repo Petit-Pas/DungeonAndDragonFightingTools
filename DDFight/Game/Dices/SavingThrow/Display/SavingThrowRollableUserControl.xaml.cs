@@ -1,5 +1,4 @@
 ﻿using DDFight.Tools.UXShortcuts;
-using DDFight.ValidationRules;
 using System;
 using System.Windows;
 using System.Windows.Controls;

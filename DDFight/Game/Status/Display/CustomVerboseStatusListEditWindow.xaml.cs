@@ -1,5 +1,4 @@
 ﻿using DDFight.Tools.Save;
-using DDFight.Windows;
 using System.Windows;
 
 namespace DDFight.Game.Status.Display

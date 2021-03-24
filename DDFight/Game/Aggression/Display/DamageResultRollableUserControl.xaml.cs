@@ -1,6 +1,5 @@
 ﻿using DDFight.Game.Aggression;
 using DDFight.Tools.UXShortcuts;
-using System;
 using System.Windows;
 using System.Windows.Controls;
 

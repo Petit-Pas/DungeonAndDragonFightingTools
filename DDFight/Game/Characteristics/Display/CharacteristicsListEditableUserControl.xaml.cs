@@ -1,8 +1,5 @@
-﻿using DDFight.Game.Characteristics;
-using DDFight.Game.Entities;
+﻿using DDFight.Game.Entities;
 using DDFight.Tools;
-using DDFight.ValidationRules;
-using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using WpfToolsLibrary.ValidationRules;

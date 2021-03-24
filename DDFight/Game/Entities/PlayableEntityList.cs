@@ -1,10 +1,4 @@
-﻿using DDFight.Game.Entities;
-using DDFight.Tools.Save;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DDFight.Tools.Save;
 
 namespace DDFight.Game.Entities
 {

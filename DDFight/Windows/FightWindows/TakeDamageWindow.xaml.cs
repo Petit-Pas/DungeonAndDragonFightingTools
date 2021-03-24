@@ -1,7 +1,6 @@
 ﻿using DDFight.Game.Aggression;
 using DDFight.Game.Entities;
 using DDFight.Tools;
-using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
 

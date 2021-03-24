@@ -1,5 +1,4 @@
-﻿using DDFight.Game.Entities.Display;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace DDFight.Game.Entities
 {

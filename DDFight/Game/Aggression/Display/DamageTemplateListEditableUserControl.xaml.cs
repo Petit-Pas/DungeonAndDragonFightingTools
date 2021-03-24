@@ -1,7 +1,6 @@
 ﻿using DDFight.Game.Aggression;
 using DDFight.Game.DamageAffinity;
 using DDFight.Tools;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;

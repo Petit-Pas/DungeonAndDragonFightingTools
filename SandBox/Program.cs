@@ -1,9 +1,4 @@
-﻿using DDFight.Game.Entities;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text.RegularExpressions;
+﻿using System;
 
 namespace SandBox
 {

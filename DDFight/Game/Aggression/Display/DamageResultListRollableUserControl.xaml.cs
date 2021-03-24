@@ -1,5 +1,4 @@
 ﻿using DDFight.Game.Aggression;
-using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 

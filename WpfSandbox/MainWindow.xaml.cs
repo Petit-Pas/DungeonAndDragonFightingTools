@@ -1,13 +1,8 @@
-﻿using DDFight.Game.Aggression.Spells;
-using DDFight.Game.Entities;
+﻿using DDFight.Game.Entities;
 using DDFight.Tools;
-using DDFight.Tools.Save;
-using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using WpfCustomControlLibrary.InputBoxes.IntTextBoxes;
-using WpfSandbox;
 using WpfSandbox.Types;
 
 namespace BindValidation

@@ -1,5 +1,4 @@
-﻿using DDFight.Game.Entities.Display;
-using DDFight.Game.Status;
+﻿using DDFight.Game.Status;
 using System.Linq;
 using System.Xml.Serialization;
 

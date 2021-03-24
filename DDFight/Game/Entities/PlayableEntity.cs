@@ -4,8 +4,6 @@ using DDFight.Game.DamageAffinity;
 using DDFight.Game.Fight.FightEvents;
 using DDFight.Tools;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -20,7 +18,6 @@ using DDFight.Windows.FightWindows;
 using DDFight.Game.Counters;
 using DDFight.Game.Aggression.Spells;
 using DDFight.Game.Entities.Display;
-using DDFight.Tools.Save;
 
 namespace DDFight.Game.Entities
 {

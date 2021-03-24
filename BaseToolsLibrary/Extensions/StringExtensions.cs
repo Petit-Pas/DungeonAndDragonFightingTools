@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BaseToolsLibrary.Extensions
+﻿namespace BaseToolsLibrary.Extensions
 {
     public static class StringExtensions
     {

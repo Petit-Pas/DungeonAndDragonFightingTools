@@ -1,17 +1,13 @@
 ﻿using DDFight.Game;
-using DDFight.Game.Aggression.Attacks;
 using DDFight.Game.Aggression.Spells;
 using DDFight.Game.Entities;
 using DDFight.Tools;
 using DDFight.Tools.Save;
 using DDFight.Windows;
 using DDFight.Windows.FightWindows;
-using System;
-using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Documents;
-using System.Xml.Serialization;
 
 namespace DDFight
 {

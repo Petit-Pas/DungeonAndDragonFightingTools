@@ -1,6 +1,4 @@
-﻿using DDFight.Game.Aggression.Attacks;
-using DDFight.Game.Entities;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
 namespace DDFight.Game.Fight.Display

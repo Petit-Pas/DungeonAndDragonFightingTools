@@ -9,10 +9,8 @@ using System.Xml.Serialization;
 using System.Windows;
 using System.Windows.Media;
 using DDFight.Game.Aggression;
-using System.Collections.Generic;
 using DDFight.Game.Aggression.Display;
 using DDFight.Game.Entities;
-using System;
 
 namespace DDFight.Game.Status
 {

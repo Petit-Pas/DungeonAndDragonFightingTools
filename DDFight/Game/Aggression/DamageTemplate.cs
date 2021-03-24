@@ -1,6 +1,5 @@
 ﻿using DDFight.Game.DamageAffinity;
 using DDFight.Game.Dices;
-using DDFight.Tools;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;

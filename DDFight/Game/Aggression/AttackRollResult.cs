@@ -1,13 +1,8 @@
 ﻿using DDFight.Game.Aggression.Attacks;
 using DDFight.Game.Entities;
-using DDFight.Tools.UXShortcuts;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DDFight.Game.Aggression
 {

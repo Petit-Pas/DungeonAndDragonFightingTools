@@ -1,9 +1,4 @@
-﻿using DDFight.Controlers;
-using DDFight.Tools.Save;
-using System;
-using System.Windows.Input;
-
-namespace DDFight.Game.Entities.Display
+﻿namespace DDFight.Game.Entities.Display
 {
     public class CharacterListEditableUserControl : PlayableEntityListUserControl<Character> //BaseListUserControl
     {

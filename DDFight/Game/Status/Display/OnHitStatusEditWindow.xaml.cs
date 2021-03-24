@@ -1,7 +1,6 @@
 ﻿using DDFight.Tools;
 using DDFight.Windows;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace DDFight.Game.Status.Display
 {

@@ -1,6 +1,4 @@
-﻿using DDFight.Game.Aggression.Attacks;
-using DDFight.Tools;
-using DDFight.ValidationRules;
+﻿using DDFight.Tools;
 using System.Windows.Controls;
 using WpfToolsLibrary.ValidationRules;
 

@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using DDFight.Game.Characteristics;
 using DDFight.Game.DamageAffinity;
-using DDFight.Game.Status;
 using System.Collections.ObjectModel;
 using System.Xml.Serialization;
 

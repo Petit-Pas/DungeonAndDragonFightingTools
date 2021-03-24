@@ -1,5 +1,4 @@
 ﻿using DDFight.Tools;
-using DDFight.ValidationRules;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

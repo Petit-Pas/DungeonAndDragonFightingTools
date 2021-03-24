@@ -1,7 +1,6 @@
 ﻿using DDFight;
 using DDFight.Game.Aggression.Spells;
 using DDFight.Tools.Save;
-using System;
 
 namespace WpfSandbox.Types
 {

@@ -6,7 +6,6 @@ using DDFight.Game.Status;
 using DDFight.Tools;
 using DDFight.Windows.ModalWindows.FormWindow;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Xml.Serialization;
