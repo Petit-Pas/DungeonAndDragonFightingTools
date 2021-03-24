@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:input="clr-namespace:DDFight.Controlers.InputBoxes"
              xmlns:characteristics="clr-namespace:DDFight.Controlers.Game.Characteristics"
-             xmlns:converters="clr-namespace:DDFight.Converters"
+             xmlns:converters="clr-namespace:DDFight.Converters" xmlns:inttextboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.IntTextBoxes;assembly=WpfCustomControlLibrary"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -81,11 +81,11 @@
                     Visibility="{Binding Converter={StaticResource VisibleIfCharacterConverter}}">
                     Level
                 </TextBlock>
-                <input:NotEmptyStringTextBox 
+                <inttextboxes:PositiveIntTextBoxControl 
                     x:Name="LevelBoxUserControl" 
                     Grid.Row="1" Grid.Column="1" 
                     Margin="0, 5, 10, 5"
-                    String="{Binding Level}"
+                    Integer="{Binding Level}"
                     Visibility="{Binding Converter={StaticResource VisibleIfCharacterConverter}}"/>
 
 
@@ -93,7 +93,7 @@
                     Grid.Row="2" Grid.Column="0">
                     Armor class
                 </TextBlock>
-                <input:PositiveIntTextBox 
+                <inttextboxes:PositiveIntTextBoxControl 
                     x:Name="CABoxUserControl" 
                     Grid.Row="2" Grid.Column="1" 
                     Margin="0, 5, 10, 5" 
@@ -103,7 +103,7 @@
                     Grid.Row="3" Grid.Column="0">
                     Spell Save
                 </TextBlock>
-                <input:PositiveIntTextBox
+                <inttextboxes:PositiveIntTextBoxControl
                     Grid.Row="3" Grid.Column="1"
                     Integer="{Binding SpellSave}"
                     Margin="0, 5, 10, 5"/>
@@ -112,7 +112,7 @@
                     Grid.Row="4" Grid.Column="0">
                     Spell Hit Modifier
                 </TextBlock>
-                <input:PositiveIntTextBox
+                <inttextboxes:PositiveIntTextBoxControl
                     Grid.Row="4" Grid.Column="1"
                     Integer="{Binding SpellHitModifier}"
                     Margin="0, 5, 10, 5"/>
@@ -121,7 +121,7 @@
                     Grid.Row="5" Grid.Column="0">
                     Max HP
                 </TextBlock>
-                <input:PositiveIntTextBox 
+                <inttextboxes:PositiveIntTextBoxControl 
                     x:Name="MaxHPBoxUserControl" 
                     Grid.Row="5" Grid.Column="1" 
                     Margin="0, 5, 10, 5" 
@@ -131,7 +131,7 @@
                     Grid.Row="6" Grid.Column="0">
                     Current HP
                 </TextBlock>
-                <input:IntBox
+                <inttextboxes:IntTextBoxControl
                     x:Name="HPBoxUserControl" 
                     Grid.Row="6" Grid.Column="1" 
                     Margin="0, 5, 10, 5"
@@ -141,7 +141,7 @@
                     Grid.Row="7">
                     Temporary HPs
                 </TextBlock>
-                <input:PositiveIntTextBox
+                <inttextboxes:PositiveIntTextBoxControl
                     Grid.Row="7" Grid.Column="1"
                     Margin="0, 5, 10, 5"
                     Integer="{Binding TempHp}"/>

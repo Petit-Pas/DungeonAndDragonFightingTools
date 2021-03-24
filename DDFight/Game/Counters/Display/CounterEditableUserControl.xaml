@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:input="clr-namespace:DDFight.Controlers.InputBoxes"
+             xmlns:input="clr-namespace:DDFight.Controlers.InputBoxes" xmlns:inttextboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.IntTextBoxes;assembly=WpfCustomControlLibrary"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -52,7 +52,7 @@
             Style="{StaticResource Label}">
             Current: 
         </TextBlock>
-        <input:PositiveIntTextBox 
+        <inttextboxes:PositiveIntTextBoxControl 
             Grid.Row="1" Grid.Column="1"
             Integer="{Binding CurrentValue}"
             Width="40"
@@ -64,7 +64,7 @@
             Style="{StaticResource Label}">
             Max (0 for no max):
         </TextBlock>
-        <input:PositiveIntTextBox 
+        <inttextboxes:PositiveIntTextBoxControl 
             Grid.Row="2" Grid.Column="1"
             Integer="{Binding MaxValue}"
             Width="40"

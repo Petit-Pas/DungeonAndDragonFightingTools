@@ -49,7 +49,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CircularSelector\CircularSelectorRadioButtonControl.cs" />
-    <Compile Include="InputControls\FilterTextBox\FilterTextBoxControl.cs" />
+    <Compile Include="InputBoxes\BaseTextBoxes\BaseTextBoxControl.cs" />
+    <Compile Include="InputBoxes\BaseTextBoxes\ValidableTextBoxControl.cs" />
+    <Compile Include="InputBoxes\FilterTextBoxes\FilterTextBoxControl.cs" />
+    <Compile Include="InputBoxes\IntTextBoxes\BaseIntTextBoxControl.cs" />
+    <Compile Include="InputBoxes\IntTextBoxes\IntTextBoxControl.cs" />
+    <Compile Include="InputBoxes\IntTextBoxes\PositiveIntTextBoxControl.cs" />
     <Compile Include="SliderButton\SliderButtonControl.cs" />
     <Page Include="CardControls\ButtonCardStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -83,7 +88,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="InputControls\FilterTextBox\FilterTextBoxStyle.xaml">
+    <Page Include="InputBoxes\BaseTextBoxes\BaseTextBoxStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

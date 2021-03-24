@@ -2,9 +2,9 @@
 using System.Globalization;
 using System.Windows.Controls;
 
-namespace DDFight.ValidationRules
+namespace WpfToolsLibrary.ValidationRules.Numeric
 {
-    public class PositiveIntRule : ValidationRule
+    public class PositiveIntValidationRule : ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:DDFight.Windows.ModalWindows.FormWindow"
         mc:Ignorable="d"
         Title="AskPositiveIntWindow" Height="200" Width="400"
-        xmlns:input="clr-namespace:DDFight.Controlers.InputBoxes"
+        xmlns:input="clr-namespace:DDFight.Controlers.InputBoxes" xmlns:inttextboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.IntTextBoxes;assembly=WpfCustomControlLibrary"
         Style="{StaticResource WindowStyle}"
         Closing="Window_Closing">
     <Grid>
@@ -25,7 +25,7 @@
             FontSize="18">
             Please enter a positive number
         </TextBlock>
-        <input:PositiveIntTextBox
+        <inttextboxes:PositiveIntTextBoxControl
             Grid.Row="1"
             Margin="5, 0"
             Integer="{Binding Number}"

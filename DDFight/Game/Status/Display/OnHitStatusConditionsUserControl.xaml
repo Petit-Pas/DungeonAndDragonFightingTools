@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:DDFight.Game.Status.Display"
              xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes"
              xmlns:converter="clr-namespace:DDFight.Converters"
-             xmlns:controlers="clr-namespace:DDFight.Controlers" xmlns:sliderbutton="clr-namespace:WpfCustomControlLibrary.SliderButton;assembly=WpfCustomControlLibrary"
+             xmlns:controlers="clr-namespace:DDFight.Controlers" xmlns:sliderbutton="clr-namespace:WpfCustomControlLibrary.SliderButton;assembly=WpfCustomControlLibrary" xmlns:inttextboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.IntTextBoxes;assembly=WpfCustomControlLibrary"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -84,7 +84,7 @@
                     Style="{StaticResource LabelStyle}">
                     Difficulty (0 for innate)
             </TextBlock>
-            <inputboxes:PositiveIntTextBox
+            <inttextboxes:PositiveIntTextBoxControl
                     Grid.Row="1" Grid.Column="1"
                     Margin="0, 5"
                     Integer="{Binding ApplySavingDifficulty}"/>
@@ -223,7 +223,7 @@
                     Visibility="{Binding HasAMaximumDuration, Converter={StaticResource BoolToVisibilityConverter}}">
                     Duration in rounds:
                 </TextBlock>
-                <inputboxes:PositiveIntTextBox 
+                <inttextboxes:PositiveIntTextBoxControl 
                     Grid.Row="1" Grid.Column="0"
                     Grid.ColumnSpan="2"
                     HorizontalAlignment="Right"

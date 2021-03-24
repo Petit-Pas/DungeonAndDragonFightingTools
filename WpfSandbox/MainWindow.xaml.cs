@@ -6,6 +6,7 @@ using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using WpfCustomControlLibrary.InputBoxes.IntTextBoxes;
 using WpfSandbox;
 using WpfSandbox.Types;
 
@@ -108,9 +109,19 @@ namespace BindValidation
             return result;
         }
 
+        public int Integer
+        {
+            get => _integer;
+            set { _integer = value;  NotifyPropertyChanged(); }
+        }
+        private int _integer = 1;
+
         public MainWindow()
         {
 
+
+            this.DataContext = this;
+            InitializeComponent();
 
             Logger.Init();
 

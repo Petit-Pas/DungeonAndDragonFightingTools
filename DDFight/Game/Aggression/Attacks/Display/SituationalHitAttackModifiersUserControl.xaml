@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DDFight.Controlers.Game.Attacks.SituationalModifiers"
-             xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes"
+             xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes" xmlns:inttextboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.IntTextBoxes;assembly=WpfCustomControlLibrary"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -19,7 +19,7 @@
                 VerticalAlignment="Center">
                 Situational AC Modifier:
             </TextBlock>
-            <inputboxes:IntBox 
+            <inttextboxes:IntTextBoxControl 
                 VerticalAlignment="Center"
                 Margin="5, 0"
                 MinWidth="35"
@@ -28,7 +28,7 @@
                 VerticalAlignment="Center">
                 Situational Hit Modifier:
             </TextBlock>
-            <inputboxes:IntBox 
+            <inttextboxes:IntTextBoxControl 
                 VerticalAlignment="Center"
                 Margin="5, 0"
                 MinWidth="35"

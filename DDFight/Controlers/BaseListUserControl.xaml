@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes" 
              xmlns:system="clr-namespace:System;assembly=mscorlib"
-             xmlns:local="clr-namespace:DDFight.Controlers" xmlns:filtertextbox="clr-namespace:WpfCustomControlLibrary.InputControls.FilterTextBox;assembly=WpfCustomControlLibrary"
+             xmlns:local="clr-namespace:DDFight.Controlers" 
+             xmlns:filtertextbox="clr-namespace:WpfCustomControlLibrary.InputBoxes.FilterTextBoxes;assembly=WpfCustomControlLibrary"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>

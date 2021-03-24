@@ -293,14 +293,8 @@
     <Compile Include="Controlers\InputBoxes\BooleanButton.xaml.cs">
       <DependentUpon>BooleanButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controlers\InputBoxes\IntBox.xaml.cs">
-      <DependentUpon>IntBox.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controlers\InputBoxes\NotEmptyStringTextBox.xaml.cs">
       <DependentUpon>NotEmptyStringTextBox.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controlers\InputBoxes\PositiveIntBox.xaml.cs">
-      <DependentUpon>PositiveIntBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controlers\InputBoxes\RangedIntBox.xaml.cs">
       <DependentUpon>RangedIntBox.xaml</DependentUpon>
@@ -358,9 +352,7 @@
     <Compile Include="ValidationRules\IValidable.cs" />
     <Compile Include="Tools\INotifyPropertyChangedSub.cs" />
     <Compile Include="Tools\Logger.cs" />
-    <Compile Include="ValidationRules\IntRule.cs" />
     <Compile Include="ValidationRules\NotEmptyStringRule.cs" />
-    <Compile Include="ValidationRules\PositiveIntRule.cs" />
     <Compile Include="Game\Entities\Character.cs" />
     <Compile Include="ValidationRules\RangedIntRule.cs" />
     <Compile Include="ValidationRules\ValidationRuleEventHandler.cs" />
@@ -644,15 +636,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controlers\InputBoxes\IntBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controlers\InputBoxes\NotEmptyStringTextBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controlers\InputBoxes\PositiveIntBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

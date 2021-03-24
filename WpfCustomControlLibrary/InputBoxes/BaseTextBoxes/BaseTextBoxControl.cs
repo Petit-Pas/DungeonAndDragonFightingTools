@@ -7,40 +7,20 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace WpfCustomControlLibrary.InputControls.FilterTextBox
+namespace WpfCustomControlLibrary.InputBoxes.BaseTextBoxes
 {
-    public partial class FilterTextBoxControl : TextBox
+    public class BaseTextBoxControl : TextBox
     {
         private static readonly ResourceDictionary styleDict = new ResourceDictionary()
         {
-            Source = new Uri("/WpfCustomControlLibrary;component/InputControls/FilterTextBox/FilterTextBoxStyle.xaml", UriKind.RelativeOrAbsolute)
+            Source = new Uri("/WpfCustomControlLibrary;component/InputBoxes/BaseTextBoxes/BaseTextBoxStyle.xaml", UriKind.RelativeOrAbsolute)
         };
-        private static readonly Style style = styleDict["FilterTextBoxStyle"] as Style;
+        private static readonly Style style = styleDict["BaseTextBoxStyle"] as Style;
 
-        public FilterTextBoxControl() : base()
+        public BaseTextBoxControl() : base()
         {
             if (style != null)
                 this.Style = style;
-            DataContext = this;
-            this.GotFocus += FilterTextBox_GotFocus; ;
-            this.LostFocus += FilterTextBox_LostFocus; ;
-            this.Text = filterPlaceHolder;
-        }
-
-        private readonly string filterPlaceHolder = "Filter...";
-
-        private void FilterTextBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(this.Text))
-            {
-                this.Text = filterPlaceHolder;
-            }
-        }
-
-        private void FilterTextBox_GotFocus(object sender, RoutedEventArgs e)
-        {
-            if (this.Text == filterPlaceHolder)
-                this.Text = "";
         }
 
         public Brush BackgroundColor
@@ -51,7 +31,7 @@ namespace WpfCustomControlLibrary.InputControls.FilterTextBox
         private static readonly DependencyProperty BackgroundColorProperty = DependencyProperty.Register(
                 nameof(BackgroundColor),
                 typeof(Brush),
-                typeof(FilterTextBoxControl),
+                typeof(BaseTextBoxControl),
                 new PropertyMetadata(System.Windows.Application.Current.Resources["Gray"])
             );
 
@@ -63,7 +43,7 @@ namespace WpfCustomControlLibrary.InputControls.FilterTextBox
         private static readonly DependencyProperty BorderColorProperty = DependencyProperty.Register(
                 nameof(BorderColor),
                 typeof(Brush),
-                typeof(FilterTextBoxControl),
+                typeof(BaseTextBoxControl),
                 new PropertyMetadata(System.Windows.Application.Current.Resources["Light"])
             );
 
@@ -75,7 +55,7 @@ namespace WpfCustomControlLibrary.InputControls.FilterTextBox
         private static readonly DependencyProperty ForegroundColorProperty = DependencyProperty.Register(
                 nameof(ForegroundColor),
                 typeof(Brush),
-                typeof(FilterTextBoxControl),
+                typeof(BaseTextBoxControl),
                 new PropertyMetadata(System.Windows.Application.Current.Resources["Light"])
             );
 
@@ -87,7 +67,7 @@ namespace WpfCustomControlLibrary.InputControls.FilterTextBox
         public static readonly DependencyProperty AccentColorProperty = DependencyProperty.Register(
                 nameof(AccentColor),
                 typeof(Brush),
-                typeof(FilterTextBoxControl),
+                typeof(BaseTextBoxControl),
                 new PropertyMetadata(System.Windows.Application.Current.Resources["Indigo"])
             );
 
@@ -99,7 +79,7 @@ namespace WpfCustomControlLibrary.InputControls.FilterTextBox
         private static readonly DependencyProperty SelectionColorProperty = DependencyProperty.Register(
                 nameof(LightAccentColor),
                 typeof(Brush),
-                typeof(FilterTextBoxControl),
+                typeof(BaseTextBoxControl),
                 new PropertyMetadata(System.Windows.Application.Current.Resources["LightIndigo"])
             );
     }

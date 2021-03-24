@@ -3,20 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:input="clr-namespace:DDFight.Controlers.InputBoxes"
+             xmlns:input="clr-namespace:DDFight.Controlers.InputBoxes" xmlns:inttextboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.IntTextBoxes;assembly=WpfCustomControlLibrary"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Grid.IsSharedSizeScope="True">
     <UserControl.Resources>
-        <Style TargetType="input:IntBox">
-            <Setter Property="Margin" Value="5,3"></Setter>
-        </Style>
-        <Style TargetType="input:PositiveIntTextBox">
-            <Setter Property="Margin" Value="5,3"></Setter>
-        </Style>
-        <Style TargetType="TextBlock">
-            <Setter Property="Margin" Value="5,3" />
-            <Setter Property="Foreground" Value="{StaticResource Light}"/>
-        </Style>
     </UserControl.Resources>
 
     <GroupBox
@@ -62,7 +52,7 @@
                     Foreground="{StaticResource Light}">
                     Mastery Bonus
                 </TextBlock>
-                <input:PositiveIntTextBox 
+                <inttextboxes:PositiveIntTextBoxControl
                     Grid.Column="2" 
                     x:Name="MasteryBonusBox" 
                     Integer="{Binding Characteristics.MasteryBonus}"
@@ -74,7 +64,7 @@
                     Grid.Row="1" Grid.ColumnSpan="3"
                     Margin="5,5, 10, 5"/>
             </Grid>
-            
+
             <ItemsControl 
                 x:Name="CharacteristicsListView" 
                 Grid.Row="1"
@@ -98,17 +88,16 @@
                                 Grid.Row="0" Grid.Column="1"
                                 IsChecked="{Binding Mastery}">
                             </CheckBox>
-                            <input:IntBox
+                            <inttextboxes:IntTextBoxControl
                                 x:Name="ModifierBox"
+                                Margin="5, 3"
                                 Grid.Row="0" Grid.Column="2"
                                 Integer="{Binding Modifier}">
-                            </input:IntBox>
+                            </inttextboxes:IntTextBoxControl>
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-            
         </Grid>
-        
     </GroupBox>
 </UserControl>
