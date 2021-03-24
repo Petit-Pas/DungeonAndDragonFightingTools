@@ -1,5 +1,6 @@
 ﻿using DDFight.ValidationRules;
 using System.Windows.Controls;
+using WpfToolsLibrary.ValidationRules;
 
 namespace DDFight.Game.Counters.Display
 {

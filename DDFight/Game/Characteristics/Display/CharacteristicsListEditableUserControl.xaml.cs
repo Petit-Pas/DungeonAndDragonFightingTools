@@ -5,6 +5,7 @@ using DDFight.ValidationRules;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using WpfToolsLibrary.ValidationRules;
 
 namespace DDFight.Controlers.Game.Characteristics
 {

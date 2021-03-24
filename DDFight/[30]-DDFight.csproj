@@ -349,7 +349,6 @@
     <Compile Include="Tools\IFocusable.cs" />
     <Compile Include="Tools\UXShortcuts\IRollableControl.cs" />
     <Compile Include="ValidationRules\DiceRollRule.cs" />
-    <Compile Include="ValidationRules\IValidable.cs" />
     <Compile Include="Tools\INotifyPropertyChangedSub.cs" />
     <Compile Include="Tools\Logger.cs" />
     <Compile Include="ValidationRules\NotEmptyStringRule.cs" />

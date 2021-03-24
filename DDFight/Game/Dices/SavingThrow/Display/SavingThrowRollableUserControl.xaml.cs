@@ -3,6 +3,7 @@ using DDFight.ValidationRules;
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using WpfToolsLibrary.ValidationRules;
 
 namespace DDFight.Game.Dices.SavingThrow.Display
 {
