@@ -64,6 +64,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="ValidationRules\IValidable.cs" />
+    <Compile Include="ValidationRules\Text\NotEmptyStringValidationRule.cs" />
     <Compile Include="ValidationRules\Numeric\IntValidationRule.cs" />
     <Compile Include="ValidationRules\Numeric\PositiveIntValidationRule.cs" />
     <Compile Include="ValidationRules\Numeric\RangedIntValidationRule.cs" />

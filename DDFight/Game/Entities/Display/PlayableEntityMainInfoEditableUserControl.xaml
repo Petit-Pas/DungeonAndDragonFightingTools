@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:input="clr-namespace:DDFight.Controlers.InputBoxes"
              xmlns:characteristics="clr-namespace:DDFight.Controlers.Game.Characteristics"
-             xmlns:converters="clr-namespace:DDFight.Converters" xmlns:inttextboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.IntTextBoxes;assembly=WpfCustomControlLibrary"
+             xmlns:converters="clr-namespace:DDFight.Converters" xmlns:inttextboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.IntTextBoxes;assembly=WpfCustomControlLibrary" xmlns:stringtextboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.StringTextBoxes;assembly=WpfCustomControlLibrary"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -70,7 +70,7 @@
                     VerticalAlignment="Center">
                     Name
                 </TextBlock>
-                <input:NotEmptyStringTextBox 
+                <stringtextboxes:NotEmptyStringTextBoxControl 
                     x:Name="NameBoxUserControl" 
                     Grid.Row="0" Grid.Column="1" 
                     Margin="0, 5, 10, 5"

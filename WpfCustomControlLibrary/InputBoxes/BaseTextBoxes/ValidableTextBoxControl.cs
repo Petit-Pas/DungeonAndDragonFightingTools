@@ -13,7 +13,7 @@ namespace WpfCustomControlLibrary.InputBoxes.BaseTextBoxes
 
         public virtual bool IsValid()
         {
-            return Validation.GetHasError(this);
+            return !Validation.GetHasError(this);
         }
     }
 }

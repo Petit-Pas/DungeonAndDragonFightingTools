@@ -56,6 +56,8 @@
     <Compile Include="InputBoxes\IntTextBoxes\IntTextBoxControl.cs" />
     <Compile Include="InputBoxes\IntTextBoxes\PositiveIntTextBoxControl.cs" />
     <Compile Include="InputBoxes\IntTextBoxes\RangedIntBoxControl.cs" />
+    <Compile Include="InputBoxes\StringTextBoxes\BaseStringTextBoxControl.cs" />
+    <Compile Include="InputBoxes\StringTextBoxes\NotEmptyStringTextBoxControl.cs" />
     <Compile Include="SliderButton\SliderButtonControl.cs" />
     <Page Include="CardControls\ButtonCardStyle.xaml">
       <Generator>MSBuild:Compile</Generator>

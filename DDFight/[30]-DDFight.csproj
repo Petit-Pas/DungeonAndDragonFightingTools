@@ -293,9 +293,6 @@
     <Compile Include="Controlers\InputBoxes\BooleanButton.xaml.cs">
       <DependentUpon>BooleanButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controlers\InputBoxes\NotEmptyStringTextBox.xaml.cs">
-      <DependentUpon>NotEmptyStringTextBox.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Converters\DamageTypeEnumToBrushConverter.cs" />
     <Compile Include="Converters\StringListToStringConverter.cs" />
     <Compile Include="Converters\IntToStringConverter.cs" />
@@ -343,7 +340,6 @@
     <Compile Include="Resources\ResourceManager.cs" />
     <Compile Include="Tools\ICopyAssignable.cs" />
     <Compile Include="Tools\IEventUnregisterable.cs" />
-    <Compile Include="Tools\IFocusable.cs" />
     <Compile Include="Tools\UXShortcuts\IRollableControl.cs" />
     <Compile Include="ValidationRules\DiceRollRule.cs" />
     <Compile Include="Tools\INotifyPropertyChangedSub.cs" />
@@ -628,10 +624,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controlers\InputBoxes\BooleanButton.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controlers\InputBoxes\NotEmptyStringTextBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

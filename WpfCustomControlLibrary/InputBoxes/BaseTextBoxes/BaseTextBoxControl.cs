@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace WpfCustomControlLibrary.InputBoxes.BaseTextBoxes
@@ -17,7 +18,33 @@ namespace WpfCustomControlLibrary.InputBoxes.BaseTextBoxes
         {
             if (style != null)
                 this.Style = style;
+            Initialized += BaseTextBoxControl_Initialized;
         }
+
+        private void BaseTextBoxControl_Initialized(object sender, EventArgs e)
+        {
+            KeyDown += BaseTextBoxControl_KeyDown;
+        }
+
+        protected void SendTab()
+        {
+            System.Windows.Input.KeyEventArgs args = new System.Windows.Input.KeyEventArgs(Keyboard.PrimaryDevice, Keyboard.PrimaryDevice.ActiveSource, 0, Key.Tab)
+            {
+                RoutedEvent = Keyboard.KeyDownEvent
+            };
+            InputManager.Current.ProcessInput(args);
+        }
+
+        protected virtual void BaseTextBoxControl_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                SendTab();
+                e.Handled = true;
+            }
+        }
+
+        #region ColorProperties
 
         public Brush BackgroundColor
         {
@@ -78,5 +105,7 @@ namespace WpfCustomControlLibrary.InputBoxes.BaseTextBoxes
                 typeof(BaseTextBoxControl),
                 new PropertyMetadata(System.Windows.Application.Current.Resources["LightIndigo"])
             );
+
+        #endregion ColorProperties
     }
 }

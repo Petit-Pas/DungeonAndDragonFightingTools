@@ -17,7 +17,7 @@ namespace DDFight.Controlers.Game.Attacks
 
         private void EditableHitAttackTemplateUserControl_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            NameTextBox.SetFocus();
+            NameTextBox.Focus();
         }
 
         public bool IsValid()

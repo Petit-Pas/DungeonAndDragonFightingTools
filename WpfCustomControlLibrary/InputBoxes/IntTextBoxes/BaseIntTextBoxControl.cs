@@ -19,7 +19,7 @@ namespace WpfCustomControlLibrary.InputBoxes.IntTextBoxes
             binding.Source = this;
             binding.ValidationRules.Clear();
             binding.ValidationRules.Add(this.GetValidationRule());
-            this.SetBinding(TextProperty, binding);
+            this.SetBinding(TextProperty, binding).UpdateSource();
         }
 
         protected virtual void IntegerProperty_Updated(DependencyPropertyChangedEventArgs a)

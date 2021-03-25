@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes" xmlns:characteristics="clr-namespace:DDFight.Controlers.Game.Characteristics" xmlns:display="clr-namespace:DDFight.Game.Status.Display"
         xmlns:converter="clr-namespace:DDFight.Converters"
-        xmlns:damagelistcontrols="clr-namespace:DDFight.Controlers.Game.Attacks.DamageListControls"
+        xmlns:damagelistcontrols="clr-namespace:DDFight.Controlers.Game.Attacks.DamageListControls" xmlns:stringtextboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.StringTextBoxes;assembly=WpfCustomControlLibrary"
         mc:Ignorable="d"
         Title="EditCustomVerboseStatusWindow" Height="550" Width="800"
         Background="{StaticResource LightestGray}"
@@ -67,12 +67,11 @@
             Style="{StaticResource LabelStyle}">
             Header :
         </TextBlock>
-        <inputboxes:NotEmptyStringTextBox 
+        <stringtextboxes:NotEmptyStringTextBoxControl 
             x:Name="HeaderBox"
             Grid.Row="1" Grid.Column="1"
             MaxHeight="25"
             String="{Binding Header}"
-            Background="{StaticResource Gray}"
             />
 
         <TextBlock

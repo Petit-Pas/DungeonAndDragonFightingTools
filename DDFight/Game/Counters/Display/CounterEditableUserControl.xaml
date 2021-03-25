@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:input="clr-namespace:DDFight.Controlers.InputBoxes" xmlns:inttextboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.IntTextBoxes;assembly=WpfCustomControlLibrary"
+             xmlns:input="clr-namespace:DDFight.Controlers.InputBoxes" xmlns:inttextboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.IntTextBoxes;assembly=WpfCustomControlLibrary" xmlns:stringtextboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.StringTextBoxes;assembly=WpfCustomControlLibrary"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -36,7 +36,7 @@
             Grid.Column="1"
             Height="{Binding ElementName=TextBlock, Path=ActualHeight}" 
             VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-            <input:NotEmptyStringTextBox 
+            <stringtextboxes:NotEmptyStringTextBoxControl 
                 x:Name="TextBlock"
                 Width="{Binding ElementName=Canvas, Path=ActualWidth}"
                 Grid.Column="1"

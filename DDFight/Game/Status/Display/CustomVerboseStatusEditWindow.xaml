@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes" xmlns:characteristics="clr-namespace:DDFight.Controlers.Game.Characteristics" xmlns:display="clr-namespace:DDFight.Game.Status.Display"
+        xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes" xmlns:characteristics="clr-namespace:DDFight.Controlers.Game.Characteristics" xmlns:display="clr-namespace:DDFight.Game.Status.Display" xmlns:stringtextboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.StringTextBoxes;assembly=WpfCustomControlLibrary"
         mc:Ignorable="d"
         Title="EditCustomVerboseStatusWindow" Height="450" Width="800"
         Background="{StaticResource LightestGray}"
@@ -53,7 +53,7 @@
             Style="{StaticResource LabelStyle}">
             Header :
         </TextBlock>
-        <inputboxes:NotEmptyStringTextBox 
+        <stringtextboxes:NotEmptyStringTextBoxControl 
             x:Name="HeaderBox"
             Grid.Row="1" Grid.Column="1"
             MaxHeight="25"

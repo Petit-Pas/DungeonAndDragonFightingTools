@@ -27,13 +27,14 @@
                         <Trigger Property="UIElement.IsMouseOver" Value="True">
                             <Setter TargetName="border" Property="Border.BorderBrush" Value="{Binding LightAccentColor, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:BaseTextBoxControl}}}"/>
                         </Trigger>
+                        <Trigger Property="UIElement.IsKeyboardFocused" Value="True">
+                            <Setter TargetName="border" Property="Border.BorderBrush" Value="{Binding AccentColor, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:BaseTextBoxControl}}}"/>
+                        </Trigger>
                         <Trigger Property="Validation.HasError" Value="True">
                             <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Mode=Self},
                                 Path=(Validation.Errors)[0].ErrorContent}"/>
                             <Setter TargetName="border" Property="Border.BorderBrush" Value="Red"/>
-                        </Trigger>
-                        <Trigger Property="UIElement.IsKeyboardFocused" Value="True">
-                            <Setter TargetName="border" Property="Border.BorderBrush" Value="{Binding AccentColor, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:BaseTextBoxControl}}}"/>
+                            <Setter TargetName="border" Property="Border.BorderThickness" Value="2"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
