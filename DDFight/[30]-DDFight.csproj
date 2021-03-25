@@ -296,9 +296,6 @@
     <Compile Include="Controlers\InputBoxes\NotEmptyStringTextBox.xaml.cs">
       <DependentUpon>NotEmptyStringTextBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controlers\InputBoxes\RangedIntBox.xaml.cs">
-      <DependentUpon>RangedIntBox.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Converters\DamageTypeEnumToBrushConverter.cs" />
     <Compile Include="Converters\StringListToStringConverter.cs" />
     <Compile Include="Converters\IntToStringConverter.cs" />
@@ -353,7 +350,6 @@
     <Compile Include="Tools\Logger.cs" />
     <Compile Include="ValidationRules\NotEmptyStringRule.cs" />
     <Compile Include="Game\Entities\Character.cs" />
-    <Compile Include="ValidationRules\RangedIntRule.cs" />
     <Compile Include="ValidationRules\ValidationRuleEventHandler.cs" />
     <Compile Include="Windows\ModalWindows\BlankDiceRollModal\BlankDiceRollModal.xaml.cs">
       <DependentUpon>BlankDiceRollModal.xaml</DependentUpon>
@@ -636,10 +632,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controlers\InputBoxes\NotEmptyStringTextBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controlers\InputBoxes\RangedIntBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

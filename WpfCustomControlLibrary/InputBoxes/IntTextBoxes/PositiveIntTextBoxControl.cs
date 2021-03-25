@@ -6,7 +6,7 @@ namespace WpfCustomControlLibrary.InputBoxes.IntTextBoxes
     public class PositiveIntTextBoxControl : BaseIntTextBoxControl
     {
 
-        private ValidationRule _validationRule = new PositiveIntValidationRule();
+        private readonly ValidationRule _validationRule = new PositiveIntValidationRule();
 
         public PositiveIntTextBoxControl() : base ()
         {

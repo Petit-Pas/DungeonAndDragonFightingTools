@@ -2,7 +2,8 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:filtertextbox1="clr-namespace:WpfCustomControlLibrary.InputBoxes.FilterTextBoxes;assembly=WpfCustomControlLibrary" xmlns:intboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.IntTextBoxes;assembly=WpfCustomControlLibrary" xmlns:wpfsandbox="clr-namespace:WpfSandbox"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:intboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.IntTextBoxes;assembly=WpfCustomControlLibrary"
         mc:Ignorable="d"
         Title="MainWindow"
         Width="650" Height="400"
@@ -27,10 +28,11 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-
-        <wpfsandbox:Test>
-            
-        </wpfsandbox:Test>
+        <intboxes:RangedIntBoxControl
+            Min="0"
+            Max="15"
+            Integer="{Binding Integer, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"></intboxes:RangedIntBoxControl>
+        
 
     </Grid>
     

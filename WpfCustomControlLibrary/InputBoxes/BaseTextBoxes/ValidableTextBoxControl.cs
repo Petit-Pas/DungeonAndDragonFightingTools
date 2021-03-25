@@ -11,7 +11,7 @@ namespace WpfCustomControlLibrary.InputBoxes.BaseTextBoxes
 
         public abstract ValidationRule GetValidationRule();
 
-        public bool IsValid()
+        public virtual bool IsValid()
         {
             return Validation.GetHasError(this);
         }

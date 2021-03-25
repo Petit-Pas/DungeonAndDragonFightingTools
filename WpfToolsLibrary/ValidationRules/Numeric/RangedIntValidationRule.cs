@@ -4,9 +4,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
 
-namespace DDFight.ValidationRules
+namespace WpfToolsLibrary.ValidationRules.Numeric
 {
-    public class RangedIntRuleBoundaries : DependencyObject
+    public class RangedIntValidationRuleBoundaries : DependencyObject
     {
         public int Max
         {
@@ -14,7 +14,7 @@ namespace DDFight.ValidationRules
             set { this.SetValue(MaxProperty, value); }
         }
         public static readonly DependencyProperty MaxProperty = DependencyProperty.Register(
-            "Max", typeof(int), typeof(RangedIntRuleBoundaries),
+            "Max", typeof(int), typeof(RangedIntValidationRuleBoundaries),
             new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public int Min
@@ -23,18 +23,18 @@ namespace DDFight.ValidationRules
             set { this.SetValue(MinProperty, value); }
         }
         public static readonly DependencyProperty MinProperty = DependencyProperty.Register(
-            "Min", typeof(int), typeof(RangedIntRuleBoundaries),
+            "Min", typeof(int), typeof(RangedIntValidationRuleBoundaries),
             new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
     }
 
     [ContentProperty("Boundaries")]
-    public class RangedIntRule : ValidationRule
+    public class RangedIntValidationRule : ValidationRule
     {
-        public RangedIntRule()
+        public RangedIntValidationRule()
         {
         }
 
-        public RangedIntRuleBoundaries Boundaries { get; set; }
+        public RangedIntValidationRuleBoundaries Boundaries { get; set; }
 
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {

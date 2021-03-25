@@ -16,10 +16,20 @@ namespace WpfCustomControlLibrary.InputBoxes.IntTextBoxes
         {
             Binding binding = new Binding("Integer");
             binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
-            binding.RelativeSource = new RelativeSource(RelativeSourceMode.Self);
+            binding.Source = this;
             binding.ValidationRules.Clear();
             binding.ValidationRules.Add(this.GetValidationRule());
             this.SetBinding(TextProperty, binding);
+        }
+
+        protected virtual void IntegerProperty_Updated(DependencyPropertyChangedEventArgs a)
+        {
+        }
+
+        private static void integerProperty_Updated(DependencyObject o, DependencyPropertyChangedEventArgs a)
+        {
+            if (o is BaseIntTextBoxControl obj)
+                obj.IntegerProperty_Updated(a);
         }
 
         public int Integer
@@ -29,6 +39,6 @@ namespace WpfCustomControlLibrary.InputBoxes.IntTextBoxes
         }
         public static readonly DependencyProperty IntegerProperty = DependencyProperty.Register(
             "Integer", typeof(int), typeof(BaseIntTextBoxControl),
-            new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+            new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, integerProperty_Updated));
     }
 }

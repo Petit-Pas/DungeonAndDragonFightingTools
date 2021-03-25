@@ -2,10 +2,11 @@
 using DDFight.Tools.UXShortcuts;
 using System;
 using System.Windows;
+using WpfCustomControlLibrary.InputBoxes.IntTextBoxes;
 
 namespace DDFight.Controlers.InputBoxes
 {
-    public class D20Box : RangedIntBox, IRollableControl
+    public class D20Box : RangedIntBoxControl, IRollableControl
     {
 
         public D20Box() : base()
@@ -17,7 +18,7 @@ namespace DDFight.Controlers.InputBoxes
         /// <summary>
         ///     Updating the Crit Property
         /// </summary>
-        protected override void integer_property_updated()
+        protected override void IntegerProperty_Updated(DependencyPropertyChangedEventArgs a)
         {
             if (Crits == false && Integer == 20)
                 Crits = true;

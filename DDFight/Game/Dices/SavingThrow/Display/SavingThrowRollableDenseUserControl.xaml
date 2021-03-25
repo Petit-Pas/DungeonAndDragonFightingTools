@@ -65,7 +65,7 @@
                     >
                     Roll: 
                 </TextBlock>
-                <inputboxes:RangedIntBox
+                <inttextboxes:RangedIntBoxControl
                     Width="40"
                     Height="20"
                     Margin="5, 0"

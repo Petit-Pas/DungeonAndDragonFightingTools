@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DDFight.Windows"
-        xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes"
+        xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes" xmlns:inttextboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.IntTextBoxes;assembly=WpfCustomControlLibrary"
         mc:Ignorable="d"
         Title="RollInitiativeWindow" Height="450" Width="400"
         Background="{StaticResource LightestGray}"
@@ -96,7 +96,7 @@
                                         Margin="10, 2"
                                         Text="{Binding Name}" 
                                         Foreground="{StaticResource Light}"/>
-                                    <inputboxes:RangedIntBox
+                                    <inttextboxes:RangedIntBoxControl
                                         Min="0"
                                         Max="20"
                                         DataContext="{Binding Entity}"
