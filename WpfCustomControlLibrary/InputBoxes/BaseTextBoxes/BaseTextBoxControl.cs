@@ -24,6 +24,12 @@ namespace WpfCustomControlLibrary.InputBoxes.BaseTextBoxes
         private void BaseTextBoxControl_Initialized(object sender, EventArgs e)
         {
             KeyDown += BaseTextBoxControl_KeyDown;
+            GotFocus += BaseTextBoxControl_GotFocus;
+        }
+
+        protected virtual void BaseTextBoxControl_GotFocus(object sender, RoutedEventArgs e)
+        {
+            this.SelectAll();
         }
 
         protected void SendTab()
