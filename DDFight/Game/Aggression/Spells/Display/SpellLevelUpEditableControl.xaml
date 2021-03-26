@@ -64,8 +64,8 @@
             
             <damagelistcontrols:DamageTemplateListEditableUserControl
                 Grid.Row="2"
-                HasSavingThrow="True"
-                DataContext="{Binding AdditionalHitDamagePerLevel}"/>
+                DataContext="{Binding AdditionalHitDamagePerLevel}"
+                HasSavingThrow="{Binding DataContext.HasSavingThrow, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:SpellLevelUpEditableControl}}}"/>
         </Grid>
         
     </Grid>
