@@ -11,11 +11,13 @@ using System.Windows.Media;
 using DDFight.Game.Aggression;
 using DDFight.Game.Aggression.Display;
 using DDFight.Game.Entities;
+using System;
 
 namespace DDFight.Game.Status
 {
     public class OnHitStatus : CustomVerboseStatus, IEventUnregisterable
     {
+
         public OnHitStatus()
         {
         }
@@ -609,11 +611,17 @@ namespace DDFight.Game.Status
         /// </summary>
         public void UnregisterToAll()
         {
-            Caster.PropertyChanged -= Caster_PropertyChanged;
-            Caster.NewTurnStarted -= Caster_NewTurnStarted;
-            Affected.NewTurnStarted -= Affected_NewTurnStarted;
-            Affected.TurnEnded -= Affected_TurnEnded;
-            Caster.TurnEnded -= Caster_TurnEnded;
+            if (Caster != null)
+            {
+                Caster.PropertyChanged -= Caster_PropertyChanged;
+                Caster.NewTurnStarted -= Caster_NewTurnStarted;
+                Caster.TurnEnded -= Caster_TurnEnded;
+            }
+            if (Affected != null)
+            {
+                Affected.NewTurnStarted -= Affected_NewTurnStarted;
+                Affected.TurnEnded -= Affected_TurnEnded;
+            }
         }
 
         #endregion ICloneable

@@ -73,13 +73,10 @@ namespace DDFight.Game.Entities
 
         #region IClonable
 
-        protected override void InitCopy(PlayableEntity to_copy)
+        private void init_copy(Character to_copy)
         {
-            Character copy_character = to_copy as Character;
-
-            base.InitCopy(copy_character);
-            Level = copy_character.Level;
-            HasInspiration = copy_character.HasInspiration;
+            Level = to_copy.Level;
+            HasInspiration = to_copy.HasInspiration;
         }
 
         /// <summary>
@@ -88,7 +85,7 @@ namespace DDFight.Game.Entities
         /// <param name=""></param>
         protected Character(Character to_copy) : base(to_copy)
         {
-            InitCopy(to_copy);
+            init_copy(to_copy);
         }
 
         public override object Clone()
@@ -96,7 +93,17 @@ namespace DDFight.Game.Entities
             return new Character(this);
         }
 
+        public override void CopyAssign(object to_copy)
+        {
+            base.CopyAssign(to_copy);
+            init_copy(to_copy as Character);
+        }
         #endregion IClonable
+
+        ~Character()
+        {
+            ;
+        }
 
     }
 }

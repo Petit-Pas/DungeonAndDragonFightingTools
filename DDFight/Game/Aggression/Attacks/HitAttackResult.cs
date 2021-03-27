@@ -39,7 +39,7 @@ namespace DDFight.Game.Aggression.Attacks
                 NotifyPropertyChanged();
             }
         }
-        private DamageResultList _damageList = new DamageResultList();
+        private DamageResultList _damageList = null;
 
         public OnHitStatusList OnHitStatuses
         {
@@ -50,7 +50,7 @@ namespace DDFight.Game.Aggression.Attacks
                 NotifyPropertyChanged();
             }
         }
-        private OnHitStatusList _onHitStatuses = new OnHitStatusList();
+        private OnHitStatusList _onHitStatuses = null;
 
         public AttackRollResult RollResult
         {
@@ -61,7 +61,7 @@ namespace DDFight.Game.Aggression.Attacks
                 NotifyPropertyChanged();
             }
         }
-        private AttackRollResult _rollResult = new AttackRollResult();
+        private AttackRollResult _rollResult = null;
 
 
         #region INotifyPropertyChanged

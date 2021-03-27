@@ -7,7 +7,8 @@ namespace DDFight.Game.Status
     public class CustomVerboseStatusList : GenericList<CustomVerboseStatus>
     {
         public CustomVerboseStatusList() : base()
-        { }
+        {
+        }
 
         public CustomVerboseStatusList(CustomVerboseStatusList to_copy) : base(to_copy)
         {

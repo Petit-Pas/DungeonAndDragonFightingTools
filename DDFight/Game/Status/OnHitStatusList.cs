@@ -7,7 +7,8 @@ namespace DDFight.Game.Status
 {
     public class OnHitStatusList : GenericList<OnHitStatus>, INotifyPropertyChanged, ICloneable
     {
-        public OnHitStatusList() : base() { }
+        public OnHitStatusList() : base() {
+        }
 
         /// <summary>
         ///     Watch out to do the difference with this (set to true if the status is applied after a Saving on a Spell), 
@@ -31,7 +32,6 @@ namespace DDFight.Game.Status
 
         public void init_copy(OnHitStatusList to_copy)
         {
-            Elements = to_copy.Elements.Clone();
             HasSavingThrow = to_copy.HasSavingThrow;
         }
 

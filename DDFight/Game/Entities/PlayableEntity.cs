@@ -21,7 +21,7 @@ using DDFight.Game.Entities.Display;
 
 namespace DDFight.Game.Entities
 {
-    public class PlayableEntity : INameable, IWindowEditable, ICloneable, INotifyPropertyChanged
+    public class PlayableEntity : INameable, IWindowEditable, ICopyAssignable, INotifyPropertyChanged
     {
         public PlayableEntity()
         {
@@ -489,14 +489,14 @@ namespace DDFight.Game.Entities
         {
             realOne = (PlayableEntity)this.Clone();
             to_transform_into.DisplayName = to_transform_into.Name + " (" + this.DisplayName + ")";
-            InitCopy(to_transform_into);
+            CopyAssign(to_transform_into);
             IsTransformed = true;
             this.DisplayName = to_transform_into.DisplayName;
         }
 
         public void TransformBack()
         {
-            InitCopy(realOne);
+            CopyAssign(realOne);
             IsTransformed = false;
         }
 
@@ -751,16 +751,18 @@ namespace DDFight.Game.Entities
         public virtual bool OpenEditWindow()
         {
             PlayableEntityEditWindow window = new PlayableEntityEditWindow();
-            PlayableEntity temporary = (PlayableEntity)this.Clone();
-            window.DataContext = temporary;
-            window.ShowCentered();
-
-            if (temporary.Validated == true)
+            using (PlayableEntity temporary = (PlayableEntity)this.Clone())
             {
-                InitCopy(temporary);
-                return true;
+                window.DataContext = temporary;
+                window.ShowCentered();
+
+                if (temporary.Validated == true)
+                {
+                    CopyAssign(temporary);
+                    return true;
+                }
+                return false;
             }
-            return false;
         }
 
         #region INotifyPropertyChanged
@@ -786,7 +788,7 @@ namespace DDFight.Game.Entities
         /// <summary>
         ///     this method is required to completely initialize an instance of this by copying another object
         /// </summary>
-        protected virtual void InitCopy(PlayableEntity to_copy)
+        private void init_copy(PlayableEntity to_copy)
         {
             Name = (string)to_copy.Name.Clone();
             CA = to_copy.CA;
@@ -817,7 +819,7 @@ namespace DDFight.Game.Entities
         /// <param name=""></param>
         protected PlayableEntity(PlayableEntity to_copy)
         {
-           InitCopy(to_copy);
+            init_copy(to_copy);
         }
 
         /// <summary>
@@ -827,6 +829,16 @@ namespace DDFight.Game.Entities
         public virtual object Clone()
         {
             return new PlayableEntity(this);
+        }
+
+        public virtual void CopyAssign(object to_copy)
+        {
+            init_copy(to_copy as PlayableEntity);
+        }
+
+        ~PlayableEntity()
+        {
+            ;
         }
 
         #endregion

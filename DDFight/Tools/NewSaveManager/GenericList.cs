@@ -9,7 +9,7 @@ namespace DDFight.Tools.Save
     ///    This class will be used everywhere where a collection is needed, it will allow easy heritance with BaseListUserControl
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class GenericList<T> : INotifyPropertyChanged, ICloneable
+    public class GenericList<T> : INotifyPropertyChanged, ICloneable, IDisposable
         where T : class, ICloneable, new()
     {
 
@@ -21,6 +21,7 @@ namespace DDFight.Tools.Save
 
         public class ListChangedArgs : EventArgs
         {
+            public T Element;
             public GenericListOperation Operation;
         }
 
@@ -117,7 +118,7 @@ namespace DDFight.Tools.Save
         public void RemoveElement(T elem)
         {
             Elements.Remove(elem);
-            OnListChanged(new ListChangedArgs { Operation = GenericListOperation.Deletion });
+            OnListChanged(new ListChangedArgs { Operation = GenericListOperation.Deletion, Element = elem });
             OnListElementChanged(new ListElementChangedArgs { Element = elem, Operation = GenericListOperation.Deletion });
         }
 
@@ -162,7 +163,7 @@ namespace DDFight.Tools.Save
             if (elem == null)
                 elem = new T();
             Elements.Add(elem);
-            OnListChanged(new ListChangedArgs { Operation = GenericListOperation.Addition });
+            OnListChanged(new ListChangedArgs { Operation = GenericListOperation.Addition, Element = elem });
             OnListElementChanged(new ListElementChangedArgs { Operation = GenericListOperation.Addition, Element = elem });
         }
 
@@ -191,6 +192,17 @@ namespace DDFight.Tools.Save
         public virtual object Clone()
         {
             return new GenericList<T>(this);
+        }
+
+        public void Dispose()
+        {
+            if (Elements.Count != 0 && Elements[0] is IDisposable)
+            {
+                foreach (IDisposable disposable in Elements)
+                {
+                    disposable.Dispose();
+                }
+            }
         }
 
         public int Count
