@@ -63,7 +63,7 @@
                 FontWeight="SemiBold">
                 Roll
             </TextBlock>
-            <inttextboxes:RangedIntBoxControl
+            <inttextboxes:RangedIntTextBoxControl
                 DataContext="{Binding ., RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
                 VerticalAlignment="Center"
                 Margin="5"
@@ -73,7 +73,7 @@
                 Min="0"
                 Integer="{Binding Roll}"
             >
-            </inttextboxes:RangedIntBoxControl>
+            </inttextboxes:RangedIntTextBoxControl>
 
         </WrapPanel>
 

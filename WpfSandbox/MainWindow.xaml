@@ -28,10 +28,10 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <intboxes:RangedIntBoxControl
+        <intboxes:RangedIntTextBoxControl
             Min="0"
             Max="15"
-            Integer="{Binding Integer, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"></intboxes:RangedIntBoxControl>
+            Integer="{Binding Integer, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"></intboxes:RangedIntTextBoxControl>
         
 
     </Grid>

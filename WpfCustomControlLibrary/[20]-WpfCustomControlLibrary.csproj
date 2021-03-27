@@ -55,7 +55,7 @@
     <Compile Include="InputBoxes\IntTextBoxes\BaseIntTextBoxControl.cs" />
     <Compile Include="InputBoxes\IntTextBoxes\IntTextBoxControl.cs" />
     <Compile Include="InputBoxes\IntTextBoxes\PositiveIntTextBoxControl.cs" />
-    <Compile Include="InputBoxes\IntTextBoxes\RangedIntBoxControl.cs" />
+    <Compile Include="InputBoxes\IntTextBoxes\RangedIntTextBoxControl.cs" />
     <Compile Include="InputBoxes\StringTextBoxes\BaseStringTextBoxControl.cs" />
     <Compile Include="InputBoxes\StringTextBoxes\NotEmptyStringTextBoxControl.cs" />
     <Compile Include="SliderButton\SliderButtonControl.cs" />

@@ -75,7 +75,7 @@
                 FontWeight="SemiBold">
                 Difficulty:
             </TextBlock>
-            <inttextboxes:RangedIntBoxControl 
+            <inttextboxes:RangedIntTextBoxControl 
                 x:Name="testBox"
                 MinWidth="30"
                 Min="1"
@@ -107,7 +107,7 @@
                 FontWeight="SemiBold">
                 Roll
             </TextBlock>
-            <inttextboxes:RangedIntBoxControl
+            <inttextboxes:RangedIntTextBoxControl
                 DataContext="{Binding ., RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
                 VerticalAlignment="Center"
                 Margin="5"

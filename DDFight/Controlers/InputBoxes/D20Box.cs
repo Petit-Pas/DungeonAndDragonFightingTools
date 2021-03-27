@@ -6,7 +6,7 @@ using WpfCustomControlLibrary.InputBoxes.IntTextBoxes;
 
 namespace DDFight.Controlers.InputBoxes
 {
-    public class D20Box : RangedIntBoxControl, IRollableControl
+    public class D20Box : RangedIntTextBoxControl, IRollableControl
     {
 
         public D20Box() : base()

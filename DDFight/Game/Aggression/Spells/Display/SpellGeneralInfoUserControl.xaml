@@ -36,7 +36,7 @@
                     VerticalAlignment="Center">
                     Level
                 </TextBlock>
-                <inttextboxes:RangedIntBoxControl
+                <inttextboxes:RangedIntTextBoxControl
                     Min="0"
                     Max="9"
                     Integer="{Binding BaseLevel}"
