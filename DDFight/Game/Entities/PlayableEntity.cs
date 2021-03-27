@@ -751,18 +751,16 @@ namespace DDFight.Game.Entities
         public virtual bool OpenEditWindow()
         {
             PlayableEntityEditWindow window = new PlayableEntityEditWindow();
-            using (PlayableEntity temporary = (PlayableEntity)this.Clone())
-            {
-                window.DataContext = temporary;
-                window.ShowCentered();
+            PlayableEntity temporary = (PlayableEntity)this.Clone();
+            window.DataContext = temporary;
+            window.ShowCentered();
 
-                if (temporary.Validated == true)
-                {
-                    CopyAssign(temporary);
-                    return true;
-                }
-                return false;
+            if (temporary.Validated == true)
+            {
+                CopyAssign(temporary);
+                return true;
             }
+            return false;
         }
 
         #region INotifyPropertyChanged
