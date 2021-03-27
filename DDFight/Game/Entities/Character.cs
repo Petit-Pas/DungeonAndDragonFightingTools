@@ -102,7 +102,6 @@ namespace DDFight.Game.Entities
 
         ~Character()
         {
-            ;
         }
 
     }

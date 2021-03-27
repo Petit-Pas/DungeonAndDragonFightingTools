@@ -15,7 +15,7 @@ using System;
 
 namespace DDFight.Game.Status
 {
-    public class OnHitStatus : CustomVerboseStatus, IEventUnregisterable
+    public class OnHitStatus : CustomVerboseStatus, IEventUnregisterable, IDisposable
     {
 
         public OnHitStatus()
@@ -502,30 +502,44 @@ namespace DDFight.Game.Status
                 paragraph.Inlines.Add(Extensions.BuildRun(" on ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
                 paragraph.Inlines.Add(Extensions.BuildRun(target.DisplayName + "\r\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
 
-                target.CustomVerboseStatusList.AddElementSilent(applied);
                 applied.Caster = caster;
                 applied.Affected = target;
-                if ((applied.CanRedoSavingThrow && applied.SavingIsRemadeAtStartOfTurn) ||
-                    (applied.HasAMaximumDuration && !applied.DurationIsCalculatedOnCasterTurn && applied.DurationIsBasedOnStartOfTurn) ||
-                    applied.DotDamageList.Elements.Count != 0)
-                    target.NewTurnStarted += applied.Affected_NewTurnStarted;
-                if ((applied.CanRedoSavingThrow && applied.SavingIsRemadeAtStartOfTurn == false) ||
-                    (applied.HasAMaximumDuration && !applied.DurationIsCalculatedOnCasterTurn && !applied.DurationIsBasedOnStartOfTurn) ||
-                    applied.DotDamageList.Elements.Count != 0)
-                    target.TurnEnded += applied.Affected_TurnEnded;
-                if ((applied.HasAMaximumDuration && applied.DurationIsCalculatedOnCasterTurn && applied.DurationIsBasedOnStartOfTurn) ||
-                    applied.DotDamageList.Elements.Count != 0)
-                    caster.NewTurnStarted += applied.Caster_NewTurnStarted;
-                if ((applied.HasAMaximumDuration && applied.DurationIsCalculatedOnCasterTurn && !applied.DurationIsBasedOnStartOfTurn) ||
-                    applied.DotDamageList.Elements.Count != 0)
-                    caster.TurnEnded += applied.Caster_TurnEnded;
+                target.CustomVerboseStatusList.AddElementSilent(applied);
+                applied.register_to_all();
+                
                 if (applied.EndsOnCasterLossOfConcentration)
                 {
                     if (caster.IsFocused == true && multiple_application == false)
                         caster.IsFocused = false;
-                    caster.PropertyChanged += applied.Caster_PropertyChanged;
                     caster.IsFocused = true;
                 }
+            }
+        }
+
+        private void register_to_all()
+        {
+            if (Affected != null)
+            {
+                if ((CanRedoSavingThrow && SavingIsRemadeAtStartOfTurn) ||
+                    (HasAMaximumDuration && !DurationIsCalculatedOnCasterTurn && DurationIsBasedOnStartOfTurn) ||
+                    DotDamageList.Elements.Count != 0)
+                    Affected.NewTurnStarted += Affected_NewTurnStarted;
+                if ((CanRedoSavingThrow && SavingIsRemadeAtStartOfTurn == false) ||
+                    (HasAMaximumDuration && !DurationIsCalculatedOnCasterTurn && !DurationIsBasedOnStartOfTurn) ||
+                    DotDamageList.Elements.Count != 0)
+                    Affected.TurnEnded += Affected_TurnEnded;
+            }
+            if (Caster != null)
+            {
+                if ((HasAMaximumDuration && DurationIsCalculatedOnCasterTurn && DurationIsBasedOnStartOfTurn) ||
+                    DotDamageList.Elements.Count != 0)
+                    Caster.NewTurnStarted += Caster_NewTurnStarted;
+                if ((HasAMaximumDuration && DurationIsCalculatedOnCasterTurn && !DurationIsBasedOnStartOfTurn) ||
+                    DotDamageList.Elements.Count != 0)
+                    Caster.TurnEnded += Caster_TurnEnded;
+
+                if (EndsOnCasterLossOfConcentration)
+                    Caster.PropertyChanged += Caster_PropertyChanged;
             }
         }
 
@@ -556,17 +570,19 @@ namespace DDFight.Game.Status
         {
 
             OnHitStatusEditWindow window = new OnHitStatusEditWindow();
-            OnHitStatus dc = (OnHitStatus)this.Clone();
-            window.DataContext = dc;
-
-            window.ShowCentered();
-
-            if (window.Validated)
+            using (OnHitStatus hitStatus = (OnHitStatus)this.Clone())
             {
-                this.CopyAssign(dc);
-                return true;
+                window.DataContext = hitStatus;
+
+                window.ShowCentered();
+
+                if (window.Validated)
+                {
+                    this.CopyAssign(hitStatus);
+                    return true;
+                }
+                return false;
             }
-            return false;
         }
 
         #region ICloneable
@@ -594,16 +610,21 @@ namespace DDFight.Game.Status
             HasSpellSaving = to_copy.HasSpellSaving;
             SpellApplicationModifier = to_copy.SpellApplicationModifier;
             SpellSavingWasSuccessful = to_copy.SpellSavingWasSuccessful;
+            Caster = to_copy.Caster;
+            Affected = to_copy.Affected;
         }
 
         public OnHitStatus(OnHitStatus to_copy)
         {
             init_copy(to_copy);
+            register_to_all();
         }
 
         public void CopyAssign(OnHitStatus to_copy)
         {
+            UnregisterToAll();
             init_copy(to_copy);
+            register_to_all();
         }
 
         /// <summary>
@@ -622,6 +643,15 @@ namespace DDFight.Game.Status
                 Affected.NewTurnStarted -= Affected_NewTurnStarted;
                 Affected.TurnEnded -= Affected_TurnEnded;
             }
+        }
+
+        ~OnHitStatus()
+        {
+        }
+
+        public void Dispose()
+        {
+            UnregisterToAll();
         }
 
         #endregion ICloneable

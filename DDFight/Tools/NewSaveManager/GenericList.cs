@@ -147,6 +147,11 @@ namespace DDFight.Tools.Save
                 {
                     AddElementSilent(elem);
                 }
+                else
+                {
+                    if (elem is IDisposable disposable)
+                        disposable.Dispose();
+                }
             }
             else
             {

@@ -21,7 +21,7 @@ using DDFight.Game.Entities.Display;
 
 namespace DDFight.Game.Entities
 {
-    public class PlayableEntity : INameable, IWindowEditable, ICopyAssignable, INotifyPropertyChanged
+    public class PlayableEntity : INameable, IWindowEditable, ICopyAssignable, INotifyPropertyChanged, IDisposable
     {
         public PlayableEntity()
         {
@@ -751,16 +751,18 @@ namespace DDFight.Game.Entities
         public virtual bool OpenEditWindow()
         {
             PlayableEntityEditWindow window = new PlayableEntityEditWindow();
-            PlayableEntity temporary = (PlayableEntity)this.Clone();
-            window.DataContext = temporary;
-            window.ShowCentered();
-
-            if (temporary.Validated == true)
+            using (PlayableEntity temporary = (PlayableEntity)this.Clone())
             {
-                CopyAssign(temporary);
-                return true;
+                window.DataContext = temporary;
+                window.ShowCentered();
+
+                if (temporary.Validated == true)
+                {
+                    CopyAssign(temporary);
+                    return true;
+                }
+                return false;
             }
-            return false;
         }
 
         #region INotifyPropertyChanged
@@ -831,12 +833,17 @@ namespace DDFight.Game.Entities
 
         public virtual void CopyAssign(object to_copy)
         {
+            this.DisposeAllDisposableMembers();
             init_copy(to_copy as PlayableEntity);
+        }
+
+        public void Dispose()
+        {
+            this.DisposeAllDisposableMembers();
         }
 
         ~PlayableEntity()
         {
-            ;
         }
 
         #endregion
