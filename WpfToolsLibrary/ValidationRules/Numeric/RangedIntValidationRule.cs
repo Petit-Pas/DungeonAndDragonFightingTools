@@ -53,7 +53,7 @@ namespace WpfToolsLibrary.ValidationRules.Numeric
             if ((nb < Boundaries.Min) || (nb > Boundaries.Max))
             {
                 return new ValidationResult(false,
-                  $"Please enter a number in the range: {Boundaries.Min}-{Boundaries.Max}.");
+                  $"{value}: Please enter a number in the range: {Boundaries.Min}-{Boundaries.Max}.");
             }
             return ValidationResult.ValidResult;
         }

@@ -21,7 +21,7 @@ namespace WpfToolsLibrary.ValidationRules.Numeric
 
             if (valid == true)
                 return ValidationResult.ValidResult;
-            return new ValidationResult(false, "Should be a positive integer");
+            return new ValidationResult(false, $"{value}: Should be an integer");
         }
     }
 }
