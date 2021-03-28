@@ -1,5 +1,5 @@
 ﻿using DDFight.Game.DamageAffinity;
-using DDFight.Game.Dices;
+using DnDToolsLibrary.Dice;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -24,7 +24,7 @@ namespace DDFight.Game.Aggression
         {
             if (!this.IsSameKind(to_combine))
                 throw new Exception("Trying to combine non likely DamageTemplates, try using DamageTemplate.IsSameKind() before calling DamageTemplate.Add()");
-            foreach (Dices.Dices dices in to_combine.Damage.DicesList)
+            foreach (DnDToolsLibrary.Dice.Dices dices in to_combine.Damage.DicesList)
             {
                 this.Damage.AddDice(dices);
             }

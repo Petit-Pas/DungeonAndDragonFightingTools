@@ -1,4 +1,5 @@
 ﻿using DDFight.Game.Dices;
+using DnDToolsLibrary.Dice;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Windows.Controls;

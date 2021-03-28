@@ -18,6 +18,7 @@ using DDFight.Windows.FightWindows;
 using DDFight.Game.Counters;
 using DDFight.Game.Aggression.Spells;
 using DDFight.Game.Entities.Display;
+using DnDToolsLibrary.Dice;
 
 namespace DDFight.Game.Entities
 {

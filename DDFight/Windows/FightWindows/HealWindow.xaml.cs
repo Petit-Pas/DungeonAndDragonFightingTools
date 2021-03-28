@@ -1,6 +1,7 @@
 ﻿using DDFight.Game.Dices;
 using DDFight.Game.Entities;
 using DDFight.Tools;
+using DnDToolsLibrary.Dice;
 using System.Windows;
 
 namespace DDFight.Windows.FightWindows

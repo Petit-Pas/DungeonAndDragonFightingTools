@@ -1,4 +1,5 @@
 using DDFight.Game.Dices;
+using DnDToolsLibrary.Dice;
 using NUnit.Framework;
 using System;
 

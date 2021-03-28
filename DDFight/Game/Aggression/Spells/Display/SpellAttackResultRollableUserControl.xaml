@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:DDFight.Game.Aggression.Spells.Display" xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes" xmlns:display="clr-namespace:DDFight.Controlers.Game.Attacks.Display" xmlns:converters="clr-namespace:DDFight.Converters" xmlns:inttextboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.IntTextBoxes;assembly=WpfCustomControlLibrary"
+             xmlns:local="clr-namespace:DDFight.Game.Aggression.Spells.Display" xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes" xmlns:display="clr-namespace:DDFight.Controlers.Game.Attacks.Display" xmlns:converters="clr-namespace:DDFight.Converters" xmlns:inttextboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.IntTextBoxes;assembly=WpfCustomControlLibrary" xmlns:dicetextboxes="clr-namespace:WpfDnDCustomControlLibrary.InputBoxes.DiceTextBoxes;assembly=WpfDnDCustomControlLibrary"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -82,7 +82,7 @@
             <TextBlock>
                 Attack roll: 
             </TextBlock>
-            <inputboxes:D20Box 
+            <dicetextboxes:AttackRollTextBoxControl
                 x:Name="AttackRollBoxControl"
                 Width="30"
                 Margin="5, 2"

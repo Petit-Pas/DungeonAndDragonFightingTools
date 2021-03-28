@@ -1,8 +1,10 @@
-﻿using DDFight.Game.Characteristics;
+﻿using BaseToolsLibrary.Extensions;
+using DDFight.Game.Characteristics;
 using DDFight.Game.Dices;
 using DDFight.Game.Entities;
 using DDFight.Tools;
 using DDFight.Tools.Save;
+using DnDToolsLibrary.Dice;
 using System;
 using System.Collections.Generic;
 using System.Linq;

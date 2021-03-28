@@ -1,4 +1,5 @@
-﻿using DDFight;
+﻿using BaseToolsLibrary.Extensions;
+using DDFight;
 using DDFight.Game.Characteristics;
 using DDFight.Game.Status;
 using DDFight.Tools;

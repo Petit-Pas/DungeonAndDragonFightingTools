@@ -26,3 +26,5 @@ separer DamageTemplate et DamageTemplateResult => utiliser une propriété dans 
 Tester le comportement d'un statut qui peut se re DC au debut d'un tour et qui inflige des degats au début du tour (ordre)
 
 Ajouter une concentration a des sorts possibles sans statuts (esprit guardiens)
+
+verifier les crits sur les sorts (je crois j'ai oublié)

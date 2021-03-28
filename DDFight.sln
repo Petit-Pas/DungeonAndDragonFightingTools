@@ -22,6 +22,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "[10]-BaseToolsLibrary", "Ba
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "[11]-WpfToolsLibrary", "WpfToolsLibrary\[11]-WpfToolsLibrary.csproj", "{84709264-0A0B-4C58-A52F-BA8ADE84AB74}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "[21]-WpfDnDCustomControlLibrary", "WpfDnDCustomControlLibrary\[21]-WpfDnDCustomControlLibrary.csproj", "{990B5507-D231-4543-BF34-EE5A7342C3E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "[12]-DnDToolsLibrary", "DnDToolsLibrary\[12]-DnDToolsLibrary.csproj", "{1BAE42FC-3797-4566-B2D7-C230077F4AE3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,6 +60,14 @@ Global
 		{84709264-0A0B-4C58-A52F-BA8ADE84AB74}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84709264-0A0B-4C58-A52F-BA8ADE84AB74}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84709264-0A0B-4C58-A52F-BA8ADE84AB74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{990B5507-D231-4543-BF34-EE5A7342C3E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{990B5507-D231-4543-BF34-EE5A7342C3E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{990B5507-D231-4543-BF34-EE5A7342C3E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{990B5507-D231-4543-BF34-EE5A7342C3E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BAE42FC-3797-4566-B2D7-C230077F4AE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BAE42FC-3797-4566-B2D7-C230077F4AE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BAE42FC-3797-4566-B2D7-C230077F4AE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BAE42FC-3797-4566-B2D7-C230077F4AE3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

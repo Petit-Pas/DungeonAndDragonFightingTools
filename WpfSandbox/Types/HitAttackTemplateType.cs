@@ -1,4 +1,5 @@
-﻿using DDFight;
+﻿using BaseToolsLibrary.Extensions;
+using DDFight;
 using DDFight.Game.Aggression.Attacks;
 using System.Collections.Generic;
 using System.Xml.Serialization;

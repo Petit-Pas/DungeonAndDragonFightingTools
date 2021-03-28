@@ -1,6 +1,7 @@
 ﻿using DDFight.Game.Aggression;
 using DDFight.Game.DamageAffinity;
 using DDFight.Game.Dices;
+using DnDToolsLibrary.Dice;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

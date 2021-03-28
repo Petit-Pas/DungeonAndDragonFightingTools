@@ -74,7 +74,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Controlers\InputBoxes\D20Box.cs" />
     <Compile Include="Controlers\SpecializedListUserControl.cs" />
     <Compile Include="Converters\BoolToReversedBoolConverter.cs" />
     <Compile Include="Converters\BoolToReversedVisibilityConverter.cs" />
@@ -311,8 +310,6 @@
     <Compile Include="Game\DamageAffinity\DamageAffinityEnum.cs" />
     <Compile Include="Game\DamageAffinity\DamageTypeAffinityList.cs" />
     <Compile Include="Game\DamageAffinity\DamageTypeAffinity.cs" />
-    <Compile Include="Game\Dices\DiceRoll.cs" />
-    <Compile Include="Game\Dices\Dices.cs" />
     <Compile Include="Game\Fight\FightDataContext.cs" />
     <Compile Include="Game\Fight\FightEvents\EndTurnEventArgs.cs" />
     <Compile Include="Game\Fight\FightEvents\SelectedCharacterEvent.cs" />
@@ -798,9 +795,17 @@
       <Project>{47d47e7e-85c8-4a4e-91d5-019e64072b1e}</Project>
       <Name>[10]-BaseToolsLibrary</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DnDToolsLibrary\[12]-DnDToolsLibrary.csproj">
+      <Project>{1bae42fc-3797-4566-b2d7-c230077f4ae3}</Project>
+      <Name>[12]-DnDToolsLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WpfCustomControlLibrary\[20]-WpfCustomControlLibrary.csproj">
       <Project>{3578fcfc-1a40-45b7-b2b8-7eecc3f8d6cf}</Project>
       <Name>[20]-WpfCustomControlLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WpfDnDCustomControlLibrary\[21]-WpfDnDCustomControlLibrary.csproj">
+      <Project>{990b5507-d231-4543-bf34-ee5a7342c3e3}</Project>
+      <Name>[21]-WpfDnDCustomControlLibrary</Name>
     </ProjectReference>
     <ProjectReference Include="..\WpfToolsLibrary\[11]-WpfToolsLibrary.csproj">
       <Project>{84709264-0a0b-4c58-a52f-ba8ade84ab74}</Project>

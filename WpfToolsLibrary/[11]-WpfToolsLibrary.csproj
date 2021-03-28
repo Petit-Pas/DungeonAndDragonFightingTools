@@ -50,6 +50,8 @@
   <ItemGroup>
     <Compile Include="Converters\Math\BasicOperationConverter.cs" />
     <Compile Include="Extensions\BindingExtensions.cs" />
+    <Compile Include="Extensions\TreeReflexionExtensions.cs" />
+    <Compile Include="Navigation\IRollableControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

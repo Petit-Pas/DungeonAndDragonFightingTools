@@ -1,12 +1,17 @@
-﻿using System.Windows;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using WpfToolsLibrary.Extensions;
 
-namespace DDFight.Tools.UXShortcuts
+namespace WpfToolsLibrary.Navigation
 {
-    public class RollableWindowTool
+    public static class RollableWindowExtensions
     {
-        public static bool IsRollControlPressed(System.Windows.Input.KeyEventArgs e)
+        public static bool IsRollControlPressed(this FrameworkElement _, KeyEventArgs e)
         {
             if (e.Key == System.Windows.Input.Key.R &&
                 (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl) ||
@@ -18,12 +23,12 @@ namespace DDFight.Tools.UXShortcuts
             return false;
         }
 
-        public static void RollRollableChildren(FrameworkElement elem)
+        public static void RollRollableChildren(this FrameworkElement elem)
         {
             foreach (IRollableControl ctrl in elem.FindAllChildren<IRollableControl>())
                 ctrl.RollControl();
         }
-        
+
         public static bool AreAllRollableChildrenRolled(FrameworkElement elem)
         {
             foreach (IRollableControl ctrl in elem.FindAllChildren<IRollableControl>())
@@ -32,7 +37,6 @@ namespace DDFight.Tools.UXShortcuts
             return true;
         }
     }
-
     public interface IRollableControl
     {
         /// <summary>

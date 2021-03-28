@@ -5,6 +5,7 @@ using DDFight.Game.Dices.SavingThrow;
 using DDFight.Game.Entities;
 using DDFight.Tools;
 using DDFight.Tools.UXShortcuts;
+using DnDToolsLibrary.Dice;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;

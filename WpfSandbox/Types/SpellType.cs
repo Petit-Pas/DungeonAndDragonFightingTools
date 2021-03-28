@@ -1,4 +1,5 @@
-﻿using DDFight;
+﻿using BaseToolsLibrary.Extensions;
+using DDFight;
 using DDFight.Game.Aggression;
 using DDFight.Game.Aggression.Spells;
 using DDFight.Game.Characteristics;

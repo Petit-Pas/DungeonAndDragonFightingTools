@@ -2,6 +2,7 @@
 using DDFight.Game.Entities;
 using DDFight.Tools;
 using DDFight.Tools.UXShortcuts;
+using DnDToolsLibrary.Dice;
 using System;
 using System.Windows;
 using System.Windows.Controls;

@@ -1,4 +1,5 @@
-﻿using DDFight.Game.Dices;
+﻿using BaseToolsLibrary.Extensions;
+using DDFight.Game.Dices;
 using DDFight.Game.Entities;
 using DDFight.Game.Fight.FightEvents;
 using DDFight.Game.Status;
@@ -8,6 +9,7 @@ using DDFight.Tools.Save;
 using DDFight.Windows;
 using DDFight.Windows.FightWindows;
 using DDFight.Windows.ModalWindows.BlankDiceRollModal;
+using DnDToolsLibrary.Dice;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;

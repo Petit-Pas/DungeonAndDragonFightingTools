@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{47D47E7E-85C8-4A4E-91D5-019E64072B1E}</ProjectGuid>
+    <ProjectGuid>{1BAE42FC-3797-4566-B2D7-C230077F4AE3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BaseToolsLibrary</RootNamespace>
-    <AssemblyName>BaseToolsLibrary</AssemblyName>
+    <RootNamespace>DnDToolsLibrary</RootNamespace>
+    <AssemblyName>DnDToolsLibrary</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -41,10 +41,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\ListExtensions.cs" />
-    <Compile Include="Extensions\StringExtensions.cs" />
-    <Compile Include="Math\ArithmeticParser.cs" />
+    <Compile Include="Dice\DiceRoll.cs" />
+    <Compile Include="Dice\Dices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BaseToolsLibrary\[10]-BaseToolsLibrary.csproj">
+      <Project>{47d47e7e-85c8-4a4e-91d5-019e64072b1e}</Project>
+      <Name>[10]-BaseToolsLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WpfToolsLibrary\[11]-WpfToolsLibrary.csproj">
+      <Project>{84709264-0a0b-4c58-a52f-ba8ade84ab74}</Project>
+      <Name>[11]-WpfToolsLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
