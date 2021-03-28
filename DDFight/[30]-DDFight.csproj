@@ -179,8 +179,8 @@
     <Compile Include="Game\Aggression\Spells\SpellList.cs" />
     <Compile Include="Game\Entities\PlayableEntityList.cs" />
     <Compile Include="Tools\IWindowEditable.cs" />
-    <Compile Include="Tools\NewSaveManager\SaveManager.cs" />
-    <Compile Include="Tools\NewSaveManager\GenericList.cs" />
+    <Compile Include="Tools\Save\SaveManager.cs" />
+    <Compile Include="Tools\Save\GenericList.cs" />
     <Compile Include="Game\Counters\Counter.cs" />
     <Compile Include="Game\Counters\Display\CounterEditableUserControl.xaml.cs">
       <DependentUpon>CounterEditableUserControl.xaml</DependentUpon>
@@ -337,7 +337,6 @@
     <Compile Include="Resources\ResourceManager.cs" />
     <Compile Include="Tools\ICopyAssignable.cs" />
     <Compile Include="Tools\IEventUnregisterable.cs" />
-    <Compile Include="Tools\UXShortcuts\IRollableControl.cs" />
     <Compile Include="ValidationRules\DiceRollRule.cs" />
     <Compile Include="Tools\INotifyPropertyChangedSub.cs" />
     <Compile Include="Tools\Logger.cs" />
@@ -780,9 +779,7 @@
     <Resource Include="Resources\checked.png" />
     <Resource Include="Resources\unchecked.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Tools\Save\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
       <Visible>False</Visible>

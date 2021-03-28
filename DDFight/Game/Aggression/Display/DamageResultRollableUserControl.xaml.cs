@@ -1,7 +1,7 @@
 ﻿using DDFight.Game.Aggression;
-using DDFight.Tools.UXShortcuts;
 using System.Windows;
 using System.Windows.Controls;
+using WpfToolsLibrary.Navigation;
 
 namespace DDFight.Controlers.Game.Attacks.Display
 {

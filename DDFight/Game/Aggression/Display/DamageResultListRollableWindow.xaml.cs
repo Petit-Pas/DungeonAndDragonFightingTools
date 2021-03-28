@@ -1,7 +1,7 @@
-﻿using DDFight.Tools.UXShortcuts;
-using DDFight.Windows;
+﻿using DDFight.Windows;
 using System.Windows;
 using System.Windows.Input;
+using WpfToolsLibrary.Navigation;
 
 namespace DDFight.Game.Aggression.Display
 {
@@ -38,16 +38,16 @@ namespace DDFight.Game.Aggression.Display
         private void Dmg_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             ValidateButton.IsEnabled = false;
-            if (RollableWindowTool.AreAllRollableChildrenRolled(this))
+            if (this.AreAllRollableChildrenRolled())
                 ValidateButton.IsEnabled = true;
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-            if (RollableWindowTool.IsRollControlPressed(e))
+            if (this.IsRollControlPressed(e))
             {
                 e.Handled = true;
-                RollableWindowTool.RollRollableChildren(this);
+                this.RollRollableChildren();
             }
         }
 
@@ -59,7 +59,7 @@ namespace DDFight.Game.Aggression.Display
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (Validated == false || RollableWindowTool.AreAllRollableChildrenRolled(this) == false)
+            if (Validated == false || this.AreAllRollableChildrenRolled() == false)
             {
                 AskYesNoDataContext ctx = new AskYesNoDataContext()
                 {

@@ -1,9 +1,9 @@
-﻿using DDFight.Tools.UXShortcuts;
-using DnDToolsLibrary.Dice;
+﻿using DnDToolsLibrary.Dice;
 using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using WpfToolsLibrary.Navigation;
 
 namespace DDFight.Game.Dices.SavingThrow.Display
 {

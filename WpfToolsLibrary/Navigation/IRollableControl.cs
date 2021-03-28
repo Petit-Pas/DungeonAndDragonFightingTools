@@ -29,7 +29,7 @@ namespace WpfToolsLibrary.Navigation
                 ctrl.RollControl();
         }
 
-        public static bool AreAllRollableChildrenRolled(FrameworkElement elem)
+        public static bool AreAllRollableChildrenRolled(this FrameworkElement elem)
         {
             foreach (IRollableControl ctrl in elem.FindAllChildren<IRollableControl>())
                 if (ctrl.IsFullyRolled() == false)

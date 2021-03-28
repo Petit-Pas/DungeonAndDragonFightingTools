@@ -3,12 +3,12 @@ using DDFight.Game.Entities;
 using DDFight.Game.Fight;
 using DDFight.Resources;
 using DDFight.Tools;
-using DDFight.Tools.UXShortcuts;
 using DnDToolsLibrary.Dice;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
+using WpfToolsLibrary.Navigation;
 
 namespace DDFight.Windows
 {
@@ -140,7 +140,7 @@ namespace DDFight.Windows
 
         private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            if (RollableWindowTool.IsRollControlPressed(e))
+            if (this.IsRollControlPressed(e))
             {
                 RollButton_Click(sender, e);
                 e.Handled = true;

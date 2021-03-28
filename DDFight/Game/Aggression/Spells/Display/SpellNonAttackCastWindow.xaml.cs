@@ -2,12 +2,12 @@
 using DDFight.Game.Dices.SavingThrow.Display;
 using DDFight.Game.Entities;
 using DDFight.Tools;
-using DDFight.Tools.UXShortcuts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using WpfToolsLibrary.Navigation;
 
 namespace DDFight.Game.Aggression.Spells.Display
 {
@@ -85,17 +85,17 @@ namespace DDFight.Game.Aggression.Spells.Display
 
         public void RollControl()
         {
-            RollableWindowTool.RollRollableChildren(this);
+            this.RollRollableChildren();
         }
 
         public bool IsFullyRolled()
         {
-            return RollableWindowTool.AreAllRollableChildrenRolled(this);
+            return this.AreAllRollableChildrenRolled();
         }
 
         private void SpellNonAttackCastWindowControl_KeyDown(object sender, KeyEventArgs e)
         {
-            if (RollableWindowTool.IsRollControlPressed(e))
+            if (this.IsRollControlPressed(e))
             {
                 RollControl();
                 e.Handled = true;

@@ -4,13 +4,13 @@ using DDFight.Game.Dices;
 using DDFight.Game.Dices.SavingThrow;
 using DDFight.Game.Entities;
 using DDFight.Tools;
-using DDFight.Tools.UXShortcuts;
 using DnDToolsLibrary.Dice;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
+using WpfToolsLibrary.Navigation;
 
 namespace DDFight.Windows.FightWindows
 {
@@ -139,7 +139,7 @@ namespace DDFight.Windows.FightWindows
 
         private void CurrentWindow_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            if (RollableWindowTool.IsRollControlPressed(e))
+            if (this.IsRollControlPressed(e))
             {
                 roll_dice();
                 e.Handled = true;

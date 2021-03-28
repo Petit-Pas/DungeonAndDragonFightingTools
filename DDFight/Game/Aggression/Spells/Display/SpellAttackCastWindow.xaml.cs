@@ -1,9 +1,9 @@
 ﻿using DDFight.Tools;
-using DDFight.Tools.UXShortcuts;
 using DDFight.Windows;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
+using WpfToolsLibrary.Navigation;
 
 namespace DDFight.Game.Aggression.Spells.Display
 {
@@ -19,12 +19,12 @@ namespace DDFight.Game.Aggression.Spells.Display
 
         public bool IsFullyRolled()
         {
-            return RollableWindowTool.AreAllRollableChildrenRolled(this);
+            return this.AreAllRollableChildrenRolled();
         }
 
         public void RollControl()
         {
-            RollableWindowTool.RollRollableChildren(this);
+            this.RollRollableChildren();
         }
 
         private void refresh_CastButton()
@@ -53,7 +53,7 @@ namespace DDFight.Game.Aggression.Spells.Display
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-            if (RollableWindowTool.IsRollControlPressed(e))
+            if (this.IsRollControlPressed(e))
             {
                 e.Handled = true;
                 if (!IsFullyRolled())

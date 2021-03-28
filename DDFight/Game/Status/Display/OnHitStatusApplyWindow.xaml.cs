@@ -2,12 +2,12 @@
 using DDFight.Game.Characteristics;
 using DDFight.Game.Dices.SavingThrow;
 using DDFight.Game.Entities;
-using DDFight.Tools.UXShortcuts;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
+using WpfToolsLibrary.Navigation;
 
 namespace DDFight.Game.Status.Display
 {
@@ -218,9 +218,9 @@ namespace DDFight.Game.Status.Display
 
         private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            if (RollableWindowTool.IsRollControlPressed(e))
+            if (this.IsRollControlPressed(e))
             {
-                RollableWindowTool.RollRollableChildren(this);
+                this.RollRollableChildren();
                 e.Handled = true;
                 foreach (DamageTemplate dmg in data_context.OnApplyDamageList.Elements)
                 {
