@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:DDFight.Game.Aggression.Display"
              xmlns:damageaffinity="clr-namespace:DDFight.Controlers.Game.DamageAffinity"
              xmlns:dices="clr-namespace:DDFight.Controlers.Game.Dices" xmlns:display="clr-namespace:DDFight.Game.Aggression.Display"
-             xmlns:converter="clr-namespace:DDFight.Converters" xmlns:controlers="clr-namespace:DDFight.Controlers"
+             xmlns:converter="clr-namespace:DDFight.Converters" xmlns:controlers="clr-namespace:DDFight.Controlers" xmlns:checkboxes="clr-namespace:WpfCustomControlLibrary.CheckBoxes;assembly=WpfCustomControlLibrary"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -104,7 +104,7 @@
                                             VerticalAlignment="Center">
                                             Caster
                                         </TextBlock>
-                                        <CheckBox                                             
+                                        <checkboxes:CheckBoxControl
                                             Grid.Row="1"
                                             Margin="5"
                                             Grid.Column="1"
@@ -115,7 +115,7 @@
                                             Margin="5">
                                             Affected
                                         </TextBlock>
-                                        <CheckBox 
+                                        <checkboxes:CheckBoxControl 
                                             Grid.Row="1"
                                             Grid.Column="3"
                                             Margin="5"
@@ -126,7 +126,7 @@
                                             VerticalAlignment="Center">
                                             Start of turn
                                         </TextBlock>
-                                        <CheckBox                                             
+                                        <checkboxes:CheckBoxControl                                             
                                             Grid.Row="2"
                                             Margin="5"
                                             Grid.Column="1"
@@ -137,7 +137,7 @@
                                             Margin="5">
                                             End of turn
                                         </TextBlock>
-                                        <CheckBox 
+                                        <checkboxes:CheckBoxControl 
                                             Grid.Row="2"
                                             Grid.Column="3"
                                             Margin="5"

@@ -10,7 +10,6 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Styles/CheckBoxStyle.xaml"/>
                 <ResourceDictionary Source="/Styles/TabControlStyles.xaml"/>
                 <ResourceDictionary Source="/Styles/ListBoxStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>

@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-        xmlns:intboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.IntTextBoxes;assembly=WpfCustomControlLibrary"
+        xmlns:intboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.IntTextBoxes;assembly=WpfCustomControlLibrary" xmlns:checkboxes="clr-namespace:WpfCustomControlLibrary.CheckBoxes;assembly=WpfCustomControlLibrary"
         mc:Ignorable="d"
         Title="MainWindow"
         Width="650" Height="400"
@@ -12,6 +12,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/WpfCustomControlLibrary;component/CircularSelector/CircularSelectorImportFile.xaml"/>
+                <ResourceDictionary Source="/WpfCustomControlLibrary;component/CheckBoxes/CheckBoxStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -27,6 +28,17 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+
+        <checkboxes:CheckBoxControl
+            Grid.Row="1" Grid.Column="1"
+            Style="{StaticResource CheckBoxStyle}"
+            CheckMark="{StaticResource CheckBoxXMark}">
+            <TextBlock Margin="15" >Hello</TextBlock>
+        </checkboxes:CheckBoxControl>
+
+        <CheckBox
+            Grid.Row="2" Grid.Column="1"/>
+
 
         <intboxes:RangedIntTextBoxControl
             Min="0"

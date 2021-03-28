@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:DDFight.Game.Status.Display"
              xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes"
              xmlns:converter="clr-namespace:DDFight.Converters"
-             xmlns:controlers="clr-namespace:DDFight.Controlers" xmlns:sliderbutton="clr-namespace:WpfCustomControlLibrary.SliderButton;assembly=WpfCustomControlLibrary" xmlns:inttextboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.IntTextBoxes;assembly=WpfCustomControlLibrary"
+             xmlns:controlers="clr-namespace:DDFight.Controlers" xmlns:sliderbutton="clr-namespace:WpfCustomControlLibrary.SliderButton;assembly=WpfCustomControlLibrary" xmlns:inttextboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.IntTextBoxes;assembly=WpfCustomControlLibrary" xmlns:checkboxes="clr-namespace:WpfCustomControlLibrary.CheckBoxes;assembly=WpfCustomControlLibrary"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -152,13 +152,13 @@
                 Visibility="{Binding CanRedoSavingThrow, Converter={StaticResource BoolToVisibilityConverter}}">
                 At Start of turn:
             </TextBlock>
-            <CheckBox
+            <checkboxes:CheckBoxControl
                 Grid.Row="1"
                 Grid.Column="1"
                 HorizontalAlignment="Center"
                 IsChecked="{Binding SavingIsRemadeAtStartOfTurn}"
                 Visibility="{Binding CanRedoSavingThrow, Converter={StaticResource BoolToVisibilityConverter}}">
-            </CheckBox>
+            </checkboxes:CheckBoxControl>
 
             <TextBlock
                 Grid.Row="1"
@@ -167,13 +167,13 @@
                 Visibility="{Binding CanRedoSavingThrow, Converter={StaticResource BoolToVisibilityConverter}}">
                 At End of turn:
             </TextBlock>
-            <CheckBox
+            <checkboxes:CheckBoxControl
                 Grid.Row="1"
                 Grid.Column="3"
                 HorizontalAlignment="Right"
                 IsChecked="{Binding SavingIsRemadeAtStartOfTurn, Converter={StaticResource BootToReversedBoolConverter}}"
                 Visibility="{Binding CanRedoSavingThrow, Converter={StaticResource BoolToVisibilityConverter}}">
-            </CheckBox>
+            </checkboxes:CheckBoxControl>
         </Grid>
             
         
@@ -262,7 +262,7 @@
                     >
                     Caster
                 </TextBlock>
-                <CheckBox 
+                <checkboxes:CheckBoxControl 
                     Grid.Row="1" Grid.Column="1"
                     Margin="20, 0"
                     VerticalAlignment="Center"
@@ -274,7 +274,7 @@
                     >
                     Affected
                 </TextBlock>
-                <CheckBox 
+                <checkboxes:CheckBoxControl 
                     Grid.Row="1" Grid.Column="3"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Right"
@@ -287,7 +287,7 @@
                     >
                     Start of Turn
                 </TextBlock>
-                <CheckBox 
+                <checkboxes:CheckBoxControl 
                     Grid.Row="2" Grid.Column="1"
                     Margin="20, 0"
                     VerticalAlignment="Center"
@@ -299,7 +299,7 @@
                     >
                     End Of Turn
                 </TextBlock>
-                <CheckBox 
+                <checkboxes:CheckBoxControl 
                     Grid.Row="2" Grid.Column="3"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Right"

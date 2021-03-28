@@ -1,0 +1,6 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:WpfCustomControlLibrary.CheckBoxes">
+    <PathGeometry x:Key="CheckBoxXMark" Figures="M 1 1 L 8 9 M 0.5 7.5 L 9 1"/>
+    <PathGeometry x:Key="CheckBoxVMark" Figures="M 1 3.5 L 3.5 8 L 9 1.5" />
+</ResourceDictionary>

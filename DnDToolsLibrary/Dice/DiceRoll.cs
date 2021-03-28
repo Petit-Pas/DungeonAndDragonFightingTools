@@ -19,7 +19,7 @@ namespace DnDToolsLibrary.Dice
         public DiceRoll()
         {
             //if (!Global.Loading)
-                init();
+            init();
         }
 
         public void AddDice(Dices to_add)

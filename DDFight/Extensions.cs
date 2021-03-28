@@ -17,8 +17,6 @@ namespace DDFight
         {
             if (target == null) return;
             FieldInfo[] fields = target.GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Instance).Concat(target.GetType().BaseType.GetFields(BindingFlags.NonPublic | BindingFlags.Instance)).ToArray();
-            //var type = target.GetType();
-            //var fields = type.GetFields(/*System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic*/);
             var disposables = fields.Where(x => x.FieldType.GetInterfaces().Contains(typeof(IDisposable)));
 
             foreach (var disposableField in disposables)

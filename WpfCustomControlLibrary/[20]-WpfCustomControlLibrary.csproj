@@ -48,6 +48,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CheckBoxes\CheckBoxControl.cs" />
     <Compile Include="CircularSelector\CircularSelectorRadioButtonControl.cs" />
     <Compile Include="InputBoxes\BaseTextBoxes\BaseTextBoxControl.cs" />
     <Compile Include="InputBoxes\BaseTextBoxes\ValidableTextBoxControl.cs" />
@@ -75,6 +76,14 @@
     <Compile Include="CardControls\ButtonCardControl.cs" />
     <Compile Include="CardControls\DownCardControl.cs" />
     <Compile Include="CardControls\UpCardControl.cs" />
+    <Page Include="CheckBoxes\CheckBoxGeometryPaths.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CheckBoxes\CheckBoxStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CircularSelector\CircularSelectorImportFile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

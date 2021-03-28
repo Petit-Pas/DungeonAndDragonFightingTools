@@ -1,56 +1,35 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Media;
 
-namespace WpfCustomControlLibrary.InputBoxes.BaseTextBoxes
+namespace WpfCustomControlLibrary.CheckBoxes
 {
-    public class BaseTextBoxControl : TextBox
+    public class CheckBoxControl : CheckBox
     {
         private static readonly ResourceDictionary styleDict = new ResourceDictionary()
         {
-            Source = new Uri("/WpfCustomControlLibrary;component/InputBoxes/BaseTextBoxes/BaseTextBoxStyle.xaml", UriKind.RelativeOrAbsolute)
+            Source = new Uri("/WpfCustomControlLibrary;component/CheckBoxes/CheckBoxStyle.xaml", UriKind.RelativeOrAbsolute)
         };
-        private static readonly Style style = styleDict["BaseTextBoxStyle"] as Style;
+        private static readonly Style style = styleDict["CheckBoxStyle"] as Style;
 
-        public BaseTextBoxControl() : base()
+        private static readonly ResourceDictionary pathsDict = new ResourceDictionary()
+        {
+            Source = new Uri("/WpfCustomControlLibrary;component/CheckBoxes/CheckBoxGeometryPaths.xaml", UriKind.RelativeOrAbsolute)
+        };
+        private static readonly PathGeometry checkMark = styleDict["CheckBoxXMark"] as PathGeometry;
+
+        public CheckBoxControl() : base()
         {
             if (style != null)
-                this.Style = style;
-            Initialized += BaseTextBoxControl_Initialized;
+                Style = style;
+            if (checkMark != null)
+                CheckMark = checkMark;
         }
-
-        private void BaseTextBoxControl_Initialized(object sender, EventArgs e)
-        {
-            KeyDown += BaseTextBoxControl_KeyDown;
-            GotFocus += BaseTextBoxControl_GotFocus;
-        }
-
-        protected virtual void BaseTextBoxControl_GotFocus(object sender, RoutedEventArgs e)
-        {
-            this.SelectAll();
-        }
-
-        protected void SendTab()
-        {
-            System.Windows.Input.KeyEventArgs args = new System.Windows.Input.KeyEventArgs(Keyboard.PrimaryDevice, Keyboard.PrimaryDevice.ActiveSource, 0, Key.Tab)
-            {
-                RoutedEvent = Keyboard.KeyDownEvent
-            };
-            InputManager.Current.ProcessInput(args);
-        }
-
-        protected virtual void BaseTextBoxControl_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-            if (e.Key == Key.Return)
-            {
-                SendTab();
-                e.Handled = true;
-            }
-        }
-
-        #region ColorProperties
 
         public Brush BackgroundColor
         {
@@ -60,7 +39,7 @@ namespace WpfCustomControlLibrary.InputBoxes.BaseTextBoxes
         private static readonly DependencyProperty BackgroundColorProperty = DependencyProperty.Register(
                 nameof(BackgroundColor),
                 typeof(Brush),
-                typeof(BaseTextBoxControl),
+                typeof(CheckBoxControl),
                 new PropertyMetadata(System.Windows.Application.Current.Resources["Gray"])
             );
 
@@ -72,19 +51,19 @@ namespace WpfCustomControlLibrary.InputBoxes.BaseTextBoxes
         private static readonly DependencyProperty BorderColorProperty = DependencyProperty.Register(
                 nameof(BorderColor),
                 typeof(Brush),
-                typeof(BaseTextBoxControl),
+                typeof(CheckBoxControl),
                 new PropertyMetadata(System.Windows.Application.Current.Resources["Light"])
             );
 
-        public Brush ForegroundColor
+        public Brush CheckColor
         {
-            get { return (Brush)this.GetValue(ForegroundColorProperty); }
-            set { this.SetValue(ForegroundColorProperty, value); }
+            get { return (Brush)this.GetValue(CheckColorProperty); }
+            set { this.SetValue(CheckColorProperty, value); }
         }
-        private static readonly DependencyProperty ForegroundColorProperty = DependencyProperty.Register(
-                nameof(ForegroundColor),
+        private static readonly DependencyProperty CheckColorProperty = DependencyProperty.Register(
+                nameof(CheckColor),
                 typeof(Brush),
-                typeof(BaseTextBoxControl),
+                typeof(CheckBoxControl),
                 new PropertyMetadata(System.Windows.Application.Current.Resources["Light"])
             );
 
@@ -96,7 +75,7 @@ namespace WpfCustomControlLibrary.InputBoxes.BaseTextBoxes
         public static readonly DependencyProperty AccentColorProperty = DependencyProperty.Register(
                 nameof(AccentColor),
                 typeof(Brush),
-                typeof(BaseTextBoxControl),
+                typeof(CheckBoxControl),
                 new PropertyMetadata(System.Windows.Application.Current.Resources["Indigo"])
             );
 
@@ -108,10 +87,21 @@ namespace WpfCustomControlLibrary.InputBoxes.BaseTextBoxes
         private static readonly DependencyProperty SelectionColorProperty = DependencyProperty.Register(
                 nameof(LightAccentColor),
                 typeof(Brush),
-                typeof(BaseTextBoxControl),
-                new PropertyMetadata(System.Windows.Application.Current.Resources["LightIndigo"])
+                typeof(CheckBoxControl),
+                new PropertyMetadata(Application.Current.Resources["LightIndigo"])
             );
 
-        #endregion ColorProperties
+        
+        public PathGeometry CheckMark
+        {
+            get { return (PathGeometry)this.GetValue(CheckMarkProperty); }
+            set { this.SetValue(CheckMarkProperty, value); }
+        }
+        private static readonly DependencyProperty CheckMarkProperty = DependencyProperty.Register(
+            nameof(CheckMark),
+            typeof(PathGeometry),
+            typeof(CheckBoxControl),
+            new PropertyMetadata(checkMark)
+        );
     }
 }
