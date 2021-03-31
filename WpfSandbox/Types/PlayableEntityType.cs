@@ -6,6 +6,7 @@ using DDFight.Game.Characteristics;
 using DDFight.Game.DamageAffinity;
 using System.Collections.ObjectModel;
 using System.Xml.Serialization;
+using WpfToolsLibrary.Display;
 
 namespace WpfSandbox.Types
 {

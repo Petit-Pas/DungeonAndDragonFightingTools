@@ -1,5 +1,6 @@
 ﻿using DDFight.Controlers;
 using DDFight.Game.Fight;
+using DDFight.Tools;
 using System.Windows.Input;
 
 namespace DDFight.Game.Entities.Display
@@ -41,8 +42,10 @@ namespace DDFight.Game.Entities.Display
 
         public override void edit(object obj)
         {
-            PlayableEntity entity = obj as PlayableEntity;
-            entity.OpenEditWindow();
+            //PlayableEntity entity = obj as PlayableEntity;
+            //entity.OpenEditWindow();
+            // TODO
+            Logger.Log("CRITICAL THIS SHOULD HAVE BEEN REPLACED");
         }
 
         public override void remove(object obj)

@@ -12,17 +12,16 @@ using System.Xml.Serialization;
 using System.Windows.Media;
 using DDFight.Game.Aggression;
 using DDFight.Converters;
-using DDFight.Game.Dices;
 using DDFight.Game.Status;
 using DDFight.Windows.FightWindows;
 using DDFight.Game.Counters;
 using DDFight.Game.Aggression.Spells;
-using DDFight.Game.Entities.Display;
 using DnDToolsLibrary.Dice;
+using WpfToolsLibrary.Display;
 
 namespace DDFight.Game.Entities
 {
-    public class PlayableEntity : INameable, IWindowEditable, ICopyAssignable, INotifyPropertyChanged, IDisposable
+    public class PlayableEntity : INameable, ICopyAssignable, INotifyPropertyChanged, IDisposable
     {
         public PlayableEntity()
         {
@@ -746,23 +745,6 @@ namespace DDFight.Game.Entities
                 {
                     Logger.Log("\t- " + status.Header);
                 }
-            }
-        }
-
-        public virtual bool OpenEditWindow()
-        {
-            PlayableEntityEditWindow window = new PlayableEntityEditWindow();
-            using (PlayableEntity temporary = (PlayableEntity)this.Clone())
-            {
-                window.DataContext = temporary;
-                window.ShowCentered();
-
-                if (temporary.Validated == true)
-                {
-                    CopyAssign(temporary);
-                    return true;
-                }
-                return false;
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿using DDFight.Game.Counters;
+using DnDToolsLibrary.Counters;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;

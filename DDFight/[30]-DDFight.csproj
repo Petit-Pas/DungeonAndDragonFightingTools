@@ -173,7 +173,7 @@
     <Compile Include="Game\Status\Display\CustomVerboseStatusListUserControl.cs" />
     <Compile Include="Tools\BindingProxy.cs" />
     <Compile Include="Tools\FrameworkElementExtensions.cs" />
-    <Compile Include="Tools\INameable.cs" />
+    <Compile Include="Tools\IContainWindowEditableElements.cs" />
     <Compile Include="Game\Entities\CharacterList.cs" />
     <Compile Include="Game\Entities\MonsterList.cs" />
     <Compile Include="Game\Aggression\Spells\SpellList.cs" />
@@ -181,7 +181,6 @@
     <Compile Include="Tools\IWindowEditable.cs" />
     <Compile Include="Tools\Save\SaveManager.cs" />
     <Compile Include="Tools\Save\GenericList.cs" />
-    <Compile Include="Game\Counters\Counter.cs" />
     <Compile Include="Game\Counters\Display\CounterEditableUserControl.xaml.cs">
       <DependentUpon>CounterEditableUserControl.xaml</DependentUpon>
     </Compile>

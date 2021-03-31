@@ -3,6 +3,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using WpfToolsLibrary.Display;
 
 namespace DDFight.Tools.Save
 {
@@ -100,14 +101,23 @@ namespace DDFight.Tools.Save
 
         public bool EditElement(T elem)
         {
-            if (elem is IWindowEditable)
+            if (this is IContainWindowEditableElements elements)
+            {
+                elements.EditElement(elem);
+            }
+            else
+            {
+                Logger.Log($"WARN: trying to Edit an element that isnt contained in a IContainWindowEditableElements: {Elements.GetType()}");
+            }
+
+            /*if (elem is IWindowEditable)
             {
                 if (((IWindowEditable)elem).OpenEditWindow())
                 {
                     OnListElementChanged(new ListElementChangedArgs { Element = elem, Operation = GenericListOperation.Modification });
                     return true;
                 }
-            }
+            }*/
             return false;
         }
 

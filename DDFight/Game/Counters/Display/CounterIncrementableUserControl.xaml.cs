@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using DnDToolsLibrary.Counters;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace DDFight.Game.Counters.Display

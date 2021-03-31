@@ -9,6 +9,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Xml.Serialization;
+using WpfToolsLibrary.Display;
 
 namespace DDFight.Game.Aggression.Spells
 {

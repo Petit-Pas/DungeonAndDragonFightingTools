@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using WpfToolsLibrary.Display;
 using WpfToolsLibrary.Extensions;
 using WpfToolsLibrary.ValidationRules;
 

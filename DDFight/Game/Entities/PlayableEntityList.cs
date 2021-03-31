@@ -1,8 +1,10 @@
-﻿using DDFight.Tools.Save;
+﻿using DDFight.Game.Entities.Display;
+using DDFight.Tools;
+using DDFight.Tools.Save;
 
 namespace DDFight.Game.Entities
 {
-    public class PlayableEntityList<T> : GenericList<T> 
+    public class PlayableEntityList<T> : GenericList<T>, IContainWindowEditableElements
         where T : PlayableEntity, new()
     {
         public PlayableEntityList() : base()
@@ -49,6 +51,26 @@ namespace DDFight.Game.Entities
                         break;
                 }
             }
+        }
+
+        public bool EditElement(object element)
+        {
+            if (element is PlayableEntity playableEntity)
+            {
+                PlayableEntityEditWindow window = new PlayableEntityEditWindow();
+                using (PlayableEntity temporary = (PlayableEntity)playableEntity.Clone())
+                {
+                    window.DataContext = temporary;
+                    window.ShowCentered();
+
+                    if (temporary.Validated == true)
+                    {
+                        playableEntity.CopyAssign(temporary);
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
     }
 }

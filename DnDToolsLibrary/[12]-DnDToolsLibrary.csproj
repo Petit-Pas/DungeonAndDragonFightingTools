@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Counters\Counter.cs" />
     <Compile Include="Dice\DiceRoll.cs" />
     <Compile Include="Dice\Dices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -54,6 +55,9 @@
       <Project>{84709264-0a0b-4c58-a52f-ba8ade84ab74}</Project>
       <Name>[11]-WpfToolsLibrary</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Entities\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

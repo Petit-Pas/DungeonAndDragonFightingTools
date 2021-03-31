@@ -1,4 +1,6 @@
-﻿namespace DDFight.Game.Entities
+﻿using DDFight.Tools;
+
+namespace DDFight.Game.Entities
 {
     public class MonsterList : PlayableEntityList<Monster>
     {

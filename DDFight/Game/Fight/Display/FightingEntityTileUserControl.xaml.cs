@@ -181,7 +181,9 @@ namespace DDFight.Controlers.Fight
 
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
-            data_context.OpenEditWindow();
+            //data_context.OpenEditWindow();
+            // TODO
+            Logger.Log("CRITICAL THIS SHOULD HAVE BEEN REPLACED");
         }
 
         private void Transform_Click(object sender, RoutedEventArgs e)

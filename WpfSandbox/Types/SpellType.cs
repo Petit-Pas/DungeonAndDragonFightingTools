@@ -7,6 +7,7 @@ using DDFight.Tools;
 using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using WpfToolsLibrary.Display;
 
 namespace WpfSandbox.Types
 {
