@@ -1,13 +1,16 @@
-﻿using DDFight.Game;
-using DDFight.Game.Aggression.Spells;
+﻿using BaseToolsLibrary.IO;
+using DDFight.Game;
 using DDFight.Game.Entities;
-using DDFight.Tools;
-using DDFight.Tools.Save;
 using DDFight.Windows;
 using DDFight.Windows.FightWindows;
+using DnDToolsLibrary.Attacks.Spells;
+using DnDToolsLibrary.Entities;
+using DnDToolsLibrary.Memory;
 using System.Linq;
 using System.Windows;
 using System.Windows.Documents;
+using WpfToolsLibrary.ConsoleTools;
+using WpfToolsLibrary.Extensions;
 
 namespace DDFight
 {
@@ -75,7 +78,7 @@ namespace DDFight
             {
                 Global.Context.FightContext.FightersList.SetTurnOrders();
 
-                Global.Context.UserLogs = new FlowDocument();
+                FightConsole.Instance.Reset();
 
                 MainFightWindow fightWindow = new MainFightWindow();
                 fightWindow.DataContext = Global.Context;

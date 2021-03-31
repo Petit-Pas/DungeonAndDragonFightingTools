@@ -1,5 +1,4 @@
-﻿using DDFight.Game.Dices;
-using DnDToolsLibrary.Dice;
+﻿using DnDToolsLibrary.Dice;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 

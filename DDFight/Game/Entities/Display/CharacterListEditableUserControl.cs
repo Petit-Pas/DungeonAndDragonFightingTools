@@ -1,4 +1,6 @@
-﻿namespace DDFight.Game.Entities.Display
+﻿using DnDToolsLibrary.Entities;
+
+namespace DDFight.Game.Entities.Display
 {
     public class CharacterListEditableUserControl : PlayableEntityListUserControl<Character> //BaseListUserControl
     {

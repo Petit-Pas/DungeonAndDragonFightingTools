@@ -1,10 +1,12 @@
-﻿using DDFight.Game.Dices;
-using DDFight.Game.Entities;
-using DDFight.Tools;
+﻿using DnDToolsLibrary.Attacks.Damage;
+using DnDToolsLibrary.Attacks.HitAttacks;
 using DnDToolsLibrary.Dice;
+using DnDToolsLibrary.Entities;
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using WpfDnDCustomControlLibrary.Entities.Extensions;
+using WpfToolsLibrary.Extensions;
 using WpfToolsLibrary.Navigation;
 
 namespace DDFight.Game.Aggression.Attacks.Display

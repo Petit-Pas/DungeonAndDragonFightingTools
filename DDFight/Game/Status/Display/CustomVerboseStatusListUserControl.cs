@@ -1,5 +1,6 @@
 ﻿using DDFight.Controlers;
-using DDFight.Tools.Save;
+using DnDToolsLibrary.Memory;
+using DnDToolsLibrary.Status;
 
 namespace DDFight.Game.Status.Display
 {

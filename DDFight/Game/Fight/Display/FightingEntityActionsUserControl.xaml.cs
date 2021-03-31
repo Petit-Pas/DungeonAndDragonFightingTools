@@ -1,6 +1,6 @@
-﻿using DDFight.Game.Entities;
-using DDFight.Game.Fight.FightEvents;
+﻿using DDFight.Game.Fight.FightEvents;
 using DDFight.Tools;
+using DnDToolsLibrary.Entities;
 using System;
 using System.Linq;
 using System.Windows;

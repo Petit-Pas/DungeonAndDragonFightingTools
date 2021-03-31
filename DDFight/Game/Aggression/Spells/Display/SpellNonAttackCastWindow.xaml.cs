@@ -1,12 +1,14 @@
 ﻿using DDFight.Game.Dices.SavingThrow;
 using DDFight.Game.Dices.SavingThrow.Display;
-using DDFight.Game.Entities;
-using DDFight.Tools;
+using DnDToolsLibrary.Attacks.Spells;
+using DnDToolsLibrary.Dice;
+using DnDToolsLibrary.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using WpfToolsLibrary.Extensions;
 using WpfToolsLibrary.Navigation;
 
 namespace DDFight.Game.Aggression.Spells.Display

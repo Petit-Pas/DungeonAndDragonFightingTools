@@ -1,4 +1,6 @@
-﻿namespace DDFight.Game.Entities
+﻿using DnDToolsLibrary.Entities;
+
+namespace DDFight.Game.Entities
 {
     public class CharacterList : PlayableEntityList<Character>
     {

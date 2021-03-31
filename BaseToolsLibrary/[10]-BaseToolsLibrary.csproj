@@ -43,7 +43,12 @@
   <ItemGroup>
     <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="IO\Logger.cs" />
     <Compile Include="Math\ArithmeticParser.cs" />
+    <Compile Include="Memory\DisposableExtensions.cs" />
+    <Compile Include="Memory\Global.cs" />
+    <Compile Include="Memory\ICopyAssignable.cs" />
+    <Compile Include="Memory\IEventUnregisterable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

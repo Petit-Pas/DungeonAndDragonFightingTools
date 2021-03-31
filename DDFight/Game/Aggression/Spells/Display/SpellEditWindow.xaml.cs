@@ -1,7 +1,8 @@
 ﻿using DDFight.Resources;
-using DDFight.Tools;
 using DDFight.Windows;
+using DnDToolsLibrary.Attacks.Spells;
 using System.Windows;
+using WpfToolsLibrary.Extensions;
 
 namespace DDFight.Game.Aggression.Spells.Display
 {

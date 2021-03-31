@@ -1,8 +1,8 @@
-﻿using DDFight.Tools;
-using DnDToolsLibrary.Counters;
+﻿using DnDToolsLibrary.Counters;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using WpfToolsLibrary.Extensions;
 using WpfToolsLibrary.ValidationRules;
 
 namespace DDFight.Game.Counters.Display

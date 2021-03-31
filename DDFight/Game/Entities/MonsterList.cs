@@ -1,4 +1,4 @@
-﻿using DDFight.Tools;
+﻿using DnDToolsLibrary.Entities;
 
 namespace DDFight.Game.Entities
 {

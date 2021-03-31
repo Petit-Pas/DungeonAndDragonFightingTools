@@ -81,42 +81,26 @@
     <Compile Include="Converters\IntEqualToZeroToVisibility.cs" />
     <Compile Include="Converters\IntGreaterThanZeroToVisibility.cs" />
     <Compile Include="Converters\VisibleIfCharacter.cs" />
-    <Compile Include="Game\Aggression\AttackRollResult.cs" />
     <Compile Include="Game\Aggression\Attacks\Display\HitAttackResultEditableControl.xaml.cs">
       <DependentUpon>HitAttackResultEditableControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Game\Aggression\Attacks\Display\HitAttackTemplateListUserControl.cs" />
-    <Compile Include="Game\Aggression\Attacks\HitAttackTemplateList.cs" />
-    <Compile Include="Game\Aggression\DamageModifierEnum.cs" />
-    <Compile Include="Game\Aggression\DamageResult.cs" />
-    <Compile Include="Game\Aggression\DamageResultList.cs" />
-    <Compile Include="Game\Aggression\DamageTemplateList.cs" />
     <Compile Include="Game\Aggression\Display\DamageModifierEnumListSelectableUserControl.xaml.cs">
       <DependentUpon>DamageModifierEnumListSelectableUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Game\Aggression\Display\DamageResultListRollableWindow.xaml.cs">
       <DependentUpon>DamageResultListRollableWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Game\Aggression\Display\DamageResultRollableUserControl.xaml.cs">
-      <DependentUpon>DamageResultRollableUserControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Game\Aggression\Display\DotTemplateListEditableControl.xaml.cs">
       <DependentUpon>DotTemplateListEditableControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Game\Aggression\DotTemplate.cs" />
-    <Compile Include="Game\Aggression\DotTemplateList.cs" />
-    <Compile Include="Game\Aggression\Spells\AttackSpellResult.cs" />
     <Compile Include="Game\Aggression\Spells\Display\SpellListEditableUserControl.cs" />
     <Compile Include="Game\Aggression\Spells\Display\SpellAttackCastWindow.xaml.cs">
       <DependentUpon>SpellAttackCastWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Game\Aggression\Spells\Display\SpellAttackResultRollableUserControl.xaml.cs">
-      <DependentUpon>SpellAttackResultRollableUserControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Game\Aggression\Spells\Display\SpellLevelUpEditableControl.xaml.cs">
       <DependentUpon>SpellLevelUpEditableControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Game\Aggression\Spells\NonAttackSpellResult.cs" />
     <Compile Include="Game\Aggression\Spells\Display\SpellAttackEditableUserControl.xaml.cs">
       <DependentUpon>SpellAttackEditableUserControl.xaml</DependentUpon>
     </Compile>
@@ -144,8 +128,6 @@
     <Compile Include="Game\Aggression\Spells\Display\SpellPreviewUserControl.xaml.cs">
       <DependentUpon>SpellPreviewUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Game\Aggression\Spells\Spell.cs" />
-    <Compile Include="Game\Counters\CounterList.cs" />
     <Compile Include="Game\Dices\SavingThrow\Display\SavingThrowRollableDenseUserControl.xaml.cs">
       <DependentUpon>SavingThrowRollableDenseUserControl.xaml</DependentUpon>
     </Compile>
@@ -166,21 +148,15 @@
     <Compile Include="Game\Fight\Display\FightingEntityListSelectableWindow.xaml.cs">
       <DependentUpon>FightingEntityListSelectableWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Game\Status\ApplicationModifierEnum.cs" />
     <Compile Include="Game\Status\Display\ApplicationModifierEnumListSelectableUserControl.xaml.cs">
       <DependentUpon>ApplicationModifierEnumListSelectableUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Game\Status\Display\CustomVerboseStatusListUserControl.cs" />
     <Compile Include="Tools\BindingProxy.cs" />
-    <Compile Include="Tools\FrameworkElementExtensions.cs" />
-    <Compile Include="Tools\IContainWindowEditableElements.cs" />
     <Compile Include="Game\Entities\CharacterList.cs" />
     <Compile Include="Game\Entities\MonsterList.cs" />
-    <Compile Include="Game\Aggression\Spells\SpellList.cs" />
     <Compile Include="Game\Entities\PlayableEntityList.cs" />
     <Compile Include="Tools\IWindowEditable.cs" />
-    <Compile Include="Tools\Save\SaveManager.cs" />
-    <Compile Include="Tools\Save\GenericList.cs" />
     <Compile Include="Game\Counters\Display\CounterEditableUserControl.xaml.cs">
       <DependentUpon>CounterEditableUserControl.xaml</DependentUpon>
     </Compile>
@@ -196,7 +172,6 @@
     <Compile Include="Game\Dices\SavingThrow\Display\SavingThrowRollableUserControl.xaml.cs">
       <DependentUpon>SavingThrowRollableUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Game\Dices\SavingThrow\SavingThrow.cs" />
     <Compile Include="Game\Fight\Display\FightConsoleUserControl.xaml.cs">
       <DependentUpon>FightConsoleUserControl.xaml</DependentUpon>
     </Compile>
@@ -214,9 +189,6 @@
     </Compile>
     <Compile Include="Game\Aggression\Display\DamageTemplateListEditableUserControl.xaml.cs">
       <DependentUpon>DamageTemplateListEditableUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Game\Aggression\Display\DamageResultListRollableUserControl.xaml.cs">
-      <DependentUpon>DamageResultListRollableUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Game\Aggression\Display\DamageTemplateListReadOnlyUserControl.xaml.cs">
       <DependentUpon>DamageTemplateListReadOnlyUserControl.xaml</DependentUpon>
@@ -260,7 +232,6 @@
     <Compile Include="Converters\BoolToCustomStringConverter.cs" />
     <Compile Include="Converters\StringToVisibilityConverter.cs" />
     <Compile Include="Game\Dices\SavingThrow\SituationalSavingThrowModifier.cs" />
-    <Compile Include="Game\DamageAffinity\DamageTypeEnum.cs" />
     <Compile Include="Game\SpecialAbilitiesEditableUserControl.xaml.cs">
       <DependentUpon>SpecialAbilitiesEditableUserControl.xaml</DependentUpon>
     </Compile>
@@ -291,34 +262,13 @@
     <Compile Include="Controlers\InputBoxes\BooleanButton.xaml.cs">
       <DependentUpon>BooleanButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converters\DamageTypeEnumToBrushConverter.cs" />
     <Compile Include="Converters\StringListToStringConverter.cs" />
     <Compile Include="Converters\IntToStringConverter.cs" />
     <Compile Include="Converters\DiceRollToStringConverter.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="Game\Aggression\AttackRangeEnum.cs" />
-    <Compile Include="Game\Aggression\AAttackTemplate.cs" />
-    <Compile Include="Game\Aggression\Attacks\HitAttackResult.cs" />
-    <Compile Include="Game\Aggression\Attacks\HitAttackTemplate.cs" />
-    <Compile Include="Game\Aggression\SituationalAdvantageModifiers.cs" />
-    <Compile Include="Game\Aggression\SituationalAttackRollModifiers.cs" />
-    <Compile Include="Game\Aggression\DamageTemplate.cs" />
-    <Compile Include="Game\Characteristics\Characteristic.cs" />
-    <Compile Include="Game\Characteristics\CharacteristicList.cs" />
-    <Compile Include="Game\Characteristics\CharacteristicsEnum.cs" />
-    <Compile Include="Game\DamageAffinity\DamageAffinityEnum.cs" />
-    <Compile Include="Game\DamageAffinity\DamageTypeAffinityList.cs" />
-    <Compile Include="Game\DamageAffinity\DamageTypeAffinity.cs" />
     <Compile Include="Game\Fight\FightDataContext.cs" />
-    <Compile Include="Game\Fight\FightEvents\EndTurnEventArgs.cs" />
     <Compile Include="Game\Fight\FightEvents\SelectedCharacterEvent.cs" />
-    <Compile Include="Game\Fight\FightEvents\StartNewTurnEventArgs.cs" />
-    <Compile Include="Game\Fight\FighterList.cs" />
-    <Compile Include="Game\Entities\PlayableEntity.cs" />
-    <Compile Include="Game\Entities\Monster.cs" />
     <Compile Include="Game\GameDataContext.cs" />
-    <Compile Include="Game\Status\CustomVerboseStatus.cs" />
-    <Compile Include="Game\Status\CustomVerboseStatusList.cs" />
     <Compile Include="Game\Status\Display\CustomVerboseStatusListEditWindow.xaml.cs">
       <DependentUpon>CustomVerboseStatusListEditWindow.xaml</DependentUpon>
     </Compile>
@@ -331,16 +281,11 @@
     <Compile Include="Game\Status\Display\StatusEndMomentumListSelectableUserControl.xaml.cs">
       <DependentUpon>StatusEndMomentumListSelectableUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Game\Status\OnHitStatus.cs" />
-    <Compile Include="Game\Status\OnHitStatusList.cs" />
     <Compile Include="Resources\ResourceManager.cs" />
-    <Compile Include="Tools\ICopyAssignable.cs" />
     <Compile Include="Tools\IEventUnregisterable.cs" />
     <Compile Include="ValidationRules\DiceRollRule.cs" />
     <Compile Include="Tools\INotifyPropertyChangedSub.cs" />
-    <Compile Include="Tools\Logger.cs" />
     <Compile Include="ValidationRules\NotEmptyStringRule.cs" />
-    <Compile Include="Game\Entities\Character.cs" />
     <Compile Include="ValidationRules\ValidationRuleEventHandler.cs" />
     <Compile Include="Windows\ModalWindows\BlankDiceRollModal\BlankDiceRollModal.xaml.cs">
       <DependentUpon>BlankDiceRollModal.xaml</DependentUpon>
@@ -402,10 +347,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Game\Aggression\Display\DamageResultRollableUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Game\Aggression\Display\DotTemplateListEditableControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -415,10 +356,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Game\Aggression\Spells\Display\SpellAttackEditableUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Game\Aggression\Spells\Display\SpellAttackResultRollableUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -519,10 +456,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Game\Aggression\Display\DamageTemplateListEditableUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Game\Aggression\Display\DamageResultListRollableUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -774,7 +707,9 @@
     <Resource Include="Resources\checked.png" />
     <Resource Include="Resources\unchecked.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Tools\Save\" />
+  </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
       <Visible>False</Visible>

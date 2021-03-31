@@ -1,13 +1,12 @@
-﻿using DDFight.Game.Dices;
-using DDFight.Game.Entities;
-using DDFight.Game.Fight;
-using DDFight.Resources;
-using DDFight.Tools;
+﻿using DDFight.Resources;
 using DnDToolsLibrary.Dice;
+using DnDToolsLibrary.Entities;
+using DnDToolsLibrary.Fight;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
+using WpfToolsLibrary.Extensions;
 using WpfToolsLibrary.Navigation;
 
 namespace DDFight.Windows
@@ -47,9 +46,9 @@ namespace DDFight.Windows
 
         public bool Cancelled = true;
 
-        private FighterList data_context
+        private FightersList data_context
         {
-            get => (FighterList)DataContext;
+            get => (FightersList)DataContext;
         }
 
         public RollInitiativeWindow()

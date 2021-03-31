@@ -1,4 +1,5 @@
-﻿using DDFight.Game.Entities;
+﻿using DnDToolsLibrary.Attacks.Spells;
+using DnDToolsLibrary.Entities;
 using System.Windows.Controls;
 using System.Windows.Input;
 

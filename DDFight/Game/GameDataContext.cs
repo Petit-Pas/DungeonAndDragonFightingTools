@@ -1,9 +1,8 @@
-﻿using DDFight.Game.Aggression.Spells;
-using DDFight.Game.Entities;
+﻿using DDFight.Game.Entities;
 using DDFight.Game.Fight;
+using DnDToolsLibrary.Attacks.Spells;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Windows.Documents;
 using System.Xml.Serialization;
 
 namespace DDFight.Game
@@ -72,23 +71,6 @@ namespace DDFight.Game
             }
         }
         #endregion
-
-        /// <summary>
-        ///     Used to log what happens on the user side
-        /// </summary>
-        [XmlIgnore]
-        public FlowDocument UserLogs
-        {
-            get {
-                return _userLogs; 
-            }
-            set
-            {
-                _userLogs = value;
-                NotifyPropertyChanged();
-            }
-        }
-        private FlowDocument _userLogs = new FlowDocument ();
 
         [XmlIgnore]
         public FightDataContext FightContext

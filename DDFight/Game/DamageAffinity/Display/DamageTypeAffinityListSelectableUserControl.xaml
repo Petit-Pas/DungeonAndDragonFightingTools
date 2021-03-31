@@ -4,8 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:System="clr-namespace:System;assembly=mscorlib"
-             xmlns:local="clr-namespace:DDFight.Controlers.Game.DamageAffinity"
-             xmlns:enum="clr-namespace:DDFight.Game.DamageAffinity"
+             xmlns:enum="clr-namespace:DnDToolsLibrary.Attacks.Damage.Type;assembly=DnDToolsLibrary"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>

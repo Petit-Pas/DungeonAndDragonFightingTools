@@ -1,4 +1,5 @@
 ﻿using DDFight.Windows;
+using DnDToolsLibrary.Attacks.Damage;
 using System.Windows;
 using System.Windows.Input;
 using WpfToolsLibrary.Navigation;

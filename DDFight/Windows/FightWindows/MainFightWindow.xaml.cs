@@ -1,8 +1,8 @@
 ﻿using DDFight.Controlers.InputBoxes;
 using DDFight.Game;
-using DDFight.Game.Aggression.Attacks;
-using DDFight.Game.Entities;
-using DDFight.Game.Fight;
+using DnDToolsLibrary.Attacks.HitAttacks;
+using DnDToolsLibrary.Entities;
+using DnDToolsLibrary.Fight;
 using System;
 using System.Windows;
 
@@ -18,7 +18,7 @@ namespace DDFight.Windows.FightWindows
             get => (GameDataContext)DataContext;
         }
 
-        private FighterList fighters
+        private FightersList fighters
         {
             get => data_context.FightContext.FightersList;
         }

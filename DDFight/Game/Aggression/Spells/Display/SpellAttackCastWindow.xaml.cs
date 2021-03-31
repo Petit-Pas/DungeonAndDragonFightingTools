@@ -1,8 +1,11 @@
-﻿using DDFight.Tools;
-using DDFight.Windows;
+﻿using DDFight.Windows;
+using DnDToolsLibrary.Attacks.Spells;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
+using WpfDnDCustomControlLibrary.Attacks.Spells;
+using WpfDnDCustomControlLibrary.Attacks.Spells.Extensions;
+using WpfToolsLibrary.Extensions;
 using WpfToolsLibrary.Navigation;
 
 namespace DDFight.Game.Aggression.Spells.Display

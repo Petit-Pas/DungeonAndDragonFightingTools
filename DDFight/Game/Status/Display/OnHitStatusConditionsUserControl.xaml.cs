@@ -1,4 +1,5 @@
-﻿using DDFight.Game.Characteristics;
+﻿using DnDToolsLibrary.Characteristics;
+using DnDToolsLibrary.Status;
 using System;
 using System.Collections.Generic;
 using System.Windows;

@@ -1,31 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Reflection;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
 using System.Windows.Media;
 
 namespace DDFight
 {
     public static class Extensions
     {
-
-        public static void DisposeAllDisposableMembers(this object target)
-        {
-            if (target == null) return;
-            FieldInfo[] fields = target.GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Instance).Concat(target.GetType().BaseType.GetFields(BindingFlags.NonPublic | BindingFlags.Instance)).ToArray();
-            var disposables = fields.Where(x => x.FieldType.GetInterfaces().Contains(typeof(IDisposable)));
-
-            foreach (var disposableField in disposables)
-            {
-                var value = (IDisposable)disposableField.GetValue(target);
-                if (value != null)
-                    value.Dispose();
-            }
-        }
 
         public static void ShowCentered(this Window window)
         {
@@ -55,18 +36,5 @@ namespace DDFight
             }
             return result;
         }
-
-        public static Run BuildRun(string text, Brush color, int fontSize, FontWeight fontWeight)
-        {
-            Run result = new Run();
-
-            result.Text = text;
-            result.Foreground = color;
-            result.FontSize = fontSize;
-            result.FontWeight = fontWeight;
-
-            return result;
-        }
-
     }
 }

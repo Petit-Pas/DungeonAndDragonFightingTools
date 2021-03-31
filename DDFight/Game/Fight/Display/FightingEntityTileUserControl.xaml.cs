@@ -1,19 +1,23 @@
 ﻿using BaseToolsLibrary.Extensions;
-using DDFight.Game.Dices;
+using BaseToolsLibrary.IO;
 using DDFight.Game.Entities;
 using DDFight.Game.Fight.FightEvents;
-using DDFight.Game.Status;
 using DDFight.Game.Status.Display;
 using DDFight.Tools;
-using DDFight.Tools.Save;
 using DDFight.Windows;
 using DDFight.Windows.FightWindows;
 using DDFight.Windows.ModalWindows.BlankDiceRollModal;
 using DnDToolsLibrary.Dice;
+using DnDToolsLibrary.Entities;
+using DnDToolsLibrary.Fight.Events;
+using DnDToolsLibrary.Memory;
+using DnDToolsLibrary.Status;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using WpfDnDCustomControlLibrary.Entities.Extensions;
+using WpfToolsLibrary.Extensions;
 
 namespace DDFight.Controlers.Fight
 {
@@ -53,12 +57,12 @@ namespace DDFight.Controlers.Fight
             }
         }
 
-        private void Data_context_TurnEnded(object sender, DDFight.Game.Fight.FightEvents.TurnEndedEventArgs args)
+        private void Data_context_TurnEnded(object sender, TurnEndedEventArgs args)
         {
             CharacterTileGroupBoxControl.Background = (Brush)Application.Current.Resources["Gray"];
         }
 
-        private void Data_context_NewTurnStarted(object sender, DDFight.Game.Fight.FightEvents.StartNewTurnEventArgs args)
+        private void Data_context_NewTurnStarted(object sender, StartNewTurnEventArgs args)
         {
             CharacterTileGroupBoxControl.Background = (Brush)Application.Current.Resources["Indigo"];
         }

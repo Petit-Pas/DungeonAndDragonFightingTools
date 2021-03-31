@@ -1,5 +1,5 @@
-﻿using DDFight.Tools;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
+using WpfToolsLibrary.Extensions;
 using WpfToolsLibrary.ValidationRules;
 
 namespace DDFight.Game.Entities.Display

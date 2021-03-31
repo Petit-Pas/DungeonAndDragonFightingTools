@@ -1,5 +1,5 @@
-﻿using DDFight.Game.Aggression.Attacks;
-using DDFight.Game.Aggression.Attacks.Display;
+﻿using DDFight.Game.Aggression.Attacks.Display;
+using DnDToolsLibrary.Attacks.HitAttacks;
 using System.Windows;
 using System.Windows.Input;
 

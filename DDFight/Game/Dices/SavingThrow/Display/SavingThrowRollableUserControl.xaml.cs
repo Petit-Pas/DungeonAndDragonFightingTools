@@ -9,12 +9,12 @@ namespace DDFight.Game.Dices.SavingThrow.Display
 {
     public partial class SavingThrowRollableUserControl : UserControl, IValidable, IRollableControl
     {
-        private SavingThrow data_context 
+        private DnDToolsLibrary.Dice.SavingThrow data_context 
         {
             get {
                 try
                 {
-                    return (SavingThrow)DataContext;
+                    return (DnDToolsLibrary.Dice.SavingThrow)DataContext;
                 }
                 catch (Exception)
                 {

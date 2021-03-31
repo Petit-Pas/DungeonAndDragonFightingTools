@@ -1,4 +1,5 @@
 ﻿using DDFight.Controlers;
+using DnDToolsLibrary.Entities;
 using System.Windows.Input;
 
 namespace DDFight.Game.Entities.Display

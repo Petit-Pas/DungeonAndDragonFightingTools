@@ -3,6 +3,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using WpfToolsLibrary.Extensions;
 
 namespace DDFight.Controlers.Fight
 {

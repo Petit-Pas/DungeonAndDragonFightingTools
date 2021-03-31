@@ -4,8 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:converters="clr-namespace:DDFight.Converters"
-        xmlns:display="clr-namespace:DDFight.Game.Dices.SavingThrow.Display" 
-        xmlns:display1="clr-namespace:DDFight.Controlers.Game.Attacks.Display"
+        xmlns:display="clr-namespace:DDFight.Game.Dices.SavingThrow.Display" xmlns:damage="clr-namespace:WpfDnDCustomControlLibrary.Attacks.Damage;assembly=WpfDnDCustomControlLibrary"
         mc:Ignorable="d"
         Title="SpellNonAttackCastWindow" Height="450" Width="800"
         Style="{StaticResource WindowStyle}"
@@ -68,7 +67,7 @@
                 <Run />
             </TextBlock>
 
-            <display1:DamageResultListRollableUserControl 
+            <damage:DamageResultListRollableUserControl 
                 Grid.Row="2"
                 DataContext="{Binding HitDamage}"/>
 

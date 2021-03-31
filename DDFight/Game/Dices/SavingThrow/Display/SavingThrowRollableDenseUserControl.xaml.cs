@@ -13,13 +13,13 @@ namespace DDFight.Game.Dices.SavingThrow.Display
     public partial class SavingThrowRollableDenseUserControl : UserControl, IRollableControl
     {
 
-        private SavingThrow data_context
+        private DnDToolsLibrary.Dice.SavingThrow data_context
         {
             get 
             {
                 try
                 {
-                    return DataContext as SavingThrow;
+                    return DataContext as DnDToolsLibrary.Dice.SavingThrow;
                 }
                 catch (Exception)
                 {

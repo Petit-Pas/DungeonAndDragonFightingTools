@@ -1,7 +1,7 @@
-﻿using DDFight.Game.Aggression.Attacks;
-using DDFight.Resources;
-using DDFight.Tools;
+﻿using DDFight.Resources;
+using DnDToolsLibrary.Attacks.HitAttacks;
 using System.Windows;
+using WpfToolsLibrary.Extensions;
 
 namespace DDFight.Windows
 {

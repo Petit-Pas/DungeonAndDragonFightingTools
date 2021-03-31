@@ -48,10 +48,14 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConsoleTools\FightConsole.cs" />
     <Compile Include="Converters\Math\BasicOperationConverter.cs" />
+    <Compile Include="Display\IContainWindowEditableElements.cs" />
     <Compile Include="Display\INameable.cs" />
     <Compile Include="Extensions\BindingExtensions.cs" />
+    <Compile Include="Extensions\RunExtensions.cs" />
     <Compile Include="Extensions\TreeReflexionExtensions.cs" />
+    <Compile Include="Extensions\FrameworkElementExtensions.cs" />
     <Compile Include="Navigation\IRollableControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -86,5 +90,6 @@
       <Name>[10]-BaseToolsLibrary</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

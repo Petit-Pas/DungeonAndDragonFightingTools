@@ -1,7 +1,8 @@
-﻿using DDFight.Tools;
-using DDFight.Windows;
+﻿using DDFight.Windows;
+using DnDToolsLibrary.Status;
 using System.Windows;
 using System.Windows.Controls;
+using WpfToolsLibrary.Extensions;
 
 namespace DDFight.Game.Status.Display
 {

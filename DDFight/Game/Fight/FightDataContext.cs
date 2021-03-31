@@ -1,11 +1,14 @@
-﻿using DDFight.Game.Entities;
+﻿using BaseToolsLibrary.IO;
 using DDFight.Game.Fight.FightEvents;
-using DDFight.Tools;
+using DnDToolsLibrary.Entities;
+using DnDToolsLibrary.Fight;
+using DnDToolsLibrary.Fight.Events;
 using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Xml.Serialization;
+using WpfDnDCustomControlLibrary.Entities.Extensions;
 
 namespace DDFight.Game.Fight
 {
@@ -15,7 +18,7 @@ namespace DDFight.Game.Fight
         ///     The list of the entities that shall fight when the Fight button is pressed
         /// </summary>
         [XmlIgnore]
-        public FighterList FightersList
+        public FightersList FightersList
         {
             get => _fightersList;
             set
@@ -24,7 +27,7 @@ namespace DDFight.Game.Fight
                 NotifyPropertyChanged();
             }
         }
-        private FighterList _fightersList = new FighterList();
+        private FightersList _fightersList = FightersList.Instance;
 
         /// <summary>
         ///     Counts the amount of rounds of a fight

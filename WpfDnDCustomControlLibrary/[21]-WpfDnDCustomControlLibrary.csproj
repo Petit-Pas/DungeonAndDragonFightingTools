@@ -48,6 +48,21 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attacks\Damage\DamageResultListRollableUserControl.xaml.cs">
+      <DependentUpon>DamageResultListRollableUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Attacks\Damage\DamageResultRollableUserControl.xaml.cs">
+      <DependentUpon>DamageResultRollableUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Attacks\Spells\Extensions\AttackSpellResultExtensions.cs" />
+    <Compile Include="Attacks\Spells\SpellAttackResultRollableUserControl.xaml.cs">
+      <DependentUpon>SpellAttackResultRollableUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\BoolToReversedVisibilityConverter.cs" />
+    <Compile Include="Converters\DamageTypeEnumToBrushConverter.cs" />
+    <Compile Include="Converters\StringToVisibilityConverter.cs" />
+    <Compile Include="DnDToolsWpfExtensions\Entities\PlayableEntityWpfExtensions.cs" />
+    <Compile Include="Entities\Extensions\PlayableEntityGameExtensions.cs" />
     <Compile Include="InputBoxes\DiceTextBoxes\AttackRollTextBoxControl.cs" />
     <Compile Include="InputBoxes\DiceTextBoxes\BaseD20TextBoxControl.cs" />
     <Compile Include="InputBoxes\DiceTextBoxes\SituationalD20TextBoxControl.cs" />
@@ -64,6 +79,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Status\Extensions\OnHitStatusGameExtension.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -92,7 +108,18 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DnDToolsWpfExtensions\" />
+    <Page Include="Attacks\Damage\DamageResultListRollableUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Attacks\Damage\DamageResultRollableUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Attacks\Spells\SpellAttackResultRollableUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,6 +1,7 @@
-﻿using DDFight.Controlers;
-using DDFight.Game.Fight;
-using DDFight.Tools;
+﻿using BaseToolsLibrary.IO;
+using DDFight.Controlers;
+using DnDToolsLibrary.Entities;
+using DnDToolsLibrary.Fight;
 using System.Windows.Input;
 
 namespace DDFight.Game.Entities.Display
@@ -22,9 +23,9 @@ namespace DDFight.Game.Entities.Display
             refresh_entityList();
         }
 
-        private FighterList data_context
+        private FightersList data_context
         {
-            get => DataContext as FighterList;
+            get => DataContext as FightersList;
         }
 
         protected override void EntityListControl_KeyDown(object sender, KeyEventArgs e)

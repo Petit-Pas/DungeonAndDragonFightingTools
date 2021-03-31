@@ -1,9 +1,7 @@
-﻿using DDFight.Game.Entities;
-using DDFight.Tools;
+﻿using BaseToolsLibrary.IO;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using WpfSandbox.Types;
 
 namespace BindValidation
 {
@@ -13,8 +11,6 @@ namespace BindValidation
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
-
-        
 
         #region INotifyPropertyChanged
 
@@ -32,77 +28,6 @@ namespace BindValidation
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion INotifyPropertyChanged
-
-        public Character transform_characterType(CharacterType to_copy)
-        {
-            Character result = new Character()
-            {
-                ActionDescription = to_copy.ActionDescription,
-                CA = to_copy.CA,
-                Characteristics = to_copy.Characteristics,
-                Counters = CounterType.ConvertListCounterType(to_copy.Counters),
-                CustomVerboseStatusList = CustomVerboseStatusListType.Convert(to_copy.CustomVerboseStatusList),
-                DamageAffinities = to_copy.DamageAffinities,
-                DisplayName = to_copy.DisplayName,
-                HasBonusAction = to_copy.HasBonusAction,
-                HasAction = to_copy.HasAction,
-                HasInspiration = to_copy.HasInspiration,
-                HasReaction = to_copy.HasReaction,
-                HasSpells = to_copy.HasSpells,
-                HitAttacks = HitAttackTemplateType.ConvertList(to_copy.HitAttacks),
-                Hp = to_copy.Hp,
-                HpString = to_copy.HpString,
-                InitiativeRoll = to_copy.InitiativeRoll,
-                IsFocused = to_copy.IsFocused,
-                IsTransformed = to_copy.IsTransformed,
-                Level = to_copy.Level,
-                MaxHp = to_copy.MaxHp,
-                Name = to_copy.Name,
-                SpecialAbilities = to_copy.SpecialAbilities,
-                SpellHitModifier = to_copy.SpellHitModifier,
-                Spells = SpellListType.Convert(to_copy.Spells),
-                SpellSave = to_copy.SpellSave,
-                TempHp = to_copy.TempHp,
-                TurnOrder = to_copy.TurnOrder,
-            };
-
-            return result;
-        }
-
-        public Monster transform_monsterType(MonsterType to_copy)
-        {
-            Monster result = new Monster()
-            {
-                ActionDescription = to_copy.ActionDescription,
-                CA = to_copy.CA,
-                Characteristics = to_copy.Characteristics,
-                Counters = CounterType.ConvertListCounterType(to_copy.Counters),
-                CustomVerboseStatusList = CustomVerboseStatusListType.Convert(to_copy.CustomVerboseStatusList),
-                DamageAffinities = to_copy.DamageAffinities,
-                DisplayName = to_copy.DisplayName,
-                HasBonusAction = to_copy.HasBonusAction,
-                HasAction = to_copy.HasAction,
-                HasReaction = to_copy.HasReaction,
-                HasSpells = to_copy.HasSpells,
-                HitAttacks = HitAttackTemplateType.ConvertList(to_copy.HitAttacks),
-                Hp = to_copy.Hp,
-                HpString = to_copy.HpString,
-                InitiativeRoll = to_copy.InitiativeRoll,
-                IsFocused = to_copy.IsFocused,
-                IsTransformed = to_copy.IsTransformed,
-                Level = to_copy.Level,
-                MaxHp = to_copy.MaxHp,
-                Name = to_copy.Name,
-                SpecialAbilities = to_copy.SpecialAbilities,
-                SpellHitModifier = to_copy.SpellHitModifier,
-                Spells = SpellListType.Convert(to_copy.Spells),
-                SpellSave = to_copy.SpellSave,
-                TempHp = to_copy.TempHp,
-                TurnOrder = to_copy.TurnOrder,
-            };
-
-            return result;
-        }
 
         public int Integer
         {

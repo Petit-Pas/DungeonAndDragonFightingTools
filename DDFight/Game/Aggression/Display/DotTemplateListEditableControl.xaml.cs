@@ -1,9 +1,10 @@
-﻿using DDFight.Game.DamageAffinity;
-using DDFight.Tools;
+﻿using DnDToolsLibrary.Attacks.Damage;
+using DnDToolsLibrary.Attacks.Damage.Type;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using WpfToolsLibrary.Extensions;
 
 namespace DDFight.Game.Aggression.Display
 {

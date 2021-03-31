@@ -138,6 +138,10 @@
       <Project>{47d47e7e-85c8-4a4e-91d5-019e64072b1e}</Project>
       <Name>[10]-BaseToolsLibrary</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DnDToolsLibrary\[12]-DnDToolsLibrary.csproj">
+      <Project>{1bae42fc-3797-4566-b2d7-c230077f4ae3}</Project>
+      <Name>[12]-DnDToolsLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WpfToolsLibrary\[11]-WpfToolsLibrary.csproj">
       <Project>{84709264-0a0b-4c58-a52f-ba8ade84ab74}</Project>
       <Name>[11]-WpfToolsLibrary</Name>

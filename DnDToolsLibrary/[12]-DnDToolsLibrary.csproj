@@ -41,10 +41,50 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attacks\AAttackTemplate.cs" />
+    <Compile Include="Attacks\AttackRangeEnum.cs" />
+    <Compile Include="Attacks\AttackRollResult.cs" />
+    <Compile Include="Attacks\Damage\DamageModifierEnum.cs" />
+    <Compile Include="Attacks\Damage\DamageResult.cs" />
+    <Compile Include="Attacks\Damage\DamageResultList.cs" />
+    <Compile Include="Attacks\Damage\DamageTemplate.cs" />
+    <Compile Include="Attacks\Damage\DamageTemplateList.cs" />
+    <Compile Include="Attacks\Damage\DotTemplate.cs" />
+    <Compile Include="Attacks\Damage\DotTemplateList.cs" />
+    <Compile Include="Attacks\Damage\Type\DamageAffinityEnum.cs" />
+    <Compile Include="Attacks\Damage\Type\DamageTypeAffinity.cs" />
+    <Compile Include="Attacks\Damage\Type\DamageTypeAffinityList.cs" />
+    <Compile Include="Attacks\Damage\Type\DamageTypeEnum.cs" />
+    <Compile Include="Attacks\HitAttacks\HitAttackResult.cs" />
+    <Compile Include="Attacks\HitAttacks\HitAttackTemplate.cs" />
+    <Compile Include="Attacks\HitAttacks\HitAttackTemplateList.cs" />
+    <Compile Include="Attacks\SituationalAdvantageModifiers.cs" />
+    <Compile Include="Attacks\SituationalAttackRollModifiers.cs" />
+    <Compile Include="Attacks\Spells\AttackSpellResult.cs" />
+    <Compile Include="Attacks\Spells\NonAttackSpellResult.cs" />
+    <Compile Include="Attacks\Spells\Spell.cs" />
+    <Compile Include="Attacks\Spells\SpellList.cs" />
+    <Compile Include="Characteristics\Characteristic.cs" />
+    <Compile Include="Characteristics\CharacteristicList.cs" />
+    <Compile Include="Characteristics\CharacteristicsEnum.cs" />
     <Compile Include="Counters\Counter.cs" />
+    <Compile Include="Counters\CounterList.cs" />
     <Compile Include="Dice\DiceRoll.cs" />
     <Compile Include="Dice\Dices.cs" />
+    <Compile Include="Dice\SavingThrow.cs" />
+    <Compile Include="Entities\Character.cs" />
+    <Compile Include="Fight\FightersList.cs" />
+    <Compile Include="Entities\Monster.cs" />
+    <Compile Include="Entities\PlayableEntity.cs" />
+    <Compile Include="Fight\Events\TurnEvents.cs" />
+    <Compile Include="Memory\GenericList.cs" />
+    <Compile Include="Memory\SaveManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Status\ApplicationModifierEnum.cs" />
+    <Compile Include="Status\CustomVerboseStatus.cs" />
+    <Compile Include="Status\CustomVerboseStatusList.cs" />
+    <Compile Include="Status\OnHitStatus.cs" />
+    <Compile Include="Status\OnHitStatusList.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BaseToolsLibrary\[10]-BaseToolsLibrary.csproj">
@@ -56,8 +96,6 @@
       <Name>[11]-WpfToolsLibrary</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Entities\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

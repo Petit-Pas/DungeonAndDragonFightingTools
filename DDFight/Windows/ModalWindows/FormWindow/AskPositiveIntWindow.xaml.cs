@@ -1,6 +1,6 @@
-﻿using DDFight.Tools;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
+using WpfToolsLibrary.Extensions;
 
 namespace DDFight.Windows.ModalWindows.FormWindow
 {

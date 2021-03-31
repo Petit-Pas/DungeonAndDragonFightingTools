@@ -1,7 +1,7 @@
-﻿using DDFight.Game.Entities;
-using DDFight.Tools;
+﻿using DnDToolsLibrary.Entities;
 using System.Windows;
 using System.Windows.Controls;
+using WpfToolsLibrary.Extensions;
 using WpfToolsLibrary.ValidationRules;
 
 namespace DDFight.Controlers.Game.Characteristics

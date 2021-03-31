@@ -1,8 +1,8 @@
-﻿using DDFight.Game.Entities;
-using DDFight.Tools;
+﻿using DnDToolsLibrary.Entities;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
+using WpfToolsLibrary.Extensions;
 
 namespace DDFight.Windows
 {

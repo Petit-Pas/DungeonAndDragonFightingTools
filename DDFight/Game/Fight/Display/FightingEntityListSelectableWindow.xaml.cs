@@ -1,11 +1,11 @@
-﻿using DDFight.Game.Entities;
-using DDFight.Tools;
-using DDFight.Windows;
+﻿using DDFight.Windows;
+using DnDToolsLibrary.Entities;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
+using WpfToolsLibrary.Extensions;
 
 namespace DDFight.Game.Fight.Display
 {

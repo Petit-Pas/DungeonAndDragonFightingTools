@@ -1,8 +1,9 @@
-﻿using DDFight.Game.Aggression;
-using DDFight.Game.Entities;
-using DDFight.Tools;
+﻿using DnDToolsLibrary.Attacks.Damage;
+using DnDToolsLibrary.Entities;
 using System.Windows;
 using System.Windows.Input;
+using WpfDnDCustomControlLibrary.Entities.Extensions;
+using WpfToolsLibrary.Extensions;
 
 namespace DDFight.Windows.FightWindows
 {

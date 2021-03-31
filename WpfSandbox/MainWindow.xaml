@@ -11,8 +11,6 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/WpfCustomControlLibrary;component/CircularSelector/CircularSelectorImportFile.xaml"/>
-                <ResourceDictionary Source="/WpfCustomControlLibrary;component/CheckBoxes/CheckBoxStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -28,23 +26,6 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-
-        <checkboxes:CheckBoxControl
-            Grid.Row="1" Grid.Column="1"
-            Style="{StaticResource CheckBoxStyle}"
-            CheckMark="{StaticResource CheckBoxXMark}">
-            <TextBlock Margin="15" >Hello</TextBlock>
-        </checkboxes:CheckBoxControl>
-
-        <CheckBox
-            Grid.Row="2" Grid.Column="1"/>
-
-
-        <intboxes:RangedIntTextBoxControl
-            Min="0"
-            Max="15"
-            Integer="{Binding Integer, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"></intboxes:RangedIntTextBoxControl>
-        
 
     </Grid>
     

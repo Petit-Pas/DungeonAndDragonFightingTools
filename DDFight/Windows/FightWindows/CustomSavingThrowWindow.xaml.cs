@@ -1,16 +1,16 @@
-﻿using DDFight.Game.Aggression.Attacks;
-using DDFight.Game.Characteristics;
-using DDFight.Game.Dices;
-using DDFight.Game.Dices.SavingThrow;
-using DDFight.Game.Entities;
-using DDFight.Tools;
+﻿using DDFight.Game.Dices.SavingThrow;
+using DnDToolsLibrary.Attacks;
+using DnDToolsLibrary.Characteristics;
 using DnDToolsLibrary.Dice;
+using DnDToolsLibrary.Entities;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using WpfToolsLibrary.ConsoleTools;
+using WpfToolsLibrary.Extensions;
 using WpfToolsLibrary.Navigation;
 
 namespace DDFight.Windows.FightWindows
@@ -116,11 +116,11 @@ namespace DDFight.Windows.FightWindows
 
         private void do_saving_throw()
         {
-            Paragraph paragraph = (Paragraph)Global.Context.UserLogs.Blocks.LastBlock;
-            paragraph.Inlines.Add(Extensions.BuildRun(data_context.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-            paragraph.Inlines.Add(Extensions.BuildRun(": Saving Throw ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-            paragraph.Inlines.Add(Extensions.BuildRun(Characteristic.ToString() + " ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
-            paragraph.Inlines.Add(Extensions.BuildRun((Roll + SituationalSavingThrowModifier.Modifier + data_context.Characteristics.GetSavingModifier(Characteristic)).ToString() + "/" + Difficulty + "\n",
+            Paragraph paragraph = (Paragraph)FightConsole.Instance.UserLogs.Blocks.LastBlock;
+            paragraph.Inlines.Add(RunExtensions.BuildRun(data_context.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+            paragraph.Inlines.Add(RunExtensions.BuildRun(": Saving Throw ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+            paragraph.Inlines.Add(RunExtensions.BuildRun(Characteristic.ToString() + " ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
+            paragraph.Inlines.Add(RunExtensions.BuildRun((Roll + SituationalSavingThrowModifier.Modifier + data_context.Characteristics.GetSavingModifier(Characteristic)).ToString() + "/" + Difficulty + "\n",
                 (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
             if (Difficulty <= (Roll + SituationalSavingThrowModifier.Modifier + data_context.Characteristics.GetSavingModifier(Characteristic)))
                 Success = true;

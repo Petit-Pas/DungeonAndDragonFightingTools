@@ -3,8 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes" 
-        xmlns:converters="clr-namespace:DDFight.Converters" xmlns:display="clr-namespace:DDFight.Controlers.Game.Attacks.Display" xmlns:display1="clr-namespace:DDFight.Controlers.Game.Attacks.DamageListControls" xmlns:display2="clr-namespace:DDFight.Game.Aggression.Spells.Display"
+        xmlns:converters="clr-namespace:DDFight.Converters" 
+        xmlns:damagelistcontrols="clr-namespace:DDFight.Controlers.Game.Attacks.DamageListControls" 
+        xmlns:spells="clr-namespace:WpfDnDCustomControlLibrary.Attacks.Spells;assembly=WpfDnDCustomControlLibrary"
         mc:Ignorable="d"
         Title="SpellAttackCastWindow" Height="450" Width="800"
         Style="{StaticResource WindowStyle}"
@@ -69,7 +70,7 @@
                 Will hit anyway
             </TextBlock>
 
-            <display1:DamageTemplateListReadOnlyUserControl 
+            <damagelistcontrols:DamageTemplateListReadOnlyUserControl 
                 Grid.Row="2"
                 DataContext="{Binding HitDamage}"/>
 
@@ -125,7 +126,7 @@
                                     FontWeight="SemiBold"
                                     />
 
-                                <display2:SpellAttackResultRollableUserControl
+                                <spells:SpellAttackResultRollableUserControl
                                     x:Name="SpellAttackResultRollableUserControl"
                                     Grid.Row="1"
                                     SpellResult="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}} }"/>

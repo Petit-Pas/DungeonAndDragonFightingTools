@@ -1,6 +1,7 @@
 ﻿using DDFight.Game.Entities.Display;
-using DDFight.Tools;
-using DDFight.Tools.Save;
+using DnDToolsLibrary.Entities;
+using DnDToolsLibrary.Memory;
+using WpfToolsLibrary.Display;
 
 namespace DDFight.Game.Entities
 {

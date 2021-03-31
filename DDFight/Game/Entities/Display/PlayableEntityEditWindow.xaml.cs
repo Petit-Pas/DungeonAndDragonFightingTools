@@ -1,8 +1,9 @@
 ﻿using DDFight.Resources;
-using DDFight.Tools;
 using DDFight.Windows;
+using DnDToolsLibrary.Entities;
 using System.ComponentModel;
 using System.Windows;
+using WpfToolsLibrary.Extensions;
 
 namespace DDFight.Game.Entities.Display
 {

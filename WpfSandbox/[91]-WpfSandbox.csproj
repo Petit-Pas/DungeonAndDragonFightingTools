@@ -55,21 +55,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Types\AAttackTemplateType.cs" />
-    <Compile Include="Types\CharacterType.cs" />
-    <Compile Include="Types\CounterType.cs" />
-    <Compile Include="Types\CustomVerboseStatusListType.cs" />
-    <Compile Include="Types\CustomVerboseStatusType.cs" />
-    <Compile Include="Types\DamageTemplateType.cs" />
-    <Compile Include="Types\DotTemplateType.cs" />
-    <Compile Include="Types\GenericList.cs" />
-    <Compile Include="Types\HitAttackTemplateType.cs" />
-    <Compile Include="Types\MonsterType.cs" />
-    <Compile Include="Types\OnHitStatusListType.cs" />
-    <Compile Include="Types\OnHitStatusType.cs" />
-    <Compile Include="Types\PlayableEntityType.cs" />
-    <Compile Include="Types\SpellListType.cs" />
-    <Compile Include="Types\SpellType.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

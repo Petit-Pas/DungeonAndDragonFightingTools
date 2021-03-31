@@ -1,4 +1,5 @@
-﻿using DDFight.Tools.Save;
+﻿using DnDToolsLibrary.Memory;
+using DnDToolsLibrary.Status;
 using System.Windows;
 
 namespace DDFight.Game.Status.Display
