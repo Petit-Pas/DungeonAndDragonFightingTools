@@ -1,5 +1,6 @@
 ﻿using DnDToolsLibrary.Memory;
 using System;
+using WpfToolsLibrary.Display;
 
 namespace DDFight.Controlers
 {
@@ -15,9 +16,10 @@ namespace DDFight.Controlers
             get => DataContext as GenericList<T>;
         }
 
-        public override void edit(object obj)
+        public override bool edit(object obj)
         {
-            data_context.EditElement(obj as T);
+            Console.WriteLine("WARNING: edit method should be overriden in SpecializedListUserControl");
+            return false;
         }
 
         public override void remove(object obj)
@@ -27,13 +29,31 @@ namespace DDFight.Controlers
 
         public override void duplicate(object obj)
         {
-            data_context.DuplicateElement(obj as T);
+            if (obj is T instance)
+            {
+                T new_one = instance.Clone() as T;
+                if (instance is INameable)
+                {
+                    ((INameable)new_one).Name = ((INameable)new_one).Name + " - Copy";
+                }
+                add_new(new_one);
+            }
         }
 
         public override void add_new(object obj = null)
         {
-            data_context.AddElement(obj as T);
+            if (obj == null)
+                obj = new T();
+            if (obj is T instance)
+            {
+                if (edit(instance))
+                    data_context.AddElementSilent(instance);
+                else
+                {
+                    if (instance is IDisposable disposable)
+                        disposable.Dispose();
+                }
+            }
         }
-
     }
 }

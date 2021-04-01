@@ -4,15 +4,18 @@ using DnDToolsLibrary.Entities;
 using System.ComponentModel;
 using System.Windows;
 using WpfToolsLibrary.Extensions;
+using WpfToolsLibrary.Navigation;
 
 namespace DDFight.Game.Entities.Display
 {
     /// <summary>
     /// Interaction logic for PlayableEntityEditWindow.xaml
     /// </summary>
-    public partial class PlayableEntityEditWindow : Window
+    public partial class PlayableEntityEditWindow : Window, IValidableWindow
     {
         private PlayableEntity data_context { get => (PlayableEntity)DataContext; }
+
+        public bool Validated { get; set; } = false; 
 
         /// <summary>
         ///     Ctor
@@ -62,7 +65,7 @@ namespace DDFight.Game.Entities.Display
             }
             else
             {
-                data_context.Validated = true;
+                Validated = true;
                 self_close = true;
                 Close();
             }
@@ -75,7 +78,7 @@ namespace DDFight.Game.Entities.Display
         /// <param name="e"></param>
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            data_context.Validated = false;
+            Validated = false;
             self_close = true;
             Close();
         }
@@ -119,7 +122,7 @@ namespace DDFight.Game.Entities.Display
 
                     if (context.Yes)
                     {
-                        data_context.Validated = true;
+                        Validated = true;
                     }
                 }
             }

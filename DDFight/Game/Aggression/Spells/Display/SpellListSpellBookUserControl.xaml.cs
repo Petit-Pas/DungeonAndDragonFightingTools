@@ -1,4 +1,5 @@
-﻿using DnDToolsLibrary.Attacks.Spells;
+﻿using DDFight.ListExtensions;
+using DnDToolsLibrary.Attacks.Spells;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -31,7 +32,7 @@ namespace DDFight.Game.Aggression.Spells.Display
 
         private void SpellListSpellBookUserControl_Initialized(object sender, EventArgs e)
         {
-            AllSpellsControl.DataContext = Global.Context.SpellList;
+            AllSpellsControl.DataContext = GlobalContext.Context.SpellList;
 
             AllSpellsControl.EntityListControl.PreviewKeyDown += AllSpellList_PreviewKeyDown;
             MenuItem learn = new MenuItem { Header = "Learn this spell" };

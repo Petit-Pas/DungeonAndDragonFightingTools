@@ -21,9 +21,6 @@ namespace DnDToolsLibrary.Entities
         {
         }
 
-        [XmlIgnore]
-        public bool Validated = false;
-
         #region Properties
 
         #region Properties_Name

@@ -195,9 +195,10 @@ namespace DDFight.Controlers
 
         #region ListControl
 
-        public virtual void edit(object obj)
+        public virtual bool edit(object obj)
         {
             Logger.Log("WARN: UserControls should override the edit() method as the base one in PlayableEntityListEditableUserControl is empty");
+            return false;
         }
 
         public virtual void remove(object obj)

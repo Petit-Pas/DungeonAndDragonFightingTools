@@ -42,14 +42,14 @@ namespace DDFight.Windows.FightWindows
 
         private void MainFightWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            GeneralInfoControl.DataContext = Global.Context;
+            GeneralInfoControl.DataContext = GlobalContext.Context;
             setupAttacksOwner();
-            Global.Context.FightContext.NextTurn();
+            GlobalContext.Context.FightContext.NextTurn();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            foreach (PlayableEntity tmp in Global.Context.FightContext.FightersList.Elements)
+            foreach (PlayableEntity tmp in GlobalContext.Context.FightContext.FightersList.Elements)
             {
                 tmp.HasAction = !tmp.HasAction;
             }

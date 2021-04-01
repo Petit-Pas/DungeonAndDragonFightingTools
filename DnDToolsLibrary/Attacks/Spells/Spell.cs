@@ -362,29 +362,6 @@ namespace DnDToolsLibrary.Attacks.Spells
 
         #region EditWindow
 
-        [XmlIgnore]
-        public bool Validated = false;
-
-        public override bool OpenEditWindow()
-        {
-            Console.Write("CRITICAL");
-            /*
-
-            SpellEditWindow window = new SpellEditWindow();
-            Spell temporary = (Spell)this.Clone();
-            window.DataContext = temporary;
-            window.ShowCentered();
-
-            if (temporary.Validated == true)
-            {
-                this.CopyAssign(temporary);
-                return true;
-            }
-            return false;
-            */
-            return false;
-        }
-
         #endregion EditWindow
 
         #region ICloneable

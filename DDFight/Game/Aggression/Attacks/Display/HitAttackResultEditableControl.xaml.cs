@@ -31,7 +31,7 @@ namespace DDFight.Game.Aggression.Attacks.Display
 
         private void HitAttackResultEditableControl_Initialized(object sender, EventArgs e)
         {
-            HitAttackTargetComboControl.ItemsSource = Global.Context.FightContext.FightersList.Elements;
+            HitAttackTargetComboControl.ItemsSource = GlobalContext.Context.FightContext.FightersList.Elements;
             HitAttackTargetComboControl.SelectionChanged += HitAttackTargetComboControl_SelectionChanged;
         }
 

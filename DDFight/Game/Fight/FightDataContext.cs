@@ -64,10 +64,10 @@ namespace DDFight.Game.Fight
             Console.WriteLine("Next Turn");
             if (TurnIndex != -1)
             {
-                Global.Context.FightContext.FightersList.Elements.ElementAt((int)TurnIndex).EndTurn();
+                GlobalContext.Context.FightContext.FightersList.Elements.ElementAt((int)TurnIndex).EndTurn();
                 OnEndTurn(new TurnEndedEventArgs()
                 {
-                    Character = Global.Context.FightContext.FightersList.Elements.ElementAt((int)TurnIndex),
+                    Character = GlobalContext.Context.FightContext.FightersList.Elements.ElementAt((int)TurnIndex),
                     CharacterIndex = (int)TurnIndex,
                 });
             }
@@ -81,7 +81,7 @@ namespace DDFight.Game.Fight
             {
                 TurnIndex = newTurn;
             }
-            PlayableEntity tmp = Global.Context.FightContext.FightersList.Elements.ElementAt((int)TurnIndex);
+            PlayableEntity tmp = GlobalContext.Context.FightContext.FightersList.Elements.ElementAt((int)TurnIndex);
             tmp.StartNewTurn();
             OnStartNewTurn(new StartNewTurnEventArgs() 
             { 

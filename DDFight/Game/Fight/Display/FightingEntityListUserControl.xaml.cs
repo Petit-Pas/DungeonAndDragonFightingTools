@@ -17,7 +17,7 @@ namespace DDFight.Controlers.Fight
             InitializeComponent();
             Loaded += FightingCharacterListUserControl_Loaded;
             FightersControl.LayoutUpdated += FightersControl_LayoutUpdated;
-            Global.Context.FightContext.FightersList.PropertyChanged += FightersList_PropertyChanged;
+            GlobalContext.Context.FightContext.FightersList.PropertyChanged += FightersList_PropertyChanged;
         }
 
         private void FightersList_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -27,7 +27,7 @@ namespace DDFight.Controlers.Fight
 
         private void FightersControl_LayoutUpdated(object sender, EventArgs e)
         {
-            if (FightersControl.Items.Count != 0 && Global.Context.FightContext.TurnIndex == 0 && Global.Context.FightContext.RoundCount == 0)
+            if (FightersControl.Items.Count != 0 && GlobalContext.Context.FightContext.TurnIndex == 0 && GlobalContext.Context.FightContext.RoundCount == 0)
             {
                 ContentPresenter uiElement = (ContentPresenter)FightersControl.ItemContainerGenerator.ContainerFromIndex(0);
                 GroupBox gb = (GroupBox)uiElement.GetFirstChildByName("CharacterTileGroupBoxControl");
@@ -39,7 +39,7 @@ namespace DDFight.Controlers.Fight
 
         private void FightingCharacterListUserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            FightersControl.ItemsSource = Global.Context.FightContext.FightersList.Elements;
+            FightersControl.ItemsSource = GlobalContext.Context.FightContext.FightersList.Elements;
         }
 
         public void UnregisterToAll()

@@ -30,13 +30,13 @@ namespace DDFight.Controlers.Fight
 
         private void FighterActionUserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            Global.Context.FightContext.CharacterSelected += FightContext_CharacterSelected;
+            GlobalContext.Context.FightContext.CharacterSelected += FightContext_CharacterSelected;
             this.LayoutUpdated += FighterActionUserControl_LayoutUpdated;
         }
 
         private void FighterActionUserControl_LayoutUpdated(object sender, EventArgs e)
         {
-            DataContext = Global.Context.FightContext.FightersList.Elements.ElementAt(0);
+            DataContext = GlobalContext.Context.FightContext.FightersList.Elements.ElementAt(0);
             this.LayoutUpdated -= FighterActionUserControl_LayoutUpdated;
         }
 
@@ -47,7 +47,7 @@ namespace DDFight.Controlers.Fight
 
         public void UnregisterToAll()
         {
-            Global.Context.FightContext.CharacterSelected -= FightContext_CharacterSelected;
+            GlobalContext.Context.FightContext.CharacterSelected -= FightContext_CharacterSelected;
         }
 
     }

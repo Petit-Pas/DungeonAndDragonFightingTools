@@ -542,32 +542,6 @@ namespace DnDToolsLibrary.Status
             */
         }
 
-        /// <summary>
-        ///     Will open an edit window to updates the status
-        /// </summary>
-        /// <returns></returns>
-        public override bool OpenEditWindow()
-        {
-            Console.WriteLine("CRITICAL THIS SHOULD HAVE BEEN CHANGED");
-
-            /*OnHitStatusEditWindow window = new OnHitStatusEditWindow();
-            using (OnHitStatus hitStatus = (OnHitStatus)this.Clone())
-            {
-                window.DataContext = hitStatus;
-
-                window.ShowCentered();
-
-                if (window.Validated)
-                {
-                    this.CopyAssign(hitStatus);
-                    return true;
-                }
-                return false;
-            }*/
-
-            return false;
-        }
-
         #region ICloneable
 
         public override object Clone()

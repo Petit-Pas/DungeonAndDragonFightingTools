@@ -22,12 +22,12 @@ namespace DDFight.Controlers.Fight
 
         private void setCharactersTurnName()
         {
-            CharacterTurnTextboxCountrol.Text = "Turn of: " + Global.Context.FightContext.FightersList.Elements.ElementAt((int)Global.Context.FightContext.TurnIndex).DisplayName;
+            CharacterTurnTextboxCountrol.Text = "Turn of: " + GlobalContext.Context.FightContext.FightersList.Elements.ElementAt((int)GlobalContext.Context.FightContext.TurnIndex).DisplayName;
         }
 
         private void GeneralInfoFightUserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            Global.Context.FightContext.NewTurnStarted += FightContext_NewTurnStarted;
+            GlobalContext.Context.FightContext.NewTurnStarted += FightContext_NewTurnStarted;
             setCharactersTurnName();
         }
 
@@ -38,29 +38,29 @@ namespace DDFight.Controlers.Fight
 
         public void UnregisterToAll()
         {
-            Global.Context.FightContext.NewTurnStarted -= FightContext_NewTurnStarted;
+            GlobalContext.Context.FightContext.NewTurnStarted -= FightContext_NewTurnStarted;
         }
 
         private void AddToFightButton_Click(object sender, RoutedEventArgs e)
         {
-            PlayableEntity currently_playing = Global.Context.FightContext.CurrentlyPlaying;
+            PlayableEntity currently_playing = GlobalContext.Context.FightContext.CurrentlyPlaying;
 
             AddToFightWindow window = new AddToFightWindow();
              
             window.ShowCentered();
 
             RollInitiativeWindow rollInitiativeWindow = new RollInitiativeWindow();
-            rollInitiativeWindow.DataContext = Global.Context.FightContext.FightersList;
+            rollInitiativeWindow.DataContext = GlobalContext.Context.FightContext.FightersList;
 
             rollInitiativeWindow.ShowCentered();
 
-            Global.Context.FightContext.FightersList.SetTurnOrdersMiddleFight();
+            GlobalContext.Context.FightContext.FightersList.SetTurnOrdersMiddleFight();
 
-            for (int i = 0; i != Global.Context.FightContext.FightersList.Elements.Count; i++)
+            for (int i = 0; i != GlobalContext.Context.FightContext.FightersList.Elements.Count; i++)
             {
-                if (Global.Context.FightContext.FightersList.Elements[i] == currently_playing)
+                if (GlobalContext.Context.FightContext.FightersList.Elements[i] == currently_playing)
                 {
-                    Global.Context.FightContext.TurnIndex = i;
+                    GlobalContext.Context.FightContext.TurnIndex = i;
                 }
             }
 
@@ -68,7 +68,7 @@ namespace DDFight.Controlers.Fight
 
         private void NextTurnButton_Click(object sender, RoutedEventArgs e)
         {
-            Global.Context.FightContext.NextTurn();
+            GlobalContext.Context.FightContext.NextTurn();
         }
     }
 }

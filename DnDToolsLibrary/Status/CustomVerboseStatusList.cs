@@ -31,20 +31,5 @@ namespace DnDToolsLibrary.Status
         [XmlIgnore]
         public bool Validated = false;
 
-        public void OpenEditWindow()
-        {
-            Console.WriteLine("CRITICAL this should not be here anymore");
-            /*
-            CustomVerboseStatusListEditWindow window = new CustomVerboseStatusListEditWindow();
-            CustomVerboseStatusList dc = (CustomVerboseStatusList)this.Clone();
-            dc.Validated = false;
-
-            window.DataContext = dc;
-
-            window.ShowCentered();
-
-            if (dc.Validated == true)
-                Elements = dc.Elements;*/
-        }
     }
 }

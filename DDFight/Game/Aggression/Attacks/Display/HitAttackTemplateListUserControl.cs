@@ -1,4 +1,5 @@
 ﻿using DDFight.Controlers;
+using DDFight.TempExtensions;
 using DnDToolsLibrary.Attacks.HitAttacks;
 
 namespace DDFight.Game.Aggression.Attacks.Display
@@ -13,6 +14,13 @@ namespace DDFight.Game.Aggression.Attacks.Display
         private HitAttackTemplateList data_context
         {
             get => DataContext as HitAttackTemplateList;
+        }
+
+        public override bool edit(object obj)
+        {
+            if (obj is HitAttackTemplate hitAttackTemplate)
+                return hitAttackTemplate.OpenEditWindow();
+            return false;
         }
 
         private void HitAttackTemplateListUserControl_DataContextChanged(object sender, System.Windows.DependencyPropertyChangedEventArgs e)

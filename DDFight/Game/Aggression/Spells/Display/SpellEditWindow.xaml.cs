@@ -3,13 +3,14 @@ using DDFight.Windows;
 using DnDToolsLibrary.Attacks.Spells;
 using System.Windows;
 using WpfToolsLibrary.Extensions;
+using WpfToolsLibrary.Navigation;
 
 namespace DDFight.Game.Aggression.Spells.Display
 {
     /// <summary>
     /// Interaction logic for SpellEditWindow.xaml
     /// </summary>
-    public partial class SpellEditWindow : Window
+    public partial class SpellEditWindow : Window, IValidableWindow
     {
         public Spell data_context 
         {
@@ -23,7 +24,7 @@ namespace DDFight.Game.Aggression.Spells.Display
             InitializeComponent();
         }
 
-        public bool Validated = false;
+        public bool Validated { get; set; } = false;
 
         private void ValidateButton_Click(object sender, RoutedEventArgs e)
         {
@@ -44,7 +45,7 @@ namespace DDFight.Game.Aggression.Spells.Display
             }
             else
             {
-                data_context.Validated = true;
+                Validated = true;
                 self_close = true;
                 Close();
             }
@@ -52,7 +53,7 @@ namespace DDFight.Game.Aggression.Spells.Display
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            data_context.Validated = false;
+            Validated = false;
             self_close = true;
             Close();
         }
@@ -75,7 +76,7 @@ namespace DDFight.Game.Aggression.Spells.Display
 
                 if (context.Yes)
                 {
-                    data_context.Validated = false;
+                    Validated = false;
                 }
                 else 
                 {

@@ -1,11 +1,12 @@
-﻿using DDFight.Game.Entities.Display;
+﻿using BaseToolsLibrary.Memory;
+using DDFight.Game.Entities.Display;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Memory;
 using WpfToolsLibrary.Display;
 
 namespace DDFight.Game.Entities
 {
-    public class PlayableEntityList<T> : GenericList<T>, IContainWindowEditableElements
+    public class PlayableEntityList<T> : GenericList<T>
         where T : PlayableEntity, new()
     {
         public PlayableEntityList() : base()
@@ -52,26 +53,6 @@ namespace DDFight.Game.Entities
                         break;
                 }
             }
-        }
-
-        public bool EditElement(object element)
-        {
-            if (element is PlayableEntity playableEntity)
-            {
-                PlayableEntityEditWindow window = new PlayableEntityEditWindow();
-                using (PlayableEntity temporary = (PlayableEntity)playableEntity.Clone())
-                {
-                    window.DataContext = temporary;
-                    window.ShowCentered();
-
-                    if (temporary.Validated == true)
-                    {
-                        playableEntity.CopyAssign(temporary);
-                        return true;
-                    }
-                }
-            }
-            return false;
         }
     }
 }

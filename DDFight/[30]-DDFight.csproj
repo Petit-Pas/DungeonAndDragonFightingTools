@@ -148,7 +148,10 @@
     </Compile>
     <Compile Include="Game\Status\Display\CustomVerboseStatusListUserControl.cs" />
     <Compile Include="TempExtensions\AttackSpellResultExtensions.cs" />
+    <Compile Include="TempExtensions\HitAttackTemplateExtensions.cs" />
+    <Compile Include="TempExtensions\ModifyListExtension.cs" />
     <Compile Include="TempExtensions\OnHitStatusGameExtension.cs" />
+    <Compile Include="TempExtensions\OpenEditWindowExtensions.cs" />
     <Compile Include="TempExtensions\PlayableEntityGameExtensions.cs" />
     <Compile Include="Tools\BindingProxy.cs" />
     <Compile Include="Game\Entities\CharacterList.cs" />

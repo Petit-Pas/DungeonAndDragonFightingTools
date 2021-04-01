@@ -38,7 +38,7 @@ namespace DnDToolsLibrary.Fight
             });
         }
 
-        public override void AddElement(PlayableEntity entity = null)
+        public void AddElement(PlayableEntity entity = null)
         {
             if (entity != null)
             {

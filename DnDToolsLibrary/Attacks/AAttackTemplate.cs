@@ -13,11 +13,6 @@ namespace DnDToolsLibrary.Attacks
         {
         }
 
-        public virtual bool OpenEditWindow()
-        {
-            throw new NotImplementedException("Edit method should be overriden");
-        }
-
         #region Properties
 
         #region Properties_Name

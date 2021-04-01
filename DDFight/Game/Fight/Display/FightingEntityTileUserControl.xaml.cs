@@ -69,7 +69,7 @@ namespace DDFight.Controlers.Fight
 
         private void MainControl_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Global.Context.FightContext.OnSelectedCharacter(new SelectedCharacterEventArgs()
+            GlobalContext.Context.FightContext.OnSelectedCharacter(new SelectedCharacterEventArgs()
             {
                 Character = data_context,
             });
@@ -83,7 +83,7 @@ namespace DDFight.Controlers.Fight
             {
                 data_context.NewTurnStarted += Data_context_NewTurnStarted;
                 data_context.TurnEnded += Data_context_TurnEnded;
-                Global.Context.FightContext.CharacterSelected += FightContext_CharacterSelected;
+                GlobalContext.Context.FightContext.CharacterSelected += FightContext_CharacterSelected;
             }
         }
 
@@ -96,7 +96,7 @@ namespace DDFight.Controlers.Fight
                 this.UnregisterAllChildren();
                 data_context.NewTurnStarted -= Data_context_NewTurnStarted;
                 data_context.TurnEnded -= Data_context_TurnEnded;
-                Global.Context.FightContext.CharacterSelected -= FightContext_CharacterSelected;
+                GlobalContext.Context.FightContext.CharacterSelected -= FightContext_CharacterSelected;
             }
         }
 
@@ -179,7 +179,7 @@ namespace DDFight.Controlers.Fight
             if (dc.Yes)
             {
                 UnregisterToAll();
-                Global.Context.FightContext.RemoveCharacterFromFight(data_context);
+                GlobalContext.Context.FightContext.RemoveCharacterFromFight(data_context);
             }
         }
 
@@ -198,7 +198,7 @@ namespace DDFight.Controlers.Fight
             {
                 SelectPlayableEntityWindow window = new SelectPlayableEntityWindow
                 {
-                    DataContext = Global.Context.MonsterList.Elements.Clone<PlayableEntity, Monster>(),
+                    DataContext = GlobalContext.Context.MonsterList.Elements.Clone<PlayableEntity, Monster>(),
                 };
                 window.TitleControl.Text = "Select the monster in which to transform";
                 window.ShowCentered();

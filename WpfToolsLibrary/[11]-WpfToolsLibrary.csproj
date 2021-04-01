@@ -58,13 +58,13 @@
     <Compile Include="Converters\Visibilities\IntEqualToZeroToVisibility.cs" />
     <Compile Include="Converters\Visibilities\IntGreaterThanZeroToVisibility.cs" />
     <Compile Include="Converters\Visibilities\StringToVisibilityConverter.cs" />
-    <Compile Include="Display\IContainWindowEditableElements.cs" />
     <Compile Include="Display\INameable.cs" />
     <Compile Include="Extensions\BindingExtensions.cs" />
     <Compile Include="Extensions\RunExtensions.cs" />
     <Compile Include="Extensions\TreeReflexionExtensions.cs" />
     <Compile Include="Extensions\FrameworkElementExtensions.cs" />
     <Compile Include="Navigation\IRollableControl.cs" />
+    <Compile Include="Navigation\IValidableWindow.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

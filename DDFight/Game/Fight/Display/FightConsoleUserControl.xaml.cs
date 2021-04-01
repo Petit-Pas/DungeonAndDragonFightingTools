@@ -11,7 +11,7 @@ namespace DDFight.Controlers.Fight
         public FightConsoleUserControl()
         {
             InitializeComponent();
-            DataContext = Global.Context;
+            DataContext = GlobalContext.Context;
             RichTextBoxControl.TextChanged += RichTextBoxControl_TextChanged;
             RichTextBoxControl.ScrollToEnd();
         }

@@ -1,4 +1,7 @@
-﻿using DnDToolsLibrary.Status;
+﻿using DDFight.ListExtensions;
+using DDFight.TempExtensions;
+using DDFight.WpfExtensions;
+using DnDToolsLibrary.Status;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -52,7 +55,8 @@ namespace DDFight.Game.Status.Display
         {
             if (StatusListControl.SelectedIndex != -1)
             {
-                data_context.EditElement((CustomVerboseStatus)StatusListControl.SelectedItem);
+                if (StatusListControl.SelectedItem is CustomVerboseStatus status)
+                    status.OpenEditWindow();
             }
         }
     }

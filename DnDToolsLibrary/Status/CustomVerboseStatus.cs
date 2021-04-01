@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BaseToolsLibrary.Memory;
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Xml.Serialization;
@@ -6,7 +7,7 @@ using WpfToolsLibrary.Display;
 
 namespace DnDToolsLibrary.Status
 {
-    public class CustomVerboseStatus : INotifyPropertyChanged, ICloneable, INameable
+    public class CustomVerboseStatus : INotifyPropertyChanged, ICopyAssignable, INameable
     {
         public CustomVerboseStatus() { }
 
@@ -75,36 +76,17 @@ namespace DnDToolsLibrary.Status
             return new CustomVerboseStatus(this);
         }
 
-        public void CopyAssign(CustomVerboseStatus to_copy)
+        public void CopyAssign(object to_copy)
         {
-            init_copy(to_copy);
+            if (to_copy is CustomVerboseStatus status)
+            {
+                init_copy(status);
+            }
         }
 
         #endregion ICloneable
 
         #region DisplayOption
-
-        /// <summary>
-        ///     Will open a window to edit this instance
-        /// </summary>
-        /// <returns> True if the current instance has changed, false otherwise </returns>
-        public virtual bool OpenEditWindow()
-        {
-            Console.WriteLine("CRITICAL THIS SHOULD NOT BE HERE ANYMORE");
-            /*CustomVerboseStatusEditWindow window = new CustomVerboseStatusEditWindow();
-            CustomVerboseStatus dc = (CustomVerboseStatus)this.Clone();
-
-            window.DataContext = dc;
-
-            window.ShowCentered();
-
-            if (window.Validated)
-            {
-                this.CopyAssign(dc);
-                return true;
-            }*/
-            return false;
-        }
 
         #endregion DisplayOption
 
@@ -126,6 +108,7 @@ namespace DnDToolsLibrary.Status
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
         #endregion
     }
 }

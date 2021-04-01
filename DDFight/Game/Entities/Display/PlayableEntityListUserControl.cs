@@ -1,6 +1,8 @@
 ﻿using DDFight.Controlers;
+using DDFight.WpfExtensions;
 using DnDToolsLibrary.Entities;
 using System.Windows.Input;
+using TempExtensionsPlayableEntity;
 
 namespace DDFight.Game.Entities.Display
 {
@@ -9,6 +11,13 @@ namespace DDFight.Game.Entities.Display
     {
         public PlayableEntityListUserControl() : base ()
         {
+        }
+        
+        public override bool edit(object element)
+        {
+            if (element is PlayableEntity playableEntity)
+                return playableEntity.OpenEditWindow();
+            return false;
         }
 
         protected override void EntityListControl_KeyDown(object sender, KeyEventArgs e)
@@ -22,7 +31,7 @@ namespace DDFight.Game.Entities.Display
                     e.Handled = true;
                     if (EntityListControl.SelectedIndex != -1)
                     {
-                        Global.Context.FightContext.FightersList.AddElement(EntityListControl.SelectedItem as T);
+                        GlobalContext.Context.FightContext.FightersList.AddElement(EntityListControl.SelectedItem as T);
                     }
                 }
             }

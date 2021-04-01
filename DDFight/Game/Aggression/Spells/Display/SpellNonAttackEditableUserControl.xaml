@@ -79,7 +79,7 @@
             Background="{StaticResource LightestGray}"
             Grid.Column="0" Grid.Row="1"
             Margin="5"
-            HasSavingThrow="{Binding Path=DataContext.HasSavingThrow, RelativeSource={RelativeSource AncestorType=local:SpellNonAttackEditableUserControl}}"
+            HasSavingThrow="{Binding Path=DataContext.HasSavingThrow, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:SpellNonAttackEditableUserControl}}}"
             DataContext="{Binding HitDamage}"
         />
 
@@ -88,7 +88,7 @@
             Grid.Column="1" Grid.Row="1"
             Margin="5"
             DataContext="{Binding AppliedStatus}"
-            HasSavingThrow="{Binding Path=DataContext.HasSavingThrow, RelativeSource={RelativeSource AncestorType=local:SpellNonAttackEditableUserControl}}"
+            HasSavingThrow="{Binding Path=DataContext.HasSavingThrow, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:SpellNonAttackEditableUserControl}}}"
         />
 
 

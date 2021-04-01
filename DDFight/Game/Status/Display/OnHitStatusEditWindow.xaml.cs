@@ -2,15 +2,16 @@
 using DnDToolsLibrary.Status;
 using System.Windows;
 using WpfToolsLibrary.Extensions;
+using WpfToolsLibrary.Navigation;
 
 namespace DDFight.Game.Status.Display
 {
     /// <summary>
     /// Logique d'interaction pour EditCustomVerboseStatusWindow.xaml
     /// </summary>
-    public partial class OnHitStatusEditWindow : Window
+    public partial class OnHitStatusEditWindow : Window, IValidableWindow
     {
-        public bool Validated = false;
+        public bool Validated { get; set; } = false;
 
         public OnHitStatus data_context
         {

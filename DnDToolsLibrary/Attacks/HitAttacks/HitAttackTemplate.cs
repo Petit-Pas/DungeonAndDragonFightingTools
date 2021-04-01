@@ -90,24 +90,6 @@ namespace DnDToolsLibrary.Attacks.HitAttacks
             */
         }
 
-        public override bool OpenEditWindow()
-        {
-            Console.WriteLine("CRITICAL THIS SHOULD NOT BE HERE ANYMORE");
-            /*
-            HitAttackTemplateEditWindow window = new HitAttackTemplateEditWindow();
-            HitAttackTemplate temporary = (HitAttackTemplate)this.Clone();
-            window.DataContext = temporary;
-            window.ShowCentered();
-
-            if (window.Validated == true)
-            {
-                this.CopyAssign(temporary);
-                return true;
-            }
-            return false;*/
-            return false;
-        }
-
         #region ICloneable
 
         private void init_copy(HitAttackTemplate to_copy)

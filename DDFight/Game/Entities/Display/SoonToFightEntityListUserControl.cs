@@ -41,12 +41,13 @@ namespace DDFight.Game.Entities.Display
 
         #region ListControl
 
-        public override void edit(object obj)
+        public override bool edit(object obj)
         {
             //PlayableEntity entity = obj as PlayableEntity;
             //entity.OpenEditWindow();
             // TODO
             Logger.Log("CRITICAL THIS SHOULD HAVE BEEN REPLACED");
+            return false;
         }
 
         public override void remove(object obj)

@@ -18,10 +18,10 @@ namespace DDFight.Windows.FightWindows
 
         private void AddToFightWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            CharacterListControl.DataContext = Global.Context.CharacterList;
-            MonsterListControl.DataContext = Global.Context.MonsterList;
+            CharacterListControl.DataContext = GlobalContext.Context.CharacterList;
+            MonsterListControl.DataContext = GlobalContext.Context.MonsterList;
 
-            FighterListControl.ItemsSource = Global.Context.FightContext.FightersList.Elements;
+            FighterListControl.ItemsSource = GlobalContext.Context.FightContext.FightersList.Elements;
         }
 
         private void FighterListControl_KeyDown(object sender, KeyEventArgs e)
@@ -30,7 +30,7 @@ namespace DDFight.Windows.FightWindows
             {
                 if (FighterListControl.SelectedIndex >= 0)
                 {
-                    Global.Context.FightContext.FightersList.RemoveElement(FighterListControl.SelectedItem as PlayableEntity);
+                    GlobalContext.Context.FightContext.FightersList.RemoveElement(FighterListControl.SelectedItem as PlayableEntity);
                 }
             }
         }

@@ -1,4 +1,5 @@
 ﻿using BaseToolsLibrary.IO;
+using BaseToolsLibrary.Memory;
 using DDFight.Game;
 using DDFight.Game.Entities;
 using DDFight.Windows;
@@ -14,14 +15,13 @@ using WpfToolsLibrary.Extensions;
 
 namespace DDFight
 {
-    public class Global
+    public class GlobalContext
     {
         /// <summary>
         ///     required for any constructor that builds a list in an item that can be saved
         ///     Loading == trues ==> do not instantiate the list as it means you are in the Loading phase where the program deserializes .xml files, the list will be done by the xmlDerserializer
         ///     Loading == false ==> you really asked for a new instance of whatever the class you did instantiate and you can then initialize its lists.
         /// </summary>
-        public static bool Loading = true;
 
         public static GameDataContext Context = new GameDataContext();
 
@@ -40,17 +40,17 @@ namespace DDFight
 
             Logger.Init();
 
-            Global.Context.CharacterList = SaveManager.LoadGenericList<Character, CharacterList>(SaveManager.players_folder);
-            Global.Context.MonsterList = SaveManager.LoadGenericList<Monster, MonsterList>(SaveManager.monsters_folder);
-            Global.Context.SpellList = SaveManager.LoadGenericList<Spell, SpellList>(SaveManager.spells_folder);
-            Global.Context.SpellList.IsMainSpellList = true;
+            GlobalContext.Context.CharacterList = SaveManager.LoadGenericList<Character, CharacterList>(SaveManager.players_folder);
+            GlobalContext.Context.MonsterList = SaveManager.LoadGenericList<Monster, MonsterList>(SaveManager.monsters_folder);
+            GlobalContext.Context.SpellList = SaveManager.LoadGenericList<Spell, SpellList>(SaveManager.spells_folder);
+            GlobalContext.Context.SpellList.IsMainSpellList = true;
 
             Global.Loading = false;
 
 
-            Global.Context.FightContext.FightersList.Elements.CollectionChanged += FightingCharacters_CollectionChanged;
+            GlobalContext.Context.FightContext.FightersList.Elements.CollectionChanged += FightingCharacters_CollectionChanged;
 
-            DataContext = Global.Context;
+            DataContext = GlobalContext.Context;
 
             InitializeComponent();
 
@@ -59,39 +59,39 @@ namespace DDFight
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            GlobalSpellListControl.DataContext = Global.Context.SpellList;
+            GlobalSpellListControl.DataContext = GlobalContext.Context.SpellList;
         }
 
         private void FightingCharacters_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            FightButton.IsEnabled = Global.Context.FightContext.FightersList.Elements.Count >= 2;
+            FightButton.IsEnabled = GlobalContext.Context.FightContext.FightersList.Elements.Count >= 2;
         }
 
         private void FightButton_Click(object sender, RoutedEventArgs e)
         {
             RollInitiativeWindow window = new RollInitiativeWindow();
-            window.DataContext = Global.Context.FightContext.FightersList;
+            window.DataContext = GlobalContext.Context.FightContext.FightersList;
 
             window.ShowCentered();
 
             if (window.Cancelled == false)
             {
-                Global.Context.FightContext.FightersList.SetTurnOrders();
+                GlobalContext.Context.FightContext.FightersList.SetTurnOrders();
 
                 FightConsole.Instance.Reset();
 
                 MainFightWindow fightWindow = new MainFightWindow();
-                fightWindow.DataContext = Global.Context;
+                fightWindow.DataContext = GlobalContext.Context;
                 fightWindow.ShowCentered();
 
                 // Clean up after a Fight
                 fightWindow.UnregisterAllChildren();
-                foreach (Character character in Global.Context.FightContext.FightersList.Elements.OfType<Character>())
+                foreach (Character character in GlobalContext.Context.FightContext.FightersList.Elements.OfType<Character>())
                 {
                     character.GetOutOfFight();
                 }
-                Global.Context.FightContext.Reset();
-                GenericList<Character>.SaveAll<Character>(Global.Context.CharacterList);
+                GlobalContext.Context.FightContext.Reset();
+                GenericList<Character>.SaveAll<Character>(GlobalContext.Context.CharacterList);
                 //Global.Context.CharacterList.SaveAll();
             }
 

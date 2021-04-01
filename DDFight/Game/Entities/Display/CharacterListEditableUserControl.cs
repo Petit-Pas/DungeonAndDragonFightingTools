@@ -22,6 +22,6 @@ namespace DDFight.Game.Entities.Display
         private void CharacterListEditableUserControl_DataContextChanged(object sender, System.Windows.DependencyPropertyChangedEventArgs e)
         {
             refresh_entityList();
-        }       
+        }
     }
 }

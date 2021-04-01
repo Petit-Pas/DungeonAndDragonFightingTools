@@ -1,4 +1,5 @@
 ﻿using DDFight.Controlers;
+using DDFight.WpfExtensions;
 using DnDToolsLibrary.Attacks.Spells;
 
 namespace DDFight.Game.Aggression.Spells.Display
@@ -13,6 +14,13 @@ namespace DDFight.Game.Aggression.Spells.Display
         private SpellList data_context
         {
             get => DataContext as SpellList;
+        }
+
+        public override bool edit(object element)
+        {
+            if (element is Spell spell)
+                return spell.OpenEditWindow();
+            return false;
         }
 
         private void refresh_entityList()

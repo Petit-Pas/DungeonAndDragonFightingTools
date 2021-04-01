@@ -104,28 +104,6 @@ namespace DnDToolsLibrary.Memory
         }
         private ObservableCollection<T> _elements = new ObservableCollection<T>();
 
-        public bool EditElement(T elem)
-        {
-            if (this is IContainWindowEditableElements elements)
-            {
-                elements.EditElement(elem);
-            }
-            else
-            {
-                Logger.Log($"WARN: trying to Edit an element that isnt contained in a IContainWindowEditableElements: {Elements.GetType()}");
-            }
-
-            /*if (elem is IWindowEditable)
-            {
-                if (((IWindowEditable)elem).OpenEditWindow())
-                {
-                    OnListElementChanged(new ListElementChangedArgs { Element = elem, Operation = GenericListOperation.Modification });
-                    return true;
-                }
-            }*/
-            return false;
-        }
-
         public void RemoveAt(int index)
         {
             Elements.RemoveAt(index);
@@ -138,41 +116,8 @@ namespace DnDToolsLibrary.Memory
             OnListElementChanged(new ListElementChangedArgs { Element = elem, Operation = GenericListOperation.Deletion });
         }
 
-        public void DuplicateElement(T elem)
-        {
-            T new_one = elem.Clone() as T;
-            if (elem is INameable)
-            {
-                ((INameable)new_one).Name = ((INameable)new_one).Name + " - Copy";
-            }
-            AddElement(new_one);
-        }
-
         /// <summary>
-        ///     Opens the editor window before adding the new element. If that window is canceled, the element is not added
-        ///     Opposed to AddElementSilent()
-        /// </summary>
-        /// <param name="elem"></param>
-        public virtual void AddElement(T elem = null)
-        {
-            if (elem == null)
-                elem = new T();
-            if (this is IContainWindowEditableElements elements)
-            {
-                if (elements.EditElement(elem))
-                    AddElementSilent(elem);
-                else
-                {
-                    if (elem is IDisposable disposable)
-                        disposable.Dispose();
-                }
-            }
-            else
-                AddElementSilent(elem);
-        }
-
-        /// <summary>
-        ///     Adds the new element to Elements without opening the Edit window, opposed to AddElement()
+        ///     Adds the new element to Elements without opening any window
         /// </summary>
         /// <param name="elem"></param>
         public void AddElementSilent(T elem = null)
