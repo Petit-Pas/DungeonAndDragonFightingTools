@@ -1,7 +1,7 @@
 ﻿using DnDToolsLibrary.Dice;
 using DnDToolsLibrary.Entities;
 using System.Windows;
-using WpfDnDCustomControlLibrary.Entities.Extensions;
+using TempExtensionsPlayableEntity;
 using WpfToolsLibrary.Extensions;
 
 namespace DDFight.Windows.FightWindows

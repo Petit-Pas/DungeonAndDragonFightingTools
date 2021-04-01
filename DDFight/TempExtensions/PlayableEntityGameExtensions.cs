@@ -14,7 +14,7 @@ using WpfDnDCustomControlLibrary.Converters;
 using WpfToolsLibrary.ConsoleTools;
 using WpfToolsLibrary.Extensions;
 
-namespace WpfDnDCustomControlLibrary.Entities.Extensions
+namespace TempExtensionsPlayableEntity
 {
     public static class PlayableEntityGameExtensions
     {

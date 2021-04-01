@@ -1,19 +1,16 @@
 ﻿using DnDToolsLibrary.Attacks.HitAttacks;
 using DnDToolsLibrary.Attacks.Spells;
 using DnDToolsLibrary.Entities;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
-using WpfDnDCustomControlLibrary.Entities.Extensions;
+using TempExtensionsPlayableEntity;
+using WpfDnDCustomControlLibrary.Attacks.Spells;
 using WpfToolsLibrary.ConsoleTools;
 using WpfToolsLibrary.Extensions;
 
-namespace WpfDnDCustomControlLibrary.Attacks.Spells.Extensions
+namespace TempExtensionsAttackSpellResultExtensions
 {
     public static class AttackSpellResultExtensions
     {

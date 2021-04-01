@@ -3,8 +3,8 @@ using DnDToolsLibrary.Attacks.Spells;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
+using TempExtensionsAttackSpellResultExtensions;
 using WpfDnDCustomControlLibrary.Attacks.Spells;
-using WpfDnDCustomControlLibrary.Attacks.Spells.Extensions;
 using WpfToolsLibrary.Extensions;
 using WpfToolsLibrary.Navigation;
 

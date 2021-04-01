@@ -16,7 +16,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using WpfDnDCustomControlLibrary.Entities.Extensions;
+using TempExtensionsPlayableEntity;
 using WpfToolsLibrary.Extensions;
 
 namespace DDFight.Controlers.Fight

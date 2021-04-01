@@ -147,6 +147,9 @@
       <DependentUpon>ApplicationModifierEnumListSelectableUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Game\Status\Display\CustomVerboseStatusListUserControl.cs" />
+    <Compile Include="TempExtensions\AttackSpellResultExtensions.cs" />
+    <Compile Include="TempExtensions\OnHitStatusGameExtension.cs" />
+    <Compile Include="TempExtensions\PlayableEntityGameExtensions.cs" />
     <Compile Include="Tools\BindingProxy.cs" />
     <Compile Include="Game\Entities\CharacterList.cs" />
     <Compile Include="Game\Entities\MonsterList.cs" />

@@ -5,7 +5,7 @@ using System.Windows.Media;
 using WpfToolsLibrary.ConsoleTools;
 using WpfToolsLibrary.Extensions;
 
-namespace WpfDnDCustomControlLibrary.Status.Extensoions
+namespace TempExtensionsOnHitStatus
 {
     public static class OnHitStatusGameExtension
     {
