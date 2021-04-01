@@ -58,9 +58,7 @@
     <Compile Include="Attacks\Spells\SpellAttackResultRollableUserControl.xaml.cs">
       <DependentUpon>SpellAttackResultRollableUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converters\BoolToReversedVisibilityConverter.cs" />
     <Compile Include="Converters\DamageTypeEnumToBrushConverter.cs" />
-    <Compile Include="Converters\StringToVisibilityConverter.cs" />
     <Compile Include="DnDToolsWpfExtensions\Entities\PlayableEntityWpfExtensions.cs" />
     <Compile Include="Entities\Extensions\PlayableEntityGameExtensions.cs" />
     <Compile Include="InputBoxes\DiceTextBoxes\AttackRollTextBoxControl.cs" />

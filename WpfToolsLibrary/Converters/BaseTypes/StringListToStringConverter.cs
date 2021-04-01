@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Windows.Data;
 
-namespace DDFight.Converters
+namespace WpfToolsLibrary.Converters.BaseTypes
 {
     public class StringListToStringConverter : IValueConverter
     {

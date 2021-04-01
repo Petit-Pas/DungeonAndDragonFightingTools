@@ -3,11 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:DDFight.Controlers.Fight"
-             xmlns:fight="clr-namespace:DDFight.Controlers.Game.Attacks"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:counter="clr-namespace:DDFight.Game.Counters.Display" 
-             xmlns:converters="clr-namespace:DDFight.Converters" xmlns:display="clr-namespace:DDFight.Game.Aggression.Spells.Display" xmlns:display1="clr-namespace:DDFight.Game.Fight.Display"
+             xmlns:display="clr-namespace:DDFight.Game.Aggression.Spells.Display"
+             xmlns:display1="clr-namespace:DDFight.Game.Fight.Display" 
+             xmlns:visibilities="clr-namespace:WpfDnDCustomControlLibrary.Converters.Visibilities;assembly=WpfToolsLibrary"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -16,7 +16,7 @@
                 <ResourceDictionary Source="/Styles/TabControlStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <system:String x:Key="Format">{0}'s Actions</system:String>
-            <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+            <visibilities:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
     <GroupBox

@@ -3,9 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes" xmlns:characteristics="clr-namespace:DDFight.Controlers.Game.Characteristics" xmlns:display="clr-namespace:DDFight.Game.Status.Display"
-        xmlns:converter="clr-namespace:DDFight.Converters"
-        xmlns:damagelistcontrols="clr-namespace:DDFight.Controlers.Game.Attacks.DamageListControls" xmlns:stringtextboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.StringTextBoxes;assembly=WpfCustomControlLibrary"
+        xmlns:display="clr-namespace:DDFight.Game.Status.Display"
+        xmlns:stringtextboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.StringTextBoxes;assembly=WpfCustomControlLibrary" 
+        xmlns:converter="clr-namespace:WpfDnDCustomControlLibrary.Converters.Visibilities;assembly=WpfToolsLibrary" xmlns:converter1="clr-namespace:WpfToolsLibrary.Converters.BaseTypes;assembly=WpfToolsLibrary"
         mc:Ignorable="d"
         Title="EditCustomVerboseStatusWindow" Height="550" Width="800"
         Background="{StaticResource LightestGray}"
@@ -16,7 +16,7 @@
                 <ResourceDictionary Source="/Styles/TabControlStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-            <converter:BoolToReversedBoolConverter x:Key="BootToReversedBoolConverter"/>
+            <converter1:BoolToReversedBoolConverter x:Key="BootToReversedBoolConverter"/>
             <Style TargetType="TextBlock" x:Key="LabelStyle">
                 <Setter Property="Foreground" Value="{StaticResource Light}" />
                 <Setter Property="FontSize" Value="15" />

@@ -75,11 +75,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controlers\SpecializedListUserControl.cs" />
-    <Compile Include="Converters\BoolToReversedBoolConverter.cs" />
-    <Compile Include="Converters\BoolToReversedVisibilityConverter.cs" />
-    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
-    <Compile Include="Converters\IntEqualToZeroToVisibility.cs" />
-    <Compile Include="Converters\IntGreaterThanZeroToVisibility.cs" />
     <Compile Include="Converters\VisibleIfCharacter.cs" />
     <Compile Include="Game\Aggression\Attacks\Display\HitAttackResultEditableControl.xaml.cs">
       <DependentUpon>HitAttackResultEditableControl.xaml</DependentUpon>
@@ -230,7 +225,6 @@
       <DependentUpon>DiceRollEditableUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BoolToCustomStringConverter.cs" />
-    <Compile Include="Converters\StringToVisibilityConverter.cs" />
     <Compile Include="Game\Dices\SavingThrow\SituationalSavingThrowModifier.cs" />
     <Compile Include="Game\SpecialAbilitiesEditableUserControl.xaml.cs">
       <DependentUpon>SpecialAbilitiesEditableUserControl.xaml</DependentUpon>
@@ -262,8 +256,6 @@
     <Compile Include="Controlers\InputBoxes\BooleanButton.xaml.cs">
       <DependentUpon>BooleanButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converters\StringListToStringConverter.cs" />
-    <Compile Include="Converters\IntToStringConverter.cs" />
     <Compile Include="Converters\DiceRollToStringConverter.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Game\Fight\FightDataContext.cs" />

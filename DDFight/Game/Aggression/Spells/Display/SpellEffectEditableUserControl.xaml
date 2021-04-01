@@ -4,10 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DDFight.Game.Aggression.Spells.Display" 
-             xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes" 
-             xmlns:converter="clr-namespace:DDFight.Converters" 
-             xmlns:controlers="clr-namespace:DDFight.Controlers"
-             xmlns:sliderbutton="clr-namespace:WpfCustomControlLibrary.SliderButton;assembly=WpfCustomControlLibrary" xmlns:inttextboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.IntTextBoxes;assembly=WpfCustomControlLibrary"
+             xmlns:sliderbutton="clr-namespace:WpfCustomControlLibrary.SliderButton;assembly=WpfCustomControlLibrary" 
+             xmlns:inttextboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.IntTextBoxes;assembly=WpfCustomControlLibrary"
+             xmlns:converter="clr-namespace:WpfDnDCustomControlLibrary.Converters.Visibilities;assembly=WpfToolsLibrary"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>

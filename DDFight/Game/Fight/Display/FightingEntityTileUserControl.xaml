@@ -4,13 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes"
-             xmlns:display="clr-namespace:DDFight.Game.Status.Display"
-             xmlns:converters="clr-namespace:DDFight.Converters"
+             xmlns:display="clr-namespace:DDFight.Game.Status.Display" 
+             xmlns:converters="clr-namespace:WpfDnDCustomControlLibrary.Converters.Visibilities;assembly=WpfToolsLibrary" 
+             xmlns:converters1="clr-namespace:DDFight.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <converters:BoolToCustomStringConverter x:Key="BoolCustomStringConverter" />
-        <converters:VisibleIfCharacter x:Key="VisibleIfCharacter" />
+        <converters1:BoolToCustomStringConverter x:Key="BoolCustomStringConverter" />
+        <converters1:VisibleIfCharacter x:Key="VisibleIfCharacter" />
         <converters:IntEqualToZeroToVisibility x:Key="IntEqualToZeroToVisibility" />
         <converters:IntGreaterThanZeroToVisibility x:Key="IntGreaterThanZeroToVisibility" />
         <ContextMenu x:Key="CMenu">

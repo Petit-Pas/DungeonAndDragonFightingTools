@@ -49,7 +49,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConsoleTools\FightConsole.cs" />
+    <Compile Include="Converters\BaseTypes\BoolToReversedBoolConverter.cs" />
+    <Compile Include="Converters\BaseTypes\IntToStringConverter.cs" />
+    <Compile Include="Converters\BaseTypes\StringListToStringConverter.cs" />
     <Compile Include="Converters\Math\BasicOperationConverter.cs" />
+    <Compile Include="Converters\Visibilities\BoolToReversedVisibilityConverter.cs" />
+    <Compile Include="Converters\Visibilities\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\Visibilities\IntEqualToZeroToVisibility.cs" />
+    <Compile Include="Converters\Visibilities\IntGreaterThanZeroToVisibility.cs" />
+    <Compile Include="Converters\Visibilities\StringToVisibilityConverter.cs" />
     <Compile Include="Display\IContainWindowEditableElements.cs" />
     <Compile Include="Display\INameable.cs" />
     <Compile Include="Extensions\BindingExtensions.cs" />
