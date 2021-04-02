@@ -5,6 +5,6 @@
     /// </summary>
     public interface IEventUnregisterable
     {
-        void UnregisterToAll();
+        void Unregister();
     }
 }

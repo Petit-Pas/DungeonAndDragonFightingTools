@@ -1,7 +1,15 @@
-﻿using DnDToolsLibrary.Status;
+﻿using DDFight;
+using DDFight.Game.Aggression.Display;
+using DDFight.Game.Status.Display;
+using DnDToolsLibrary.Attacks.Damage;
+using DnDToolsLibrary.Entities;
+using DnDToolsLibrary.Fight.Events;
+using DnDToolsLibrary.Status;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
+using TempExtensionsPlayableEntity;
 using WpfToolsLibrary.ConsoleTools;
 using WpfToolsLibrary.Extensions;
 
@@ -9,6 +17,144 @@ namespace TempExtensionsOnHitStatus
 {
     public static class OnHitStatusGameExtension
     {
+        /// <summary>
+        ///     is injected in OnHitStatus.Register at the start of the application in order to handle the events at a higher layer of the application 
+        /// </summary>
+        /// <param name="status"></param>
+        public static void Register(OnHitStatus status)
+        {
+            if (status.Affected != null)
+            {
+                if ((status.CanRedoSavingThrow && status.SavingIsRemadeAtStartOfTurn) ||
+                    (status.HasAMaximumDuration && !status.DurationIsCalculatedOnCasterTurn && status.DurationIsBasedOnStartOfTurn) ||
+                    status.DotDamageList.Elements.Count != 0)
+                    status.Affected.NewTurnStarted += status.Affected_NewTurnStarted;
+                if ((status.CanRedoSavingThrow && status.SavingIsRemadeAtStartOfTurn == false) ||
+                    (status.HasAMaximumDuration && !status.DurationIsCalculatedOnCasterTurn && !status.DurationIsBasedOnStartOfTurn) ||
+                    status.DotDamageList.Elements.Count != 0)
+                    status.Affected.TurnEnded += status.Affected_TurnEnded;
+            }
+            if (status.Caster != null)
+            {
+                if ((status.HasAMaximumDuration && status.DurationIsCalculatedOnCasterTurn && status.DurationIsBasedOnStartOfTurn) ||
+                    status.DotDamageList.Elements.Count != 0)
+                    status.Caster.NewTurnStarted += status.Caster_NewTurnStarted;
+                if ((status.HasAMaximumDuration && status.DurationIsCalculatedOnCasterTurn && !status.DurationIsBasedOnStartOfTurn) ||
+                    status.DotDamageList.Elements.Count != 0)
+                    status.Caster.TurnEnded += status.Caster_TurnEnded;
+
+                if (status.EndsOnCasterLossOfConcentration)
+                    status.Caster.PropertyChanged += status.Caster_PropertyChanged;
+            }
+        }
+
+        /// <summary>
+        ///     is injected in OnHitStatus.Register at the start of the application in order to handle the events at a higher layer of the application 
+        /// </summary>
+        /// <param name="status"></param>
+        public static void Unregister(OnHitStatus status)
+        {
+            if (status.Caster != null)
+            {
+                status.Caster.PropertyChanged -= status.Caster_PropertyChanged;
+                status.Caster.NewTurnStarted -= status.Caster_NewTurnStarted;
+                status.Caster.TurnEnded -= status.Caster_TurnEnded;
+            }
+            if (status.Affected != null)
+            {
+                status.Affected.NewTurnStarted -= status.Affected_NewTurnStarted;
+                status.Affected.TurnEnded -= status.Affected_TurnEnded;
+            }
+        }
+
+        /// <summary>
+        ///     Will trigger any dot damage required
+        /// </summary>
+        /// <param name="start"> true if its start of turn, false otherwise </param>
+        /// <param name="caster"> true if its caster's turn, false otherwise </param>
+        public static void CheckDotDamage(this OnHitStatus onHitStatus, bool start, bool caster)
+        {
+            DamageResultList to_apply = new DamageResultList();
+            foreach (DotTemplate dot in onHitStatus.DotDamageList.Elements)
+            {
+                if (dot.TriggersStartOfTurn == start && dot.TriggersOnCastersTurn == caster)
+                    to_apply.AddElementSilent(new DamageResult(dot));
+            }
+            if (to_apply.Elements.Count != 0)
+            {
+                DamageResultListRollableWindow window = new DamageResultListRollableWindow() { DataContext = to_apply, };
+                window.TitleControl.Text = onHitStatus.Header + " inflicts damage to " + onHitStatus.Affected.DisplayName;
+                window.ShowCentered();
+
+                if (window.Validated)
+                {
+                    onHitStatus.Affected.TakeHitDamage(to_apply);
+                }
+            }
+        }
+
+        public static void Affected_TurnEnded(this OnHitStatus onHitStatus, object sender, TurnEndedEventArgs args)
+        {
+            bool expired = false;
+
+            onHitStatus.CheckDotDamage(false, false);
+
+            if (onHitStatus.HasAMaximumDuration && !onHitStatus.DurationIsCalculatedOnCasterTurn && !onHitStatus.DurationIsBasedOnStartOfTurn)
+                expired = onHitStatus.RemoveDuration();
+            if (!expired && onHitStatus.CanRedoSavingThrow && !onHitStatus.SavingIsRemadeAtStartOfTurn)
+            {
+                OnHitStatusApplyWindow window = new OnHitStatusApplyWindow(onHitStatus.Caster, onHitStatus.Affected, false);
+                window.DataContext = onHitStatus;
+                window.ShowCentered();
+            }
+        }
+
+        public static void Caster_TurnEnded(this OnHitStatus onHitStatus, object sender, TurnEndedEventArgs args)
+        {
+            onHitStatus.CheckDotDamage(false, true);
+
+            if (onHitStatus.HasAMaximumDuration && onHitStatus.DurationIsCalculatedOnCasterTurn && !onHitStatus.DurationIsBasedOnStartOfTurn)
+                onHitStatus.RemoveDuration();
+        }
+
+        public static void Caster_NewTurnStarted(this OnHitStatus onHitStatus, object sender, StartNewTurnEventArgs args)
+        {
+            onHitStatus.CheckDotDamage(true, true);
+
+            if (onHitStatus.HasAMaximumDuration && onHitStatus.DurationIsCalculatedOnCasterTurn && onHitStatus.DurationIsBasedOnStartOfTurn)
+                onHitStatus.RemoveDuration();
+        }
+
+        public static void Caster_PropertyChanged(this OnHitStatus onHitStatus, object sender, PropertyChangedEventArgs e)
+        {
+            if (onHitStatus.EndsOnCasterLossOfConcentration && e.PropertyName == "IsFocused" && onHitStatus.Caster.IsFocused == false)
+            {
+                Paragraph paragraph = (Paragraph)FightConsole.Instance.UserLogs.Blocks.LastBlock;
+
+                paragraph.Inlines.Add(RunExtensions.BuildRun("Due to ", (Brush)System.Windows.Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                paragraph.Inlines.Add(RunExtensions.BuildRun(onHitStatus.Caster.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
+                paragraph.Inlines.Add(RunExtensions.BuildRun("'s loss of concentration, ", (Brush)System.Windows.Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                onHitStatus.RemoveStatus();
+            }
+        }
+
+        public static void Affected_NewTurnStarted(this OnHitStatus onHitStatus, object sender, StartNewTurnEventArgs args)
+        {
+            bool expired = false;
+
+            onHitStatus.CheckDotDamage(true, false);
+
+            if (onHitStatus.HasAMaximumDuration && !onHitStatus.DurationIsCalculatedOnCasterTurn && onHitStatus.DurationIsBasedOnStartOfTurn)
+                expired = onHitStatus.RemoveDuration();
+            if (!expired && onHitStatus.CanRedoSavingThrow && onHitStatus.SavingIsRemadeAtStartOfTurn)
+            {
+                OnHitStatusApplyWindow window = new OnHitStatusApplyWindow(onHitStatus.Caster, onHitStatus.Affected, false);
+                window.DataContext = onHitStatus;
+
+                window.ShowCentered();
+            }
+        }
+
         /// <summary>
         ///     removes 1 turn from the Remaining rounds variable
         ///     if the status expires, the function removes it from the target of the status
@@ -47,7 +193,76 @@ namespace TempExtensionsOnHitStatus
             paragraph.Inlines.Add(RunExtensions.BuildRun(".\r\n", (Brush)System.Windows.Application.Current.Resources["Light"], 15, FontWeights.Normal));
 
             onHitStatus.Affected.CustomVerboseStatusList.RemoveElement(onHitStatus);
-            onHitStatus.UnregisterToAll();
+            onHitStatus.Unregister();
         }
+
+
+        /// <summary>
+        ///     A function that applies this status to the given target
+        ///     it will register to any required event for the status to automatically ends
+        /// </summary>
+        /// <param name="caster"> the one that tries to apply the status </param>
+        /// <param name="target"> the target of the status </param>
+        /// <param name="application_success"> tells wether or not the application is a success, only used with "false" to tell the OnApplyDamage can be resisted / canceled </param>
+        /// <param name="multiple_application"> tells that a status will be applied more than once ==> to avoid the removal of concentration on every new affected ==> false for the first call, true for the other ones </param>
+        public static void Apply(this OnHitStatus onHitStatus, PlayableEntity caster, PlayableEntity target, bool application_success = true, bool multiple_application = false)
+        {
+            // the applied status is a copy
+            OnHitStatus applied = (OnHitStatus)onHitStatus.Clone();
+
+            if (applied.OnApplyDamageList.Elements.Count != 0)
+            {
+                DamageResultList onApplyDamageList = onHitStatus.OnApplyDamageList.GetResultList();
+                foreach (DamageResult dmg in onApplyDamageList.Elements)
+                    dmg.LastSavingWasSuccesfull = !application_success;
+                DamageResultListRollableWindow window = new DamageResultListRollableWindow() { DataContext=onApplyDamageList, };
+                window.ShowCentered();
+                if (window.Validated)
+                    target.TakeHitDamage(onApplyDamageList);
+            }
+
+            if (application_success)
+            {
+                Paragraph paragraph = (Paragraph)FightConsole.Instance.UserLogs.Blocks.LastBlock;
+
+                paragraph.Inlines.Add(RunExtensions.BuildRun(caster.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                paragraph.Inlines.Add(RunExtensions.BuildRun(" applies ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                paragraph.Inlines.Add(RunExtensions.BuildRun(onHitStatus.Header, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                paragraph.Inlines.Add(RunExtensions.BuildRun(" on ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                paragraph.Inlines.Add(RunExtensions.BuildRun(target.DisplayName + "\r\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+
+                applied.Caster = caster;
+                applied.Affected = target;
+                target.CustomVerboseStatusList.AddElementSilent(applied);
+                OnHitStatus.RegisterEvents(applied);
+                
+                if (applied.EndsOnCasterLossOfConcentration)
+                {
+                    if (caster.IsFocused == true && multiple_application == false)
+                        caster.IsFocused = false;
+                    caster.IsFocused = true;
+                }
+            }
+        }
+
+        /// <summary>
+        ///     Will open a window if a check has to be made for the OnHitStatus to affect the target, then apply the status if required
+        /// </summary>
+        /// <param name="caster"> the one that tries to apply the status </param>
+        /// <param name="target"> the target of the status </param>
+        public static void CheckIfApply(this OnHitStatus onHitStatus, PlayableEntity caster, PlayableEntity target)
+        {
+            if (onHitStatus.HasApplyCondition)
+            {
+                OnHitStatusApplyWindow window = new OnHitStatusApplyWindow(caster, target);
+                window.DataContext = onHitStatus;
+                window.ShowCentered();
+            }
+            else
+            {
+                onHitStatus.Apply(caster, target);
+            }
+        }
+
     }
 }

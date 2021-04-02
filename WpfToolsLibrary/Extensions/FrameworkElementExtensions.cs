@@ -41,7 +41,7 @@ namespace WpfToolsLibrary.Extensions
                 var child = VisualTreeHelper.GetChild(element, i) as FrameworkElement;
                 if (child is IEventUnregisterable)
                 {
-                    ((IEventUnregisterable)child).UnregisterToAll();
+                    ((IEventUnregisterable)child).Unregister();
                 }
                 child.UnregisterAllChildren();
             }

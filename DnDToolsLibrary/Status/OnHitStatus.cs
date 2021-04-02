@@ -1,17 +1,21 @@
-﻿using System.ComponentModel;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 using System;
 using BaseToolsLibrary.Tools;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Characteristics;
 using DnDToolsLibrary.Attacks.Damage;
-using DnDToolsLibrary.Fight.Events;
 using DnDToolsLibrary.Dice;
 
 namespace DnDToolsLibrary.Status
 {
     public class OnHitStatus : CustomVerboseStatus, IEventUnregisterable, IDisposable
     {
+        /// <summary>
+        ///     As event handling is moved to higher layers of the application, these actions allow us to inject Register and Unregister comportment from other layers
+        /// </summary>
+        public static Action<OnHitStatus> RegisterEvents { get; set; } = null;
+        public static Action<OnHitStatus> UnregisterEvents { get; set; } = null;
+
 
         public OnHitStatus()
         {
@@ -219,8 +223,6 @@ namespace DnDToolsLibrary.Status
 
         #region Spells
 
-        // TODO check if this is realy necessary
-
         /* WARNING : these (in Spells region) are only used when the status is applied by a spell
                      with a spell you can have a Saving Throw (on the spell, not the status)
                      Is is different than the Saving Throw you could set in the OnHitStatus itself
@@ -268,51 +270,6 @@ namespace DnDToolsLibrary.Status
 
         #endregion Spells
 
-        #region InteractionLogic
-
-        #region InteractionLogic_Damage
-
-        #region InteractionLogic_Damage_Dot
-
-        /// <summary>
-        ///     Will trigger any dot damage required
-        /// </summary>
-        /// <param name="start"> true if its start of turn, false otherwise </param>
-        /// <param name="caster"> true if its caster's turn, false otherwise </param>
-        private void checkDotDamage(bool start, bool caster)
-        {
-            Console.WriteLine("CRITICAL DOT DAMAGE ON STATUS HAVE TO BE REIMPLEMENTED");
-            /*
-            DamageResultList to_apply = new DamageResultList();
-            foreach (DotTemplate dot in DotDamageList.Elements)
-            {
-                if (dot.TriggersStartOfTurn == start && dot.TriggersOnCastersTurn == caster)
-                    to_apply.AddElementSilent(new DamageResult(dot));
-            }
-            if (to_apply.Elements.Count != 0)
-            {
-                DamageResultListRollableWindow window = new DamageResultListRollableWindow() { DataContext = to_apply, };
-                window.TitleControl.Text = this.Header + " inflicts damage to " + Affected.DisplayName;
-                window.ShowCentered();
-
-                if (window.Validated)
-                {
-                    Affected.TakeHitDamage(to_apply);
-                }
-            }*/
-        }
-
-        #endregion InteractionLogic_Damage_Dot
-
-        #endregion InteractionLogic_Damage
-
-        #region InteractionLogic_EndCondition
-
-        #region InteractionLogic_EndCondition_MaximumDuration
-
-
-        #endregion InteractionLogic_EndCondition_MaximumDuration
-
         /// <summary>
         ///     In this method implements any "end of condition" such as : 
         ///     - after n turns
@@ -335,93 +292,6 @@ namespace DnDToolsLibrary.Status
             return false;
         }
 
-        #endregion InteractionLogic_EndCondition
-
-        #endregion InteractionLogic
-
-        #region Events
-
-        public void Affected_NewTurnStarted(object sender, StartNewTurnEventArgs args)
-        {
-            Console.WriteLine("CRITICAL");
-            /*
-
-            bool expired = false;
-
-            checkDotDamage(true, false);
-
-            if (HasAMaximumDuration && !DurationIsCalculatedOnCasterTurn && DurationIsBasedOnStartOfTurn)
-                expired = RemoveDuration();
-            if (!expired && CanRedoSavingThrow && SavingIsRemadeAtStartOfTurn)
-            {
-                OnHitStatusApplyWindow window = new OnHitStatusApplyWindow(Caster, Affected, false);
-                window.DataContext = this;
-
-                window.ShowCentered();
-            }
-            */
-        }
-
-        public void Affected_TurnEnded(object sender, TurnEndedEventArgs args)
-        {
-            Console.WriteLine("CRITICAL");
-            /*
-
-            bool expired = false;
-
-            checkDotDamage(false, false);
-
-            if (HasAMaximumDuration && !DurationIsCalculatedOnCasterTurn && !DurationIsBasedOnStartOfTurn)
-                expired = RemoveDuration();
-            if (!expired && CanRedoSavingThrow && !SavingIsRemadeAtStartOfTurn)
-            {
-                OnHitStatusApplyWindow window = new OnHitStatusApplyWindow(Caster, Affected, false);
-                window.DataContext = this;
-
-                window.ShowCentered();
-            }
-            */
-        }
-
-        private void Caster_TurnEnded(object sender, TurnEndedEventArgs args)
-        {
-            Console.WriteLine("CRITICAL");
-            /*
-            checkDotDamage(false, true);
-
-            if (HasAMaximumDuration && DurationIsCalculatedOnCasterTurn && !DurationIsBasedOnStartOfTurn)
-                RemoveDuration();
-            */
-        }
-
-        private void Caster_NewTurnStarted(object sender, StartNewTurnEventArgs args)
-        {
-            Console.WriteLine("CRITICAL");
-            /*
-            checkDotDamage(true, true);
-
-            if (HasAMaximumDuration && DurationIsCalculatedOnCasterTurn && DurationIsBasedOnStartOfTurn)
-                RemoveDuration();
-            */
-        }
-
-        public void Caster_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            Console.WriteLine("CRITICAL");
-            /*
-            if (this.EndsOnCasterLossOfConcentration && e.PropertyName == "IsFocused" && Caster.IsFocused == false)
-            {
-                Paragraph paragraph = (Paragraph)Global.Context.UserLogs.Blocks.LastBlock;
-
-                paragraph.Inlines.Add(Extensions.BuildRun("Due to ", (Brush)System.Windows.Application.Current.Resources["Light"], 15, FontWeights.Normal));
-                paragraph.Inlines.Add(Extensions.BuildRun(Caster.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
-                paragraph.Inlines.Add(Extensions.BuildRun("'s loss of concentration, ", (Brush)System.Windows.Application.Current.Resources["Light"], 15, FontWeights.Normal));
-                RemoveStatus();
-            }*/
-        }
-
-        #endregion Events
-
         /// <summary>
         ///     Returns a saving throw object to know if the status is applied
         /// </summary>
@@ -437,109 +307,6 @@ namespace DnDToolsLibrary.Status
                 Target = target,
             };
             return result;
-        }
-
-
-        /// <summary>
-        ///     A function that applies this status to the given target
-        ///     it will register to any required event for the status to automatically ends
-        /// </summary>
-        /// <param name="caster"> the one that tries to apply the status </param>
-        /// <param name="target"> the target of the status </param>
-        /// <param name="application_success"> tells wether or not the application is a success, only used with "false" to tell the OnApplyDamage can be resisted / canceled </param>
-        /// <param name="multiple_application"> tells that a status will be applied more than once ==> to avoid the removal of concentration on every new affected ==> false for the first call, true for the other ones </param>
-        public void Apply(PlayableEntity caster, PlayableEntity target, bool application_success = true, bool multiple_application = false)
-        {
-            Console.WriteLine("CRITICAL");
-            /*
-
-
-            // the applied status is a copy
-            OnHitStatus applied = (OnHitStatus)this.Clone();
-
-            if (applied.OnApplyDamageList.Elements.Count != 0)
-            {
-                DamageResultList onApplyDamageList = OnApplyDamageList.GetResultList();
-                foreach (DamageResult dmg in onApplyDamageList.Elements)
-                    dmg.LastSavingWasSuccesfull = !application_success;
-                DamageResultListRollableWindow window = new DamageResultListRollableWindow() { DataContext=onApplyDamageList, };
-                window.ShowCentered();
-                if (window.Validated)
-                    target.TakeHitDamage(onApplyDamageList);
-            }
-
-            if (application_success)
-            {
-                Paragraph paragraph = (Paragraph)Global.Context.UserLogs.Blocks.LastBlock;
-
-                paragraph.Inlines.Add(Extensions.BuildRun(caster.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-                paragraph.Inlines.Add(Extensions.BuildRun(" applies ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-                paragraph.Inlines.Add(Extensions.BuildRun(this.Header, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-                paragraph.Inlines.Add(Extensions.BuildRun(" on ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-                paragraph.Inlines.Add(Extensions.BuildRun(target.DisplayName + "\r\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-
-                applied.Caster = caster;
-                applied.Affected = target;
-                target.CustomVerboseStatusList.AddElementSilent(applied);
-                applied.register_to_all();
-                
-                if (applied.EndsOnCasterLossOfConcentration)
-                {
-                    if (caster.IsFocused == true && multiple_application == false)
-                        caster.IsFocused = false;
-                    caster.IsFocused = true;
-                }
-            }*/
-        }
-
-        private void register_to_all()
-        {
-            if (Affected != null)
-            {
-                if ((CanRedoSavingThrow && SavingIsRemadeAtStartOfTurn) ||
-                    (HasAMaximumDuration && !DurationIsCalculatedOnCasterTurn && DurationIsBasedOnStartOfTurn) ||
-                    DotDamageList.Elements.Count != 0)
-                    Affected.NewTurnStarted += Affected_NewTurnStarted;
-                if ((CanRedoSavingThrow && SavingIsRemadeAtStartOfTurn == false) ||
-                    (HasAMaximumDuration && !DurationIsCalculatedOnCasterTurn && !DurationIsBasedOnStartOfTurn) ||
-                    DotDamageList.Elements.Count != 0)
-                    Affected.TurnEnded += Affected_TurnEnded;
-            }
-            if (Caster != null)
-            {
-                if ((HasAMaximumDuration && DurationIsCalculatedOnCasterTurn && DurationIsBasedOnStartOfTurn) ||
-                    DotDamageList.Elements.Count != 0)
-                    Caster.NewTurnStarted += Caster_NewTurnStarted;
-                if ((HasAMaximumDuration && DurationIsCalculatedOnCasterTurn && !DurationIsBasedOnStartOfTurn) ||
-                    DotDamageList.Elements.Count != 0)
-                    Caster.TurnEnded += Caster_TurnEnded;
-
-                if (EndsOnCasterLossOfConcentration)
-                    Caster.PropertyChanged += Caster_PropertyChanged;
-            }
-        }
-
-        /// <summary>
-        ///     Will open a window if a check has to be made for the OnHitStatus to affect the target, then apply the status if required
-        /// </summary>
-        /// <param name="caster"> the one that tries to apply the status </param>
-        /// <param name="target"> the target of the status </param>
-        public void CheckIfApply(PlayableEntity caster, PlayableEntity target)
-        {
-            Console.WriteLine("CRITICAL");
-            /*
-
-            if (this.HasApplyCondition)
-            {
-                OnHitStatusApplyWindow window = new OnHitStatusApplyWindow(caster, target);
-                window.DataContext = this;
-                window.ShowCentered();
-            }
-            else
-            {
-                Apply(caster, target);
-            }
-            */
         }
 
         #region ICloneable
@@ -574,32 +341,14 @@ namespace DnDToolsLibrary.Status
         public OnHitStatus(OnHitStatus to_copy)
         {
             init_copy(to_copy);
-            register_to_all();
+            RegisterEvents(this);
         }
 
         public void CopyAssign(OnHitStatus to_copy)
         {
-            UnregisterToAll();
+            UnregisterEvents(this);
             init_copy(to_copy);
-            register_to_all();
-        }
-
-        /// <summary>
-        ///     Unregister to all possible events
-        /// </summary>
-        public void UnregisterToAll()
-        {
-            if (Caster != null)
-            {
-                Caster.PropertyChanged -= Caster_PropertyChanged;
-                Caster.NewTurnStarted -= Caster_NewTurnStarted;
-                Caster.TurnEnded -= Caster_TurnEnded;
-            }
-            if (Affected != null)
-            {
-                Affected.NewTurnStarted -= Affected_NewTurnStarted;
-                Affected.TurnEnded -= Affected_TurnEnded;
-            }
+            RegisterEvents(this);
         }
 
         ~OnHitStatus()
@@ -608,7 +357,12 @@ namespace DnDToolsLibrary.Status
 
         public void Dispose()
         {
-            UnregisterToAll();
+            UnregisterEvents(this);
+        }
+
+        public void Unregister()
+        {
+            UnregisterEvents(this);
         }
 
         #endregion ICloneable

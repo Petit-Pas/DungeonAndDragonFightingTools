@@ -13,6 +13,7 @@ using System;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
+using TempExtensionsOnHitStatus;
 using WpfDnDCustomControlLibrary.Converters;
 using WpfToolsLibrary.ConsoleTools;
 using WpfToolsLibrary.Extensions;
@@ -188,8 +189,6 @@ namespace TempExtensionsPlayableEntity
             // handles Concentration Check if required
             if (playableEntity.IsFocused)
             {
-                Console.WriteLine("CRITICAL thOSE FOCUS MECHANIC NEEDS TO BE REIMPLEMENTED");
-
                 ConcentrationCheckWindow window = new ConcentrationCheckWindow
                 {
                     DataContext = playableEntity

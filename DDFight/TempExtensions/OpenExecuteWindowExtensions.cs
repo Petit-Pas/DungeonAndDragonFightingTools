@@ -17,6 +17,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
+using TempExtensionsOnHitStatus;
 using TempExtensionsPlayableEntity;
 using WpfToolsLibrary.ConsoleTools;
 using WpfToolsLibrary.Extensions;

@@ -7,9 +7,12 @@ using DDFight.Windows.FightWindows;
 using DnDToolsLibrary.Attacks.Spells;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Memory;
+using DnDToolsLibrary.Status;
+using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Documents;
+using TempExtensionsOnHitStatus;
 using WpfToolsLibrary.ConsoleTools;
 using WpfToolsLibrary.Extensions;
 
@@ -35,8 +38,11 @@ namespace DDFight
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
+            OnHitStatus.RegisterEvents = OnHitStatusGameExtension.Register;
+            OnHitStatus.UnregisterEvents = OnHitStatusGameExtension.Unregister;
 
             Logger.Init();
 

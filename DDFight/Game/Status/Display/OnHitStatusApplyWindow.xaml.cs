@@ -9,6 +9,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
+using TempExtensionsOnHitStatus;
 using WpfToolsLibrary.ConsoleTools;
 using WpfToolsLibrary.Extensions;
 using WpfToolsLibrary.Navigation;
@@ -196,8 +197,10 @@ namespace DDFight.Game.Status.Display
             {
                 //resist
                 paragraph.Inlines.Add(RunExtensions.BuildRun("Success\r\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-                data_context.UnregisterToAll();
                 data_context.Affected.CustomVerboseStatusList.RemoveElement(data_context);
+                //TODO check if not too dangerous
+                //data_context.Unregister();
+                data_context.Dispose();
             }
             else
             {
