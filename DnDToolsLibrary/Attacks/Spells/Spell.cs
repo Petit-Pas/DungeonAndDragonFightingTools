@@ -241,55 +241,6 @@ namespace DnDToolsLibrary.Attacks.Spells
 
         #endregion Properties
 
-        public void CastSpell(PlayableEntity caster)
-        {
-            Console.Write("CRITICAL");
-            /*
-            AskPositiveIntWindow levelWindow = new AskPositiveIntWindow();
-            levelWindow.DescriptionTextBoxControl.Text = "at which level do you wish to cast this spell?";
-            levelWindow.Number = this.BaseLevel;
-            levelWindow.ShowCentered();
-
-            if (levelWindow.Validated == false)
-                return;
-
-            int level = levelWindow.Number;
-            int additional_levels = level - this.BaseLevel;
-            int amountTargets = this.AmountTargets;
-
-            if (amountTargets != 0)
-                for (int i = additional_levels; i > 0; i--)
-                {
-                    amountTargets += this.AdditionalTargetPerLevel;
-                }
-
-            FightingEntityListSelectableWindow targetWindow = new FightingEntityListSelectableWindow {
-                MaximumSelected = amountTargets,
-                CanSelectSameTargetTwice = this.CanSelectSameTargetTwice,
-            };
-            targetWindow.ShowCentered();
-
-            if (targetWindow.Validated == true)
-            {
-                if (IsAnAttack)
-                {
-                    SpellAttackCastWindow window = new SpellAttackCastWindow()
-                    {
-                        DataContext = this.GetAttackSpellResult(caster, targetWindow.Selected, additional_levels)
-                    };
-                    window.ShowCentered();
-                }
-                else
-                {
-                    SpellNonAttackCastWindow window = new SpellNonAttackCastWindow() { 
-                        DataContext = this.GetNonAttackSpellResult(caster, targetWindow.Selected, additional_levels) 
-                    };
-                    window.ShowCentered();
-                }
-            }
-            */
-        }
-
         public AttackSpellResult GetAttackSpellResult(PlayableEntity caster, ObservableCollection<PlayableEntity> targets, int additional_levels)
         {
             AttackSpellResult template = new AttackSpellResult

@@ -7,6 +7,7 @@ using DDFight.Tools;
 using DDFight.Windows;
 using DDFight.Windows.FightWindows;
 using DDFight.Windows.ModalWindows.BlankDiceRollModal;
+using DDFight.WpfExtensions;
 using DnDToolsLibrary.Dice;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Fight.Events;
@@ -185,9 +186,7 @@ namespace DDFight.Controlers.Fight
 
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
-            //data_context.OpenEditWindow();
-            // TODO
-            Logger.Log("CRITICAL THIS SHOULD HAVE BEEN REPLACED");
+            data_context.OpenEditWindow();
         }
 
         private void Transform_Click(object sender, RoutedEventArgs e)

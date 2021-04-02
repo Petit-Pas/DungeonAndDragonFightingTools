@@ -77,19 +77,6 @@ namespace DnDToolsLibrary.Attacks.HitAttacks
             };
         }
 
-        public void ExecuteAttack()
-        {
-            Console.WriteLine("CRITICAL");
-            /*
-
-            ExecuteHitAttackWindow window = new ExecuteHitAttackWindow()
-            {
-                DataContext = this,
-            };
-            window.ShowCentered();
-            */
-        }
-
         #region ICloneable
 
         private void init_copy(HitAttackTemplate to_copy)

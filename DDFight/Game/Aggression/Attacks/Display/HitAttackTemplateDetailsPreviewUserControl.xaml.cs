@@ -1,4 +1,5 @@
-﻿using DnDToolsLibrary.Attacks.HitAttacks;
+﻿using DDFight.WpfExtensions;
+using DnDToolsLibrary.Attacks.HitAttacks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -35,7 +36,7 @@ namespace DDFight.Controlers.Game.Attacks
 
         private void ExecuteButton_Click(object sender, RoutedEventArgs e)
         {
-            data_context.ExecuteAttack();
+            data_context.ExecuteHitAttack();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using DDFight.Game.Aggression.Attacks.Display;
+using DDFight.WpfExtensions;
 using DnDToolsLibrary.Attacks.HitAttacks;
 using System.Windows;
 using System.Windows.Input;
@@ -17,7 +18,7 @@ namespace DDFight.Game.Fight.Display
         {
             if (EntityListControl.SelectedIndex != -1)
             {
-                ((HitAttackTemplate)(EntityListControl.SelectedItem)).ExecuteAttack();
+                ((HitAttackTemplate)EntityListControl.SelectedItem).ExecuteHitAttack();
                 e.Handled = true;
             }
         }
@@ -28,7 +29,7 @@ namespace DDFight.Game.Fight.Display
             {
                 if (EntityListControl.SelectedIndex != -1)
                 {
-                    ((HitAttackTemplate)(EntityListControl.SelectedItem)).ExecuteAttack();
+                    ((HitAttackTemplate)EntityListControl.SelectedItem).ExecuteHitAttack();
                     e.Handled = true;
                 }
             }

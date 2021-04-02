@@ -1,5 +1,6 @@
 ﻿using DDFight;
 using DDFight.Game.Entities.Display;
+using DDFight.Windows.FightWindows;
 using DnDToolsLibrary.Attacks.Damage;
 using DnDToolsLibrary.Attacks.Damage.Type;
 using DnDToolsLibrary.Attacks.HitAttacks;
@@ -187,17 +188,17 @@ namespace TempExtensionsPlayableEntity
             // handles Concentration Check if required
             if (playableEntity.IsFocused)
             {
-                Console.WriteLine("CRITICAL MOSE FOCUS MECHANIC NEEDS TO BE REIMPLEMENTED");
-                // TODO
-                /*ConcentrationCheckWindow window = new ConcentrationCheckWindow
+                Console.WriteLine("CRITICAL thOSE FOCUS MECHANIC NEEDS TO BE REIMPLEMENTED");
+
+                ConcentrationCheckWindow window = new ConcentrationCheckWindow
                 {
-                    DataContext = this
+                    DataContext = playableEntity
                 };
                 window.ShowCentered();
                 if (window.Success == false)
                 {
-                    this.IsFocused = false;
-                }*/
+                    playableEntity.IsFocused = false;
+                }
             }
         }
 

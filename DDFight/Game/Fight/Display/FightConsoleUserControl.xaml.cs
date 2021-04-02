@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using WpfToolsLibrary.ConsoleTools;
 
 namespace DDFight.Controlers.Fight
 {
@@ -11,7 +12,7 @@ namespace DDFight.Controlers.Fight
         public FightConsoleUserControl()
         {
             InitializeComponent();
-            DataContext = GlobalContext.Context;
+            DataContext = FightConsole.Instance;
             RichTextBoxControl.TextChanged += RichTextBoxControl_TextChanged;
             RichTextBoxControl.ScrollToEnd();
         }
