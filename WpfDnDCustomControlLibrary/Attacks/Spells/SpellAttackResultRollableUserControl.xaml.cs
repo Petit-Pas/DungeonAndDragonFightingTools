@@ -36,7 +36,10 @@ namespace WpfDnDCustomControlLibrary.Attacks.Spells
             }
         }
         public static readonly DependencyProperty SpellResultProperty = DependencyProperty.Register(
-          nameof(SpellResult), typeof(AttackSpellResult), typeof(SpellAttackResultRollableUserControl), new PropertyMetadata(new AttackSpellResult(), new PropertyChangedCallback(OnSpellPropertyChanged)));
+          nameof(SpellResult),
+          typeof(AttackSpellResult), 
+          typeof(SpellAttackResultRollableUserControl), 
+          new PropertyMetadata(new AttackSpellResult(), new PropertyChangedCallback(OnSpellPropertyChanged)));
 
         private static void OnSpellPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {

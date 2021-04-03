@@ -253,6 +253,10 @@ namespace DnDToolsLibrary.Attacks.Spells
                 Level = this.BaseLevel + additional_levels,
                 AutomaticalyHits = this.AutomaticalyHits,
                 ToHitBonus = (this.HitRollBonus == 0 ? caster.SpellHitModifier : this.HitRollBonus),
+                RollResult = new AttackRollResult
+                {
+                    BaseRollModifier = (this.HitRollBonus == 0 ? caster.SpellHitModifier : this.HitRollBonus),
+                }
             };
 
             for (int i = additional_levels; i > 0; i -= 1)
