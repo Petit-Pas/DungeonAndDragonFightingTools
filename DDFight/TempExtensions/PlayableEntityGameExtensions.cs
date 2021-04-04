@@ -63,39 +63,6 @@ namespace TempExtensionsPlayableEntity
 
         #endregion Turn
 
-        #region Attack
-        /// <summary>
-        ///     Will evaluate if the HitAttack hits and deal damage if so.
-        /// </summary>
-        /// <param name="result"></param>
-        /// <param name="attacker"></param>
-        /// <returns></returns>
-        public static bool GetAttacked(this PlayableEntity playableEntity, HitAttackResult result, PlayableEntity attacker)
-        {
-            Paragraph paragraph = (Paragraph)FightConsole.Instance.UserLogs.Blocks.LastBlock;
-
-            paragraph.Inlines.Add(RunExtensions.BuildRun(attacker.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-            paragraph.Inlines.Add(RunExtensions.BuildRun(" attacks ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-            paragraph.Inlines.Add(RunExtensions.BuildRun(playableEntity.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-            paragraph.Inlines.Add(RunExtensions.BuildRun(". ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-            paragraph.Inlines.Add(RunExtensions.BuildRun(result.RollResult.Description, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-            paragraph.Inlines.Add(RunExtensions.BuildRun("\r\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-
-            if (result.RollResult.Hits)
-            {
-                playableEntity.TakeHitDamage(result.DamageList);
-                foreach (OnHitStatus onHitStatus in result.OnHitStatuses.Elements)
-                {
-                    onHitStatus.CheckIfApply(result.Owner, result.Target);
-                }
-                return true;
-            }
-            else
-                return false;
-        }
-
-        #endregion Attack
-
         #region HpManagement
 
         public static void HealTempHP(this PlayableEntity playableEntity, DiceRoll to_roll)

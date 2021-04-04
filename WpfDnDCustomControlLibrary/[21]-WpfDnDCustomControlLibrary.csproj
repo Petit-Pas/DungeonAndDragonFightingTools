@@ -51,7 +51,7 @@
     <Compile Include="Attacks\AttackRollResultUserControl.xaml.cs">
       <DependentUpon>AttackRollResultUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Attacks\Attacks\HitAttackResultUserControl.xaml.cs">
+    <Compile Include="Attacks\HitAttacks\HitAttackResultUserControl.xaml.cs">
       <DependentUpon>HitAttackResultUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Attacks\Damage\DamageResultListRollableUserControl.xaml.cs">
@@ -121,7 +121,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Attacks\Attacks\HitAttackResultUserControl.xaml">
+    <Page Include="Attacks\HitAttacks\HitAttackResultUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -19,6 +19,10 @@ namespace WpfDnDCustomControlLibrary.Attacks.Damage
             InitializeComponent();
         }
 
+        public static void crit_Updated(DependencyObject o, DependencyPropertyChangedEventArgs a)
+        {
+        }
+
         /// <summary>
         ///     tells wheter the damage are applied with a crit
         /// </summary>
@@ -29,6 +33,6 @@ namespace WpfDnDCustomControlLibrary.Attacks.Damage
         }
         public static readonly DependencyProperty CritProperty = DependencyProperty.Register(
           "Crits", typeof(bool), typeof(DamageResultListRollableUserControl), 
-          new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+          new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, crit_Updated));
     }
 }

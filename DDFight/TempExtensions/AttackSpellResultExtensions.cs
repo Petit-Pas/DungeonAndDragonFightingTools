@@ -1,4 +1,5 @@
-﻿using DnDToolsLibrary.Attacks.HitAttacks;
+﻿using DDFight.GameExtensions;
+using DnDToolsLibrary.Attacks.HitAttacks;
 using DnDToolsLibrary.Attacks.Spells;
 using DnDToolsLibrary.Entities;
 using System.Collections.Generic;
@@ -27,13 +28,14 @@ namespace TempExtensionsAttackSpellResultExtensions
             foreach (PlayableEntity target in attackSpellResult.Targets)
             {
                 SpellAttackResultRollableUserControl attack = attacks[index];
-                target.GetAttacked(new HitAttackResult
-                {
+                HitAttackResult result = new HitAttackResult {
                     DamageList = attack.HitDamage,
                     RollResult = attack.RollResult,
                     OnHitStatuses = attackSpellResult.AppliedStatusList,
                     Owner = attackSpellResult.Caster,
-                }, attackSpellResult.Caster);
+                    Target = target,
+                };
+                result.Execute();
                 index += 1;
             }
         }

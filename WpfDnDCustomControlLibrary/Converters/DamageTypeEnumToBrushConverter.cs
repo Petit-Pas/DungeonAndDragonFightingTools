@@ -18,7 +18,7 @@ namespace WpfDnDCustomControlLibrary.Converters
                 case DamageTypeEnum.Bludgeoning:
                     break;
                 case DamageTypeEnum.Cold:
-                    return new SolidColorBrush(Colors.Blue);
+                    return new SolidColorBrush(Colors.Aqua);
                 case DamageTypeEnum.Fire:
                     return new SolidColorBrush(Colors.Red);
                 case DamageTypeEnum.Force:

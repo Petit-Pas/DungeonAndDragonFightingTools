@@ -2,13 +2,14 @@
 using DnDToolsLibrary.Attacks.HitAttacks;
 using System.Windows;
 using WpfToolsLibrary.Extensions;
+using WpfToolsLibrary.Navigation;
 
 namespace DDFight.Windows
 {
     /// <summary>
     /// Interaction logic for EditAAttackTemplate.xaml
     /// </summary>
-    public partial class HitAttackTemplateEditWindow : Window
+    public partial class HitAttackTemplateEditWindow : Window, IValidableWindow
     {
     
         private HitAttackTemplate data_context
@@ -56,7 +57,7 @@ namespace DDFight.Windows
             }
         }
 
-        public bool Validated = false;
+        public bool Validated { get; set; } = false;
 
         /// <summary>
         ///     Handler for the click event on the Cancel button

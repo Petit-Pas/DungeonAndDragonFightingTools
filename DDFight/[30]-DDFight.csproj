@@ -76,10 +76,10 @@
     </ApplicationDefinition>
     <Compile Include="Controlers\SpecializedListUserControl.cs" />
     <Compile Include="Converters\VisibleIfCharacter.cs" />
-    <Compile Include="Game\Aggression\Attacks\Display\HitAttackResultEditableControl.xaml.cs">
-      <DependentUpon>HitAttackResultEditableControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Game\Aggression\Attacks\Display\HitAttackTemplateListUserControl.cs" />
+    <Compile Include="Game\Aggression\Attacks\HitAttackExecuteWindow.xaml.cs">
+      <DependentUpon>HitAttackExecuteWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Game\Aggression\Display\DamageModifierEnumListSelectableUserControl.xaml.cs">
       <DependentUpon>DamageModifierEnumListSelectableUserControl.xaml</DependentUpon>
     </Compile>
@@ -148,7 +148,7 @@
     </Compile>
     <Compile Include="Game\Status\Display\CustomVerboseStatusListUserControl.cs" />
     <Compile Include="TempExtensions\AttackSpellResultExtensions.cs" />
-    <Compile Include="TempExtensions\HitAttackTemplateExtensions.cs" />
+    <Compile Include="TempExtensions\ExecuteActionExtensions.cs" />
     <Compile Include="TempExtensions\ModifyListExtension.cs" />
     <Compile Include="TempExtensions\OnHitStatusGameExtension.cs" />
     <Compile Include="TempExtensions\OpenEditWindowExtensions.cs" />
@@ -312,9 +312,6 @@
     <Compile Include="Windows\FightWindows\CustomSavingThrowWindow.xaml.cs">
       <DependentUpon>CustomSavingThrowWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\FightWindows\ExecuteHitAttackWindow.xaml.cs">
-      <DependentUpon>ExecuteHitAttackWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Windows\FightWindows\HealWindow.xaml.cs">
       <DependentUpon>HealWindow.xaml</DependentUpon>
     </Compile>
@@ -334,7 +331,7 @@
       <DependentUpon>StatusMessageWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\ModalWindows\StatusModal\StatusMessageWindowDataContext.cs" />
-    <Page Include="Game\Aggression\Attacks\Display\HitAttackResultEditableControl.xaml">
+    <Page Include="Game\Aggression\Attacks\HitAttackExecuteWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -635,10 +632,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\FightWindows\CustomSavingThrowWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\FightWindows\ExecuteHitAttackWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

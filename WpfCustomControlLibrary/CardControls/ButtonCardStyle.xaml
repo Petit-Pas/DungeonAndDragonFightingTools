@@ -7,8 +7,7 @@
                 <ControlTemplate TargetType="{x:Type local:ButtonCardControl}">
                     <Grid
                         x:Name="TemplateGridControl"
-                        DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonCardControl}}"
-                        Margin="13">
+                        DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonCardControl}}">
                         <Border 
                             x:Name="BorderControl"
                             CornerRadius="4" 
@@ -31,12 +30,27 @@
                                             <Setter Property="BorderBrush" Value="{Binding ClickBorderColor}" />
                                             <Setter Property="Background" Value="{Binding ClickBackgroundColor}" />
                                         </DataTrigger>
+                                        <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:ButtonCardControl}}}" Value="False">
+                                            <Setter Property="Background" Value="{Binding BorderColor}"/>
+                                            <Setter Property="BorderBrush" Value="{Binding CardColor}"/>
+                                            <Setter Property="Opacity" Value="0.7"/>
+                                        </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
                             </Border.Style>
                         </Border>
-                        <Border>
-                            <ContentPresenter />
+                        <Border Padding="5">
+                            <ContentPresenter>
+                                <ContentPresenter.Resources>
+                                    <Style TargetType="ContentPresenter">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:ButtonCardControl}}}" Value="False">
+                                                <Setter Property="Opacity" Value="0.4"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </ContentPresenter.Resources>
+                            </ContentPresenter>
                         </Border>
                         <Grid.Style>
                             <Style TargetType="{x:Type Grid}">

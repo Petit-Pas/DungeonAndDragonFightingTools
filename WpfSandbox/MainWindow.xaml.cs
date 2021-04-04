@@ -76,7 +76,7 @@ namespace BindValidation
                 }
             };
 
-            TestControl.AttackResult = test;
+            //TestControl.AttackResult = test;
 
 
 

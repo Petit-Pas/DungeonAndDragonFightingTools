@@ -2,6 +2,8 @@
 using DDFight.Game.Aggression.Spells.Display;
 using DDFight.Game.Entities.Display;
 using DDFight.Game.Status.Display;
+using DDFight.Windows;
+using DnDToolsLibrary.Attacks.HitAttacks;
 using DnDToolsLibrary.Attacks.Spells;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Status;
@@ -50,6 +52,11 @@ namespace DDFight.WpfExtensions
         public static bool OpenEditWindow(this Spell spell)
         {
             return OpenEditWindowGeneric<Spell, SpellEditWindow>(spell);
+        }
+
+        public static bool OpenEditWindow(this HitAttackTemplate hitAttackTemplate)
+        {
+            return OpenEditWindowGeneric<HitAttackTemplate, HitAttackTemplateEditWindow>(hitAttackTemplate);
         }
     }
 }

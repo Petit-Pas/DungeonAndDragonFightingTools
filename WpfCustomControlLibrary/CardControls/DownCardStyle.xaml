@@ -21,7 +21,7 @@
                         <Border CornerRadius="4" BorderBrush="{Binding EnvironmentColor}" BorderThickness="7" Margin="-6" Panel.ZIndex="0">
                         </Border>
                         
-                        <Border Background="Transparent" Margin="7">
+                        <Border Background="Transparent" Margin="7" Padding="5">
                             <ContentPresenter />
                         </Border>
                     </Grid>

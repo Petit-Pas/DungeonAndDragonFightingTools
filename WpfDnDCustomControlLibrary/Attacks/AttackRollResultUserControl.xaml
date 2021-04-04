@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:WpfDnDCustomControlLibrary.Attacks" xmlns:dicetextboxes="clr-namespace:WpfDnDCustomControlLibrary.InputBoxes.DiceTextBoxes" xmlns:damage="clr-namespace:WpfDnDCustomControlLibrary.Attacks.Damage"
+             xmlns:local="clr-namespace:WpfDnDCustomControlLibrary.Attacks" 
+             xmlns:dicetextboxes="clr-namespace:WpfDnDCustomControlLibrary.InputBoxes.DiceTextBoxes" 
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -46,9 +47,14 @@
                 Margin="5, 2"
                 Integer="{Binding AttackRoll}"
                 AdvantageModifiers="{Binding AdvantageModifiers}" />
+            <TextBlock
+                Text="{Binding BaseRollModifier, StringFormat='+{0} '}">
+                
+            </TextBlock>
             <TextBlock 
                 FontWeight="SemiBold"
                 FontSize="14"
+                Margin="15 0 0 0"
                 Text="{Binding Description}"/>
         </WrapPanel>
     </Grid>

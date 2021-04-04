@@ -1,5 +1,5 @@
 ﻿using DDFight.Controlers;
-using DDFight.TempExtensions;
+using DDFight.WpfExtensions;
 using DnDToolsLibrary.Attacks.HitAttacks;
 
 namespace DDFight.Game.Aggression.Attacks.Display

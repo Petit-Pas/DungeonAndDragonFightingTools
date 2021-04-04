@@ -1,4 +1,5 @@
 ﻿using BaseToolsLibrary.Memory;
+using DDFight.Game.Aggression.Attacks;
 using DDFight.Game.Aggression.Spells.Display;
 using DDFight.Game.Fight.Display;
 using DDFight.Windows.FightWindows;
@@ -28,7 +29,7 @@ namespace DDFight.WpfExtensions
     {
         public static void ExecuteHitAttack(this HitAttackTemplate template)
         {
-            ExecuteHitAttackWindow window = new ExecuteHitAttackWindow() { DataContext = template, };
+            HitAttackExecuteWindow window = new HitAttackExecuteWindow() { DataContext = template, };
             window.ShowCentered();
         }
 

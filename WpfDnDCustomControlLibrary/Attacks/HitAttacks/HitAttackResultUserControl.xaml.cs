@@ -1,6 +1,7 @@
 ﻿using DnDToolsLibrary.Attacks.HitAttacks;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfDnDCustomControlLibrary.Attacks.Attacks
+namespace WpfDnDCustomControlLibrary.Attacks.HitAttacks
 {
     /// <summary>
     ///     Interaction logic for HitAttackResultUserControl.xaml
@@ -33,6 +34,11 @@ namespace WpfDnDCustomControlLibrary.Attacks.Attacks
                 AttackResult = attackResult;
         }
 
+        private static void attackResult_Changed(DependencyObject o, DependencyPropertyChangedEventArgs a)
+        {
+            //HitAttackResultUserControl control = (HitAttackResultUserControl)o;
+        }
+
         public HitAttackResult AttackResult
         {
             get { return (HitAttackResult)this.GetValue(AttackResultProperty); }
@@ -42,6 +48,6 @@ namespace WpfDnDCustomControlLibrary.Attacks.Attacks
             nameof(AttackResult),
             typeof(HitAttackResult),
             typeof(HitAttackResultUserControl),
-            new PropertyMetadata(new HitAttackResult()));
+            new PropertyMetadata(null, attackResult_Changed));
     }
 }

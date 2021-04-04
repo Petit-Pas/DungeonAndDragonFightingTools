@@ -6,14 +6,14 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:UpCardControl}">
                     <Grid
-                        DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:UpCardControl}}"
-                        Margin="13">
+                        DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:UpCardControl}}">
                         <Border CornerRadius="4" BorderBrush="{Binding BorderColor}" BorderThickness="1" Margin="0" Background="{Binding CardColor}">
                             <Border.Effect>
                                 <DropShadowEffect Color="{Binding ShadowColor}"/>
                             </Border.Effect>
                         </Border>
-                        <Border>
+                        <Border
+                            Padding="5">
                             <ContentPresenter />
                         </Border>
                     </Grid>
