@@ -1,4 +1,5 @@
-﻿using DnDToolsLibrary.Dice;
+﻿using DnDToolsLibrary.Attacks;
+using DnDToolsLibrary.Dice;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,25 +22,20 @@ namespace WpfDnDCustomControlLibrary.InputBoxes.DiceTextBoxes
         {
             if (!IsFullyRolled())
             {
-                int rolled = DiceRoll.Roll("1d20", HasAdvantage, HasDisAdvantage);
+                int rolled = DiceRoll.Roll("1d20", AdvantageModifiers.SituationalAdvantage, AdvantageModifiers.SituationalDisadvantage);
                 this.SetValue(IntegerProperty, rolled);
             }
         }
 
-        public bool HasAdvantage
+        public SituationalAdvantageModifiers AdvantageModifiers
         {
-            get { return (bool)this.GetValue(AdvantageProperty); }
-            set { this.SetValue(AdvantageProperty, value); }
+            get { return (SituationalAdvantageModifiers)this.GetValue(AdvantageModifiersProperty); }
+            set { this.SetValue(AdvantageModifiersProperty, value); }
         }
-        public static readonly DependencyProperty AdvantageProperty = DependencyProperty.Register(
-          "HasAdvantage", typeof(bool), typeof(SituationalD20TextBoxControl), new PropertyMetadata(false));
-
-        public bool HasDisAdvantage
-        {
-            get { return (bool)this.GetValue(DisAdvantageProperty); }
-            set { this.SetValue(DisAdvantageProperty, value); }
-        }
-        public static readonly DependencyProperty DisAdvantageProperty = DependencyProperty.Register(
-          "HasDisAdvantage", typeof(bool), typeof(SituationalD20TextBoxControl), new PropertyMetadata(false));
+        private static readonly DependencyProperty AdvantageModifiersProperty = DependencyProperty.Register(
+            nameof(AdvantageModifiers),
+            typeof(SituationalAdvantageModifiers),
+            typeof(SituationalD20TextBoxControl),
+            new PropertyMetadata(new SituationalAdvantageModifiers()));
     }
 }

@@ -18,10 +18,16 @@
             <Color x:Key="RawGray">#202020</Color>
             <Color x:Key="RawLightestGray">#2e2e2e</Color>
 
+            <Style TargetType="{x:Type TextBlock}" x:Key="BaseTextBlock">
+                <Setter Property="Foreground" Value="{StaticResource Light}"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+
+
             <Style x:Key="WindowStyle" TargetType="Window">
                 <Setter Property="Background" Value="{StaticResource LightestGray}" />
             </Style>
-
+            
             <Style TargetType="Button">
                 <Setter Property="Background" Value="{StaticResource Light}" />
                 <Setter Property="Foreground" Value="{StaticResource LightestGray}"/>
@@ -37,7 +43,11 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-            
+
+            <Style TargetType="{x:Type TextBlock}" x:Key="BaseTextStyle">
+                <Setter Property="Foreground" Value="{StaticResource Light}"/>
+            </Style>
+
             <Style TargetType="{x:Type TextBlock}" x:Key="ErrorMessage" >
                 <Setter Property="Foreground" Value="Red"/>
                 <Setter Property="FontSize" Value="15"/>

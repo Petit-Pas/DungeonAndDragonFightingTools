@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="WpfDnDCustomControlLibrary.Attacks.AttackRollResultUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfDnDCustomControlLibrary.Attacks" xmlns:dicetextboxes="clr-namespace:WpfDnDCustomControlLibrary.InputBoxes.DiceTextBoxes" xmlns:damage="clr-namespace:WpfDnDCustomControlLibrary.Attacks.Damage"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlock}"/>
+    </UserControl.Resources>
+    <Grid
+        DataContext="{Binding RollResult, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:AttackRollResultUserControl}}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <local:SituationalAdvantageModifiersUserControl
+            Grid.Row="0"
+            Margin="0, 5"
+            Modifiers="{Binding AdvantageModifiers}"
+            />
+
+        <local:SituationalAttackRollModifiersUserControl 
+            Grid.Row="1"
+            Modifiers="{Binding HitModifiers}"
+            Margin="0 0 0 5"
+            />
+
+        <WrapPanel
+            Grid.Row="2">
+            <TextBlock
+                Margin="0, 5"
+                FontSize="14">
+                Attack roll:
+            </TextBlock>
+            <dicetextboxes:AttackRollTextBoxControl
+                x:Name="AttackRollTextBoxControl"
+                Height="18"
+                Width="30"
+                Margin="5, 2"
+                Integer="{Binding AttackRoll}"
+                AdvantageModifiers="{Binding AdvantageModifiers}" />
+            <TextBlock 
+                FontWeight="SemiBold"
+                FontSize="14"
+                Text="{Binding Description}"/>
+        </WrapPanel>
+    </Grid>
+</UserControl>

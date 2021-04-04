@@ -92,8 +92,7 @@
                 Margin="5, 2"
                 DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SpellAttackResultRollableUserControl}}}"
                 Integer="{Binding RollResult.AttackRoll}"
-                HasAdvantage="{Binding RollResult.AdvantageModifiers.SituationalAdvantage}"
-                HasDisAdvantage="{Binding RollResult.AdvantageModifiers.SituationalDisadvantage}"/>
+                AdvantageModifiers="{Binding RollResult.AdvantageModifiers}" />
             <TextBlock 
                 Text="{Binding Path=RollResult.Description, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:SpellAttackResultRollableUserControl}}}"/>
         </WrapPanel>

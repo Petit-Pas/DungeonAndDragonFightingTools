@@ -64,6 +64,7 @@ namespace DnDToolsLibrary.Attacks.HitAttacks
         {
             return new HitAttackResult()
             {
+                Name = this.Name,
                 DamageList = DamageList.GetResultList(),
                 RollResult = new AttackRollResult
                 {

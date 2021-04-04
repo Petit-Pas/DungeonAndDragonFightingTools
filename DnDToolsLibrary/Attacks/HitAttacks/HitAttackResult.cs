@@ -8,13 +8,25 @@ namespace DnDToolsLibrary.Attacks.HitAttacks
 {
     public class HitAttackResult : INotifyPropertyChanged
     {
+        public string Name 
+        {
+            get => _name;
+            set
+            {
+                _name = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private string _name;
+
         public PlayableEntity Owner
         {
             get => _owner;
             set
             {
                 _owner = value;
-                this.RollResult.Caster = value;
+                if (this.RollResult != null)
+                    this.RollResult.Caster = value;
                 NotifyPropertyChanged();
             }
         }

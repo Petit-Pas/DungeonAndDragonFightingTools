@@ -27,26 +27,8 @@
             x:Name="_ComboBox" 
             ItemsSource="{Binding Source={StaticResource DataFromEnum}}"
             Style="{StaticResource ComboBoxStyle}">
-            <!--ComboBox.Resources>
-                <Style TargetType="TextBlock">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ComboBoxItem}}" Value="True">
-                            <Setter Property="FontWeight" Value="Bold" />
-                            <Setter Property="Foreground" Value="Black"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </ComboBox.Resources-->
             <ComboBox.ItemContainerStyle>
                 <Style TargetType="ComboBoxItem" BasedOn="{StaticResource ComboBoxItemStyle}"/>
-                <!--<Style.Triggers>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" Value="Red" />
-                        </Trigger>
-                    </Style.Triggers>
-                    <Setter Property="Background" Value="{StaticResource LightestGray}" />
-                    <Setter Property="Foreground" Value="{StaticResource Light}"/>
-                </Style>-->
             </ComboBox.ItemContainerStyle>
         </ComboBox>
     </Grid>

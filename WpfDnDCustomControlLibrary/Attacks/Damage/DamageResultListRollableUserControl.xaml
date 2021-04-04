@@ -9,19 +9,17 @@
     <UserControl.Resources>
         <converters:DamageTypeEnumToBrushConverter x:Key="DamageColorConverter" />
     </UserControl.Resources>
-    <Grid>
-        <ItemsControl
-            Grid.Row="2"
-            Grid.IsSharedSizeScope="True"
-            x:Name="DamageControl"
-            VirtualizingPanel.IsVirtualizing="False"
-            ItemsSource="{Binding Elements}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <local:DamageResultRollableUserControl
-                        Crits="{Binding Crits, Mode=TwoWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:DamageResultListRollableUserControl}}}"/>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-    </Grid>
+    <ItemsControl
+        Focusable="False"
+        Grid.IsSharedSizeScope="True"
+        x:Name="DamageControl"
+        VirtualizingPanel.IsVirtualizing="False"
+        ItemsSource="{Binding Elements}">
+        <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <local:DamageResultRollableUserControl
+                    Crits="{Binding Crits, Mode=TwoWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:DamageResultListRollableUserControl}}}"/>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
 </UserControl>

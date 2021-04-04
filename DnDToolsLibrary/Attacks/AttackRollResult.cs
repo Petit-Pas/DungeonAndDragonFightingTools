@@ -125,7 +125,7 @@ namespace DnDToolsLibrary.Attacks
 
         public bool IsRolled { get { return this.AttackRoll != 0; } }
 
-        public bool Crits { get { return this.AttackRoll == 20; } }
+        public bool Crits { get { return this.AttackRoll == 20; } set { } }
 
         public bool CriticalFailure { get { return this.AttackRoll == 1; } }
 
@@ -169,6 +169,8 @@ namespace DnDToolsLibrary.Attacks
         /// <param name="propertyName"></param>
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
+            if (propertyName == nameof(AttackRoll))
+                NotifyPropertyChanged("Crits");
             if (propertyName != "Description" && inner == false)
                 // almost any change changes the Description
                 NotifyPropertyChanged("Description");

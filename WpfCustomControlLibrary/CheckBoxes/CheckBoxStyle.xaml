@@ -37,7 +37,8 @@
                         <Trigger Property="IsPressed" Value="true">
                             <Setter TargetName="Border" Property="BorderBrush" Value="{Binding AccentColor, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                         </Trigger>
-                        <Trigger Property="IsEnabled" Value="false">
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{Binding LightAccentColor, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

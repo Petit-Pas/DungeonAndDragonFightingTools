@@ -48,16 +48,31 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attacks\AttackRollResultUserControl.xaml.cs">
+      <DependentUpon>AttackRollResultUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Attacks\Attacks\HitAttackResultUserControl.xaml.cs">
+      <DependentUpon>HitAttackResultUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Attacks\Damage\DamageResultListRollableUserControl.xaml.cs">
       <DependentUpon>DamageResultListRollableUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Attacks\Damage\DamageResultRollableUserControl.xaml.cs">
       <DependentUpon>DamageResultRollableUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Attacks\SituationalAdvantageModifiersUserControl.xaml.cs">
+      <DependentUpon>SituationalAdvantageModifiersUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Attacks\SituationalAttackRollModifiersUserControl.xaml.cs">
+      <DependentUpon>SituationalAttackRollModifiersUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Attacks\Spells\SpellAttackResultRollableUserControl.xaml.cs">
       <DependentUpon>SpellAttackResultRollableUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\DamageTypeEnumToBrushConverter.cs" />
+    <Compile Include="Fight\FightingEntitiesDropdownListUserControl.xaml.cs">
+      <DependentUpon>FightingEntitiesDropdownListUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="InputBoxes\DiceTextBoxes\AttackRollTextBoxControl.cs" />
     <Compile Include="InputBoxes\DiceTextBoxes\BaseD20TextBoxControl.cs" />
     <Compile Include="InputBoxes\DiceTextBoxes\SituationalD20TextBoxControl.cs" />
@@ -102,6 +117,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Attacks\AttackRollResultUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Attacks\Attacks\HitAttackResultUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Attacks\Damage\DamageResultListRollableUserControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -110,9 +133,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Attacks\SituationalAdvantageModifiersUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Attacks\SituationalAttackRollModifiersUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Attacks\Spells\SpellAttackResultRollableUserControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Fight\FightingEntitiesDropdownListUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

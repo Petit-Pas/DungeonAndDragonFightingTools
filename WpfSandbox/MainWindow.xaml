@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-        xmlns:intboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.IntTextBoxes;assembly=WpfCustomControlLibrary" xmlns:checkboxes="clr-namespace:WpfCustomControlLibrary.CheckBoxes;assembly=WpfCustomControlLibrary"
+        xmlns:intboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.IntTextBoxes;assembly=WpfCustomControlLibrary" xmlns:checkboxes="clr-namespace:WpfCustomControlLibrary.CheckBoxes;assembly=WpfCustomControlLibrary" xmlns:attacks="clr-namespace:DnDToolsLibrary.Attacks;assembly=DnDToolsLibrary" xmlns:attacks1="clr-namespace:WpfDnDCustomControlLibrary.Attacks;assembly=WpfDnDCustomControlLibrary" xmlns:damage="clr-namespace:WpfDnDCustomControlLibrary.Attacks.Damage;assembly=WpfDnDCustomControlLibrary" xmlns:attacks2="clr-namespace:WpfDnDCustomControlLibrary.Attacks.Attacks;assembly=WpfDnDCustomControlLibrary"
         mc:Ignorable="d"
         Title="MainWindow"
         Width="650" Height="400"
@@ -18,7 +18,7 @@
     <Grid
         ShowGridLines="False">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
@@ -26,6 +26,11 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+
+        <attacks2:HitAttackResultUserControl
+            x:Name="TestControl"
+            />
+
 
     </Grid>
     

@@ -1,7 +1,14 @@
 ﻿using BaseToolsLibrary.IO;
+using DnDToolsLibrary.Attacks;
+using DnDToolsLibrary.Attacks.Damage;
+using DnDToolsLibrary.Attacks.HitAttacks;
+using DnDToolsLibrary.Entities;
+using DnDToolsLibrary.Fight;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using WpfToolsLibrary.Navigation;
 
 namespace BindValidation
 {
@@ -42,6 +49,36 @@ namespace BindValidation
 
             this.DataContext = this;
             InitializeComponent();
+
+            FightersList.Instance.Elements.Add(new PlayableEntity() { Name = "Toto", DisplayName = "Tutu", CA=1 });
+            FightersList.Instance.Elements.Add(new PlayableEntity() { Name = "Tata", DisplayName = "Titi", CA=2 });
+
+            HitAttackResult test = new HitAttackResult()
+            {
+                Name = "Claw",
+                Owner = new PlayableEntity() { DisplayName = "Richard" },
+                RollResult = new AttackRollResult()
+                {
+                    Target = new PlayableEntity() { CA = 12 },
+                    Caster = new PlayableEntity() { },
+                    BaseRollModifier = 3,
+                },
+                DamageList = new DamageResultList
+                {
+                    Elements = new ObservableCollection<DamageResult>()
+                    {
+                        new DamageResult(),
+                        new DamageResult() {
+                            DamageType = DnDToolsLibrary.Attacks.Damage.Type.DamageTypeEnum.Fire
+                        },
+
+                    }
+                }
+            };
+
+            TestControl.AttackResult = test;
+
+
 
             Logger.Init();
 
@@ -89,6 +126,11 @@ namespace BindValidation
 
         private void ButtonCardControl_Click(object sender, RoutedEventArgs e)
         {
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.RollRollableChildren();
         }
     }
 }
