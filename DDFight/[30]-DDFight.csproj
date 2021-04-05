@@ -207,12 +207,6 @@
     <Compile Include="Game\Aggression\Display\RangeEditableUserControl.xaml.cs">
       <DependentUpon>RangeEditableUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Game\Aggression\Display\SituationalAdvantageModifiersUserControl.xaml.cs">
-      <DependentUpon>SituationalAdvantageModifiersUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Game\Aggression\Attacks\Display\SituationalHitAttackModifiersUserControl.xaml.cs">
-      <DependentUpon>SituationalHitAttackModifiersUserControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Game\Dices\SavingThrow\Display\SituationalSavingThrowModifierUserControl.xaml.cs">
       <DependentUpon>SituationalSavingThrowModifierUserControl.xaml</DependentUpon>
     </Compile>
@@ -472,14 +466,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Game\Aggression\Display\RangeEditableUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Game\Aggression\Display\SituationalAdvantageModifiersUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Game\Aggression\Attacks\Display\SituationalHitAttackModifiersUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

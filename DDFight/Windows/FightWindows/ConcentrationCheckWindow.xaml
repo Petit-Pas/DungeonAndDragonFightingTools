@@ -3,9 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DDFight.Windows.FightWindows"
-        xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes"
-        xmlns:situationalmodifiers="clr-namespace:DDFight.Controlers.Game.Attacks.SituationalModifiers" xmlns:display="clr-namespace:DDFight.Game.Dices.SavingThrow.Display" xmlns:inttextboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.IntTextBoxes;assembly=WpfCustomControlLibrary"
+        xmlns:display="clr-namespace:DDFight.Game.Dices.SavingThrow.Display"
+        xmlns:inttextboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.IntTextBoxes;assembly=WpfCustomControlLibrary" 
+        xmlns:attacks="clr-namespace:WpfDnDCustomControlLibrary.Attacks;assembly=WpfDnDCustomControlLibrary"
         mc:Ignorable="d"
         Title="ConcentrationCheckWindow" Height="300" Width="400"
         Background="{StaticResource LightestGray}"
@@ -40,7 +40,7 @@
             Text="{Binding DisplayName, 
             StringFormat='Character {0} took a hit while focused, it needs to make a Concentration check.'}"/>
 
-        <situationalmodifiers:SituationalAdvantageModifiersUserControl
+        <attacks:SituationalAdvantageModifiersUserControl
             Grid.Row="1" 
             Margin="10, 5"
             DataContext="{Binding SituationalAdvantageModifiers, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"/>
