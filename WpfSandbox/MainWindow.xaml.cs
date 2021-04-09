@@ -1,13 +1,17 @@
 ﻿using BaseToolsLibrary.IO;
+using DDFight;
 using DnDToolsLibrary.Attacks;
 using DnDToolsLibrary.Attacks.Damage;
+using DnDToolsLibrary.Attacks.Damage.Type;
 using DnDToolsLibrary.Attacks.HitAttacks;
+using DnDToolsLibrary.Dice;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Fight;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using WpfSandbox;
 using WpfToolsLibrary.Navigation;
 
 namespace BindValidation
@@ -46,35 +50,32 @@ namespace BindValidation
         public MainWindow()
         {
 
+            ModalWindow win = new ModalWindow()
+            {
+            };
+            win.ShowCentered();
 
-            this.DataContext = this;
+
+            DamageTemplateList list = new DamageTemplateList()
+            {
+                Elements = new ObservableCollection<DamageTemplate>() {
+                    new DamageTemplate()
+                    {
+                        Damage = new DiceRoll("2d6+3"),
+                        DamageType = DamageTypeEnum.Fire,
+                    },
+                    new DamageTemplate()
+                    {
+                        Damage = new DiceRoll("1d10+8"),
+                        DamageType = DamageTypeEnum.Cold,
+                    },
+                },
+            };
+
+            this.DataContext = list;
             InitializeComponent();
 
-            FightersList.Instance.Elements.Add(new PlayableEntity() { Name = "Toto", DisplayName = "Tutu", CA=1 });
-            FightersList.Instance.Elements.Add(new PlayableEntity() { Name = "Tata", DisplayName = "Titi", CA=2 });
-
-            HitAttackResult test = new HitAttackResult()
-            {
-                Name = "Claw",
-                Owner = new PlayableEntity() { DisplayName = "Richard" },
-                RollResult = new AttackRollResult()
-                {
-                    Target = new PlayableEntity() { CA = 12 },
-                    Caster = new PlayableEntity() { },
-                    BaseRollModifier = 3,
-                },
-                DamageList = new DamageResultList
-                {
-                    Elements = new ObservableCollection<DamageResult>()
-                    {
-                        new DamageResult(),
-                        new DamageResult() {
-                            DamageType = DnDToolsLibrary.Attacks.Damage.Type.DamageTypeEnum.Fire
-                        },
-
-                    }
-                }
-            };
+            
 
             //TestControl.AttackResult = test;
 

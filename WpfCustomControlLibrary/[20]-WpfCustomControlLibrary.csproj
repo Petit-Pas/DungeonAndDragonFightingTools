@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.31\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -48,6 +51,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CardControls\WindowCardControl.cs" />
     <Compile Include="CheckBoxes\CheckBoxControl.cs" />
     <Compile Include="CircularSelector\CircularSelectorRadioButtonControl.cs" />
     <Compile Include="InputBoxes\BaseTextBoxes\BaseTextBoxControl.cs" />
@@ -60,6 +64,9 @@
     <Compile Include="InputBoxes\StringTextBoxes\BaseStringTextBoxControl.cs" />
     <Compile Include="InputBoxes\StringTextBoxes\NotEmptyStringTextBoxControl.cs" />
     <Compile Include="SliderButton\SliderButtonControl.cs" />
+    <Compile Include="Windows\BaseWindowBodyUserControl.xaml.cs">
+      <DependentUpon>BaseWindowBodyUserControl.xaml</DependentUpon>
+    </Compile>
     <Page Include="CardControls\ButtonCardStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -76,6 +83,10 @@
     <Compile Include="CardControls\ButtonCardControl.cs" />
     <Compile Include="CardControls\DownCardControl.cs" />
     <Compile Include="CardControls\UpCardControl.cs" />
+    <Page Include="CardControls\WindowCardStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CheckBoxes\CheckBoxGeometryPaths.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -112,6 +123,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Windows\BaseWindowBodyUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CircularSelector\CircularSelectorCenterControl.cs" />
@@ -132,6 +147,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -5,67 +5,82 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DDFight.Game.Aggression.Attacks" 
         xmlns:cardcontrols="clr-namespace:WpfCustomControlLibrary.CardControls;assembly=WpfCustomControlLibrary" 
-        xmlns:attacks="clr-namespace:WpfDnDCustomControlLibrary.Attacks.HitAttacks;assembly=WpfDnDCustomControlLibrary"
+        xmlns:attacks="clr-namespace:WpfDnDCustomControlLibrary.Attacks.HitAttacks;assembly=WpfDnDCustomControlLibrary" xmlns:windows="clr-namespace:WpfCustomControlLibrary.Windows;assembly=WpfCustomControlLibrary"
         mc:Ignorable="d"
         Title="HitAttacksExecuteWindow" Height="450" Width="600"
-        Style="{StaticResource WindowStyle}"
+        Style="{StaticResource ModalWindowStyle}"
+        AllowsTransparency="True"
+        Background="Transparent"
         KeyDown="Window_KeyDown"
-        Closing="Window_Closing">
+        Closing="Window_Closing"
+        >
     <Window.Resources>
         <Style TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlock}" />
     </Window.Resources>
-    <Grid
-        VerticalAlignment="Center"
-        HorizontalAlignment="Center"
-        DataContext="{Binding AttackResult, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:HitAttackExecuteWindow}}}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
-
-        <attacks:HitAttackResultUserControl 
-            Margin="5"
-            HorizontalAlignment="Center"
-            AttackResult="{Binding}" />
-
+    <Border BorderThickness="1" BorderBrush="Black">
         <Grid
-            x:Name="ButtonsGridControl"
-            Grid.Row="1">
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            DataContext="{Binding AttackResult, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:HitAttackExecuteWindow}}}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="20" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <cardcontrols:ButtonCardControl
-                x:Name="RollButton"
-                Grid.ColumnSpan="2"
-                Margin="5"
-                Click="RollButton_Click">
-                <TextBlock HorizontalAlignment="Center">Roll</TextBlock>
-            </cardcontrols:ButtonCardControl>
+            <Border BorderBrush="Red"
+                    BorderThickness="2"
+                    PreviewMouseLeftButtonDown="Window_PreviewMouseLeftButtonDown"
+                    PreviewMouseMove="Window_PreviewMouseMove">
+            </Border>
 
-            <cardcontrols:ButtonCardControl
-                x:Name="ValidateResetButton"
+            <attacks:HitAttackResultUserControl 
                 Grid.Row="1"
                 Margin="5"
-                Click="ValidateResetButton_Click">
-                <TextBlock HorizontalAlignment="Center">Validate and Reset</TextBlock>
-            </cardcontrols:ButtonCardControl>
+                HorizontalAlignment="Center"
+                AttackResult="{Binding}" />
+
+            
+            <Grid
+                x:Name="ButtonsGridControl"
+                Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <cardcontrols:ButtonCardControl
+                    x:Name="RollButton"
+                    Grid.ColumnSpan="2"
+                    Margin="5"
+                    Click="RollButton_Click">
+                    <TextBlock HorizontalAlignment="Center">Roll</TextBlock>
+                </cardcontrols:ButtonCardControl>
+
+                <cardcontrols:ButtonCardControl
+                    x:Name="ValidateResetButton"
+                    Grid.Row="1"
+                    Margin="5"
+                    Click="ValidateResetButton_Click">
+                    <TextBlock HorizontalAlignment="Center">Validate and Reset</TextBlock>
+                </cardcontrols:ButtonCardControl>
         
-            <cardcontrols:ButtonCardControl
-                x:Name="ValidateExitButton"
-                Grid.Row="1" Grid.Column="1"
-                Margin="5"
-                Click="ValidateExitButton_Click">
-                <TextBlock HorizontalAlignment="Center">Validate and Exit</TextBlock>
-            </cardcontrols:ButtonCardControl>
+                <cardcontrols:ButtonCardControl
+                    x:Name="ValidateExitButton"
+                    Grid.Row="1" Grid.Column="1"
+                    Margin="5"
+                    Click="ValidateExitButton_Click">
+                    <TextBlock HorizontalAlignment="Center">Validate and Exit</TextBlock>
+                </cardcontrols:ButtonCardControl>
+            </Grid>
         </Grid>
-    </Grid>
+    </Border>
+
 </Window>

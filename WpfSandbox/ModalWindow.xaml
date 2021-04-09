@@ -1,0 +1,44 @@
+﻿<Window x:Class="WpfSandbox.ModalWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfSandbox" 
+        xmlns:cardcontrols="clr-namespace:WpfCustomControlLibrary.CardControls;assembly=WpfCustomControlLibrary" xmlns:hitattacks="clr-namespace:WpfDnDCustomControlLibrary.Attacks.HitAttacks;assembly=WpfDnDCustomControlLibrary"
+        mc:Ignorable="d"
+        Title="ModalWindow"
+        Style="{StaticResource ModalWindowStyle}" Padding="5"
+        Background="Transparent">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/WpfCustomControlLibrary;component/CardControls/WindowCardStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    
+    
+    <cardcontrols:WindowCardControl Title="Toto le héros" Style="{StaticResource WindowCardStyle}" CardColor="{StaticResource LightestGray}" Margin="10">
+        <hitattacks:HitAttackResultUserControl/>
+    </cardcontrols:WindowCardControl>
+
+            <!--<Border 
+                Grid.Row="0"
+                CornerRadius="10">
+                <Grid>
+                    <Grid.OpacityMask>
+                        <VisualBrush Visual="{Binding ElementName=clipMask}" Stretch="None" />
+                    </Grid.OpacityMask>
+                    <Border x:Name="clipMask" Background="{StaticResource Gray}" CornerRadius="10 10 0 0" Panel.ZIndex="-1"></Border>
+                    <Button Panel.ZIndex="1"
+                        Background="{StaticResource Light}"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Right"
+                        Width="30">
+                        X
+                    </Button>
+                </Grid>
+            </Border>-->
+
+</Window>
