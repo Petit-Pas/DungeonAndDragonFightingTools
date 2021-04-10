@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using WpfToolsLibrary.Commands.WindowCommands;
 using WpfToolsLibrary.Extensions;
 
 namespace WpfCustomControlLibrary.CardControls
@@ -17,14 +18,18 @@ namespace WpfCustomControlLibrary.CardControls
 
         public WindowCardControl() : base()
         {
+#pragma warning disable 0067
+#pragma warning disable 0168
             // a bug in this package forces us to use it in order for the dll to be loaded
-            Microsoft.Xaml.Behaviors.TriggerAction nullable = null;
+            Microsoft.Xaml.Behaviors.TriggerAction nullable;
+#pragma warning restore 0168
+#pragma warning restore 0067
 
             if (style != null)
                 this.Style = style;
-            LeftButtonDownCommand = new PreviewMouseLeftButtonDownCommand(this);
-            MouseMoveCommand = new PreviewMouseMoveCommand(this);
-            ClickCommand = new OnClickCommand();
+            TitleBar_PreviewMouseMove = new DragMoveCommand_PreviewMouseMove();
+            TitleBar_PreviewMouseLeftButtonDown = new DragMoveCommand_PreviewMouseLeftButtonDown();
+            CloseCommand_Click = new CloseCommand();
         }
 
         public string Title
@@ -39,76 +44,8 @@ namespace WpfCustomControlLibrary.CardControls
                 new PropertyMetadata("Title")
             );
 
-        public OnClickCommand ClickCommand { get; set; }
-        public class OnClickCommand : ICommand
-        {
-            public event EventHandler CanExecuteChanged;
-
-            public bool CanExecute(object parameter)
-            {
-                return true;
-            }
-
-            public void Execute(object parameter)
-            {
-                Application.Current.GetCurrentWindow().Close();
-            }
-        }
-
-        public Point startPoint;
-
-        public PreviewMouseLeftButtonDownCommand LeftButtonDownCommand { get; set; }
-        public class PreviewMouseLeftButtonDownCommand : ICommand
-        {
-            private readonly WindowCardControl ctrl;
-
-            public event EventHandler CanExecuteChanged;
-
-            public PreviewMouseLeftButtonDownCommand(WindowCardControl ctrl)
-            {
-                this.ctrl = ctrl;
-            }
-
-            public bool CanExecute(object parameter)
-            {
-                return true;
-            }
-
-            public void Execute(object parameter)
-            {
-                ctrl.startPoint = Mouse.GetPosition(Application.Current.GetCurrentWindow());
-            }
-        }
-
-        public PreviewMouseMoveCommand MouseMoveCommand { get; set; }
-        public class PreviewMouseMoveCommand : ICommand
-        {
-            private readonly WindowCardControl ctrl;
-
-            public event EventHandler CanExecuteChanged;
-
-            public PreviewMouseMoveCommand(WindowCardControl ctrl)
-            {
-                this.ctrl = ctrl;
-            }
-
-            public bool CanExecute(object parameter)
-            {
-                return true;
-            }
-
-            public void Execute(object parameter)
-            {
-                if (Mouse.LeftButton == MouseButtonState.Pressed)
-                {
-                    Point newPoint = Mouse.GetPosition(Application.Current.GetCurrentWindow());
-                    if ((Math.Abs(newPoint.X - ctrl.startPoint.X) > SystemParameters.MinimumHorizontalDragDistance ||
-                        Math.Abs(newPoint.Y - ctrl.startPoint.Y) > SystemParameters.MinimumVerticalDragDistance))
-                    {
-                        Application.Current.GetCurrentWindow().DragMove();
-                    }
-                }
-            }
-        }
+        public CloseCommand CloseCommand_Click { get; set; }
+        public DragMoveCommand_PreviewMouseMove TitleBar_PreviewMouseMove { get; set; }
+        public DragMoveCommand_PreviewMouseLeftButtonDown TitleBar_PreviewMouseLeftButtonDown { get; set; }
     }
 }

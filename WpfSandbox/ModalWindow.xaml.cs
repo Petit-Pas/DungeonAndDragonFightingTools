@@ -1,6 +1,16 @@
-﻿using System;
+﻿using DnDToolsLibrary.Attacks;
+using DnDToolsLibrary.Attacks.Damage;
+using DnDToolsLibrary.Attacks.Damage.Type;
+using DnDToolsLibrary.Attacks.HitAttacks;
+using DnDToolsLibrary.Dice;
+using DnDToolsLibrary.Entities;
+using DnDToolsLibrary.Fight;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -17,29 +27,68 @@ namespace WpfSandbox
     /// <summary>
     /// Interaction logic for ModalWindow.xaml
     /// </summary>
-    public partial class ModalWindow : Window
+    public partial class ModalWindow : Window, INotifyPropertyChanged
     {
+        #region INotifyPropertyChanged
+
+        /// <summary>
+        ///     PropertyChanged EventHandler
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
+        protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        #endregion
+
         public ModalWindow()
         {
             InitializeComponent();
+            FightersList.Instance.AddElement(new PlayableEntity { DisplayName = "number 1", CA = 11 });
+            FightersList.Instance.AddElement(new PlayableEntity { DisplayName = "number 2", CA = 12 });
+
         }
 
-        private Point startPoint;
-
-        private void PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        public HitAttackResult Result
         {
-            startPoint = e.GetPosition(this);
-        }
-
-        private void PreviewMouseMove(object sender, MouseEventArgs e)
-        {
-            Point newPoint = e.GetPosition(this);
-            if (e.LeftButton == MouseButtonState.Pressed && (Math.Abs(newPoint.X - startPoint.X) > SystemParameters.MinimumHorizontalDragDistance ||
-                Math.Abs(newPoint.Y - startPoint.Y) > SystemParameters.MinimumVerticalDragDistance))
+            get => result;
+            set
             {
-                this.DragMove();
+                result = value;
+                NotifyPropertyChanged();
             }
         }
-
+        private HitAttackResult result = new HitAttackResult()
+        {
+            DamageList = new DamageResultList()
+            {
+                Elements = new ObservableCollection<DamageResult>() {
+                    new DamageResult()
+                    {
+                        Damage = new DiceRoll("2d6+3"),
+                        DamageType = DamageTypeEnum.Fire,
+                    },
+                    new DamageResult()
+                    {
+                        Damage = new DiceRoll("1d10+8"),
+                        DamageType = DamageTypeEnum.Cold,
+                    },
+                },
+            },
+            RollResult = new AttackRollResult()
+            {
+                BaseRollModifier = 2,
+            },
+            Owner = new PlayableEntity()
+            {
+                DisplayName = "Attacker",
+            }
+        };
     }
 }

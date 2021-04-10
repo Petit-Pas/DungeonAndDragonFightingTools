@@ -4,7 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfSandbox" 
-        xmlns:cardcontrols="clr-namespace:WpfCustomControlLibrary.CardControls;assembly=WpfCustomControlLibrary" xmlns:hitattacks="clr-namespace:WpfDnDCustomControlLibrary.Attacks.HitAttacks;assembly=WpfDnDCustomControlLibrary"
+        xmlns:cardcontrols="clr-namespace:WpfCustomControlLibrary.CardControls;assembly=WpfCustomControlLibrary" 
+        xmlns:hitattacks="clr-namespace:WpfDnDCustomControlLibrary.Attacks.HitAttacks;assembly=WpfDnDCustomControlLibrary"
         mc:Ignorable="d"
         Title="ModalWindow"
         Style="{StaticResource ModalWindowStyle}" Padding="5"
@@ -20,8 +21,9 @@
     
     
     <cardcontrols:WindowCardControl Title="Toto le héros" Style="{StaticResource WindowCardStyle}" CardColor="{StaticResource LightestGray}" Margin="10">
-        <hitattacks:HitAttackResultUserControl/>
+        <hitattacks:HitAttackResultUserControl AttackResult="{Binding Result, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"/>
     </cardcontrols:WindowCardControl>
+    
 
             <!--<Border 
                 Grid.Row="0"

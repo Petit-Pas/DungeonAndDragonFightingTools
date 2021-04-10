@@ -19,50 +19,61 @@
                                     <VisualBrush Visual="{Binding ElementName=clipMask}" Stretch="None" />
                                 </Grid.OpacityMask>
 
-                                <Border x:Name="clipMask" Background="{Binding CardColor}" CornerRadius="10" Grid.RowSpan="2">
-                                    <Border.Effect>
-                                        <DropShadowEffect Color="{Binding ShadowColor}"/>
-                                    </Border.Effect>
-                                </Border>
-                            <Grid HorizontalAlignment="Stretch">
+                            <Border x:Name="clipMask" BorderBrush="{Binding BorderColor}" BorderThickness="2" Background="{Binding CardColor}" CornerRadius="10" Grid.RowSpan="2">
+                                <Border.Effect>
+                                    <DropShadowEffect Color="{Binding ShadowColor}"/>
+                                </Border.Effect>
+                            </Border>
+                            <Border BorderBrush="Black" BorderThickness="1">
+                            <Grid HorizontalAlignment="Stretch"
+                                  Background="{Binding BorderColor}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="PreviewMouseMove">
-                                        <i:InvokeCommandAction Command="{Binding MouseMoveCommand}"/>
-                                    </i:EventTrigger>
-                                    <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
-                                        <i:InvokeCommandAction Command="{Binding LeftButtonDownCommand}"/>
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
 
-                                <TextBlock 
-                                    Text="{Binding Title}"
-                                    Foreground="{StaticResource Light}"
-                                    FontWeight="SemiBold"
-                                    FontSize="18"
-                                    Margin="10 0 10 0"/>
+                                    <TextBlock 
+                                        Text="{Binding Title}"
+                                        Foreground="{StaticResource Light}"
+                                        FontWeight="SemiBold"
+                                        FontSize="18"
+                                        Margin="10 5 10 5">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="PreviewMouseMove">
+                                                <i:InvokeCommandAction 
+                                                    Command="{Binding TitleBar_PreviewMouseMove}" 
+                                                    CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"/>
+                                            </i:EventTrigger>
+                                            <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                                <i:InvokeCommandAction 
+                                                    Command="{Binding TitleBar_PreviewMouseLeftButtonDown}" 
+                                                    CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>   
+                                    </TextBlock>
 
-                                <Button 
-                                    Grid.Column="1"
-                                    Background="Red"
-                                    Width="30"
-                                    Margin="0">
+                                    <Button 
+                                        Grid.Column="1"
+                                        Background="Red"
+                                        Width="30"
+                                        Margin="0">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="Click">
-                                            <i:InvokeCommandAction Command="{Binding ClickCommand}" />
+                                            <i:InvokeCommandAction 
+                                                Command="{Binding CloseCommand_Click}" 
+                                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" />
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                     X
                                 </Button>
                             </Grid>
+                            </Border>
 
-                            <ContentPresenter Grid.Row="1" Margin="5"
-                                              HorizontalAlignment="Left"/>
-
-                            </Grid>
+                            <ContentPresenter 
+                                Grid.Row="1" 
+                                Margin="5"
+                                HorizontalAlignment="Left"/>
+                        </Grid>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

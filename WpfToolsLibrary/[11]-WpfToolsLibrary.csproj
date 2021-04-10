@@ -48,6 +48,8 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\WindowCommands\CloseCommand.cs" />
+    <Compile Include="Commands\WindowCommands\DragMoveCommands.cs" />
     <Compile Include="ConsoleTools\FightConsole.cs" />
     <Compile Include="Converters\BaseTypes\BoolToReversedBoolConverter.cs" />
     <Compile Include="Converters\BaseTypes\IntToStringConverter.cs" />
