@@ -64,8 +64,8 @@
     <Compile Include="InputBoxes\StringTextBoxes\BaseStringTextBoxControl.cs" />
     <Compile Include="InputBoxes\StringTextBoxes\NotEmptyStringTextBoxControl.cs" />
     <Compile Include="SliderButton\SliderButtonControl.cs" />
-    <Compile Include="Windows\BaseWindowBodyUserControl.xaml.cs">
-      <DependentUpon>BaseWindowBodyUserControl.xaml</DependentUpon>
+    <Compile Include="Windows\WindowTitleBar.xaml.cs">
+      <DependentUpon>WindowTitleBar.xaml</DependentUpon>
     </Compile>
     <Page Include="CardControls\ButtonCardStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -123,7 +123,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Windows\BaseWindowBodyUserControl.xaml">
+    <Page Include="Windows\WindowTitleBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
