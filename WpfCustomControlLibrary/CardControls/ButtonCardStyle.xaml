@@ -11,8 +11,7 @@
                         <Border 
                             x:Name="BorderControl"
                             CornerRadius="4" 
-                            BorderThickness="1" 
-                            >
+                            BorderThickness="1">
                             <Border.Effect>
                                 <DropShadowEffect Color="{Binding ShadowColor}">
                                 </DropShadowEffect>

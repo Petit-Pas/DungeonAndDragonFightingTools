@@ -4,10 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfCustomControlLibrary.Windows"
-             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors" xmlns:buttons="clr-namespace:WpfCustomControlLibrary.Buttons"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Border BorderBrush="Black" BorderThickness="1">
+    <Border BorderBrush="Black" BorderThickness="1" CornerRadius="12 12 0 0">
         <Grid 
             HorizontalAlignment="Stretch"
             DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:WindowTitleBar}}}">
@@ -35,20 +35,9 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </TextBlock>
-            <Button 
-                Grid.Column="1"
-                Background="Red"
-                Width="30"
-                Margin="0">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="Click">
-                        <i:InvokeCommandAction 
-                            Command="{Binding CloseCommand_Click}" 
-                            CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" />
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-                X
-            </Button>
+            <buttons:ExitButtonControl
+                Grid.Column="1" />
+
         </Grid>
     </Border>
 </UserControl>

@@ -51,6 +51,8 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Buttons\BaseButtonControl.cs" />
+    <Compile Include="Buttons\ExitButtonControl.cs" />
     <Compile Include="CardControls\WindowCardControl.cs" />
     <Compile Include="CheckBoxes\CheckBoxControl.cs" />
     <Compile Include="CircularSelector\CircularSelectorRadioButtonControl.cs" />
@@ -67,6 +69,10 @@
     <Compile Include="Windows\WindowTitleBar.xaml.cs">
       <DependentUpon>WindowTitleBar.xaml</DependentUpon>
     </Compile>
+    <Page Include="Buttons\BaseButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CardControls\ButtonCardStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
