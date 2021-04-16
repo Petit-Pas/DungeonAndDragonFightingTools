@@ -257,8 +257,9 @@ namespace DnDToolsLibrary.Dice
 
         protected DiceRoll(DiceRoll to_copy)
         {
-            Modifier = to_copy.Modifier;
-            DicesList = (List<Dices>)to_copy.DicesList.Clone();
+            this.Modifier = to_copy.Modifier;
+            this.DicesList = (List<Dices>)to_copy.DicesList.Clone();
+            this.LastRoll = to_copy.LastRoll;
         }
 
         public object Clone()

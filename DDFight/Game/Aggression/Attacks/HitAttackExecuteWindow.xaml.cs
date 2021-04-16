@@ -1,4 +1,5 @@
-﻿using DDFight.GameExtensions;
+﻿using DDFight.Commands;
+using DDFight.Commands.AttackCommands;
 using DnDToolsLibrary.Attacks.Damage;
 using DnDToolsLibrary.Attacks.HitAttacks;
 using System;
@@ -162,8 +163,7 @@ namespace DDFight.Game.Aggression.Attacks
         {
             if (this.AreAllChildrenValid())
             {
-                AttackResult.Execute();
-                //AttackTemplate
+                DnDCommandManager.StaticTryExecute(new ApplyHitAttackResultCommand(AttackResult, false));
             }
         }
 
@@ -197,34 +197,6 @@ namespace DDFight.Game.Aggression.Attacks
                 // windows X key pressed
             }
         }
-
         #endregion CloseHandling
-
-        private Point startPoint;
-
-        private void Window_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            startPoint = e.GetPosition(this);
-        }
-
-        private void Window_PreviewMouseMove(object sender, MouseEventArgs e)
-        {
-            Point newPoint = e.GetPosition(this);
-            if (e.LeftButton == MouseButtonState.Pressed && (Math.Abs(newPoint.X - startPoint.X) > SystemParameters.MinimumHorizontalDragDistance ||
-                Math.Abs(newPoint.Y - startPoint.Y) > SystemParameters.MinimumVerticalDragDistance))
-            {
-                this.DragMove();
-            }
-        }
-
-        private void Grid_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            e.Handled = true;
-        }
-
-        private void Grid_PreviewMouseMove(object sender, MouseEventArgs e)
-        {
-            e.Handled = true;
-        }
     }
 }

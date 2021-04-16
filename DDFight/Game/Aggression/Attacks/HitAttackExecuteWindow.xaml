@@ -9,14 +9,17 @@
         xmlns:windows="clr-namespace:WpfCustomControlLibrary.Windows;assembly=WpfCustomControlLibrary"
         mc:Ignorable="d"
         Title="HitAttacksExecuteWindow" Height="450" Width="600"
-        Style="{StaticResource ModalWindowStyle}"
-        Background="Transparent"
-        KeyDown="Window_KeyDown"
         Closing="Window_Closing"
-        >
+        SizeToContent="WidthAndHeight"
+        KeyDown="Window_KeyDown"
+        WindowState="Normal"
+        ResizeMode="CanResize"
+        WindowStyle="None"
+        AllowsTransparency="True">
     <Window.Resources>
         <Style TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlock}" />
     </Window.Resources>
+    <Grid Background="Transparent" Opacity="1">
     <cardcontrols:WindowCardControl Title="Toto le héros" CardColor="{StaticResource LightestGray}" Margin="10" BorderColor="{StaticResource Gray}">
         <Grid 
             VerticalAlignment="Center"
@@ -73,4 +76,5 @@
             </Grid>
         </Grid>
     </cardcontrols:WindowCardControl>
+    </Grid>
 </Window>

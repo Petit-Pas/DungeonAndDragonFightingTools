@@ -1,4 +1,5 @@
-﻿using DnDToolsLibrary.Attacks.Damage;
+﻿using BaseToolsLibrary.Memory;
+using DnDToolsLibrary.Attacks.Damage;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Status;
 using System.ComponentModel;
@@ -6,8 +7,10 @@ using System.Runtime.CompilerServices;
 
 namespace DnDToolsLibrary.Attacks.HitAttacks
 {
-    public class HitAttackResult : INotifyPropertyChanged
+    public class HitAttackResult : INotifyPropertyChanged, ICopyAssignable
     {
+        public HitAttackResult() { }
+
         public string Name 
         {
             get => _name;
@@ -52,7 +55,7 @@ namespace DnDToolsLibrary.Attacks.HitAttacks
                 NotifyPropertyChanged();
             }
         }
-        private DamageResultList _damageList = null;
+        private DamageResultList _damageList = new DamageResultList();
 
         public OnHitStatusList OnHitStatuses
         {
@@ -63,7 +66,7 @@ namespace DnDToolsLibrary.Attacks.HitAttacks
                 NotifyPropertyChanged();
             }
         }
-        private OnHitStatusList _onHitStatuses = null;
+        private OnHitStatusList _onHitStatuses = new OnHitStatusList();
 
         public AttackRollResult RollResult
         {
@@ -74,7 +77,7 @@ namespace DnDToolsLibrary.Attacks.HitAttacks
                 NotifyPropertyChanged();
             }
         }
-        private AttackRollResult _rollResult = null;
+        private AttackRollResult _rollResult = new AttackRollResult();
 
 
         #region INotifyPropertyChanged
@@ -96,6 +99,8 @@ namespace DnDToolsLibrary.Attacks.HitAttacks
             }
         }
 
+        #endregion
+
         public void Reset()
         {
             foreach (DamageResult dmg in DamageList.Elements)
@@ -104,7 +109,31 @@ namespace DnDToolsLibrary.Attacks.HitAttacks
             }
             this.RollResult.Reset();
         }
-        #endregion
+
+        private void init_copy(HitAttackResult to_copy)
+        {
+            this.DamageList = (DamageResultList)to_copy.DamageList.Clone();
+            this.RollResult = (AttackRollResult)to_copy.RollResult.Clone();
+            this.OnHitStatuses = (OnHitStatusList)OnHitStatuses.Clone();
+            this.Name = to_copy.Name;
+            this.Target = to_copy.Target;
+            this.Owner = to_copy.Owner;
+        }
+
+        public HitAttackResult(HitAttackResult to_copy)
+        {
+            init_copy(to_copy);
+        }
+
+        public void CopyAssign(object to_copy)
+        {
+            init_copy((HitAttackResult)to_copy);
+        }
+
+        public object Clone()
+        {
+            return new HitAttackResult(this);
+        }
 
     }
 }

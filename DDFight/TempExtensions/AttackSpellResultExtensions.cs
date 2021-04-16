@@ -1,4 +1,5 @@
-﻿using DDFight.GameExtensions;
+﻿using DDFight.Commands;
+using DDFight.Commands.AttackCommands;
 using DnDToolsLibrary.Attacks.HitAttacks;
 using DnDToolsLibrary.Attacks.Spells;
 using DnDToolsLibrary.Entities;
@@ -35,7 +36,7 @@ namespace TempExtensionsAttackSpellResultExtensions
                     Owner = attackSpellResult.Caster,
                     Target = target,
                 };
-                result.Execute();
+                DnDCommandManager.StaticTryExecute(new ApplyHitAttackResultCommand(result, true));
                 index += 1;
             }
         }

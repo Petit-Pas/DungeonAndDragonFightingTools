@@ -1,5 +1,6 @@
 ﻿using BaseToolsLibrary.IO;
 using DDFight;
+using DDFight.Commands;
 using DnDToolsLibrary.Attacks;
 using DnDToolsLibrary.Attacks.Damage;
 using DnDToolsLibrary.Attacks.Damage.Type;

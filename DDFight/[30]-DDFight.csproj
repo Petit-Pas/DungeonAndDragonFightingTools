@@ -74,6 +74,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\AttackCommands\ApplyDamageResultListCommand.cs" />
+    <Compile Include="Commands\DnDCommandBase.cs" />
+    <Compile Include="Commands\DnDCommandManager.cs" />
+    <Compile Include="Commands\AttackCommands\ApplyHitAttackResultCommand.cs" />
+    <Compile Include="Commands\IDnDCommand.cs" />
     <Compile Include="Controlers\SpecializedListUserControl.cs" />
     <Compile Include="Converters\VisibleIfCharacter.cs" />
     <Compile Include="Game\Aggression\Attacks\Display\HitAttackTemplateListUserControl.cs" />
@@ -148,7 +153,6 @@
     </Compile>
     <Compile Include="Game\Status\Display\CustomVerboseStatusListUserControl.cs" />
     <Compile Include="TempExtensions\AttackSpellResultExtensions.cs" />
-    <Compile Include="TempExtensions\ExecuteActionExtensions.cs" />
     <Compile Include="TempExtensions\ModifyListExtension.cs" />
     <Compile Include="TempExtensions\OnHitStatusGameExtension.cs" />
     <Compile Include="TempExtensions\OpenEditWindowExtensions.cs" />

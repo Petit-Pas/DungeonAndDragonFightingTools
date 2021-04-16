@@ -26,7 +26,6 @@ namespace WpfCustomControlLibrary.Windows
             InitializeComponent();
             TitleBar_PreviewMouseMove = new DragMoveCommand_PreviewMouseMove();
             TitleBar_PreviewMouseLeftButtonDown = new DragMoveCommand_PreviewMouseLeftButtonDown();
-            CloseCommand_Click = new CloseCommand();
         }
 
         public string Title
@@ -41,7 +40,6 @@ namespace WpfCustomControlLibrary.Windows
                 new PropertyMetadata("Title")
             );
 
-        public CloseCommand CloseCommand_Click { get; set; }
         public DragMoveCommand_PreviewMouseMove TitleBar_PreviewMouseMove { get; set; }
         public DragMoveCommand_PreviewMouseLeftButtonDown TitleBar_PreviewMouseLeftButtonDown { get; set; }
     }
