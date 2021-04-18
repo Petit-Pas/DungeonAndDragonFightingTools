@@ -47,24 +47,53 @@ namespace WpfCustomControlLibrary.CardControls
             this.MouseLeftButtonUp += ButtonCardControl_MouseLeftButtonUp;
             this.MouseEnter += ButtonCardControl_MouseEnter;
             this.MouseLeave += ButtonCardControl_MouseLeave;
+            this.KeyDown += ButtonCardControl_KeyDown;
+            this.GotFocus += ButtonCardControl_GotFocus;
+            this.LostFocus += ButtonCardControl_LostFocus;
+        }
+
+        private void ButtonCardControl_LostFocus(object sender, RoutedEventArgs e)
+        {
+            animate_inactive();
+        }
+
+        private void ButtonCardControl_GotFocus(object sender, RoutedEventArgs e)
+        {
+            animate_active();
+        }
+
+        private void ButtonCardControl_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter || e.Key == Key.Space)
+                this.OnClick();
+        }
+
+        private void animate_active()
+        {
+            Border border = this.Template.FindName("ButtonCard_BorderControl", this) as Border;
+            border.AnimateBackground(
+                (Color)Application.Current.Resources["RawLightestGray"],
+                (Color)Application.Current.Resources["RawIndigo"],
+                TimeSpan.FromSeconds(0.15));
+        }
+
+        private void animate_inactive()
+        {
+            Border border = this.Template.FindName("ButtonCard_BorderControl", this) as Border;
+            border.AnimateBackground(
+                (Color)Application.Current.Resources["RawIndigo"],
+                (Color)Application.Current.Resources["RawLightestGray"],
+                TimeSpan.FromSeconds(0.15));
         }
 
         private void ButtonCardControl_MouseLeave(object sender, MouseEventArgs e)
         {
-            Border border = this.Template.FindName("ButtonCard_BorderControl", this) as Border;
-            border.AnimateBackground(
-                (Color)Application.Current.Resources["RawIndigo"],
-                (Color)Application.Current.Resources["RawLightestGray"],
-                TimeSpan.FromSeconds(0.15));
+            animate_inactive();
         }
 
         private void ButtonCardControl_MouseEnter(object sender, MouseEventArgs e)
         {
-            Border border = this.Template.FindName("ButtonCard_BorderControl", this) as Border;
-            border.AnimateBackground(
-                (Color)Application.Current.Resources["RawLightestGray"],
-                (Color)Application.Current.Resources["RawIndigo"],
-                TimeSpan.FromSeconds(0.15));
+            animate_active();
         }
 
         public bool IsPressed

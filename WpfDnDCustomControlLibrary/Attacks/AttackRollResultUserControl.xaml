@@ -42,8 +42,7 @@
             </TextBlock>
             <dicetextboxes:AttackRollTextBoxControl
                 x:Name="AttackRollTextBoxControl"
-                Height="18"
-                Width="30"
+                Width="32"
                 Margin="5, 2"
                 Integer="{Binding AttackRoll}"
                 AdvantageModifiers="{Binding AdvantageModifiers}" />

@@ -37,6 +37,9 @@
                                             <Setter Property="BorderBrush" Value="{Binding CardColor}"/>
                                             <Setter Property="Opacity" Value="0.7"/>
                                         </DataTrigger>
+                                        <DataTrigger Binding="{Binding IsFocused, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:ButtonCardControl}}}" Value="True">
+                                            <Setter Property="Background" Value="{StaticResource Indigo}" />
+                                        </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
                             </Border.Style>
@@ -57,7 +60,8 @@
                                         <Style.Triggers>
                                             <DataTrigger 
                                                 Binding="{Binding IsEnabled,
-                                                          RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:ButtonCardControl}}}" 
+                                                    RelativeSource={RelativeSource Mode=FindAncestor, 
+                                                    AncestorType={x:Type local:ButtonCardControl}}}" 
                                                 Value="False">
                                                 <Setter Property="Opacity" Value="0.3"/>
                                             </DataTrigger>
