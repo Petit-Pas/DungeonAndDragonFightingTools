@@ -2,8 +2,11 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
+using WpfCustomControlLibrary.Animations.Extensions;
 
 namespace WpfCustomControlLibrary.CardControls
 {
@@ -42,14 +45,31 @@ namespace WpfCustomControlLibrary.CardControls
                 this.Style = style;
             this.MouseLeftButtonDown += ButtonCardControl_MouseLeftButtonDown;
             this.MouseLeftButtonUp += ButtonCardControl_MouseLeftButtonUp;
+            this.MouseEnter += ButtonCardControl_MouseEnter;
+            this.MouseLeave += ButtonCardControl_MouseLeave;
+        }
+
+        private void ButtonCardControl_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Border border = this.Template.FindName("ButtonCard_BorderControl", this) as Border;
+            border.AnimateBackground(
+                (Color)Application.Current.Resources["RawIndigo"],
+                (Color)Application.Current.Resources["RawLightestGray"],
+                TimeSpan.FromSeconds(0.15));
+        }
+
+        private void ButtonCardControl_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Border border = this.Template.FindName("ButtonCard_BorderControl", this) as Border;
+            border.AnimateBackground(
+                (Color)Application.Current.Resources["RawLightestGray"],
+                (Color)Application.Current.Resources["RawIndigo"],
+                TimeSpan.FromSeconds(0.15));
         }
 
         public bool IsPressed
         {
-            get
-            {
-                return _isPressed;
-            }
+            get => _isPressed;
             set
             {
                 _isPressed = value;
@@ -60,11 +80,21 @@ namespace WpfCustomControlLibrary.CardControls
 
         private void ButtonCardControl_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            Border border = this.Template.FindName("ButtonCard_BorderControl", this) as Border;
+            border.AnimateBackground(
+                (Color)Application.Current.Resources["RawLightIndigo"],
+                (Color)Application.Current.Resources["RawIndigo"],
+                TimeSpan.FromSeconds(0.05));
             IsPressed = false;
         }
 
         private void ButtonCardControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            Border border = this.Template.FindName("ButtonCard_BorderControl", this) as Border;
+            border.AnimateBackground(
+                (Color)Application.Current.Resources["RawIndigo"],
+                (Color)Application.Current.Resources["RawLightIndigo"],
+                TimeSpan.FromSeconds(0.05));
             IsPressed = true;
         }
 
@@ -81,7 +111,6 @@ namespace WpfCustomControlLibrary.CardControls
             RoutedEventArgs args = new RoutedEventArgs(ClickEvent, this);
 
             RaiseEvent(args);
-
         }
 
         protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e)
@@ -105,18 +134,6 @@ namespace WpfCustomControlLibrary.CardControls
                 new PropertyMetadata(System.Windows.Application.Current.Resources["LightIndigo"])
             );
 
-        public Brush ClickBorderColor
-        {
-            get { return (Brush)this.GetValue(ClickBorderColorProperty); }
-            set { this.SetValue(ClickBorderColorProperty, value); }
-        }
-        private static readonly DependencyProperty ClickBorderColorProperty = DependencyProperty.Register(
-                nameof(ClickBorderColor),
-                typeof(Brush),
-                typeof(ButtonCardControl),
-                new PropertyMetadata(System.Windows.Application.Current.Resources["LightIndigo"])
-            );
-
         #endregion Click
 
         #region Hover
@@ -128,18 +145,6 @@ namespace WpfCustomControlLibrary.CardControls
         }
         private static readonly DependencyProperty HoverBackgroundColorProperty = DependencyProperty.Register(
                 nameof(HoverBackgroundColor),
-                typeof(Brush),
-                typeof(ButtonCardControl),
-                new PropertyMetadata(System.Windows.Application.Current.Resources["Indigo"])
-            );
-
-        public Brush HoverBorderColor
-        {
-            get { return (Brush)this.GetValue(HoverBorderColorProperty); }
-            set { this.SetValue(HoverBorderColorProperty, value); }
-        }
-        private static readonly DependencyProperty HoverBorderColorProperty = DependencyProperty.Register(
-                nameof(HoverBorderColor),
                 typeof(Brush),
                 typeof(ButtonCardControl),
                 new PropertyMetadata(System.Windows.Application.Current.Resources["Indigo"])

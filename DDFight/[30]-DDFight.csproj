@@ -49,7 +49,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>MainIcon.ico</ApplicationIcon>
+    <ApplicationIcon>icon_black.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -683,9 +683,6 @@
     <Resource Include="Resources\MainIcon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="MainIcon.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\checked.png" />
     <Resource Include="Resources\unchecked.png" />
   </ItemGroup>
@@ -720,6 +717,14 @@
       <Project>{84709264-0a0b-4c58-a52f-ba8ade84ab74}</Project>
       <Name>[11]-WpfToolsLibrary</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icon_black.ico" />
+    <Resource Include="Resources\icon_white2.ico" />
+    <Resource Include="Resources\icon_black.ico" />
+    <Content Include="Resources\icon_black.svg" />
+    <Resource Include="Resources\icon_white.ico" />
+    <Content Include="Resources\icon_white.svg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

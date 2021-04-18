@@ -49,28 +49,36 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
+                <Grid.Resources>
+                    <Style TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlock}">
+                        <Setter Property="FontSize" Value="15"/>
+                    </Style>
+                </Grid.Resources>
 
                 <cardcontrols:ButtonCardControl
                     x:Name="RollButton"
                     Grid.ColumnSpan="2"
-                    Margin="5"
-                    Click="RollButton_Click">
-                    <TextBlock HorizontalAlignment="Center">Roll</TextBlock>
+                    Margin="7"
+                    Click="RollButton_Click"
+                    CardColor="{StaticResource LightestGray}">
+                        <TextBlock HorizontalAlignment="Center">Roll</TextBlock>
                 </cardcontrols:ButtonCardControl>
 
                 <cardcontrols:ButtonCardControl
                     x:Name="ValidateResetButton"
                     Grid.Row="1"
-                    Margin="5"
-                    Click="ValidateResetButton_Click">
+                    Margin="7"
+                    Click="ValidateResetButton_Click"
+                    CardColor="{StaticResource LightestGray}">
                     <TextBlock HorizontalAlignment="Center">Validate and Reset</TextBlock>
                 </cardcontrols:ButtonCardControl>
 
                 <cardcontrols:ButtonCardControl
                     x:Name="ValidateExitButton"
                     Grid.Row="1" Grid.Column="1"
-                    Margin="5"
-                    Click="ValidateExitButton_Click">
+                    Margin="7"
+                    Click="ValidateExitButton_Click"
+                    CardColor="{StaticResource LightestGray}">
                     <TextBlock HorizontalAlignment="Center">Validate and Exit</TextBlock>
                 </cardcontrols:ButtonCardControl>
             </Grid>

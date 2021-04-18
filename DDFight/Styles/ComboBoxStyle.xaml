@@ -14,13 +14,13 @@
             <Border
                   x:Name="Border" 
                   Grid.ColumnSpan="2"
-                  CornerRadius="0"
+                  CornerRadius="10"
                   Background="#FF3F3F3F"
                   BorderBrush="{StaticResource Indigo}"
                   BorderThickness="1" />
             <Border 
                   Grid.Column="0"
-                  CornerRadius="0" 
+                  CornerRadius="10" 
                   Margin="1" 
                   Background="#FF3F3F3F" 
                   BorderBrush="{StaticResource Indigo}"

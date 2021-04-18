@@ -3,8 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-        xmlns:damage="clr-namespace:WpfDnDCustomControlLibrary.Attacks.Damage;assembly=WpfDnDCustomControlLibrary"
-        xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
         mc:Ignorable="d"
         Title="MainWindow"
         Width="650" Height="400"
@@ -27,16 +25,7 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-
-        <Button>
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="Click">
-                    <i:InvokeCommandAction 
-                            Command="{Binding Command, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"/>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-            Test
-        </Button>
+        
         
     </Grid>
     

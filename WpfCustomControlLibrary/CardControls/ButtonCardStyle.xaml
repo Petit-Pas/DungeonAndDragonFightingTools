@@ -8,29 +8,32 @@
                     <Grid
                         x:Name="TemplateGridControl"
                         DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:ButtonCardControl}}">
+                        <Grid.Style>
+                            <Style TargetType="{x:Type Grid}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsPressed}" Value="True">
+                                        <Setter Property="RenderTransform">
+                                            <Setter.Value>
+                                                <TranslateTransform X="1" Y="1" />
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Grid.Style>
                         <Border 
-                            x:Name="BorderControl"
-                            CornerRadius="4" 
-                            BorderThickness="1">
+                            x:Name="ButtonCard_BorderControl"
+                            CornerRadius="13">
                             <Border.Effect>
-                                <DropShadowEffect Color="{Binding ShadowColor}">
-                                </DropShadowEffect>
+                                <DropShadowEffect Color="{StaticResource RawIndigo}" ShadowDepth="5.5" Opacity="0.7" Direction="-45"></DropShadowEffect>
                             </Border.Effect>
                             <Border.Style>
                                 <Style TargetType="{x:Type Border}">
-                                    <Setter Property="BorderBrush" Value="{Binding BorderColor}" />
                                     <Setter Property="Background" Value="{Binding CardColor}" />
+                                    <Setter Property="BorderThickness" Value="0"/>
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Grid}}}" Value="True">
-                                            <Setter Property="BorderBrush" Value="{Binding HoverBorderColor}" />
-                                            <Setter Property="Background" Value="{Binding HoverBackgroundColor}" />
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding IsPressed, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:ButtonCardControl}}}" Value="True">
-                                            <Setter Property="BorderBrush" Value="{Binding ClickBorderColor}" />
-                                            <Setter Property="Background" Value="{Binding ClickBackgroundColor}" />
-                                        </DataTrigger>
                                         <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:ButtonCardControl}}}" Value="False">
-                                            <Setter Property="Background" Value="{Binding BorderColor}"/>
+                                            <Setter Property="Background" Value="{Binding CardColor}"/>
                                             <Setter Property="BorderBrush" Value="{Binding CardColor}"/>
                                             <Setter Property="Opacity" Value="0.7"/>
                                         </DataTrigger>
@@ -38,32 +41,31 @@
                                 </Style>
                             </Border.Style>
                         </Border>
-                        <Border Padding="5">
+                        <Border
+                            CornerRadius="{Binding CornerRadius, ElementName=ButtonCard_BorderControl}"
+                            BorderThickness="0"
+                            Background="{Binding Background, ElementName=ButtonCard_BorderControl}"
+                            Padding="5"
+                            Opacity="1">
+                            <Border.Effect>
+                                <DropShadowEffect Color="#888888" Direction="135" ShadowDepth="4" Opacity="0.7"/>
+                            </Border.Effect>
                             <ContentPresenter>
                                 <ContentPresenter.Resources>
-                                    <Style TargetType="ContentPresenter">
+                                    <Style 
+                                        TargetType="ContentPresenter">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:ButtonCardControl}}}" Value="False">
-                                                <Setter Property="Opacity" Value="0.4"/>
+                                            <DataTrigger 
+                                                Binding="{Binding IsEnabled,
+                                                          RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:ButtonCardControl}}}" 
+                                                Value="False">
+                                                <Setter Property="Opacity" Value="0.3"/>
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
                                 </ContentPresenter.Resources>
                             </ContentPresenter>
                         </Border>
-                        <Grid.Style>
-                            <Style TargetType="{x:Type Grid}">
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="RenderTransform">
-                                            <Setter.Value>
-                                                <TranslateTransform X="1" Y="1" />
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Grid.Style>
                     </Grid>
                     <ControlTemplate.Triggers>
                     </ControlTemplate.Triggers>

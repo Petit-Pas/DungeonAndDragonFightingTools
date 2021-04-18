@@ -4,7 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfDnDCustomControlLibrary.Attacks.HitAttacks" 
-             xmlns:cardcontrols="clr-namespace:WpfCustomControlLibrary.CardControls;assembly=WpfCustomControlLibrary" xmlns:attacks="clr-namespace:WpfDnDCustomControlLibrary.Attacks" xmlns:damage="clr-namespace:WpfDnDCustomControlLibrary.Attacks.Damage" xmlns:fight="clr-namespace:WpfDnDCustomControlLibrary.Fight"
+             xmlns:cardcontrols="clr-namespace:WpfCustomControlLibrary.CardControls;assembly=WpfCustomControlLibrary"
+             xmlns:attacks="clr-namespace:WpfDnDCustomControlLibrary.Attacks" 
+             xmlns:damage="clr-namespace:WpfDnDCustomControlLibrary.Attacks.Damage"
+             xmlns:fight="clr-namespace:WpfDnDCustomControlLibrary.Fight"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
         <Grid
@@ -49,7 +52,8 @@
 
             <cardcontrols:DownCardControl
                 Margin="-10 0 0 0"
-                Grid.Row="2">
+                Grid.Row="2"
+                CardColor="{StaticResource LightestGray}">
 
                 <damage:DamageResultListRollableUserControl
                     Margin="10 0"

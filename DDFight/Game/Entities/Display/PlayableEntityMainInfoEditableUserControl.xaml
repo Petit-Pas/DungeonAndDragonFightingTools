@@ -5,7 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:input="clr-namespace:DDFight.Controlers.InputBoxes"
              xmlns:characteristics="clr-namespace:DDFight.Controlers.Game.Characteristics"
-             xmlns:converters="clr-namespace:DDFight.Converters" xmlns:inttextboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.IntTextBoxes;assembly=WpfCustomControlLibrary" xmlns:stringtextboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.StringTextBoxes;assembly=WpfCustomControlLibrary" xmlns:checkboxes="clr-namespace:WpfCustomControlLibrary.CheckBoxes;assembly=WpfCustomControlLibrary"
+             xmlns:converters="clr-namespace:DDFight.Converters"
+             xmlns:inttextboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.IntTextBoxes;assembly=WpfCustomControlLibrary"
+             xmlns:stringtextboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.StringTextBoxes;assembly=WpfCustomControlLibrary"
+             xmlns:checkboxes="clr-namespace:WpfCustomControlLibrary.CheckBoxes;assembly=WpfCustomControlLibrary"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -28,140 +31,142 @@
                 Main Information about the Character
             </TextBlock>
         </GroupBox.Header>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <!-- Meta -->
-                <RowDefinition Height="Auto" />
-                <!-- Characteristics -->
-            </Grid.RowDefinitions>
-
-            <Grid Grid.Row="0">
-                <!-- Meta Informations -->
+        <ScrollViewer>
+            <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <!-- Name -->
-                    <RowDefinition Height="Auto"/>
-                    <!-- Level -->
-                    <RowDefinition Height="Auto"/>
-                    <!-- Armor Class -->
-                    <RowDefinition Height="Auto"/>
-                    <!-- Spell Save -->
-                    <RowDefinition Height="Auto"/>
-                    <!-- Spell Hit Modifier -->
-                    <RowDefinition Height="Auto"/>
-                    <!-- Max HPs -->
-                    <RowDefinition Height="Auto"/>
-                    <!-- Current HPs -->
-                    <RowDefinition Height="Auto"/>
-                    <!-- Temporary HPs -->
-                    <RowDefinition Height="Auto"/>
-                    <!-- Inspiration -->
+                    <RowDefinition Height="Auto" />
+                    <!-- Meta -->
+                    <RowDefinition Height="Auto" />
+                    <!-- Characteristics -->
                 </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <!-- Labels -->
-                    <ColumnDefinition Width="*"/>
-                    <!-- TextBoxes -->
-                </Grid.ColumnDefinitions>
 
-                <TextBlock 
-                    Grid.Row="0" Grid.Column="0" 
-                    VerticalAlignment="Center">
-                    Name
-                </TextBlock>
-                <stringtextboxes:NotEmptyStringTextBoxControl 
-                    x:Name="NameBoxUserControl" 
-                    Grid.Row="0" Grid.Column="1" 
-                    Margin="0, 5, 10, 5"
-                    String="{Binding Name}"/>
+                <Grid Grid.Row="0">
+                    <!-- Meta Informations -->
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <!-- Name -->
+                        <RowDefinition Height="Auto"/>
+                        <!-- Level -->
+                        <RowDefinition Height="Auto"/>
+                        <!-- Armor Class -->
+                        <RowDefinition Height="Auto"/>
+                        <!-- Spell Save -->
+                        <RowDefinition Height="Auto"/>
+                        <!-- Spell Hit Modifier -->
+                        <RowDefinition Height="Auto"/>
+                        <!-- Max HPs -->
+                        <RowDefinition Height="Auto"/>
+                        <!-- Current HPs -->
+                        <RowDefinition Height="Auto"/>
+                        <!-- Temporary HPs -->
+                        <RowDefinition Height="Auto"/>
+                        <!-- Inspiration -->
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <!-- Labels -->
+                        <ColumnDefinition Width="*"/>
+                        <!-- TextBoxes -->
+                    </Grid.ColumnDefinitions>
 
-                <TextBlock 
-                    Grid.Row="1" Grid.Column="0"
-                    Visibility="{Binding Converter={StaticResource VisibleIfCharacterConverter}}">
-                    Level
-                </TextBlock>
-                <inttextboxes:PositiveIntTextBoxControl 
-                    x:Name="LevelBoxUserControl" 
-                    Grid.Row="1" Grid.Column="1" 
-                    Margin="0, 5, 10, 5"
-                    Integer="{Binding Level}"
-                    Visibility="{Binding Converter={StaticResource VisibleIfCharacterConverter}}"/>
+                    <TextBlock 
+                        Grid.Row="0" Grid.Column="0" 
+                        VerticalAlignment="Center">
+                        Name
+                    </TextBlock>
+                    <stringtextboxes:NotEmptyStringTextBoxControl 
+                        x:Name="NameBoxUserControl" 
+                        Grid.Row="0" Grid.Column="1" 
+                        Margin="0, 5, 10, 5"
+                        String="{Binding Name}"/>
+
+                    <TextBlock 
+                        Grid.Row="1" Grid.Column="0"
+                        Visibility="{Binding Converter={StaticResource VisibleIfCharacterConverter}}">
+                        Level
+                    </TextBlock>
+                    <inttextboxes:PositiveIntTextBoxControl 
+                        x:Name="LevelBoxUserControl" 
+                        Grid.Row="1" Grid.Column="1" 
+                        Margin="0, 5, 10, 5"
+                        Integer="{Binding Level}"
+                        Visibility="{Binding Converter={StaticResource VisibleIfCharacterConverter}}"/>
 
 
-                <TextBlock 
-                    Grid.Row="2" Grid.Column="0">
-                    Armor class
-                </TextBlock>
-                <inttextboxes:PositiveIntTextBoxControl 
-                    x:Name="CABoxUserControl" 
-                    Grid.Row="2" Grid.Column="1" 
-                    Margin="0, 5, 10, 5" 
-                    Integer="{Binding CA}"/>
+                    <TextBlock 
+                        Grid.Row="2" Grid.Column="0">
+                        Armor class
+                    </TextBlock>
+                    <inttextboxes:PositiveIntTextBoxControl 
+                        x:Name="CABoxUserControl" 
+                        Grid.Row="2" Grid.Column="1" 
+                        Margin="0, 5, 10, 5" 
+                        Integer="{Binding CA}"/>
 
-                <TextBlock
-                    Grid.Row="3" Grid.Column="0">
-                    Spell Save
-                </TextBlock>
-                <inttextboxes:PositiveIntTextBoxControl
-                    Grid.Row="3" Grid.Column="1"
-                    Integer="{Binding SpellSave}"
-                    Margin="0, 5, 10, 5"/>
+                    <TextBlock
+                        Grid.Row="3" Grid.Column="0">
+                        Spell Save
+                    </TextBlock>
+                    <inttextboxes:PositiveIntTextBoxControl
+                        Grid.Row="3" Grid.Column="1"
+                        Integer="{Binding SpellSave}"
+                        Margin="0, 5, 10, 5"/>
 
-                <TextBlock
-                    Grid.Row="4" Grid.Column="0">
-                    Spell Hit Modifier
-                </TextBlock>
-                <inttextboxes:PositiveIntTextBoxControl
-                    Grid.Row="4" Grid.Column="1"
-                    Integer="{Binding SpellHitModifier}"
-                    Margin="0, 5, 10, 5"/>
+                    <TextBlock
+                        Grid.Row="4" Grid.Column="0">
+                        Spell Hit Modifier
+                    </TextBlock>
+                    <inttextboxes:PositiveIntTextBoxControl
+                        Grid.Row="4" Grid.Column="1"
+                        Integer="{Binding SpellHitModifier}"
+                        Margin="0, 5, 10, 5"/>
 
-                <TextBlock 
-                    Grid.Row="5" Grid.Column="0">
-                    Max HP
-                </TextBlock>
-                <inttextboxes:PositiveIntTextBoxControl 
-                    x:Name="MaxHPBoxUserControl" 
-                    Grid.Row="5" Grid.Column="1" 
-                    Margin="0, 5, 10, 5" 
-                    Integer="{Binding MaxHp}"/>
+                    <TextBlock 
+                        Grid.Row="5" Grid.Column="0">
+                        Max HP
+                    </TextBlock>
+                    <inttextboxes:PositiveIntTextBoxControl 
+                        x:Name="MaxHPBoxUserControl" 
+                        Grid.Row="5" Grid.Column="1" 
+                        Margin="0, 5, 10, 5" 
+                        Integer="{Binding MaxHp}"/>
 
-                <TextBlock 
-                    Grid.Row="6" Grid.Column="0">
-                    Current HP
-                </TextBlock>
-                <inttextboxes:IntTextBoxControl
-                    x:Name="HPBoxUserControl" 
-                    Grid.Row="6" Grid.Column="1" 
-                    Margin="0, 5, 10, 5"
-                    Integer="{Binding Hp}"/>
+                    <TextBlock 
+                        Grid.Row="6" Grid.Column="0">
+                        Current HP
+                    </TextBlock>
+                    <inttextboxes:IntTextBoxControl
+                        x:Name="HPBoxUserControl" 
+                        Grid.Row="6" Grid.Column="1" 
+                        Margin="0, 5, 10, 5"
+                        Integer="{Binding Hp}"/>
 
-                <TextBlock
-                    Grid.Row="7">
-                    Temporary HPs
-                </TextBlock>
-                <inttextboxes:PositiveIntTextBoxControl
-                    Grid.Row="7" Grid.Column="1"
-                    Margin="0, 5, 10, 5"
-                    Integer="{Binding TempHp}"/>
+                    <TextBlock
+                        Grid.Row="7">
+                        Temporary HPs
+                    </TextBlock>
+                    <inttextboxes:PositiveIntTextBoxControl
+                        Grid.Row="7" Grid.Column="1"
+                        Margin="0, 5, 10, 5"
+                        Integer="{Binding TempHp}"/>
 
-                <TextBlock
-                    Grid.Row="8"
-                    Visibility="{Binding Converter={StaticResource VisibleIfCharacterConverter}}">
-                    Has Inpiration
-                </TextBlock>
-                <checkboxes:CheckBoxControl
-                    Grid.Row="8" Grid.Column="1"
-                    HorizontalAlignment="Left"
-                    IsChecked="{Binding HasInspiration}"
-                    Visibility="{Binding Converter={StaticResource VisibleIfCharacterConverter}}"/>
+                    <TextBlock
+                        Grid.Row="8"
+                        Visibility="{Binding Converter={StaticResource VisibleIfCharacterConverter}}">
+                        Has Inpiration
+                    </TextBlock>
+                    <checkboxes:CheckBoxControl
+                        Grid.Row="8" Grid.Column="1"
+                        HorizontalAlignment="Left"
+                        IsChecked="{Binding HasInspiration}"
+                        Visibility="{Binding Converter={StaticResource VisibleIfCharacterConverter}}"/>
 
+                </Grid>
+                <characteristics:CharacteristicsListEditableUserControl
+                    x:Name="CharacteristicsUserControl"
+                    Grid.Row="2"
+                    Margin="5, 0"/>
             </Grid>
-            <characteristics:CharacteristicsListEditableUserControl
-                x:Name="CharacteristicsUserControl"
-                Grid.Row="2"
-                Margin="5, 0"/>
-        </Grid>
+        </ScrollViewer>
     </GroupBox>
 </UserControl>

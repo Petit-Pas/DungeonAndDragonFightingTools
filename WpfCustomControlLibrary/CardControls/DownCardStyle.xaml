@@ -9,12 +9,17 @@
                         DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:DownCardControl}}"
                         Background="{Binding CardColor}"
                         Margin="6">
-                        <Border CornerRadius="10" BorderBrush="{Binding EnvironmentColor}" BorderThickness="5" Margin="0" Panel.ZIndex="0">
+                        <Border CornerRadius="10" BorderBrush="{Binding EnvironmentColor}" BorderThickness="3" Margin="0" Panel.ZIndex="0">
                             <Border.Effect>
                                 <DropShadowEffect Color="{Binding ShadowColor}" />
                             </Border.Effect>
                         </Border>
-                        
+                        <Border CornerRadius="10" BorderBrush="{Binding EnvironmentColor}" BorderThickness="3" Margin="0" Panel.ZIndex="0">
+                            <Border.Effect>
+                                <DropShadowEffect Color="#AAAAAA" Direction="135" />
+                            </Border.Effect>
+                        </Border>
+
                         <!-- serve the purpose of hiding the external shadow -->
                         <Border CornerRadius="0" BorderBrush="{Binding EnvironmentColor}" BorderThickness="4" Margin="0" Panel.ZIndex="0">
                         </Border>

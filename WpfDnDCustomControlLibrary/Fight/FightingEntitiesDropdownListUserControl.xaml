@@ -13,7 +13,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <ComboBox
+    <ComboBox 
         x:Name="HitAttackTargetComboControl"
         Style="{StaticResource ComboBoxStyle}"
         Margin="5, 0"
@@ -23,10 +23,3 @@
         </ComboBox.ItemContainerStyle>
     </ComboBox>
 </UserControl>
-    
-    <!--
-            Margin="5, 0"
-            MinWidth="80"
-            VerticalAlignment="Center"
-
-    -->

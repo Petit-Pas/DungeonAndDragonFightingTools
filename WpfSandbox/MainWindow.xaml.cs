@@ -51,12 +51,6 @@ namespace BindValidation
         public MainWindow()
         {
 
-            ModalWindow win = new ModalWindow()
-            {
-            };
-            win.ShowCentered();
-
-
             DamageTemplateList list = new DamageTemplateList()
             {
                 Elements = new ObservableCollection<DamageTemplate>() {

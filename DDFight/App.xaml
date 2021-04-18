@@ -6,8 +6,13 @@
 
         <ResourceDictionary>
 
-            <SolidColorBrush x:Key="LightestGray" Color="#2e2e2e" />
+            <!-- 
+                #1F2523
+                #2C302C 
+            -->
+            
             <SolidColorBrush x:Key="Gray" Color="#202020" />
+            <SolidColorBrush x:Key="LightestGray" Color="#2e2e2e" />
             <SolidColorBrush x:Key="Light" Color="#fbf2d4" />
             <SolidColorBrush x:Key="Indigo" Color="#4B0082" />
             <SolidColorBrush x:Key="LightIndigo" Color="#6E329B" />
