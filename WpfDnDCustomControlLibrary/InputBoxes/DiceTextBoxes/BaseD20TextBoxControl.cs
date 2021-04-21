@@ -16,6 +16,7 @@ namespace WpfDnDCustomControlLibrary.InputBoxes.DiceTextBoxes
         {
             Min = 0;
             Max = 20;
+            this.MinWidth = 40;
         }
 
         public override bool IsValid()

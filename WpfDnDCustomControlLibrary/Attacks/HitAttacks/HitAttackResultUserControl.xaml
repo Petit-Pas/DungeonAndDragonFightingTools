@@ -50,18 +50,11 @@
                 Grid.Row="1"
                 RollResult="{Binding RollResult}"/>
 
-            <cardcontrols:DownCardControl
-                Margin="-10 0 0 0"
+            <damage:DamageResultListRollableUserControl
                 Grid.Row="2"
-                CardColor="{StaticResource LightestGray}"
-                Focusable="False">
-
-                <damage:DamageResultListRollableUserControl
-                    Margin="10 0"
-                    x:Name="DamageResultList"
-                    Crits="{Binding AttackResult.RollResult.Crits, Mode=TwoWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:HitAttackResultUserControl}}}"
-                    DataContext="{Binding DamageList}"/>
-            </cardcontrols:DownCardControl>
-
+                Margin="0"
+                x:Name="DamageResultList"
+                Crits="{Binding AttackResult.RollResult.Crits, Mode=TwoWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:HitAttackResultUserControl}}}"
+                DataContext="{Binding DamageList}"/>
         </Grid>
 </UserControl>

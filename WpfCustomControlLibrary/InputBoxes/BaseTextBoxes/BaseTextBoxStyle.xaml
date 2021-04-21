@@ -9,85 +9,67 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:BaseTextBoxControl}">
-                    <Grid 
-                        Background="{StaticResource LightestGray}"
-                        >
-                        <Border 
-                            x:Name="Border"
-                            BorderThickness="2" BorderBrush="{StaticResource LightestGray}"
-                            CornerRadius="10"
-                            ClipToBounds="True"
-                            >
+                    <Grid>
+                        <Border Background="Transparent" Panel.ZIndex="1">
+                            <Border.OpacityMask>
+                                <VisualBrush Stretch="None" Visual="{Binding ElementName=Mask}" />
+                            </Border.OpacityMask>
                             <Grid>
-                                <Border 
-                                    x:Name="InnerBorder1"
-                                    Background="Transparent" 
-                                    BorderBrush="{StaticResource LightestGray}" BorderThickness="1 1 0 0"
-                                    Margin="-2 -2 0 0"
-                                    CornerRadius="8 10 10 10">
+                                <Border
+                                    CornerRadius="{Binding CornerRadius, ElementName=Mask}"
+                                    BorderBrush="{Binding Background, ElementName=Mask}"
+                                    BorderThickness="5 5 0 0"
+                                    >       
                                     <Border.Effect>
-                                        <DropShadowEffect ShadowDepth="3"  Color="{StaticResource RawIndigo}" Opacity="1" Direction="-45" BlurRadius="2.5"/>
+                                        <DropShadowEffect Color="Black" ShadowDepth="0" BlurRadius="10" />
                                     </Border.Effect>
-                                    <Border.Style>
-                                        <Style TargetType="Border">
-                                            <Setter Property="RenderTransform">
-                                                <Setter.Value>
-                                                    <TransformGroup>
-                                                        <TranslateTransform X="0"></TranslateTransform>
-                                                    </TransformGroup>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </Style>
-                                    </Border.Style>
                                 </Border>
-                                <Border 
-                                    x:Name="InnerBorder2"
-                                    Background="Transparent" 
-                                    BorderBrush="{StaticResource LightestGray}" BorderThickness="0 0 1 1" 
-                                    Margin="0 0 -2 -2"
-                                    CornerRadius="10 10 8 10">
+                                <Border
+                                    CornerRadius="{Binding CornerRadius, ElementName=Mask}"
+                                    BorderBrush="{Binding Background, ElementName=Mask}"
+                                    BorderThickness="0 0 5 5"
+                                    >       
                                     <Border.Effect>
-                                        <DropShadowEffect ShadowDepth="3"  Color="#AAAAAA" Opacity="1" Direction="135" BlurRadius="3"/>
+                                        <DropShadowEffect Color="#D7D7D7" ShadowDepth="0" BlurRadius="6" />
                                     </Border.Effect>
-                                    <Border.Style>
-                                        <Style TargetType="Border">
-                                            <Setter Property="RenderTransform">
-                                                <Setter.Value>
-                                                    <TransformGroup>
-                                                        <TranslateTransform X="1"></TranslateTransform>
-                                                    </TransformGroup>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </Style>
-                                    </Border.Style>
                                 </Border>
-
                             </Grid>
                         </Border>
-                        <Border Background="Transparent" Padding="7">
+                        <Border 
+                            x:Name="Mask"
+                            Background="{StaticResource LightestGray}"
+                            CornerRadius="10"
+                            BorderBrush="{StaticResource LightestGray}"
+                            BorderThickness="2"
+                            Margin="5"
+                            />
+                        <Border 
+                            x:Name="AddedBorder"
+                            Panel.ZIndex="2"
+                            CornerRadius="10"
+                            BorderBrush="Transparent"
+                            BorderThickness="2"
+                            Margin="5"
+                            />
+
+                        <Border Background="Transparent" Padding="9" Panel.ZIndex="3">
                             <ScrollViewer 
-                                    HorizontalScrollBarVisibility="Hidden" 
-                                    VerticalScrollBarVisibility="Hidden" 
-                                    Name="PART_ContentHost" Focusable="False" />
+                                HorizontalScrollBarVisibility="Hidden" 
+                                VerticalScrollBarVisibility="Hidden" 
+                                Name="PART_ContentHost" Focusable="False" />
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="UIElement.IsMouseOver" Value="True">
-                            <Setter TargetName="Border" Property="Border.BorderBrush" Value="{Binding LightAccentColor, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:BaseTextBoxControl}}}"/>
-                            <Setter TargetName="InnerBorder1" Property="Border.BorderThickness" Value="0"/>
-                            <Setter TargetName="InnerBorder2" Property="Border.BorderThickness" Value="0"/>
+                            <Setter TargetName="AddedBorder" Property="Border.BorderBrush" Value="{StaticResource ThemeHover}"/>
                         </Trigger>
                         <Trigger Property="UIElement.IsKeyboardFocused" Value="True">
-                            <Setter TargetName="Border" Property="Border.BorderBrush" Value="{Binding AccentColor, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:BaseTextBoxControl}}}"/>
-                            <Setter TargetName="InnerBorder1" Property="Border.BorderThickness" Value="0"/>
-                            <Setter TargetName="InnerBorder2" Property="Border.BorderThickness" Value="0"/>
+                            <Setter TargetName="AddedBorder" Property="Border.BorderBrush" Value="{StaticResource ThemeFocus}"/>
                         </Trigger>
                         <Trigger Property="Validation.HasError" Value="True">
                             <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Mode=Self},
                                 Path=(Validation.Errors)[0].ErrorContent}"/>
-                            <Setter TargetName="Border" Property="Border.BorderBrush" Value="#ff142e"/>
-                            <Setter TargetName="InnerBorder1" Property="Border.BorderThickness" Value="0"/>
-                            <Setter TargetName="InnerBorder2" Property="Border.BorderThickness" Value="0"/>
+                            <Setter TargetName="AddedBorder" Property="Border.BorderBrush" Value="{StaticResource Error}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

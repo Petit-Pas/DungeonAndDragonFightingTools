@@ -5,25 +5,69 @@
         <ResourceDictionary Source="CheckBoxGeometryPaths.xaml"/>
     </ResourceDictionary.MergedDictionaries>
     <Style TargetType="{x:Type local:CheckBoxControl}" x:Key="CheckBoxStyle">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:CheckBoxControl}">
                     <BulletDecorator>
                         <BulletDecorator.Bullet>
-                            <Border x:Name="Border" 
-                                Width="14" 
-                                Height="14" 
-                                CornerRadius="0" 
-                                Background="{Binding BackgroundColor, RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                BorderThickness="1.5"
-                                BorderBrush="{Binding BorderColor, RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                            <Grid>
+                                <Grid Panel.ZIndex="1">
+                                    <Grid.OpacityMask>
+                                        <VisualBrush Stretch="None" Visual="{Binding ElementName=Mask}"/>
+                                    </Grid.OpacityMask>
+                                    <Canvas>
+                                        <Path 
+                                            Stroke="{Binding BackgroundColor, RelativeSource={RelativeSource Mode=TemplatedParent}}" 
+                                            StrokeThickness="1" 
+                                            Data="M 3,17 A 7,7 -180 1 0 17,3">
+                                            <Path.Effect>
+                                                <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="6" />
+                                            </Path.Effect>
+                                        </Path>
+
+                                        <Path 
+                                            Stroke="{Binding BackgroundColor, RelativeSource={RelativeSource Mode=TemplatedParent}}" 
+                                            StrokeThickness="1" 
+                                            Data="M 17,3 A 7,7 -180 1 0 3,17">
+                                            <Path.Effect>
+                                                <DropShadowEffect Color="Black" ShadowDepth="0" BlurRadius="6" />
+                                            </Path.Effect>
+                                        </Path>
+                                    </Canvas>
+
+                                </Grid>
+
+                                <Ellipse 
+                                    x:Name="Mask"
+                                    Width="20"
+                                    Height="20"
+                                    Fill="{Binding BackgroundColor, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                    StrokeThickness="1.5"
+                                    Stroke="{Binding BackgroundColor, RelativeSource={RelativeSource Mode=TemplatedParent}}" 
+                                    >
+                                </Ellipse>
+
+                                <Ellipse 
+                                    Panel.ZIndex="2"
+                                    x:Name="Border"
+                                    Width="20"
+                                    Height="20"
+                                    Fill="Transparent"
+                                    StrokeThickness="1.5"
+                                    Stroke="Transparent">
+                                </Ellipse>
+
                                 <Path 
-                                    Width="10" Height="10" 
+                                    Panel.ZIndex="3"
+                                    Width="20" Height="20" 
                                     x:Name="CheckMark"
-                                    Stroke="{Binding CheckColor, RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                    StrokeThickness="2"
+                                    Stroke="{StaticResource ThemeFocus}"
+                                    StrokeThickness="3"
                                     Data="{Binding CheckMark, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
-                            </Border>
+                            </Grid>
                         </BulletDecorator.Bullet>
                         <ContentPresenter />
                     </BulletDecorator>
@@ -32,13 +76,13 @@
                             <Setter TargetName="CheckMark" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter TargetName="Border" Property="BorderBrush" Value="{Binding LightAccentColor, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            <Setter TargetName="Border" Property="Stroke" Value="{StaticResource ThemeHover}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter TargetName="Border" Property="BorderBrush" Value="{Binding AccentColor, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            <Setter TargetName="Border" Property="Stroke" Value="{StaticResource ThemeFocus}" />
                         </Trigger>
                         <Trigger Property="IsFocused" Value="True">
-                            <Setter TargetName="Border" Property="BorderBrush" Value="{Binding LightAccentColor, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            <Setter TargetName="Border" Property="Stroke" Value="{StaticResource ThemeFocus}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

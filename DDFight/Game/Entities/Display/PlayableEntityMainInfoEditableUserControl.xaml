@@ -31,7 +31,8 @@
                 Main Information about the Character
             </TextBlock>
         </GroupBox.Header>
-        <ScrollViewer>
+        <ScrollViewer
+            VerticalScrollBarVisibility="Auto">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />

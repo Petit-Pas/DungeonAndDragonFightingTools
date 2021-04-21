@@ -21,7 +21,7 @@ namespace WpfCustomControlLibrary.CheckBoxes
         {
             Source = new Uri("/WpfCustomControlLibrary;component/CheckBoxes/CheckBoxGeometryPaths.xaml", UriKind.RelativeOrAbsolute)
         };
-        private static readonly PathGeometry checkMark = styleDict["CheckBoxXMark"] as PathGeometry;
+        private static readonly PathGeometry checkMark = styleDict["CheckBoxVMark"] as PathGeometry;
 
         public CheckBoxControl() : base()
         {
@@ -40,7 +40,7 @@ namespace WpfCustomControlLibrary.CheckBoxes
                 nameof(BackgroundColor),
                 typeof(Brush),
                 typeof(CheckBoxControl),
-                new PropertyMetadata(System.Windows.Application.Current.Resources["Gray"])
+                new PropertyMetadata(System.Windows.Application.Current.Resources["LightestGray"])
             );
 
         public Brush BorderColor

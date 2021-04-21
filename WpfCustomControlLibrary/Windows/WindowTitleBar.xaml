@@ -19,9 +19,10 @@
 
             <TextBlock 
                 Text="{Binding Title}"
+                FontFamily="{StaticResource ManualCoverFont}"
                 Foreground="{StaticResource Light}"
                 FontWeight="SemiBold"
-                FontSize="18"
+                FontSize="25"
                 Margin="10 5 10 5">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="PreviewMouseMove">

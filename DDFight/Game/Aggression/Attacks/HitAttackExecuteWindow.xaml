@@ -20,7 +20,7 @@
         <Style TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlock}" />
     </Window.Resources>
     <Grid Background="Transparent" Opacity="1">
-    <cardcontrols:WindowCardControl Title="Toto le héros" CardColor="{StaticResource LightestGray}" Margin="10" BorderColor="{StaticResource Gray}">
+    <cardcontrols:WindowCardControl Title="Toto le heros" CardColor="{StaticResource LightestGray}" Margin="10" BorderColor="{StaticResource Gray}">
         <Grid 
             VerticalAlignment="Center"
             HorizontalAlignment="Center"

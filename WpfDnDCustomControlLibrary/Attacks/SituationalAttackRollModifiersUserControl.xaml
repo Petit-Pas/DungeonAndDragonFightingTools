@@ -15,7 +15,7 @@
         </TextBlock>
         <inttextboxes:IntTextBoxControl 
                 Integer="{Binding HitModifier}"
-                Width="30"
+                MinWidth="40"
                 Margin="5, 2"/>
         <TextBlock
                 VerticalAlignment="Center">
@@ -23,7 +23,7 @@
         </TextBlock>
         <inttextboxes:IntTextBoxControl 
                 Integer="{Binding ACModifier}"
-                Width="30"
+                Width="40"
                 Margin="5, 2"/>
     </WrapPanel>
 </UserControl>
