@@ -19,22 +19,24 @@
             </FontFamily>
             
             <SolidColorBrush x:Key="Gray" Color="#202020" />
-            <SolidColorBrush x:Key="LightestGray" Color="#2e2e2e" />
+            <SolidColorBrush x:Key="LightestGray" Color="#2e2f2d" />
+            <SolidColorBrush x:Key="AlternateLightGray" Color="#333432"/>
             <SolidColorBrush x:Key="Light" Color="#fbf2d4" />
             <SolidColorBrush x:Key="Indigo" Color="#4B0082" />
             <SolidColorBrush x:Key="LightIndigo" Color="#6E329B" />
             <SolidColorBrush x:Key="Error" Color="#ff6868"/>
             <SolidColorBrush x:Key="ThemeFocus" Color="#8B5CEE"/>
-            <SolidColorBrush x:Key="ThemeHover" Color="#B789F2"/>
+            <SolidColorBrush x:Key="ThemeHover" Color="#B789F1"/>
 
             <Color x:Key="RawLightIndigo">#6E329B</Color>
             <Color x:Key="RawIndigo">#4B0082</Color>
             <Color x:Key="RawLight">#fbf2d4</Color>
             <Color x:Key="RawGray">#202020</Color>
-            <Color x:Key="RawLightestGray">#2e2e2e</Color>
+            <Color x:Key="RawLightestGray">#2e2f2d</Color>
+            <Color x:Key="RawAlternateLightGray">#333432</Color>
             <Color x:Key="RawError">#ff6868</Color>
             <Color x:Key="RawThemeFocus">#8B5CEE</Color>
-            <Color x:Key="RawThemeHover">#B789F2</Color>
+            <Color x:Key="RawThemeHover">#B789F1</Color>
 
             <Style TargetType="{x:Type TextBlock}" x:Key="BaseTextBlock">
                 <Setter Property="Foreground" Value="{StaticResource Light}"/>

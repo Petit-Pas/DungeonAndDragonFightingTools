@@ -15,6 +15,7 @@
                 <ResourceDictionary Source="/Styles/ListBoxStyle.xaml"/>
                 <ResourceDictionary Source="/Styles/ScrollBarStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <CollectionViewSource x:Key="EntityList" Source="{Binding EntityList, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:BaseListUserControl}}}" />
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid 
@@ -43,12 +44,13 @@
             <ListBox 
                 Background="{StaticResource Gray}"
                 x:Name="EntityListControl" 
-                ItemsSource="{Binding EntityList, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:BaseListUserControl}}}"
+                ItemsSource="{Binding Source={StaticResource EntityList}}"
                 Grid.Column="0" Grid.Row="0"
                 MouseDoubleClick="EntityList_MouseDoubleClick"
                 VirtualizingPanel.IsVirtualizing="False"
                 KeyDown="EntityListControl_KeyDown"
-                ContextMenuOpening="EntityList_ContextMenuOpening">
+                ContextMenuOpening="EntityList_ContextMenuOpening"
+                AlternationCount="2">
 
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem" BasedOn="{StaticResource ListBoxItemCustomStyle}">

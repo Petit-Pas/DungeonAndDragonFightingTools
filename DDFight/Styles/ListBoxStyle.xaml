@@ -130,9 +130,10 @@
         </Setter>
         <Setter Property="Panel.Background" Value="{StaticResource LightestGray}" />
         <Setter Property="Border.BorderBrush" Value="{StaticResource Light}" />
-        <Setter Property="Margin" Value="3, 2" />
-        <Setter Property="Border.BorderThickness" Value="2" />
+        <Setter Property="Margin" Value="0, 0" />
+        <Setter Property="Border.BorderThickness" Value="0" />
         <Setter Property="Foreground" Value="{StaticResource Light}" />
+        <Setter Property="Padding" Value="5"/>
 
         <Setter Property="FrameworkElement.FocusVisualStyle">
             <Setter.Value>
@@ -143,7 +144,12 @@
                     <Setter Property="Control.Template">
                         <Setter.Value>
                             <ControlTemplate>
-                                <Rectangle Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2" Margin="2,2,2,2" SnapsToDevicePixels="True" />
+                                <Rectangle
+                                    
+                                    Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" 
+                                    StrokeThickness="1" 
+                                    StrokeDashArray="1 2" 
+                                    SnapsToDevicePixels="True" />
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
@@ -166,7 +172,8 @@
                                     </Condition.Value>
                                 </Condition>
                             </MultiTrigger.Conditions>
-                            <Setter Property="Border.BorderBrush" TargetName="Bd" Value="{StaticResource LightIndigo}" />
+                            <Setter Property="Panel.Background" TargetName="Bd" Value="{StaticResource ThemeHover}" />
+                            <Setter Property="ItemsControl.Foreground" Value="Black"/>
 
                         </MultiTrigger>
                         <MultiTrigger>
@@ -207,8 +214,8 @@
                                     </Condition.Value>
                                 </Condition>
                             </MultiTrigger.Conditions>
-                            <Setter Property="Panel.Background" TargetName="Bd" Value="{StaticResource Indigo}" />
-                            <Setter Property="Border.BorderBrush" TargetName="Bd" Value="{StaticResource LightIndigo}" />
+                            <Setter Property="Panel.Background" TargetName="Bd" Value="{StaticResource ThemeFocus}" />
+                            <Setter Property="ItemsControl.Foreground" Value="Black"/>
 
                         </MultiTrigger>
                         <Trigger Property="UIElement.IsEnabled">
@@ -226,5 +233,13 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+            <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                <Setter Property="Background" Value="{StaticResource AlternateLightGray}"></Setter>
+            </Trigger>
+            <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                <Setter Property="Background" Value="{StaticResource LightestGray}"></Setter>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 </ResourceDictionary>

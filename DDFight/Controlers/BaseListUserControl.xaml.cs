@@ -1,10 +1,13 @@
 ﻿using BaseToolsLibrary.IO;
 using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
+using WpfToolsLibrary.Display;
 using WpfToolsLibrary.Extensions;
 
 namespace DDFight.Controlers
@@ -37,8 +40,30 @@ namespace DDFight.Controlers
 
         public BaseListUserControl()
         {
+            Loaded += BaseListUserControl_Loaded;
             InitializeComponent();
             ContextMenu_Populate();
+            ((CollectionViewSource)this.Resources["EntityList"]).Filter += BaseListUserControl_Filter; ;
+        }
+
+        private void BaseListUserControl_Filter(object sender, FilterEventArgs e)
+        {
+            INameable nameable = e.Item as INameable;
+            if (nameable != null)
+            {
+                if (FilterControl.IsEmpty || nameable.DisplayName.Contains(FilterControl.Text))
+                    e.Accepted = true;
+                else
+                    e.Accepted = false;
+            }
+            else
+                e.Accepted = true;
+        }
+
+        private void BaseListUserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            int count = EntityListControl.GetChildrenOfType<ListBoxItem>().Count;
+            ;
         }
 
         /// <summary>
@@ -168,7 +193,7 @@ namespace DDFight.Controlers
 
         private void FilterTextBox_KeyUp(object sender, KeyEventArgs e)
         {
-            EntityListControl.FilterINameableListBox(FilterControl.Text);
+            ((CollectionViewSource)this.Resources["EntityList"]).View.Refresh();
         }
 
         #region ClickEvents

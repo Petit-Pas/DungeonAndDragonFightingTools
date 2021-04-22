@@ -14,6 +14,8 @@ namespace WpfCustomControlLibrary.InputBoxes.FilterTextBoxes
 
         private readonly string filterPlaceHolder = "Filter...";
 
+        public bool IsEmpty => this.Text == filterPlaceHolder || string.IsNullOrEmpty(this.Text);
+        
         private void FilterTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(this.Text))
