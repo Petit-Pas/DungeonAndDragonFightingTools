@@ -2,9 +2,16 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:WpfCustomControlLibrary.CheckBoxes">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="CheckBoxGeometryPaths.xaml"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="CheckBoxGeometryPaths.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </ResourceDictionary.MergedDictionaries>
     <Style TargetType="{x:Type local:CheckBoxControl}" x:Key="CheckBoxStyle">
+        <Style.Resources>
+            
+        </Style.Resources>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
@@ -66,15 +73,14 @@
                                     x:Name="CheckMark"
                                     Stroke="{StaticResource ThemeFocus}"
                                     StrokeThickness="3"
-                                    Data="{Binding CheckMark, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                    Data="{Binding CheckMark, RelativeSource={RelativeSource Mode=TemplatedParent}}" 
+                                    StrokeDashArray="15"
+                                    Visibility="Collapsed"/>
                             </Grid>
                         </BulletDecorator.Bullet>
                         <ContentPresenter />
                     </BulletDecorator>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsChecked" Value="false">
-                            <Setter TargetName="CheckMark" Property="Visibility" Value="Collapsed"/>
-                        </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter TargetName="Border" Property="Stroke" Value="{StaticResource ThemeHover}" />
                         </Trigger>
