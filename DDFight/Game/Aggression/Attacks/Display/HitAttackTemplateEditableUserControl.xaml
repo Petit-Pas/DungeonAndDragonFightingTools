@@ -50,7 +50,6 @@
             <stringtextboxes:NotEmptyStringTextBoxControl 
                 x:Name="NameTextBox"
                 Grid.Row="0" Grid.Column="1"
-                MaxHeight="20"
                 String="{Binding Name}" />
 
             <Label
@@ -60,7 +59,6 @@
             <inttextboxes:IntTextBoxControl
                 x:Name="HitBonusTextBox"
                 Grid.Row="1" Grid.Column="1"
-                MaxHeight="20"
                 Integer="{Binding HitBonus}"/>
 
             <Label 

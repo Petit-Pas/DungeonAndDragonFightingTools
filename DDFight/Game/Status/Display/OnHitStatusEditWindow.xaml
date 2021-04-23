@@ -69,7 +69,6 @@
         <stringtextboxes:NotEmptyStringTextBoxControl 
             x:Name="HeaderBox"
             Grid.Row="1" Grid.Column="1"
-            MaxHeight="25"
             String="{Binding Header}"
             />
 
@@ -80,7 +79,6 @@
         </TextBlock>
         <TextBox
             Foreground="{StaticResource Light}"
-            MaxHeight="25"
             BorderThickness="2"
             Grid.Row="2" Grid.Column="1"
             Text="{Binding ToolTip}"

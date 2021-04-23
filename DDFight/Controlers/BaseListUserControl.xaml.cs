@@ -51,7 +51,7 @@ namespace DDFight.Controlers
             INameable nameable = e.Item as INameable;
             if (nameable != null)
             {
-                if (FilterControl.IsEmpty || nameable.DisplayName.Contains(FilterControl.Text))
+                if (FilterControl.IsEmpty || nameable.DisplayName.ToLower().Contains(FilterControl.Text.ToLower()))
                     e.Accepted = true;
                 else
                     e.Accepted = false;
