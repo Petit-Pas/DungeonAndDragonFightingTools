@@ -10,6 +10,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/ListBoxStyle.xaml" />
+                <ResourceDictionary Source="/WpfCustomControlLibrary;component/Scrollbars/ScrollBarStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -47,6 +48,7 @@
                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                         <Setter Property="BorderThickness" Value="1" />
                         <Setter Property="Margin" Value="2, 3" />
+                        <Setter Property="Background" Value="Red"/>
                     </Style>
                 </ListBox.ItemContainerStyle>
                 <ListBox.ItemTemplate>

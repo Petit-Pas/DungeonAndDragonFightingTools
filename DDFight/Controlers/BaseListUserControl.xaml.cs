@@ -260,5 +260,31 @@ namespace DDFight.Controlers
         {
             e.Handled = !ContextMenuCanOpen;
         }
+
+        #region ScrollbarProperties
+
+        public int ScrollbarSmallChange
+        {
+            get { return (int)this.GetValue(ScrollbarSmallChangeProperty); }
+            set { this.SetValue(ScrollbarSmallChangeProperty, value); }
+        }
+        private static readonly DependencyProperty ScrollbarSmallChangeProperty = DependencyProperty.Register(
+            nameof(ScrollbarSmallChange),
+            typeof(int),
+            typeof(BaseListUserControl),
+            new PropertyMetadata(10));
+
+        public int ScrollbarLargeChange
+        {
+            get { return (int)this.GetValue(ScrollbarLargeChangeProperty); }
+            set { this.SetValue(ScrollbarLargeChangeProperty, value); }
+        }
+        private static readonly DependencyProperty ScrollbarLargeChangeProperty = DependencyProperty.Register(
+            nameof(ScrollbarLargeChange),
+            typeof(int),
+            typeof(BaseListUserControl),
+            new PropertyMetadata(50));
+
+        #endregion ScrollbarProperties
     }
 }

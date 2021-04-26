@@ -14,9 +14,9 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Styles/ScrollBarStyle.xaml"/>
+                <ResourceDictionary Source="/WpfCustomControlLibrary;component/Scrollbars/ScrollBarStyle.xaml"/>
                 <ResourceDictionary Source="/Styles/ListBoxStyle.xaml"/>
-                <ResourceDictionary Source="/Styles/ScrollBarStyle.xaml"/>
+                <ResourceDictionary Source="/WpfCustomControlLibrary;component/Scrollbars/ScrollBarStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <converters:BoolToCustomStringConverter x:Key="BoolToCustomStringConverter" />
             <converters1:IntGreaterThanZeroToVisibility x:Key="IntGreaterThanZeroToVisibility" />

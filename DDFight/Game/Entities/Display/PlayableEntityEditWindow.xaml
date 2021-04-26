@@ -19,7 +19,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/TabControlStyles.xaml" />
-                <ResourceDictionary Source="/Styles/ScrollBarStyle.xaml" />
+                <ResourceDictionary Source="/WpfCustomControlLibrary;component/Scrollbars/ScrollBarStyle.xaml" />
                 <ResourceDictionary Source="/Styles/ListBoxStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

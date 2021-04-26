@@ -11,7 +11,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Styles/ScrollBarStyle.xaml" />
+                <ResourceDictionary Source="/WpfCustomControlLibrary;component/Scrollbars/ScrollBarStyle.xaml" />
                 <ResourceDictionary Source="/Styles/ListBoxStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         <Style TargetType="TextBlock" >

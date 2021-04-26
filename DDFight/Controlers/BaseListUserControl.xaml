@@ -6,14 +6,12 @@
              xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes" 
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:local="clr-namespace:DDFight.Controlers" 
-             xmlns:filtertextbox="clr-namespace:WpfCustomControlLibrary.InputBoxes.FilterTextBoxes;assembly=WpfCustomControlLibrary"
+             xmlns:filtertextbox="clr-namespace:WpfCustomControlLibrary.InputBoxes.FilterTextBoxes;assembly=WpfCustomControlLibrary" xmlns:listboxcontrols="clr-namespace:WpfCustomControlLibrary.ListControls.ListBoxControls;assembly=WpfCustomControlLibrary"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Styles/ListBoxStyle.xaml"/>
-                <ResourceDictionary Source="/Styles/ScrollBarStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <CollectionViewSource x:Key="EntityList" Source="{Binding EntityList, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:BaseListUserControl}}}" />
         </ResourceDictionary>
@@ -41,7 +39,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <ListBox 
+            <listboxcontrols:ListBoxControl 
                 Background="{StaticResource Gray}"
                 x:Name="EntityListControl" 
                 ItemsSource="{Binding Source={StaticResource EntityList}}"
@@ -50,19 +48,22 @@
                 VirtualizingPanel.IsVirtualizing="False"
                 KeyDown="EntityListControl_KeyDown"
                 ContextMenuOpening="EntityList_ContextMenuOpening"
-                AlternationCount="2">
+                AlternationCount="2"
+                ScrollbarSmallChange="{Binding ScrollbarSmallChange, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:BaseListUserControl}}}"
+                ScrollbarLargeChange="{Binding ScrollbarLargeChange, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:BaseListUserControl}}}"
+                >
 
-                <ListBox.ItemContainerStyle>
+                <!--<ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem" BasedOn="{StaticResource ListBoxItemCustomStyle}">
                         <Setter Property="ContextMenu" Value="{Binding ListContextMenu, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:BaseListUserControl}}}"/>
                     </Style>
-                </ListBox.ItemContainerStyle>
+                </ListBox.ItemContainerStyle>-->
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding DisplayName}"/>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
-            </ListBox>
+            </listboxcontrols:ListBoxControl>
 
             <Grid
                 x:Name="ButtonGrid"

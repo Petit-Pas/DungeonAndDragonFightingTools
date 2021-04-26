@@ -130,5 +130,11 @@ namespace BindValidation
         {
             this.RollRollableChildren();
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine();
+            Console.WriteLine();
+        }
     }
 }

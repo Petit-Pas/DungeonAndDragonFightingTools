@@ -71,6 +71,8 @@
     <Compile Include="InputBoxes\IntTextBoxes\RangedIntTextBoxControl.cs" />
     <Compile Include="InputBoxes\StringTextBoxes\BaseStringTextBoxControl.cs" />
     <Compile Include="InputBoxes\StringTextBoxes\NotEmptyStringTextBoxControl.cs" />
+    <Compile Include="ListControls\ListBoxControls\ListBoxControl.cs" />
+    <Compile Include="Scrollbars\ExternalScrollBar.cs" />
     <Compile Include="SliderButton\SliderButtonControl.cs" />
     <Compile Include="Windows\WindowTitleBar.xaml.cs">
       <DependentUpon>WindowTitleBar.xaml</DependentUpon>
@@ -128,6 +130,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="InputBoxes\BaseTextBoxes\BaseTextBoxStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ListControls\ListBoxControls\ListBoxStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Scrollbars\ScrollBarStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

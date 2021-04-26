@@ -30,23 +30,14 @@
             HorizontalAlignment="Left">
             Name:
         </TextBlock>
-
-        <Canvas
-            x:Name="Canvas"
+        <stringtextboxes:NotEmptyStringTextBoxControl 
+            x:Name="TextBlock"
+            Width="{Binding ElementName=Canvas, Path=ActualWidth}"
             Grid.Column="1"
-            Height="{Binding ElementName=TextBlock, Path=ActualHeight}" 
-            VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-            <stringtextboxes:NotEmptyStringTextBoxControl 
-                x:Name="TextBlock"
-                Width="{Binding ElementName=Canvas, Path=ActualWidth}"
-                Grid.Column="1"
-                String="{Binding Name}"
-                HorizontalAlignment="Stretch"
-            />
-
-        </Canvas>
+            String="{Binding Name}"
+            HorizontalAlignment="Stretch"
+        />
         
-
         <TextBlock
             Grid.Row="1" Grid.Column="0"
             Style="{StaticResource Label}">
@@ -56,7 +47,6 @@
             Grid.Row="1" Grid.Column="1"
             Integer="{Binding CurrentValue}"
             Width="40"
-            Height="20"
             HorizontalAlignment="Left"/>
 
         <TextBlock
@@ -68,7 +58,6 @@
             Grid.Row="2" Grid.Column="1"
             Integer="{Binding MaxValue}"
             Width="40"
-            Height="20"
             HorizontalAlignment="Left"/>
 
     </Grid>

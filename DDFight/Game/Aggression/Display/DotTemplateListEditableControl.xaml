@@ -14,7 +14,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Styles/ScrollBarStyle.xaml" />
+                <ResourceDictionary Source="/WpfCustomControlLibrary;component/Scrollbars/ScrollBarStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <visibilities:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
             <basetypes:BoolToReversedBoolConverter x:Key="BoolToReverseConverter"/>
