@@ -29,7 +29,7 @@
                             </Border.Effect>
                             <Border.Style>
                                 <Style TargetType="{x:Type Border}">
-                                    <Setter Property="Background" Value="{Binding CardColor}" />
+                                    <Setter Property="Background" Value="{StaticResource LightestGray}" />
                                     <Setter Property="BorderThickness" Value="0"/>
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:ButtonCardControl}}}" Value="False">

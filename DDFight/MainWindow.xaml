@@ -4,9 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:spells="clr-namespace:DDFight.Game.Aggression.Spells.Display" 
-        xmlns:display="clr-namespace:DDFight.Game.Entities.Display"
+        xmlns:display="clr-namespace:DDFight.Game.Entities.Display" xmlns:controls="clr-namespace:BlurryControls.Controls;assembly=BlurryControls"
         mc:Ignorable="d"
         Title="Dungeons &amp; Dragons Fighting Tool" Height="450" Width="800"
+        WindowState="Maximized"
         x:Name="Window"
         Style="{StaticResource WindowStyle}">
     <Window.Resources>
@@ -16,55 +17,96 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <Grid
-        Margin="0, 5, 0, 0">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
-        <TabControl 
-            Grid.Row="1"
-            Style="{StaticResource TabControlStyle}"
-            Background="{StaticResource LightestGray}"
-            Margin="10, 0, 0, 10">
-            <TabItem Style="{StaticResource TabItemStyle}">
-                <TabItem.Header>
-                    <TextBlock Style="{StaticResource HeaderTextBlockStyle}">
-                        Characters
-                    </TextBlock>
-                </TabItem.Header>
-                <display:CharacterListEditableUserControl
-                    DataContext="{Binding CharacterList}"
-                    IsEditable="True"/>
-            </TabItem>
-            <TabItem Style="{StaticResource TabItemStyle}">
-                <TabItem.Header>
-                    <TextBlock Style="{StaticResource HeaderTextBlockStyle}">
-                        Monsters
-                    </TextBlock>
-                </TabItem.Header>
-                <display:MonsterListEditableUserControl 
-                    x:Name="MonsterListControl"
-                    DataContext="{Binding MonsterList}"/>
-            </TabItem>
-            <TabItem Style="{StaticResource TabItemStyle}">
-                <TabItem.Header>
-                    <TextBlock Style="{StaticResource HeaderTextBlockStyle}">
-                        Spells
-                    </TextBlock>
-                </TabItem.Header>
-                <spells:SpellListEditableUserControl
-                    x:Name="GlobalSpellListControl"
-                    DataContext="{Binding SpellList}"/>
-            </TabItem>
-            
-        </TabControl>
+    <Grid>
+        <Image 
+            Source="/Images/background.jpg"
+            x:Name="BackgroundImage" 
+            Stretch="UniformToFill" />
 
-        <Button
+        <Grid
+            Background="Transparent"
+            Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="400" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="400" />
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0" Margin="10">
+
+                <Border Background="Gray" Panel.ZIndex="1">
+                    <Border.OpacityMask>
+                        <VisualBrush Stretch="None" Visual="{Binding ElementName=Mask}" />
+                    </Border.OpacityMask>
+                    <Grid >
+                        <controls:BlurryUserControl BorderBrush="Red" BorderThickness="0" BlurRadius="5" BlurContainer="{Binding ElementName=BackgroundImage}" Panel.ZIndex="1" >
+                            <Grid Margin="15">
+                                <Border Background="Transparent" Opacity="0.3">
+                                </Border>
+                                <!-- ^^ not sure this is useful ^^ -->
+                                <UniformGrid Columns="3" Margin="5">
+                                    <FrameworkElement x:Name="columnDivider"/>
+                                </UniformGrid>
+                                <TabControl
+                                    Style="{StaticResource TabControlStyle}"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    Margin="0">
+                                    <TabItem 
+                                        Style="{StaticResource TabItemStyle}" 
+                                        Width="{Binding ElementName=columnDivider, Path=ActualWidth}">
+                                        <TabItem.Header>
+                                            <TextBlock Style="{StaticResource HeaderTextBlockStyle}">
+                                                Characters
+                                            </TextBlock>
+                                        </TabItem.Header>
+                                        <display:CharacterListEditableUserControl
+                                            DataContext="{Binding CharacterList}"
+                                            IsEditable="True"/>
+                                    </TabItem>
+                                    <TabItem 
+                                        Style="{StaticResource TabItemStyle}" 
+                                        Width="{Binding ElementName=columnDivider, Path=ActualWidth}">
+                                        <TabItem.Header>
+                                            <TextBlock Style="{StaticResource HeaderTextBlockStyle}">
+                                                Monsters
+                                            </TextBlock>
+                                        </TabItem.Header>
+                                        <display:MonsterListEditableUserControl 
+                                            x:Name="MonsterListControl"
+                                            DataContext="{Binding MonsterList}"/>
+                                    </TabItem>
+                                    <TabItem 
+                                        Style="{StaticResource TabItemStyle}" 
+                                        Width="{Binding ElementName=columnDivider, Path=ActualWidth}">
+                                        <TabItem.Header>
+                                            <TextBlock Style="{StaticResource HeaderTextBlockStyle}">
+                                                Spells
+                                            </TextBlock>
+                                        </TabItem.Header>
+                                        <spells:SpellListEditableUserControl
+                                        x:Name="GlobalSpellListControl"
+                                        DataContext="{Binding SpellList}"/>
+                                    </TabItem>
+
+                                </TabControl>
+                            </Grid>
+                        </controls:BlurryUserControl>
+                    </Grid>
+                </Border>
+                <Border 
+                    x:Name="Mask"
+                    Background="{StaticResource LightestGray}"
+                    CornerRadius="20"
+                    BorderBrush="{StaticResource LightestGray}"
+                    BorderThickness="0"
+                    Margin="5"/>
+            </Grid>
+
+            <Button
             x:Name="FightButton"
             MaxHeight="100"
             MaxWidth="200"
@@ -73,24 +115,54 @@
             FontWeight="Bold"
             Click="FightButton_Click"
             IsEnabled="False">
-            Fight
-        </Button>
+                Fight
+            </Button>
 
-        <TabControl
-            Margin="5, 0, 5, 10"
-            Background="{StaticResource LightestGray}"
-            Style="{StaticResource TabControlStyle}"
-            Grid.Column="2">
-            <TabItem Style="{StaticResource TabItemStyle}">
-                <TabItem.Header>
-                    <TextBlock Style="{StaticResource HeaderTextBlockStyle}">
-                        Fighting
-                    </TextBlock>
-                </TabItem.Header>
-                <display:SoonToFightEntityListUserControl 
-                    DataContext="{Binding FightContext.FightersList}"
-                    ButtonsVisibility="Collapsed"/>
-            </TabItem>
-        </TabControl>
+            <Grid Grid.Column="2" Margin="10">
+                <Border Background="Gray" Panel.ZIndex="1">
+                    <Border.OpacityMask>
+                        <VisualBrush Stretch="None" Visual="{Binding ElementName=Mask2}" />
+                    </Border.OpacityMask>
+                    <Grid >
+                        <controls:BlurryUserControl BorderBrush="Red" BorderThickness="0" BlurRadius="5" BlurContainer="{Binding ElementName=BackgroundImage}" Panel.ZIndex="1" >
+                            <Grid Margin="15">
+                                <Border Background="Transparent" Opacity="0.3">
+                                </Border>
+                                <!-- not sure this is useful -->
+                                <UniformGrid Columns="1" Margin="5">
+                                    <FrameworkElement x:Name="columnDivider2"/>
+                                </UniformGrid>
+                                <TabControl
+                                    BorderThickness="0"
+                                    Margin="0"
+                                    Background="Transparent"
+                                    Style="{StaticResource TabControlStyle}"
+                                    Grid.Column="2">
+                                    <TabItem 
+                                        Style="{StaticResource TabItemStyle}"
+                                        Width="{Binding ElementName=columnDivider2, Path=ActualWidth}">
+                                        <TabItem.Header>
+                                            <TextBlock Style="{StaticResource HeaderTextBlockStyle}">
+                                                Fighting
+                                            </TextBlock>
+                                        </TabItem.Header>
+                                        <display:SoonToFightEntityListUserControl 
+                                        DataContext="{Binding FightContext.FightersList}"
+                                        ButtonsVisibility="Collapsed"/>
+                                    </TabItem>
+                                </TabControl>
+                            </Grid>
+                        </controls:BlurryUserControl>
+                    </Grid>
+                </Border>
+                <Border 
+                    x:Name="Mask2"
+                    Background="{StaticResource LightestGray}"
+                    CornerRadius="20"
+                    BorderBrush="{StaticResource LightestGray}"
+                    BorderThickness="0"
+                    Margin="5"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

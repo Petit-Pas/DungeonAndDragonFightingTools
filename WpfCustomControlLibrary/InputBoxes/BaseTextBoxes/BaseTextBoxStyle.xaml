@@ -40,7 +40,7 @@
                             Background="{StaticResource LightestGray}"
                             CornerRadius="10"
                             BorderBrush="{StaticResource LightestGray}"
-                            BorderThickness="2"
+                            BorderThickness="0.1"
                             Margin="5"
                             />
                         <Border 
