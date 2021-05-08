@@ -41,7 +41,6 @@ namespace DDFight.Controlers
 
         public BaseListUserControl()
         {
-            Loaded += BaseListUserControl_Loaded;
             InitializeComponent();
             ContextMenu_Populate();
             ((CollectionViewSource)this.Resources["EntityList"]).Filter += BaseListUserControl_Filter;
@@ -59,12 +58,6 @@ namespace DDFight.Controlers
             }
             else
                 e.Accepted = true;
-        }
-
-        private void BaseListUserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            int count = EntityListControl.GetChildrenOfType<ListBoxItem>().Count;
-            EntityListControl.ItemsSource = EntityList as IEnumerable;
         }
 
         /// <summary>

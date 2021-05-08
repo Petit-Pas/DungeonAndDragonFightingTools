@@ -25,7 +25,13 @@ namespace WpfDnDCustomControlLibrary.Attacks.HitAttacks
         public HitAttackResultUserControl()
         {
             DataContextChanged += HitAttackResultUserControl_DataContextChanged;
+            Loaded += HitAttackResultUserControl_Loaded;
             InitializeComponent();
+        }
+
+        private void HitAttackResultUserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.TargetSelectionControl.Focus();
         }
 
         private void HitAttackResultUserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
