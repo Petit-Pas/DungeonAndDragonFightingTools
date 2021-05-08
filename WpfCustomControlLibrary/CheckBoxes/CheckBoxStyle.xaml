@@ -37,10 +37,10 @@
 
                                         <Path 
                                             Stroke="{Binding BackgroundColor, RelativeSource={RelativeSource Mode=TemplatedParent}}" 
-                                            StrokeThickness="1" 
+                                            StrokeThickness="2" 
                                             Data="M 17,3 A 7,7 -180 1 0 3,17">
                                             <Path.Effect>
-                                                <DropShadowEffect Color="Black" ShadowDepth="0" BlurRadius="6" />
+                                                <DropShadowEffect Color="Black" ShadowDepth="3" BlurRadius="5" />
                                             </Path.Effect>
                                         </Path>
                                     </Canvas>
@@ -52,7 +52,7 @@
                                     Width="20"
                                     Height="20"
                                     Fill="{Binding BackgroundColor, RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                    StrokeThickness="1.5"
+                                    StrokeThickness="0.1"
                                     Stroke="{Binding BackgroundColor, RelativeSource={RelativeSource Mode=TemplatedParent}}" 
                                     >
                                 </Ellipse>
@@ -71,7 +71,7 @@
                                     Panel.ZIndex="3"
                                     Width="20" Height="20" 
                                     x:Name="CheckMark"
-                                    Stroke="{StaticResource ThemeFocus}"
+                                    Stroke="{StaticResource CheckBoxColor}"
                                     StrokeThickness="3"
                                     Data="{Binding CheckMark, RelativeSource={RelativeSource Mode=TemplatedParent}}" 
                                     StrokeDashArray="15"
@@ -82,13 +82,13 @@
                     </BulletDecorator>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter TargetName="Border" Property="Stroke" Value="{StaticResource ThemeHover}" />
+                            <Setter TargetName="Border" Property="Stroke" Value="{StaticResource CheckBoxColor}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter TargetName="Border" Property="Stroke" Value="{StaticResource ThemeFocus}" />
+                            <Setter TargetName="Border" Property="Stroke" Value="{StaticResource CheckBoxColor}" />
                         </Trigger>
                         <Trigger Property="IsFocused" Value="True">
-                            <Setter TargetName="Border" Property="Stroke" Value="{StaticResource ThemeFocus}" />
+                            <Setter TargetName="Border" Property="Stroke" Value="{StaticResource CheckBoxColor}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

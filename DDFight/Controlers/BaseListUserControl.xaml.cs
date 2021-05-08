@@ -1,5 +1,6 @@
 ﻿using BaseToolsLibrary.IO;
 using System;
+using System.Collections;
 using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.CompilerServices;
@@ -43,7 +44,7 @@ namespace DDFight.Controlers
             Loaded += BaseListUserControl_Loaded;
             InitializeComponent();
             ContextMenu_Populate();
-            ((CollectionViewSource)this.Resources["EntityList"]).Filter += BaseListUserControl_Filter; ;
+            ((CollectionViewSource)this.Resources["EntityList"]).Filter += BaseListUserControl_Filter;
         }
 
         private void BaseListUserControl_Filter(object sender, FilterEventArgs e)
@@ -63,7 +64,7 @@ namespace DDFight.Controlers
         private void BaseListUserControl_Loaded(object sender, RoutedEventArgs e)
         {
             int count = EntityListControl.GetChildrenOfType<ListBoxItem>().Count;
-            ;
+            EntityListControl.ItemsSource = EntityList as IEnumerable;
         }
 
         /// <summary>

@@ -6,17 +6,11 @@
     <Application.Resources>
 
         <ResourceDictionary>
-            <SolidColorBrush x:Key="LightestGray" Color="#2e2e2e" />
-            <SolidColorBrush x:Key="Gray" Color="#202020" />
-            <SolidColorBrush x:Key="Light" Color="#fbf2d4" />
-            <SolidColorBrush x:Key="Indigo" Color="#4B0082" />
-            <SolidColorBrush x:Key="LightIndigo" Color="#6E329B" />
 
-            <Color x:Key="RawLightIndigo">#6E329B</Color>
-            <Color x:Key="RawIndigo">#4B0082</Color>
-            <Color x:Key="RawLight">#fbf2d4</Color>
-            <Color x:Key="RawGray">#202020</Color>
-            <Color x:Key="RawLightestGray">#2e2e2e</Color>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/DDFight;component/Theme/ColorTheme.xaml"/>
+                <ResourceDictionary Source="/DDFight;component/FontTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
 
             <Style x:Key="WindowStyle" TargetType="Window">
                 <Setter Property="Background" Value="{StaticResource LightestGray}" />

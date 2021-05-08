@@ -48,12 +48,14 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BindingTools\BindableObjectReference.cs" />
     <Compile Include="Commands\WindowCommands\CloseCommand.cs" />
     <Compile Include="Commands\WindowCommands\DragMoveCommands.cs" />
     <Compile Include="ConsoleTools\FightConsole.cs" />
     <Compile Include="Converters\BaseTypes\BoolToReversedBoolConverter.cs" />
     <Compile Include="Converters\BaseTypes\IntToStringConverter.cs" />
     <Compile Include="Converters\BaseTypes\StringListToStringConverter.cs" />
+    <Compile Include="Converters\CornerRadii\CornerRadiusMaskConverter.cs" />
     <Compile Include="Converters\Math\BasicOperationConverter.cs" />
     <Compile Include="Converters\Visibilities\BoolToReversedVisibilityConverter.cs" />
     <Compile Include="Converters\Visibilities\BoolToVisibilityConverter.cs" />

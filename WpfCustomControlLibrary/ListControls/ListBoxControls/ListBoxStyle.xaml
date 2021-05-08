@@ -17,7 +17,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:ListBoxControl}">
 
-                    <Grid>
+                    <Grid Margin="5">
                         <Grid.Resources>
                             <ResourceDictionary Source="/WpfCustomControlLibrary;component/Scrollbars/ScrollBarStyle.xaml"/>
                         </Grid.Resources>
@@ -44,14 +44,21 @@
                             x:Name="Mask"
                             Background="{StaticResource LightestGray}"
                             CornerRadius="10"
-                            />
+                            >
+                        </Border>
+                        <Border CornerRadius="10"
+                                Background="{Binding Background, ElementName=Mask}">
+                            <Border.Effect>
+                                <DropShadowEffect Color="Black" Direction="0" ShadowDepth="0" BlurRadius="5"/>
+                            </Border.Effect>
+                        </Border>
 
                         <scrollbars:ExternalScrollBar 
                             Style="{StaticResource ScrollBarStyle}"
                             Grid.Column="1"
                             SmallChange="{Binding ScrollbarSmallChange, RelativeSource={RelativeSource Mode=TemplatedParent}}"
                             LargeChange="{Binding ScrollbarLargeChange, RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                            Margin="10 0 0 0"
+                            Margin="10 0 2 0"
                             LinkedScrollViewer="{Binding ElementName=ScrollableArea}"/>
                     </Grid>
 
@@ -110,8 +117,7 @@
                             <MultiTrigger.Conditions>
                                 <Condition Property="UIElement.IsMouseOver" Value="True"/>
                             </MultiTrigger.Conditions>
-                            <Setter Property="Panel.Background" TargetName="Bd" Value="{StaticResource ThemeHover}" />
-                            <Setter Property="ItemsControl.Foreground" Value="Black"/>
+                            <Setter Property="Panel.Background" TargetName="Bd" Value="{StaticResource ListItemHoverColor}" />
                         </MultiTrigger>
 
                         <MultiTrigger>
@@ -119,8 +125,7 @@
                                 <Condition Property="Selector.IsSelectionActive" Value="True"/>
                                 <Condition Property="Selector.IsSelected" Value="True"/>
                             </MultiTrigger.Conditions>
-                            <Setter Property="Panel.Background" TargetName="Bd" Value="{StaticResource ThemeFocus}" />
-                            <Setter Property="ItemsControl.Foreground" Value="Black"/>
+                            <Setter Property="Panel.Background" TargetName="Bd" Value="{StaticResource ListItemActiveColor}" />
                         </MultiTrigger>
 
                     </ControlTemplate.Triggers>
@@ -129,10 +134,10 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="ItemsControl.AlternationIndex" Value="0">
-                <Setter Property="Background" Value="{StaticResource AlternateLightGray}" />
+                <Setter Property="Background" Value="{StaticResource ListItemColor1}" />
             </Trigger>
             <Trigger Property="ItemsControl.AlternationIndex" Value="1">
-                <Setter Property="Background" Value="{StaticResource LightestGray}" />
+                <Setter Property="Background" Value="{StaticResource ListItemColor2}" />
             </Trigger>
         </Style.Triggers>
     </Style>

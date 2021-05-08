@@ -333,6 +333,14 @@
       <DependentUpon>StatusMessageWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\ModalWindows\StatusModal\StatusMessageWindowDataContext.cs" />
+    <Page Include="Theme\ColorTheme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FontTheme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Game\Aggression\Attacks\HitAttackExecuteWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -670,6 +678,7 @@
     </EmbeddedResource>
     <Resource Include="Fonts\ScalySansCaps.otf" />
     <Resource Include="Fonts\Nodesto Caps Condensed.otf" />
+    <Resource Include="Fonts\Bookinsanity.otf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

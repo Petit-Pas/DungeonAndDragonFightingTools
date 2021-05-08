@@ -6,10 +6,11 @@
         xmlns:basetextboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.BaseTextBoxes;assembly=WpfCustomControlLibrary"
         xmlns:wpfsandbox="clr-namespace:WpfSandbox" 
         xmlns:controls="clr-namespace:BlurryControls.Controls;assembly=BlurryControls" 
-        xmlns:scrollbars="clr-namespace:WpfCustomControlLibrary.Scrollbars;assembly=WpfCustomControlLibrary"
+        xmlns:scrollbars="clr-namespace:WpfCustomControlLibrary.Scrollbars;assembly=WpfCustomControlLibrary" xmlns:shadowboxes="clr-namespace:WpfCustomControlLibrary.ShadowBoxes;assembly=WpfCustomControlLibrary"
         mc:Ignorable="d"
         Title="MainWindow"
         WindowState="Maximized"
+        Focusable="True"
         Background="{StaticResource LightestGray}">
     <Window.Resources>
         <ResourceDictionary>
@@ -20,9 +21,81 @@
     </Window.Resources>
 
 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.Resources>
+            <Style TargetType="TextBlock" x:Key="Big">
+                <Setter Property="FontSize" Value="25" />
+                <Setter Property="FontWeight" Value="SemiBold" />
+                <Setter Property="Foreground" Value="{StaticResource Light}"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="10"/>
+            </Style>
+            <Style TargetType="TextBlock" x:Key="small">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="FontWeight" Value="Normal" />
+                <Setter Property="Foreground" Value="{StaticResource Light}"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="10"/>
+            </Style>
+        </Grid.Resources>
 
+        <TextBlock Style="{StaticResource Big}">
+            The quick brown fox jumps over the lazy dog ABSOLUTE CAPITAL
+        </TextBlock>
+        <TextBlock Style="{StaticResource small}" Grid.Column="1">
+            The quick brown fox jumps over the lazy dog ABSOLUTE CAPITAL
+        </TextBlock>
 
+        <TextBlock Style="{StaticResource Big}" 
+                   Grid.Row="1"
+                   FontFamily="{StaticResource ManualCoverFont}">
+            The quick brown fox jumps over the lazy dog ABSOLUTE CAPITAL
+        </TextBlock>
+        <TextBlock Style="{StaticResource small}" Grid.Column="1"
+                   Grid.Row="1"
+                   FontFamily="{StaticResource ManualCoverFont}">
+            The quick brown fox jumps over the lazy dog ABSOLUTE CAPITAL
+        </TextBlock>
 
+        <TextBlock Style="{StaticResource Big}" 
+                   Grid.Row="2"
+                   FontFamily="{StaticResource ManualHeadersFont}">
+            The quick brown fox jumps over the lazy dog ABSOLUTE CAPITAL
+        </TextBlock>
+        <TextBlock Style="{StaticResource small}" Grid.Column="1"
+                   Grid.Row="2"
+                   FontFamily="{StaticResource ManualHeadersFont}">
+            The quick brown fox jumps over the lazy dog ABSOLUTE CAPITAL
+        </TextBlock>
+
+        <TextBlock Style="{StaticResource Big}" 
+                   Grid.Row="3"
+                   FontFamily="{StaticResource BookInsanity}">
+            The quick brown fox jumps over the lazy dog ABSOLUTE CAPITAL
+        </TextBlock>
+        <TextBlock Style="{StaticResource small}" Grid.Column="1"
+                   Grid.Row="3"
+                   FontFamily="{StaticResource BookInsanity}">
+            The quick brown fox jumps over the lazy dog ABSOLUTE CAPITAL
+        </TextBlock>
+    </Grid>
+
+    <!--
 
     <Grid>
         <Image Source="/Images/wpp.jpg" Stretch="UniformToFill" x:Name="Img">
@@ -53,5 +126,5 @@
             BorderThickness="0"
             Margin="5"
             />
-    </Grid>
+    </Grid>-->
 </Window>

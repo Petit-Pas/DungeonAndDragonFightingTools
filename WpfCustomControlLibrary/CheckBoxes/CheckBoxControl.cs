@@ -110,7 +110,7 @@ namespace WpfCustomControlLibrary.CheckBoxes
                 new PropertyMetadata(System.Windows.Application.Current.Resources["Light"])
             );
 
-        public Brush AccentColor
+        /*public Brush AccentColor
         {
             get { return (Brush)this.GetValue(AccentColorProperty); }
             set { this.SetValue(AccentColorProperty, value); }
@@ -119,7 +119,7 @@ namespace WpfCustomControlLibrary.CheckBoxes
                 nameof(AccentColor),
                 typeof(Brush),
                 typeof(CheckBoxControl),
-                new PropertyMetadata(System.Windows.Application.Current.Resources["Indigo"])
+                new PropertyMetadata(System.Windows.Application.Current.Resources["CheckBoxColor"])
             );
 
         public Brush LightAccentColor
@@ -132,7 +132,7 @@ namespace WpfCustomControlLibrary.CheckBoxes
                 typeof(Brush),
                 typeof(CheckBoxControl),
                 new PropertyMetadata(Application.Current.Resources["LightIndigo"])
-            );
+            );*/
 
         
         public PathGeometry CheckMark

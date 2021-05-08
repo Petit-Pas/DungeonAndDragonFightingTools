@@ -39,7 +39,6 @@
                     Background="{StaticResource LightestGray}"
                     />
             </ScrollViewer>
-
         </GroupBox>
     </Grid>
 </UserControl>

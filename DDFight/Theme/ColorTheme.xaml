@@ -1,0 +1,61 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <SolidColorBrush x:Key="Gray" Color="#202020" />
+    <SolidColorBrush x:Key="LightestGray" Color="#2e2f2d" />
+    <SolidColorBrush x:Key="AlternateLightGray" Color="#333432"/>
+    <!-- <SolidColorBrush x:Key="Light" Color="#fbf2d4"/> -->
+    <SolidColorBrush x:Key="Light" Color="#ECF3EE" />
+    <SolidColorBrush x:Key="Indigo" Color="#4B0082" />
+    <SolidColorBrush x:Key="LightIndigo" Color="#6E329B" />
+    <SolidColorBrush x:Key="Error" Color="#FF3838"/>
+    <SolidColorBrush x:Key="ThemeFocus" Color="#8B5CEE"/>
+    <SolidColorBrush x:Key="ThemeHover" Color="#B789F1"/>
+
+    <SolidColorBrush x:Key="Brown1" Color="#833F3F"/>
+    <SolidColorBrush x:Key="Brown2" Color="#954E4E"/>
+    <SolidColorBrush x:Key="Brown3" Color="#A65F5C"/>
+    <SolidColorBrush x:Key="Brown4" Color="#BF7572"/>
+    <SolidColorBrush x:Key="Brown5" Color="#CC726F"/>
+    <SolidColorBrush x:Key="Brown6" Color="#EB9895"/>
+
+    <Color x:Key="RawLightIndigo">#6E329B</Color>
+    <Color x:Key="RawIndigo">#4B0082</Color>
+    <Color x:Key="RawLight">#fbf2d4</Color>
+    <Color x:Key="RawGray">#202020</Color>
+    <Color x:Key="RawLightestGray">#2e2f2d</Color>
+    <Color x:Key="RawAlternateLightGray">#333432</Color>
+    <Color x:Key="RawError">#ff6868</Color>
+    <Color x:Key="RawThemeFocus">#8B5CEE</Color>
+    <Color x:Key="RawThemeHover">#B789F1</Color>
+
+    <!-- Text -->
+    <SolidColorBrush x:Key="TextBaseColor" Color="{Binding Color, Source={StaticResource Light}}"/>
+
+    <!-- TextBoxes -->
+    <SolidColorBrush x:Key="TextBoxHoverColor" Color="{Binding Color, Source={StaticResource Brown6}}"/>
+    <SolidColorBrush x:Key="TextBoxActiveColor" Color="{Binding Color, Source={StaticResource Brown5}}"/>
+    <SolidColorBrush x:Key="SelectionBrushColor" Color="{Binding Color, Source={StaticResource Brown3}}"/>
+
+    <!-- CheckBoxes -->
+    <SolidColorBrush x:Key="CheckBoxColor" Color="{Binding Color, Source={StaticResource Brown6}}"/>
+
+    <!-- Buttons -->
+    <SolidColorBrush x:Key="ButtonBaseColor" Color="{Binding Color, Source={StaticResource LightestGray}}"/>
+    <SolidColorBrush x:Key="ButtonHoverColor" Color="{Binding Color, Source={StaticResource Brown2}}"/>
+    <SolidColorBrush x:Key="ButtonClickedColor" Color="{Binding Color, Source={StaticResource Brown4}}"/>
+    
+    <!-- TabHeaders -->
+    <SolidColorBrush x:Key="TabHeaderBaseColor" Color="{Binding Color, Source={StaticResource LightestGray}}"/>
+    <SolidColorBrush x:Key="TabHeaderHoverColor" Color="{Binding Color, Source={StaticResource Brown5}}"/>
+    <SolidColorBrush x:Key="TabHeaderActiveColor" Color="{Binding Color, Source={StaticResource Brown3}}"/>
+
+    
+    <!-- ListItems -->
+    <SolidColorBrush x:Key="ListItemHoverColor" Color="{Binding Color, Source={StaticResource Brown5}}"/>
+    <SolidColorBrush x:Key="ListItemActiveColor" Color="{Binding Color, Source={StaticResource Brown3}}"/>
+    <SolidColorBrush x:Key="ListItemColor1" Color="{Binding Color, Source={StaticResource LightestGray}}"/>
+    <SolidColorBrush x:Key="ListItemColor2" Color="{Binding Color, Source={StaticResource AlternateLightGray}}"/>
+
+
+</ResourceDictionary>

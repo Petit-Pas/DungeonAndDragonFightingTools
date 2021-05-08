@@ -11,7 +11,7 @@
         xmlns:counter="clr-namespace:DDFight.Game.Counters.Display"
         xmlns:display="clr-namespace:DDFight.Game.Aggression.Spells.Display" 
         xmlns:display1="clr-namespace:DDFight.Game.Entities.Display" xmlns:attacks1="clr-namespace:DDFight.Game.Aggression.Attacks.Display"
-        Title="Edit Character" Height="750" Width="500"
+        Title="Edit Character" Height="750" Width="750"
         WindowStartupLocation="CenterOwner"
         Closing="Window_Closing"
         Style="{StaticResource WindowStyle}">
@@ -31,13 +31,17 @@
             <RowDefinition Height="Auto"/>
             <!-- Button's Grid -->
         </Grid.RowDefinitions>
+        <UniformGrid Columns="7" Margin="5">
+            <FrameworkElement x:Name="columnDivider"/>
+        </UniformGrid>
         <TabControl 
             Grid.Row="0" Grid.ColumnSpan="2"
             Background="{StaticResource LightestGray}"
             VirtualizingPanel.IsVirtualizing="False"
             Style="{StaticResource TabControlStyle}">
             <TabItem Style="{StaticResource TabItemStyle}"
-                     x:Name="MainControl">
+                     x:Name="MainControl"
+                     Width="{Binding ElementName=columnDivider, Path=ActualWidth}">
                 <TabItem.Header>
                     <TextBlock Style="{StaticResource HeaderTextBlockStyle}">
                         Main
@@ -48,7 +52,8 @@
             </TabItem>
 
             <TabItem Style="{StaticResource TabItemStyle}"
-                     x:Name="AffinitiesControl">
+                     x:Name="AffinitiesControl"
+                     Width="{Binding ElementName=columnDivider, Path=ActualWidth}">
                 <TabItem.Header>
                     <TextBlock Style="{StaticResource HeaderTextBlockStyle}">
                         Affinities
@@ -59,7 +64,8 @@
             </TabItem>
 
             <TabItem Style="{StaticResource TabItemStyle}"
-                     x:Name="AbilitiesControl">
+                     x:Name="AbilitiesControl"
+                     Width="{Binding ElementName=columnDivider, Path=ActualWidth}">
                 <TabItem.Header>
                     <TextBlock Style="{StaticResource HeaderTextBlockStyle}">
                         Abilities
@@ -70,7 +76,8 @@
             </TabItem>
 
             <TabItem Style="{StaticResource TabItemStyle}"
-                     x:Name="AttacksControl">
+                     x:Name="AttacksControl"
+                     Width="{Binding ElementName=columnDivider, Path=ActualWidth}">
                 <TabItem.Header>
                     <TextBlock Style="{StaticResource HeaderTextBlockStyle}">
                         Attacks
@@ -112,7 +119,8 @@
             </TabItem>
 
             <TabItem Style="{StaticResource TabItemStyle}"
-                     x:Name="StatusControl">
+                     x:Name="StatusControl"
+                     Width="{Binding ElementName=columnDivider, Path=ActualWidth}">
                 <TabItem.Header>
                     <TextBlock Style="{StaticResource HeaderTextBlockStyle}">
                         Statuses
@@ -123,7 +131,8 @@
             </TabItem>
 
             <TabItem Style="{StaticResource TabItemStyle}"
-                     x:Name="SpellBookControl">
+                     x:Name="SpellBookControl"
+                     Width="{Binding ElementName=columnDivider, Path=ActualWidth}">
                 <TabItem.Header>
                     <TextBlock Style="{StaticResource HeaderTextBlockStyle}">
                         Spell Book
@@ -134,7 +143,8 @@
             </TabItem>
 
             <TabItem Style="{StaticResource TabItemStyle}"
-                     x:Name="CounterControl">
+                     x:Name="CounterControl"
+                     Width="{Binding ElementName=columnDivider, Path=ActualWidth}">
                 <TabItem.Header>
                     <TextBlock Style="{StaticResource HeaderTextBlockStyle}">
                         Counters

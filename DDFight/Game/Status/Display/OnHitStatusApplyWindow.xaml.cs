@@ -90,6 +90,7 @@ namespace DDFight.Game.Status.Display
 
         private void refresh_validate_button()
         {
+            //TODO crach tibo
             ValidateButtonControl.IsEnabled = true;
             if (((SavingThrow)SavingThrowControl.DataContext).SavingRoll == 0)
                 ValidateButtonControl.IsEnabled = false;

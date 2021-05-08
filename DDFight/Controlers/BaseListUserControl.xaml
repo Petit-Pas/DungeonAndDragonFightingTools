@@ -6,7 +6,9 @@
              xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes" 
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:local="clr-namespace:DDFight.Controlers" 
-             xmlns:filtertextbox="clr-namespace:WpfCustomControlLibrary.InputBoxes.FilterTextBoxes;assembly=WpfCustomControlLibrary" xmlns:listboxcontrols="clr-namespace:WpfCustomControlLibrary.ListControls.ListBoxControls;assembly=WpfCustomControlLibrary" xmlns:cardcontrols="clr-namespace:WpfCustomControlLibrary.CardControls;assembly=WpfCustomControlLibrary"
+             xmlns:filtertextbox="clr-namespace:WpfCustomControlLibrary.InputBoxes.FilterTextBoxes;assembly=WpfCustomControlLibrary"
+             xmlns:listboxcontrols="clr-namespace:WpfCustomControlLibrary.ListControls.ListBoxControls;assembly=WpfCustomControlLibrary" 
+             xmlns:shadowboxes="clr-namespace:WpfCustomControlLibrary.ShadowBoxes;assembly=WpfCustomControlLibrary"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -30,7 +32,7 @@
             x:Name="FilterControl"
             KeyUp="FilterTextBox_KeyUp"
             Margin="-5 5"/>
-
+        
         <Grid Grid.Row="1" MinWidth="200">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -39,16 +41,18 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+
             <listboxcontrols:ListBoxControl 
                 Background="Transparent"
                 x:Name="EntityListControl" 
-                ItemsSource="{Binding Source={StaticResource EntityList}}"
                 MouseDoubleClick="EntityList_MouseDoubleClick"
                 KeyDown="EntityListControl_KeyDown"
                 ContextMenuOpening="EntityList_ContextMenuOpening"
                 AlternationCount="2"
+                ItemsSource="{Binding Source={StaticResource EntityList}, UpdateSourceTrigger=PropertyChanged}" 
                 ScrollbarSmallChange="{Binding ScrollbarSmallChange, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:BaseListUserControl}}}"
                 ScrollbarLargeChange="{Binding ScrollbarLargeChange, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:BaseListUserControl}}}"
+                ContextMenu="{Binding ListContextMenu, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:BaseListUserControl}}}"
                 >
 
                 <ListBox.ItemTemplate>
@@ -67,30 +71,28 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
-                <cardcontrols:ButtonCardControl
+                <shadowboxes:ShadowButtonControl
                     x:Name="AddButtonControl"
                     Margin="5 10"
                     Click="AddButtonControl_Click"
                     >
                     <TextBlock 
-                        VerticalAlignment="Center" 
-                        HorizontalAlignment="Center">
+                        Foreground="{StaticResource TextBaseColor}">
                         Add New 
                     </TextBlock>
-                </cardcontrols:ButtonCardControl>
+                </shadowboxes:ShadowButtonControl>
 
-                <cardcontrols:ButtonCardControl
+                <shadowboxes:ShadowButtonControl
                     x:Name="RemoveButtonControl"
                     Grid.Column="1"
                     Margin="5 10"
                     Click="RemoveButtonControl_Click"
                     >
                     <TextBlock 
-                        VerticalAlignment="Center" 
-                        HorizontalAlignment="Center">
+                        Foreground="{StaticResource TextBaseColor}">
                         Remove
                     </TextBlock>
-                </cardcontrols:ButtonCardControl>
+                </shadowboxes:ShadowButtonControl>
                 
             </Grid>
         </Grid>

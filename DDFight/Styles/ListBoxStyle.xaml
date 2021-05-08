@@ -37,7 +37,11 @@
                             x:Name="Mask"
                             Background="{StaticResource LightestGray}"
                             CornerRadius="10"
-                            />
+                        >
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="5" Color="Red" Direction="0"/>
+                            </Border.Effect>    
+                        </Border>
 
                         <scrollbars:ExternalScrollBar 
                             Grid.Column="1"
@@ -102,8 +106,7 @@
                             <MultiTrigger.Conditions>
                                 <Condition Property="UIElement.IsMouseOver" Value="True"/>
                             </MultiTrigger.Conditions>
-                            <Setter Property="Panel.Background" TargetName="Bd" Value="{StaticResource ThemeHover}" />
-                            <Setter Property="ItemsControl.Foreground" Value="Black"/>
+                            <Setter Property="Panel.Background" TargetName="Bd" Value="{StaticResource ListItemHoverColor}" />
                         </MultiTrigger>
                         
                         <MultiTrigger>
@@ -111,8 +114,7 @@
                                 <Condition Property="Selector.IsSelectionActive" Value="True"/>
                                 <Condition Property="Selector.IsSelected" Value="True"/>
                             </MultiTrigger.Conditions>
-                            <Setter Property="Panel.Background" TargetName="Bd" Value="{StaticResource ThemeFocus}" />
-                            <Setter Property="ItemsControl.Foreground" Value="Black"/>
+                            <Setter Property="Panel.Background" TargetName="Bd" Value="{StaticResource ListItemActiveColor}" />
                         </MultiTrigger>
                         
                     </ControlTemplate.Triggers>
@@ -121,10 +123,10 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="ItemsControl.AlternationIndex" Value="0">
-                <Setter Property="Background" Value="{StaticResource AlternateLightGray}" />
+                <Setter Property="Background" Value="{StaticResource ListItemColor1}" />
             </Trigger>
             <Trigger Property="ItemsControl.AlternationIndex" Value="1">
-                <Setter Property="Background" Value="{StaticResource LightestGray}" />
+                <Setter Property="Background" Value="{StaticResource ListItemColor2}" />
             </Trigger>
         </Style.Triggers>
     </Style>

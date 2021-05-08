@@ -3,7 +3,7 @@
                     xmlns:local="clr-namespace:WpfCustomControlLibrary.InputBoxes.BaseTextBoxes" xmlns:cardcontrols="clr-namespace:WpfCustomControlLibrary.CardControls">
     <Style TargetType="{x:Type local:BaseTextBoxControl}" x:Key="BaseTextBoxStyle">
         <Setter Property="Foreground" Value="{Binding ForegroundColor, RelativeSource={RelativeSource Mode=Self}}"/>
-        <Setter Property="TextBoxBase.SelectionBrush" Value="{Binding LightAccentColor, RelativeSource={RelativeSource Mode=Self}}"/>
+        <Setter Property="TextBoxBase.SelectionBrush" Value="{StaticResource SelectionBrushColor}"/>
         <Setter Property="CaretBrush" Value="{Binding Foreground, RelativeSource={RelativeSource Mode=Self}}"/>
         <Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
         <Setter Property="Template">
@@ -61,10 +61,10 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="UIElement.IsMouseOver" Value="True">
-                            <Setter TargetName="AddedBorder" Property="Border.BorderBrush" Value="{StaticResource ThemeHover}"/>
+                            <Setter TargetName="AddedBorder" Property="Border.BorderBrush" Value="{StaticResource TextBoxHoverColor}"/>
                         </Trigger>
                         <Trigger Property="UIElement.IsKeyboardFocused" Value="True">
-                            <Setter TargetName="AddedBorder" Property="Border.BorderBrush" Value="{StaticResource ThemeFocus}"/>
+                            <Setter TargetName="AddedBorder" Property="Border.BorderBrush" Value="{StaticResource TextBoxActiveColor}"/>
                         </Trigger>
                         <Trigger Property="Validation.HasError" Value="True">
                             <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Mode=Self},

@@ -56,6 +56,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Animations\AnimationLibrary.cs" />
     <Compile Include="Animations\Extensions\BorderAnimationExtension.cs" />
     <Compile Include="Buttons\BaseButtonControl.cs" />
     <Compile Include="Buttons\ExitButtonControl.cs" />
@@ -73,6 +74,8 @@
     <Compile Include="InputBoxes\StringTextBoxes\NotEmptyStringTextBoxControl.cs" />
     <Compile Include="ListControls\ListBoxControls\ListBoxControl.cs" />
     <Compile Include="Scrollbars\ExternalScrollBar.cs" />
+    <Compile Include="ShadowBoxes\BaseShadowBoxControl.cs" />
+    <Compile Include="ShadowBoxes\ShadowButtonControl.cs" />
     <Compile Include="SliderButton\SliderButtonControl.cs" />
     <Compile Include="Windows\WindowTitleBar.xaml.cs">
       <DependentUpon>WindowTitleBar.xaml</DependentUpon>
@@ -138,6 +141,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Scrollbars\ScrollBarStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ShadowBoxes\BaseShadowBoxStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ShadowBoxes\ShadowButtonStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
