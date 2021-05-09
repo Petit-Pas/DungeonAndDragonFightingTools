@@ -76,7 +76,7 @@ namespace DnDToolsLibrary.Status
             return new CustomVerboseStatus(this);
         }
 
-        public void CopyAssign(object to_copy)
+        public virtual void CopyAssign(object to_copy)
         {
             if (to_copy is CustomVerboseStatus status)
             {

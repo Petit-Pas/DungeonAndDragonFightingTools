@@ -114,7 +114,7 @@ namespace DnDToolsLibrary.Attacks.HitAttacks
         {
             this.DamageList = (DamageResultList)to_copy.DamageList.Clone();
             this.RollResult = (AttackRollResult)to_copy.RollResult.Clone();
-            this.OnHitStatuses = (OnHitStatusList)OnHitStatuses.Clone();
+            this.OnHitStatuses = (OnHitStatusList)to_copy.OnHitStatuses.Clone();
             this.Name = to_copy.Name;
             this.Target = to_copy.Target;
             this.Owner = to_copy.Owner;

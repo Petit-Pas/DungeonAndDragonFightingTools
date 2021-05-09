@@ -33,6 +33,7 @@ namespace DnDToolsLibrary.Status
         public void init_copy(OnHitStatusList to_copy)
         {
             HasSavingThrow = to_copy.HasSavingThrow;
+
         }
 
         public OnHitStatusList(OnHitStatusList to_copy) : base(to_copy)

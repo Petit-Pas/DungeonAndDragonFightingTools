@@ -5,10 +5,11 @@ using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Characteristics;
 using DnDToolsLibrary.Attacks.Damage;
 using DnDToolsLibrary.Dice;
+using BaseToolsLibrary.Memory;
 
 namespace DnDToolsLibrary.Status
 {
-    public class OnHitStatus : CustomVerboseStatus, IEventUnregisterable, IDisposable
+    public class OnHitStatus : CustomVerboseStatus, IEventUnregisterable, IDisposable, ICopyAssignable
     {
         /// <summary>
         ///     As event handling is moved to higher layers of the application, these actions allow us to inject Register and Unregister comportment from other layers
@@ -344,11 +345,14 @@ namespace DnDToolsLibrary.Status
             RegisterEvents(this);
         }
 
-        public void CopyAssign(OnHitStatus to_copy)
+        public override void CopyAssign(object to_copy)
         {
-            UnregisterEvents(this);
-            init_copy(to_copy);
-            RegisterEvents(this);
+            if (to_copy is OnHitStatus status)
+            {
+                UnregisterEvents(this);
+                init_copy(status);
+                RegisterEvents(this);
+            }
         }
 
         ~OnHitStatus()
