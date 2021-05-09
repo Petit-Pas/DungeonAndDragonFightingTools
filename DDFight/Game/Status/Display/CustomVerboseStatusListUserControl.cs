@@ -26,7 +26,7 @@ namespace DDFight.Game.Status.Display
 
         private void CustomVerboseStatusListUserControl_DataContextChanged(object sender, System.Windows.DependencyPropertyChangedEventArgs e)
         {
-            this.EntityList = data_context.Elements;
+            this.EntityList = data_context;
         }
     }
 }

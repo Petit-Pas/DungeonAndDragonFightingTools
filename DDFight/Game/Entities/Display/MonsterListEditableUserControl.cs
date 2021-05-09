@@ -16,7 +16,7 @@ namespace DDFight.Game.Entities.Display
 
         private void refresh_entityList()
         {
-            EntityList = data_context?.Elements;
+            EntityList = data_context;
         }
 
         private void NewMonsterListEditableUserControl_DataContextChanged(object sender, System.Windows.DependencyPropertyChangedEventArgs e)

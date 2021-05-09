@@ -10,10 +10,10 @@ namespace DDFight.Game.Status.Display
     //TODO unsure this file / functionality is still useful
     public partial class CustomVerboseStatusListEditWindow : Window
     {
-        /*public CustomVerboseStatusList data_context
+        public GenericList<CustomVerboseStatus> data_context
         {
-            get => (CustomVerboseStatusList)DataContext;
-        }*/
+            get => (GenericList<CustomVerboseStatus>)DataContext;
+        }
 
         public CustomVerboseStatusListEditWindow()
         {
@@ -23,7 +23,7 @@ namespace DDFight.Game.Status.Display
 
         private void CustomVerboseStatusListEditWindow_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            StatusListControl.EntityList = ((GenericList<CustomVerboseStatus>)DataContext).Elements;
+            StatusListControl.EntityList = data_context.Elements;
             //data_context.Validated = false;
         }
 

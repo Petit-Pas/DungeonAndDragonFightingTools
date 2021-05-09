@@ -15,7 +15,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
             </ResourceDictionary.MergedDictionaries>
-            <CollectionViewSource x:Key="EntityList" Source="{Binding EntityList, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:BaseListUserControl}}}" />
+            <CollectionViewSource x:Key="EntityList" Source="{Binding EntityList.Elements, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:BaseListUserControl}}}" />
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid 

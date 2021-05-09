@@ -25,7 +25,7 @@ namespace DDFight.Game.Aggression.Spells.Display
 
         private void refresh_entityList()
         {
-            EntityList = data_context?.Elements;
+            EntityList = data_context;
         }
 
         private void SpellListEditableUserControl_DataContextChanged(object sender, System.Windows.DependencyPropertyChangedEventArgs e)

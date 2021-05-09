@@ -26,7 +26,7 @@ namespace DDFight.Game.Aggression.Attacks.Display
         private void HitAttackTemplateListUserControl_DataContextChanged(object sender, System.Windows.DependencyPropertyChangedEventArgs e)
         {
             if (data_context != null)
-                EntityList = data_context.Elements;
+                EntityList = data_context;
         }
     }
 }

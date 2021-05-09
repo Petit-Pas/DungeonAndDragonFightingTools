@@ -63,7 +63,7 @@ namespace DnDToolsLibrary.Memory
 
         public event ListElementChanged_EventHandler ListElementChanged;
 
-        protected void OnListElementChanged(ListElementChangedArgs e)
+        public void OnListElementChanged(ListElementChangedArgs e)
         {
             if (ListElementChanged != null)
             {
@@ -168,6 +168,6 @@ namespace DnDToolsLibrary.Memory
         }
 
         public int Count
-        { get => Elements.Count; }
+        { get => Elements.Count;}
     }
 }

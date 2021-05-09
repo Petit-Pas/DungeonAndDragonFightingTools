@@ -46,6 +46,7 @@ namespace DnDToolsLibrary.Fight
                     add_character(entity as Character);
                 else if (entity.GetType() == typeof(Monster))
                     add_monster(entity as Monster);
+                Sort();
             }
             else
                 Logger.Log("WARNING: tried to add null entity to FighterList");
@@ -60,10 +61,7 @@ namespace DnDToolsLibrary.Fight
             try
             {
                 if (Elements.SingleOrDefault(x => x.Name == character.Name) == null)
-                {
                     base.AddElementSilent(character);
-                    Sort();
-                }
             }
             catch (Exception err)
             {
@@ -91,7 +89,6 @@ namespace DnDToolsLibrary.Fight
             }
             new_fighter.DisplayName = new_fighter.Name + " - " + i;
             base.AddElementSilent(new_fighter);
-            Sort();
         }
 
 

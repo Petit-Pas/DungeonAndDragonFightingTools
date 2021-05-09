@@ -1,6 +1,7 @@
 ﻿using DDFight.Controlers;
 using DDFight.WpfExtensions;
 using DnDToolsLibrary.Entities;
+using DnDToolsLibrary.Memory;
 using System.Windows.Input;
 using TempExtensionsPlayableEntity;
 
@@ -16,7 +17,16 @@ namespace DDFight.Game.Entities.Display
         public override bool edit(object element)
         {
             if (element is PlayableEntity playableEntity)
-                return playableEntity.OpenEditWindow();
+            {
+                bool retval = playableEntity.OpenEditWindow();
+                if (retval)
+                    ((GenericList<T>)EntityList).OnListElementChanged(new GenericList<T>.ListElementChangedArgs
+                    {
+                        Operation = GenericList<T>.GenericListOperation.Modification,
+                        Element = (T)playableEntity,
+                    });
+                return retval;
+            }
             return false;
         }
 
