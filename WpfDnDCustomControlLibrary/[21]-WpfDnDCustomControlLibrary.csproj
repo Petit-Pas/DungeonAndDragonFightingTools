@@ -70,9 +70,7 @@
       <DependentUpon>SpellAttackResultRollableUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\DamageTypeEnumToBrushConverter.cs" />
-    <Compile Include="Fight\FightingEntitiesDropdownListUserControl.xaml.cs">
-      <DependentUpon>FightingEntitiesDropdownListUserControl.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Fight\FightersSelectorControl.cs" />
     <Compile Include="InputBoxes\DiceTextBoxes\AttackRollTextBoxControl.cs" />
     <Compile Include="InputBoxes\DiceTextBoxes\BaseD20TextBoxControl.cs" />
     <Compile Include="InputBoxes\DiceTextBoxes\SituationalD20TextBoxControl.cs" />
@@ -145,10 +143,6 @@
     <Page Include="Attacks\Spells\SpellAttackResultRollableUserControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Fight\FightingEntitiesDropdownListUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

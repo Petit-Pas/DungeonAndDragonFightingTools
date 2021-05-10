@@ -55,5 +55,11 @@ namespace WpfDnDCustomControlLibrary.Attacks.HitAttacks
             typeof(HitAttackResult),
             typeof(HitAttackResultUserControl),
             new PropertyMetadata(null, attackResult_Changed));
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //this.AttackRoll.AttackRollTextBoxControl.Focus();
+            this.TargetSelectionControl.Focus();
+        }
     }
 }

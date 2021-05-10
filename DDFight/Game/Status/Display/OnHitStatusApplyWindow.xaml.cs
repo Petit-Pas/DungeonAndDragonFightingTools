@@ -63,8 +63,13 @@ namespace DDFight.Game.Status.Display
             Target = target;
             Applicant = applicant;
             this.first_application = first_application;
+            Loaded += OnHitStatusApplyWindow_Loaded;
 
             InitializeComponent();
+        }
+
+        private void OnHitStatusApplyWindow_Loaded(object sender, RoutedEventArgs e)
+        {
             DataContextChanged += OnHitStatusApplyWindow_DataContextChanged;
         }
 

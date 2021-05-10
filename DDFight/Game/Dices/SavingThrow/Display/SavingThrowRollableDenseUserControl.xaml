@@ -67,7 +67,6 @@
                 </TextBlock>
                 <inttextboxes:RangedIntTextBoxControl
                     Width="40"
-                    Height="20"
                     Margin="5, 0"
                     Min="0"
                     Max="20"
@@ -82,7 +81,6 @@
                 </TextBlock>
                 <inttextboxes:IntTextBoxControl
                     Width="40"
-                    Height="20"
                     Margin="5, 0"
                     Integer="{Binding Modifier}"
                     VerticalAlignment="Center"

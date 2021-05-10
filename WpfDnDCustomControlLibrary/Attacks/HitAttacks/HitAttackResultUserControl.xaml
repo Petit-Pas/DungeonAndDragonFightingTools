@@ -10,52 +10,52 @@
              xmlns:fight="clr-namespace:WpfDnDCustomControlLibrary.Fight"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-        <Grid
+    <Grid
             DataContext="{Binding AttackResult, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:HitAttackResultUserControl}}}"
             Margin="10 0 0 0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
-            <WrapPanel>
-                <WrapPanel.Resources>
-                    <Style TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlock}">
-                        <Setter Property="FontSize" Value="14"/>
-                    </Style>
-                </WrapPanel.Resources>
-                <TextBlock 
-                    Margin="0 5 0 0"
-                    Text="{Binding Owner.DisplayName}"/>
-                <TextBlock
-                    Margin="0 5 0 0"
-                    Text=" uses "/>
-                <TextBlock
-                    Margin="0 5 0 0"
-                    Text="{Binding Name}" />
-                <TextBlock
-                    Margin="0 5 0 0"
-                    Text=" on "/>
-                <fight:FightingEntitiesDropdownListUserControl 
-                    x:Name="TargetSelectionControl"
-                    Margin="0 5 0 0"
-                    Target="{Binding Target}"/>
-            </WrapPanel>
-            
-            <attacks:AttackRollResultUserControl 
-                x:Name="AttackRoll"
-                Grid.Row="1"
-                RollResult="{Binding RollResult}"/>
+        <WrapPanel>
+            <WrapPanel.Resources>
+                <Style TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlock}">
+                    <Setter Property="FontSize" Value="14"/>
+                </Style>
+            </WrapPanel.Resources>
+            <TextBlock 
+                Margin="0 5 0 0"
+                Text="{Binding Owner.DisplayName}"/>
+            <TextBlock
+                Margin="0 5 0 0"
+                Text=" uses "/>
+            <TextBlock
+                Margin="0 5 0 0"
+                Text="{Binding Name}" />
+            <TextBlock
+                Margin="0 5 0 0"
+                Text=" on "/>
+            <fight:FightersSelectorControl 
+                x:Name="TargetSelectionControl"
+                Margin="0 5 0 0"
+                Target="{Binding Target}"/>
+        </WrapPanel>
 
-            <damage:DamageResultListRollableUserControl
-                Grid.Row="2"
-                Margin="0"
-                x:Name="DamageResultList"
-                Crits="{Binding AttackResult.RollResult.Crits, Mode=TwoWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:HitAttackResultUserControl}}}"
-                DataContext="{Binding DamageList}"/>
-        </Grid>
+        <attacks:AttackRollResultUserControl 
+            x:Name="AttackRoll"
+            Grid.Row="1"
+            RollResult="{Binding RollResult}"/>
+
+        <damage:DamageResultListRollableUserControl
+            Grid.Row="2"
+            Margin="0"
+            x:Name="DamageResultList"
+            Crits="{Binding AttackResult.RollResult.Crits, Mode=TwoWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:HitAttackResultUserControl}}}"
+            DataContext="{Binding DamageList}"/>
+    </Grid>
 </UserControl>

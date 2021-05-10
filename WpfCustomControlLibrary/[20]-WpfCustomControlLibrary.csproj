@@ -63,6 +63,7 @@
     <Compile Include="CardControls\WindowCardControl.cs" />
     <Compile Include="CheckBoxes\CheckBoxControl.cs" />
     <Compile Include="CircularSelector\CircularSelectorRadioButtonControl.cs" />
+    <Compile Include="ComboBoxes\ComboBoxControl.cs" />
     <Compile Include="InputBoxes\BaseTextBoxes\BaseTextBoxControl.cs" />
     <Compile Include="InputBoxes\BaseTextBoxes\ValidableTextBoxControl.cs" />
     <Compile Include="InputBoxes\FilterTextBoxes\FilterTextBoxControl.cs" />
