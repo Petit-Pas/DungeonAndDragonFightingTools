@@ -37,6 +37,7 @@ namespace WpfToolsLibrary.Navigation
             return true;
         }
     }
+    
     public interface IRollableControl
     {
         /// <summary>

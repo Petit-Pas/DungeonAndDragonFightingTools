@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
@@ -25,6 +26,18 @@ namespace WpfCustomControlLibrary.Animations
             SolidColorBrush brush = new SolidColorBrush();
             brushSetter(brush);
             brush.BeginAnimation(SolidColorBrush.ColorProperty, color_animation);
+        }
+
+        public static void AnimateDouble(FrameworkElement element, DependencyProperty property, double from, double to, TimeSpan duration)
+        {
+            DoubleAnimation double_animation = new DoubleAnimation(from, to, duration);
+            element.BeginAnimation(property, double_animation);
+        }
+
+        public static void AnimateDouble(FrameworkElement element, DependencyProperty property, double to, TimeSpan duration)
+        {
+            DoubleAnimation double_animation = new DoubleAnimation(to, duration);
+            element.BeginAnimation(property, double_animation);
         }
     }
 }

@@ -1,0 +1,108 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:WpfCustomControlLibrary.ShadowBoxes">
+    
+    <Style TargetType="{x:Type local:BaseDoubleShadowBoxControl}" x:Key="BaseDoubleShadowBoxStyle">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:BaseDoubleShadowBoxControl}">
+                    <Grid
+                        SnapsToDevicePixels="True">
+                        <Grid 
+                            Background="Transparent">
+                            <Border 
+                                Background="Transparent" 
+                                BorderThickness="0" 
+                                Panel.ZIndex="1">
+                                <Border.OpacityMask>
+                                    <VisualBrush Stretch="None" Visual="{Binding ElementName=Mask}" />
+                                </Border.OpacityMask>
+                                <Grid
+                                    x:Name="InnerShadowGrid"
+                                    Visibility="{Binding InnerShadowVisibility, RelativeSource={RelativeSource AncestorType={x:Type local:BaseDoubleShadowBoxControl}}}">
+                                    <Border
+                                        x:Name="UpperInnerShadow"
+                                        CornerRadius="{Binding CornerRadius, ElementName=Mask}"
+                                        BorderBrush="{Binding Background, ElementName=Mask}"
+                                        BorderThickness="5 5 0 0"
+                                        >   
+                                        <Border.Effect>
+                                            <DropShadowEffect 
+                                                Color="{Binding UpperInnerShadowColor, RelativeSource={RelativeSource AncestorType={x:Type local:BaseDoubleShadowBoxControl}}}"
+                                                ShadowDepth="0" 
+                                                BlurRadius="{Binding UpperInnerShadowBlurRadius, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:BaseDoubleShadowBoxControl}}}" />
+                                        </Border.Effect>
+                                    </Border>
+                                    <Border
+                                        x:Name="LowerInnerShadow"
+                                        CornerRadius="{Binding CornerRadius, ElementName=Mask}"
+                                        BorderBrush="{Binding Background, ElementName=Mask}"
+                                        BorderThickness="0 0 5 5"
+                                        >
+                                        <Border.Effect>
+                                            <DropShadowEffect 
+                                                Color="{Binding LowerInnerShadowColor, RelativeSource={RelativeSource AncestorType={x:Type local:BaseDoubleShadowBoxControl}}}" 
+                                                ShadowDepth="0" 
+                                                BlurRadius="{Binding LowerInnerShadowBlurRadius, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:BaseDoubleShadowBoxControl}}}" />
+                                        </Border.Effect>
+                                    </Border>
+                                </Grid>
+                            </Border>
+
+                            <Grid
+                                x:Name="OuterShadowGrid"
+                                    Visibility="{Binding OuterShadowVisibility, RelativeSource={RelativeSource AncestorType={x:Type local:BaseDoubleShadowBoxControl}}}">
+                                <Border
+                                    Panel.ZIndex="-1"
+                                    x:Name="UpperOuterShadow"
+                                    CornerRadius="{Binding CornerRadius, ElementName=Mask}"
+                                    BorderBrush="{Binding Background, ElementName=Mask}"
+                                    Margin="5"
+                                    BorderThickness="5 5 0 0">
+                                    <Border.Effect>
+                                        <DropShadowEffect 
+                                            Color="{Binding UpperOuterShadowColor, RelativeSource={RelativeSource AncestorType={x:Type local:BaseDoubleShadowBoxControl}}}" 
+                                            ShadowDepth="2" 
+                                            BlurRadius="{Binding UpperOuterShadowBlurRadius, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:BaseDoubleShadowBoxControl}}}" 
+                                            Direction="135" />
+                                    </Border.Effect>
+                                </Border>
+                                <Border
+                                    Panel.ZIndex="-1"
+                                    x:Name="LowerOuterShadow"
+                                    CornerRadius="{Binding CornerRadius, ElementName=Mask}"
+                                    BorderBrush="{Binding Background, ElementName=Mask}"
+                                    Margin="5"
+                                    BorderThickness="0 0 5 5">
+                                    <Border.Effect>
+                                        <DropShadowEffect 
+                                            Color="{Binding LowerOuterShadowColor, RelativeSource={RelativeSource AncestorType={x:Type local:BaseDoubleShadowBoxControl}}}" 
+                                            ShadowDepth="2"
+                                            BlurRadius="{Binding UpperInnerShadowBlurRadius, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:BaseDoubleShadowBoxControl}}}"/>
+                                    </Border.Effect>
+                                </Border>
+                            </Grid>
+
+                            <Border 
+                                x:Name="Mask"
+                                Background="{Binding BackgroundColor, RelativeSource={RelativeSource AncestorType={x:Type local:BaseDoubleShadowBoxControl}}}"
+                                CornerRadius="{Binding BorderCornerRadius, RelativeSource={RelativeSource AncestorType={x:Type local:BaseDoubleShadowBoxControl}}}"
+                                BorderBrush="{Binding Background, RelativeSource={RelativeSource Mode=Self}}"
+                                BorderThickness="0.1"
+                                Margin="5"
+                            />
+
+                            <Border Background="Transparent" BorderThickness="0" Padding="{TemplateBinding Padding}" Panel.ZIndex="3">
+                                <ContentPresenter 
+                                    HorizontalAlignment="Center" 
+                                    VerticalAlignment="Center"
+                                    Focusable="False" />
+                            </Border>
+                        </Grid>
+
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

@@ -60,8 +60,15 @@
     <Compile Include="Attacks\Damage\DamageResultRollableUserControl.xaml.cs">
       <DependentUpon>DamageResultRollableUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Attacks\SituationalAdvantageModifiersUserControl.xaml.cs">
-      <DependentUpon>SituationalAdvantageModifiersUserControl.xaml</DependentUpon>
+    <Compile Include="Converters\CharacteristicToShortConverter.cs" />
+    <Compile Include="SavingThrows\SavingThrowRollableDenseUserControl.xaml.cs">
+      <DependentUpon>SavingThrowRollableDenseUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SavingThrows\SavingThrowRollableUserControl.xaml.cs">
+      <DependentUpon>SavingThrowRollableUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SituationalModifiers\SituationalAdvantageModifiersControl.xaml.cs">
+      <DependentUpon>SituationalAdvantageModifiersControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Attacks\SituationalAttackRollModifiersUserControl.xaml.cs">
       <DependentUpon>SituationalAttackRollModifiersUserControl.xaml</DependentUpon>
@@ -135,7 +142,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Attacks\SituationalAdvantageModifiersUserControl.xaml">
+    <Page Include="SavingThrows\SavingThrowRollableDenseUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SavingThrows\SavingThrowRollableUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SituationalModifiers\SituationalAdvantageModifiersControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

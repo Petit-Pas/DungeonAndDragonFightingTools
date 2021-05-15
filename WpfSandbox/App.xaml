@@ -13,7 +13,8 @@
             </ResourceDictionary.MergedDictionaries>
 
             <Style x:Key="WindowStyle" TargetType="Window">
-                <Setter Property="Background" Value="{StaticResource LightestGray}" />
+                <Setter Property="Background" Value="{StaticResource LightestGray}"/>
+                <Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
             </Style>
 
             <Style x:Key="ModalWindowStyle" TargetType="Window" BasedOn="{StaticResource WindowStyle}">

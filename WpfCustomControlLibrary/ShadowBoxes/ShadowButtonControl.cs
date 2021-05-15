@@ -21,9 +21,9 @@ namespace WpfCustomControlLibrary.ShadowBoxes
         };
         private static readonly Style style = styleDict["ShadowButtonStyle"] as Style;
 
-        private BaseShadowBoxControl shadowBox
+        private BaseDoubleShadowBoxControl shadowBox
         {
-            get => this.Template.FindName("ContentPresenterContainer", this) as BaseShadowBoxControl;
+            get => this.Template.FindName("ContentPresenterContainer", this) as BaseDoubleShadowBoxControl;
         }
 
         public ShadowButtonControl() : base()
@@ -34,15 +34,42 @@ namespace WpfCustomControlLibrary.ShadowBoxes
             MouseLeave += ShadowButtonControl_MouseLeave;
             GotFocus += ShadowButtonControl_GotFocus;
             LostFocus += ShadowButtonControl_LostFocus;
+            IsEnabledChanged += ShadowButtonControl_IsEnabledChanged;
 
             BaseColor = (SolidColorBrush)System.Windows.Application.Current.Resources["ButtonBaseColor"];
             HoverColor = (SolidColorBrush)System.Windows.Application.Current.Resources["ButtonHoverColor"];
             ClickedColor = (SolidColorBrush)System.Windows.Application.Current.Resources["ButtonClickedColor"];
+
+            Foreground = (SolidColorBrush)System.Windows.Application.Current.Resources["Light"];
+            Loaded += ShadowButtonControl_Loaded;
+        }
+
+        private void ShadowButtonControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            ShadowButtonControl_IsEnabledChanged(this, new DependencyPropertyChangedEventArgs(Button.IsEnabledProperty, !IsEnabled, IsEnabled));
+        }
+
+        private void ShadowButtonControl_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if ((bool)e.NewValue == true)
+                animate_enabled();
+            else
+                animate_disabled();
+        }
+
+        private void animate_enabled()
+        {
+            AnimationLibrary.AnimateDouble(this, Button.OpacityProperty, 1, TimeSpan.FromSeconds(0.25));
+        }
+
+        private void animate_disabled()
+        {
+            AnimationLibrary.AnimateDouble(this, Button.OpacityProperty, 0.3, TimeSpan.FromSeconds(0.25));
         }
 
         protected override void OnIsPressedChanged(System.Windows.DependencyPropertyChangedEventArgs e)
         {
-            BaseShadowBoxControl ShadowBox = shadowBox;
+            BaseDoubleShadowBoxControl ShadowBox = shadowBox;
             if (ShadowBox != null)
             {
                 if ((bool)e.NewValue == true)
@@ -97,7 +124,7 @@ namespace WpfCustomControlLibrary.ShadowBoxes
 
         private void animate_hover()
         {
-            BaseShadowBoxControl ShadowBox = shadowBox;
+            BaseDoubleShadowBoxControl ShadowBox = shadowBox;
             if (ShadowBox != null)
             {
                 AnimationLibrary.AnimateBrush(
@@ -110,7 +137,7 @@ namespace WpfCustomControlLibrary.ShadowBoxes
 
         private void animate_normal()
         {
-            BaseShadowBoxControl ShadowBox = shadowBox;
+            BaseDoubleShadowBoxControl ShadowBox = shadowBox;
             if (ShadowBox != null)
             {
                 AnimationLibrary.AnimateBrush(

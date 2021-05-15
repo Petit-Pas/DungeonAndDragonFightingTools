@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DDFight.Game.Dices.SavingThrow.Display" 
-             xmlns:inttextboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.IntTextBoxes;assembly=WpfCustomControlLibrary" xmlns:attacks="clr-namespace:WpfDnDCustomControlLibrary.Attacks;assembly=WpfDnDCustomControlLibrary"
+             xmlns:inttextboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.IntTextBoxes;assembly=WpfCustomControlLibrary" xmlns:attacks="clr-namespace:WpfDnDCustomControlLibrary.Attacks;assembly=WpfDnDCustomControlLibrary" xmlns:situationalmodifiers="clr-namespace:WpfDnDCustomControlLibrary.SituationalModifiers;assembly=WpfDnDCustomControlLibrary"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -58,7 +58,7 @@
                 Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                 Margin="0, 5"/>
 
-            <attacks:SituationalAdvantageModifiersUserControl 
+            <situationalmodifiers:SituationalAdvantageModifiersControl 
                 Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
                 Margin="0, 5"
                 DataContext="{Binding Modifiers}"/>

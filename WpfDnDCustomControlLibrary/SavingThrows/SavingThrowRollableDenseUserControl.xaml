@@ -1,0 +1,87 @@
+﻿<UserControl x:Class="WpfDnDCustomControlLibrary.SavingThrows.SavingThrowRollableDenseUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:inttextboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.IntTextBoxes;assembly=WpfCustomControlLibrary" 
+             xmlns:checkboxes="clr-namespace:WpfCustomControlLibrary.CheckBoxes;assembly=WpfCustomControlLibrary" xmlns:situationalmodifiers="clr-namespace:WpfDnDCustomControlLibrary.SituationalModifiers" xmlns:shadowboxes="clr-namespace:WpfCustomControlLibrary.ShadowBoxes;assembly=WpfCustomControlLibrary" xmlns:converters="clr-namespace:WpfDnDCustomControlLibrary.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             x:Name="SavingThrowRollableDenseControl">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="TextBlock">
+                <Setter Property="Foreground" Value="{StaticResource Light}"/>
+                <Setter Property="Margin" Value="0, 5"/>
+            </Style>
+            <converters:CharacteristicToShortConverter x:Key="CharacteristicToShortConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <shadowboxes:BaseSimpleShadowBoxControl
+            SnapsToDevicePixels="True">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <TextBlock
+                Style="{StaticResource BaseTextBlock}"
+                FontSize="18"
+                FontWeight="SemiBold"
+                VerticalAlignment="Center">
+                <Run Text="{Binding Characteristic, Converter={StaticResource CharacteristicToShortConverter}}"></Run>
+                <Run> Saving Throw DC </Run>
+                <Run Text="{Binding Difficulty}">  </Run>
+                <Run>(</Run>
+                <Run x:Name="AbilityModifierControl2"/>
+                <Run>)</Run>
+            </TextBlock>
+
+
+            <situationalmodifiers:SituationalAdvantageModifiersControl 
+                    Grid.Row="1"
+                    Modifiers="{Binding AdvantageModifiers}"/>
+
+            <StackPanel
+                    Grid.Row="2"
+                    Orientation="Horizontal">
+                <TextBlock
+                        Margin="0, 0, 5, 0"
+                        VerticalAlignment="Center">
+                        Roll:
+                </TextBlock>
+                <inttextboxes:RangedIntTextBoxControl
+                        Width="40"
+                        Margin="5, 0"
+                        Min="0"
+                        Max="20"
+                        Integer="{Binding SavingRoll}"
+                        VerticalAlignment="Center"
+                    />
+                <TextBlock
+                        Margin="5, 0"
+                        VerticalAlignment="Center"> 
+                        +
+                </TextBlock>
+                <inttextboxes:IntTextBoxControl
+                        Width="40"
+                        Margin="5, 0"
+                        Integer="{Binding Modifier}"
+                        VerticalAlignment="Center"
+                    />
+                <TextBlock
+                    VerticalAlignment="Center">
+                    <Run x:Name="AbilityModifierControl">+ 0 (DEFAULT)</Run>
+                    <Run Text="  ==> "></Run>
+                    <Run x:Name="ResultControl">0/0</Run>
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+    </shadowboxes:BaseSimpleShadowBoxControl>
+
+</UserControl>

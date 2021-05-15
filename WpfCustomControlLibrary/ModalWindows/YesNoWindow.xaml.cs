@@ -38,5 +38,13 @@ namespace WpfCustomControlLibrary.ModalWindows
         {
             this.Close();
         }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter || e.Key == Key.Y)
+                ValidateButton_Click(this, null);
+            else if (e.Key == Key.Escape || e.Key == Key.N)
+                CancelButton_Click(this, null);
+        }
     }
 }

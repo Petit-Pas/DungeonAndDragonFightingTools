@@ -39,7 +39,7 @@
                     <Grid
                         SnapsToDevicePixels="True"
                         >
-                        <shadowboxes:BaseShadowBoxControl
+                        <shadowboxes:BaseDoubleShadowBoxControl
                             x:Name="PresenterContainer"
                             InnerShadowVisibility="Visible"
                             OuterShadowVisibility="Collapsed"
@@ -57,7 +57,7 @@
                                 SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" 
                                 Focusable="False" 
                             />
-                        </shadowboxes:BaseShadowBoxControl>
+                        </shadowboxes:BaseDoubleShadowBoxControl>
                     </Grid>
 
                     <ControlTemplate.Triggers>

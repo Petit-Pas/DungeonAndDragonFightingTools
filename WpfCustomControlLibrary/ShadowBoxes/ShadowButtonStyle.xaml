@@ -6,7 +6,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
-                    <local:BaseShadowBoxControl
+                    <local:BaseDoubleShadowBoxControl
                         x:Name="ContentPresenterContainer"
                         OuterShadowVisibility="Visible"
                         InnerShadowVisibility="Collapsed"
@@ -16,7 +16,7 @@
                         <ContentPresenter
                             Content="{TemplateBinding ContentControl.Content}" 
                             />
-                    </local:BaseShadowBoxControl>
+                    </local:BaseDoubleShadowBoxControl>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

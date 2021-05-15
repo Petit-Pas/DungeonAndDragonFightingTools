@@ -1,4 +1,5 @@
 ﻿using BaseToolsLibrary.IO;
+using BaseToolsLibrary.Memory;
 using DDFight;
 using DDFight.Commands;
 using DnDToolsLibrary.Attacks;
@@ -94,6 +95,7 @@ namespace BindValidation
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
+            Global.Loading = false;
             OnHitStatusHandleWindow window = new OnHitStatusHandleWindow();
 
             Character caster = new Character()

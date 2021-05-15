@@ -9,7 +9,8 @@
         MinWidth="485"
         SizeToContent="WidthAndHeight"
         Style="{StaticResource WindowStyle}"
-       >
+        KeyDown="Window_KeyDown"
+        >
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

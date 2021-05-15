@@ -6,13 +6,16 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:local="clr-namespace:WpfDnDCustomControlLibrary.Statuses" 
     xmlns:shadowboxes="clr-namespace:WpfCustomControlLibrary.ShadowBoxes;assembly=WpfCustomControlLibrary"
-    xmlns:status="clr-namespace:DnDToolsLibrary.Status;assembly=DnDToolsLibrary"
+    xmlns:status="clr-namespace:DnDToolsLibrary.Status;assembly=DnDToolsLibrary" xmlns:savingthrows="clr-namespace:WpfDnDCustomControlLibrary.SavingThrows"
     mc:Ignorable="d" 
     Height="450" Width="800"
     Closing="Window_Closing"
+    SizeToContent="Height"
     Style="{StaticResource WindowStyle}"
     d:DataContext="{x:Type status:OnHitStatus}"
-    Title="{Binding DisplayName}">
+    Title="{Binding DisplayName}"
+    KeyDown="Window_KeyDown"
+    >
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -33,7 +36,8 @@
         <Grid
             x:Name="MainGrid">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -51,7 +55,7 @@
 
                 <TextBlock
                     HorizontalAlignment="Center"
-                    Margin="20"
+                    Margin="20 20 20 0"
                     Foreground="{StaticResource Light}"
                     FontSize="18">
                     <Run Text="{Binding Caster.DisplayName}"/>
@@ -64,12 +68,16 @@
                 <TextBlock
                     Grid.Row="1"
                     Text="{Binding Description}"
-                    Foreground="{StaticResource Light}">
+                    TextWrapping="Wrap"
+                    TextAlignment="Justify"
+                    Margin="10"
+                    Foreground="{StaticResource Light}" />
 
-                </TextBlock>
-                
             </Grid>
-            
+
+            <savingthrows:SavingThrowRollableDenseUserControl Grid.Row="1" Margin="10" DataContext="{Binding Saving, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:OnHitStatusHandleWindow}}}"/>
+
+
         </Grid>
         
         <Grid

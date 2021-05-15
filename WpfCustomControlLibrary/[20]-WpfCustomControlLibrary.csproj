@@ -78,7 +78,8 @@
       <DependentUpon>YesNoWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Scrollbars\ExternalScrollBar.cs" />
-    <Compile Include="ShadowBoxes\BaseShadowBoxControl.cs" />
+    <Compile Include="ShadowBoxes\BaseDoubleShadowBoxControl.cs" />
+    <Compile Include="ShadowBoxes\BaseSimpleShadowBoxControl.cs" />
     <Compile Include="ShadowBoxes\ShadowButtonControl.cs" />
     <Compile Include="SliderButton\SliderButtonControl.cs" />
     <Compile Include="WindowTools\WindowTitleBar.xaml.cs">
@@ -152,7 +153,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ShadowBoxes\BaseShadowBoxStyle.xaml">
+    <Page Include="ShadowBoxes\BaseDoubleShadowBoxStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ShadowBoxes\BaseSimpleShadowBoxStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
