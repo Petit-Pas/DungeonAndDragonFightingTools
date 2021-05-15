@@ -74,11 +74,14 @@
     <Compile Include="InputBoxes\StringTextBoxes\BaseStringTextBoxControl.cs" />
     <Compile Include="InputBoxes\StringTextBoxes\NotEmptyStringTextBoxControl.cs" />
     <Compile Include="ListControls\ListBoxControls\ListBoxControl.cs" />
+    <Compile Include="ModalWindows\YesNoWindow.xaml.cs">
+      <DependentUpon>YesNoWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Scrollbars\ExternalScrollBar.cs" />
     <Compile Include="ShadowBoxes\BaseShadowBoxControl.cs" />
     <Compile Include="ShadowBoxes\ShadowButtonControl.cs" />
     <Compile Include="SliderButton\SliderButtonControl.cs" />
-    <Compile Include="Windows\WindowTitleBar.xaml.cs">
+    <Compile Include="WindowTools\WindowTitleBar.xaml.cs">
       <DependentUpon>WindowTitleBar.xaml</DependentUpon>
     </Compile>
     <Page Include="Buttons\BaseButtonStyle.xaml">
@@ -141,6 +144,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ModalWindows\YesNoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Scrollbars\ScrollBarStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -157,7 +164,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Windows\WindowTitleBar.xaml">
+    <Page Include="WindowTools\WindowTitleBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

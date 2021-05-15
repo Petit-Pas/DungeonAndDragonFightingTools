@@ -6,6 +6,7 @@ using DnDToolsLibrary.Fight.Events;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using WpfToolsLibrary.Extensions;
 
 namespace DDFight.Controlers.Fight
 {

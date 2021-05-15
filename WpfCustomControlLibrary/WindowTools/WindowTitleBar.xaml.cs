@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfToolsLibrary.Commands.WindowCommands;
 
-namespace WpfCustomControlLibrary.Windows
+namespace WpfCustomControlLibrary.WindowTools
 {
     /// <summary>
     /// Interaction logic for WindowTitleBar.xaml

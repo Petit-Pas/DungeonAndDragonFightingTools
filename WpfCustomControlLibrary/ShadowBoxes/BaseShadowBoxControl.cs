@@ -83,7 +83,7 @@ namespace WpfCustomControlLibrary.ShadowBoxes
             nameof(LowerOuterShadowColor),
             typeof(Color),
             typeof(BaseShadowBoxControl),
-            new PropertyMetadata(System.Windows.Application.Current.Resources["RawIndigo"]));
+            new PropertyMetadata((Color)System.Windows.Application.Current.Resources["RawIndigo"]));
 
         public Color UpperInnerShadowColor
         {

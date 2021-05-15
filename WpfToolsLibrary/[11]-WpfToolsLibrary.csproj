@@ -68,6 +68,7 @@
     <Compile Include="Extensions\RunExtensions.cs" />
     <Compile Include="Extensions\TreeReflexionExtensions.cs" />
     <Compile Include="Extensions\FrameworkElementExtensions.cs" />
+    <Compile Include="Extensions\WindowExtensions.cs" />
     <Compile Include="Navigation\IRollableControl.cs" />
     <Compile Include="Navigation\IValidableWindow.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

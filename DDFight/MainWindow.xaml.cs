@@ -27,10 +27,6 @@ namespace DDFight
         /// </summary>
 
         public static GameDataContext Context = new GameDataContext();
-
-        public static Window CurrentMainWindow { 
-            get => Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
-        }
     }
 
     /// <summary>

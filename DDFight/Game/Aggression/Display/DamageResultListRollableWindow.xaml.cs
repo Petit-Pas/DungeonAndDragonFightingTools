@@ -2,6 +2,7 @@
 using DnDToolsLibrary.Attacks.Damage;
 using System.Windows;
 using System.Windows.Input;
+using WpfToolsLibrary.Extensions;
 using WpfToolsLibrary.Navigation;
 
 namespace DDFight.Game.Aggression.Display

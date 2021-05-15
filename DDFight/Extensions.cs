@@ -7,13 +7,6 @@ namespace DDFight
 {
     public static class Extensions
     {
-        public static void ShowCentered(this Window window)
-        {
-            window.Owner = GlobalContext.CurrentMainWindow;
-            window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            window.ShowDialog();
-        }
-
         public static List<T> GetChildrenOfType<T>(this ItemsControl depObj)
             where T : DependencyObject
         {

@@ -30,6 +30,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -93,6 +94,10 @@
                    FontFamily="{StaticResource BookInsanity}">
             The quick brown fox jumps over the lazy dog ABSOLUTE CAPITAL
         </TextBlock>
+
+        <Button Grid.Row="6" Click="Button_Click_2">
+            ClickMe
+        </Button>
     </Grid>
 
     <!--

@@ -30,13 +30,13 @@ namespace DnDToolsLibrary.Status
         ///     The Entity that initiated the status, can be used when its concentration loss provokes the annulation of the status
         /// </summary>
         [XmlIgnore]
-        public PlayableEntity Caster = null;
+        public PlayableEntity Caster { get; set; } = null;
 
         /// <summary>
         ///     The Entity that is affected by the status, can be used to remove the status from its list of Statuses   
         /// </summary>
         [XmlIgnore]
-        public PlayableEntity Affected = null;
+        public PlayableEntity Affected { get; set; } = null;
 
         #endregion Properties_Concerned
 

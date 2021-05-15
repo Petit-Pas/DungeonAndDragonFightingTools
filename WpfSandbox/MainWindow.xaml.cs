@@ -5,16 +5,20 @@ using DnDToolsLibrary.Attacks;
 using DnDToolsLibrary.Attacks.Damage;
 using DnDToolsLibrary.Attacks.Damage.Type;
 using DnDToolsLibrary.Attacks.HitAttacks;
+using DnDToolsLibrary.Characteristics;
 using DnDToolsLibrary.Dice;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Fight;
+using DnDToolsLibrary.Status;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows;
+using WpfDnDCustomControlLibrary.Statuses;
 using WpfSandbox;
+using WpfToolsLibrary.Extensions;
 using WpfToolsLibrary.Navigation;
 
 namespace BindValidation
@@ -88,23 +92,67 @@ namespace BindValidation
         {
         }
 
-        private void ButtonCardControl_Click(object sender, RoutedEventArgs e)
+        private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-        }
+            OnHitStatusHandleWindow window = new OnHitStatusHandleWindow();
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            this.RollRollableChildren();
-        }
+            Character caster = new Character()
+            {
+                Name = "Caster"
+            };
+            Character target = new Character()
+            {
+                Name = "Target"
+            };
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            Console.WriteLine();
-            Console.WriteLine();
-        }
+            OnHitStatus status = new OnHitStatus()
+            {
+                Affected = target,
+                Caster = caster,
+                ApplySavingCharacteristic = CharacteristicsEnum.Constitution,
+                ApplySavingDifficulty = 14,
+                Description = "Each target must succeed on a Wisdom saving throw or be affected by this spell for the duration." +
+                                "\r\nAn affected target’s speed is halved, " +
+                                "it takes a −2 penalty to AC and Dexterity saving throws, " +
+                                "and it can’t use reactions.On its turn, " +
+                                "it can use either an action or a bonus action, " +
+                                "not both.Regardless of the creature’s abilities or magic items, " +
+                                "it can’t make more than one melee or ranged attack during its turn." +
+                                "\r\nIf the creature attempts to cast a spell with a casting time of 1 action, " +
+                                "roll a d20.On an 11 or higher, " +
+                                "the spell doesn’t take effect until the creature’s next turn, " +
+                                "and the creature must use its action on that turn to complete the spell.If it can’t, " +
+                                "the spell is wasted." +
+                                "\r\nA creature affected by this spell makes another Wisdom saving throw at the end of its turn.On a successful save, " +
+                                "the effect ends for it.",
+                DisplayName = "Slowed",
+                DotDamageList = new DotTemplateList()
+                {
+                    Elements = new ObservableCollection<DotTemplate>()
+                    {
+                        new DotTemplate()
+                        {
+                            Damage = new DiceRoll("2d6"),
+                            TriggersStartOfTurn = true,
+                            DamageType = DamageTypeEnum.Fire,
+                        },
+                        new DotTemplate()
+                        {
+                            Damage = new DiceRoll("1d6+3"),
+                            TriggersStartOfTurn = true,
+                            DamageType = DamageTypeEnum.Cold,
+                        },
+                    }
+                },
+                HasApplyCondition = true,
+                Header = "Slowed",
+                ToolTip = "Slowed by spell",
+                Name = "Slowed",
+            };
 
-        private void ShadowButtonControl_Click(object sender, RoutedEventArgs e)
-        {
+            window.DataContext = status;
+
+            window.ShowCentered();
         }
     }
 }

@@ -1,0 +1,110 @@
+﻿<Window 
+    x:Class="WpfDnDCustomControlLibrary.Statuses.OnHitStatusHandleWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:local="clr-namespace:WpfDnDCustomControlLibrary.Statuses" 
+    xmlns:shadowboxes="clr-namespace:WpfCustomControlLibrary.ShadowBoxes;assembly=WpfCustomControlLibrary"
+    xmlns:status="clr-namespace:DnDToolsLibrary.Status;assembly=DnDToolsLibrary"
+    mc:Ignorable="d" 
+    Height="450" Width="800"
+    Closing="Window_Closing"
+    Style="{StaticResource WindowStyle}"
+    d:DataContext="{x:Type status:OnHitStatus}"
+    Title="{Binding DisplayName}">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/WpfCustomControlLibrary;component/ShadowBoxes/ShadowButtonStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid
+        x:Name="WindowGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid
+            x:Name="MainGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid
+                x:Name="DescriptionGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    Margin="20"
+                    Foreground="{StaticResource Light}"
+                    FontSize="18">
+                    <Run Text="{Binding Caster.DisplayName}"/>
+                    <Run> tries to apply </Run>
+                    <Run Text="{Binding DisplayName}"/>
+                    <Run> on </Run>
+                    <Run Text="{Binding Affected.DisplayName}"/>
+                </TextBlock>
+
+                <TextBlock
+                    Grid.Row="1"
+                    Text="{Binding Description}"
+                    Foreground="{StaticResource Light}">
+
+                </TextBlock>
+                
+            </Grid>
+            
+        </Grid>
+        
+        <Grid
+            x:Name="WindowButtons"
+            Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.Resources>
+                <Style TargetType="shadowboxes:ShadowButtonControl" x:Key="ButtonStyle" BasedOn="{StaticResource ShadowButtonStyle}">
+                    <Setter Property="Foreground" Value="{StaticResource Light}"/>
+                    <Setter Property="FontSize" Value="20"/>
+                    <Setter Property="Margin" Value="10"/>
+                </Style>
+            </Grid.Resources>
+
+            <shadowboxes:ShadowButtonControl
+                x:Name="ValidateButton"
+                Click="ValidateButton_Click"
+                Style="{StaticResource ButtonStyle}">
+                Validate
+            </shadowboxes:ShadowButtonControl>
+            <shadowboxes:ShadowButtonControl
+                x:Name="CancelButton"
+                Click="CancelButton_Click"
+                Grid.Column="1"
+                Style="{StaticResource ButtonStyle}">
+                Cancel
+            </shadowboxes:ShadowButtonControl>
+
+        </Grid>
+        
+    </Grid>
+</Window>

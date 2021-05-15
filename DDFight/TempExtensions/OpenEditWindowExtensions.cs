@@ -8,6 +8,7 @@ using DnDToolsLibrary.Attacks.Spells;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Status;
 using System.Windows;
+using WpfToolsLibrary.Extensions;
 using WpfToolsLibrary.Navigation;
 
 namespace DDFight.WpfExtensions
