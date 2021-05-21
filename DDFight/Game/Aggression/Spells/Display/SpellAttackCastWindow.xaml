@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:damagelistcontrols="clr-namespace:DDFight.Controlers.Game.Attacks.DamageListControls" 
         xmlns:spells="clr-namespace:WpfDnDCustomControlLibrary.Attacks.Spells;assembly=WpfDnDCustomControlLibrary" 
-        xmlns:converters="clr-namespace:WpfDnDCustomControlLibrary.Converters.Visibilities;assembly=WpfToolsLibrary"
+        xmlns:converters="clr-namespace:WpfToolsLibrary.Converters.Visibilities;assembly=WpfToolsLibrary"
         mc:Ignorable="d"
         Title="SpellAttackCastWindow" Height="450" Width="800"
         Style="{StaticResource WindowStyle}"

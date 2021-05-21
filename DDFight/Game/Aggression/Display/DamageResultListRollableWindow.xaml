@@ -27,7 +27,7 @@
             Damage
         </TextBlock>
         
-        <display:DamageResultListRollableUserControl
+        <display:DamageResultListRollableControl
             Grid.Row="1"/>
 
         <Button

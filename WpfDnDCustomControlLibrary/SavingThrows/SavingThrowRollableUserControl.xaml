@@ -5,7 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="WpfDnDCustomControlLibrary.SavingThrows" 
              xmlns:inttextboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.IntTextBoxes;assembly=WpfCustomControlLibrary" 
-             xmlns:attacks="clr-namespace:WpfDnDCustomControlLibrary.Attacks;assembly=WpfDnDCustomControlLibrary" xmlns:situationalmodifiers="clr-namespace:WpfDnDCustomControlLibrary.SituationalModifiers" xmlns:shadowboxes="clr-namespace:WpfCustomControlLibrary.ShadowBoxes;assembly=WpfCustomControlLibrary" xmlns:dicetextboxes="clr-namespace:WpfDnDCustomControlLibrary.InputBoxes.DiceTextBoxes" xmlns:converters="clr-namespace:WpfDnDCustomControlLibrary.Converters"
+             xmlns:attacks="clr-namespace:WpfDnDCustomControlLibrary.Attacks;assembly=WpfDnDCustomControlLibrary"
+             xmlns:situationalmodifiers="clr-namespace:WpfDnDCustomControlLibrary.SituationalModifiers" 
+             xmlns:shadowboxes="clr-namespace:WpfCustomControlLibrary.ShadowBoxes;assembly=WpfCustomControlLibrary"
+             xmlns:dicetextboxes="clr-namespace:WpfDnDCustomControlLibrary.InputBoxes.DiceTextBoxes" 
+             xmlns:converters="clr-namespace:WpfDnDCustomControlLibrary.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -16,6 +20,7 @@
         <converters:CharacteristicToShortConverter x:Key="CharacteristicToShortConverter"/>
     </UserControl.Resources>
     <shadowboxes:BaseSimpleShadowBoxControl
+        Focusable="False"
         SnapsToDevicePixels="True">
         <Grid>
             <Grid.RowDefinitions>
@@ -29,9 +34,7 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock
-                Style="{StaticResource BaseTextBlock}"
-                FontSize="18"
-                FontWeight="SemiBold">
+                Style="{StaticResource CardTitle}">
                 <Run Text="{Binding Characteristic, Converter={StaticResource CharacteristicToShortConverter}}"></Run>
                 <Run> Saving Throw DC </Run>
                 <Run Text="{Binding Difficulty}">  </Run>

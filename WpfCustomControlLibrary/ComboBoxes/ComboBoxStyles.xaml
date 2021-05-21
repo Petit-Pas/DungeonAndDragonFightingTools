@@ -1,5 +1,5 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:wpfcustomcontrollibrary="clr-namespace:WpfCustomControlLibrary">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ControlTemplate x:Key="ComboBoxTextBox" TargetType="{x:Type TextBox}">
         <Border x:Name="PART_ContentHost" Focusable="False" Background="{TemplateBinding Background}" />
@@ -227,7 +227,7 @@
                             HorizontalAlignment="Left" 
                             VerticalAlignment="Center" 
                             Margin="3,3,3,3"
-                            Focusable="True" 
+                            Focusable="False" 
                             Background="#FF3F3F3F"
                             Foreground="Green"
                             Visibility="Hidden"

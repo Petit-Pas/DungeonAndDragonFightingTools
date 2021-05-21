@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="WpfDnDCustomControlLibrary.Attacks.Damage.DamageModifierSelectableControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfDnDCustomControlLibrary.Attacks.Damage"
+             mc:Ignorable="d" 
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
+             xmlns:enum="clr-namespace:DnDToolsLibrary.Attacks.Damage;assembly=DnDToolsLibrary"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/WpfCustomControlLibrary;component/ComboBoxes/ComboBoxStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <ObjectDataProvider 
+            x:Key="DataFromEnum" MethodName="GetValues"
+            ObjectType="{x:Type System:Enum}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:Type TypeName="enum:DamageModifierEnum"/>
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <ComboBox 
+            x:Name="_ComboBox"
+            Margin="5"
+            Grid.Column="1"
+            VerticalAlignment="Center"  
+            ItemsSource="{Binding Source={StaticResource DataFromEnum}}"
+            SelectedItem="{Binding DamageModifier, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:DamageModifierSelectableControl}}}"
+            Style="{StaticResource ComboBoxStyle}"
+            ItemContainerStyle="{StaticResource ComboBoxItemStyle}">
+            <!--<ComboBox.Resources>
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ComboBoxItem}}" Value="True">
+                            <Setter Property="FontWeight" Value="Bold" />
+                            <Setter Property="Foreground" Value="Black"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ComboBox.Resources>
+            <ComboBox.ItemContainerStyle>
+                <Style TargetType="ComboBoxItem">
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="Red" />
+                        </Trigger>
+                    </Style.Triggers>
+                    <Setter Property="Background" Value="{StaticResource LightestGray}" />
+                    <Setter Property="Foreground" Value="{StaticResource Light}"/>
+                </Style>
+            </ComboBox.ItemContainerStyle>-->
+        </ComboBox>
+    </Grid>
+</UserControl>

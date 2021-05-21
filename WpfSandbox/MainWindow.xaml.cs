@@ -96,7 +96,7 @@ namespace BindValidation
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             Global.Loading = false;
-            OnHitStatusHandleWindow window = new OnHitStatusHandleWindow();
+            OnHitStatusHandleWindow window = new OnHitStatusHandleWindow(true);
 
             Character caster = new Character()
             {
@@ -128,6 +128,29 @@ namespace BindValidation
                                 "\r\nA creature affected by this spell makes another Wisdom saving throw at the end of its turn.On a successful save, " +
                                 "the effect ends for it.",
                 DisplayName = "Slowed",
+                OnApplyDamageList = new DamageTemplateList() {
+                    Elements = new ObservableCollection<DamageTemplate>()
+                    {
+                        new DamageTemplate()
+                        {
+                            Damage = new DiceRoll("1d4+2"),
+                            DamageType = DamageTypeEnum.Necrotic,
+                            SituationalDamageModifier = DamageModifierEnum.Halved,
+                        },
+                        new DamageTemplate()
+                        {
+                            Damage = new DiceRoll("2d5+1"),
+                            DamageType = DamageTypeEnum.Force,
+                            SituationalDamageModifier = DamageModifierEnum.Canceled,
+                        },
+                        new DamageTemplate()
+                        {
+                            Damage = new DiceRoll("3d3+3"),
+                            DamageType = DamageTypeEnum.Acid,
+                            SituationalDamageModifier = DamageModifierEnum.Normal,
+                        },
+                    }
+                },
                 DotDamageList = new DotTemplateList()
                 {
                     Elements = new ObservableCollection<DotTemplate>()

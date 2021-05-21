@@ -30,3 +30,6 @@ Ajouter une concentration a des sorts possibles sans statuts (esprit guardiens)
 verifier les crits sur les sorts (je crois j'ai oublié)
 
 Remplacer les checkbox dans le cas d'avantages / désavantages par des flèches
+
+Inclure les faiblesses, résistances, etc.. dans les DamageResult pour pouvoir les override depuis l'UI.
+Dans la fenetre d'attaque, parfois si la cible est sélect avant, les boutons ne se refreshent pas.

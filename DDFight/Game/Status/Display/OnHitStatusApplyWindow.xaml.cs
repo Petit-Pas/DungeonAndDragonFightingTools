@@ -63,6 +63,7 @@ namespace DDFight.Game.Status.Display
             Target = target;
             Applicant = applicant;
             this.first_application = first_application;
+            DataContextChanged += OnHitStatusApplyWindow_DataContextChanged;
             Loaded += OnHitStatusApplyWindow_Loaded;
 
             InitializeComponent();
@@ -70,13 +71,17 @@ namespace DDFight.Game.Status.Display
 
         private void OnHitStatusApplyWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            DataContextChanged += OnHitStatusApplyWindow_DataContextChanged;
+            refresh_saving_control();
+            refresh_validate_button();
         }
 
         private void OnHitStatusApplyWindow_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            refresh_saving_control();
-            refresh_validate_button();
+            if (IsLoaded)
+            {
+                refresh_saving_control();
+                refresh_validate_button();
+            }
             foreach (DamageTemplate dmg in data_context.OnApplyDamageList.Elements)
             {
                 dmg.Damage.PropertyChanged += Dmg_PropertyChanged;
@@ -108,7 +113,7 @@ namespace DDFight.Game.Status.Display
 
         private void refresh_saving_control()
         {
-            if (data_context.HasApplyCondition)
+            if (data_context != null && data_context.HasApplyCondition)
             {
                 SavingThrowControl.DataContext = data_context.GetSavingThrow(Applicant, Target);
                 SavingThrowControl.Visibility = Visibility.Visible;

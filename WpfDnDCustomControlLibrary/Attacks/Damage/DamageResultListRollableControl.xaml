@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="WpfDnDCustomControlLibrary.Attacks.Damage.DamageResultListRollableControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfDnDCustomControlLibrary.Attacks.Damage" 
+             xmlns:converters="clr-namespace:WpfDnDCustomControlLibrary.Converters"
+             xmlns:shadowboxes="clr-namespace:WpfCustomControlLibrary.ShadowBoxes;assembly=WpfCustomControlLibrary"
+             xmlns:visibilities="clr-namespace:WpfToolsLibrary.Converters.Visibilities;assembly=WpfToolsLibrary"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <converters:DamageTypeEnumToBrushConverter x:Key="DamageColorConverter" />
+        <visibilities:IntEqualToZeroToVisibility x:Key="IntEqualToZeroToVisibilityConverter"/>
+        <visibilities:VisibleToCollapsedConverter x:Key="VisibleToCollapsedConverter"/>
+    </UserControl.Resources>
+    <shadowboxes:BaseSimpleShadowBoxControl Focusable="False">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock
+                x:Name="DamageTitle"
+                Visibility="{Binding Visibility, ElementName=NoDamageTitle, Converter={StaticResource VisibleToCollapsedConverter}}"
+                Style="{StaticResource CardTitle}">
+                Damage
+            </TextBlock>
+            <TextBlock
+                x:Name="NoDamageTitle"
+                Visibility="{Binding Elements.Count, Converter={StaticResource IntEqualToZeroToVisibilityConverter}}"
+                Style="{StaticResource CardTitle}">
+                No damage
+            </TextBlock>
+            <ItemsControl
+                Grid.Row="1"
+                Visibility="{Binding Visibility, ElementName=DamageTitle}"
+                Focusable="False"
+                Grid.IsSharedSizeScope="True"
+                x:Name="DamageControl"
+                VirtualizingPanel.IsVirtualizing="False"
+                ItemsSource="{Binding Elements}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <local:DamageResultRollableControl
+                            Crits="{Binding Crits, Mode=TwoWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:DamageResultListRollableControl}}}"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+    </shadowboxes:BaseSimpleShadowBoxControl>
+</UserControl>

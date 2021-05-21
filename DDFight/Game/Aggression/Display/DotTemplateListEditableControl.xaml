@@ -7,8 +7,8 @@
              xmlns:damageaffinity="clr-namespace:DDFight.Controlers.Game.DamageAffinity"
              xmlns:dices="clr-namespace:DDFight.Controlers.Game.Dices"
              xmlns:checkboxes="clr-namespace:WpfCustomControlLibrary.CheckBoxes;assembly=WpfCustomControlLibrary" 
-             xmlns:visibilities="clr-namespace:WpfDnDCustomControlLibrary.Converters.Visibilities;assembly=WpfToolsLibrary"
-             xmlns:basetypes="clr-namespace:WpfToolsLibrary.Converters.BaseTypes;assembly=WpfToolsLibrary"
+             xmlns:basetypes="clr-namespace:WpfToolsLibrary.Converters.BaseTypes;assembly=WpfToolsLibrary" 
+             xmlns:visibilities="clr-namespace:WpfToolsLibrary.Converters.Visibilities;assembly=WpfToolsLibrary"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>

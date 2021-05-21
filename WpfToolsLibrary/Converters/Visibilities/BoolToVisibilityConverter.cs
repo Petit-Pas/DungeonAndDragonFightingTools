@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace WpfDnDCustomControlLibrary.Converters.Visibilities
+namespace WpfToolsLibrary.Converters.Visibilities
 {
     /// <summary>
     ///     if the received bool is false, this shall return COLLAPSED, VISIBLE otherwise

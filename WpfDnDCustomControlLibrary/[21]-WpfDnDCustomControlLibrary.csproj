@@ -51,14 +51,17 @@
     <Compile Include="Attacks\AttackRollResultUserControl.xaml.cs">
       <DependentUpon>AttackRollResultUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Attacks\Damage\DamageModifierSelectableControl.xaml.cs">
+      <DependentUpon>DamageModifierSelectableControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Attacks\HitAttacks\HitAttackResultUserControl.xaml.cs">
       <DependentUpon>HitAttackResultUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Attacks\Damage\DamageResultListRollableUserControl.xaml.cs">
-      <DependentUpon>DamageResultListRollableUserControl.xaml</DependentUpon>
+    <Compile Include="Attacks\Damage\DamageResultListRollableControl.xaml.cs">
+      <DependentUpon>DamageResultListRollableControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Attacks\Damage\DamageResultRollableUserControl.xaml.cs">
-      <DependentUpon>DamageResultRollableUserControl.xaml</DependentUpon>
+    <Compile Include="Attacks\Damage\DamageResultRollableControl.xaml.cs">
+      <DependentUpon>DamageResultRollableControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\CharacteristicToShortConverter.cs" />
     <Compile Include="SavingThrows\SavingThrowRollableDenseUserControl.xaml.cs">
@@ -130,15 +133,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Attacks\Damage\DamageModifierSelectableControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Attacks\HitAttacks\HitAttackResultUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Attacks\Damage\DamageResultListRollableUserControl.xaml">
+    <Page Include="Attacks\Damage\DamageResultListRollableControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Attacks\Damage\DamageResultRollableUserControl.xaml">
+    <Page Include="Attacks\Damage\DamageResultRollableControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

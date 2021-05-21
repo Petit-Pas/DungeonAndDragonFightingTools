@@ -52,6 +52,7 @@
     <Compile Include="Commands\WindowCommands\CloseCommand.cs" />
     <Compile Include="Commands\WindowCommands\DragMoveCommands.cs" />
     <Compile Include="ConsoleTools\FightConsole.cs" />
+    <Compile Include="Converters\BaseTypes\BoolToCustomStringConverter.cs" />
     <Compile Include="Converters\BaseTypes\BoolToReversedBoolConverter.cs" />
     <Compile Include="Converters\BaseTypes\IntToStringConverter.cs" />
     <Compile Include="Converters\BaseTypes\StringListToStringConverter.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="Converters\Visibilities\IntEqualToZeroToVisibility.cs" />
     <Compile Include="Converters\Visibilities\IntGreaterThanZeroToVisibility.cs" />
     <Compile Include="Converters\Visibilities\StringToVisibilityConverter.cs" />
+    <Compile Include="Converters\Visibilities\VisibleToCollapsedConverter.cs" />
     <Compile Include="Display\INameable.cs" />
     <Compile Include="Extensions\ApplicationExtension.cs" />
     <Compile Include="Extensions\BindingExtensions.cs" />

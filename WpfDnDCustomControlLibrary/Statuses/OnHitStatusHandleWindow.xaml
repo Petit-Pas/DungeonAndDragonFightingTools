@@ -6,7 +6,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:local="clr-namespace:WpfDnDCustomControlLibrary.Statuses" 
     xmlns:shadowboxes="clr-namespace:WpfCustomControlLibrary.ShadowBoxes;assembly=WpfCustomControlLibrary"
-    xmlns:status="clr-namespace:DnDToolsLibrary.Status;assembly=DnDToolsLibrary" xmlns:savingthrows="clr-namespace:WpfDnDCustomControlLibrary.SavingThrows"
+    xmlns:status="clr-namespace:DnDToolsLibrary.Status;assembly=DnDToolsLibrary"
+    xmlns:savingthrows="clr-namespace:WpfDnDCustomControlLibrary.SavingThrows"
+    xmlns:basetypes="clr-namespace:WpfToolsLibrary.Converters.BaseTypes;assembly=WpfToolsLibrary"
+    xmlns:damage="clr-namespace:WpfDnDCustomControlLibrary.Attacks.Damage" 
+    xmlns:visibilities="clr-namespace:WpfToolsLibrary.Converters.Visibilities;assembly=WpfToolsLibrary"
     mc:Ignorable="d" 
     Height="450" Width="800"
     Closing="Window_Closing"
@@ -21,6 +25,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/WpfCustomControlLibrary;component/ShadowBoxes/ShadowButtonStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <basetypes:BoolToCustomStringConverter x:Key="BoolToCustomStringConverter"/>
+            <visibilities:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
         </ResourceDictionary>
     </Window.Resources>
     <Grid
@@ -59,7 +65,7 @@
                     Foreground="{StaticResource Light}"
                     FontSize="18">
                     <Run Text="{Binding Caster.DisplayName}"/>
-                    <Run> tries to apply </Run>
+                    <Run Text="{Binding HasApplyCondition, Converter={StaticResource BoolToCustomStringConverter}, ConverterParameter='tries to apply|applies'}" />
                     <Run Text="{Binding DisplayName}"/>
                     <Run> on </Run>
                     <Run Text="{Binding Affected.DisplayName}"/>
@@ -75,11 +81,33 @@
 
             </Grid>
 
-            <savingthrows:SavingThrowRollableDenseUserControl Grid.Row="1" Margin="10" DataContext="{Binding Saving, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:OnHitStatusHandleWindow}}}"/>
+            <Grid
+                x:Name="ContentGrid"
+                Grid.Row="1"
+                >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <savingthrows:SavingThrowRollableDenseUserControl 
+                    Visibility="{Binding DataContext.HasApplyCondition, Converter={StaticResource BoolToVisibilityConverter}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:OnHitStatusHandleWindow}}}"
+                    Margin="10 5"
+                    DataContext="{Binding Saving, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:OnHitStatusHandleWindow}}}"/>
+
+                <damage:DamageResultListRollableControl
+                    Grid.Row="1"
+                    Margin="10 5"
+                    DataContext="{Binding DamageList, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:OnHitStatusHandleWindow}}}"/>
+
+            </Grid>
 
 
         </Grid>
-        
+
         <Grid
             x:Name="WindowButtons"
             Grid.Row="1">

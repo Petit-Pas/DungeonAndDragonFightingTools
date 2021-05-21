@@ -8,7 +8,7 @@
              xmlns:dicetextboxes="clr-namespace:WpfDnDCustomControlLibrary.InputBoxes.DiceTextBoxes"
              xmlns:checkboxes="clr-namespace:WpfCustomControlLibrary.CheckBoxes;assembly=WpfCustomControlLibrary" 
              xmlns:damage="clr-namespace:WpfDnDCustomControlLibrary.Attacks.Damage"
-             xmlns:converter="clr-namespace:WpfDnDCustomControlLibrary.Converters.Visibilities;assembly=WpfToolsLibrary"
+             xmlns:converter="clr-namespace:WpfToolsLibrary.Converters.Visibilities;assembly=WpfToolsLibrary"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -97,7 +97,7 @@
                 Text="{Binding Path=RollResult.Description, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:SpellAttackResultRollableUserControl}}}"/>
         </WrapPanel>
 
-        <damage:DamageResultListRollableUserControl
+        <damage:DamageResultListRollableControl
             Margin="0, 5"
             Grid.Row="3"
             DataContext="{Binding HitDamage, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SpellAttackResultRollableUserControl}}}"

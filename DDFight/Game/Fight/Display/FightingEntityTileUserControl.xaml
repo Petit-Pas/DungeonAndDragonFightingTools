@@ -5,15 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes"
              xmlns:display="clr-namespace:DDFight.Game.Status.Display" 
-             xmlns:converters="clr-namespace:WpfDnDCustomControlLibrary.Converters.Visibilities;assembly=WpfToolsLibrary" 
-             xmlns:converters1="clr-namespace:DDFight.Converters"
+             xmlns:basetypes="clr-namespace:WpfToolsLibrary.Converters.BaseTypes;assembly=WpfToolsLibrary" xmlns:converters="clr-namespace:DDFight.Converters" xmlns:converters2="clr-namespace:WpfToolsLibrary.Converters.Visibilities;assembly=WpfToolsLibrary"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <converters1:BoolToCustomStringConverter x:Key="BoolCustomStringConverter" />
-        <converters1:VisibleIfCharacter x:Key="VisibleIfCharacter" />
-        <converters:IntEqualToZeroToVisibility x:Key="IntEqualToZeroToVisibility" />
-        <converters:IntGreaterThanZeroToVisibility x:Key="IntGreaterThanZeroToVisibility" />
+        <basetypes:BoolToCustomStringConverter x:Key="BoolCustomStringConverter" />
+        <converters:VisibleIfCharacter x:Key="VisibleIfCharacter" />
+        <converters2:IntEqualToZeroToVisibility x:Key="IntEqualToZeroToVisibility" />
+        <converters2:IntGreaterThanZeroToVisibility x:Key="IntGreaterThanZeroToVisibility" />
         <ContextMenu x:Key="CMenu">
             <MenuItem Header="Take Damage" Click="ContextTakeDamage_Click"/>
             <MenuItem Header="Heal" Click="ContextHeal_Click" />

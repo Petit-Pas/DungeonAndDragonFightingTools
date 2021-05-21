@@ -51,7 +51,7 @@
             Grid.Row="1"
             RollResult="{Binding RollResult}"/>
 
-        <damage:DamageResultListRollableUserControl
+        <damage:DamageResultListRollableControl
             Grid.Row="2"
             Margin="0"
             x:Name="DamageResultList"

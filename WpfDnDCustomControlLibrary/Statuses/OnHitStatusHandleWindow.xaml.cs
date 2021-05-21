@@ -1,21 +1,13 @@
-﻿using DnDToolsLibrary.Dice;
+﻿using DnDToolsLibrary.Attacks.Damage;
+using DnDToolsLibrary.Dice;
 using DnDToolsLibrary.Status;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using WpfCustomControlLibrary.ModalWindows;
 using WpfToolsLibrary.Extensions;
 using WpfToolsLibrary.Navigation;
@@ -42,33 +34,41 @@ namespace WpfDnDCustomControlLibrary.Statuses
         }
         private SavingThrow _saving = null;
 
-        public OnHitStatusHandleWindow()
+        public DamageResultList DamageList
         {
-            Initialized += OnHitStatusHandleWindow_Initialized;
+            get => _damageList;
+            set
+            {
+                _damageList = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private DamageResultList _damageList = null;
+
+        /// <summary>
+        /// </summary>
+        /// <param name="application"> tells wether it is the application or a recurrent event </param>
+        public OnHitStatusHandleWindow(bool application)
+        {
+            _application = application;
+            Loaded += OnHitStatusHandleWindow_Loaded;
             InitializeComponent();
         }
 
-        private void OnHitStatusHandleWindow_Initialized(object sender, EventArgs e)
+        private void OnHitStatusHandleWindow_Loaded(object sender, EventArgs e)
         {
             DataContextChanged += OnHitStatusHandleWindow_DataContextChanged;
-            refresh_saving();
+            refresh_all();
         }
 
         private void OnHitStatusHandleWindow_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            refresh_saving();
-        }
-
-        private void refresh_saving()
-        {
-            if (data_context != null)
-            {
-                Saving = data_context.GetSavingThrow(data_context.Caster, data_context.Affected);
-            }
+            refresh_all();
         }
 
         public bool Validated = false;
         private bool selfClosing = false;
+        private readonly bool _application;
 
         private void ValidateButton_Click(object sender, RoutedEventArgs e)
         {
@@ -95,6 +95,40 @@ namespace WpfDnDCustomControlLibrary.Statuses
             }
         }
 
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (this.IsRollControlPressed(e))
+            {
+                this.RollRollableChildren();
+                e.Handled = true;
+            }
+        }
+
+        #region RefreshMethods
+        private void refresh_all()
+        {
+            refresh_saving();
+            refresh_damage();
+        }
+
+        private void refresh_saving()
+        {
+            if (data_context != null)
+            {
+                Saving = data_context.GetSavingThrow(data_context.Caster, data_context.Affected);
+            }
+        }
+
+        private void refresh_damage()
+        {
+            if (data_context != null && IsLoaded)
+                if (_application)
+                    DamageList = data_context.OnApplyDamageList.GetResultList();
+                else
+                    DamageList = data_context.DotDamageList.GetResultList();
+        }
+
+        #endregion RefreshMethods
 
         #region INotifyPropertyChanged
 
@@ -116,14 +150,5 @@ namespace WpfDnDCustomControlLibrary.Statuses
         }
 
         #endregion
-
-        private void Window_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (this.IsRollControlPressed(e))
-            {
-                this.RollRollableChildren();
-                e.Handled = true;
-            }
-        }
     }
 }

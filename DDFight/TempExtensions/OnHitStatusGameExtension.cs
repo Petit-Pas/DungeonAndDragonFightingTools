@@ -215,7 +215,7 @@ namespace TempExtensionsOnHitStatus
                 DamageResultList onApplyDamageList = onHitStatus.OnApplyDamageList.GetResultList();
                 foreach (DamageResult dmg in onApplyDamageList.Elements)
                     dmg.LastSavingWasSuccesfull = !application_success;
-                DamageResultListRollableWindow window = new DamageResultListRollableWindow() { DataContext=onApplyDamageList, };
+                DamageResultListRollableWindow window = new DamageResultListRollableWindow() { DataContext=onApplyDamageList };
                 window.ShowCentered();
                 if (window.Validated)
                     target.TakeHitDamage(onApplyDamageList);

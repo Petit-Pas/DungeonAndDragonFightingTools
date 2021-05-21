@@ -233,7 +233,6 @@
     <Compile Include="Game\Dices\Display\DiceRollEditableUserControl.xaml.cs">
       <DependentUpon>DiceRollEditableUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converters\BoolToCustomStringConverter.cs" />
     <Compile Include="Game\Dices\SavingThrow\SituationalSavingThrowModifier.cs" />
     <Compile Include="Game\SpecialAbilitiesEditableUserControl.xaml.cs">
       <DependentUpon>SpecialAbilitiesEditableUserControl.xaml</DependentUpon>

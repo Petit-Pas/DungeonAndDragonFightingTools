@@ -29,6 +29,16 @@
                 <Setter Property="FontWeight" Value="SemiBold"/>
             </Style>
 
+            <Style TargetType="{x:Type TextBlock}" x:Key="BaseTextBlock">
+                <Setter Property="Foreground" Value="{StaticResource Light}"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+
+            <Style TargetType="{x:Type TextBlock}" x:Key="CardTitle" BasedOn="{StaticResource BaseTextBlock}">
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="FontWeight" Value="SemiBold"/>
+            </Style>
+
             <Style TargetType="{x:Type ContentControl}">
                 <Setter Property="Template">
                     <Setter.Value>
@@ -44,16 +54,7 @@
                 <Setter Property="FontSize" Value="15"/>
                 <Setter Property="FontWeight" Value="SemiBold" />
             </Style>
-            <Style TargetType="{x:Type TextBlock}" x:Key="BaseTextBlock">
-                <Setter Property="Foreground" Value="{StaticResource Light}" />
-                <Setter Property="VerticalAlignment" Value="Center" />
-            </Style>
-
-
-
-
-
-
+            
         </ResourceDictionary>
 
     </Application.Resources>

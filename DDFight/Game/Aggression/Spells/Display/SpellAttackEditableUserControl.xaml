@@ -8,7 +8,7 @@
              xmlns:display="clr-namespace:DDFight.Game.Status.Display" 
              xmlns:sliderbutton="clr-namespace:WpfCustomControlLibrary.SliderButton;assembly=WpfCustomControlLibrary" 
              xmlns:inttextboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.IntTextBoxes;assembly=WpfCustomControlLibrary" 
-             xmlns:converters="clr-namespace:WpfDnDCustomControlLibrary.Converters.Visibilities;assembly=WpfToolsLibrary"
+             xmlns:converters="clr-namespace:WpfToolsLibrary.Converters.Visibilities;assembly=WpfToolsLibrary"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
