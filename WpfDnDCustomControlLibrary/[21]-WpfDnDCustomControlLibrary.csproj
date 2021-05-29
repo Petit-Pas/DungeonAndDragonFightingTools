@@ -51,6 +51,9 @@
     <Compile Include="Attacks\AttackRollResultUserControl.xaml.cs">
       <DependentUpon>AttackRollResultUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Attacks\Damage\DamageAffinity\DamageAffinitySelectableControl.xaml.cs">
+      <DependentUpon>DamageAffinitySelectableControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Attacks\Damage\DamageModifierSelectableControl.xaml.cs">
       <DependentUpon>DamageModifierSelectableControl.xaml</DependentUpon>
     </Compile>
@@ -130,6 +133,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Attacks\AttackRollResultUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Attacks\Damage\DamageAffinity\DamageAffinitySelectableControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

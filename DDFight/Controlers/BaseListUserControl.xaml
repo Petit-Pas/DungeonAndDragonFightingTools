@@ -48,7 +48,6 @@
                 MouseDoubleClick="EntityList_MouseDoubleClick"
                 KeyDown="EntityListControl_KeyDown"
                 ContextMenuOpening="EntityList_ContextMenuOpening"
-                AlternationCount="2"
                 ItemsSource="{Binding Source={StaticResource EntityList}}" 
                 ScrollbarSmallChange="{Binding ScrollbarSmallChange, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:BaseListUserControl}}}"
                 ScrollbarLargeChange="{Binding ScrollbarLargeChange, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:BaseListUserControl}}}"

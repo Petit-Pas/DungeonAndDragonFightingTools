@@ -1,33 +1,41 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
-    <SolidColorBrush x:Key="Gray" Color="#202020" />
-    <SolidColorBrush x:Key="LightestGray" Color="#2e2f2d" />
-    <SolidColorBrush x:Key="AlternateLightGray" Color="#333432"/>
-    <!-- <SolidColorBrush x:Key="Light" Color="#fbf2d4"/> -->
-    <SolidColorBrush x:Key="Light" Color="#ECF3EE" />
     <SolidColorBrush x:Key="Indigo" Color="#4B0082" />
     <SolidColorBrush x:Key="LightIndigo" Color="#6E329B" />
-    <SolidColorBrush x:Key="Error" Color="#FF3838"/>
     <SolidColorBrush x:Key="ThemeFocus" Color="#8B5CEE"/>
     <SolidColorBrush x:Key="ThemeHover" Color="#B789F1"/>
-
-    <SolidColorBrush x:Key="Brown1" Color="#833F3F"/>
-    <SolidColorBrush x:Key="Brown2" Color="#954E4E"/>
-    <SolidColorBrush x:Key="Brown3" Color="#A65F5C"/>
-    <SolidColorBrush x:Key="Brown4" Color="#BF7572"/>
-    <SolidColorBrush x:Key="Brown5" Color="#CC726F"/>
-    <SolidColorBrush x:Key="Brown6" Color="#EB9895"/>
-
     <Color x:Key="RawLightIndigo">#6E329B</Color>
     <Color x:Key="RawIndigo">#4B0082</Color>
-    <Color x:Key="RawLight">#fbf2d4</Color>
-    <Color x:Key="RawGray">#202020</Color>
-    <Color x:Key="RawLightestGray">#2e2f2d</Color>
-    <Color x:Key="RawAlternateLightGray">#333432</Color>
-    <Color x:Key="RawError">#ff6868</Color>
     <Color x:Key="RawThemeFocus">#8B5CEE</Color>
     <Color x:Key="RawThemeHover">#B789F1</Color>
+
+    <Color x:Key="RawLight">                #ECF3EE</Color>
+    <Color x:Key="RawGray">                 #202020</Color>
+    <Color x:Key="RawLightestGray">         #2e2f2d</Color>
+    <Color x:Key="RawAlternateLightGray">   #333432</Color>
+    <Color x:Key="RawError">                #ff6868</Color>
+
+    <Color x:Key="RawBrown1">#833F3F</Color>
+    <Color x:Key="RawBrown2">#954E4E</Color>
+    <Color x:Key="RawBrown3">#A65F5C</Color>
+    <Color x:Key="RawBrown4">#BF7572</Color>
+    <Color x:Key="RawBrown5">#CC726F</Color>
+    <Color x:Key="RawBrown6">#EB9895</Color>
+
+    <SolidColorBrush x:Key="Light"              Color="{StaticResource RawLight}"/>
+    <SolidColorBrush x:Key="Gray"               Color="{StaticResource RawGray}"/>
+    <SolidColorBrush x:Key="LightestGray"       Color="{StaticResource RawLightestGray}"/>
+    <SolidColorBrush x:Key="AlternateLightGray" Color="{StaticResource RawAlternateLightGray}"/>
+    <SolidColorBrush x:Key="Error"              Color="{StaticResource RawError}"/>
+
+    <SolidColorBrush x:Key="Brown1" Color="{StaticResource RawBrown1}"/>
+    <SolidColorBrush x:Key="Brown2" Color="{StaticResource RawBrown2}"/>
+    <SolidColorBrush x:Key="Brown3" Color="{StaticResource RawBrown3}"/>
+    <SolidColorBrush x:Key="Brown4" Color="{StaticResource RawBrown4}"/>
+    <SolidColorBrush x:Key="Brown5" Color="{StaticResource RawBrown5}"/>
+    <SolidColorBrush x:Key="Brown6" Color="{StaticResource RawBrown6}"/>
+
 
     <!-- Text -->
     <SolidColorBrush x:Key="TextBaseColor" Color="{Binding Color, Source={StaticResource Light}}"/>
@@ -57,5 +65,10 @@
     <SolidColorBrush x:Key="ListItemColor1" Color="{Binding Color, Source={StaticResource LightestGray}}"/>
     <SolidColorBrush x:Key="ListItemColor2" Color="{Binding Color, Source={StaticResource AlternateLightGray}}"/>
 
-
+    <!-- ComboBox -->
+    <SolidColorBrush x:Key="ComboBoxItemHoverColor" Color="{Binding Color, Source={StaticResource Brown5}}"/>
+    <SolidColorBrush x:Key="ComboBoxItemActiveColor" Color="{Binding Color, Source={StaticResource Brown3}}"/>
+    <SolidColorBrush x:Key="ComboBoxItemColor1" Color="{Binding Color, Source={StaticResource LightestGray}}"/>
+    <SolidColorBrush x:Key="ComboBoxItemColor2" Color="{Binding Color, Source={StaticResource AlternateLightGray}}"/>
+    <SolidColorBrush x:Key="ComboBoxHoverColor" Color="{StaticResource RawBrown2}"/>
 </ResourceDictionary>

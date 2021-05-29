@@ -6,7 +6,7 @@
     </ControlTemplate>
 
     <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
-        <Grid>
+        <Grid Focusable="False">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="22" />
@@ -14,10 +14,12 @@
             
             <!-- Main border -->
             <Border
-                x:Name="Border" 
+                Focusable="True"
+                x:Name="Border"
                 Grid.ColumnSpan="2"
                 Background="{StaticResource LightestGray}"
-                BorderThickness="0">
+                BorderThickness="0"
+                FocusVisualStyle="{x:Null}">
                 <Border.CornerRadius>
                     <CornerRadius 
                         BottomLeft="10"
@@ -27,7 +29,7 @@
                         />
                 </Border.CornerRadius>
                 <Border.Effect>
-                    <DropShadowEffect Color="{StaticResource RawIndigo}" ShadowDepth="5.5" Opacity="0.7" Direction="-45" />
+                    <DropShadowEffect Color="{Binding Color, Source={StaticResource ComboBoxHoverColor}}" ShadowDepth="5.5" Opacity="0.7" Direction="-45" />
                 </Border.Effect>
             </Border>
             <Border
@@ -61,14 +63,37 @@
             </Path>
         </Grid>
         <ControlTemplate.Triggers>
+            <EventTrigger RoutedEvent="GotFocus">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ColorAnimation 
+                            Storyboard.TargetName="Border" 
+                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" 
+                            To="{StaticResource RawBrown2}"
+                            Duration="0:0:0.25"
+                            />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="LostFocus">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ColorAnimation 
+                            Storyboard.TargetName="Border" 
+                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" 
+                            To="{StaticResource RawLightestGray}"
+                            Duration="0:0:0.25"
+                            />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
             <EventTrigger RoutedEvent="MouseEnter">
                 <BeginStoryboard>
                     <Storyboard>
                         <ColorAnimation 
                             Storyboard.TargetName="Border" 
                             Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" 
-                            From="{StaticResource RawLightestGray}" 
-                            To="{StaticResource RawIndigo}"
+                            To="{StaticResource RawBrown2}"
                             Duration="0:0:0.25"
                             />
                     </Storyboard>
@@ -80,7 +105,6 @@
                         <ColorAnimation 
                             Storyboard.TargetName="Border" 
                             Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" 
-                            From="{StaticResource RawIndigo}" 
                             To="{StaticResource RawLightestGray}"
                             Duration="0:0:0.25"
                             />
@@ -192,6 +216,7 @@
     </ControlTemplate>
 
     <Style x:Key="ComboBoxStyle" TargetType="{x:Type ComboBox}">
+        <Setter Property="AlternationCount" Value="2"/>
         <Setter Property="SnapsToDevicePixels" Value="true"/>
         <Setter Property="OverridesDefaultStyle" Value="true"/>
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
@@ -201,15 +226,16 @@
         <Setter Property="MinHeight" Value="20"/>
         <Setter Property="Foreground" Value="{StaticResource Light}"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Focusable" Value="False"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ComboBox}">
                     <Grid>
                         <ToggleButton 
-                            Name="ToggleButton" 
-                            Template="{StaticResource ComboBoxToggleButton}" 
-                            Grid.Column="2" 
-                            Focusable="false"
+                            Focusable="False"
+                            Name="ToggleButton"
+                            Template="{StaticResource ComboBoxToggleButton}"    
+                            Grid.Column="2"
                             IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
                             ClickMode="Press">
                         </ToggleButton>
@@ -238,7 +264,8 @@
                             IsOpen="{TemplateBinding IsDropDownOpen}"
                             AllowsTransparency="True" 
                             Focusable="False"
-                            PopupAnimation="Slide">
+                            PopupAnimation="Fade"
+                            >
 
                             <Grid 
                                 Name="DropDown"
@@ -323,13 +350,14 @@
         <Setter Property="OverridesDefaultStyle" Value="true"/>
         <Setter Property="FontWeight" Value="Normal"/>
         <Setter Property="Foreground" Value="{StaticResource Light}"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ComboBoxItem}">
                     <Border 
                         x:Name="ComboBoxItemBorder"
                         SnapsToDevicePixels="true"
-                        Background="{StaticResource LightestGray}">
+                        Background="{Binding Background, RelativeSource={RelativeSource Mode=TemplatedParent}}">
                         <ContentPresenter
                             Margin="7 3"
                             Name="Presenter">
@@ -340,15 +368,26 @@
                         </ContentPresenter>
                     </Border>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="ComboBoxItemBorder" Property="Background" Value="{StaticResource ComboBoxItemHoverColor}"/>
+                        </Trigger>
                         <Trigger Property="IsSelected" Value="true">
-                            <Setter TargetName="ComboBoxItemBorder" Property="Background" Value="{StaticResource LightIndigo}"/>
+                            <Setter TargetName="ComboBoxItemBorder" Property="Background" Value="{StaticResource ComboBoxItemActiveColor}"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter TargetName="ComboBoxItemBorder" Property="Background" Value="{StaticResource Indigo}"/>
+                            <Setter TargetName="ComboBoxItemBorder" Property="Background" Value="{StaticResource ComboBoxItemHoverColor}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+            <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                <Setter Property="Background" Value="{StaticResource ComboBoxItemColor1}" />
+            </Trigger>
+            <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                <Setter Property="Background" Value="{StaticResource ComboBoxItemColor2}" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
 </ResourceDictionary>
