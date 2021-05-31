@@ -19,10 +19,6 @@ namespace WpfDnDCustomControlLibrary.Attacks.Damage
             InitializeComponent();
         }
 
-        public static void crit_Updated(DependencyObject o, DependencyPropertyChangedEventArgs a)
-        {
-        }
-
         /// <summary>
         ///     tells wheter the damage are applied with a crit
         /// </summary>
@@ -33,6 +29,23 @@ namespace WpfDnDCustomControlLibrary.Attacks.Damage
         }
         public static readonly DependencyProperty CritProperty = DependencyProperty.Register(
           "Crits", typeof(bool), typeof(DamageResultListRollableControl), 
-          new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, crit_Updated));
+          new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
+        public bool CanBeAltered
+        {
+            get { return (bool)this.GetValue(CanBeAlteredProperty); }
+            set { this.SetValue(CanBeAlteredProperty, value); }
+        }
+        public static readonly DependencyProperty CanBeAlteredProperty = DependencyProperty.Register(
+            nameof(CanBeAltered),
+            typeof(bool),
+            typeof(DamageResultListRollableControl),
+            new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault)
+        );
+
+        private void EditModeChange(object sender, RoutedEventArgs e)
+        {
+            CanBeAltered = !CanBeAltered;
+        }
     }
 }

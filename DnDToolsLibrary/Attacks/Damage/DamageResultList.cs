@@ -1,5 +1,7 @@
 ﻿
+using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Memory;
+using System;
 
 namespace DnDToolsLibrary.Attacks.Damage
 {
@@ -18,5 +20,12 @@ namespace DnDToolsLibrary.Attacks.Damage
             return new DamageResultList(this);
         }
 
+        public void RefreshDamageAffinityModifier(PlayableEntity newTarget)
+        {
+            foreach (DamageResult result in Elements)
+            {
+                result.AffinityModifier = newTarget.DamageAffinities.GetAffinity(result.DamageType).Affinity;
+            }
+        }
     }
 }

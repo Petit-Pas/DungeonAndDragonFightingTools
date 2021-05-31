@@ -31,7 +31,6 @@ namespace DnDToolsLibrary.Attacks.Damage
             this.Damage.Modifier += to_combine.Damage.Modifier;
         }
 
-
         public string ToRollDamage
         {
             get => Damage.RollTemplateToString();
@@ -74,6 +73,17 @@ namespace DnDToolsLibrary.Attacks.Damage
             }
         }
         private DamageModifierEnum _temporaryDamageModifier = DamageModifierEnum.Normal;
+
+        public DamageAffinityEnum AffinityModifier
+        {
+            get => _affinityModifier;
+            set
+            {
+                _affinityModifier = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private DamageAffinityEnum _affinityModifier = DamageAffinityEnum.Unspecified;
 
         /// <summary>
         ///     The dices to throw

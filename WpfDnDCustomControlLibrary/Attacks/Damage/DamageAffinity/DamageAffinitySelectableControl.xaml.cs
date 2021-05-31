@@ -36,7 +36,7 @@ namespace WpfDnDCustomControlLibrary.Attacks.Damage.DamageAffinity
             nameof(DamageAffinity),
             typeof(DamageAffinityEnum),
             typeof(DamageAffinitySelectableControl),
-            new PropertyMetadata(DamageAffinityEnum.Neutral)
+            new FrameworkPropertyMetadata(DamageAffinityEnum.Neutral, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault)
         );
     }
 }

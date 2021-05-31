@@ -20,12 +20,16 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <TextBlock
-                x:Name="DamageTitle"
-                Visibility="{Binding Visibility, ElementName=NoDamageTitle, Converter={StaticResource VisibleToCollapsedConverter}}"
-                Style="{StaticResource CardTitle}">
-                Damage
-            </TextBlock>
+            <StackPanel 
+                Visibility="{Binding Visibility, ElementName=NoDamageTitle, Converter={StaticResource VisibleToCollapsedConverter}}"                
+                Orientation="Horizontal">
+                <TextBlock
+                    x:Name="DamageTitle"
+                    Style="{StaticResource CardTitle}">
+                    Damage
+                </TextBlock>
+                <Button Click="EditModeChange">Edit</Button>
+            </StackPanel>
             <TextBlock
                 x:Name="NoDamageTitle"
                 Visibility="{Binding Elements.Count, Converter={StaticResource IntEqualToZeroToVisibilityConverter}}"
@@ -43,7 +47,8 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <local:DamageResultRollableControl
-                            Crits="{Binding Crits, Mode=TwoWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:DamageResultListRollableControl}}}"/>
+                            Crits="{Binding Crits, Mode=TwoWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:DamageResultListRollableControl}}}"
+                            CanBeAltered="{Binding CanBeAltered, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:DamageResultListRollableControl}}}"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

@@ -106,6 +106,10 @@ namespace BindValidation
             {
                 Name = "Target"
             };
+            target.DamageAffinities.GetAffinity(DamageTypeEnum.Acid).Affinity = DamageAffinityEnum.Weak;
+            target.DamageAffinities.GetAffinity(DamageTypeEnum.Force).Affinity = DamageAffinityEnum.Immune;
+            caster.DamageAffinities.GetAffinity(DamageTypeEnum.Acid).Affinity = DamageAffinityEnum.Resistant;
+            caster.DamageAffinities.GetAffinity(DamageTypeEnum.Force).Affinity = DamageAffinityEnum.Resistant;
 
             OnHitStatus status = new OnHitStatus()
             {

@@ -6,7 +6,7 @@
              xmlns:inttextboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.IntTextBoxes;assembly=WpfCustomControlLibrary" 
              xmlns:converters="clr-namespace:WpfDnDCustomControlLibrary.Converters" 
              xmlns:local="clr-namespace:WpfDnDCustomControlLibrary.Attacks.Damage" 
-             xmlns:visibilities="clr-namespace:WpfToolsLibrary.Converters.Visibilities;assembly=WpfToolsLibrary"
+             xmlns:visibilities="clr-namespace:WpfToolsLibrary.Converters.Visibilities;assembly=WpfToolsLibrary" xmlns:damageaffinity="clr-namespace:WpfDnDCustomControlLibrary.Attacks.Damage.DamageAffinity"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -66,7 +66,12 @@
                 Text="{Binding ToRollBonus}" />
 
             <local:DamageModifierSelectableControl
+                IsEnabled="{Binding CanBeAltered, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:DamageResultRollableControl}}}"
                 DamageModifier="{Binding SituationalDamageModifier}"/>
+
+            <damageaffinity:DamageAffinitySelectableControl
+                IsEnabled="{Binding CanBeAltered, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:DamageResultRollableControl}}}"
+                DamageAffinity="{Binding AffinityModifier}"/>
         </WrapPanel>
     </Grid>
 </UserControl>

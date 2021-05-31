@@ -2,6 +2,7 @@
 using DnDToolsLibrary.Attacks.Damage;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Status;
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -40,9 +41,12 @@ namespace DnDToolsLibrary.Attacks.HitAttacks
             get => RollResult.Target;
             set 
             {
-                RollResult.Target = value;
-                this.RollResult.Target = value;
-                NotifyPropertyChanged();
+                if (this.RollResult != null)
+                {
+                    refresh_damage_affinity_modifiers(value);
+                    this.RollResult.Target = value;
+                    NotifyPropertyChanged();
+                }
             }
         }
 
@@ -52,6 +56,8 @@ namespace DnDToolsLibrary.Attacks.HitAttacks
             set
             {
                 _damageList = value;
+                if (Target != null)
+                    refresh_damage_affinity_modifiers(Target);
                 NotifyPropertyChanged();
             }
         }
@@ -108,6 +114,11 @@ namespace DnDToolsLibrary.Attacks.HitAttacks
                 dmg.Reset();
             }
             this.RollResult.Reset();
+        }
+
+        private void refresh_damage_affinity_modifiers(PlayableEntity newTarget)
+        {
+            DamageList.RefreshDamageAffinityModifier(newTarget);
         }
 
         private void init_copy(HitAttackResult to_copy)

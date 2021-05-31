@@ -2,6 +2,7 @@
 {
     public enum DamageAffinityEnum
     {
+        Unspecified,
         Neutral,
         Resistant,
         Immune,

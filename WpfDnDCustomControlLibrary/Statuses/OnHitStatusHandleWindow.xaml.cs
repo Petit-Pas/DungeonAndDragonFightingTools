@@ -123,9 +123,15 @@ namespace WpfDnDCustomControlLibrary.Statuses
         {
             if (data_context != null && IsLoaded)
                 if (_application)
+                {
                     DamageList = data_context.OnApplyDamageList.GetResultList();
+                    DamageList.RefreshDamageAffinityModifier(data_context.Affected);
+                }
                 else
+                {
                     DamageList = data_context.DotDamageList.GetResultList();
+                    DamageList.RefreshDamageAffinityModifier(data_context.Affected);
+                }
         }
 
         #endregion RefreshMethods
