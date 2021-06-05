@@ -14,10 +14,10 @@
             
             <!-- Main border -->
             <Border
-                Focusable="True"
+                Focusable="False"
                 x:Name="Border"
                 Grid.ColumnSpan="2"
-                Background="{StaticResource LightestGray}"
+                Background="{TemplateBinding Background}"
                 BorderThickness="0"
                 FocusVisualStyle="{x:Null}">
                 <Border.CornerRadius>
@@ -63,54 +63,6 @@
             </Path>
         </Grid>
         <ControlTemplate.Triggers>
-            <EventTrigger RoutedEvent="GotFocus">
-                <BeginStoryboard>
-                    <Storyboard>
-                        <ColorAnimation 
-                            Storyboard.TargetName="Border" 
-                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" 
-                            To="{StaticResource RawBrown2}"
-                            Duration="0:0:0.25"
-                            />
-                    </Storyboard>
-                </BeginStoryboard>
-            </EventTrigger>
-            <EventTrigger RoutedEvent="LostFocus">
-                <BeginStoryboard>
-                    <Storyboard>
-                        <ColorAnimation 
-                            Storyboard.TargetName="Border" 
-                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" 
-                            To="{StaticResource RawLightestGray}"
-                            Duration="0:0:0.25"
-                            />
-                    </Storyboard>
-                </BeginStoryboard>
-            </EventTrigger>
-            <EventTrigger RoutedEvent="MouseEnter">
-                <BeginStoryboard>
-                    <Storyboard>
-                        <ColorAnimation 
-                            Storyboard.TargetName="Border" 
-                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" 
-                            To="{StaticResource RawBrown2}"
-                            Duration="0:0:0.25"
-                            />
-                    </Storyboard>
-                </BeginStoryboard>
-            </EventTrigger>
-            <EventTrigger RoutedEvent="MouseLeave">
-                <BeginStoryboard>
-                    <Storyboard>
-                        <ColorAnimation 
-                            Storyboard.TargetName="Border" 
-                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" 
-                            To="{StaticResource RawLightestGray}"
-                            Duration="0:0:0.25"
-                            />
-                    </Storyboard>
-                </BeginStoryboard>
-            </EventTrigger>
             <EventTrigger RoutedEvent="ToggleButton.Checked">
                 <BeginStoryboard>
                     <Storyboard>
@@ -226,13 +178,15 @@
         <Setter Property="MinHeight" Value="20"/>
         <Setter Property="Foreground" Value="{StaticResource Light}"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
-        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Focusable" Value="True"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ComboBox}">
                     <Grid>
                         <ToggleButton 
                             Focusable="False"
+                            Background="{StaticResource LightestGray}"
                             Name="ToggleButton"
                             Template="{StaticResource ComboBoxToggleButton}"    
                             Grid.Column="2"
@@ -319,14 +273,59 @@
                         </Popup>
                     </Grid>
                     <ControlTemplate.Triggers>
+                        <EventTrigger RoutedEvent="GotFocus">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation 
+                                        Storyboard.TargetName="ToggleButton" 
+                                        Storyboard.TargetProperty="(ToggleButton.Background).(SolidColorBrush.Color)" 
+                                        To="{StaticResource RawBrown2}"
+                                        Duration="0:0:0.25"
+                                        />          
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="LostFocus">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation 
+                                        Storyboard.TargetName="ToggleButton" 
+                                        Storyboard.TargetProperty="(ToggleButton.Background).(SolidColorBrush.Color)" 
+                                        To="{StaticResource RawLightestGray}"
+                                        Duration="0:0:0.25"
+                                        />      
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="MouseEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation 
+                                        Storyboard.TargetName="ToggleButton" 
+                                        Storyboard.TargetProperty="(ToggleButton.Background).(SolidColorBrush.Color)" 
+                                        To="{StaticResource RawBrown2}"
+                                        Duration="0:0:0.25"
+                                        />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="MouseLeave">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation 
+                                        Storyboard.TargetName="ToggleButton" 
+                                        Storyboard.TargetProperty="(ToggleButton.Background).(SolidColorBrush.Color)" 
+                                        To="{StaticResource RawLightestGray}"
+                                        Duration="0:0:0.25"
+                                        />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" Value="0.5"/>
                         </Trigger>
                         <Trigger Property="HasItems" Value="false">
                             <Setter TargetName="DropDownBorder" Property="MinHeight" Value="95"/>
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Foreground" Value="#888888"/>
                         </Trigger>
                         <Trigger Property="IsGrouping" Value="true">
                             <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
