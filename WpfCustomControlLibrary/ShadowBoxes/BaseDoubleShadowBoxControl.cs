@@ -21,7 +21,8 @@ namespace WpfCustomControlLibrary.ShadowBoxes
         {
             if (this.Style == null && style != null)
                 this.Style = style;
-            Padding = new Thickness(9);
+            if (this.Padding == null)
+                this.Padding = new Thickness(9);
         }
 
         public Brush BackgroundColor
@@ -72,8 +73,8 @@ namespace WpfCustomControlLibrary.ShadowBoxes
             nameof(UpperOuterShadowColor),
             typeof(Color),
             typeof(BaseDoubleShadowBoxControl),
-            new PropertyMetadata((Color)ColorConverter.ConvertFromString("#D7D7D7")));
-
+            new PropertyMetadata(((SolidColorBrush)System.Windows.Application.Current.Resources["OuterUpperShadowColor"]).Color));
+        
         public Color LowerOuterShadowColor
         {
             get { return (Color)this.GetValue(LowerOuterShadowColorProperty); }
@@ -83,8 +84,8 @@ namespace WpfCustomControlLibrary.ShadowBoxes
             nameof(LowerOuterShadowColor),
             typeof(Color),
             typeof(BaseDoubleShadowBoxControl),
-            new PropertyMetadata((Color)System.Windows.Application.Current.Resources["RawIndigo"]));
-
+            new PropertyMetadata(((SolidColorBrush)System.Windows.Application.Current.Resources["OuterLowerShadowColor"]).Color));
+        
         public Color UpperInnerShadowColor
         {
             get { return (Color)this.GetValue(UpperInnerShadowColorProperty); }
@@ -94,8 +95,8 @@ namespace WpfCustomControlLibrary.ShadowBoxes
             nameof(UpperInnerShadowColor),
             typeof(Color),
             typeof(BaseDoubleShadowBoxControl),
-            new PropertyMetadata(Colors.Black));
-
+            new PropertyMetadata(((SolidColorBrush)System.Windows.Application.Current.Resources["InnerUpperShadowColor"]).Color));
+        
         public Color LowerInnerShadowColor
         {
             get { return (Color)this.GetValue(LowerInnerShadowColorProperty); }
@@ -105,7 +106,7 @@ namespace WpfCustomControlLibrary.ShadowBoxes
             nameof(LowerInnerShadowColor),
             typeof(Color),
             typeof(BaseDoubleShadowBoxControl),
-            new PropertyMetadata((Color)ColorConverter.ConvertFromString("#D7D7D7")));
+            new PropertyMetadata(((SolidColorBrush)System.Windows.Application.Current.Resources["InnerLowerShadowColor"]).Color));
 
         #endregion ShadowColors
 

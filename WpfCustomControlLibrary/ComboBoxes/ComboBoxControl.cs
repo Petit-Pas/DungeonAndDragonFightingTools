@@ -8,6 +8,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using System.Windows.Media;
+using WpfCustomControlLibrary.Animations;
 using WpfToolsLibrary.Extensions;
 
 namespace WpfCustomControlLibrary.ComboBoxes
@@ -30,48 +32,87 @@ namespace WpfCustomControlLibrary.ComboBoxes
                 this.ItemContainerStyle = itemStyle;
             this.FocusVisualStyle = null;
             this.KeyDown += ComboBoxControl_KeyDown;
-            this.DropDownClosed += ComboBoxControl_DropDownClosed;
             this.MouseEnter += ComboBoxControl_MouseEnter;
             this.MouseLeave += ComboBoxControl_MouseLeave;
-            this.DropDownClosed += ComboBoxControl_DropDownClosed1;
             this.GotFocus += ComboBoxControl_GotFocus;
             this.LostFocus += ComboBoxControl_LostFocus;
+            BaseColor = (SolidColorBrush)System.Windows.Application.Current.Resources["ButtonBaseColor"];
+            ActiveColor = (SolidColorBrush)System.Windows.Application.Current.Resources["ComboBoxHoverColor"];
+            Background = BaseColor;
+            DropDownClosed += ComboBoxControl_DropDownClosed;
+            DropDownOpened += ComboBoxControl_DropDownOpened;
         }
 
-        private void ComboBoxControl_LostFocus(object sender, RoutedEventArgs e)
-        {
-            Console.WriteLine("LostFocus");
-        }
+        // We need to use a custom value, because the actual one fires after a MouseEnter/MouseLeave cycle used to click on it by WPF
+        private bool innerIsDropDownOpen = false;
 
-        private void ComboBoxControl_GotFocus(object sender, RoutedEventArgs e)
+        private void ComboBoxControl_DropDownOpened(object sender, EventArgs e)
         {
-            Console.WriteLine("GotFocus");
-        }
-
-        private void ComboBoxControl_DropDownClosed1(object sender, EventArgs e)
-        {
-            Console.WriteLine("Closed");
-        }
-
-        private void ComboBoxControl_MouseLeave(object sender, MouseEventArgs e)
-        {
-            Console.WriteLine("MouseLeave");
-
-        }
-
-        private void ComboBoxControl_MouseEnter(object sender, MouseEventArgs e)
-        {
-            Console.WriteLine("MouseEnter");
+            innerIsDropDownOpen = true;
         }
 
         private void ComboBoxControl_DropDownClosed(object sender, EventArgs e)
         {
-            /*ToggleButton btn =  this.Template.FindName("ToggleButton", this) as ToggleButton;
-            Border border = btn.Template.FindName("Border", btn) as Border;
-            ;
-            border.Focus();*/
-            Application.Current.GetCurrentWindow().Focus();
-            this.Focus();
+            innerIsDropDownOpen = false;
+        }
+
+        private void ComboBoxControl_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (!innerIsDropDownOpen) // event is fired every time you mouseover a new element => avoid blinking
+            {
+                animate_normal();
+            }
+        }
+
+        private void ComboBoxControl_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (!innerIsDropDownOpen) // event is fired every time you mouseover a new element => avoid blinking
+            {
+                animate_active();
+            }
+        }
+
+        private void ComboBoxControl_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (this.IsFocused)
+            {
+                // DropDown menu was closed
+            }
+            else
+            {
+                animate_normal();
+            }
+        }
+
+        private void ComboBoxControl_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if (this.IsFocused)
+            {
+                // DropDown menu was open
+            }
+            else
+            {
+                animate_active();
+            }
+        }
+
+        private void animate_active()
+        {
+            var test = ((SolidColorBrush)this.Background).Color;
+            AnimationLibrary.AnimateBrush(
+                ((x) => this.Background = x),
+                ((SolidColorBrush)this.Background).Color,
+                ActiveColor.Color,
+                TimeSpan.FromSeconds(0.15));
+        }
+
+        private void animate_normal()
+        {
+            AnimationLibrary.AnimateBrush(
+                ((x) => this.Background = x),
+                ((SolidColorBrush)this.Background).Color,
+                BaseColor.Color,
+                TimeSpan.FromSeconds(0.15));
         }
 
         private void ComboBoxControl_KeyDown(object sender, KeyEventArgs e)
@@ -79,5 +120,27 @@ namespace WpfCustomControlLibrary.ComboBoxes
             if (e.Key == Key.Space || e.Key == Key.Enter)
                 this.IsDropDownOpen = true;
         }
+
+        public SolidColorBrush BaseColor
+        {
+            get { return (SolidColorBrush)this.GetValue(BaseColorProperty); }
+            set { this.SetValue(BaseColorProperty, value); }
+        }
+        private static readonly DependencyProperty BaseColorProperty = DependencyProperty.Register(
+            nameof(BaseColor),
+            typeof(SolidColorBrush),
+            typeof(ComboBoxControl),
+            new PropertyMetadata());
+        
+        public SolidColorBrush ActiveColor
+        {
+            get { return (SolidColorBrush)this.GetValue(HoverColorProperty); }
+            set { this.SetValue(HoverColorProperty, value); }
+        }
+        private static readonly DependencyProperty HoverColorProperty = DependencyProperty.Register(
+            nameof(ActiveColor),
+            typeof(SolidColorBrush),
+            typeof(ComboBoxControl),
+            new PropertyMetadata());
     }
 }

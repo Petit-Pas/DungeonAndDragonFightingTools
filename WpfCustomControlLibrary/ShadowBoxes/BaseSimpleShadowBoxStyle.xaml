@@ -9,14 +9,19 @@
                     <Grid
                         SnapsToDevicePixels="True">
                         <Border
+                            x:Name="ShadowBorder"
                             Background="{Binding BackgroundColor, RelativeSource={RelativeSource AncestorType={x:Type local:BaseSimpleShadowBoxControl}}}"
-                            CornerRadius="10"
-                            Padding="10 5">
+                            CornerRadius="10">
                             <Border.Effect>
                                 <DropShadowEffect 
                                     Color="{Binding ShadowColor, RelativeSource={RelativeSource AncestorType={x:Type local:BaseSimpleShadowBoxControl}}}" 
                                     Direction="0" ShadowDepth="0" BlurRadius="5"/>
                             </Border.Effect>
+                        </Border>
+                        <Border
+                            CornerRadius="{Binding CornerRadius, ElementName=ShadowBorder}"
+                            Background="{Binding Background, ElementName=ShadowBorder}"
+                            Padding="10 5">
                             <ContentPresenter 
                                 VerticalAlignment="Center"
                                 Focusable="False" />

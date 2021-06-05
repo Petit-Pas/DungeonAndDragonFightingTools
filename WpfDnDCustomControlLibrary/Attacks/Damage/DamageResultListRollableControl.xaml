@@ -8,7 +8,8 @@
              xmlns:shadowboxes="clr-namespace:WpfCustomControlLibrary.ShadowBoxes;assembly=WpfCustomControlLibrary"
              xmlns:visibilities="clr-namespace:WpfToolsLibrary.Converters.Visibilities;assembly=WpfToolsLibrary"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             TextOptions.TextFormattingMode="Display">
     <UserControl.Resources>
         <converters:DamageTypeEnumToBrushConverter x:Key="DamageColorConverter" />
         <visibilities:IntEqualToZeroToVisibility x:Key="IntEqualToZeroToVisibilityConverter"/>
@@ -47,6 +48,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <local:DamageResultRollableControl
+                            Margin="0 2"
                             Crits="{Binding Crits, Mode=TwoWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:DamageResultListRollableControl}}}"
                             CanBeAltered="{Binding CanBeAltered, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:DamageResultListRollableControl}}}"/>
                     </DataTemplate>

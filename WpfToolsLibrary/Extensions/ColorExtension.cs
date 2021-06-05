@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Media;
+
+namespace WpfToolsLibrary.Extensions
+{
+    public static class ColorExtension
+    {
+        public static string ToARGB(this Color color)
+        {
+            return $"{color.A}{color.R}{color.G}{color.B}";
+        }
+    }
+}

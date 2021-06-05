@@ -70,5 +70,12 @@
     <SolidColorBrush x:Key="ComboBoxItemActiveColor" Color="{Binding Color, Source={StaticResource Brown3}}"/>
     <SolidColorBrush x:Key="ComboBoxItemColor1" Color="{Binding Color, Source={StaticResource LightestGray}}"/>
     <SolidColorBrush x:Key="ComboBoxItemColor2" Color="{Binding Color, Source={StaticResource AlternateLightGray}}"/>
-    <SolidColorBrush x:Key="ComboBoxHoverColor" Color="{StaticResource RawBrown2}"/>
+    <SolidColorBrush x:Key="ComboBoxHoverColor" Color="{Binding Color, Source={StaticResource ButtonHoverColor}}"/>
+    <SolidColorBrush x:Key="ComboBoxBaseColor" Color="{Binding Color, Source={StaticResource ButtonBaseColor}}"/>
+    
+    <!-- DropShadow -->
+    <SolidColorBrush x:Key="OuterUpperShadowColor" Color="#D7D7D7" />
+    <SolidColorBrush x:Key="OuterLowerShadowColor" Color="{Binding Color, Source={StaticResource Brown4}}" />
+    <SolidColorBrush x:Key="InnerUpperShadowColor" Color="Black" />
+    <SolidColorBrush x:Key="InnerLowerShadowColor" Color="#D7D7D7" />
 </ResourceDictionary>

@@ -16,7 +16,6 @@
     </UserControl.Resources>
     <Grid>
         <WrapPanel
-            Margin="0, 5"
             Orientation="Horizontal">
             <Grid>
                 <Grid.ToolTip>
@@ -59,11 +58,13 @@
                 MinWidth="40"
                 DataContext="{Binding Damage}"
                 Integer="{Binding LastRoll}"
+                VerticalAlignment="Center"
                 />
 
             <TextBlock 
                 FontWeight="Bold"
-                Text="{Binding ToRollBonus}" />
+                Text="{Binding ToRollBonus}" 
+                VerticalAlignment="Center"/>
 
             <local:DamageModifierSelectableControl
                 IsEnabled="{Binding CanBeAltered, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:DamageResultRollableControl}}}"

@@ -67,6 +67,7 @@
     <Compile Include="Display\INameable.cs" />
     <Compile Include="Extensions\ApplicationExtension.cs" />
     <Compile Include="Extensions\BindingExtensions.cs" />
+    <Compile Include="Extensions\ColorExtension.cs" />
     <Compile Include="Extensions\RunExtensions.cs" />
     <Compile Include="Extensions\TreeReflexionExtensions.cs" />
     <Compile Include="Extensions\FrameworkElementExtensions.cs" />

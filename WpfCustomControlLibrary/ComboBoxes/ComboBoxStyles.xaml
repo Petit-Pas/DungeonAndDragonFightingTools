@@ -1,64 +1,44 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:WpfCustomControlLibrary.ComboBoxes" xmlns:shadowboxes="clr-namespace:WpfCustomControlLibrary.ShadowBoxes">
 
     <ControlTemplate x:Key="ComboBoxTextBox" TargetType="{x:Type TextBox}">
         <Border x:Name="PART_ContentHost" Focusable="False" Background="{TemplateBinding Background}" />
     </ControlTemplate>
 
     <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
-        <Grid Focusable="False">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="22" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            
-            <!-- Main border -->
-            <Border
-                Focusable="False"
-                x:Name="Border"
-                Grid.ColumnSpan="2"
-                Background="{TemplateBinding Background}"
-                BorderThickness="0"
-                FocusVisualStyle="{x:Null}">
-                <Border.CornerRadius>
-                    <CornerRadius 
-                        BottomLeft="10"
-                        BottomRight="10"
-                        TopLeft="10"
-                        TopRight="10"
-                        />
-                </Border.CornerRadius>
-                <Border.Effect>
-                    <DropShadowEffect Color="{Binding Color, Source={StaticResource ComboBoxHoverColor}}" ShadowDepth="5.5" Opacity="0.7" Direction="-45" />
-                </Border.Effect>
-            </Border>
-            <Border
-                Grid.ColumnSpan="2"
-                CornerRadius="{Binding CornerRadius, ElementName=Border}"
-                Background="{Binding Background, ElementName=Border}"
-                BorderThickness="0">
-                <Border.Effect>
-                    <DropShadowEffect Color="#888888" Direction="135" ShadowDepth="4" Opacity="0.7"/>
-                </Border.Effect>
-            </Border>
 
-            <!-- Border with selected only -->
-            <Border 
-                Grid.Column="0"
-                CornerRadius="10 0 0 10" 
-                Margin="1" 
-                Background="{Binding Background, ElementName=Border}" 
-                BorderThickness="0" />
+            <shadowboxes:BaseDoubleShadowBoxControl
+                x:Name="ShadowBoxControl"
+                BorderCornerRadius="10"
+                Margin="-5"
+                Padding="9"
+                Focusable="False" 
+                BackgroundColor="{TemplateBinding Background}">
+                <TextBlock></TextBlock>
+            </shadowboxes:BaseDoubleShadowBoxControl>
+
             <Path 
                 x:Name="Arrow"
-                Grid.Column="1"     
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Margin="10 0"
+                Grid.Column="1"
                 Fill="{StaticResource Light}"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
                 Data="M5,8 L5,10 L9,15 L13,10 L13,8 L9,11 z">
                 <Path.RenderTransform>
-                    <RotateTransform x:Name="MyAnimatedTransform" Angle="0" CenterX="9" CenterY="11">
-                    </RotateTransform>
+                    <TransformGroup>
+                        <RotateTransform x:Name="MyAnimatedTransform" Angle="0" CenterX="9" CenterY="11">
+                        </RotateTransform>
+                        <TranslateTransform Y="-3"/>
+                    </TransformGroup>
                 </Path.RenderTransform>
             </Path>
         </Grid>
@@ -66,18 +46,70 @@
             <EventTrigger RoutedEvent="ToggleButton.Checked">
                 <BeginStoryboard>
                     <Storyboard>
-                        <!-- Rotates arrow -->
+
                         <DoubleAnimation
+                            x:Name="ArrowRotateAnimation"
                             Storyboard.TargetName="MyAnimatedTransform"
                             Storyboard.TargetProperty="(RotateTransform.Angle)"
                             From="0.0" To="180" Duration="0:0:0.15"
                             />
-                        <!-- squaring corners -->
+
                         <ObjectAnimationUsingKeyFrames
-                            Storyboard.TargetName="Border"
-                            Storyboard.TargetProperty="(Border.CornerRadius)"
-                            Duration="0:0:0.1">
+                            x:Name="SquaringCornersAnimation"
+                            Storyboard.TargetName="ShadowBoxControl"
+                            Storyboard.TargetProperty="(shadowboxes:BaseDoubleShadowBoxControl.BorderCornerRadius)"
+                            Duration="0:0:0.15">
                             <ObjectAnimationUsingKeyFrames.KeyFrames>
+                                <DiscreteObjectKeyFrame>
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <CornerRadius BottomLeft="10" BottomRight="10" TopLeft="10" TopRight="10"/>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                                <DiscreteObjectKeyFrame>
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <CornerRadius BottomLeft="9" BottomRight="9" TopLeft="10" TopRight="10"/>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                                <DiscreteObjectKeyFrame>
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <CornerRadius BottomLeft="8" BottomRight="8" TopLeft="10" TopRight="10"/>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                                <DiscreteObjectKeyFrame>
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <CornerRadius BottomLeft="7" BottomRight="7" TopLeft="10" TopRight="10"/>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                                <DiscreteObjectKeyFrame>
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <CornerRadius BottomLeft="6" BottomRight="6" TopLeft="10" TopRight="10"/>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                                <DiscreteObjectKeyFrame>
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <CornerRadius BottomLeft="5" BottomRight="5" TopLeft="10" TopRight="10"/>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                                <DiscreteObjectKeyFrame>
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <CornerRadius BottomLeft="4" BottomRight="4" TopLeft="10" TopRight="10"/>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                                <DiscreteObjectKeyFrame>
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <CornerRadius BottomLeft="3" BottomRight="3" TopLeft="10" TopRight="10"/>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                                <DiscreteObjectKeyFrame>
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <CornerRadius BottomLeft="2" BottomRight="2" TopLeft="10" TopRight="10"/>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                                <DiscreteObjectKeyFrame>
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <CornerRadius BottomLeft="1" BottomRight="1" TopLeft="10" TopRight="10"/>
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
                                 <DiscreteObjectKeyFrame>
                                     <DiscreteObjectKeyFrame.Value>
                                         <CornerRadius BottomLeft="0" BottomRight="0" TopLeft="10" TopRight="10"/>
@@ -91,17 +123,18 @@
             <EventTrigger RoutedEvent="ToggleButton.Unchecked">
                 <BeginStoryboard>
                     <Storyboard>
-                        <!-- Rotates arrow -->
+
                         <DoubleAnimation
+                            x:Name="ReverseRotateArrowAnimation"
                             Storyboard.TargetName="MyAnimatedTransform"
                             Storyboard.TargetProperty="(RotateTransform.Angle)"
                             From="180" To="0.0" Duration="0:0:0.15" 
                             />
 
-                        <!-- desquaring corners -->
                         <ObjectAnimationUsingKeyFrames
-                            Storyboard.TargetName="Border"
-                            Storyboard.TargetProperty="(Border.CornerRadius)"
+                            x:Name="DesquaringCornersAnimation"
+                            Storyboard.TargetName="ShadowBoxControl"
+                            Storyboard.TargetProperty="(shadowboxes:BaseDoubleShadowBoxControl.BorderCornerRadius)"
                             Duration="0:0:0.15">
                             <ObjectAnimationUsingKeyFrames.KeyFrames>
                                 <DiscreteObjectKeyFrame>
@@ -185,11 +218,11 @@
                 <ControlTemplate TargetType="{x:Type ComboBox}">
                     <Grid>
                         <ToggleButton 
+                            Width="{TemplateBinding Width}"
                             Focusable="False"
-                            Background="{StaticResource LightestGray}"
+                            Background="{TemplateBinding Background}"
                             Name="ToggleButton"
-                            Template="{StaticResource ComboBoxToggleButton}"    
-                            Grid.Column="2"
+                            Template="{StaticResource ComboBoxToggleButton}"
                             IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
                             ClickMode="Press">
                         </ToggleButton>
@@ -220,7 +253,6 @@
                             Focusable="False"
                             PopupAnimation="Fade"
                             >
-
                             <Grid 
                                 Name="DropDown"
                                 SnapsToDevicePixels="True"                
@@ -240,7 +272,11 @@
                                     BorderThickness="0"
                                     CornerRadius="0 0 10 10">
                                     <Border.Effect>
-                                        <DropShadowEffect Color="{StaticResource RawIndigo}" ShadowDepth="5.5" Opacity="0.6" Direction="-45" />
+                                        <DropShadowEffect Color="{Binding Color, Source={StaticResource OuterLowerShadowColor}}" 
+                                                          ShadowDepth="2" 
+                                                          BlurRadius="6"
+                                                          Opacity="0.6"
+                                                          Direction="-90" />
                                     </Border.Effect>
                                 </Border>
                                 <Border 
@@ -249,7 +285,11 @@
                                     BorderThickness="0"
                                     CornerRadius="0 0 10 10">
                                     <Border.Effect>
-                                        <DropShadowEffect Color="{StaticResource RawIndigo}" ShadowDepth="3.5" Opacity="0.3" Direction="0" />
+                                        <DropShadowEffect Color="{Binding Color, Source={StaticResource OuterLowerShadowColor}}" 
+                                                          ShadowDepth="2" 
+                                                          BlurRadius="6"
+                                                          Opacity="0.6"
+                                                          Direction="0" />
                                     </Border.Effect>
                                 </Border>
                                 <Border 
@@ -258,10 +298,13 @@
                                     BorderThickness="0"
                                     CornerRadius="0 0 10 10">
                                     <Border.Effect>
-                                        <DropShadowEffect Color="#888888" Direction="180" ShadowDepth="4" Opacity="0.7"/>
+                                        <DropShadowEffect Color="{Binding Color, Source={StaticResource OuterUpperShadowColor}}"
+                                                          Direction="135" 
+                                                          ShadowDepth="1" 
+                                                          BlurRadius="4"/>
                                     </Border.Effect>
                                 </Border>
-                                <Grid>
+                                <Grid Margin="-1" Panel.ZIndex="1">
                                     <Grid.OpacityMask>
                                         <VisualBrush Visual="{Binding ElementName=clipMask}" Stretch="None" />
                                     </Grid.OpacityMask>
@@ -273,54 +316,6 @@
                         </Popup>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <EventTrigger RoutedEvent="GotFocus">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ColorAnimation 
-                                        Storyboard.TargetName="ToggleButton" 
-                                        Storyboard.TargetProperty="(ToggleButton.Background).(SolidColorBrush.Color)" 
-                                        To="{StaticResource RawBrown2}"
-                                        Duration="0:0:0.25"
-                                        />          
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                        <EventTrigger RoutedEvent="LostFocus">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ColorAnimation 
-                                        Storyboard.TargetName="ToggleButton" 
-                                        Storyboard.TargetProperty="(ToggleButton.Background).(SolidColorBrush.Color)" 
-                                        To="{StaticResource RawLightestGray}"
-                                        Duration="0:0:0.25"
-                                        />      
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                        <EventTrigger RoutedEvent="MouseEnter">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ColorAnimation 
-                                        Storyboard.TargetName="ToggleButton" 
-                                        Storyboard.TargetProperty="(ToggleButton.Background).(SolidColorBrush.Color)" 
-                                        To="{StaticResource RawBrown2}"
-                                        Duration="0:0:0.25"
-                                        />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                        <EventTrigger RoutedEvent="MouseLeave">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ColorAnimation 
-                                        Storyboard.TargetName="ToggleButton" 
-                                        Storyboard.TargetProperty="(ToggleButton.Background).(SolidColorBrush.Color)" 
-                                        To="{StaticResource RawLightestGray}"
-                                        Duration="0:0:0.25"
-                                        />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" Value="0.5"/>
                         </Trigger>

@@ -14,8 +14,9 @@
 
             <Style x:Key="WindowStyle" TargetType="Window">
                 <Setter Property="Background" Value="{StaticResource LightestGray}"/>
-                <Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
+                <!--<Setter Property="TextOptions.TextFormattingMode" Value="Display"/> Should not be needed anymore -->
             </Style>
+
 
             <Style x:Key="ModalWindowStyle" TargetType="Window" BasedOn="{StaticResource WindowStyle}">
                 <Setter Property="WindowStyle" Value="None"/>

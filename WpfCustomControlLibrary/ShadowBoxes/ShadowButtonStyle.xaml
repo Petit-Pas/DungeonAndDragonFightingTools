@@ -11,8 +11,8 @@
                         OuterShadowVisibility="Visible"
                         InnerShadowVisibility="Collapsed"
                         Focusable="False"
-                        BackgroundColor="{Binding BaseColor, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:ShadowButtonControl}}}"
-                        LowerOuterShadowColor="{Binding HoverColor.Color, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:ShadowButtonControl}}}">
+                        Padding="9"
+                        BackgroundColor="{Binding BaseColor, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:ShadowButtonControl}}}">
                         <ContentPresenter
                             Content="{TemplateBinding ContentControl.Content}" 
                             />
