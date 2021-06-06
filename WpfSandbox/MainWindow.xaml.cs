@@ -85,7 +85,7 @@ namespace BindValidation
 
             Logger.Init();
             ;
-
+            Button_Click_2(null, null);
 
         }
 

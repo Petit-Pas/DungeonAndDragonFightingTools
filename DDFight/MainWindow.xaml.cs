@@ -1,4 +1,5 @@
-﻿using BaseToolsLibrary.IO;
+﻿using BaseToolsLibrary.DependencyInjection;
+using BaseToolsLibrary.IO;
 using BaseToolsLibrary.Memory;
 using DDFight.Game;
 using DDFight.Game.Entities;
@@ -34,6 +35,7 @@ namespace DDFight
     /// </summary>
     public partial class MainWindow : Window
     {
+        private ICustomConsole console;
 
         public MainWindow()
         {
@@ -42,6 +44,8 @@ namespace DDFight
 
             Logger.Init();
 
+            DIConfigurer.Configure();
+
             GlobalContext.Context.CharacterList = SaveManager.LoadGenericList<Character, CharacterList>(SaveManager.players_folder);
             GlobalContext.Context.MonsterList = SaveManager.LoadGenericList<Monster, MonsterList>(SaveManager.monsters_folder);
             GlobalContext.Context.SpellList = SaveManager.LoadGenericList<Spell, SpellList>(SaveManager.spells_folder);
@@ -49,6 +53,7 @@ namespace DDFight
 
             Global.Loading = false;
 
+            console = DIContainer.GetImplementation<ICustomConsole>();
 
             GlobalContext.Context.FightContext.FightersList.Elements.CollectionChanged += FightingCharacters_CollectionChanged;
 
@@ -80,7 +85,7 @@ namespace DDFight
             {
                 GlobalContext.Context.FightContext.FightersList.SetTurnOrders();
 
-                FightConsole.Instance.Reset();
+                console.Reset();
 
                 MainFightWindow fightWindow = new MainFightWindow();
                 fightWindow.DataContext = GlobalContext.Context;

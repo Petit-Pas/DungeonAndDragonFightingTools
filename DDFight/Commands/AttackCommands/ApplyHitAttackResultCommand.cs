@@ -1,4 +1,6 @@
-﻿using DnDToolsLibrary.Attacks.HitAttacks;
+﻿using BaseToolsLibrary.DependencyInjection;
+using BaseToolsLibrary.IO;
+using DnDToolsLibrary.Attacks.HitAttacks;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Status;
 using System.Windows;
@@ -13,14 +15,15 @@ namespace DDFight.Commands.AttackCommands
 {
     public class ApplyHitAttackResultCommand : DnDCommandBase
     {
+        private ICustomConsole console = DIContainer.GetImplementation<ICustomConsole>();
+        private IFontWeightProvider fontWeightProvider = DIContainer.GetImplementation<IFontWeightProvider>();
+
         public ApplyHitAttackResultCommand(HitAttackResult attackResult, bool isInnerCommand) : base(isInnerCommand)
         {
             AttackResult = (HitAttackResult)attackResult.Clone();
         }
 
         protected HitAttackResult AttackResult { get; }
-
-        protected Paragraph CommandParagraph { get; set; }
 
         public override bool CanExecute(object parameter)
         {
@@ -35,14 +38,11 @@ namespace DDFight.Commands.AttackCommands
 
             #region FightLog
 
-            CommandParagraph = (Paragraph)FightConsole.Instance.UserLogs.Blocks.LastBlock;
-
-            CommandParagraph.Inlines.Add(RunExtensions.BuildRun(attacker.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-            CommandParagraph.Inlines.Add(RunExtensions.BuildRun(" attacks ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-            CommandParagraph.Inlines.Add(RunExtensions.BuildRun(target.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-            CommandParagraph.Inlines.Add(RunExtensions.BuildRun(". ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-            CommandParagraph.Inlines.Add(RunExtensions.BuildRun(AttackResult.RollResult.Description, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-            CommandParagraph.Inlines.Add(RunExtensions.BuildRun("\r\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+            console.AddEntry($"{attacker.DisplayName}", fontWeightProvider.Bold);
+            console.AddEntry(" attacks ");
+            console.AddEntry($"{target.DisplayName}", fontWeightProvider.Bold);
+            console.AddEntry(". ");
+            console.AddEntry($"{AttackResult.RollResult.Description}\r\n", fontWeightProvider.Bold);
 
             #endregion FightLog
 

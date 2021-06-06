@@ -1,4 +1,6 @@
-﻿using DDFight.Game.Dices.SavingThrow;
+﻿using BaseToolsLibrary.DependencyInjection;
+using BaseToolsLibrary.IO;
+using DDFight.Game.Dices.SavingThrow;
 using DnDToolsLibrary.Attacks;
 using DnDToolsLibrary.Characteristics;
 using DnDToolsLibrary.Dice;
@@ -19,6 +21,9 @@ namespace DDFight.Windows.FightWindows
     /// </summary>
     public partial class ConcentrationCheckWindow : Window, INotifyPropertyChanged
     {
+        private ICustomConsole console = DIContainer.GetImplementation<ICustomConsole>();
+        private IFontWeightProvider fontWeightProvider = DIContainer.GetImplementation<IFontWeightProvider>();
+
         private PlayableEntity data_context
         {
             get => (PlayableEntity)DataContext;
@@ -93,22 +98,20 @@ namespace DDFight.Windows.FightWindows
 
         private void check_concentration()
         {
-            Paragraph paragraph = (Paragraph)FightConsole.Instance.UserLogs.Blocks.LastBlock;
-            paragraph.Inlines.Add(RunExtensions.BuildRun(data_context.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
-            paragraph.Inlines.Add(RunExtensions.BuildRun(": Concentration check: ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-            paragraph.Inlines.Add(RunExtensions.BuildRun((Roll + SituationalSavingThrowModifier.Modifier + data_context.Characteristics.GetSavingModifier(CharacteristicsEnum.Constitution)).ToString() + "/10: ", 
-                (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
+            console.AddEntry($"{data_context.DisplayName}", fontWeightProvider.SemiBold);
+            console.AddEntry(": Concentration check: ");
+            console.AddEntry($"{Roll + SituationalSavingThrowModifier.Modifier + data_context.Characteristics.GetSavingModifier(CharacteristicsEnum.Constitution)}/10: ", 
+                fontWeightProvider.SemiBold);
 
             if (Roll + SituationalSavingThrowModifier.Modifier + data_context.Characteristics.GetSavingModifier(CharacteristicsEnum.Constitution) >= 10)
             {
-                paragraph.Inlines.Add(RunExtensions.BuildRun("still focused.", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                console.AddEntry("still focused\r\n");
                 Success = true;
             }
             else
             {
-                paragraph.Inlines.Add(RunExtensions.BuildRun("lost Focus.", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                console.AddEntry("lost Focus.\r\n");
             }
-            paragraph.Inlines.Add(RunExtensions.BuildRun("\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
         }
 
         private void roll_dice()

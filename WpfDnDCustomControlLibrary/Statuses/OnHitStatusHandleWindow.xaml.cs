@@ -72,7 +72,14 @@ namespace WpfDnDCustomControlLibrary.Statuses
 
         private void ValidateButton_Click(object sender, RoutedEventArgs e)
         {
+            if (_application)
+            {
 
+            }
+            else
+            {
+
+            }
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -124,12 +131,12 @@ namespace WpfDnDCustomControlLibrary.Statuses
             if (data_context != null && IsLoaded)
                 if (_application)
                 {
-                    DamageList = data_context.OnApplyDamageList.GetResultList();
+                    DamageList = data_context.OnApplyDamageList.GetResultList(data_context.HasApplyCondition);
                     DamageList.RefreshDamageAffinityModifier(data_context.Affected);
                 }
                 else
                 {
-                    DamageList = data_context.DotDamageList.GetResultList();
+                    DamageList = data_context.DotDamageList.GetResultList(false);
                     DamageList.RefreshDamageAffinityModifier(data_context.Affected);
                 }
         }

@@ -1,30 +1,27 @@
-﻿using System;
+﻿using SimpleInjector;
+using System;
 
 namespace SandBox
 {
     class Program
     {
-        public class Test
+        static readonly Container container;
+        static Program()
         {
-            public int test = 0;
+            container = new Container();
 
-            public Test()
-            {
-                Console.WriteLine("base ctor");
-                test = 1;
-            }
+            container.Register<IImplementation, Second>();
 
-            public Test(int oui) : this()
-            {
-                Console.WriteLine("allo?");
-            }
+            container.Verify();
         }
 
         static void Main(string[] args)
         {
-            Test test = new Test(0);
+            IImplementation handler = container.GetInstance<IImplementation>();
 
-            Console.ReadKey();
+            handler.Method();
+
+            Console.ReadLine();
         }
     }
 }

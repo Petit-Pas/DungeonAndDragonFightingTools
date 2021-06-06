@@ -34,7 +34,7 @@
                     BorderThickness="0"
                     x:Name="RichTextBoxControl"
                     IsReadOnly="True"
-                    Document="{Binding UserLogs}" 
+                    Document="{Binding}" 
                     VirtualizingStackPanel.VirtualizationMode="Standard"
                     Background="{StaticResource LightestGray}"
                     />

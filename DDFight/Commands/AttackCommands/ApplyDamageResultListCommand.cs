@@ -1,4 +1,6 @@
-﻿using DnDToolsLibrary.Attacks.Damage;
+﻿using BaseToolsLibrary.DependencyInjection;
+using BaseToolsLibrary.IO;
+using DnDToolsLibrary.Attacks.Damage;
 using DnDToolsLibrary.Attacks.Damage.Type;
 using DnDToolsLibrary.Entities;
 using System;
@@ -18,6 +20,10 @@ namespace DDFight.Commands.AttackCommands
 {
     public class ApplyDamageResultListCommand : DnDCommandBase
     {
+        private ICustomConsole console = DIContainer.GetImplementation<ICustomConsole>();
+        private IFontWeightProvider fontWeightProvider = DIContainer.GetImplementation<IFontWeightProvider>();
+        private IFontColorProvider colorProvider = DIContainer.GetImplementation<IFontColorProvider>();
+
         public ApplyDamageResultListCommand(PlayableEntity target, DamageResultList damageList, bool isInnerCommand) : base(isInnerCommand)
         {
             Target = target;
@@ -26,8 +32,6 @@ namespace DDFight.Commands.AttackCommands
 
         public PlayableEntity Target { get; }
         public DamageResultList DamageList { get; }
-
-        protected Paragraph CommandParagraph { get; set; }
 
         public override bool CanExecute(object parameter)
         {
@@ -39,11 +43,8 @@ namespace DDFight.Commands.AttackCommands
             int i = 1;
             int total = 0;
 
-            CommandParagraph = (Paragraph)FightConsole.Instance.UserLogs.Blocks.LastBlock;
-
-            CommandParagraph.Inlines.Add(RunExtensions.BuildRun(Target.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-            CommandParagraph.Inlines.Add(RunExtensions.BuildRun(" takes ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-
+            console.AddEntry($"{Target.DisplayName}", fontWeightProvider.Bold);
+            console.AddEntry(" takes ");
 
             foreach (DamageResult dmg in DamageList.Elements)
             {
@@ -87,9 +88,9 @@ namespace DDFight.Commands.AttackCommands
                 }
 
                 if (i == DamageList.Elements.Count && i != 1)
-                    CommandParagraph.Inlines.Add(RunExtensions.BuildRun("and ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-                CommandParagraph.Inlines.Add(RunExtensions.BuildRun(damage_value.ToString() + " " + dmg.DamageType.ToString(), (Brush)DamageTypeEnumToBrushConverter.StaticConvert(dmg.DamageType), 15, FontWeights.Bold));
-                CommandParagraph.Inlines.Add(RunExtensions.BuildRun(i == DamageList.Elements.Count ? " damage" : " damage, ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                    console.AddEntry("and ");
+                console.AddEntry($"{damage_value} {dmg.DamageType}", fontWeightProvider.Bold, colorProvider.GetColorByKey(dmg.DamageType.ToString()));
+                console.AddEntry($"{(i == DamageList.Elements.Count ? " damage" : " damage, ")}");
                 total += damage_value;
                 i += 1;
             }

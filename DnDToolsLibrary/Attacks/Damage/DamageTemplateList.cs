@@ -17,13 +17,13 @@ namespace DnDToolsLibrary.Attacks.Damage
             return new DamageTemplateList(this);
         }
 
-        public DamageResultList GetResultList()
+        public DamageResultList GetResultList(bool linked_to_saving = true)
         {
             DamageResultList result = new DamageResultList();
 
             foreach (DamageTemplate template in Elements)
             {
-                result.AddElementSilent(new DamageResult(template));
+                result.AddElementSilent(new DamageResult(template, linked_to_saving));
             }
             return result;
         }

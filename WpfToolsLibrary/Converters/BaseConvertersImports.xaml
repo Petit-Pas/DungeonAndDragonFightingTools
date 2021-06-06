@@ -1,0 +1,18 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:basetypes="clr-namespace:WpfToolsLibrary.Converters.BaseTypes" xmlns:cornerradii="clr-namespace:WpfToolsLibrary.Converters.CornerRadii" xmlns:math="clr-namespace:WpfToolsLibrary.Converters.Math" xmlns:visibilities="clr-namespace:WpfToolsLibrary.Converters.Visibilities">
+    <basetypes:BoolToCustomStringConverter x:Key="BoolToCustomStringConverter"/>
+    <basetypes:BoolToReversedBoolConverter x:Key="BoolToReversedBoolConverter"/>
+    <basetypes:IntToStringConverter x:Key="IntToStringConverter"/>
+    <basetypes:StringListToStringConverter x:Key="StringListToStringConverter"/>
+
+    <cornerradii:CornerRadiusMaskConverter x:Key="CornerRadiusMaskConverter"/>
+
+    <math:BasicOperationConverter x:Key="BasicOperationConverter"/>
+
+    <visibilities:BoolToReversedVisibilityConverter x:Key="BoolToReversedVisibilityConverter"/>
+    <visibilities:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    <visibilities:IntEqualToZeroToVisibility x:Key="IntEqualToZeroToVisibility"/>
+    <visibilities:IntGreaterThanZeroToVisibility x:Key="IntGreaterThanZeroToVisibility"/>
+    <visibilities:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
+    <visibilities:VisibleToCollapsedConverter x:Key="VisibleToCollapsedConverter"/>
+</ResourceDictionary>

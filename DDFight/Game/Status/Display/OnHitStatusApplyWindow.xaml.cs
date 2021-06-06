@@ -1,4 +1,5 @@
-﻿using DDFight.Game.Dices.SavingThrow;
+﻿using BaseToolsLibrary.DependencyInjection;
+using BaseToolsLibrary.IO;
 using DnDToolsLibrary.Attacks.Damage;
 using DnDToolsLibrary.Characteristics;
 using DnDToolsLibrary.Dice;
@@ -7,11 +8,7 @@ using DnDToolsLibrary.Status;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Documents;
-using System.Windows.Media;
 using TempExtensionsOnHitStatus;
-using WpfToolsLibrary.ConsoleTools;
-using WpfToolsLibrary.Extensions;
 using WpfToolsLibrary.Navigation;
 
 namespace DDFight.Game.Status.Display
@@ -21,6 +18,9 @@ namespace DDFight.Game.Status.Display
     /// </summary>
     public partial class OnHitStatusApplyWindow : Window, INotifyPropertyChanged
     {
+        private ICustomConsole console = DIContainer.GetImplementation<ICustomConsole>();
+        private IFontWeightProvider fontWeightProvider = DIContainer.GetImplementation<IFontWeightProvider>();
+
         private OnHitStatus data_context
         {
             get => (OnHitStatus)DataContext;
@@ -153,33 +153,32 @@ namespace DDFight.Game.Status.Display
         /// </summary>
         private void validateOnHit()
         {
-            Paragraph paragraph = (Paragraph)FightConsole.Instance.UserLogs.Blocks.LastBlock;
             SavingThrow saving = ((SavingThrow)SavingThrowControl.DataContext);
 
             if (data_context.HasApplyCondition)
             {
                 // there is a saving throw to resist the status
                 Characteristic charac = Target.Characteristics.GetCharacteristic(data_context.ApplySavingCharacteristic);
-                
-                paragraph.Inlines.Add(RunExtensions.BuildRun(Target.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-                paragraph.Inlines.Add(RunExtensions.BuildRun(" tries to resist the ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-                paragraph.Inlines.Add(RunExtensions.BuildRun(data_context.Header, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-                paragraph.Inlines.Add(RunExtensions.BuildRun(" status from ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-                paragraph.Inlines.Add(RunExtensions.BuildRun(Applicant.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-                paragraph.Inlines.Add(RunExtensions.BuildRun(". ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-                paragraph.Inlines.Add(RunExtensions.BuildRun(saving.Result.ToString() + "/" + saving.Difficulty.ToString(), (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-                paragraph.Inlines.Add(RunExtensions.BuildRun(" ==> ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+
+                console.AddEntry($"{Target.DisplayName}", fontWeightProvider.Bold);
+                console.AddEntry(" tries to resist the ");
+                console.AddEntry($"{data_context.Header}", fontWeightProvider.Bold);
+                console.AddEntry(" status from ");
+                console.AddEntry($"{Applicant.DisplayName}", fontWeightProvider.Bold);
+                console.AddEntry(". ");
+                console.AddEntry($"{saving.Result}/{saving.Difficulty}", fontWeightProvider.Bold);
+                console.AddEntry(" ==> ");
 
                 if (saving.Result >= saving.Difficulty)
                 {
                     //resist
-                    paragraph.Inlines.Add(RunExtensions.BuildRun("Success\r\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                    console.AddEntry("Success\r\n", fontWeightProvider.Bold);
                     applyStatus(false);
                 }
                 else
                 {
                     //fails
-                    paragraph.Inlines.Add(RunExtensions.BuildRun("Failure\r\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                    console.AddEntry("Failure\r\n", fontWeightProvider.Bold);
                     applyStatus();
                 }
             }
@@ -191,23 +190,21 @@ namespace DDFight.Game.Status.Display
         /// </summary>
         private void validateResist()
         {
-            Paragraph paragraph = (Paragraph)FightConsole.Instance.UserLogs.Blocks.LastBlock;
 
             SavingThrow saving = ((SavingThrow)SavingThrowControl.DataContext);
-
-            paragraph.Inlines.Add(RunExtensions.BuildRun(Target.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-            paragraph.Inlines.Add(RunExtensions.BuildRun(" tries again to resist the ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-            paragraph.Inlines.Add(RunExtensions.BuildRun(data_context.Header, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-            paragraph.Inlines.Add(RunExtensions.BuildRun(" status from ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-            paragraph.Inlines.Add(RunExtensions.BuildRun(Applicant.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-            paragraph.Inlines.Add(RunExtensions.BuildRun(" ==> ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-            paragraph.Inlines.Add(RunExtensions.BuildRun(saving.Result.ToString() + "/" + saving.Difficulty.ToString(), (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-            paragraph.Inlines.Add(RunExtensions.BuildRun(" ==> ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+            console.AddEntry($"{Target.DisplayName}", fontWeightProvider.Bold);
+            console.AddEntry(" tries again to resist the ");
+            console.AddEntry($"{data_context.Header}", fontWeightProvider.Bold);
+            console.AddEntry(" status from ");
+            console.AddEntry($"{Applicant.DisplayName}", fontWeightProvider.Bold);
+            console.AddEntry(". ");
+            console.AddEntry($"{saving.Result}/{saving.Difficulty}", fontWeightProvider.Bold);
+            console.AddEntry(" ==> ");
 
             if (saving.Result >= saving.Difficulty)
             {
                 //resist
-                paragraph.Inlines.Add(RunExtensions.BuildRun("Success\r\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                console.AddEntry("Success\r\n", fontWeightProvider.Bold);
                 data_context.Affected.CustomVerboseStatusList.RemoveElement(data_context);
                 //TODO check if not too dangerous
                 //data_context.Unregister();
@@ -216,7 +213,7 @@ namespace DDFight.Game.Status.Display
             else
             {
                 //fails
-                paragraph.Inlines.Add(RunExtensions.BuildRun("Failure\r\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                console.AddEntry("Failure\r\n", fontWeightProvider.Bold);
             }
         }
 

@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SimpleInjector, Version=5.0.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.5.3.0\lib\net45\SimpleInjector.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,8 +44,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DependencyInjection\DIContainer.cs" />
     <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="IO\FontColorProvider.cs" />
+    <Compile Include="IO\ICustomConsole.cs" />
+    <Compile Include="IO\IFontColor.cs" />
+    <Compile Include="IO\IFontColorProvider.cs" />
+    <Compile Include="IO\IFontWeight.cs" />
+    <Compile Include="IO\IFontWeightProvider.cs" />
     <Compile Include="IO\Logger.cs" />
     <Compile Include="Math\ArithmeticParser.cs" />
     <Compile Include="Memory\DisposableExtensions.cs" />
@@ -50,6 +60,9 @@
     <Compile Include="Memory\ICopyAssignable.cs" />
     <Compile Include="Memory\IEventUnregisterable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

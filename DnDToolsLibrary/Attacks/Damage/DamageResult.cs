@@ -128,6 +128,20 @@ namespace DnDToolsLibrary.Attacks.Damage
 
         private DamageTypeEnum _damageType = DamageTypeEnum.Force;
 
+        public bool LinkedToSaving
+        {
+            get => _linkedToSaving;
+            set
+            {
+                if (_linkedToSaving != value)
+                {
+                    _linkedToSaving = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        private bool _linkedToSaving = true;
+
 
         private void init_copy(DamageResult to_copy)
         {
@@ -135,12 +149,14 @@ namespace DnDToolsLibrary.Attacks.Damage
             this.SituationalDamageModifier = to_copy.SituationalDamageModifier;
             this.Damage = (DiceRoll)to_copy.Damage.Clone();
             this.DamageType = to_copy.DamageType;
+            this.LinkedToSaving = to_copy.LinkedToSaving;
         }
-        public DamageResult(DamageTemplate template)
+        public DamageResult(DamageTemplate template, bool linked_to_saving = true)
         {
             this.SituationalDamageModifier = template.SituationalDamageModifier;
             this.Damage = (DiceRoll)template.Damage.Clone();
             this.DamageType = template.DamageType;
+            this.LinkedToSaving = linked_to_saving;
         }
 
         public DamageResult(DamageResult to_copy)

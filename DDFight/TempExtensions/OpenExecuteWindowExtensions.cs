@@ -1,4 +1,6 @@
-﻿using BaseToolsLibrary.Memory;
+﻿using BaseToolsLibrary.DependencyInjection;
+using BaseToolsLibrary.IO;
+using BaseToolsLibrary.Memory;
 using DDFight.Game.Aggression.Attacks;
 using DDFight.Game.Aggression.Spells.Display;
 using DDFight.Game.Fight.Display;
@@ -27,6 +29,9 @@ namespace DDFight.WpfExtensions
 {
     public static class OpenExecuteWindowExtensions
     {
+        private static ICustomConsole console = DIContainer.GetImplementation<ICustomConsole>();
+        private static IFontWeightProvider fontWeightProvider = DIContainer.GetImplementation<IFontWeightProvider>();
+
         public static void ExecuteHitAttack(this HitAttackTemplate template)
         {
             HitAttackExecuteWindow window = new HitAttackExecuteWindow() { DataContext = template, };
@@ -36,11 +41,9 @@ namespace DDFight.WpfExtensions
         public static void Cast(this NonAttackSpellResult nonAttackSpellResult, List<SavingThrow> savings = null)
         {
 
-            Paragraph paragraph = (Paragraph)FightConsole.Instance.UserLogs.Blocks.LastBlock;
-
-            paragraph.Inlines.Add(RunExtensions.BuildRun(nonAttackSpellResult.Caster.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-            paragraph.Inlines.Add(RunExtensions.BuildRun(" casts a lvl ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-            paragraph.Inlines.Add(RunExtensions.BuildRun(nonAttackSpellResult.Level.ToString() + " " + nonAttackSpellResult.Name + "\r\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+            console.AddEntry($"{nonAttackSpellResult.Caster.DisplayName}", fontWeightProvider.Bold);
+            console.AddEntry(" casts a lvl ");
+            console.AddEntry($"{nonAttackSpellResult.Level} {nonAttackSpellResult.Name}\r\n", fontWeightProvider.Bold);
 
             if (nonAttackSpellResult.Targets.Contains(nonAttackSpellResult.Caster))
             {
@@ -69,17 +72,17 @@ namespace DDFight.WpfExtensions
                 // damage lessening if has saving throw
                 if (nonAttackSpellResult.HasSavingThrow)
                 {
-                    paragraph.Inlines.Add(RunExtensions.BuildRun(nonAttackSpellResult.Targets.ElementAt(i).DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-                    paragraph.Inlines.Add(RunExtensions.BuildRun(" (", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-                    paragraph.Inlines.Add(RunExtensions.BuildRun(savings.ElementAt(i).Result + " / " + savings.ElementAt(i).Difficulty, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-                    paragraph.Inlines.Add(RunExtensions.BuildRun(") ==> ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                    console.AddEntry($"{nonAttackSpellResult.Targets.ElementAt(i).DisplayName}", fontWeightProvider.Bold);
+                    console.AddEntry(" (");
+                    console.AddEntry($"{savings.ElementAt(i).Result} / {savings.ElementAt(i).Difficulty}", fontWeightProvider.Bold);
+                    console.AddEntry(") ==> ");
                     if (savings.ElementAt(i).IsSuccesful)
                     {
                         foreach (DamageResult dmg in nonAttackSpellResult.HitDamage.Elements)
                         {
                             dmg.LastSavingWasSuccesfull = true;
                         }
-                        paragraph.Inlines.Add(RunExtensions.BuildRun("Resists\r\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                        console.AddEntry("Resists\r\n", fontWeightProvider.Bold);
                     }
                     else
                     {
@@ -87,7 +90,7 @@ namespace DDFight.WpfExtensions
                         {
                             dmg.LastSavingWasSuccesfull = false;
                         }
-                        paragraph.Inlines.Add(RunExtensions.BuildRun("Does not resist\r\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                        console.AddEntry("Does not resist\r\n", fontWeightProvider.Bold);
                     }
                 }
                 // damage application

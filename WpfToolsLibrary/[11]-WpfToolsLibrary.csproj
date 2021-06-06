@@ -51,7 +51,11 @@
     <Compile Include="BindingTools\BindableObjectReference.cs" />
     <Compile Include="Commands\WindowCommands\CloseCommand.cs" />
     <Compile Include="Commands\WindowCommands\DragMoveCommands.cs" />
-    <Compile Include="ConsoleTools\FightConsole.cs" />
+    <Compile Include="ConsoleTools\WpfConsole.cs" />
+    <Compile Include="ConsoleTools\WpfFontColorProvider.cs" />
+    <Compile Include="ConsoleTools\WpfFontWeight.cs" />
+    <Compile Include="ConsoleTools\WpfFontColor.cs" />
+    <Compile Include="ConsoleTools\WpfFontWeightProvider.cs" />
     <Compile Include="Converters\BaseTypes\BoolToCustomStringConverter.cs" />
     <Compile Include="Converters\BaseTypes\BoolToReversedBoolConverter.cs" />
     <Compile Include="Converters\BaseTypes\IntToStringConverter.cs" />
@@ -107,6 +111,11 @@
       <Name>[10]-BaseToolsLibrary</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Page Include="Converters\BaseConvertersImports.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

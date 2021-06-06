@@ -1,4 +1,6 @@
-﻿using DDFight;
+﻿using BaseToolsLibrary.DependencyInjection;
+using BaseToolsLibrary.IO;
+using DDFight;
 using DDFight.Game.Entities.Display;
 using DDFight.Windows.FightWindows;
 using DnDToolsLibrary.Attacks.Damage;
@@ -22,6 +24,9 @@ namespace TempExtensionsPlayableEntity
 {
     public static class PlayableEntityGameExtensions
     {
+        private static ICustomConsole console = DIContainer.GetImplementation<ICustomConsole>();
+        private static IFontWeightProvider fontWeightProvider = DIContainer.GetImplementation<IFontWeightProvider>();
+        private static IFontColorProvider fontColorProvider = DIContainer.GetImplementation<IFontColorProvider>();
 
         #region Turn
         /// <summary>
@@ -34,12 +39,9 @@ namespace TempExtensionsPlayableEntity
             playableEntity.HasReaction = true;
             playableEntity.HasBonusAction = true;
 
-            FlowDocument document = FightConsole.Instance.UserLogs;
-            document.Blocks.Add(new Paragraph());
-
-            Paragraph tmp = (Paragraph)document.Blocks.LastBlock;
-            tmp.Inlines.Add(RunExtensions.BuildRun(playableEntity.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-            tmp.Inlines.Add(RunExtensions.BuildRun(" starts its turn!\r\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+            console.NewParagraph();
+            console.AddEntry(playableEntity.DisplayName, fontWeightProvider.Bold);
+            console.AddEntry("starts its turn!\r\n", fontWeightProvider.Normal);
 
             playableEntity.InvokeTurnStarted(new StartNewTurnEventArgs()
             {
@@ -69,22 +71,21 @@ namespace TempExtensionsPlayableEntity
         {
             to_roll.Roll();
             int amount = to_roll.LastResult;
-            Paragraph paragraph = (Paragraph)FightConsole.Instance.UserLogs.Blocks.LastBlock;
 
-            paragraph.Inlines.Add(RunExtensions.BuildRun(playableEntity.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+            console.AddEntry(playableEntity.DisplayName, fontWeightProvider.Bold);
 
             if (playableEntity.TempHp < amount)
             {
-                paragraph.Inlines.Add(RunExtensions.BuildRun(" now has ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-                paragraph.Inlines.Add(RunExtensions.BuildRun(amount.ToString(), (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-                paragraph.Inlines.Add(RunExtensions.BuildRun(" temporary Hps.\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                console.AddEntry(" now has ");
+                console.AddEntry($"{amount}", fontWeightProvider.Bold);
+                console.AddEntry(" temporary Hps.\n");
                 playableEntity.TempHp = amount;
             }
             else
             {
-                paragraph.Inlines.Add(RunExtensions.BuildRun(" keeps his ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-                paragraph.Inlines.Add(RunExtensions.BuildRun(playableEntity.TempHp.ToString(), (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-                paragraph.Inlines.Add(RunExtensions.BuildRun(" temporary Hps.\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                console.AddEntry(" keeps his ");
+                console.AddEntry($"{amount}", fontWeightProvider.Bold);
+                console.AddEntry(" temporary Hps.\n");
             }
         }
 
@@ -96,25 +97,22 @@ namespace TempExtensionsPlayableEntity
             if (playableEntity.Hp + amount >= playableEntity.MaxHp)
                 amount = (int)playableEntity.MaxHp - playableEntity.Hp;
 
-            Paragraph paragraph = (Paragraph)FightConsole.Instance.UserLogs.Blocks.LastBlock;
 
-            paragraph.Inlines.Add(RunExtensions.BuildRun(playableEntity.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-            paragraph.Inlines.Add(RunExtensions.BuildRun(" regains ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-            paragraph.Inlines.Add(RunExtensions.BuildRun(amount.ToString(), (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-            paragraph.Inlines.Add(RunExtensions.BuildRun(" Hps.\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+            console.AddEntry(playableEntity.DisplayName, fontWeightProvider.Bold);
+            console.AddEntry(" regains ");
+            console.AddEntry($"{amount}", fontWeightProvider.Bold);
+            console.AddEntry(" Hps.\r\n");
 
             playableEntity.Hp += amount;
         }
 
         public static void LooseHp(this PlayableEntity playableEntity, int amount)
         {
-            Paragraph paragraph = (Paragraph)FightConsole.Instance.UserLogs.Blocks.LastBlock;
-
-            paragraph.Inlines.Add(RunExtensions.BuildRun("\nTotal: ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-            paragraph.Inlines.Add(RunExtensions.BuildRun(amount.ToString(), (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-            paragraph.Inlines.Add(RunExtensions.BuildRun(" damage (", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-            paragraph.Inlines.Add(RunExtensions.BuildRun(playableEntity.HpString, (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
-            paragraph.Inlines.Add(RunExtensions.BuildRun(" ==> ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+            console.AddEntry("\nTotal: ");
+            console.AddEntry($"{amount}", fontWeightProvider.Bold);
+            console.AddEntry(" damage (");
+            console.AddEntry($"{playableEntity.HpString}", fontWeightProvider.SemiBold);
+            console.AddEntry(" ==> ");
 
             // handles temp HP
             if (playableEntity.TempHp != 0)
@@ -134,8 +132,8 @@ namespace TempExtensionsPlayableEntity
             // removes remaining HPs
             playableEntity.Hp -= amount;
 
-            paragraph.Inlines.Add(RunExtensions.BuildRun(playableEntity.HpString, (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
-            paragraph.Inlines.Add(RunExtensions.BuildRun(").\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+            console.AddEntry($"{playableEntity.HpString}", fontWeightProvider.SemiBold);
+            console.AddEntry(").\r\n");
             if (amount == 0)
                 return;
 
@@ -146,10 +144,10 @@ namespace TempExtensionsPlayableEntity
                 if (playableEntity.IsFocused == true)
                 {
                     playableEntity.IsFocused = false;
-                    paragraph.Inlines.Add(RunExtensions.BuildRun(playableEntity.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
-                    paragraph.Inlines.Add(RunExtensions.BuildRun(": Has reached", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-                    paragraph.Inlines.Add(RunExtensions.BuildRun(" 0 Hps", (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
-                    paragraph.Inlines.Add(RunExtensions.BuildRun(", lost Focus.", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                    console.AddEntry($"{playableEntity.DisplayName}", fontWeightProvider.SemiBold);
+                    console.AddEntry(": Has reached");
+                    console.AddEntry(" 0 Hps", fontWeightProvider.SemiBold);
+                    console.AddEntry(", lost Focus.");
                 }
             }
 
@@ -178,11 +176,8 @@ namespace TempExtensionsPlayableEntity
             int i = 1;
             int total = 0;
 
-            Paragraph paragraph = (Paragraph)FightConsole.Instance.UserLogs.Blocks.LastBlock;
-
-            paragraph.Inlines.Add(RunExtensions.BuildRun(playableEntity.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-            paragraph.Inlines.Add(RunExtensions.BuildRun(" takes ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-
+            console.AddEntry($"{playableEntity.DisplayName}", fontWeightProvider.Bold);
+            console.AddEntry(" takes ");
 
             foreach (DamageResult dmg in damages.Elements)
             {
@@ -226,9 +221,9 @@ namespace TempExtensionsPlayableEntity
                 }
 
                 if (i == damages.Elements.Count && i != 1)
-                    paragraph.Inlines.Add(RunExtensions.BuildRun("and ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-                paragraph.Inlines.Add(RunExtensions.BuildRun(damage_value.ToString() + " " + dmg.DamageType.ToString(), (Brush)DamageTypeEnumToBrushConverter.StaticConvert(dmg.DamageType), 15, FontWeights.Bold));
-                paragraph.Inlines.Add(RunExtensions.BuildRun(i == damages.Elements.Count ? " damage" : " damage, ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                    console.AddEntry("and ");
+                console.AddEntry($"{damage_value} {dmg.DamageType}", fontWeightProvider.Bold, fontColorProvider.GetColorByKey(dmg.DamageType.ToString()));
+                console.AddEntry($"{(i == damages.Elements.Count ? " damage" : " damage, ")}");
                 total += damage_value;
                 i += 1;
             }

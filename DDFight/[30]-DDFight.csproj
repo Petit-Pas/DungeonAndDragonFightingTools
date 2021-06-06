@@ -85,6 +85,7 @@
     <Compile Include="Commands\IDnDCommand.cs" />
     <Compile Include="Controlers\SpecializedListUserControl.cs" />
     <Compile Include="Converters\VisibleIfCharacter.cs" />
+    <Compile Include="DIConfigurer.cs" />
     <Compile Include="Game\Aggression\Attacks\Display\HitAttackTemplateListUserControl.cs" />
     <Compile Include="Game\Aggression\Attacks\HitAttackExecuteWindow.xaml.cs">
       <DependentUpon>HitAttackExecuteWindow.xaml</DependentUpon>

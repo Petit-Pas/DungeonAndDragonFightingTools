@@ -44,7 +44,8 @@
                             InnerShadowVisibility="Visible"
                             OuterShadowVisibility="Collapsed"
                             BackgroundColor="{StaticResource TabHeaderBaseColor}"
-                            LowerOuterShadowColor="{Binding Color, Source={StaticResource TabHeaderHoverColor}}">
+                            LowerOuterShadowColor="{Binding Color, Source={StaticResource TabHeaderHoverColor}}"
+                            Padding="9">
                             <ContentPresenter 
                                 HorizontalAlignment="Center" 
                                 VerticalAlignment="Center"

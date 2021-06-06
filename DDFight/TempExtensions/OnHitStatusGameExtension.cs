@@ -1,4 +1,6 @@
-﻿using DDFight;
+﻿using BaseToolsLibrary.DependencyInjection;
+using BaseToolsLibrary.IO;
+using DDFight;
 using DDFight.Game.Aggression.Display;
 using DDFight.Game.Status.Display;
 using DnDToolsLibrary.Attacks.Damage;
@@ -17,6 +19,9 @@ namespace TempExtensionsOnHitStatus
 {
     public static class OnHitStatusGameExtension
     {
+        private static ICustomConsole console = DIContainer.GetImplementation<ICustomConsole>();
+        private static IFontWeightProvider fontWeightProvider = DIContainer.GetImplementation<IFontWeightProvider>();
+
         /// <summary>
         ///     is injected in OnHitStatus.Register at the start of the application in order to handle the events at a higher layer of the application 
         /// </summary>
@@ -129,11 +134,9 @@ namespace TempExtensionsOnHitStatus
         {
             if (onHitStatus.EndsOnCasterLossOfConcentration && e.PropertyName == "IsFocused" && onHitStatus.Caster.IsFocused == false)
             {
-                Paragraph paragraph = (Paragraph)FightConsole.Instance.UserLogs.Blocks.LastBlock;
-
-                paragraph.Inlines.Add(RunExtensions.BuildRun("Due to ", (Brush)System.Windows.Application.Current.Resources["Light"], 15, FontWeights.Normal));
-                paragraph.Inlines.Add(RunExtensions.BuildRun(onHitStatus.Caster.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
-                paragraph.Inlines.Add(RunExtensions.BuildRun("'s loss of concentration, ", (Brush)System.Windows.Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                console.AddEntry("Due to ");
+                console.AddEntry($"{onHitStatus.Caster.DisplayName}", fontWeightProvider.SemiBold);
+                console.AddEntry("'s loss of concentration, ");
                 onHitStatus.RemoveStatus();
             }
         }
@@ -165,10 +168,9 @@ namespace TempExtensionsOnHitStatus
             onHitStatus.RemainingRounds -= 1;
             if (onHitStatus.RemainingRounds <= 0)
             {
-                Paragraph paragraph = (Paragraph)FightConsole.Instance.UserLogs.Blocks.LastBlock;
-                paragraph.Inlines.Add(RunExtensions.BuildRun("The Status inflicted by ", (Brush)System.Windows.Application.Current.Resources["Light"], 15, FontWeights.Normal));
-                paragraph.Inlines.Add(RunExtensions.BuildRun(onHitStatus.Caster.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
-                paragraph.Inlines.Add(RunExtensions.BuildRun(" has expired. ", (Brush)System.Windows.Application.Current.Resources["Light"], 15, FontWeights.Normal));
+                console.AddEntry("The Status inflicted by ");
+                console.AddEntry($"{onHitStatus.Caster.DisplayName}", fontWeightProvider.SemiBold);
+                console.AddEntry(" has expired. ");
                 onHitStatus.RemoveStatus();
 
                 // if caster was focused on this, he can now be "un"focused
@@ -185,12 +187,10 @@ namespace TempExtensionsOnHitStatus
         /// </summary>
         public static void RemoveStatus(this OnHitStatus onHitStatus)
         {
-            Paragraph paragraph = (Paragraph)FightConsole.Instance.UserLogs.Blocks.LastBlock;
-
-            paragraph.Inlines.Add(RunExtensions.BuildRun(onHitStatus.Affected.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
-            paragraph.Inlines.Add(RunExtensions.BuildRun(" is no more affected by ", (Brush)System.Windows.Application.Current.Resources["Light"], 15, FontWeights.Normal));
-            paragraph.Inlines.Add(RunExtensions.BuildRun(onHitStatus.Header, (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
-            paragraph.Inlines.Add(RunExtensions.BuildRun(".\r\n", (Brush)System.Windows.Application.Current.Resources["Light"], 15, FontWeights.Normal));
+            console.AddEntry($"{onHitStatus.Affected.DisplayName}", fontWeightProvider.SemiBold);
+            console.AddEntry(" is no more affected by ");
+            console.AddEntry($"{onHitStatus.Header}", fontWeightProvider.SemiBold);
+            console.AddEntry(".\r\n");
 
             onHitStatus.Affected.CustomVerboseStatusList.RemoveElement(onHitStatus);
             onHitStatus.Unregister();
@@ -223,13 +223,11 @@ namespace TempExtensionsOnHitStatus
 
             if (application_success)
             {
-                Paragraph paragraph = (Paragraph)FightConsole.Instance.UserLogs.Blocks.LastBlock;
-
-                paragraph.Inlines.Add(RunExtensions.BuildRun(caster.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-                paragraph.Inlines.Add(RunExtensions.BuildRun(" applies ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-                paragraph.Inlines.Add(RunExtensions.BuildRun(onHitStatus.Header, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-                paragraph.Inlines.Add(RunExtensions.BuildRun(" on ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-                paragraph.Inlines.Add(RunExtensions.BuildRun(target.DisplayName + "\r\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
+                console.AddEntry($"{caster.DisplayName}", fontWeightProvider.Bold);
+                console.AddEntry(" applies ");
+                console.AddEntry($"{onHitStatus.Header}", fontWeightProvider.Bold);
+                console.AddEntry(" on ");
+                console.AddEntry($"{target.DisplayName}\r\n", fontWeightProvider.Bold);
 
                 applied.Caster = caster;
                 applied.Affected = target;

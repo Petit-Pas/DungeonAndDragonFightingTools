@@ -85,6 +85,7 @@
     <Compile Include="Status\CustomVerboseStatusList.cs" />
     <Compile Include="Status\OnHitStatus.cs" />
     <Compile Include="Status\OnHitStatusList.cs" />
+    <Compile Include="Status\TempCommands\OnHitStatusTempCommands.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BaseToolsLibrary\[10]-BaseToolsLibrary.csproj">

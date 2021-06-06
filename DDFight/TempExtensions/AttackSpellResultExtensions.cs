@@ -1,4 +1,6 @@
-﻿using DDFight.Commands;
+﻿using BaseToolsLibrary.DependencyInjection;
+using BaseToolsLibrary.IO;
+using DDFight.Commands;
 using DDFight.Commands.AttackCommands;
 using DnDToolsLibrary.Attacks.HitAttacks;
 using DnDToolsLibrary.Attacks.Spells;
@@ -16,14 +18,15 @@ namespace TempExtensionsAttackSpellResultExtensions
 {
     public static class AttackSpellResultExtensions
     {
+        private static ICustomConsole console = DIContainer.GetImplementation<ICustomConsole>();
+        private static IFontWeightProvider fontWeightProvider = DIContainer.GetImplementation<IFontWeightProvider>();
+
         public static void Cast(this AttackSpellResult attackSpellResult, List<SpellAttackResultRollableUserControl> attacks)
         {
-            Paragraph paragraph = (Paragraph)FightConsole.Instance.UserLogs.Blocks.LastBlock;
 
-            paragraph.Inlines.Add(RunExtensions.BuildRun(attackSpellResult.Caster.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-            paragraph.Inlines.Add(RunExtensions.BuildRun(" casts a lvl ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-            paragraph.Inlines.Add(RunExtensions.BuildRun(attackSpellResult.Level.ToString() + " " + attackSpellResult.Name + "\r\n", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-
+            console.AddEntry($"{attackSpellResult.Caster.DisplayName}", fontWeightProvider.Bold);
+            console.AddEntry(" casts a lvl ", fontWeightProvider.Bold);
+            console.AddEntry($"{attackSpellResult.Level} {attackSpellResult.Name}\r\n", fontWeightProvider.Bold);
 
             int index = 0;
             foreach (PlayableEntity target in attackSpellResult.Targets)

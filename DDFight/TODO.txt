@@ -33,3 +33,5 @@ Remplacer les checkbox dans le cas d'avantages / désavantages par des flèches
 
 Inclure les faiblesses, résistances, etc.. dans les DamageResult pour pouvoir les override depuis l'UI.
 Dans la fenetre d'attaque, parfois si la cible est sélect avant, les boutons ne se refreshent pas.
+
+Peut etre devoir inclure un saving throw dans les dotDamage (les lumières qui tournent autour du clerc)

@@ -22,10 +22,11 @@ namespace DnDToolsLibrary.Attacks.Damage
 
         public void RefreshDamageAffinityModifier(PlayableEntity newTarget)
         {
-            foreach (DamageResult result in Elements)
-            {
-                result.AffinityModifier = newTarget.DamageAffinities.GetAffinity(result.DamageType).Affinity;
-            }
+            if (newTarget != null)
+                foreach (DamageResult result in Elements)
+                {
+                    result.AffinityModifier = newTarget.DamageAffinities.GetAffinity(result.DamageType).Affinity;
+                }
         }
     }
 }

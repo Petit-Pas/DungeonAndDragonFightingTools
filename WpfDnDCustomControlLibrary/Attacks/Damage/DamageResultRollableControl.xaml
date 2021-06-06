@@ -12,6 +12,7 @@
     <UserControl.Resources>
         <converters:DamageTypeEnumToBrushConverter x:Key="DamageColorConverter" />
         <visibilities:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
+        <visibilities:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
         <Style TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlock}"/>
     </UserControl.Resources>
     <Grid>
@@ -64,11 +65,14 @@
             <TextBlock 
                 FontWeight="Bold"
                 Text="{Binding ToRollBonus}" 
-                VerticalAlignment="Center"/>
+                VerticalAlignment="Center"
+                Margin="0 0 10 0"/>
 
             <local:DamageModifierSelectableControl
                 IsEnabled="{Binding CanBeAltered, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:DamageResultRollableControl}}}"
-                DamageModifier="{Binding SituationalDamageModifier}"/>
+                DamageModifier="{Binding SituationalDamageModifier}"
+                Visibility="{Binding LinkedToSaving, Converter={StaticResource BoolToVisibilityConverter}}"
+                />
 
             <damageaffinity:DamageAffinitySelectableControl
                 IsEnabled="{Binding CanBeAltered, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:DamageResultRollableControl}}}"

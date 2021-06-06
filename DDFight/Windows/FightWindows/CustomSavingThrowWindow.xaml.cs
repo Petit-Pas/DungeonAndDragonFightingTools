@@ -1,4 +1,6 @@
-﻿using DDFight.Game.Dices.SavingThrow;
+﻿using BaseToolsLibrary.DependencyInjection;
+using BaseToolsLibrary.IO;
+using DDFight.Game.Dices.SavingThrow;
 using DnDToolsLibrary.Attacks;
 using DnDToolsLibrary.Characteristics;
 using DnDToolsLibrary.Dice;
@@ -20,6 +22,9 @@ namespace DDFight.Windows.FightWindows
     /// </summary>
     public partial class CustomSavingThrowWindow : Window, INotifyPropertyChanged
     {
+        private ICustomConsole console = DIContainer.GetImplementation<ICustomConsole>();
+        private IFontWeightProvider fontWeightProvider = DIContainer.GetImplementation<IFontWeightProvider>();
+
         private PlayableEntity data_context
         {
             get => (PlayableEntity)DataContext;
@@ -116,12 +121,10 @@ namespace DDFight.Windows.FightWindows
 
         private void do_saving_throw()
         {
-            Paragraph paragraph = (Paragraph)FightConsole.Instance.UserLogs.Blocks.LastBlock;
-            paragraph.Inlines.Add(RunExtensions.BuildRun(data_context.DisplayName, (Brush)Application.Current.Resources["Light"], 15, FontWeights.Bold));
-            paragraph.Inlines.Add(RunExtensions.BuildRun(": Saving Throw ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.Normal));
-            paragraph.Inlines.Add(RunExtensions.BuildRun(Characteristic.ToString() + " ", (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
-            paragraph.Inlines.Add(RunExtensions.BuildRun((Roll + SituationalSavingThrowModifier.Modifier + data_context.Characteristics.GetSavingModifier(Characteristic)).ToString() + "/" + Difficulty + "\n",
-                (Brush)Application.Current.Resources["Light"], 15, FontWeights.SemiBold));
+            console.AddEntry($"{data_context.DisplayName}", fontWeightProvider.Bold);
+            console.AddEntry(": Saving Throw ", fontWeightProvider.Bold);
+            console.AddEntry($"{Characteristic} ", fontWeightProvider.Bold);
+            console.AddEntry($"{Roll + SituationalSavingThrowModifier.Modifier + data_context.Characteristics.GetSavingModifier(Characteristic)}/{Difficulty}\n", fontWeightProvider.Bold);
             if (Difficulty <= (Roll + SituationalSavingThrowModifier.Modifier + data_context.Characteristics.GetSavingModifier(Characteristic)))
                 Success = true;
         }
