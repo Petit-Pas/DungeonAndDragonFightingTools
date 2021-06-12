@@ -1,9 +1,9 @@
-﻿using BaseToolsLibrary.Tools;
+﻿using BaseToolsLibrary;
+using BaseToolsLibrary.Tools;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using WpfToolsLibrary.Display;
 using WpfToolsLibrary.ValidationRules;
 
 namespace WpfToolsLibrary.Extensions

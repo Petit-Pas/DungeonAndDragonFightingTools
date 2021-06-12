@@ -17,7 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BaseToolsLibrary\[10]-BaseToolsLibrary.csproj" />
     <ProjectReference Include="..\DDFight\[30]-DDFight.csproj" />
+    <ProjectReference Include="..\DnDToolsLibrary\[12]-DnDToolsLibrary.csproj" />
   </ItemGroup>
 
 </Project>

@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Xml.Serialization;
-using WpfToolsLibrary.Display;
 using DnDToolsLibrary.Fight.Events;
 using BaseToolsLibrary.IO;
 using BaseToolsLibrary.Memory;
@@ -12,6 +11,7 @@ using DnDToolsLibrary.Attacks.HitAttacks;
 using DnDToolsLibrary.Attacks.Spells;
 using DnDToolsLibrary.Counters;
 using DnDToolsLibrary.Status;
+using BaseToolsLibrary;
 
 namespace DnDToolsLibrary.Entities
 {

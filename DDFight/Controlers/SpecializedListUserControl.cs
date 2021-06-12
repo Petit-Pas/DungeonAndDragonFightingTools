@@ -1,6 +1,6 @@
-﻿using DnDToolsLibrary.Memory;
+﻿using BaseToolsLibrary;
+using DnDToolsLibrary.Memory;
 using System;
-using WpfToolsLibrary.Display;
 
 namespace DDFight.Controlers
 {

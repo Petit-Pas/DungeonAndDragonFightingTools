@@ -9,12 +9,9 @@ using DnDToolsLibrary.Attacks.Spells;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Memory;
 using DnDToolsLibrary.Status;
-using System;
 using System.Linq;
 using System.Windows;
-using System.Windows.Documents;
 using TempExtensionsOnHitStatus;
-using WpfToolsLibrary.ConsoleTools;
 using WpfToolsLibrary.Extensions;
 
 namespace DDFight
@@ -44,7 +41,8 @@ namespace DDFight
 
             Logger.Init();
 
-            DIConfigurer.Configure();
+            DIConfigurer.ConfigureCore();
+            DIConfigurer.ConfigureWpf();
 
             GlobalContext.Context.CharacterList = SaveManager.LoadGenericList<Character, CharacterList>(SaveManager.players_folder);
             GlobalContext.Context.MonsterList = SaveManager.LoadGenericList<Monster, MonsterList>(SaveManager.monsters_folder);

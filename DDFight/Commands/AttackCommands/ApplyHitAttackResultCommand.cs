@@ -3,13 +3,7 @@ using BaseToolsLibrary.IO;
 using DnDToolsLibrary.Attacks.HitAttacks;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Status;
-using System.Windows;
-using System.Windows.Documents;
-using System.Windows.Media;
 using TempExtensionsOnHitStatus;
-using TempExtensionsPlayableEntity;
-using WpfToolsLibrary.ConsoleTools;
-using WpfToolsLibrary.Extensions;
 
 namespace DDFight.Commands.AttackCommands
 {

@@ -47,6 +47,7 @@
     <Compile Include="DependencyInjection\DIContainer.cs" />
     <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="INameable.cs" />
     <Compile Include="IO\FontColorProvider.cs" />
     <Compile Include="IO\ICustomConsole.cs" />
     <Compile Include="IO\IFontColor.cs" />
@@ -55,6 +56,15 @@
     <Compile Include="IO\IFontWeightProvider.cs" />
     <Compile Include="IO\Logger.cs" />
     <Compile Include="Math\ArithmeticParser.cs" />
+    <Compile Include="Mediator\BaseHistoryMediator.cs" />
+    <Compile Include="Mediator\BaseMediator.cs" />
+    <Compile Include="Mediator\BaseMediatorHandler.cs" />
+    <Compile Include="Mediator\BaseSuperCommand.cs" />
+    <Compile Include="Mediator\BaseSuperHandler.cs" />
+    <Compile Include="Mediator\IHistoryMediator.cs" />
+    <Compile Include="Mediator\IMediator.cs" />
+    <Compile Include="Mediator\IMediatorCommand.cs" />
+    <Compile Include="Mediator\IMediatorHandler.cs" />
     <Compile Include="Memory\DisposableExtensions.cs" />
     <Compile Include="Memory\Global.cs" />
     <Compile Include="Memory\ICopyAssignable.cs" />

@@ -1,4 +1,3 @@
-using DDFight.Game.Dices;
 using DnDToolsLibrary.Dice;
 using NUnit.Framework;
 using System;
@@ -115,7 +114,6 @@ namespace CoreUnitTest
         [Test]
         public void TestBadFormat()
         {
-
             failing_test("-1d4");
             failing_test("d4");
             failing_test("1d");

@@ -1,25 +1,24 @@
-﻿using SimpleInjector;
+﻿using BaseToolsLibrary.Mediator;
+using DDFight;
+using DnDToolsLibrary.Entities;
+using DnDToolsLibrary.Entities.EntitiesCommands.HpCommands;
+using SimpleInjector;
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace SandBox
 {
+    
     class Program
     {
-        static readonly Container container;
-        static Program()
-        {
-            container = new Container();
-
-            container.Register<IImplementation, Second>();
-
-            container.Verify();
-        }
+        
 
         static void Main(string[] args)
         {
-            IImplementation handler = container.GetInstance<IImplementation>();
+            DIConfigurer.ConfigureCore();
 
-            handler.Method();
+            HealEntityCommand command = new HealEntityCommand(new Character(), 10);
 
             Console.ReadLine();
         }

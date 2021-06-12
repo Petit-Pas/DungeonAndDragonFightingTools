@@ -1,7 +1,6 @@
 ﻿using DnDToolsLibrary.Attacks.Damage;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Status;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;

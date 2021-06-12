@@ -1,6 +1,5 @@
 ﻿using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.IO;
-using DDFight;
 using DDFight.Game.Aggression.Display;
 using DDFight.Game.Status.Display;
 using DnDToolsLibrary.Attacks.Damage;
@@ -8,11 +7,7 @@ using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Fight.Events;
 using DnDToolsLibrary.Status;
 using System.ComponentModel;
-using System.Windows;
-using System.Windows.Documents;
-using System.Windows.Media;
 using TempExtensionsPlayableEntity;
-using WpfToolsLibrary.ConsoleTools;
 using WpfToolsLibrary.Extensions;
 
 namespace TempExtensionsOnHitStatus

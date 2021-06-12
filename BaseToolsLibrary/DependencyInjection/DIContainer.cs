@@ -25,6 +25,13 @@ namespace BaseToolsLibrary.DependencyInjection
             container.RegisterSingleton<T, U>();
         }
 
+        public static void RegisterSingleton<T, U>(U instance)
+            where T : class
+            where U : class, T
+        {
+            container.RegisterInstance<T>(instance);
+        }
+
         public static T GetImplementation<T>()
             where T : class
         {

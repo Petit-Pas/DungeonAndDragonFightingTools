@@ -1,23 +1,12 @@
 ﻿using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.IO;
-using DDFight;
-using DDFight.Game.Entities.Display;
 using DDFight.Windows.FightWindows;
 using DnDToolsLibrary.Attacks.Damage;
 using DnDToolsLibrary.Attacks.Damage.Type;
-using DnDToolsLibrary.Attacks.HitAttacks;
 using DnDToolsLibrary.Dice;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Fight;
 using DnDToolsLibrary.Fight.Events;
-using DnDToolsLibrary.Status;
-using System;
-using System.Windows;
-using System.Windows.Documents;
-using System.Windows.Media;
-using TempExtensionsOnHitStatus;
-using WpfDnDCustomControlLibrary.Converters;
-using WpfToolsLibrary.ConsoleTools;
 using WpfToolsLibrary.Extensions;
 
 namespace TempExtensionsPlayableEntity

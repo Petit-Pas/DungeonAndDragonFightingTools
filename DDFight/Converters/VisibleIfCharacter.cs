@@ -1,5 +1,4 @@
-﻿using DDFight.Game.Entities;
-using DnDToolsLibrary.Entities;
+﻿using DnDToolsLibrary.Entities;
 using System;
 using System.Globalization;
 using System.Windows;

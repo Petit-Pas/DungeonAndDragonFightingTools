@@ -1,9 +1,9 @@
-﻿using BaseToolsLibrary.Memory;
+﻿using BaseToolsLibrary;
+using BaseToolsLibrary.Memory;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Xml.Serialization;
-using WpfToolsLibrary.Display;
 
 namespace DnDToolsLibrary.Attacks
 {

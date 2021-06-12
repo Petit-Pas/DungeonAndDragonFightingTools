@@ -1,8 +1,6 @@
 ﻿using BaseToolsLibrary.Memory;
-using DDFight.Game.Entities.Display;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Memory;
-using WpfToolsLibrary.Display;
 
 namespace DDFight.Game.Entities
 {

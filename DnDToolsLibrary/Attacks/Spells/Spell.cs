@@ -1,4 +1,5 @@
-﻿using DnDToolsLibrary.Attacks.Damage;
+﻿using BaseToolsLibrary;
+using DnDToolsLibrary.Attacks.Damage;
 using DnDToolsLibrary.Characteristics;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Status;
@@ -6,7 +7,6 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Xml.Serialization;
-using WpfToolsLibrary.Display;
 
 namespace DnDToolsLibrary.Attacks.Spells
 {

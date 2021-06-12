@@ -1,10 +1,6 @@
 ﻿using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.IO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BaseToolsLibrary.Mediator;
 using System.Windows;
 using System.Windows.Media;
 using WpfToolsLibrary.ConsoleTools;
@@ -13,7 +9,19 @@ namespace DDFight
 {
     public static class DIConfigurer
     {
-        public static void Configure()
+        public static void ConfigureCore()
+        {
+            // REGISTER 
+            // Mediator
+            DIContainer.RegisterSingleton<IMediator, BaseMediator>(new BaseMediator());
+
+            // VERIFY
+            DIContainer.Verify();
+
+            // CONFIGURE
+        }
+
+        public static void ConfigureWpf()
         {
             // REGISTER
 
@@ -21,7 +29,6 @@ namespace DDFight
             DIContainer.RegisterSingleton<ICustomConsole, WpfConsole>();
             DIContainer.RegisterSingleton<IFontColorProvider, WpfFontColorProvider>();
             DIContainer.RegisterSingleton<IFontWeightProvider, WpfFontWeightProvider>();
-
 
             // VERIFY
             DIContainer.Verify();
@@ -44,6 +51,5 @@ namespace DDFight
             colorProvider.AddKey("Psychic", new WpfFontColor() { Brush = new SolidColorBrush(Colors.Purple) });
             colorProvider.AddKey("Radiant", new WpfFontColor() { Brush = new SolidColorBrush(Colors.Orange) });
         }
-
     }
 }

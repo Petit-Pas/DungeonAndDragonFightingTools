@@ -73,6 +73,18 @@
     <Compile Include="Dice\Dices.cs" />
     <Compile Include="Dice\SavingThrow.cs" />
     <Compile Include="Entities\Character.cs" />
+    <Compile Include="Entities\EntitiesCommands\EntityCommand.cs" />
+    <Compile Include="Entities\EntitiesCommands\EntitySuperCommand.cs" />
+    <Compile Include="Entities\EntitiesCommands\HpCommands\HealEntityCommand.cs" />
+    <Compile Include="Entities\EntitiesCommands\HpCommands\HealEntityHandler.cs" />
+    <Compile Include="Entities\EntitiesCommands\HpCommands\LooseHpCommand.cs" />
+    <Compile Include="Entities\EntitiesCommands\HpCommands\LooseHpHandler.cs" />
+    <Compile Include="Entities\EntitiesCommands\HpCommands\LooseTempHpCommand.cs" />
+    <Compile Include="Entities\EntitiesCommands\HpCommands\LooseTempHpHandler.cs" />
+    <Compile Include="Entities\EntitiesCommands\HpCommands\TakeDamageCommand.cs" />
+    <Compile Include="Entities\EntitiesCommands\HpCommands\TakeDamageHandler.cs" />
+    <Compile Include="Entities\EntitiesCommands\HpCommands\TempHealEntityCommand.cs" />
+    <Compile Include="Entities\EntitiesCommands\HpCommands\TempHealEntityHandler.cs" />
     <Compile Include="Fight\FightersList.cs" />
     <Compile Include="Entities\Monster.cs" />
     <Compile Include="Entities\PlayableEntity.cs" />
@@ -91,10 +103,6 @@
     <ProjectReference Include="..\BaseToolsLibrary\[10]-BaseToolsLibrary.csproj">
       <Project>{47d47e7e-85c8-4a4e-91d5-019e64072b1e}</Project>
       <Name>[10]-BaseToolsLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WpfToolsLibrary\[11]-WpfToolsLibrary.csproj">
-      <Project>{84709264-0a0b-4c58-a52f-ba8ade84ab74}</Project>
-      <Name>[11]-WpfToolsLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

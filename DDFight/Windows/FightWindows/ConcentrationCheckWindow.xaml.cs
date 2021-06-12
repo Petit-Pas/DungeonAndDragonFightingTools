@@ -8,9 +8,6 @@ using DnDToolsLibrary.Entities;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Documents;
-using System.Windows.Media;
-using WpfToolsLibrary.ConsoleTools;
 using WpfToolsLibrary.Extensions;
 using WpfToolsLibrary.Navigation;
 

@@ -1,7 +1,6 @@
 ﻿
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Memory;
-using System;
 
 namespace DnDToolsLibrary.Attacks.Damage
 {

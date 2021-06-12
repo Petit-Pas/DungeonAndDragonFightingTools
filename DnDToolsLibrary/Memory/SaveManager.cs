@@ -1,4 +1,5 @@
-﻿using BaseToolsLibrary.IO;
+﻿using BaseToolsLibrary;
+using BaseToolsLibrary.IO;
 using DnDToolsLibrary.Attacks.Spells;
 using DnDToolsLibrary.Entities;
 using System;
@@ -6,7 +7,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
-using WpfToolsLibrary.Display;
 
 namespace DnDToolsLibrary.Memory
 {

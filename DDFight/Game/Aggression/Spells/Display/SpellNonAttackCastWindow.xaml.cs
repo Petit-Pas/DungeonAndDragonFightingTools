@@ -1,5 +1,4 @@
-﻿using DDFight.Game.Dices.SavingThrow;
-using DDFight.Game.Dices.SavingThrow.Display;
+﻿using DDFight.Game.Dices.SavingThrow.Display;
 using DDFight.WpfExtensions;
 using DnDToolsLibrary.Attacks.Spells;
 using DnDToolsLibrary.Dice;

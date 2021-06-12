@@ -1,10 +1,8 @@
 ﻿using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.IO;
-using BaseToolsLibrary.Memory;
 using DDFight.Game.Aggression.Attacks;
 using DDFight.Game.Aggression.Spells.Display;
 using DDFight.Game.Fight.Display;
-using DDFight.Windows.FightWindows;
 using DDFight.Windows.ModalWindows.FormWindow;
 using DnDToolsLibrary.Attacks.Damage;
 using DnDToolsLibrary.Attacks.HitAttacks;
@@ -12,17 +10,10 @@ using DnDToolsLibrary.Attacks.Spells;
 using DnDToolsLibrary.Dice;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Status;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Documents;
-using System.Windows.Media;
 using TempExtensionsOnHitStatus;
 using TempExtensionsPlayableEntity;
-using WpfToolsLibrary.ConsoleTools;
 using WpfToolsLibrary.Extensions;
 
 namespace DDFight.WpfExtensions

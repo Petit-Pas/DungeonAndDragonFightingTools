@@ -68,7 +68,6 @@
     <Compile Include="Converters\Visibilities\IntGreaterThanZeroToVisibility.cs" />
     <Compile Include="Converters\Visibilities\StringToVisibilityConverter.cs" />
     <Compile Include="Converters\Visibilities\VisibleToCollapsedConverter.cs" />
-    <Compile Include="Display\INameable.cs" />
     <Compile Include="Extensions\ApplicationExtension.cs" />
     <Compile Include="Extensions\BindingExtensions.cs" />
     <Compile Include="Extensions\ColorExtension.cs" />

@@ -1,6 +1,5 @@
 ﻿using BaseToolsLibrary.Extensions;
 using BaseToolsLibrary.IO;
-using DDFight.Game.Entities;
 using DDFight.Game.Fight.FightEvents;
 using DDFight.Game.Status.Display;
 using DDFight.Tools;

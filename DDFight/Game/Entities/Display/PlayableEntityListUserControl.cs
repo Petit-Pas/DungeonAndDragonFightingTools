@@ -3,7 +3,6 @@ using DDFight.WpfExtensions;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Memory;
 using System.Windows.Input;
-using TempExtensionsPlayableEntity;
 
 namespace DDFight.Game.Entities.Display
 {

@@ -6,13 +6,7 @@ using DnDToolsLibrary.Attacks.HitAttacks;
 using DnDToolsLibrary.Attacks.Spells;
 using DnDToolsLibrary.Entities;
 using System.Collections.Generic;
-using System.Windows;
-using System.Windows.Documents;
-using System.Windows.Media;
-using TempExtensionsPlayableEntity;
 using WpfDnDCustomControlLibrary.Attacks.Spells;
-using WpfToolsLibrary.ConsoleTools;
-using WpfToolsLibrary.Extensions;
 
 namespace TempExtensionsAttackSpellResultExtensions
 {

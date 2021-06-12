@@ -1,4 +1,4 @@
-﻿namespace WpfToolsLibrary.Display
+﻿namespace BaseToolsLibrary
 {
     /// <summary>
     ///     to be sure to have a name to bind to
