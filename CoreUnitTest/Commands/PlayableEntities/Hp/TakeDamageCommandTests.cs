@@ -29,12 +29,12 @@ namespace CoreUnitTest.Commands.PlayableEntities.Hp
         [SetUp]
         public void Setup()
         {
+            _character.Hp = 50;
         }
 
         [Test]
         public void Basic()
         {
-            _character.Hp = 50;
             _character.TempHp = 0;
             TakeDamageCommand command = new TakeDamageCommand(_character, 10);
 
@@ -50,7 +50,6 @@ namespace CoreUnitTest.Commands.PlayableEntities.Hp
         [Test]
         public void Ko()
         {
-            _character.Hp = 50;
             _character.TempHp = 0;
             TakeDamageCommand command = new TakeDamageCommand(_character, 50);
 
@@ -66,7 +65,6 @@ namespace CoreUnitTest.Commands.PlayableEntities.Hp
         [Test]
         public void KoOverflow()
         {
-            _character.Hp = 50;
             _character.TempHp = 0;
             TakeDamageCommand command = new TakeDamageCommand(_character, 60);
 
@@ -82,7 +80,6 @@ namespace CoreUnitTest.Commands.PlayableEntities.Hp
         [Test]
         public void BasicTemp()
         {
-            _character.Hp = 50;
             _character.TempHp = 10;
             TakeDamageCommand command = new TakeDamageCommand(_character, 5);
 
@@ -98,7 +95,6 @@ namespace CoreUnitTest.Commands.PlayableEntities.Hp
         [Test]
         public void EmptyTemp()
         {
-            _character.Hp = 50;
             _character.TempHp = 10;
             TakeDamageCommand command = new TakeDamageCommand(_character, 10);
 
@@ -114,7 +110,6 @@ namespace CoreUnitTest.Commands.PlayableEntities.Hp
         [Test]
         public void TempOverflow()
         {
-            _character.Hp = 50;
             _character.TempHp = 10;
             TakeDamageCommand command = new TakeDamageCommand(_character, 20);
 
@@ -130,7 +125,6 @@ namespace CoreUnitTest.Commands.PlayableEntities.Hp
         [Test]
         public void FullOverflow()
         {
-            _character.Hp = 50;
             _character.TempHp = 10;
             TakeDamageCommand command = new TakeDamageCommand(_character, 100);
 
@@ -146,7 +140,6 @@ namespace CoreUnitTest.Commands.PlayableEntities.Hp
         [Test]
         public void NoDamage()
         {
-            _character.Hp = 50;
             _character.TempHp = 10;
             TakeDamageCommand command = new TakeDamageCommand(_character, 0);
 

@@ -12,6 +12,8 @@ namespace BaseToolsLibrary.Mediator
     /// </summary>
     public abstract class BaseSuperCommand : IMediatorCommand
     {
+        // TODO should this be XmlIgnored ?
+        // we probably only need the base data of the super command in order to recreate them all with a call to Execute()
         [XmlElement]
         public Stack<IMediatorCommand> InnerCommands { get; set; }
 

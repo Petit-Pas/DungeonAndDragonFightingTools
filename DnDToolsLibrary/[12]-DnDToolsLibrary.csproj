@@ -73,6 +73,8 @@
     <Compile Include="Dice\Dices.cs" />
     <Compile Include="Dice\SavingThrow.cs" />
     <Compile Include="Entities\Character.cs" />
+    <Compile Include="Entities\EntitiesCommands\DamageCommand\ApplyDamageResultListCommand.cs" />
+    <Compile Include="Entities\EntitiesCommands\DamageCommand\ApplyDamageResultListHandler.cs" />
     <Compile Include="Entities\EntitiesCommands\EntityCommand.cs" />
     <Compile Include="Entities\EntitiesCommands\EntitySuperCommand.cs" />
     <Compile Include="Entities\EntitiesCommands\HpCommands\HealEntityCommand.cs" />

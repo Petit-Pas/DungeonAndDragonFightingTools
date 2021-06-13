@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands
 {
@@ -12,6 +13,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands
     /// </summary>
     public class TakeDamageCommand : EntitySuperCommand
     {
+        [XmlAttribute]
         public int Amount { get; set; }
 
         public TakeDamageCommand(PlayableEntity entity, int amount) : base(entity.DisplayName)

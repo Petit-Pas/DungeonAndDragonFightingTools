@@ -43,6 +43,7 @@ namespace DDFight
 
             DIConfigurer.ConfigureCore();
             DIConfigurer.ConfigureWpf();
+            DIConfigurer.Verify();
 
             GlobalContext.Context.CharacterList = SaveManager.LoadGenericList<Character, CharacterList>(SaveManager.players_folder);
             GlobalContext.Context.MonsterList = SaveManager.LoadGenericList<Monster, MonsterList>(SaveManager.monsters_folder);

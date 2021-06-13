@@ -74,6 +74,9 @@ namespace DnDToolsLibrary.Attacks.Damage
         }
         private DamageModifierEnum _temporaryDamageModifier = DamageModifierEnum.Normal;
 
+        /// <summary>
+        ///     Should be set to the default of the Target but can always be overriden
+        /// </summary>
         public DamageAffinityEnum AffinityModifier
         {
             get => _affinityModifier;

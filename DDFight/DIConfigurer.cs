@@ -15,9 +15,6 @@ namespace DDFight
             // Mediator
             DIContainer.RegisterSingleton<IMediator, BaseMediator>(new BaseMediator());
 
-            // VERIFY
-            DIContainer.Verify();
-
             // CONFIGURE
         }
 
@@ -29,9 +26,6 @@ namespace DDFight
             DIContainer.RegisterSingleton<ICustomConsole, WpfConsole>();
             DIContainer.RegisterSingleton<IFontColorProvider, WpfFontColorProvider>();
             DIContainer.RegisterSingleton<IFontWeightProvider, WpfFontWeightProvider>();
-
-            // VERIFY
-            DIContainer.Verify();
 
             // CONFIGURE
 
@@ -50,6 +44,15 @@ namespace DDFight
             colorProvider.AddKey("Poison", new WpfFontColor() { Brush = new SolidColorBrush(Colors.Green) });
             colorProvider.AddKey("Psychic", new WpfFontColor() { Brush = new SolidColorBrush(Colors.Purple) });
             colorProvider.AddKey("Radiant", new WpfFontColor() { Brush = new SolidColorBrush(Colors.Orange) });
+        }
+
+        /// <summary>
+        ///     DIContainer should not be updated after this call
+        /// </summary>
+        public static void Verify()
+        {
+            // VERIFY
+            DIContainer.Verify();
         }
     }
 }
