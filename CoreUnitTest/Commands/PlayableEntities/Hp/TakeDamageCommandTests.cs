@@ -3,6 +3,7 @@ using BaseToolsLibrary.Mediator;
 using DDFight;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Entities.EntitiesCommands.HpCommands;
+using DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.TakeDamage;
 using DnDToolsLibrary.Fight;
 using NUnit.Framework;
 using System;
@@ -150,6 +151,18 @@ namespace CoreUnitTest.Commands.PlayableEntities.Hp
             _mediator.Undo(command);
             Assert.AreEqual(50, _character.Hp);
             Assert.AreEqual(10, _character.TempHp);
+        }
+
+        [Test]
+        public void ReturnValue()
+        {
+            _character.Hp = 50;
+            TakeDamageCommand command = new TakeDamageCommand(_character, 0);
+
+            IMediatorCommandResponse response = _mediator.Execute(command);
+            NoResponse _response = response as NoResponse;
+
+            Assert.IsNotNull(_response);
         }
     }
 }

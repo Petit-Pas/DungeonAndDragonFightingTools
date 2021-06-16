@@ -10,16 +10,22 @@ namespace BaseToolsLibrary.Mediator
     ///     Base class for every Command handler
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class BaseMediatorHandler<T> : IMediatorHandler<T>
-        where T : class, IMediatorCommand
+    public abstract class BaseMediatorHandler<TCommand, TResponse> : IMediatorHandler<TCommand, TResponse>
+        where   TCommand : class, IMediatorCommand
+        where   TResponse : class, IMediatorCommandResponse
     {
-        public abstract void Execute(IMediatorCommand command);
+        public abstract TResponse Execute(IMediatorCommand command);
+
+        IMediatorCommandResponse IMediatorHandler.Execute(IMediatorCommand command)
+        {
+            return this.Execute(command);
+        }
 
         public abstract void Undo(IMediatorCommand command);
 
-        protected T cast_command(IMediatorCommand command)
+        protected TCommand cast_command(IMediatorCommand command)
         {
-            if (command is T _command)
+            if (command is TCommand _command)
                 return _command;
             Console.WriteLine($"ERROR : Wrong kind of command recieved for the MediatorHandler {this.GetType()}");
             throw new InvalidOperationException($"Wrong kind of command recieved for the MediatorHandler {this.GetType()}");

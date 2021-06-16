@@ -61,10 +61,12 @@
     <Compile Include="Mediator\BaseMediatorHandler.cs" />
     <Compile Include="Mediator\BaseSuperCommand.cs" />
     <Compile Include="Mediator\BaseSuperHandler.cs" />
+    <Compile Include="Mediator\IMediatorCommandResponse.cs" />
     <Compile Include="Mediator\IHistoryMediator.cs" />
     <Compile Include="Mediator\IMediator.cs" />
     <Compile Include="Mediator\IMediatorCommand.cs" />
     <Compile Include="Mediator\IMediatorHandler.cs" />
+    <Compile Include="Mediator\NoResponse.cs" />
     <Compile Include="Memory\DisposableExtensions.cs" />
     <Compile Include="Memory\Global.cs" />
     <Compile Include="Memory\ICopyAssignable.cs" />

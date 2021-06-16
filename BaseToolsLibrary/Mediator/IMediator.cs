@@ -13,6 +13,6 @@ namespace BaseToolsLibrary.Mediator
     {
         void Undo(IMediatorCommand command);
 
-        void Execute(IMediatorCommand command);
+        IMediatorCommandResponse Execute(IMediatorCommand command);
     }
 }

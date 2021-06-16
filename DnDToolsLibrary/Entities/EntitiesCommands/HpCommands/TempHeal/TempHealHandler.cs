@@ -1,13 +1,13 @@
 ﻿using BaseToolsLibrary.Mediator;
 using System;
 
-namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands
+namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.TempHeal
 {
-    public class TempHealEntityHandler : BaseMediatorHandler<TempHealEntityCommand>
+    public class TempHealHandler : BaseMediatorHandler<TempHealCommand, NoResponse>
     {
-        public override void Execute(IMediatorCommand command)
+        public override NoResponse Execute(IMediatorCommand command)
         {
-            TempHealEntityCommand _command = this.cast_command(command);
+            TempHealCommand _command = this.cast_command(command);
             PlayableEntity target = _command.GetEntity();
 
             _command.From = target.TempHp;
@@ -16,11 +16,12 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands
                 target.TempHp = _command.Amount;
 
             _command.To = target.TempHp;
+            return MediatorCommandResponses.NoResponse;
         }
 
         public override void Undo(IMediatorCommand command)
         {
-            TempHealEntityCommand _command = this.cast_command(command);
+            TempHealCommand _command = this.cast_command(command);
 
             if (false == _command.To.HasValue || false == _command.From.HasValue)
             {

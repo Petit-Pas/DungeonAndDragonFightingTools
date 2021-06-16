@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands
+namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.LooseHp
 {
-    public class LooseTempHpCommand : EntityCommand
+    public class LooseHpCommand : EntityCommand
     {
         [XmlAttribute]
         public int Amount { get; set; }
@@ -16,7 +16,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands
         [XmlAttribute]
         public int? To { get; set; }
 
-        public LooseTempHpCommand(PlayableEntity entity, int amount) : base(entity.DisplayName)
+        public LooseHpCommand(PlayableEntity entity, int amount) : base(entity.DisplayName)
         {
             Amount = amount;
         }

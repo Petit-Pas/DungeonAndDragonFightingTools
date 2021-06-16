@@ -5,6 +5,7 @@ using DnDToolsLibrary.Attacks.Damage.Type;
 using DnDToolsLibrary.Dice;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand;
+using DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageResultList;
 using DnDToolsLibrary.Fight;
 using NUnit.Framework;
 using System;
@@ -67,6 +68,20 @@ namespace CoreUnitTest.Commands.PlayableEntities.Damage
 
             _mediator.Execute(command);
             Assert.AreEqual(25, _character.Hp);
+
+            _mediator.Undo(command);
+            Assert.AreEqual(50, _character.Hp);
+        }
+        
+        [Test]
+        public void ReturnValue()
+        {
+            _damage.Elements[0].AffinityModifier = DamageAffinityEnum.Resistant;
+            ApplyDamageResultListCommand command = new ApplyDamageResultListCommand(_character, _damage);
+
+            ApplyDamageResultListResponse response = _mediator.Execute(command) as ApplyDamageResultListResponse;
+            Assert.AreEqual(30, _character.Hp);
+            Assert.AreEqual(20, response.Amount);
 
             _mediator.Undo(command);
             Assert.AreEqual(50, _character.Hp);

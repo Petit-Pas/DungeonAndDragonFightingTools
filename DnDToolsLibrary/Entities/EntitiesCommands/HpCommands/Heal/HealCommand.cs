@@ -2,9 +2,9 @@
 using System;
 using System.Xml.Serialization;
 
-namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands
+namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.Heal
 {
-    public class HealEntityCommand : EntityCommand
+    public class HealCommand : EntityCommand
     {
         [XmlAttribute]
         public int Amount { get; set; }
@@ -13,7 +13,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands
         [XmlAttribute]
         public int? To { get; set; }
 
-        public HealEntityCommand(PlayableEntity target, int amount) : base(target.DisplayName)
+        public HealCommand(PlayableEntity target, int amount) : base(target.DisplayName)
         {
             Amount = amount;
         }

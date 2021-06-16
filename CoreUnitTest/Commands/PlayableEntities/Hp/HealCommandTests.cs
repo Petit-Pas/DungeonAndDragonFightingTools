@@ -2,6 +2,7 @@
 using BaseToolsLibrary.Mediator;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Entities.EntitiesCommands.HpCommands;
+using DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.Heal;
 using DnDToolsLibrary.Fight;
 using NUnit.Framework;
 using System;
@@ -11,7 +12,7 @@ using System.Text;
 namespace CoreUnitTest.Commands.PlayableEntities.Hp
 {
     [TestFixture]
-    public class HealEntityCommandTests
+    public class HealCommandTests
     {
         private IMediator _mediator;
         private PlayableEntity _character;
@@ -34,7 +35,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.Hp
         public void HealFull()
         {
             _character.Hp = 50;
-            HealEntityCommand command = new HealEntityCommand(_character, 50);
+            HealCommand command = new HealCommand(_character, 50);
 
             _mediator.Execute(command);
             Assert.AreEqual(100, _character.Hp);
@@ -47,7 +48,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.Hp
         public void HealNormal()
         {
             _character.Hp = 50;
-            HealEntityCommand command = new HealEntityCommand(_character, 40);
+            HealCommand command = new HealCommand(_character, 40);
 
             _mediator.Execute(command);
             Assert.AreEqual(90, _character.Hp);
@@ -60,7 +61,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.Hp
         public void OverHeal()
         {
             _character.Hp = 50;
-            HealEntityCommand command = new HealEntityCommand(_character, 60);
+            HealCommand command = new HealCommand(_character, 60);
 
             _mediator.Execute(command);
             Assert.AreEqual(100, _character.Hp);
@@ -73,7 +74,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.Hp
         public void NoHeal()
         {
             _character.Hp = 50;
-            HealEntityCommand command = new HealEntityCommand(_character, 0);
+            HealCommand command = new HealCommand(_character, 0);
 
             _mediator.Execute(command);
             Assert.AreEqual(50, _character.Hp);
@@ -86,7 +87,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.Hp
         public void NegativeHeal()
         {
             _character.Hp = 50;
-            HealEntityCommand command = new HealEntityCommand(_character, -10);
+            HealCommand command = new HealCommand(_character, -10);
 
             _mediator.Execute(command);
             Assert.AreEqual(50, _character.Hp);
@@ -99,9 +100,21 @@ namespace CoreUnitTest.Commands.PlayableEntities.Hp
         public void WrongUndo()
         {
             _character.Hp = 50;
-            HealEntityCommand command = new HealEntityCommand(_character, 50);
+            HealCommand command = new HealCommand(_character, 50);
 
             Assert.Throws<NullReferenceException>(() => _mediator.Undo(command));
+        }
+
+        [Test]
+        public void ReturnValue()
+        {
+            _character.Hp = 50;
+            HealCommand command = new HealCommand(_character, 50);
+
+            IMediatorCommandResponse response = _mediator.Execute(command);
+            NoResponse _response = response as NoResponse;
+
+            Assert.IsNotNull(_response);
         }
     }
 }

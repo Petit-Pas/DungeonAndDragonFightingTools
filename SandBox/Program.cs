@@ -2,6 +2,7 @@
 using DDFight;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Entities.EntitiesCommands.HpCommands;
+using DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.Heal;
 using SimpleInjector;
 using System;
 using System.Threading;
@@ -18,7 +19,7 @@ namespace SandBox
         {
             DIConfigurer.ConfigureCore();
 
-            HealEntityCommand command = new HealEntityCommand(new Character(), 10);
+            HealCommand command = new HealCommand(new Character(), 10);
 
             Console.ReadLine();
         }

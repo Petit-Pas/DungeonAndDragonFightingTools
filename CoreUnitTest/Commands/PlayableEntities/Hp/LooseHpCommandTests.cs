@@ -2,6 +2,7 @@
 using BaseToolsLibrary.Mediator;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Entities.EntitiesCommands.HpCommands;
+using DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.LooseHp;
 using DnDToolsLibrary.Fight;
 using NUnit.Framework;
 using System;
@@ -76,6 +77,18 @@ namespace CoreUnitTest.Commands.PlayableEntities.Hp
             LooseHpCommand command = new LooseHpCommand(_character, 50);
 
             Assert.Throws<NullReferenceException>(() => _mediator.Undo(command));
+        }
+
+        [Test]
+        public void ReturnValue()
+        {
+            _character.Hp = 50;
+            LooseHpCommand command = new LooseHpCommand(_character, 50);
+
+            IMediatorCommandResponse response = _mediator.Execute(command);
+            NoResponse _response = response as NoResponse;
+
+            Assert.IsNotNull(_response);
         }
     }
 }

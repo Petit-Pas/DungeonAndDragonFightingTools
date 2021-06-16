@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand
+namespace DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageResultList
 {
     public class ApplyDamageResultListCommand : EntitySuperCommand
     {

@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands
+namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.LooseTempHp
 {
-    public class LooseTempHpHandler : BaseMediatorHandler<LooseTempHpCommand>
+    public class LooseTempHpHandler : BaseMediatorHandler<LooseTempHpCommand, NoResponse>
     {
-        public override void Execute(IMediatorCommand command)
+        public override NoResponse Execute(IMediatorCommand command)
         {
             LooseTempHpCommand _command = this.cast_command(command);
             PlayableEntity target = _command.GetEntity();
@@ -23,6 +23,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands
             }
 
             _command.To = target.TempHp;
+            return MediatorCommandResponses.NoResponse;
         }
 
         public override void Undo(IMediatorCommand command)

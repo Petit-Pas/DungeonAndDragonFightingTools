@@ -2,16 +2,17 @@
 using DnDToolsLibrary.Attacks.Damage;
 using DnDToolsLibrary.Attacks.Damage.Type;
 using DnDToolsLibrary.Entities.EntitiesCommands.HpCommands;
+using DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.TakeDamage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageResultListCommand;
+using static DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageResultList.ApplyDamageResultListCommand;
 
-namespace DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand
+namespace DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageResultList
 {
-    public class ApplyDamageResultListHandler : BaseSuperHandler<ApplyDamageResultListCommand>
+    public class ApplyDamageResultListHandler : BaseSuperHandler<ApplyDamageResultListCommand, ApplyDamageResultListResponse>
     {
         private void applyDamageAffinity(ref int rawAmount, DamageAffinityEnum affinity)
         {
@@ -46,12 +47,12 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand
             }
         }
 
-        public override void Execute(IMediatorCommand command)
+        public override ApplyDamageResultListResponse Execute(IMediatorCommand command)
         {
             ApplyDamageResultListCommand _command = base.cast_command(command);
 
             if (false == _command.DamageList.Any())
-                return;
+                return null;
 
             PlayableEntity target = _command.GetEntity();
             int total = 0;
@@ -78,6 +79,8 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand
             TakeDamageCommand inner_command = new TakeDamageCommand(target, total);
             base._mediator.Value.Execute(inner_command);
             _command.AddToInnerCommands(inner_command);
+
+            return new ApplyDamageResultListResponse(total);
         }
     }
 }

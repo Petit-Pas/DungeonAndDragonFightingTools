@@ -1,8 +1,8 @@
 ﻿using System.Xml.Serialization;
 
-namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands
+namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.TempHeal
 {
-    public class TempHealEntityCommand : EntityCommand
+    public class TempHealCommand : EntityCommand
     {
         [XmlAttribute]
         public int Amount { get; set; }
@@ -11,7 +11,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands
         [XmlAttribute]
         public int? To { get; set; }
 
-        public TempHealEntityCommand(PlayableEntity target, int amount) : base(target.DisplayName)
+        public TempHealCommand(PlayableEntity target, int amount) : base(target.DisplayName)
         {
             Amount = amount;
         }

@@ -1,20 +1,22 @@
 ﻿using BaseToolsLibrary.Mediator;
+using DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.LooseHp;
+using DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.LooseTempHp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands
+namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.TakeDamage
 {
-    public class TakeDamageHandler : BaseSuperHandler<TakeDamageCommand>
+    public class TakeDamageHandler : BaseSuperHandler<TakeDamageCommand, NoResponse>
     {
-        public override void Execute(IMediatorCommand command)
+        public override NoResponse Execute(IMediatorCommand command)
         {
             TakeDamageCommand _command = base.cast_command(command);
 
             if (_command.Amount == 0)
-                return;
+                return MediatorCommandResponses.NoResponse;
 
             PlayableEntity target = _command.GetEntity();
             int remaining = _command.Amount;
@@ -22,6 +24,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands
             if (target.TempHp != 0)
                 remaining = handleTempHp(_command, target, remaining);
             handleHp(_command, target, remaining);
+            return MediatorCommandResponses.NoResponse;
         }
 
         private void handleHp(TakeDamageCommand command, PlayableEntity target, int remaining)

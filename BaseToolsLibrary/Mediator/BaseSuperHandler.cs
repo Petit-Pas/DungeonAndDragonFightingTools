@@ -11,8 +11,9 @@ namespace BaseToolsLibrary.Mediator
     ///     Base handler for the BaseSuperCommands implementation
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class BaseSuperHandler<T> : BaseMediatorHandler<T>
-        where T : BaseSuperCommand
+    public abstract class BaseSuperHandler<TCommand, TResponse> : BaseMediatorHandler<TCommand, TResponse>
+        where TCommand : BaseSuperCommand
+        where TResponse : class, IMediatorCommandResponse
     {
         protected Lazy<IMediator> _mediator = new Lazy<IMediator>(() => DIContainer.GetImplementation<IMediator>());
 

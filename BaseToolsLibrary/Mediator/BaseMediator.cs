@@ -53,7 +53,7 @@ namespace BaseToolsLibrary.Mediator
                             {
                                 if (_interface.IsGenericType)
                                 {
-                                    if (_interface.GetGenericTypeDefinition() == typeof(IMediatorHandler<>))
+                                    if (_interface.GetGenericTypeDefinition() == typeof(IMediatorHandler<,>))
                                     {
                                         Console.WriteLine($"==>INFO : MediatorBase found the '{type.FullName}' handler, its command type is {type.GetInterfaces()[i].GetGenericArguments()[0]}.");
                                         register_handler(Activator.CreateInstance(type) as IMediatorHandler, type.GetInterfaces()[i].GetGenericArguments()[0]);
@@ -180,11 +180,11 @@ namespace BaseToolsLibrary.Mediator
             return pair.Value;
         }
 
-        public void Execute(IMediatorCommand command)
+        public IMediatorCommandResponse Execute(IMediatorCommand command)
         {
             IMediatorHandler handler = get_handler_from_command(command);
 
-            handler.Execute(command);
+            return handler.Execute(command);
         }
 
         public void Undo(IMediatorCommand command)
