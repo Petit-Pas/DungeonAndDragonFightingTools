@@ -8,8 +8,8 @@
         <ResourceDictionary>
 
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/DDFight;component/Theme/ColorTheme.xaml"/>
                 <ResourceDictionary Source="/DDFight;component/FontTheme.xaml"/>
+                <ResourceDictionary Source="/DDFight;component/Theme/ColorTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <Style x:Key="WindowStyle" TargetType="Window">

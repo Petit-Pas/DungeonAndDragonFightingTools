@@ -44,6 +44,8 @@
     <Compile Include="Attacks\AAttackTemplate.cs" />
     <Compile Include="Attacks\AttackRangeEnum.cs" />
     <Compile Include="Attacks\AttackRollResult.cs" />
+    <Compile Include="Attacks\AttacksCommands\DamageCommands\CalculateDamageListResult\CalculateDamageResultListCommand.cs" />
+    <Compile Include="Attacks\AttacksCommands\DamageCommands\CalculateDamageListResult\CalculateDamageResultListResponse.cs" />
     <Compile Include="Attacks\Damage\DamageModifierEnum.cs" />
     <Compile Include="Attacks\Damage\DamageResult.cs" />
     <Compile Include="Attacks\Damage\DamageResultList.cs" />

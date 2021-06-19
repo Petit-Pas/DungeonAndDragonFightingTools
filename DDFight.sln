@@ -26,6 +26,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "[21]-WpfDnDCustomControlLib
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "[12]-DnDToolsLibrary", "DnDToolsLibrary\[12]-DnDToolsLibrary.csproj", "{1BAE42FC-3797-4566-B2D7-C230077F4AE3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "[29]-WpfDnDCommandHandlers", "WpfDnDCommandHandlers\[29]-WpfDnDCommandHandlers.csproj", "{BC3A9F4D-044E-41F4-9303-40F2C29E1C6A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -68,6 +70,10 @@ Global
 		{1BAE42FC-3797-4566-B2D7-C230077F4AE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BAE42FC-3797-4566-B2D7-C230077F4AE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1BAE42FC-3797-4566-B2D7-C230077F4AE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC3A9F4D-044E-41F4-9303-40F2C29E1C6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC3A9F4D-044E-41F4-9303-40F2C29E1C6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC3A9F4D-044E-41F4-9303-40F2C29E1C6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC3A9F4D-044E-41F4-9303-40F2C29E1C6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

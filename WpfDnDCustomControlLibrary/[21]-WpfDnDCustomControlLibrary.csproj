@@ -57,6 +57,9 @@
     <Compile Include="Attacks\Damage\DamageModifierSelectableControl.xaml.cs">
       <DependentUpon>DamageModifierSelectableControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Attacks\Damage\DamageResultListRollableWindow.xaml.cs">
+      <DependentUpon>DamageResultListRollableWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Attacks\HitAttacks\HitAttackResultUserControl.xaml.cs">
       <DependentUpon>HitAttackResultUserControl.xaml</DependentUpon>
     </Compile>
@@ -141,6 +144,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Attacks\Damage\DamageModifierSelectableControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Attacks\Damage\DamageResultListRollableWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

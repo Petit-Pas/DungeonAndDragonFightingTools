@@ -11,13 +11,37 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageRes
 {
     public class ApplyDamageResultListCommand : EntitySuperCommand
     {
+        /// <summary>
+        ///     Should always be false, unless the damages were linked to a saving that has been succesfull
+        ///         e.g. : resisting a spell or a poison
+        /// </summary>
+        [XmlAttribute]
+        public bool LastSavingWasSuccessfull { get; set; } = false;
+
+        public List<Damage> DamageList { get; set; } = new List<Damage>();
+
+        public ApplyDamageResultListCommand(PlayableEntity target, DamageResultList damageList, bool lastSavingWasSuccessfull = false) 
+            : base(target.DisplayName)
+        {
+            LastSavingWasSuccessfull = lastSavingWasSuccessfull;
+            foreach (DamageResult dmg in damageList.Elements)
+            {
+                DamageList.Add(new Damage(
+                    dmg.Damage.LastResult,
+                    dmg.SituationalDamageModifier,
+                    dmg.AffinityModifier,
+                    dmg.DamageType
+                    ));
+            }
+        }
+
         public class Damage
         {
             private Damage()
             {
 
             }
-         
+
             public Damage(int rawAmount, DamageModifierEnum savingModifier, DamageAffinityEnum typeAffinity, DamageTypeEnum type)
             {
                 RawAmount = rawAmount;
@@ -52,30 +76,6 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageRes
             /// </summary>
             [XmlAttribute]
             public DamageTypeEnum Type { get; set; }
-        }
-
-        /// <summary>
-        ///     Should always be false, unless the damages were linked to a saving that has been succesfull
-        ///         e.g. : resisting a spell or a poison
-        /// </summary>
-        [XmlAttribute]
-        public bool LastSavingWasSuccessfull { get; set; } = false;
-
-        public List<Damage> DamageList { get; set; } = new List<Damage>();
-
-        public ApplyDamageResultListCommand(PlayableEntity target, DamageResultList damageList, bool lastSavingWasSuccessfull = false) 
-            : base(target.DisplayName)
-        {
-            LastSavingWasSuccessfull = lastSavingWasSuccessfull;
-            foreach (DamageResult dmg in damageList.Elements)
-            {
-                DamageList.Add(new Damage(
-                    dmg.Damage.LastResult,
-                    dmg.SituationalDamageModifier,
-                    dmg.AffinityModifier,
-                    dmg.DamageType
-                    ));
-            }
         }
     }
 }

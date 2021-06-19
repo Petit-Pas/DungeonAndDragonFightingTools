@@ -1,8 +1,11 @@
-﻿using BaseToolsLibrary.IO;
+﻿using BaseToolsLibrary.DependencyInjection;
+using BaseToolsLibrary.IO;
+using BaseToolsLibrary.Mediator;
 using BaseToolsLibrary.Memory;
 using DDFight;
 using DDFight.Commands;
 using DnDToolsLibrary.Attacks;
+using DnDToolsLibrary.Attacks.AttacksCommands.DamageCommands.CalculateDamageResultList;
 using DnDToolsLibrary.Attacks.Damage;
 using DnDToolsLibrary.Attacks.Damage.Type;
 using DnDToolsLibrary.Attacks.HitAttacks;
@@ -17,6 +20,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows;
+using WpfDnDCommandHandlers.AttackCommands.DamageCommands.CalculateDamageResultList;
 using WpfDnDCustomControlLibrary.Statuses;
 using WpfSandbox;
 using WpfToolsLibrary.Extensions;
@@ -73,6 +77,27 @@ namespace BindValidation
                     },
                 },
             };
+
+            CalculateDamageResultListHandler dfghj = new CalculateDamageResultListHandler();
+
+            DIConfigurer.ConfigureCore();
+            DIConfigurer.ConfigureWpf();
+            DIConfigurer.Verify();
+            HandlerToUiConfig.Configure();
+
+            DamageResultList damageResultList = list.GetResultList();
+            foreach (DamageResult result in damageResultList.Elements)
+            {
+                result.LinkedToSaving = false;
+            }
+            damageResultList.Elements[0].AffinityModifier = DamageAffinityEnum.Resistant;
+
+
+            CalculateDamageResultListCommand command = new CalculateDamageResultListCommand(damageResultList, "Because very good reasons");
+
+            IMediator mediator = DIContainer.GetImplementation<IMediator>();
+
+            ValidableResponse<CalculateDamageResultListResponse> response = mediator.Execute(command) as ValidableResponse<CalculateDamageResultListResponse>;
 
             this.DataContext = list;
             InitializeComponent();

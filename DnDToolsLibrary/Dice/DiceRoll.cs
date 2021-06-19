@@ -130,7 +130,7 @@ namespace DnDToolsLibrary.Dice
         /// <summary>
         ///     does not contain the modifier, dices only
         /// </summary>
-        [XmlIgnore]
+        [XmlAttribute]
         public int LastRoll
         {
             get => _lastRoll;

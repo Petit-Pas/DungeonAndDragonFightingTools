@@ -114,7 +114,8 @@
             FontSize="22"
             FontWeight="Bold"
             Click="FightButton_Click"
-            IsEnabled="False">
+            IsEnabled="False"
+                FontFamily="{StaticResource BookInsanity}">
                 Fight
             </Button>
 

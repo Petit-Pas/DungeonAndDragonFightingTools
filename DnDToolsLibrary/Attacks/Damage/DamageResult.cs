@@ -3,6 +3,7 @@ using DnDToolsLibrary.Dice;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Xml.Serialization;
 
 namespace DnDToolsLibrary.Attacks.Damage
 {
@@ -49,6 +50,7 @@ namespace DnDToolsLibrary.Attacks.Damage
         ///     Set to true when SituationalDamageModifier should be taken into account
         ///     Should always be resetted to false after use
         /// </summary>
+        [XmlAttribute]
         public bool LastSavingWasSuccesfull
         {
             get => _lastSavingWasSuccesfull;
@@ -63,6 +65,7 @@ namespace DnDToolsLibrary.Attacks.Damage
         /// <summary>
         ///     Can be used to determine what happens in case of a successful saving Throw (OnHitStatus damage, spells, etc...)
         /// </summary>
+        [XmlAttribute]
         public DamageModifierEnum SituationalDamageModifier
         {
             get => _temporaryDamageModifier;
@@ -77,6 +80,7 @@ namespace DnDToolsLibrary.Attacks.Damage
         /// <summary>
         ///     Should be set to the default of the Target but can always be overriden
         /// </summary>
+        [XmlAttribute]
         public DamageAffinityEnum AffinityModifier
         {
             get => _affinityModifier;
@@ -119,6 +123,7 @@ namespace DnDToolsLibrary.Attacks.Damage
             Damage.Reset();
         }
 
+        [XmlAttribute]
         public DamageTypeEnum DamageType
         {
             get => _damageType;
@@ -131,6 +136,7 @@ namespace DnDToolsLibrary.Attacks.Damage
 
         private DamageTypeEnum _damageType = DamageTypeEnum.Force;
 
+        [XmlAttribute]
         public bool LinkedToSaving
         {
             get => _linkedToSaving;
@@ -150,10 +156,12 @@ namespace DnDToolsLibrary.Attacks.Damage
         {
             this.LastSavingWasSuccesfull = to_copy.LastSavingWasSuccesfull;
             this.SituationalDamageModifier = to_copy.SituationalDamageModifier;
-            this.Damage = (DiceRoll)to_copy.Damage.Clone();
+            this.Damage = to_copy.Damage.Clone() as DiceRoll;
             this.DamageType = to_copy.DamageType;
             this.LinkedToSaving = to_copy.LinkedToSaving;
+            this.AffinityModifier = to_copy.AffinityModifier;
         }
+        
         public DamageResult(DamageTemplate template, bool linked_to_saving = true)
         {
             this.SituationalDamageModifier = template.SituationalDamageModifier;

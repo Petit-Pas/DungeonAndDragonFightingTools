@@ -14,7 +14,7 @@ namespace CoreUnitTest
         [OneTimeSetUp]
         public void GlobalSetup()
         {
-            DIConfigurer.ConfigureCore();
+            DIConfigurer.ConfigureCore(true);
 
             PlayableEntity character = new Character();
             character.MaxHp = 100;

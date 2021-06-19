@@ -9,11 +9,11 @@ namespace DDFight
 {
     public static class DIConfigurer
     {
-        public static void ConfigureCore()
+        public static void ConfigureCore(bool mediator_param = false)
         {
             // REGISTER 
             // Mediator
-            DIContainer.RegisterSingleton<IMediator, BaseMediator>(new BaseMediator());
+            DIContainer.RegisterSingleton<IMediator, BaseMediator>(new BaseMediator(mediator_param));
 
             // CONFIGURE
         }

@@ -66,7 +66,9 @@
     <Compile Include="Mediator\IMediator.cs" />
     <Compile Include="Mediator\IMediatorCommand.cs" />
     <Compile Include="Mediator\IMediatorHandler.cs" />
+    <Compile Include="Mediator\IUiCommand.cs" />
     <Compile Include="Mediator\NoResponse.cs" />
+    <Compile Include="Mediator\ValidableResponse.cs" />
     <Compile Include="Memory\DisposableExtensions.cs" />
     <Compile Include="Memory\Global.cs" />
     <Compile Include="Memory\ICopyAssignable.cs" />
