@@ -178,7 +178,9 @@ namespace DnDToolsLibrary.Attacks
 
         public int TotalCAScore { get { return this.Target != null ? (int)this.Target.CA + this.HitModifiers.ACModifier : 0; } }
 
-        public bool Hits { get { return this.Target != null ? this.TotalCAScore <= this.TotalAttackScore : false; } }
+        public bool Hits { get { return this.Target != null ? 
+                    (this.Crits || this.TotalCAScore <= this.TotalAttackScore) 
+                    : false; } }
 
         public string Description 
         { 

@@ -1,14 +1,22 @@
-﻿using BaseToolsLibrary.Mediator;
+﻿using BaseToolsLibrary.DependencyInjection;
+using BaseToolsLibrary.IO;
+using BaseToolsLibrary.Mediator;
 using System;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.TempHeal
 {
     public class TempHealHandler : BaseMediatorHandler<TempHealCommand, NoResponse>
     {
+        private static Lazy<ICustomConsole> console = new Lazy<ICustomConsole>(() => DIContainer.GetImplementation<ICustomConsole>());
+        private static Lazy<IFontWeightProvider> fontWeightProvider = new Lazy<IFontWeightProvider>(() => DIContainer.GetImplementation<IFontWeightProvider>());
+        private static Lazy<IFontColorProvider> colorProvider = new Lazy<IFontColorProvider>(() => DIContainer.GetImplementation<IFontColorProvider>());
+
         public override NoResponse Execute(IMediatorCommand command)
         {
             TempHealCommand _command = this.cast_command(command);
             PlayableEntity target = _command.GetEntity();
+
+            console.Value.AddEntry($"{target.DisplayName} regains {_command.Amount} temporary HPs.\r\n", fontWeightProvider.Value.Bold);
 
             _command.From = target.TempHp;
 

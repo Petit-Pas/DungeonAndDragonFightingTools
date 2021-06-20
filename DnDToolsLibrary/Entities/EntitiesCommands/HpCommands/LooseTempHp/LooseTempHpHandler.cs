@@ -1,4 +1,6 @@
-﻿using BaseToolsLibrary.Mediator;
+﻿using BaseToolsLibrary.DependencyInjection;
+using BaseToolsLibrary.IO;
+using BaseToolsLibrary.Mediator;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +11,16 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.LooseTempHp
 {
     public class LooseTempHpHandler : BaseMediatorHandler<LooseTempHpCommand, NoResponse>
     {
+        private static Lazy<ICustomConsole> console = new Lazy<ICustomConsole>(() => DIContainer.GetImplementation<ICustomConsole>());
+        private static Lazy<IFontWeightProvider> fontWeightProvider = new Lazy<IFontWeightProvider>(() => DIContainer.GetImplementation<IFontWeightProvider>());
+        private static Lazy<IFontColorProvider> colorProvider = new Lazy<IFontColorProvider>(() => DIContainer.GetImplementation<IFontColorProvider>());
+
         public override NoResponse Execute(IMediatorCommand command)
         {
             LooseTempHpCommand _command = this.cast_command(command);
             PlayableEntity target = _command.GetEntity();
+
+            console.Value.AddEntry($"{target.DisplayName} looses {_command.Amount} temporary HPs.\r\n", fontWeightProvider.Value.Bold);
 
             _command.From = target.TempHp;
 

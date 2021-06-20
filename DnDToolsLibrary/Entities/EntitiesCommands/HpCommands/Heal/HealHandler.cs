@@ -1,10 +1,16 @@
-﻿using BaseToolsLibrary.Mediator;
+﻿using BaseToolsLibrary.DependencyInjection;
+using BaseToolsLibrary.IO;
+using BaseToolsLibrary.Mediator;
 using System;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.Heal
 {
     public class HealHandler : BaseMediatorHandler<HealCommand, NoResponse>
     {
+        private static Lazy<ICustomConsole> console = new Lazy<ICustomConsole>(() => DIContainer.GetImplementation<ICustomConsole>());
+        private static Lazy<IFontWeightProvider> fontWeightProvider = new Lazy<IFontWeightProvider>(() => DIContainer.GetImplementation<IFontWeightProvider>());
+        private static Lazy<IFontColorProvider> colorProvider = new Lazy<IFontColorProvider>(() => DIContainer.GetImplementation<IFontColorProvider>());
+
         public override NoResponse Execute(IMediatorCommand command)
         {
             HealCommand _command = this.cast_command(command);
@@ -15,6 +21,8 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.Heal
                 Console.WriteLine($"WARNING : Trying to heal {target.DisplayName} for {_command.Amount}, will be set to 0 instead");
                 _command.Amount = 0;
             }
+
+            console.Value.AddEntry($"{target.DisplayName} regains {_command.Amount} HPs.\r\n", fontWeightProvider.Value.Bold);
 
             _command.From = target.Hp;
 

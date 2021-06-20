@@ -1,0 +1,87 @@
+﻿<Window x:Class="WpfDnDCustomControlLibrary.Attacks.HitAttacks.HitAttackExecuteWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:cardcontrols="clr-namespace:WpfCustomControlLibrary.CardControls;assembly=WpfCustomControlLibrary" 
+        xmlns:local="clr-namespace:WpfDnDCustomControlLibrary.Attacks.HitAttacks"
+        mc:Ignorable="d"
+        Title="HitAttacksExecuteWindow" Height="450" Width="600"
+        Closing="Window_Closing"
+        SizeToContent="WidthAndHeight"
+        KeyDown="Window_KeyDown"
+        WindowState="Normal"
+        ResizeMode="CanResize"
+        WindowStyle="None"
+        AllowsTransparency="True">
+    <Window.Resources>
+        <Style TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlock}" />
+    </Window.Resources>
+    <Grid Background="Transparent" Opacity="1">
+    <cardcontrols:WindowCardControl Title="Toto le heros" CardColor="{StaticResource LightestGray}" Margin="10" BorderColor="{StaticResource Gray}">
+        <Grid 
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            DataContext="{Binding AttackResult, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:HitAttackExecuteWindow}}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <local:HitAttackResultUserControl 
+                Grid.Row="0"
+                x:Name="HitAttackResultControl"
+                HorizontalAlignment="Center"
+                AttackResult="{Binding}" />
+
+            <Grid
+                x:Name="ButtonsGridControl"
+                Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.Resources>
+                    <Style TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlock}">
+                        <Setter Property="FontSize" Value="15"/>
+                    </Style>
+                </Grid.Resources>
+
+                <cardcontrols:ButtonCardControl
+                    x:Name="RollButton"
+                    Grid.ColumnSpan="2"
+                    Margin="7"
+                    Click="RollButton_Click"
+                    CardColor="{StaticResource LightestGray}">
+                        <TextBlock HorizontalAlignment="Center">Roll</TextBlock>
+                </cardcontrols:ButtonCardControl>
+
+                <cardcontrols:ButtonCardControl
+                    x:Name="ValidateResetButton"
+                    Grid.Row="1"
+                    Margin="7"
+                    Click="ValidateResetButton_Click"
+                    CardColor="{StaticResource LightestGray}">
+                    <TextBlock HorizontalAlignment="Center">Validate and Reset</TextBlock>
+                </cardcontrols:ButtonCardControl>
+
+                <cardcontrols:ButtonCardControl
+                    x:Name="ValidateExitButton"
+                    Grid.Row="1" Grid.Column="1"
+                    Margin="7"
+                    Click="ValidateExitButton_Click"
+                    CardColor="{StaticResource LightestGray}">
+                    <TextBlock HorizontalAlignment="Center">Validate and Exit</TextBlock>
+                </cardcontrols:ButtonCardControl>
+            </Grid>
+        </Grid>
+    </cardcontrols:WindowCardControl>
+    </Grid>
+</Window>

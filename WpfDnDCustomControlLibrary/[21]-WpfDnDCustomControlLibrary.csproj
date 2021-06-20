@@ -60,6 +60,9 @@
     <Compile Include="Attacks\Damage\DamageResultListRollableWindow.xaml.cs">
       <DependentUpon>DamageResultListRollableWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Attacks\HitAttacks\HitAttackExecuteWindow.xaml.cs">
+      <DependentUpon>HitAttackExecuteWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Attacks\HitAttacks\HitAttackResultUserControl.xaml.cs">
       <DependentUpon>HitAttackResultUserControl.xaml</DependentUpon>
     </Compile>
@@ -150,6 +153,10 @@
     <Page Include="Attacks\Damage\DamageResultListRollableWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Attacks\HitAttacks\HitAttackExecuteWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Attacks\HitAttacks\HitAttackResultUserControl.xaml">
       <SubType>Designer</SubType>

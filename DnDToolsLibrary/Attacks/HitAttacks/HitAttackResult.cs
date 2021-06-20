@@ -179,8 +179,8 @@ namespace DnDToolsLibrary.Attacks.HitAttacks
             this.RollResult = (AttackRollResult)to_copy.RollResult.Clone();
             this.OnHitStatuses = (OnHitStatusList)to_copy.OnHitStatuses.Clone();
             this.Name = to_copy.Name;
-            this.Target = to_copy.Target;
-            this.Owner = to_copy.Owner;
+            this.TargetName = to_copy.TargetName;
+            this.OwnerName = to_copy.OwnerName;
         }
 
         public HitAttackResult(HitAttackResult to_copy)

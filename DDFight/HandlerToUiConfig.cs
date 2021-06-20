@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using WpfDnDCommandHandlers;
 using WpfDnDCommandHandlers.AttackCommands.DamageCommands.CalculateDamageResultList;
 using WpfDnDCustomControlLibrary.Attacks.Damage;
+using WpfDnDCustomControlLibrary.Attacks.HitAttacks;
 
 namespace DDFight
 {
