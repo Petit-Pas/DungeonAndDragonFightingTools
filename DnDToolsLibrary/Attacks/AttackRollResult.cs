@@ -1,7 +1,10 @@
-﻿using DnDToolsLibrary.Entities;
+﻿using BaseToolsLibrary.DependencyInjection;
+using DnDToolsLibrary.Entities;
+using DnDToolsLibrary.Fight;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Xml.Serialization;
 
 namespace DnDToolsLibrary.Attacks
 {
@@ -40,28 +43,70 @@ namespace DnDToolsLibrary.Attacks
 
         #region Properties
 
-        public PlayableEntity Target
-        {
-            get => _target;
-            set
-            {
-                _target = value;
-                NotifyPropertyChanged();
-            }
-        }
-        private PlayableEntity _target = null;
-
+        [XmlIgnore]
         public PlayableEntity Caster
         {
-            get => _caster;
+            get
+            {
+                return fighterProvider.GetFighterByDisplayName(CasterName);
+            }
             set
             {
-                _caster = value;
+                if (value != null)
+                    CasterName = value.DisplayName;
+                else
+                    CasterName = null;
                 NotifyPropertyChanged();
             }
         }
-        private PlayableEntity _caster = null;
+        [XmlAttribute]
+        public string CasterName
+        {
+            get
+            {
+                return _casterName;
+            }
+            set
+            {
+                _casterName = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private string _casterName = null;
 
+        private static IFigtherProvider fighterProvider = DIContainer.GetImplementation<IFigtherProvider>();
+
+        [XmlIgnore]
+        public PlayableEntity Target
+        {
+            get
+            {
+                return fighterProvider.GetFighterByDisplayName(TargetName);
+            }
+            set
+            {
+                if (value != null)
+                    TargetName = value.DisplayName;
+                else
+                    TargetName = null;
+                NotifyPropertyChanged();
+            }
+        }
+        [XmlAttribute]
+        public string TargetName
+        {
+            get
+            {
+                return _targetName;
+            }
+            set
+            {
+                _targetName = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private string _targetName = null;
+        
         public int AttackRoll
         {
             get => _attackRoll;

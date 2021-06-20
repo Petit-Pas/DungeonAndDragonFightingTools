@@ -1,9 +1,12 @@
-﻿using BaseToolsLibrary.Memory;
+﻿using BaseToolsLibrary.DependencyInjection;
+using BaseToolsLibrary.Memory;
 using DnDToolsLibrary.Attacks.Damage;
 using DnDToolsLibrary.Entities;
+using DnDToolsLibrary.Fight;
 using DnDToolsLibrary.Status;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Xml.Serialization;
 
 namespace DnDToolsLibrary.Attacks.HitAttacks
 {
@@ -22,32 +25,82 @@ namespace DnDToolsLibrary.Attacks.HitAttacks
         }
         private string _name;
 
+        private static IFigtherProvider fighterProvider = DIContainer.GetImplementation<IFigtherProvider>();
+
+        [XmlIgnore]
         public PlayableEntity Owner
         {
-            get => _owner;
+            get
+            {
+                return fighterProvider.GetFighterByDisplayName(OwnerName);
+            }
             set
             {
-                _owner = value;
                 if (this.RollResult != null)
+                {
                     this.RollResult.Caster = value;
+                }
+
+                if (value != null)
+                    OwnerName = value.DisplayName;
+                else
+                    OwnerName = null;
+                
                 NotifyPropertyChanged();
             }
         }
-        private PlayableEntity _owner;
+        [XmlAttribute]
+        public string OwnerName
+        {
+            get
+            {
+                return _ownerName;
+            }
+            set
+            {
+                _ownerName = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private string _ownerName = null;
 
+        [XmlIgnore]
         public PlayableEntity Target
         {
-            get => RollResult.Target;
-            set 
+            get
+            {
+                return fighterProvider.GetFighterByDisplayName(TargetName);
+            }
+            set
             {
                 if (this.RollResult != null)
                 {
                     refresh_damage_affinity_modifiers(value);
                     this.RollResult.Target = value;
-                    NotifyPropertyChanged();
                 }
+
+                if (value != null)
+                    TargetName = value.DisplayName;
+                else
+                    TargetName = null;
+                
+                NotifyPropertyChanged();
             }
         }
+        [XmlAttribute]
+        public string TargetName
+        {
+            get
+            {
+                return _targetName;
+            }
+            set
+            {
+                _targetName = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private string _targetName = null;
 
         public DamageResultList DamageList
         {

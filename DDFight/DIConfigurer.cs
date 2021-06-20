@@ -1,6 +1,7 @@
 ﻿using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.IO;
 using BaseToolsLibrary.Mediator;
+using DnDToolsLibrary.Fight;
 using System.Windows;
 using System.Windows.Media;
 using WpfToolsLibrary.ConsoleTools;
@@ -14,6 +15,7 @@ namespace DDFight
             // REGISTER 
             // Mediator
             DIContainer.RegisterSingleton<IMediator, BaseMediator>(new BaseMediator(mediator_param));
+            DIContainer.RegisterSingleton<IFigtherProvider, FightersList>(FightersList.Instance);
 
             // CONFIGURE
         }

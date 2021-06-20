@@ -40,11 +40,6 @@ namespace WpfDnDCustomControlLibrary.Attacks.HitAttacks
                 AttackResult = attackResult;
         }
 
-        private static void attackResult_Changed(DependencyObject o, DependencyPropertyChangedEventArgs a)
-        {
-            //HitAttackResultUserControl control = (HitAttackResultUserControl)o;
-        }
-
         public HitAttackResult AttackResult
         {
             get { return (HitAttackResult)this.GetValue(AttackResultProperty); }
@@ -54,11 +49,10 @@ namespace WpfDnDCustomControlLibrary.Attacks.HitAttacks
             nameof(AttackResult),
             typeof(HitAttackResult),
             typeof(HitAttackResultUserControl),
-            new PropertyMetadata(null, attackResult_Changed));
+            new PropertyMetadata(null));
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //this.AttackRoll.AttackRollTextBoxControl.Focus();
             this.TargetSelectionControl.Focus();
         }
     }

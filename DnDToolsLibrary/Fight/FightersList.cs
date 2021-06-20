@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace DnDToolsLibrary.Fight
 {
-    public class FightersList : GenericList<PlayableEntity>
+    public class FightersList : GenericList<PlayableEntity>, IFigtherProvider
     {
 
         private FightersList()
@@ -146,6 +146,11 @@ namespace DnDToolsLibrary.Fight
                 }
             }
             SetTurnOrders();
+        }
+
+        public PlayableEntity GetFighterByDisplayName(string displayName)
+        {
+            return Elements.FirstOrDefault(x => x.DisplayName == displayName);
         }
     }
 }

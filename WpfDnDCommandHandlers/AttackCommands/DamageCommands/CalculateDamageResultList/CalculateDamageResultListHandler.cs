@@ -25,7 +25,10 @@ namespace WpfDnDCommandHandlers.AttackCommands.DamageCommands.CalculateDamageRes
             bool validated = ((IValidableWindow)window).Validated;
 
             return new ValidableResponse<CalculateDamageResultListResponse>(
-                validated, new CalculateDamageResultListResponse() { DamageResultList = _command.DamageList }
+                validated, 
+                new CalculateDamageResultListResponse() { 
+                    DamageResultList = _command.DamageList 
+                }
             );
         }
 

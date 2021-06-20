@@ -46,6 +46,7 @@
     <Compile Include="Attacks\AttackRollResult.cs" />
     <Compile Include="Attacks\AttacksCommands\DamageCommands\CalculateDamageListResult\CalculateDamageResultListCommand.cs" />
     <Compile Include="Attacks\AttacksCommands\DamageCommands\CalculateDamageListResult\CalculateDamageResultListResponse.cs" />
+    <Compile Include="Attacks\AttacksCommands\HitAttackCommands\ExecuteHitAttack\ExecuteHitAttackCommand.cs" />
     <Compile Include="Attacks\Damage\DamageModifierEnum.cs" />
     <Compile Include="Attacks\Damage\DamageResult.cs" />
     <Compile Include="Attacks\Damage\DamageResultList.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="Entities\Monster.cs" />
     <Compile Include="Entities\PlayableEntity.cs" />
     <Compile Include="Fight\Events\TurnEvents.cs" />
+    <Compile Include="Fight\IFigtherProvider.cs" />
     <Compile Include="Memory\GenericList.cs" />
     <Compile Include="Memory\SaveManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
