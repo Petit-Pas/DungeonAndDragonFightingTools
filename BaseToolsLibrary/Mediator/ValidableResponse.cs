@@ -11,6 +11,7 @@ namespace BaseToolsLibrary.Mediator
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class ValidableResponse<T> : IMediatorCommandResponse
+        where T : IMediatorCommandResponse
     {
 
         public ValidableResponse(bool isValid, T response)

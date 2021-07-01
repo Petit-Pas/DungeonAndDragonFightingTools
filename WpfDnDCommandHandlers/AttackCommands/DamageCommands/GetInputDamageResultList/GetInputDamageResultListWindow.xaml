@@ -1,10 +1,10 @@
-﻿<Window x:Class="WpfDnDCustomControlLibrary.Attacks.Damage.DamageResultListRollableWindow"
+﻿<Window x:Class="WpfDnDCommandHandlers.AttackCommands.DamageCommands.GetInputDamageResultListWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfDnDCustomControlLibrary.Attacks.Damage" 
-        xmlns:shadowboxes="clr-namespace:WpfCustomControlLibrary.ShadowBoxes;assembly=WpfCustomControlLibrary"
+        xmlns:shadowboxes="clr-namespace:WpfCustomControlLibrary.ShadowBoxes;assembly=WpfCustomControlLibrary" 
+        xmlns:damage="clr-namespace:WpfDnDCustomControlLibrary.Attacks.Damage;assembly=WpfDnDCustomControlLibrary"
         mc:Ignorable="d"
         Title="DamageResultListRollableWindow" Height="450" Width="800"
         Style="{StaticResource WindowStyle}"
@@ -37,12 +37,12 @@
             Text="{Binding Reason}">
         </TextBlock>
 
-        <local:DamageResultListRollableControl
+        <damage:DamageResultListRollableControl
             Grid.Row="1"
             Margin="0 10"
             DataContext="{Binding DamageList}">
 
-        </local:DamageResultListRollableControl>
+        </damage:DamageResultListRollableControl>
 
         <shadowboxes:ShadowButtonControl
             Grid.Row="2"

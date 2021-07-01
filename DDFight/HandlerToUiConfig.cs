@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WpfDnDCommandHandlers;
-using WpfDnDCommandHandlers.AttackCommands.DamageCommands.CalculateDamageResultList;
-using WpfDnDCustomControlLibrary.Attacks.Damage;
-using WpfDnDCustomControlLibrary.Attacks.HitAttacks;
+﻿using WpfDnDCommandHandlers;
+using WpfDnDCommandHandlers.AttackCommands.DamageCommands;
+using WpfDnDCommandHandlers.AttackCommands.DamageCommands.GetInputResultList;
+using WpfDnDCommandHandlers.AttackCommands.SpellCommands.GetInputSpellLevel.GetInputCantripLevel;
+using WpfDnDCommandHandlers.AttackCommands.SpellCommands.GetInputSpellLevel.GetInputNormalSpellLevel;
+using WpfDnDCommandHandlers.AttackCommands.SpellCommands.GetInputSpellTargets;
 
 namespace DDFight
 {
@@ -14,7 +11,10 @@ namespace DDFight
     {
         public static void Configure()
         {
-            HandlerToUILinker.AddNewPair(typeof(CalculateDamageResultListHandler), new DamageResultListRollableWindow());
+            HandlerToUILinker.AddNewPair(typeof(GetInputDamageResultListHandler), typeof(GetInputDamageResultListWindow));
+            HandlerToUILinker.AddNewPair(typeof(GetInputSpellLevelHandler), typeof(GetInputNormalSpellLevelWindow));
+            HandlerToUILinker.AddNewPair(typeof(GetInputCantripLevelHandler), typeof(GetInputCantripLevelWindow));
+            HandlerToUILinker.AddNewPair(typeof(GetInputSpellTargetsHandler), typeof(GetInputSpellTargetsWindow));
         }
     }
 }

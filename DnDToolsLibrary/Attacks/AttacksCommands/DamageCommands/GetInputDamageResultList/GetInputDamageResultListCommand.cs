@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DnDToolsLibrary.Attacks.AttacksCommands.DamageCommands.CalculateDamageResultList
+namespace DnDToolsLibrary.Attacks.AttacksCommands.DamageCommands.GetInputDamageResultList
 { 
-    public class CalculateDamageResultListCommand : IMediatorCommand, IUiCommand
+    public class GetInputDamageResultListCommand : IMediatorCommand, IUiCommand
     {
         public DamageResultList DamageList { get; set; }
 
@@ -19,7 +19,7 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.DamageCommands.CalculateDamage
         ///     / ! \ As the target is not known by the commands, the eventual resistances should be known in the list beforehand
         /// </summary>
         /// <param name="damages">  </param>
-        public CalculateDamageResultListCommand(DamageResultList damages, string reason = "")
+        public GetInputDamageResultListCommand(DamageResultList damages, string reason = "")
         {
             DamageList = damages.Clone() as DamageResultList;
             Reason = reason;

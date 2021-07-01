@@ -1,8 +1,13 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Shapes;
+using WpfCustomControlLibrary.Animations;
 
 namespace WpfCustomControlLibrary.CircularSelector
 {
@@ -28,23 +33,170 @@ namespace WpfCustomControlLibrary.CircularSelector
         }
         #endregion
 
-        public CircularSelectorRadioButtonControl() : base()
+        private static readonly ResourceDictionary styleDict = new ResourceDictionary()
         {
-            this.MouseEnter += TriangleRadioButton_MouseEnter;
-            this.MouseLeave += TriangleRadioButton_MouseLeave;
+            Source = new Uri("/WpfCustomControlLibrary;component/CircularSelector/CircularSelectorRadioButtonStyle.xaml", UriKind.RelativeOrAbsolute)
+        };
+        private static readonly Style style = styleDict["CircularSelectorRadioButtonStyle"] as Style;
+
+        public object RadioValue
+        {
+            get { return (object)GetValue(RadioValueProperty); }
+            set { SetValue(RadioValueProperty, value); }
         }
 
-        public string Label
+        // Using a DependencyProperty as the backing store for RadioValue.
+        // This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty RadioValueProperty =
+        DependencyProperty.Register(
+            "RadioValue",
+            typeof(object),
+            typeof(CircularSelectorRadioButtonControl),
+            new UIPropertyMetadata(null));
+
+        public object RadioBinding
         {
-            get { return (string)GetValue(LabelProperty); }
-            set { SetValue(LabelProperty, value); }
+            get { return (object)GetValue(RadioBindingProperty); }
+            set { SetValue(RadioBindingProperty, value); }
         }
-        public static readonly DependencyProperty LabelProperty =
-            DependencyProperty.Register(
-                nameof(Label),
-                typeof(string),
-                typeof(CircularSelectorRadioButtonControl),
-                new FrameworkPropertyMetadata("XX"));
+
+        // Using a DependencyProperty as the backing store for RadioBinding.
+        // This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty RadioBindingProperty =
+        DependencyProperty.Register(
+            "RadioBinding",
+            typeof(object),
+            typeof(CircularSelectorRadioButtonControl),
+            new FrameworkPropertyMetadata(
+                null,
+                FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
+                OnRadioBindingChanged));
+
+        private static void OnRadioBindingChanged(
+            DependencyObject d,
+            DependencyPropertyChangedEventArgs e)
+        {
+            CircularSelectorRadioButtonControl rb = (CircularSelectorRadioButtonControl)d;
+            if (rb.RadioValue.Equals(e.NewValue))
+                rb.SetCurrentValue(RadioButton.IsCheckedProperty, true);
+        }
+
+        protected override void OnChecked(RoutedEventArgs e)
+        {
+            base.OnChecked(e);
+            SetCurrentValue(RadioBindingProperty, RadioValue);
+        }
+
+
+        public CircularSelectorRadioButtonControl() : base()
+        {
+            if (style != null)
+                this.Style = style;
+            this.MouseEnter += TriangleRadioButton_MouseEnter;
+            this.MouseLeave += TriangleRadioButton_MouseLeave;
+
+            GotFocus += CircularSelectorRadioButtonControl_GotFocus;
+            LostFocus += CircularSelectorRadioButtonControl_LostFocus;
+            Unchecked += CircularSelectorRadioButtonControl_Unchecked;
+            Checked += CircularSelectorRadioButtonControl_Checked;
+        }
+
+        private void CircularSelectorRadioButtonControl_Checked(object sender, RoutedEventArgs e)
+        {
+            animate_selected();
+        }
+
+        private void CircularSelectorRadioButtonControl_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (!IsMouseOver)
+                animate_normal();
+        }
+
+        private void CircularSelectorRadioButtonControl_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (false == IsChecked)
+                // lost focus AND is not the one clicked
+                animate_normal();
+        }
+
+        private void CircularSelectorRadioButtonControl_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (false == IsChecked)
+                animate_hover();
+        }
+
+        private void TriangleRadioButton_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (IsPressed)
+            {
+                // button was pressed with spacebar
+            }
+            else
+            {
+                if (IsChecked == false && IsFocused == false)
+                    animate_normal();
+            }
+        }
+
+        private void TriangleRadioButton_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (IsPressed || IsChecked == true)
+            {
+                // button was pressed with spacebar
+            }
+            else
+            {
+                animate_hover();
+            }
+        }
+        private Path _path
+        {
+            get => this.Template.FindName("ThePath", this) as Path;
+        }
+
+        private void animate_hover()    
+        {
+            Path path = _path;
+            if (path != null)
+            {
+                AnimationLibrary.AnimateBrush(
+                    ((x) => path.Fill = x),
+                    ((SolidColorBrush)path.Fill).Color,
+                    (CircularSelectorCenterControl.GetHoverColorBrush(this) as SolidColorBrush).Color,
+                    TimeSpan.FromSeconds(0.15));
+            }
+            DoubleAnimation double_animation = new DoubleAnimation(this.Scale, 1.1, TimeSpan.FromSeconds(0.15));
+            this.BeginAnimation(CircularSelectorRadioButtonControl.ScaleProperty, double_animation);
+        }
+
+        private void animate_normal()
+        {
+            Path path = _path;
+            if (path != null)
+            {
+                AnimationLibrary.AnimateBrush(
+                    ((x) => path.Fill = x),
+                    ((SolidColorBrush)path.Fill).Color,
+                    (CircularSelectorCenterControl.GetBaseColorBrush(this) as SolidColorBrush).Color,
+                    TimeSpan.FromSeconds(0.15));
+            }
+
+            DoubleAnimation double_animation = new DoubleAnimation(this.Scale, 1.0, TimeSpan.FromSeconds(0.15));
+            this.BeginAnimation(CircularSelectorRadioButtonControl.ScaleProperty, double_animation);
+        }
+
+        private void animate_selected()
+        {
+            Path path = _path;
+            if (path != null)
+            {
+                AnimationLibrary.AnimateBrush(
+                    ((x) => path.Fill = x),
+                    ((SolidColorBrush)path.Fill).Color,
+                    (CircularSelectorCenterControl.GetSelectedColorBrush(this) as SolidColorBrush).Color,
+                    TimeSpan.FromSeconds(0.15));
+            }
+        }
 
         public double Angle
         {
@@ -60,179 +212,13 @@ namespace WpfCustomControlLibrary.CircularSelector
 
         public double Scale
         {
-            get => _scale;
-            set {
-                _scale = value;
-                NotifyPropertyChanged();
-            }
+            get { return (double)this.GetValue(ScaleProperty); }
+            set { this.SetValue(ScaleProperty, value); }
         }
-        private double _scale = 1.0;
-
-        private void TriangleRadioButton_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            Scale = 1.0;
-        }
-
-        private void TriangleRadioButton_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            if (IsEnabled)
-                Scale = 1.1;
-        }
-
-    }
-
-    /// <summary>
-    ///     Contains properties that will be used for a collection of TriangleRadioButtons
-    /// </summary>
-    public class TriangleRadioButtonProperties
-    {
-        #region Colors
-
-        public static void SetBorderBaseColorBrush(DependencyObject obj, Brush value)
-        {
-            obj.SetValue(BorderBaseColorBrushProperty, value);
-        }
-        public static Brush GetBorderBaseColorBrush(DependencyObject obj)
-        {
-            return (Brush)obj.GetValue(BorderBaseColorBrushProperty);
-        }
-        public static readonly DependencyProperty BorderBaseColorBrushProperty =
-            DependencyProperty.RegisterAttached(
-                "BorderBaseColorBrush",
-                typeof(Brush),
-                typeof(TriangleRadioButtonProperties),
-                new FrameworkPropertyMetadata(Brushes.Gray,
-                    FrameworkPropertyMetadataOptions.Inherits));
-
-        public static void SetDisabledColorBrush(DependencyObject obj, Brush value)
-        {
-            obj.SetValue(DisabledColorBrushProperty, value);
-        }
-        public static Brush GetDisabledColorBrush(DependencyObject obj)
-        {
-            return (Brush)obj.GetValue(DisabledColorBrushProperty);
-        }
-        public static readonly DependencyProperty DisabledColorBrushProperty =
-            DependencyProperty.RegisterAttached(
-                "DisabledColorBrush",
-                typeof(Brush),
-                typeof(TriangleRadioButtonProperties),
-                new FrameworkPropertyMetadata(Brushes.Gray,
-                    FrameworkPropertyMetadataOptions.Inherits));
-
-
-        public static void SetHoverColorBrush(DependencyObject obj, Brush value)
-        {
-            obj.SetValue(HoverColorBrushProperty, value);
-        }
-        public static Brush GetHoverColorBrush(DependencyObject obj)
-        {
-            return (Brush)obj.GetValue(HoverColorBrushProperty);
-        }
-        public static readonly DependencyProperty HoverColorBrushProperty =
-            DependencyProperty.RegisterAttached(
-                "HoverColorBrush",
-                typeof(Brush),
-                typeof(TriangleRadioButtonProperties),
-                new FrameworkPropertyMetadata(Brushes.LightGreen,
-                    FrameworkPropertyMetadataOptions.Inherits));
-
-        public static void SetSelectedColorBrush(DependencyObject obj, Brush value)
-        {
-            obj.SetValue(SelectedColorBrushProperty, value);
-        }
-        public static Brush GetSelectedColorBrush(DependencyObject obj)
-        {
-            return (Brush)obj.GetValue(SelectedColorBrushProperty);
-        }
-        public static readonly DependencyProperty SelectedColorBrushProperty =
-            DependencyProperty.RegisterAttached(
-                "SelectedColorBrush",
-                typeof(Brush),
-                typeof(TriangleRadioButtonProperties),
-                new FrameworkPropertyMetadata(Brushes.Green,
-                    FrameworkPropertyMetadataOptions.Inherits));
-
-        public static void SetBaseColorBrush(DependencyObject obj, Brush value)
-        {
-            obj.SetValue(BaseColorBrushProperty, value);
-        }
-        public static Brush GetBaseColorBrush(DependencyObject obj)
-        {
-            return (Brush)obj.GetValue(BaseColorBrushProperty);
-        }
-        public static readonly DependencyProperty BaseColorBrushProperty =
-            DependencyProperty.RegisterAttached(
-                "BaseColorBrush",
-                typeof(Brush),
-                typeof(TriangleRadioButtonProperties),
-                new FrameworkPropertyMetadata(Brushes.Black,
-                    FrameworkPropertyMetadataOptions.Inherits));
-
-        #endregion Colors
-
-        public static int GetLabelFontSize(DependencyObject obj)
-        {
-            return (int)obj.GetValue(LabelFontSizeProperty);
-        }
-        public static void SetLabelFontSize(DependencyObject obj, int value)
-        {
-            obj.SetValue(LabelFontSizeProperty, value);
-        }
-        public static readonly DependencyProperty LabelFontSizeProperty =
-            DependencyProperty.RegisterAttached(
-                "LabelFontSize",
-                typeof(int),
-                typeof(TriangleRadioButtonProperties),
-                new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.Inherits));
-
-        public static double GetLabelYOffset(DependencyObject obj)
-        {
-            return (double)obj.GetValue(LabelYOffsetProperty);
-        }
-        public static void SetLabelYOffset(DependencyObject obj, double value)
-        {
-            obj.SetValue(LabelYOffsetProperty, value);
-        }
-        public static readonly DependencyProperty LabelYOffsetProperty =
-            DependencyProperty.RegisterAttached(
-                "LabelYOffset",
-                typeof(double),
-                typeof(TriangleRadioButtonProperties),
-                new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.Inherits));
-
-        public static double GetLabelXOffset(DependencyObject obj)
-        {
-            return (double)obj.GetValue(LabelXOffsetProperty);
-        }
-        public static void SetLabelXOffset(DependencyObject obj, double value)
-        {
-            obj.SetValue(LabelXOffsetProperty, value);
-        }
-        public static readonly DependencyProperty LabelXOffsetProperty =
-            DependencyProperty.RegisterAttached(
-                "LabelXOffset",
-                typeof(double),
-                typeof(TriangleRadioButtonProperties),
-                new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.Inherits));
-
-        #region PathGeometryProperty
-
-        /*public static PathGeometry GetPathGeometry(DependencyObject obj)
-        {
-            return (PathGeometry)obj.GetValue(PathGeometryProperty);
-        }
-        public static void SetPathGeometry(DependencyObject obj, double value)
-        {
-            obj.SetValue(PathGeometryProperty, value);
-        }
-        public static readonly DependencyProperty PathGeometryProperty =
-            DependencyProperty.RegisterAttached(
-                "PathGeometry",
-                typeof(PathGeometry),
-                typeof(TriangleRadioButtonProperties),
-                new FrameworkPropertyMetadata(new PathGeometry(), FrameworkPropertyMetadataOptions.Inherits));
-        */
-        #endregion PathGeometryProperty
+        private static readonly DependencyProperty ScaleProperty = DependencyProperty.Register(
+            nameof(Scale),
+            typeof(double),
+            typeof(CircularSelectorRadioButtonControl),
+            new PropertyMetadata(1.0));
     }
 }

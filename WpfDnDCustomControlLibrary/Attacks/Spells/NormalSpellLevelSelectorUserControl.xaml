@@ -1,0 +1,130 @@
+﻿<UserControl x:Class="WpfDnDCustomControlLibrary.Attacks.Spells.NormalSpellLevelSelectorUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfDnDCustomControlLibrary.Attacks.Spells" xmlns:circularselector="clr-namespace:WpfCustomControlLibrary.CircularSelector;assembly=WpfCustomControlLibrary"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Width="200" Height="200">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/WpfCustomControlLibrary;component/CircularSelector/CircularSelectorImportFile.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <circularselector:CircularSelectorCenterControl
+            x:Name="SelectorControl"
+            circularselector:CircularSelectorCenterControl.PathGeometry="{StaticResource CircularSelectorRadioButtonTriangle}"
+            circularselector:CircularSelectorCenterControl.BorderBaseColorBrush="{StaticResource Gray}"
+            circularselector:CircularSelectorCenterControl.BaseColorBrush="{StaticResource Gray}"
+            circularselector:CircularSelectorCenterControl.HoverColorBrush="{StaticResource Brown3}"
+            circularselector:CircularSelectorCenterControl.SelectedColorBrush="{StaticResource Brown1}"
+            >
+            <Grid Focusable="False">
+                <circularselector:CircularSelectorRadioButtonControl
+                    Angle="-240" 
+                    Content="1"
+                    circularselector:CircularSelectorCenterControl.LabelXOffset="10"
+                    circularselector:CircularSelectorCenterControl.LabelYOffset="-2"
+                    GroupName="Level"
+                    RadioValue="1"
+                    RadioBinding="{Binding SelectedLevel, 
+                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:NormalSpellLevelSelectorUserControl}}}"
+                    />
+                <circularselector:CircularSelectorRadioButtonControl
+                    Angle="-202.5" 
+                    Content="2"
+                    circularselector:CircularSelectorCenterControl.LabelXOffset="12"
+                    circularselector:CircularSelectorCenterControl.LabelYOffset="-3"
+                    GroupName="Level"
+                    RadioValue="2"
+                    RadioBinding="{Binding SelectedLevel, 
+                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:NormalSpellLevelSelectorUserControl}}}"
+                    />
+                <circularselector:CircularSelectorRadioButtonControl
+                    Angle="-165" 
+                    Content="3"
+                    circularselector:CircularSelectorCenterControl.LabelXOffset="12"
+                    circularselector:CircularSelectorCenterControl.LabelYOffset="-3"
+                    GroupName="Level"
+                    RadioValue="3"
+                    RadioBinding="{Binding SelectedLevel, 
+                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:NormalSpellLevelSelectorUserControl}}}"
+                    />
+                <circularselector:CircularSelectorRadioButtonControl
+                    Angle="-127.5" 
+                    Content="4"
+                    circularselector:CircularSelectorCenterControl.LabelXOffset="14"
+                    circularselector:CircularSelectorCenterControl.LabelYOffset="-3"
+                    GroupName="Level"
+                    RadioValue="4"
+                    RadioBinding="{Binding SelectedLevel, 
+                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:NormalSpellLevelSelectorUserControl}}}"
+                    />
+                <circularselector:CircularSelectorRadioButtonControl
+                    Angle="-90" 
+                    Content="5"
+                    circularselector:CircularSelectorCenterControl.LabelXOffset="16"
+                    circularselector:CircularSelectorCenterControl.LabelYOffset="-1"
+                    GroupName="Level"
+                    RadioValue="5"
+                    RadioBinding="{Binding SelectedLevel, 
+                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:NormalSpellLevelSelectorUserControl}}}"
+                    />
+                <circularselector:CircularSelectorRadioButtonControl
+                    Angle="-52.5" 
+                    Content="6"
+                    circularselector:CircularSelectorCenterControl.LabelXOffset="14"
+                    circularselector:CircularSelectorCenterControl.LabelYOffset="1"
+                    GroupName="Level"
+                    RadioValue="6"
+                    RadioBinding="{Binding SelectedLevel, 
+                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:NormalSpellLevelSelectorUserControl}}}"
+                    />
+                <circularselector:CircularSelectorRadioButtonControl
+                    Angle="-15" 
+                    Content="7"
+                    circularselector:CircularSelectorCenterControl.LabelXOffset="12"
+                    circularselector:CircularSelectorCenterControl.LabelYOffset="2"
+                    GroupName="Level"
+                    RadioValue="7"
+                    RadioBinding="{Binding SelectedLevel, 
+                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:NormalSpellLevelSelectorUserControl}}}"
+                    />
+                <circularselector:CircularSelectorRadioButtonControl
+                    Angle="22.5" 
+                    Content="8"
+                    circularselector:CircularSelectorCenterControl.LabelXOffset="12"
+                    circularselector:CircularSelectorCenterControl.LabelYOffset="2"
+                    GroupName="Level"
+                    RadioValue="8"
+                    RadioBinding="{Binding SelectedLevel, 
+                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:NormalSpellLevelSelectorUserControl}}}"
+                    />
+                <circularselector:CircularSelectorRadioButtonControl
+                    Angle="60" 
+                    Content="9"
+                    circularselector:CircularSelectorCenterControl.LabelXOffset="10"
+                    circularselector:CircularSelectorCenterControl.LabelYOffset="1"
+                    GroupName="Level"
+                    RadioValue="9"
+                    RadioBinding="{Binding SelectedLevel, 
+                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:NormalSpellLevelSelectorUserControl}}}"
+                    />
+            </Grid>
+        </circularselector:CircularSelectorCenterControl>
+
+    </Grid>
+    
+</UserControl>

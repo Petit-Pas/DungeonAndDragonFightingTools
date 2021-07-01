@@ -1,4 +1,5 @@
-﻿using BaseToolsLibrary.Mediator;
+﻿using BaseToolsLibrary.DependencyInjection;
+using BaseToolsLibrary.Mediator;
 using DnDToolsLibrary.Fight;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,8 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands
     /// </summary>
     public abstract class EntityCommand : IMediatorCommand
     {
+        private static IFigtherProvider fighterProvider = DIContainer.GetImplementation<IFigtherProvider>();
+
         private readonly string _entityName;
 
         public EntityCommand(string entity_name)
@@ -24,7 +27,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands
 
         public PlayableEntity GetEntity()
         {
-            PlayableEntity result = FightersList.Instance.Elements.FirstOrDefault(x => x.DisplayName == _entityName);
+            PlayableEntity result = fighterProvider.GetFighterByDisplayName(_entityName);
 
             if (result == null)
             {

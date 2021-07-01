@@ -22,9 +22,16 @@
                             CornerRadius="{Binding CornerRadius, ElementName=ShadowBorder}"
                             Background="{Binding Background, ElementName=ShadowBorder}"
                             Padding="10 5">
-                            <ContentPresenter 
-                                VerticalAlignment="Center"
-                                Focusable="False" />
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <ContentPresenter 
+                                    Grid.Row="0"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Center"
+                                    Focusable="False" />
+                            </Grid>
                         </Border>
                     </Grid>
                 </ControlTemplate>

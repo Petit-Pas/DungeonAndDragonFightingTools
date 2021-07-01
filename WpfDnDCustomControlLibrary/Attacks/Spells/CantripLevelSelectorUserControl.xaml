@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="WpfDnDCustomControlLibrary.Attacks.Spells.CantripLevelSelectorUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfDnDCustomControlLibrary.Attacks.Spells" xmlns:circularselector="clr-namespace:WpfCustomControlLibrary.CircularSelector;assembly=WpfCustomControlLibrary"
+             mc:Ignorable="d" 
+             Height="200" Width="200">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/WpfCustomControlLibrary;component/CircularSelector/CircularSelectorImportFile.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <circularselector:CircularSelectorCenterControl
+            x:Name="SelectorControl"
+            circularselector:CircularSelectorCenterControl.PathGeometry="{StaticResource CircularSelectorRadioButtonBigTriangle}"
+            circularselector:CircularSelectorCenterControl.BorderBaseColorBrush="{StaticResource Gray}"
+            circularselector:CircularSelectorCenterControl.BaseColorBrush="{StaticResource Gray}"
+            circularselector:CircularSelectorCenterControl.HoverColorBrush="{StaticResource Brown3}"
+            circularselector:CircularSelectorCenterControl.SelectedColorBrush="{StaticResource Brown1}"
+            >
+            <Grid Focusable="False">
+                <circularselector:CircularSelectorRadioButtonControl
+                    Angle="-186.75" 
+                    Content="1"
+                    circularselector:CircularSelectorCenterControl.LabelXOffset="16"
+                    circularselector:CircularSelectorCenterControl.LabelYOffset="-15"
+                    RadioValue="1"
+                    RadioBinding="{Binding SelectedLevel, 
+                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:CantripLevelSelectorUserControl}}}"
+                    />
+                <circularselector:CircularSelectorRadioButtonControl
+                    Angle="-122.25" 
+                    Content="2"
+                    circularselector:CircularSelectorCenterControl.LabelXOffset="30"
+                    circularselector:CircularSelectorCenterControl.LabelYOffset="-10"
+                    RadioValue="2"
+                    RadioBinding="{Binding SelectedLevel, 
+                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:CantripLevelSelectorUserControl}}}"
+                    />
+                <circularselector:CircularSelectorRadioButtonControl
+                    Angle="-57.75" 
+                    Content="3"
+                    circularselector:CircularSelectorCenterControl.LabelXOffset="30"
+                    circularselector:CircularSelectorCenterControl.LabelYOffset="10"
+                    RadioValue="3"
+                    RadioBinding="{Binding SelectedLevel, 
+                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:CantripLevelSelectorUserControl}}}"
+                    />
+                <circularselector:CircularSelectorRadioButtonControl
+                    Angle="6.75" 
+                    Content="4"
+                    circularselector:CircularSelectorCenterControl.LabelXOffset="16"
+                    circularselector:CircularSelectorCenterControl.LabelYOffset="15"
+                    RadioValue="4"
+                    RadioBinding="{Binding SelectedLevel, 
+                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:CantripLevelSelectorUserControl}}}"
+                    />
+            </Grid>
+        </circularselector:CircularSelectorCenterControl>
+    </Grid>
+</UserControl>

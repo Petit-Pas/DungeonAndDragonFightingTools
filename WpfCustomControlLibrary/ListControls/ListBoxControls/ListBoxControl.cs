@@ -17,7 +17,6 @@ namespace WpfCustomControlLibrary.ListControls.ListBoxControls
         private static readonly Style style = styleDict["ListBoxStyle"] as Style;
         private static readonly Style itemStyle = styleDict["ListBoxItemStyle"] as Style;
 
-
         public ListBoxControl() : base()
         {
             if (style != null && this.Style == null)

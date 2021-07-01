@@ -152,5 +152,15 @@ namespace DnDToolsLibrary.Fight
         {
             return Elements.FirstOrDefault(x => x.DisplayName == displayName);
         }
+
+        public void AddFighter(PlayableEntity fighter)
+        {
+            this.AddElementSilent(fighter);
+        }
+
+        public List<string> GetFightersNames()
+        {
+            return Elements.Select(x => x.DisplayName).ToList();
+        }
     }
 }

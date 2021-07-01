@@ -44,10 +44,19 @@
     <Compile Include="Attacks\AAttackTemplate.cs" />
     <Compile Include="Attacks\AttackRangeEnum.cs" />
     <Compile Include="Attacks\AttackRollResult.cs" />
-    <Compile Include="Attacks\AttacksCommands\DamageCommands\CalculateDamageListResult\CalculateDamageResultListCommand.cs" />
-    <Compile Include="Attacks\AttacksCommands\DamageCommands\CalculateDamageListResult\CalculateDamageResultListResponse.cs" />
+    <Compile Include="Attacks\AttacksCommands\DamageCommands\GetInputDamageResultList\GetInputDamageResultListCommand.cs" />
+    <Compile Include="Attacks\AttacksCommands\DamageCommands\GetInputDamageResultList\GetInputDamageResultListResponse.cs" />
     <Compile Include="Attacks\AttacksCommands\HitAttackCommands\ApplyHitAttackResult\ApplyHitAttackResultCommand.cs" />
     <Compile Include="Attacks\AttacksCommands\HitAttackCommands\ApplyHitAttackResult\ApplyHitAttackResultHandler.cs" />
+    <Compile Include="Attacks\AttacksCommands\SpellsCommands\CastSpell\CastSpellCommand.cs" />
+    <Compile Include="Attacks\AttacksCommands\SpellsCommands\CastSpell\CastSpellHandler.cs" />
+    <Compile Include="Attacks\AttacksCommands\SpellsCommands\GetInputSpellLevel\GetInputCantripLevelCommand.cs" />
+    <Compile Include="Attacks\AttacksCommands\SpellsCommands\GetInputSpellLevel\GetInputCantripLevelResponse.cs" />
+    <Compile Include="Attacks\AttacksCommands\SpellsCommands\GetInputSpellLevel\GetInputSpellLevelBaseCommand.cs" />
+    <Compile Include="Attacks\AttacksCommands\SpellsCommands\GetInputSpellLevel\GetInputNormalSpellLevelCommand.cs" />
+    <Compile Include="Attacks\AttacksCommands\SpellsCommands\GetInputSpellLevel\GetInputSpellLevelResponse.cs" />
+    <Compile Include="Attacks\AttacksCommands\SpellsCommands\GetInputSpellTargets\GetInputSpellTargetsCommand.cs" />
+    <Compile Include="Attacks\AttacksCommands\SpellsCommands\GetInputSpellTargets\GetInputSpellTargetsResponse.cs" />
     <Compile Include="Attacks\Damage\DamageModifierEnum.cs" />
     <Compile Include="Attacks\Damage\DamageResult.cs" />
     <Compile Include="Attacks\Damage\DamageResultList.cs" />
@@ -113,6 +122,9 @@
       <Name>[10]-BaseToolsLibrary</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Attacks\AttacksCommands\SpellsCommands\CastAttackSpell\" />
+    <Folder Include="Attacks\AttacksCommands\SpellsCommands\CastNonAttackSpell\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

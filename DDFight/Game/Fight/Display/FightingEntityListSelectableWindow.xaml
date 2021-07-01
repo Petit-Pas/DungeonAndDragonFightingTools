@@ -12,7 +12,6 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/WpfCustomControlLibrary;component/Scrollbars/ScrollBarStyle.xaml"/>
                 <ResourceDictionary Source="/Styles/ListBoxStyle.xaml"/>
                 <ResourceDictionary Source="/WpfCustomControlLibrary;component/Scrollbars/ScrollBarStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>

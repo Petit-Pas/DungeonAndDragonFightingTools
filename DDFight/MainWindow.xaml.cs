@@ -12,7 +12,7 @@ using DnDToolsLibrary.Status;
 using System.Linq;
 using System.Windows;
 using TempExtensionsOnHitStatus;
-using WpfDnDCommandHandlers.AttackCommands.DamageCommands.CalculateDamageResultList;
+using WpfDnDCommandHandlers.AttackCommands.DamageCommands.GetInputResultList;
 using WpfToolsLibrary.Extensions;
 
 namespace DDFight
@@ -38,7 +38,7 @@ namespace DDFight
         public MainWindow()
         {
             // this lines serves the purpose of force loading its .dll, enabling the mediator to find the handler.
-            CalculateDamageResultListHandler handler = new CalculateDamageResultListHandler();
+            GetInputDamageResultListHandler handler = new GetInputDamageResultListHandler();
 
 
             OnHitStatus.RegisterEvents = OnHitStatusGameExtension.Register;

@@ -3,7 +3,8 @@
                     xmlns:local="clr-namespace:WpfCustomControlLibrary.CircularSelector" 
                     xmlns:converters="clr-namespace:WpfToolsLibrary.Converters.Math;assembly=WpfToolsLibrary">
     <converters:BasicOperationConverter x:Key="OperationConverter"/>
-    <Style TargetType="local:CircularSelectorRadioButtonControl" x:Key="CircularSelectorRadioButtonControlStyle">
+    <Style TargetType="local:CircularSelectorRadioButtonControl" x:Key="CircularSelectorRadioButtonStyle">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:CircularSelectorRadioButtonControl}">
@@ -44,6 +45,7 @@
                             </TransformGroup>
                         </Grid.RenderTransform>
                         <TextBlock 
+                            x:Name="LabelControl"
                             Grid.Row="0"
                             Grid.Column="0"
                             Panel.ZIndex="20"
@@ -79,12 +81,10 @@
                                             </MultiBinding>
                                         </TranslateTransform.Y>
                                     </TranslateTransform>
-
-                                    
                                 </TransformGroup>
                             </TextBlock.RenderTransform>
                             <TextBlock.Text>
-                                <Binding Path="Label" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType={x:Type local:CircularSelectorRadioButtonControl}}"/>
+                                <Binding Path="Content" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType={x:Type local:CircularSelectorRadioButtonControl}}"/>
                             </TextBlock.Text>
                         </TextBlock>
                         <Path 
@@ -97,19 +97,13 @@
                             Stroke="{Binding Path=(local:CircularSelectorCenterControl.BorderBaseColorBrush), RelativeSource={RelativeSource TemplatedParent}}"
                             Data="{Binding Path=(local:CircularSelectorCenterControl.PathGeometry), RelativeSource={RelativeSource TemplatedParent}}">
                             <Path.Effect>
-                                <DropShadowEffect Direction="0" Color="{StaticResource RawIndigo}" BlurRadius="12" ShadowDepth="2" ></DropShadowEffect>
+                                <DropShadowEffect Direction="0" Color="{StaticResource RawGray}" ShadowDepth="2" Opacity="0.7" BlurRadius="10"  ></DropShadowEffect>
                             </Path.Effect>
                         </Path>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Fill" Value="{Binding Path=(local:CircularSelectorCenterControl.HoverColorBrush), RelativeSource={RelativeSource TemplatedParent}}" TargetName="ThePath"/>
-                        </Trigger>
-                        <Trigger Property="IsChecked" Value="True">
-                            <Setter Property="Fill" Value="{Binding Path=(local:CircularSelectorCenterControl.SelectedColorBrush), RelativeSource={RelativeSource TemplatedParent}}" TargetName="ThePath"/>
-                        </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Fill" Value="{Binding Path=(local:CircularSelectorCenterControl.DisabledColorBrush), RelativeSource={RelativeSource TemplatedParent}}" TargetName="ThePath"/>
+                            <Setter Property="Opacity" Value="0.3" TargetName="LabelControl"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
