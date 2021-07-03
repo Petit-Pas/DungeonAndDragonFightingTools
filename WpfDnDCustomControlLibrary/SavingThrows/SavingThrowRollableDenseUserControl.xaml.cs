@@ -13,26 +13,12 @@ namespace WpfDnDCustomControlLibrary.SavingThrows
     public partial class SavingThrowRollableDenseUserControl : UserControl, IRollableControl
     {
 
-        private DnDToolsLibrary.Dice.SavingThrow data_context
-        {
-            get 
-            {
-                try
-                {
-                    return DataContext as DnDToolsLibrary.Dice.SavingThrow;
-                }
-                catch (Exception)
-                {
-                    return null;
-                }
-            }
-        }
+        private SavingThrow data_context { get => DataContext as SavingThrow; }
 
         public SavingThrowRollableDenseUserControl()
         {
-            InitializeComponent();
-
             DataContextChanged += SavingThrowRollableDenseUserControl_DataContextChanged;
+            InitializeComponent();
         }
 
         private void SavingThrowRollableDenseUserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -42,13 +28,7 @@ namespace WpfDnDCustomControlLibrary.SavingThrows
                 int modifier = data_context.Target.Characteristics.GetSavingModifier(data_context.Characteristic);
                 AbilityModifierControl.Text = modifier < 0 ? modifier.ToString() : "+" + modifier.ToString();
                 AbilityModifierControl2.Text = modifier < 0 ? modifier.ToString() : "+" + modifier.ToString();
-                data_context.PropertyChanged += Data_context_PropertyChanged;
             }
-        }
-
-        private void Data_context_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            refreshResult();
         }
 
         private void refreshResult()

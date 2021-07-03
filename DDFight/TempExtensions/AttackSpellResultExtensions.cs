@@ -15,8 +15,10 @@ namespace TempExtensionsAttackSpellResultExtensions
         private static ICustomConsole console = DIContainer.GetImplementation<ICustomConsole>();
         private static IFontWeightProvider fontWeightProvider = DIContainer.GetImplementation<IFontWeightProvider>();
 
+        // Todo this should be removed
         public static void Cast(this AttackSpellResult attackSpellResult, List<SpellAttackResultRollableUserControl> attacks)
         {
+            throw new System.Exception("this method should not be called anymore");
 
             console.AddEntry($"{attackSpellResult.Caster.DisplayName}", fontWeightProvider.Bold);
             console.AddEntry(" casts a lvl ", fontWeightProvider.Bold);
@@ -27,8 +29,8 @@ namespace TempExtensionsAttackSpellResultExtensions
             {
                 SpellAttackResultRollableUserControl attack = attacks[index];
                 HitAttackResult result = new HitAttackResult {
-                    DamageList = attack.HitDamage,
-                    RollResult = attack.RollResult,
+                    //DamageList = attack.HitDamage,
+                    //RollResult = attack.RollResult,
                     OnHitStatuses = attackSpellResult.AppliedStatusList,
                     Owner = attackSpellResult.Caster,
                     Target = target,

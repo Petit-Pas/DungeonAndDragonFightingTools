@@ -45,8 +45,9 @@
             <dicetextboxes:AttackRollTextBoxControl
                 x:Name="AttackRollTextBoxControl"
                 Margin="5, 2"
-                Integer="{Binding AttackRoll}"
-                AdvantageModifiers="{Binding AdvantageModifiers}" />
+                Integer="{Binding AttackRoll, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}"
+                AdvantageModifiers="{Binding AdvantageModifiers}" 
+                Crits="{Binding Crits, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:AttackRollResultUserControl}}}"/>
             <TextBlock
                 Text="{Binding BaseRollModifier, StringFormat='+{0} '}">
                 

@@ -23,7 +23,7 @@ namespace WpfDnDCustomControlLibrary.InputBoxes.DiceTextBoxes
             if (!IsFullyRolled())
             {
                 int rolled = DiceRoll.Roll("1d20", AdvantageModifiers.SituationalAdvantage, AdvantageModifiers.SituationalDisadvantage);
-                this.SetValue(IntegerProperty, rolled);
+                Integer = rolled;
             }
         }
 

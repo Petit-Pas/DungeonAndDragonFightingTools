@@ -1,5 +1,6 @@
 ﻿using BaseToolsLibrary;
 using DnDToolsLibrary.Attacks.Damage;
+using DnDToolsLibrary.Attacks.HitAttacks;
 using DnDToolsLibrary.Characteristics;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Status;
@@ -241,6 +242,51 @@ namespace DnDToolsLibrary.Attacks.Spells
 
         #endregion Properties
 
+        public NewAttackSpellResult GetAttackSpellResultTemplate(PlayableEntity caster, int castLevel)
+        {
+            NewAttackSpellResult template = new NewAttackSpellResult()
+            {
+                HitDamage = this.HitDamage.GetResultList(),
+                AppliedStatusList = this.AppliedStatus.Clone() as OnHitStatusList,
+                Caster = caster,
+                Target = null,
+                Name = $"default name for {DisplayName}",
+                Level = castLevel,
+                AutomaticalyHits = this.AutomaticalyHits,
+                RollResult = new AttackRollResult()
+                {
+                    BaseRollModifier = this.HitRollBonus == 0 ? caster.SpellHitModifier : this.HitRollBonus,
+                },
+            };
+
+            for (int i = castLevel - this.BaseLevel; i > 0; i -= 1)
+            {
+                foreach (DamageTemplate damageTemplate in AdditionalHitDamagePerLevel.Elements)
+                {
+                    bool added = false;
+                    foreach (DamageResult onHitTemplate in template.HitDamage.Elements)
+                    {
+                        if (onHitTemplate.IsSameKind(damageTemplate))
+                        {
+                            onHitTemplate.Add(damageTemplate);
+                            added = true;
+                            break;
+                        }
+                    }
+                    if (added == false)
+                        template.HitDamage.AddElementSilent(new DamageResult(damageTemplate));
+                }
+            }
+
+            foreach (DamageResult result in template.HitDamage.Elements)
+            {
+                result.LinkedToSaving = false;
+            }
+
+            return template;
+        }
+
+        // TODO this one is old version, see upper for new one 
         public AttackSpellResult GetAttackSpellResult(PlayableEntity caster, ObservableCollection<PlayableEntity> targets, int additional_levels)
         {
             AttackSpellResult template = new AttackSpellResult

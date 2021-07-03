@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 
 namespace WpfDnDCustomControlLibrary.InputBoxes.DiceTextBoxes
 {
@@ -10,6 +11,9 @@ namespace WpfDnDCustomControlLibrary.InputBoxes.DiceTextBoxes
 
         protected override void IntegerProperty_Updated(DependencyPropertyChangedEventArgs a)
         {
+            Console.WriteLine("BHDEBUG: in intergerPropertyUpdated");
+            base.IntegerProperty_Updated(a);
+
             if (Crits == false && Integer == 20)
                 Crits = true;
             else if (Crits == true && Integer != 20)

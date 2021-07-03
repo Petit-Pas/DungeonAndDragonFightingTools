@@ -137,6 +137,16 @@ namespace DnDToolsLibrary.Attacks.HitAttacks
         }
         private AttackRollResult _rollResult = new AttackRollResult();
 
+        public bool AutomaticallyHits {
+            get => _automaticallyHits;
+            set
+            {
+                _automaticallyHits = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private bool _automaticallyHits = false;
+
 
         #region INotifyPropertyChanged
 
@@ -181,6 +191,7 @@ namespace DnDToolsLibrary.Attacks.HitAttacks
             this.Name = to_copy.Name;
             this.TargetName = to_copy.TargetName;
             this.OwnerName = to_copy.OwnerName;
+            this.AutomaticallyHits = to_copy.AutomaticallyHits;
         }
 
         public HitAttackResult(HitAttackResult to_copy)

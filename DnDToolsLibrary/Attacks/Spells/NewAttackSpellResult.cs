@@ -1,15 +1,25 @@
-﻿using DnDToolsLibrary.Attacks.Damage;
+﻿using BaseToolsLibrary.DependencyInjection;
+using DnDToolsLibrary.Attacks.Damage;
 using DnDToolsLibrary.Entities;
+using DnDToolsLibrary.Fight;
 using DnDToolsLibrary.Status;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace DnDToolsLibrary.Attacks.Spells
 {
-    //TODO this class should be deleted and replace by NewAttackSpellResult when all its dependences have been removed
-    public class AttackSpellResult : INotifyPropertyChanged
+    public class NewAttackSpellResult : ICloneable
     {
+        public NewAttackSpellResult()
+        {
+        }
 
         #region Properties
 
@@ -71,6 +81,7 @@ namespace DnDToolsLibrary.Attacks.Spells
         }
         private bool _automaticalyHits = false;
 
+        // not sure this is useful
         public int ToHitBonus
         {
             get => _toHitBonus;
@@ -93,27 +104,83 @@ namespace DnDToolsLibrary.Attacks.Spells
         }
         private OnHitStatusList _appliedStatusList = new OnHitStatusList();
 
-        public ObservableCollection<PlayableEntity> Targets
-        {
-            get => _targets;
-            set
-            {
-                _targets = value;
-                NotifyPropertyChanged();
-            }
-        }
-        private ObservableCollection<PlayableEntity> _targets = new ObservableCollection<PlayableEntity>();
+        private static IFigtherProvider fighterProvider = DIContainer.GetImplementation<IFigtherProvider>();
 
+        [XmlIgnore]
         public PlayableEntity Caster
         {
-            get => _caster;
+            get
+            {
+                return fighterProvider.GetFighterByDisplayName(CasterName);
+            }
             set
             {
-                _caster = value;
+                if (this.RollResult != null)
+                {
+                    this.RollResult.Caster = value;
+                }
+
+                if (value != null)
+                    CasterName = value.DisplayName;
+                else
+                    CasterName = null;
+
                 NotifyPropertyChanged();
             }
         }
-        private PlayableEntity _caster = null;
+        [XmlAttribute]
+        public string CasterName
+        {
+            get
+            {
+                return _casterName;
+            }
+            set
+            {
+                _casterName = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private string _casterName = null;
+
+        [XmlIgnore]
+        public PlayableEntity Target
+        {
+            get
+            {
+                return fighterProvider.GetFighterByDisplayName(TargetName);
+            }
+            set
+            {
+                if (this.RollResult != null)
+                {
+                    HitDamage.RefreshDamageAffinityModifier(value);
+                    this.RollResult.Target = value;
+                }
+
+                if (value != null)
+                    TargetName = value.DisplayName;
+                else
+                    TargetName = null;
+
+                NotifyPropertyChanged();
+            }
+        }
+        
+        [XmlAttribute]
+        public string TargetName
+        {
+            get
+            {
+                return _targetName;
+            }
+            set
+            {
+                _targetName = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private string _targetName = null;
 
         #endregion Properties
 
@@ -136,7 +203,29 @@ namespace DnDToolsLibrary.Attacks.Spells
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-        #endregion
 
+        private void init_copy(NewAttackSpellResult to_copy)
+        {
+            this.AppliedStatusList = to_copy.AppliedStatusList.Clone() as OnHitStatusList;
+            this.AutomaticalyHits = to_copy.AutomaticalyHits;
+            this.CasterName = to_copy.CasterName;
+            this.HitDamage = to_copy.HitDamage.Clone() as DamageResultList;
+            this.Level = to_copy.Level;
+            this.Name = to_copy.Name;
+            this.RollResult = to_copy.RollResult.Clone() as AttackRollResult;
+            this.TargetName = to_copy.TargetName;
+            this.ToHitBonus = to_copy.ToHitBonus;
+        }
+
+        public NewAttackSpellResult(NewAttackSpellResult to_copy)
+        {
+            init_copy(to_copy);
+        }
+
+        public object Clone()
+        {
+            return new NewAttackSpellResult(this);
+        }
+        #endregion
     }
 }

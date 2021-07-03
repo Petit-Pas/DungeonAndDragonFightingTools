@@ -19,6 +19,9 @@ namespace WpfCustomControlLibrary.InputBoxes.IntTextBoxes
             binding.Source = this;
             binding.ValidationRules.Clear();
             binding.ValidationRules.Add(this.GetValidationRule());
+            binding.NotifyOnValidationError = true;
+            binding.NotifyOnSourceUpdated = true;
+            binding.NotifyOnTargetUpdated = true;
             this.SetBinding(TextProperty, binding).UpdateSource();
         }
 

@@ -1,6 +1,7 @@
 ﻿using WpfDnDCommandHandlers;
 using WpfDnDCommandHandlers.AttackCommands.DamageCommands;
 using WpfDnDCommandHandlers.AttackCommands.DamageCommands.GetInputResultList;
+using WpfDnDCommandHandlers.AttackCommands.SpellCommands.GetInputSpellAttackResults;
 using WpfDnDCommandHandlers.AttackCommands.SpellCommands.GetInputSpellLevel.GetInputCantripLevel;
 using WpfDnDCommandHandlers.AttackCommands.SpellCommands.GetInputSpellLevel.GetInputNormalSpellLevel;
 using WpfDnDCommandHandlers.AttackCommands.SpellCommands.GetInputSpellTargets;
@@ -15,6 +16,7 @@ namespace DDFight
             HandlerToUILinker.AddNewPair(typeof(GetInputSpellLevelHandler), typeof(GetInputNormalSpellLevelWindow));
             HandlerToUILinker.AddNewPair(typeof(GetInputCantripLevelHandler), typeof(GetInputCantripLevelWindow));
             HandlerToUILinker.AddNewPair(typeof(GetInputSpellTargetsHandler), typeof(GetInputSpellTargetsWindow));
+            HandlerToUILinker.AddNewPair(typeof(GetInputSpellAttackResultsHandler), typeof(GetInputSpellAttackResultsWindow));
         }
     }
 }

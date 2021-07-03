@@ -43,5 +43,16 @@ namespace WpfDnDCustomControlLibrary.Attacks
             typeof(AttackRollResult),
             typeof(AttackRollResultUserControl),
             new PropertyMetadata(new AttackRollResult()));
+
+        public bool Crits
+        {
+            get { return (bool)this.GetValue(CritsProperty); }
+            set { this.SetValue(CritsProperty, value); }
+        }
+        private static readonly DependencyProperty CritsProperty = DependencyProperty.Register(
+            nameof(Crits),
+            typeof(bool),
+            typeof(AttackRollResultUserControl),
+            new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
     }
 }

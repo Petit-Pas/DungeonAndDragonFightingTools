@@ -19,6 +19,11 @@ namespace WpfDnDCustomControlLibrary.InputBoxes.DiceTextBoxes
             this.MinWidth = 40;
         }
 
+        protected override void IntegerProperty_Updated(DependencyPropertyChangedEventArgs a)
+        {
+            base.IntegerProperty_Updated(a);
+        }
+
         public override bool IsValid()
         {
             if (base.IsValid() && IsFullyRolled())

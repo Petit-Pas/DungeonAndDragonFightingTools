@@ -53,6 +53,10 @@
       <DependentUpon>GetInputDamageResultListWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="AttackCommands\DamageCommands\GetInputDamageResultList\GetInputDamageResultListHandler.cs" />
+    <Compile Include="AttackCommands\SpellCommands\GetInputSpellAttackResults\GetInputSpellAttackResultsHandler.cs" />
+    <Compile Include="AttackCommands\SpellCommands\GetInputSpellAttackResults\GetInputSpellAttackResultsWindow.xaml.cs">
+      <DependentUpon>GetInputSpellAttackResultsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AttackCommands\SpellCommands\GetInputSpellLevel\GetInpuCantripLevel\GetInputCantripLevelWindow.xaml.cs">
       <DependentUpon>GetInputCantripLevelWindow.xaml</DependentUpon>
     </Compile>
@@ -94,6 +98,10 @@
     <Page Include="AttackCommands\DamageCommands\GetInputDamageResultList\GetInputDamageResultListWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AttackCommands\SpellCommands\GetInputSpellAttackResults\GetInputSpellAttackResultsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AttackCommands\SpellCommands\GetInputSpellLevel\GetInpuCantripLevel\GetInputCantripLevelWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -1,7 +1,9 @@
 ﻿using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.Mediator;
+using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.GetInputAttackSpellResults;
 using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.GetInputSpellLevel;
 using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.GetInputSpellTargets;
+using DnDToolsLibrary.Attacks.Spells;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Fight;
 using System;
@@ -26,7 +28,45 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpell
             if (targetsSelected(_command) == false)
                 return new ValidableResponse<NoResponse>(false, MediatorCommandResponses.NoResponse);
 
+            if (_command.Spell.IsAnAttack)
+            {
+                if (castAttackSpell(_command) == false)
+                    return new ValidableResponse<NoResponse>(false, MediatorCommandResponses.NoResponse);
+            }
+            else
+            {
+                if (castNonAttackSpell(_command) == false)
+                    return new ValidableResponse<NoResponse>(false, MediatorCommandResponses.NoResponse);
+            }
+
             return new ValidableResponse<NoResponse>(true, MediatorCommandResponses.NoResponse);
+        }
+
+        private bool castNonAttackSpell(CastSpellCommand command)
+        {
+            throw new NotImplementedException();
+        }
+
+        private bool castAttackSpell(CastSpellCommand command)
+        {
+            NewAttackSpellResult template = command.Spell.GetAttackSpellResultTemplate(fighterProvider.Value.GetFighterByDisplayName(command.CasterName), command.CastLevel);
+            List<NewAttackSpellResult> spellResults = new List<NewAttackSpellResult>();
+            foreach (string name in command.TargetNames)
+            {
+                NewAttackSpellResult spellResult = template.Clone() as NewAttackSpellResult;
+                spellResult.Target = fighterProvider.Value.GetFighterByDisplayName(name);
+                spellResults.Add(spellResult);
+            }
+
+            GetInputAttackSpellResultsCommand _command = new GetInputAttackSpellResultsCommand(command.Spell.DisplayName, command.CastLevel, spellResults);
+
+            ValidableResponse<GetInputAttackSpellResultsResponse> response = base._mediator.Value.Execute(_command) as ValidableResponse<GetInputAttackSpellResultsResponse>;
+
+            if (response.IsValid)
+            {
+                ;// actually execute the spell
+            }
+            return response.IsValid;
         }
 
         private bool targetsSelected(CastSpellCommand command)

@@ -82,12 +82,18 @@ namespace BindValidation
                 },
             };
 
+            spell.HitDamage = list;
+
+            spell.IsAnAttack = true;
+
             GetInputDamageResultListHandler dfghj = new GetInputDamageResultListHandler();
 
             DIConfigurer.ConfigureCore();
             DIConfigurer.ConfigureWpf();
             DIConfigurer.Verify();
             HandlerToUiConfig.Configure();
+
+            Global.Loading = false;
 
             IFigtherProvider provider = DIContainer.GetImplementation<IFigtherProvider>();
             provider.AddFighter(new PlayableEntity() { DisplayName = "Roger" });
@@ -108,6 +114,10 @@ namespace BindValidation
             provider.AddFighter(new PlayableEntity() { DisplayName = "Jacques" });
             provider.AddFighter(new PlayableEntity() { DisplayName = "Michel" });
             provider.AddFighter(new PlayableEntity() { DisplayName = "Jhon" });
+            PlayableEntity roger = provider.GetFighterByDisplayName("Roger");
+            roger.DamageAffinities.GetAffinity(DamageTypeEnum.Fire).Affinity = DamageAffinityEnum.Resistant;
+            roger.CA = 12;
+
 
             CastSpellCommand command_spell = new CastSpellCommand(provider.GetFighterByDisplayName("Roger"), spell);
             IMediator mediator = DIContainer.GetImplementation<IMediator>();

@@ -50,6 +50,8 @@
     <Compile Include="Attacks\AttacksCommands\HitAttackCommands\ApplyHitAttackResult\ApplyHitAttackResultHandler.cs" />
     <Compile Include="Attacks\AttacksCommands\SpellsCommands\CastSpell\CastSpellCommand.cs" />
     <Compile Include="Attacks\AttacksCommands\SpellsCommands\CastSpell\CastSpellHandler.cs" />
+    <Compile Include="Attacks\AttacksCommands\SpellsCommands\GetInputAttackSpellResults\GetInputAttackSpellResultsCommand.cs" />
+    <Compile Include="Attacks\AttacksCommands\SpellsCommands\GetInputAttackSpellResults\GetInputAttackSpellResultsResponse.cs" />
     <Compile Include="Attacks\AttacksCommands\SpellsCommands\GetInputSpellLevel\GetInputCantripLevelCommand.cs" />
     <Compile Include="Attacks\AttacksCommands\SpellsCommands\GetInputSpellLevel\GetInputCantripLevelResponse.cs" />
     <Compile Include="Attacks\AttacksCommands\SpellsCommands\GetInputSpellLevel\GetInputSpellLevelBaseCommand.cs" />
@@ -74,6 +76,7 @@
     <Compile Include="Attacks\SituationalAdvantageModifiers.cs" />
     <Compile Include="Attacks\SituationalAttackRollModifiers.cs" />
     <Compile Include="Attacks\Spells\AttackSpellResult.cs" />
+    <Compile Include="Attacks\Spells\NewAttackSpellResult.cs" />
     <Compile Include="Attacks\Spells\NonAttackSpellResult.cs" />
     <Compile Include="Attacks\Spells\Spell.cs" />
     <Compile Include="Attacks\Spells\SpellList.cs" />
@@ -122,9 +125,6 @@
       <Name>[10]-BaseToolsLibrary</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Attacks\AttacksCommands\SpellsCommands\CastAttackSpell\" />
-    <Folder Include="Attacks\AttacksCommands\SpellsCommands\CastNonAttackSpell\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

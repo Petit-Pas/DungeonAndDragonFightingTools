@@ -65,5 +65,6 @@ namespace WpfToolsLibrary.ValidationRules
         bool IsValid();
 
         //string GetValidationErrorMessage();
+
     }
 }
