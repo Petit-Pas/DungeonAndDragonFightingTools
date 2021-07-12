@@ -52,6 +52,8 @@
     <Compile Include="Attacks\AttacksCommands\SpellsCommands\CastSpell\CastSpellHandler.cs" />
     <Compile Include="Attacks\AttacksCommands\SpellsCommands\GetInputAttackSpellResults\GetInputAttackSpellResultsCommand.cs" />
     <Compile Include="Attacks\AttacksCommands\SpellsCommands\GetInputAttackSpellResults\GetInputAttackSpellResultsResponse.cs" />
+    <Compile Include="Attacks\AttacksCommands\SpellsCommands\GetInputNonAttackSpellResults\GetInputNonAttackSpellResultsCommand.cs" />
+    <Compile Include="Attacks\AttacksCommands\SpellsCommands\GetInputNonAttackSpellResults\GetInputNonAttackSpellResultsResponse.cs" />
     <Compile Include="Attacks\AttacksCommands\SpellsCommands\GetInputSpellLevel\GetInputCantripLevelCommand.cs" />
     <Compile Include="Attacks\AttacksCommands\SpellsCommands\GetInputSpellLevel\GetInputCantripLevelResponse.cs" />
     <Compile Include="Attacks\AttacksCommands\SpellsCommands\GetInputSpellLevel\GetInputSpellLevelBaseCommand.cs" />
@@ -77,6 +79,7 @@
     <Compile Include="Attacks\SituationalAttackRollModifiers.cs" />
     <Compile Include="Attacks\Spells\AttackSpellResult.cs" />
     <Compile Include="Attacks\Spells\NewAttackSpellResult.cs" />
+    <Compile Include="Attacks\Spells\NewNonAttackSpellResult.cs" />
     <Compile Include="Attacks\Spells\NonAttackSpellResult.cs" />
     <Compile Include="Attacks\Spells\Spell.cs" />
     <Compile Include="Attacks\Spells\SpellList.cs" />

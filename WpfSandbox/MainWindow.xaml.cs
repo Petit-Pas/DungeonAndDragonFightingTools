@@ -73,6 +73,7 @@ namespace BindValidation
                     {
                         Damage = new DiceRoll("2d6+3"),
                         DamageType = DamageTypeEnum.Fire,
+                        SituationalDamageModifier = DamageModifierEnum.Halved,
                     },
                     new DamageTemplate()
                     {
@@ -84,7 +85,10 @@ namespace BindValidation
 
             spell.HitDamage = list;
 
-            spell.IsAnAttack = true;
+            spell.IsAnAttack = false;
+
+            spell.HasSavingThrow = true;
+            spell.SavingCharacteristic = CharacteristicsEnum.Intelligence;
 
             GetInputDamageResultListHandler dfghj = new GetInputDamageResultListHandler();
 
@@ -115,6 +119,7 @@ namespace BindValidation
             provider.AddFighter(new PlayableEntity() { DisplayName = "Michel" });
             provider.AddFighter(new PlayableEntity() { DisplayName = "Jhon" });
             PlayableEntity roger = provider.GetFighterByDisplayName("Roger");
+            roger.Characteristics.GetCharacteristic(CharacteristicsEnum.Intelligence).Modifier = 3;
             roger.DamageAffinities.GetAffinity(DamageTypeEnum.Fire).Affinity = DamageAffinityEnum.Resistant;
             roger.CA = 12;
 

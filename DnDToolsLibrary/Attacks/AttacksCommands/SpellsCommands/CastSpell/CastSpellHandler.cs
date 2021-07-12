@@ -1,10 +1,13 @@
 ﻿using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.Mediator;
 using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.GetInputAttackSpellResults;
+using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.GetInputNonAttackSpellResults;
 using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.GetInputSpellLevel;
 using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.GetInputSpellTargets;
+using DnDToolsLibrary.Attacks.Damage;
 using DnDToolsLibrary.Attacks.Spells;
 using DnDToolsLibrary.Entities;
+using DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageResultList;
 using DnDToolsLibrary.Fight;
 using System;
 using System.Collections.Generic;
@@ -44,7 +47,32 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpell
 
         private bool castNonAttackSpell(CastSpellCommand command)
         {
-            throw new NotImplementedException();
+            NewNonAttackSpellResult template = command.Spell.GetNonAttackSpellResultTemplate(fighterProvider.Value.GetFighterByDisplayName(command.CasterName), command.CastLevel);
+            List<NewNonAttackSpellResult> spellResults = new List<NewNonAttackSpellResult>();
+            foreach (string name in command.TargetNames)
+            {
+                NewNonAttackSpellResult spellResult = template.Clone() as NewNonAttackSpellResult;
+                spellResult.Target = fighterProvider.Value.GetFighterByDisplayName(name);
+                spellResults.Add(spellResult);
+            }
+
+            GetInputNonAttackSpellResultsCommand _command = new GetInputNonAttackSpellResultsCommand(template, spellResults);
+
+            ValidableResponse<GetInputNonAttackSpellResultsResponse> response = base._mediator.Value.Execute(_command) as ValidableResponse<GetInputNonAttackSpellResultsResponse>;
+
+            if (response.IsValid)
+            {
+                foreach (NewNonAttackSpellResult spellResult in response.Response.SpellResults)
+                {
+                    ApplyDamageResultListCommand damageCommand = new ApplyDamageResultListCommand(spellResult.Target, spellResult.HitDamage);
+                    base._mediator.Value.Execute(damageCommand);
+                    command.AddToInnerCommands(damageCommand);
+                    // TODO
+                    // add On hit status
+                }
+            }
+
+            return response.IsValid;
         }
 
         private bool castAttackSpell(CastSpellCommand command)
@@ -64,7 +92,14 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpell
 
             if (response.IsValid)
             {
-                ;// actually execute the spell
+                foreach (NewAttackSpellResult attackSpellResult in response.Response.SpellResults)
+                {
+                    ApplyDamageResultListCommand damageCommand = new ApplyDamageResultListCommand(attackSpellResult.Target, attackSpellResult.HitDamage);
+                    base._mediator.Value.Execute(damageCommand);
+                    command.AddToInnerCommands(damageCommand);
+                    // TODO
+                    // apply on hit status
+                }
             }
             return response.IsValid;
         }

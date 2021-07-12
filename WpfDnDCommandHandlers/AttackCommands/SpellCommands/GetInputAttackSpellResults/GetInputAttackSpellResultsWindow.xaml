@@ -1,9 +1,9 @@
-﻿<Window x:Class="WpfDnDCommandHandlers.AttackCommands.SpellCommands.GetInputSpellAttackResults.GetInputSpellAttackResultsWindow"
+﻿<Window x:Class="WpfDnDCommandHandlers.AttackCommands.SpellCommands.GetInputAttackSpellResults.GetInputAttackSpellResultsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfDnDCommandHandlers.AttackCommands.SpellCommands.GetInputSpellAttackResults"
+        xmlns:local="clr-namespace:WpfDnDCommandHandlers.AttackCommands.SpellCommands.GetInputAttackSpellResults"
         xmlns:shadowboxes="clr-namespace:WpfCustomControlLibrary.ShadowBoxes;assembly=WpfCustomControlLibrary" xmlns:spells="clr-namespace:WpfDnDCustomControlLibrary.Attacks.Spells;assembly=WpfDnDCustomControlLibrary" xmlns:converters="clr-namespace:WpfToolsLibrary.Converters.Visibilities;assembly=WpfToolsLibrary"
         mc:Ignorable="d"
         Title="GetInputSpellAttackResultsWindow" Height="450" Width="800"
@@ -84,7 +84,6 @@
             VerticalScrollBarVisibility="Auto" Padding="5"
             Background="{StaticResource Gray}">
             <ItemsControl
-                Visibility="{Binding Visibility, ElementName=DamageTitle}"
                 Focusable="False"
                 Grid.IsSharedSizeScope="True"
                 x:Name="DamageControl"

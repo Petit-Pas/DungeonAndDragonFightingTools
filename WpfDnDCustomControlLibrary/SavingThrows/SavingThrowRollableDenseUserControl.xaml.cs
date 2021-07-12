@@ -23,12 +23,21 @@ namespace WpfDnDCustomControlLibrary.SavingThrows
 
         private void SavingThrowRollableDenseUserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
+            if (e.OldValue is SavingThrow oldSaving)
+                oldSaving.PropertyChanged -= savingPropertyChanged;
+
             if (data_context != null)
             {
-                int modifier = data_context.Target.Characteristics.GetSavingModifier(data_context.Characteristic);
+                int modifier = data_context.Target?.Characteristics.GetSavingModifier(data_context.Characteristic) ?? 0;
                 AbilityModifierControl.Text = modifier < 0 ? modifier.ToString() : "+" + modifier.ToString();
                 AbilityModifierControl2.Text = modifier < 0 ? modifier.ToString() : "+" + modifier.ToString();
+                data_context.PropertyChanged += savingPropertyChanged;
             }
+        }
+
+        private void savingPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            refreshResult();
         }
 
         private void refreshResult()
