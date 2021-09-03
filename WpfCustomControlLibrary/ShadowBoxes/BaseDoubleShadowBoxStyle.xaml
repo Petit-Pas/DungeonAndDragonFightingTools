@@ -61,8 +61,9 @@
                                     BorderThickness="5 5 0 0">
                                     <Border.Effect>
                                         <DropShadowEffect 
-                                            Color="{Binding UpperOuterShadowColor, RelativeSource={RelativeSource AncestorType={x:Type local:BaseDoubleShadowBoxControl}}}" 
-                                            ShadowDepth="2" 
+                                            Color="#888888"
+                                            ShadowDepth="4"
+                                            Opacity="0.7"
                                             BlurRadius="{Binding UpperOuterShadowBlurRadius, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:BaseDoubleShadowBoxControl}}}" 
                                             Direction="135" />
                                     </Border.Effect>
@@ -76,8 +77,10 @@
                                     BorderThickness="0 0 5 5">
                                     <Border.Effect>
                                         <DropShadowEffect 
-                                            Color="{Binding LowerOuterShadowColor, RelativeSource={RelativeSource AncestorType={x:Type local:BaseDoubleShadowBoxControl}}}" 
-                                            ShadowDepth="2"
+                                            Color="#6d3509" 
+                                            ShadowDepth="5.5"
+                                            Opacity="0.7"
+                                            Direction="-45"
                                             BlurRadius="{Binding UpperInnerShadowBlurRadius, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:BaseDoubleShadowBoxControl}}}"/>
                                     </Border.Effect>
                                 </Border>
