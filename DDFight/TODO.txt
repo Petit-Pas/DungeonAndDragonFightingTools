@@ -35,3 +35,15 @@ Inclure les faiblesses, résistances, etc.. dans les DamageResult pour pouvoir l
 Dans la fenetre d'attaque, parfois si la cible est sélect avant, les boutons ne se refreshent pas.
 
 Peut etre devoir inclure un saving throw dans les dotDamage (les lumières qui tournent autour du clerc)
+
+###IMPORTANT###
+On peut enfin oublier les abonnements a des events en cascade pour valider un formulaire!
+Il y a 3 events auxquels on peut s'abonner dans une window
+	Validation.Error="Window_Error"
+	Binding.SourceUpdated="Window_SourceUpdated"
+	Binding.TargetUpdated="Window_TargetUpdated"
+Ils permettent à eux seuls de savoir quand refresh l'UI, mais pour fonctionner ils faut que respectivement ces propriétés aient été set sur tout les bindings voulus:
+	binding.NotifyOnValidationError = true;
+	binding.NotifyOnSourceUpdated = true;
+	binding.NotifyOnTargetUpdated = true;
+Il pourrait donc être bon de revor tout les bindings et d'y ajouter ceci, puis de revoir toute les fenetres validables et de jouer avec les events de la window plutot que les nouveaux

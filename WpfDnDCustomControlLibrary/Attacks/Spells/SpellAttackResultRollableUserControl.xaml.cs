@@ -14,7 +14,7 @@ namespace WpfDnDCustomControlLibrary.Attacks.Spells
     /// <summary>
     /// Interaction logic for SpellAttackResultRollableUserControl.xaml
     /// </summary>
-    public partial class SpellAttackResultRollableUserControl : UserControl, INotifyPropertyChanged, IValidable
+    public partial class SpellAttackResultRollableUserControl : UserControl, INotifyPropertyChanged
     {
         private PlayableEntity data_context
         {
@@ -26,9 +26,9 @@ namespace WpfDnDCustomControlLibrary.Attacks.Spells
             InitializeComponent();
         }
 
-        public AttackSpellResult SpellResult
+        public NewAttackSpellResult SpellResult
         {
-            get { return (AttackSpellResult)this.GetValue(SpellResultProperty); }
+            get { return (NewAttackSpellResult)this.GetValue(SpellResultProperty); }
             set 
             {
                 this.SetValue(SpellResultProperty, value);
@@ -37,49 +37,9 @@ namespace WpfDnDCustomControlLibrary.Attacks.Spells
         }
         public static readonly DependencyProperty SpellResultProperty = DependencyProperty.Register(
           nameof(SpellResult),
-          typeof(AttackSpellResult), 
+          typeof(NewAttackSpellResult), 
           typeof(SpellAttackResultRollableUserControl), 
-          new PropertyMetadata(new AttackSpellResult(), new PropertyChangedCallback(OnSpellPropertyChanged)));
-
-        private static void OnSpellPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
-        {
-            ((SpellAttackResultRollableUserControl)sender).RefreshHitDamage();
-            ((SpellAttackResultRollableUserControl)sender).RefreshHitResult();
-        }
-
-        public void RefreshHitResult()
-        {
-            // the same AttackSpellResult serves all such controls, so we duplicate the important data
-            RollResult = (AttackRollResult)SpellResult.RollResult.Clone();
-            RollResult.Target = this.data_context;
-        }
-
-        public void RefreshHitDamage()
-        {
-            HitDamage = (DamageResultList)SpellResult.HitDamage.Clone();
-        }
-
-        public AttackRollResult RollResult
-        {
-            get => _rollResult;
-            set
-            {
-                _rollResult = value;
-                NotifyPropertyChanged();
-            }
-        }
-        private AttackRollResult _rollResult = null;
-
-        public DamageResultList HitDamage
-        {
-            get => _hitDamage;
-            set
-            {
-                _hitDamage = value;
-                NotifyPropertyChanged();
-            }
-        }
-        private DamageResultList _hitDamage = new DamageResultList();
+          new PropertyMetadata(null));
 
         #region INotifyPropertyChanged
 
@@ -100,19 +60,5 @@ namespace WpfDnDCustomControlLibrary.Attacks.Spells
             }
         }
         #endregion
-
-        public bool IsValid()
-        {
-            if (RollResult == null)
-                return false;
-            if (RollResult.AttackRoll == 0)
-                return false;
-            foreach (DamageResult dmg in HitDamage.Elements)
-            {
-                if (dmg.Damage.LastRoll == 0)
-                    return false;
-            }
-            return this.AreAllChildrenValid();
-        }
     }
 }

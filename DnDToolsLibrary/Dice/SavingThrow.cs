@@ -1,9 +1,12 @@
-﻿using DnDToolsLibrary.Attacks;
+﻿using BaseToolsLibrary.DependencyInjection;
+using DnDToolsLibrary.Attacks;
 using DnDToolsLibrary.Characteristics;
 using DnDToolsLibrary.Entities;
+using DnDToolsLibrary.Fight;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Xml.Serialization;
 
 namespace DnDToolsLibrary.Dice
 { 
@@ -15,6 +18,9 @@ namespace DnDToolsLibrary.Dice
         {
         }
 
+        private static IFigtherProvider fighterProvider = DIContainer.GetImplementation<IFigtherProvider>();
+
+        [XmlIgnore]
         public bool IsSuccesful
         {
             get 
@@ -23,11 +29,13 @@ namespace DnDToolsLibrary.Dice
             }
         }
 
+        [XmlIgnore]
         public int Result
         {
             get => Modifier + SavingRoll + Target.Characteristics.GetSavingModifier(Characteristic);
         }
 
+        [XmlAttribute]
         public CharacteristicsEnum Characteristic
         {
             get => _characteristic;
@@ -39,6 +47,7 @@ namespace DnDToolsLibrary.Dice
         }
         private CharacteristicsEnum _characteristic = CharacteristicsEnum.Dexterity;
 
+        [XmlAttribute]
         public int Difficulty
         {
             get => _difficulty;
@@ -50,6 +59,7 @@ namespace DnDToolsLibrary.Dice
         }
         private int _difficulty = 10;
 
+        [XmlAttribute]
         public SituationalAdvantageModifiers AdvantageModifiers
         {
             get => _advantageModifiers;
@@ -64,6 +74,7 @@ namespace DnDToolsLibrary.Dice
         /// <summary>
         ///     An arbitrary modifier for the Saving Throw
         /// </summary>
+        [XmlAttribute]
         public int Modifier
         {
             get => _modifier;
@@ -75,6 +86,7 @@ namespace DnDToolsLibrary.Dice
         }
         private int _modifier = 0;
 
+        [XmlAttribute]
         public int SavingRoll
         {
             get => _savingRoll;
@@ -86,17 +98,34 @@ namespace DnDToolsLibrary.Dice
         }
         private int _savingRoll = 0;
 
+        [XmlIgnore]
         public PlayableEntity Target
         {
-            get => _target;
+            get
+            {
+                return fighterProvider.GetFighterByDisplayName(TargetName);
+            }
             set
             {
-                _target = value;
+                if (value != null)
+                    TargetName = value.DisplayName;
+                else
+                    TargetName = null;
                 NotifyPropertyChanged();
             }
         }
-        private PlayableEntity _target;
-
+        [XmlAttribute]
+        public string TargetName
+        {
+            get => _targetName;
+            set
+            {
+                _targetName = value;
+                NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(this.Target));
+            }
+        }
+        private string _targetName = "";
         #endregion Properties
 
         #region ICloneable
@@ -108,7 +137,12 @@ namespace DnDToolsLibrary.Dice
 
         protected void init_copy(SavingThrow to_copy)
         {
-            _characteristic = to_copy._characteristic;
+            this.AdvantageModifiers = to_copy.AdvantageModifiers.Clone() as SituationalAdvantageModifiers;
+            this.Characteristic = to_copy.Characteristic;
+            this.Difficulty = to_copy.Difficulty;
+            this.Modifier = to_copy.Modifier;
+            this.SavingRoll = to_copy.SavingRoll;
+            this.TargetName = to_copy.TargetName;
         }
 
         public SavingThrow(SavingThrow to_copy)

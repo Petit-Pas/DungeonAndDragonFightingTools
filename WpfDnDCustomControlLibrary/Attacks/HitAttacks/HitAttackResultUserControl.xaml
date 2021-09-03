@@ -40,7 +40,7 @@
             <TextBlock
                 Margin="0 5 0 0"
                 Text=" on "/>
-            <fight:FightersSelectorControl 
+            <fight:FightersSelectorComboboxControl 
                 x:Name="TargetSelectionControl"
                 Margin="0 5 0 0"
                 Target="{Binding Target}"/>

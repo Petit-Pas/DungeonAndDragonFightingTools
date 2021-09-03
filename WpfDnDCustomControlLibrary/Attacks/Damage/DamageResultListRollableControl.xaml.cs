@@ -43,6 +43,28 @@ namespace WpfDnDCustomControlLibrary.Attacks.Damage
             new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault)
         );
 
+        public bool EditModeEnabled
+        {
+            get { return (bool)this.GetValue(EditModeEnabledProperty); }
+            set { this.SetValue(EditModeEnabledProperty, value); }
+        }
+        private static readonly DependencyProperty EditModeEnabledProperty = DependencyProperty.Register(
+            nameof(EditModeEnabled),
+            typeof(bool),
+            typeof(DamageResultListRollableControl),
+            new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
+        public bool Rollable
+        {
+            get { return (bool)this.GetValue(RollableProperty); }
+            set { this.SetValue(RollableProperty, value); }
+        }
+        private static readonly DependencyProperty RollableProperty = DependencyProperty.Register(
+            nameof(Rollable),
+            typeof(bool),
+            typeof(DamageResultListRollableControl),
+            new PropertyMetadata(true));
+
         private void EditModeChange(object sender, RoutedEventArgs e)
         {
             CanBeAltered = !CanBeAltered;

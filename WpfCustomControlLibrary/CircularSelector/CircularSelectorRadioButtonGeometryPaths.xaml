@@ -2,9 +2,32 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:WpfCustomControlLibrary.CircularSelector">
     <!-- 
-        This Style creates small triangles buttons (Angle of 37.5 degrees) with round border
+        This Style creates small triangles buttons (Angle of 31.5 degrees) with round border
     -->
     <PathGeometry x:Key="CircularSelectorRadioButtonSmallTriangle">
+        <PathGeometry.Figures>
+            <PathFigure 
+                StartPoint="0 0">
+                <PathFigure.Segments>
+                    <LineSegment 
+                        Point="90 -25"/>
+                    <ArcSegment 
+                        RotationAngle="0" 
+                        SweepDirection="Clockwise" 
+                        IsLargeArc="False"
+                        Size="25 50"
+                        Point="90 25"/>
+                    <LineSegment 
+                        Point="0 0"/>
+                </PathFigure.Segments>
+            </PathFigure>
+        </PathGeometry.Figures>
+    </PathGeometry>
+
+    <!-- 
+        This Style creates triangles buttons (Angle of 37.5 degrees) with round border
+    -->
+    <PathGeometry x:Key="CircularSelectorRadioButtonTriangle">
         <PathGeometry.Figures>
             <PathFigure 
                 StartPoint="0 0">
@@ -23,4 +46,28 @@
             </PathFigure>
         </PathGeometry.Figures>
     </PathGeometry>
+
+    <!-- 
+        This Style creates big triangles buttons (Angle of 64.5 degrees) with round border 70 -50    65 78
+    -->
+    <PathGeometry x:Key="CircularSelectorRadioButtonBigTriangle">
+        <PathGeometry.Figures>
+            <PathFigure 
+                StartPoint="0 0">
+                <PathFigure.Segments>
+                    <LineSegment 
+                        Point="80 -50"/>
+                    <ArcSegment 
+                        RotationAngle="0" 
+                        SweepDirection="Clockwise" 
+                        IsLargeArc="False"
+                        Size="65 82"
+                        Point="80 50"/>
+                    <LineSegment 
+                        Point="0 0"/>
+                </PathFigure.Segments>
+            </PathFigure>
+        </PathGeometry.Figures>
+    </PathGeometry>
+
 </ResourceDictionary>

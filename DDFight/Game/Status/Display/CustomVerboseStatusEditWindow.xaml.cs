@@ -39,7 +39,6 @@ namespace DDFight.Game.Status.Display
         }
 
         private bool planned_close = false;
-
         private void ValidateButton_Click(object sender, RoutedEventArgs e)
         {
             if (this.AreAllChildrenValid())

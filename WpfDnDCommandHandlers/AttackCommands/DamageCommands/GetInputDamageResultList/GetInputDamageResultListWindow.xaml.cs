@@ -1,4 +1,4 @@
-﻿using DnDToolsLibrary.Attacks.AttacksCommands.DamageCommands.CalculateDamageResultList;
+﻿using DnDToolsLibrary.Attacks.AttacksCommands.DamageCommands.GetInputDamageResultList;
 using DnDToolsLibrary.Attacks.Damage;
 using System;
 using System.Collections.Generic;
@@ -17,20 +17,20 @@ using WpfCustomControlLibrary.ModalWindows;
 using WpfToolsLibrary.Extensions;
 using WpfToolsLibrary.Navigation;
 
-namespace WpfDnDCustomControlLibrary.Attacks.Damage
+namespace WpfDnDCommandHandlers.AttackCommands.DamageCommands
 {
     /// <summary>
     /// Logique d'interaction pour DamageResultListRollableWindow.xaml
     /// </summary>
-    public partial class DamageResultListRollableWindow : Window, IValidableWindow
+    public partial class GetInputDamageResultListWindow : Window, IResultWindow<GetInputDamageResultListCommand, GetInputDamageResultListResponse>
     {
-        private CalculateDamageResultListCommand data_context
+        private GetInputDamageResultListCommand data_context
         {
-            get => DataContext as CalculateDamageResultListCommand;
+            get => DataContext as GetInputDamageResultListCommand;
         }
         public bool Validated { get; set; }
 
-        public DamageResultListRollableWindow()
+        public GetInputDamageResultListWindow()
         {
             DataContextChanged += DamageResultListRollableWindow_DataContextChanged;
             InitializeComponent();
@@ -82,6 +82,16 @@ namespace WpfDnDCustomControlLibrary.Attacks.Damage
                     e.Cancel = false;
                 }
             }
+        }
+
+        public void LoadContext(GetInputDamageResultListCommand context)
+        {
+            DataContext = context;
+        }
+
+        public GetInputDamageResultListResponse GetResult()
+        {
+            return new GetInputDamageResultListResponse(data_context.DamageList.Clone() as DamageResultList);
         }
     }
 }

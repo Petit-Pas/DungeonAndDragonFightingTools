@@ -13,6 +13,7 @@
         <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
         <Setter Property="Control.VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Background" Value="{StaticResource ListItemColor1}"/>
         <Setter Property="AlternationCount" Value="2"/>
         <Setter Property="Control.Template">
             <Setter.Value>

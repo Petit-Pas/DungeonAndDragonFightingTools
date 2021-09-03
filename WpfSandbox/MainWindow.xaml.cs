@@ -5,10 +5,12 @@ using BaseToolsLibrary.Memory;
 using DDFight;
 using DDFight.Commands;
 using DnDToolsLibrary.Attacks;
-using DnDToolsLibrary.Attacks.AttacksCommands.DamageCommands.CalculateDamageResultList;
+using DnDToolsLibrary.Attacks.AttacksCommands.DamageCommands.GetInputDamageResultList;
+using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpell;
 using DnDToolsLibrary.Attacks.Damage;
 using DnDToolsLibrary.Attacks.Damage.Type;
 using DnDToolsLibrary.Attacks.HitAttacks;
+using DnDToolsLibrary.Attacks.Spells;
 using DnDToolsLibrary.Characteristics;
 using DnDToolsLibrary.Dice;
 using DnDToolsLibrary.Entities;
@@ -20,7 +22,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows;
-using WpfDnDCommandHandlers.AttackCommands.DamageCommands.CalculateDamageResultList;
+using WpfDnDCommandHandlers.AttackCommands.DamageCommands.GetInputResultList;
 using WpfDnDCustomControlLibrary.Statuses;
 using WpfSandbox;
 using WpfToolsLibrary.Extensions;
@@ -62,6 +64,8 @@ namespace BindValidation
         public MainWindow()
         {
 
+            Spell spell = new Spell();
+
             DamageTemplateList list = new DamageTemplateList()
             {
                 Elements = new ObservableCollection<DamageTemplate>() {
@@ -69,6 +73,7 @@ namespace BindValidation
                     {
                         Damage = new DiceRoll("2d6+3"),
                         DamageType = DamageTypeEnum.Fire,
+                        SituationalDamageModifier = DamageModifierEnum.Halved,
                     },
                     new DamageTemplate()
                     {
@@ -78,12 +83,56 @@ namespace BindValidation
                 },
             };
 
-            CalculateDamageResultListHandler dfghj = new CalculateDamageResultListHandler();
+            spell.HitDamage = list;
+
+            spell.IsAnAttack = false;
+
+            spell.HasSavingThrow = true;
+            spell.SavingCharacteristic = CharacteristicsEnum.Intelligence;
+
+            GetInputDamageResultListHandler dfghj = new GetInputDamageResultListHandler();
 
             DIConfigurer.ConfigureCore();
             DIConfigurer.ConfigureWpf();
             DIConfigurer.Verify();
             HandlerToUiConfig.Configure();
+
+            Global.Loading = false;
+
+            IFigtherProvider provider = DIContainer.GetImplementation<IFigtherProvider>();
+            provider.AddFighter(new PlayableEntity() { DisplayName = "Roger" });
+            provider.AddFighter(new PlayableEntity() { DisplayName = "Pierre" });
+            provider.AddFighter(new PlayableEntity() { DisplayName = "Paul" });
+            provider.AddFighter(new PlayableEntity() { DisplayName = "Jacques" });
+            provider.AddFighter(new PlayableEntity() { DisplayName = "Michel" });
+            provider.AddFighter(new PlayableEntity() { DisplayName = "Jhon" });
+            provider.AddFighter(new PlayableEntity() { DisplayName = "Roger" });
+            provider.AddFighter(new PlayableEntity() { DisplayName = "Pierre" });
+            provider.AddFighter(new PlayableEntity() { DisplayName = "Paul" });
+            provider.AddFighter(new PlayableEntity() { DisplayName = "Jacques" });
+            provider.AddFighter(new PlayableEntity() { DisplayName = "Michel" });
+            provider.AddFighter(new PlayableEntity() { DisplayName = "Jhon" });
+            provider.AddFighter(new PlayableEntity() { DisplayName = "Roger" });
+            provider.AddFighter(new PlayableEntity() { DisplayName = "Pierre" });
+            provider.AddFighter(new PlayableEntity() { DisplayName = "Paul" });
+            provider.AddFighter(new PlayableEntity() { DisplayName = "Jacques" });
+            provider.AddFighter(new PlayableEntity() { DisplayName = "Michel" });
+            provider.AddFighter(new PlayableEntity() { DisplayName = "Jhon" });
+            PlayableEntity roger = provider.GetFighterByDisplayName("Roger");
+            roger.Characteristics.GetCharacteristic(CharacteristicsEnum.Intelligence).Modifier = 3;
+            roger.DamageAffinities.GetAffinity(DamageTypeEnum.Fire).Affinity = DamageAffinityEnum.Resistant;
+            roger.CA = 12;
+
+
+            CastSpellCommand command_spell = new CastSpellCommand(provider.GetFighterByDisplayName("Roger"), spell);
+            IMediator mediator = DIContainer.GetImplementation<IMediator>();
+
+            mediator.Execute(command_spell);
+            command_spell.Spell.BaseLevel = 1;
+            command_spell.Spell.AmountTargets = 15;
+            command_spell.Spell.CanSelectSameTargetTwice = true;
+            mediator.Execute(command_spell);
+
 
             DamageResultList damageResultList = list.GetResultList();
             foreach (DamageResult result in damageResultList.Elements)
@@ -93,11 +142,10 @@ namespace BindValidation
             damageResultList.Elements[0].AffinityModifier = DamageAffinityEnum.Resistant;
 
 
-            CalculateDamageResultListCommand command = new CalculateDamageResultListCommand(damageResultList, "Because very good reasons");
+            GetInputDamageResultListCommand command = new GetInputDamageResultListCommand(damageResultList, "Because very good reasons");
 
-            IMediator mediator = DIContainer.GetImplementation<IMediator>();
 
-            ValidableResponse<CalculateDamageResultListResponse> response = mediator.Execute(command) as ValidableResponse<CalculateDamageResultListResponse>;
+            ValidableResponse<GetInputDamageResultListResponse> response = mediator.Execute(command) as ValidableResponse<GetInputDamageResultListResponse>;
 
             this.DataContext = list;
             InitializeComponent();

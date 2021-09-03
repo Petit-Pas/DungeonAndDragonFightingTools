@@ -9,15 +9,15 @@ namespace WpfDnDCustomControlLibrary.SavingThrows
 {
     public partial class SavingThrowRollableUserControl : UserControl, IValidable, IRollableControl
     {
-        private DnDToolsLibrary.Dice.SavingThrow data_context 
+        private SavingThrow data_context 
         {
             get => DataContext as SavingThrow;
         }
 
         public SavingThrowRollableUserControl()
         {
-            InitializeComponent();
             DataContextChanged += SavingThrowRollableUserControl_DataContextChanged;
+            InitializeComponent();
         }
 
         private void refreshSavingModifier()
@@ -31,6 +31,8 @@ namespace WpfDnDCustomControlLibrary.SavingThrows
 
         private void SavingThrowRollableUserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
+            if (e.OldValue is SavingThrow oldDataContext)
+                oldDataContext.PropertyChanged -= Data_context_PropertyChanged;
             if (data_context != null)
             {
                 data_context.PropertyChanged += Data_context_PropertyChanged;

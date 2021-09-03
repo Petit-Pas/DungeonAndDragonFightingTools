@@ -57,9 +57,6 @@
     <Compile Include="Attacks\Damage\DamageModifierSelectableControl.xaml.cs">
       <DependentUpon>DamageModifierSelectableControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Attacks\Damage\DamageResultListRollableWindow.xaml.cs">
-      <DependentUpon>DamageResultListRollableWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Attacks\HitAttacks\HitAttackExecuteWindow.xaml.cs">
       <DependentUpon>HitAttackExecuteWindow.xaml</DependentUpon>
     </Compile>
@@ -71,6 +68,15 @@
     </Compile>
     <Compile Include="Attacks\Damage\DamageResultRollableControl.xaml.cs">
       <DependentUpon>DamageResultRollableControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Attacks\Spells\CantripLevelSelectorUserControl.xaml.cs">
+      <DependentUpon>CantripLevelSelectorUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Attacks\Spells\NormalSpellLevelSelectorUserControl.xaml.cs">
+      <DependentUpon>NormalSpellLevelSelectorUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Attacks\Spells\SpellLevelSelectorUserControl.xaml.cs">
+      <DependentUpon>SpellLevelSelectorUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\CharacteristicToShortConverter.cs" />
     <Compile Include="SavingThrows\SavingThrowRollableDenseUserControl.xaml.cs">
@@ -89,7 +95,7 @@
       <DependentUpon>SpellAttackResultRollableUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\DamageTypeEnumToBrushConverter.cs" />
-    <Compile Include="Fight\FightersSelectorControl.cs" />
+    <Compile Include="Fight\FightersSelectorComboboxControl.cs" />
     <Compile Include="InputBoxes\DiceTextBoxes\AttackRollTextBoxControl.cs" />
     <Compile Include="InputBoxes\DiceTextBoxes\BaseD20TextBoxControl.cs" />
     <Compile Include="InputBoxes\DiceTextBoxes\SituationalD20TextBoxControl.cs" />
@@ -150,10 +156,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Attacks\Damage\DamageResultListRollableWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Attacks\HitAttacks\HitAttackExecuteWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -169,6 +171,18 @@
     <Page Include="Attacks\Damage\DamageResultRollableControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Attacks\Spells\CantripLevelSelectorUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Attacks\Spells\NormalSpellLevelSelectorUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Attacks\Spells\SpellLevelSelectorUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SavingThrows\SavingThrowRollableDenseUserControl.xaml">
       <Generator>MSBuild:Compile</Generator>

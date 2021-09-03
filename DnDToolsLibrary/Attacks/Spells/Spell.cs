@@ -1,11 +1,14 @@
 ﻿using BaseToolsLibrary;
 using DnDToolsLibrary.Attacks.Damage;
+using DnDToolsLibrary.Attacks.HitAttacks;
 using DnDToolsLibrary.Characteristics;
+using DnDToolsLibrary.Dice;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Status;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Xml.Serialization;
 
 namespace DnDToolsLibrary.Attacks.Spells
@@ -241,6 +244,43 @@ namespace DnDToolsLibrary.Attacks.Spells
 
         #endregion Properties
 
+        public NewAttackSpellResult GetAttackSpellResultTemplate(PlayableEntity caster, int castLevel)
+        {
+            NewAttackSpellResult template = new NewAttackSpellResult()
+            {
+                HitDamage = this.HitDamage.GetResultList(),
+                AppliedStatusList = this.AppliedStatus.Clone() as OnHitStatusList,
+                Caster = caster,
+                Target = null,
+                Name = $"default name for {DisplayName}",
+                Level = castLevel,
+                AutomaticalyHits = this.AutomaticalyHits,
+                RollResult = new AttackRollResult()
+                {
+                    BaseRollModifier = this.HitRollBonus == 0 ? caster.SpellHitModifier : this.HitRollBonus,
+                },
+            };
+
+            for (int i = castLevel - this.BaseLevel; i > 0; i -= 1)
+            {
+                foreach (DamageTemplate damageTemplate in AdditionalHitDamagePerLevel.Elements)
+                {
+                    DamageResult result = template.HitDamage.Elements.FirstOrDefault(x => x.IsSameKind(damageTemplate));
+                    if (result != null)
+                        result.Add(damageTemplate);
+                    else
+                        template.HitDamage.AddElementSilent(new DamageResult(damageTemplate));
+                }
+            }
+
+            foreach (DamageResult result in template.HitDamage.Elements)
+            {
+                result.LinkedToSaving = false;
+            }
+            return template;
+        }
+
+        // TODO this one is old version, see upper for new one 
         public AttackSpellResult GetAttackSpellResult(PlayableEntity caster, ObservableCollection<PlayableEntity> targets, int additional_levels)
         {
             AttackSpellResult template = new AttackSpellResult
@@ -280,6 +320,50 @@ namespace DnDToolsLibrary.Attacks.Spells
             return template;
         }
 
+        public NewNonAttackSpellResult GetNonAttackSpellResultTemplate(PlayableEntity caster, int castLevel)
+        {
+            NewNonAttackSpellResult template = new NewNonAttackSpellResult()
+            {
+                HitDamage = this.HitDamage.GetResultList(),
+                AppliedStatusList = this.AppliedStatus.Clone() as OnHitStatusList,
+                Level = castLevel,
+                Caster = caster,
+                Target = null,
+                HasSavingThrow = this.HasSavingThrow,
+                Name = this.Name,
+                Saving = null,
+            };
+
+            for (int i = castLevel - this.BaseLevel; i > 0; i -= 1)
+            {
+                foreach (DamageTemplate damageTemplate in AdditionalHitDamagePerLevel.Elements)
+                {
+                    DamageResult result = template.HitDamage.Elements.FirstOrDefault(x => x.IsSameKind(damageTemplate));
+                    if (result != null)
+                        result.Add(damageTemplate);
+                    else
+                        template.HitDamage.AddElementSilent(new DamageResult(damageTemplate));
+                }
+            }
+
+            foreach (DamageResult result in template.HitDamage.Elements)
+            {
+                result.LinkedToSaving = this.HasSavingThrow;
+            }
+
+            if (HasSavingThrow)
+            {
+                template.Saving = new SavingThrow()
+                {
+                    Characteristic = this.SavingCharacteristic,
+                    Difficulty = this.SavingDifficulty == 0 ? caster.SpellSave : this.SavingDifficulty,
+                    Target = template.Target,
+                };
+            }
+            return template;
+        }
+
+        // TODO this one is old version, see upper for new one 
         public NonAttackSpellResult GetNonAttackSpellResult(PlayableEntity caster, ObservableCollection<PlayableEntity> targets, int additional_levels)
         {
             NonAttackSpellResult template = new NonAttackSpellResult {

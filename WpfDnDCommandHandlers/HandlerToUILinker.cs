@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Collections.Generic;
-using WpfDnDCommandHandlers.AttackCommands.DamageCommands.CalculateDamageResultList;
 using WpfDnDCustomControlLibrary.Attacks.Damage;
 using WpfToolsLibrary.Navigation;
 
@@ -13,16 +12,16 @@ namespace WpfDnDCommandHandlers
 {
     public static class HandlerToUILinker
     {
-        private static Dictionary<Type, IValidableWindow> _links = new Dictionary<Type, IValidableWindow>();
+        private static Dictionary<Type, Type> _links = new Dictionary<Type, Type>();
 
-        public static void AddNewPair(Type handler, IValidableWindow window)
+        public static void AddNewPair(Type handler, Type window)
         {
             _links[handler] = window;
         }
 
         public static IValidableWindow GetWindow(Type handler)
         {
-            return _links[handler];
+            return Activator.CreateInstance(_links[handler]) as IValidableWindow;
         }
     }
 }

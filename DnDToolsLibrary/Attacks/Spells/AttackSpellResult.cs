@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 
 namespace DnDToolsLibrary.Attacks.Spells
 {
+    //TODO this class should be deleted and replace by NewAttackSpellResult when all its dependences have been removed
     public class AttackSpellResult : INotifyPropertyChanged
     {
 

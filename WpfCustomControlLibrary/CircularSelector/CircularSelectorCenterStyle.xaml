@@ -2,11 +2,12 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:WpfCustomControlLibrary.CircularSelector">
     <Style TargetType="{x:Type local:CircularSelectorCenterControl}" x:Key="CircularSelectorCenterStyle">
+        <Setter Property="Focusable" Value="False"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:CircularSelectorCenterControl}">
                     <Canvas
-                        Background="Red">
+                        Background="Transparent">
                         <ContentPresenter />
                         <Grid
                             Width="{Binding ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Canvas}}}" 
@@ -14,11 +15,14 @@
                             <Ellipse
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center"
-                                Fill="{StaticResource Indigo}"
-                                Stroke="{StaticResource Light}"
+                                Fill="{StaticResource Gray}"
+                                Stroke="{StaticResource Brown1}"
                                 StrokeThickness="1.5"
                                 Width="100"
                                 Height="100">
+                                <Ellipse.Effect>
+                                    <DropShadowEffect Direction="0" Color="{StaticResource RawBrown0}" ShadowDepth="0" Opacity="1" BlurRadius="22"  ></DropShadowEffect>
+                                </Ellipse.Effect>
                             </Ellipse>
                             <TextBlock
                                 VerticalAlignment="Center"

@@ -56,13 +56,16 @@ namespace WpfToolsLibrary.ConsoleTools
         {
             if (fontColor is WpfFontColor color && fontWeight is WpfFontWeight weight)
             {
-                currentParagraph.Inlines.Add(new Run()
+                if (currentParagraph != null)
                 {
-                    Text = text,
-                    Foreground = color.Brush,
-                    FontSize = fontSize,
-                    FontWeight = weight.FontWeight,
-                });
+                    currentParagraph.Inlines.Add(new Run()
+                    {
+                        Text = text,
+                        Foreground = color.Brush,
+                        FontSize = fontSize,
+                        FontWeight = weight.FontWeight,
+                    });
+                }
             }
             else
             {

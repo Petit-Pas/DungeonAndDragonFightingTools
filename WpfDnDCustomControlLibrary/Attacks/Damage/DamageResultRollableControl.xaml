@@ -10,9 +10,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <converters:DamageTypeEnumToBrushConverter x:Key="DamageColorConverter" />
+        <converters:DamageTypeEnumToBrushConverter x:Key="DamageColorConverter"/>
         <visibilities:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
         <visibilities:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <visibilities:BoolToReversedVisibilityConverter x:Key="BoolToReversedVisibilityConverter"/>
         <Style TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlock}"/>
     </UserControl.Resources>
     <Grid>
@@ -54,6 +55,8 @@
             </Grid>
 
             <inttextboxes:IntTextBoxControl 
+                Visibility="{Binding Rollable, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:DamageResultRollableControl}},
+                                                Converter={StaticResource BoolToVisibilityConverter}}"
                 Margin="5 0"
                 ToolTipService.IsEnabled="False"
                 MinWidth="40"
@@ -62,21 +65,45 @@
                 VerticalAlignment="Center"
                 />
 
+            <TextBlock
+                Visibility="{Binding Rollable, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:DamageResultRollableControl}},
+                                                Converter={StaticResource BoolToReversedVisibilityConverter}}"
+                FontWeight="Bold"
+                Text="{Binding Damage.LastRoll, StringFormat=' => {0} '}"
+                VerticalAlignment="Center"
+                Margin="0 0"/>
+
             <TextBlock 
                 FontWeight="Bold"
                 Text="{Binding ToRollBonus}" 
                 VerticalAlignment="Center"
                 Margin="0 0 10 0"/>
 
-            <local:DamageModifierSelectableControl
-                IsEnabled="{Binding CanBeAltered, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:DamageResultRollableControl}}}"
-                DamageModifier="{Binding SituationalDamageModifier}"
-                Visibility="{Binding LinkedToSaving, Converter={StaticResource BoolToVisibilityConverter}}"
+            <Grid 
+                Visibility="{Binding EditModeEnabled, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:DamageResultRollableControl}},
+                                                          Converter={StaticResource BoolToVisibilityConverter}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <local:DamageModifierSelectableControl
+                    IsEnabled="{Binding CanBeAltered, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:DamageResultRollableControl}}}"
+                    DamageModifier="{Binding SituationalDamageModifier}"
+                    Visibility="{Binding LinkedToSaving, Converter={StaticResource BoolToVisibilityConverter}}"
                 />
 
-            <damageaffinity:DamageAffinitySelectableControl
-                IsEnabled="{Binding CanBeAltered, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:DamageResultRollableControl}}}"
-                DamageAffinity="{Binding AffinityModifier}"/>
+                <damageaffinity:DamageAffinitySelectableControl
+                    Grid.Column="1"
+                    IsEnabled="{Binding CanBeAltered, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:DamageResultRollableControl}}}"
+                    DamageAffinity="{Binding AffinityModifier}"/>
+
+            </Grid>
+            
+            
         </WrapPanel>
     </Grid>
 </UserControl>

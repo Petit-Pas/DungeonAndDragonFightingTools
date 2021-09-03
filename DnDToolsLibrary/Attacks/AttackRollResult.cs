@@ -102,6 +102,7 @@ namespace DnDToolsLibrary.Attacks
             set
             {
                 _targetName = value;
+                NotifyPropertyChanged(nameof(this.Target));
                 NotifyPropertyChanged();
             }
         }

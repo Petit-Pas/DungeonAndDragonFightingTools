@@ -129,7 +129,7 @@ namespace WpfCustomControlLibrary.CircularSelector
                 "LabelFontSize",
                 typeof(int),
                 typeof(CircularSelectorCenterControl),
-                new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.Inherits));
+                new FrameworkPropertyMetadata(15, FrameworkPropertyMetadataOptions.Inherits));
 
         public static double GetLabelYOffset(DependencyObject obj)
         {

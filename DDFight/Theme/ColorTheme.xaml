@@ -16,6 +16,7 @@
     <Color x:Key="RawAlternateLightGray">   #333432</Color>
     <Color x:Key="RawError">                #ff6868</Color>
 
+    <Color x:Key="RawBrown0">#6d3509</Color>
     <Color x:Key="RawBrown1">#833F3F</Color>
     <Color x:Key="RawBrown2">#954E4E</Color>
     <Color x:Key="RawBrown3">#A65F5C</Color>
@@ -29,6 +30,7 @@
     <SolidColorBrush x:Key="AlternateLightGray" Color="{StaticResource RawAlternateLightGray}"/>
     <SolidColorBrush x:Key="Error"              Color="{StaticResource RawError}"/>
 
+    <SolidColorBrush x:Key="Brown0" Color="{StaticResource RawBrown0}"/>
     <SolidColorBrush x:Key="Brown1" Color="{StaticResource RawBrown1}"/>
     <SolidColorBrush x:Key="Brown2" Color="{StaticResource RawBrown2}"/>
     <SolidColorBrush x:Key="Brown3" Color="{StaticResource RawBrown3}"/>

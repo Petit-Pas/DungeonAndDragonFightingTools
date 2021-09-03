@@ -39,6 +39,28 @@ namespace WpfDnDCustomControlLibrary.Attacks.Damage
             new FrameworkPropertyMetadata(false)
         );
 
+        public bool EditModeEnabled
+        {
+            get { return (bool)this.GetValue(EditModeEnabledProperty); }
+            set { this.SetValue(EditModeEnabledProperty, value); }
+        }
+        private static readonly DependencyProperty EditModeEnabledProperty = DependencyProperty.Register(
+            nameof(EditModeEnabled),
+            typeof(bool),
+            typeof(DamageResultRollableControl),
+            new PropertyMetadata(true));
+
+        public bool Rollable
+        {
+            get { return (bool)this.GetValue(RollableProperty); }
+            set { this.SetValue(RollableProperty, value); }
+        }
+        private static readonly DependencyProperty RollableProperty = DependencyProperty.Register(
+            nameof(Rollable),
+            typeof(bool),
+            typeof(DamageResultRollableControl),
+            new PropertyMetadata(true));
+
         public DamageResultRollableControl()
         {
             InitializeComponent();
@@ -46,13 +68,14 @@ namespace WpfDnDCustomControlLibrary.Attacks.Damage
 
         public void RollControl()
         {
-            if (data_context != null)
-                if (data_context.Damage.LastRoll == 0)
-                    data_context.Damage.Roll(Crits);
+            if (Rollable && data_context != null && data_context.Damage.LastRoll == 0)
+                data_context.Damage.Roll(Crits);
         }
 
         public bool IsFullyRolled()
         {
+            if (!Rollable)
+                return true;
             if (data_context != null)
                 if (data_context.Damage.LastRoll == 0)
                     return false;

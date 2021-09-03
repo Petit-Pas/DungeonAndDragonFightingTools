@@ -49,7 +49,31 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AttackCommands\DamageCommands\CalculateDamageResultList\CalculateDamageResultListHandler.cs" />
+    <Compile Include="AttackCommands\DamageCommands\GetInputDamageResultList\GetInputDamageResultListWindow.xaml.cs">
+      <DependentUpon>GetInputDamageResultListWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AttackCommands\DamageCommands\GetInputDamageResultList\GetInputDamageResultListHandler.cs" />
+    <Compile Include="AttackCommands\SpellCommands\GetInputAttackSpellResults\GetInputAttackSpellResultsHandler.cs" />
+    <Compile Include="AttackCommands\SpellCommands\GetInputAttackSpellResults\GetInputAttackSpellResultsWindow.xaml.cs">
+      <DependentUpon>GetInputAttackSpellResultsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AttackCommands\SpellCommands\GetInputSpellLevel\GetInpuCantripLevel\GetInputCantripLevelWindow.xaml.cs">
+      <DependentUpon>GetInputCantripLevelWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AttackCommands\SpellCommands\GetInputSpellLevel\GetInpuCantripLevel\GetInputCantripLevelHandler.cs" />
+    <Compile Include="AttackCommands\SpellCommands\GetInputSpellLevel\GetInputNormalSpellLevel\GetInputSpellLevelHandler.cs" />
+    <Compile Include="AttackCommands\SpellCommands\GetInputSpellLevel\GetInputNormalSpellLevel\GetInputSpellLevelWindow.xaml.cs">
+      <DependentUpon>GetInputSpellLevelWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AttackCommands\SpellCommands\GetInputNonAttackSpellResults\GetInputNonAttackSpellResultsHandler.cs" />
+    <Compile Include="AttackCommands\SpellCommands\GetInputNonAttackSpellResults\GetInputNonAttackSpellResultsWindow.xaml.cs">
+      <DependentUpon>GetInputNonAttackSpellResultsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AttackCommands\SpellCommands\GetInputSpellTargets\GetInputSpellTargetsWindow.xaml.cs">
+      <DependentUpon>GetInputSpellTargetsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AttackCommands\SpellCommands\GetInputSpellTargets\GetInputSpellTargetsHandler.cs" />
+    <Compile Include="BaseResultCommandHandler.cs" />
     <Compile Include="HandlerToUILinker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -74,7 +98,32 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Page Include="AttackCommands\DamageCommands\GetInputDamageResultList\GetInputDamageResultListWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AttackCommands\SpellCommands\GetInputAttackSpellResults\GetInputAttackSpellResultsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AttackCommands\SpellCommands\GetInputSpellLevel\GetInpuCantripLevel\GetInputCantripLevelWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AttackCommands\SpellCommands\GetInputSpellLevel\GetInputNormalSpellLevel\GetInputSpellLevelWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AttackCommands\SpellCommands\GetInputNonAttackSpellResults\GetInputNonAttackSpellResultsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AttackCommands\SpellCommands\GetInputSpellTargets\GetInputSpellTargetsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BaseToolsLibrary\[10]-BaseToolsLibrary.csproj">
       <Project>{47d47e7e-85c8-4a4e-91d5-019e64072b1e}</Project>
