@@ -150,7 +150,10 @@ namespace DnDToolsLibrary.Fight
 
         public PlayableEntity GetFighterByDisplayName(string displayName)
         {
-            return Elements.FirstOrDefault(x => x.DisplayName == displayName);
+            var result = Elements.FirstOrDefault(x => x.DisplayName == displayName);
+            if (result == null)
+                Console.WriteLine($"WARNING: FightersList could not find a fighter with name {displayName}");
+            return result;
         }
 
         public void AddFighter(PlayableEntity fighter)

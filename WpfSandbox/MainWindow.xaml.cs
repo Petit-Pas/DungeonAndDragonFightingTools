@@ -127,11 +127,11 @@ namespace BindValidation
             CastSpellCommand command_spell = new CastSpellCommand(provider.GetFighterByDisplayName("Roger"), spell);
             IMediator mediator = DIContainer.GetImplementation<IMediator>();
 
-            mediator.Execute(command_spell);
+            //mediator.Execute(command_spell);
             command_spell.Spell.BaseLevel = 1;
             command_spell.Spell.AmountTargets = 15;
             command_spell.Spell.CanSelectSameTargetTwice = true;
-            mediator.Execute(command_spell);
+            //mediator.Execute(command_spell);
 
 
             DamageResultList damageResultList = list.GetResultList();
@@ -142,10 +142,10 @@ namespace BindValidation
             damageResultList.Elements[0].AffinityModifier = DamageAffinityEnum.Resistant;
 
 
-            GetInputDamageResultListCommand command = new GetInputDamageResultListCommand(damageResultList, "Because very good reasons");
+            DamageResultListQuery command = new DamageResultListQuery(damageResultList, "Because very good reasons");
 
 
-            ValidableResponse<GetInputDamageResultListResponse> response = mediator.Execute(command) as ValidableResponse<GetInputDamageResultListResponse>;
+            //ValidableResponse<GetInputDamageResultListResponse> response = mediator.Execute(command) as ValidableResponse<GetInputDamageResultListResponse>;
 
             this.DataContext = list;
             InitializeComponent();
@@ -179,6 +179,12 @@ namespace BindValidation
             {
                 Name = "Target"
             };
+
+            IFigtherProvider provider = DIContainer.GetImplementation<IFigtherProvider>();
+            provider.AddFighter(target);
+            provider.AddFighter(caster);
+
+
             target.DamageAffinities.GetAffinity(DamageTypeEnum.Acid).Affinity = DamageAffinityEnum.Weak;
             target.DamageAffinities.GetAffinity(DamageTypeEnum.Force).Affinity = DamageAffinityEnum.Immune;
             caster.DamageAffinities.GetAffinity(DamageTypeEnum.Acid).Affinity = DamageAffinityEnum.Resistant;

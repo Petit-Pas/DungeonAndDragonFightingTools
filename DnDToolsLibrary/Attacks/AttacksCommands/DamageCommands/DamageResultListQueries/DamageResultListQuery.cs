@@ -3,7 +3,7 @@ using DnDToolsLibrary.Attacks.Damage;
 
 namespace DnDToolsLibrary.Attacks.AttacksCommands.DamageCommands.DamageResultListQueries
 {
-    public class GetInputDamageResultListCommand : IMediatorCommand, IUiCommand
+    public class DamageResultListQuery : IMediatorCommand, IUiCommand
     {
         public DamageResultList DamageList { get; set; }
 
@@ -14,7 +14,7 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.DamageCommands.DamageResultLis
         ///     / ! \ As the target is not known by the commands, the eventual resistances should be known in the list beforehand
         /// </summary>
         /// <param name="damages">  </param>
-        public GetInputDamageResultListCommand(DamageResultList damages, string reason = "")
+        public DamageResultListQuery(DamageResultList damages, string reason = "")
         {
             DamageList = damages.Clone() as DamageResultList;
             Reason = reason;

@@ -11,11 +11,11 @@ namespace WpfDnDCommandHandlers.AttackQueries.DamageQueries
     /// <summary>
     /// Logique d'interaction pour DamageResultListRollableWindow.xaml
     /// </summary>
-    public partial class DamageResultListQueryHandlerWindow : Window, IResultWindow<GetInputDamageResultListCommand, GetInputDamageResultListResponse>
+    public partial class DamageResultListQueryHandlerWindow : Window, IResultWindow<DamageResultListQuery, GetInputDamageResultListResponse>
     {
-        private GetInputDamageResultListCommand data_context
+        private DamageResultListQuery data_context
         {
-            get => DataContext as GetInputDamageResultListCommand;
+            get => DataContext as DamageResultListQuery;
         }
         public bool Validated { get; set; }
 
@@ -73,7 +73,7 @@ namespace WpfDnDCommandHandlers.AttackQueries.DamageQueries
             }
         }
 
-        public void LoadContext(GetInputDamageResultListCommand context)
+        public void LoadContext(DamageResultListQuery context)
         {
             DataContext = context;
         }

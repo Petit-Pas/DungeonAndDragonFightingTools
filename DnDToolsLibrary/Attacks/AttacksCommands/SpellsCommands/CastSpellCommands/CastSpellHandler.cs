@@ -35,40 +35,10 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
             }
             else
             {
-                CastNonAttackSpellCommand castAttackSpellCommand = new CastNonAttackSpellCommand(_command.CasterName, _command.Spell, _command.CastLevel, _command.TargetNames);
-                response = base._mediator.Value.Execute(castAttackSpellCommand) as ValidableResponse<NoResponse>;
+                CastNonAttackSpellCommand castNonAttackSpellCommand = new CastNonAttackSpellCommand(_command.CasterName, _command.Spell, _command.CastLevel, _command.TargetNames);
+                response = base._mediator.Value.Execute(castNonAttackSpellCommand) as ValidableResponse<NoResponse>;
             }
             return new ValidableResponse<NoResponse>(response.IsValid, MediatorCommandResponses.NoResponse);
-        }
-
-        private bool castNonAttackSpell(CastSpellCommand command)
-        {
-            NewNonAttackSpellResult template = command.Spell.GetNonAttackSpellResultTemplate(_fighterProvider.Value.GetFighterByDisplayName(command.CasterName), command.CastLevel);
-            NonAttackSpellResults spellResults = new NonAttackSpellResults();
-            foreach (string name in command.TargetNames)
-            {
-                NewNonAttackSpellResult spellResult = template.Clone() as NewNonAttackSpellResult;
-                spellResult.Target = _fighterProvider.Value.GetFighterByDisplayName(name);
-                spellResults.Add(spellResult);
-            }
-
-            NonAttackSpellResultsQuery _command = new NonAttackSpellResultsQuery(template, spellResults);
-
-            ValidableResponse<NonAttackSpellResults> response = base._mediator.Value.Execute(_command) as ValidableResponse<NonAttackSpellResults>;
-
-            if (response.IsValid)
-            {
-                foreach (NewNonAttackSpellResult spellResult in response.Response)
-                {
-                    ApplyDamageResultListCommand damageCommand = new ApplyDamageResultListCommand(spellResult.Target, spellResult.HitDamage);
-                    base._mediator.Value.Execute(damageCommand);
-                    command.AddToInnerCommands(damageCommand);
-                    // TODO
-                    // add On hit status
-                }
-            }
-
-            return response.IsValid;
         }
 
         private bool targetsSelected(CastSpellCommand command)

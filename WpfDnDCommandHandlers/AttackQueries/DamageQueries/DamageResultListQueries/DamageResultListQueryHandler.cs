@@ -6,7 +6,7 @@ using WpfToolsLibrary.Navigation;
 
 namespace WpfDnDCommandHandlers.AttackQueries.DamageQueries.DamageResultListQueries
 {
-    public class DamageResultListQueryHandler : BaseResultCommandHandler<GetInputDamageResultListCommand, GetInputDamageResultListResponse>
+    public class DamageResultListQueryHandler : BaseResultCommandHandler<DamageResultListQuery, GetInputDamageResultListResponse>
     {
     }
 }

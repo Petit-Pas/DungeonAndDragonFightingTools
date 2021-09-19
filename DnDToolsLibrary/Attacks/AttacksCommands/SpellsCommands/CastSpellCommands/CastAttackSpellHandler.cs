@@ -44,10 +44,10 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
                 spellResults.Add(spellResult);
             }
 
-            AttackSpellResultsQuery _command = new AttackSpellResultsQuery(command.Spell.DisplayName, command.CastLevel, spellResults);
-            ValidableResponse<AttackSpellResults> response = base._mediator.Value.Execute(_command) as ValidableResponse<AttackSpellResults>;
+            AttackSpellResultsQuery query = new AttackSpellResultsQuery(command.Spell.DisplayName, command.CastLevel, spellResults);
+            ValidableResponse<AttackSpellResults> response = base._mediator.Value.Execute(query) as ValidableResponse<AttackSpellResults>;
 
-            _command.SpellResults = response.IsValid ? response.Response : null;
+            query.SpellResults = response.IsValid ? response.Response : null;
 
             return response.IsValid;
         }
