@@ -5,8 +5,8 @@ using BaseToolsLibrary.Memory;
 using DDFight;
 using DDFight.Commands;
 using DnDToolsLibrary.Attacks;
-using DnDToolsLibrary.Attacks.AttacksCommands.DamageCommands.GetInputDamageResultList;
-using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpell;
+using DnDToolsLibrary.Attacks.AttacksCommands.DamageCommands.DamageResultListQueries;
+using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellCommands;
 using DnDToolsLibrary.Attacks.Damage;
 using DnDToolsLibrary.Attacks.Damage.Type;
 using DnDToolsLibrary.Attacks.HitAttacks;
@@ -22,7 +22,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows;
-using WpfDnDCommandHandlers.AttackCommands.DamageCommands.GetInputResultList;
+using WpfDnDCommandHandlers.AttackQueries.DamageQueries.DamageResultListQueries;
 using WpfDnDCustomControlLibrary.Statuses;
 using WpfSandbox;
 using WpfToolsLibrary.Extensions;
@@ -90,7 +90,7 @@ namespace BindValidation
             spell.HasSavingThrow = true;
             spell.SavingCharacteristic = CharacteristicsEnum.Intelligence;
 
-            GetInputDamageResultListHandler dfghj = new GetInputDamageResultListHandler();
+            DamageResultListQueryHandler dfghj = new DamageResultListQueryHandler();
 
             DIConfigurer.ConfigureCore();
             DIConfigurer.ConfigureWpf();

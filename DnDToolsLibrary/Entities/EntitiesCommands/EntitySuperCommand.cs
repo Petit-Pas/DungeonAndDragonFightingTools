@@ -1,13 +1,10 @@
 ﻿using BaseToolsLibrary.Mediator;
 using DnDToolsLibrary.Fight;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands
-{    
+{
     /// <summary>
     ///     Base class for super commands related to PlayableEntity
     ///     As such commands are only supposed to be used during a fight, it will store only the name of the entity,

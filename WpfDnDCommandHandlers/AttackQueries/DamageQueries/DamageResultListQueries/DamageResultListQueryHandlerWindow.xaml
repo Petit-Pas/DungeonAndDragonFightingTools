@@ -1,0 +1,55 @@
+﻿<Window x:Class="WpfDnDCommandHandlers.AttackQueries.DamageQueries.DamageResultListQueryHandlerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:shadowboxes="clr-namespace:WpfCustomControlLibrary.ShadowBoxes;assembly=WpfCustomControlLibrary" 
+        xmlns:damage="clr-namespace:WpfDnDCustomControlLibrary.Attacks.Damage;assembly=WpfDnDCustomControlLibrary"
+        mc:Ignorable="d"
+        Title="DamageResultListRollableWindow" Height="450" Width="800"
+        Style="{StaticResource WindowStyle}"
+        KeyDown="Window_KeyDown">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/WpfCustomControlLibrary;component/ShadowBoxes/ShadowButtonStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.Resources>
+            <Style TargetType="{x:Type shadowboxes:ShadowButtonControl}" x:Key="ButtonStyle" BasedOn="{StaticResource ShadowButtonStyle}">
+                <Setter Property="Foreground" Value="{StaticResource Light}"/>
+                <Setter Property="FontSize" Value="20"/>
+            </Style>
+        </Grid.Resources>
+
+        <TextBlock 
+            Style="{StaticResource CardTitle}" 
+            Text="{Binding Reason}">
+        </TextBlock>
+
+        <damage:DamageResultListRollableControl
+            Grid.Row="1"
+            Margin="0 10"
+            DataContext="{Binding DamageList}">
+
+        </damage:DamageResultListRollableControl>
+
+        <shadowboxes:ShadowButtonControl
+            Grid.Row="2"
+            x:Name="ValidateButton"
+            Style="{StaticResource ButtonStyle}"
+            Click="ValidateButton_Click">
+            Validate
+        </shadowboxes:ShadowButtonControl>
+    </Grid>
+</Window>

@@ -1,6 +1,5 @@
 ﻿using BaseToolsLibrary;
 using DnDToolsLibrary.Attacks.Damage;
-using DnDToolsLibrary.Attacks.HitAttacks;
 using DnDToolsLibrary.Characteristics;
 using DnDToolsLibrary.Dice;
 using DnDToolsLibrary.Entities;

@@ -1,11 +1,11 @@
 ﻿using WpfDnDCommandHandlers;
-using WpfDnDCommandHandlers.AttackCommands.DamageCommands;
-using WpfDnDCommandHandlers.AttackCommands.DamageCommands.GetInputResultList;
-using WpfDnDCommandHandlers.AttackCommands.SpellCommands.GetInputAttackSpellResults;
-using WpfDnDCommandHandlers.AttackCommands.SpellCommands.GetInputNonAttackSpellResults;
-using WpfDnDCommandHandlers.AttackCommands.SpellCommands.GetInputSpellLevel.GetInputCantripLevel;
-using WpfDnDCommandHandlers.AttackCommands.SpellCommands.GetInputSpellLevel.GetInputNormalSpellLevel;
-using WpfDnDCommandHandlers.AttackCommands.SpellCommands.GetInputSpellTargets;
+using WpfDnDCommandHandlers.AttackQueries.DamageQueries;
+using WpfDnDCommandHandlers.AttackQueries.DamageQueries.DamageResultListQueries;
+using WpfDnDCommandHandlers.AttackQueries.SpellQueries.AttackSpellResultsQueries;
+using WpfDnDCommandHandlers.AttackQueries.SpellQueries.NonAttackSpellResultsQueries;
+using WpfDnDCommandHandlers.AttackQueries.SpellQueries.SpellLevelQueries.CantripLevelQueries;
+using WpfDnDCommandHandlers.AttackQueries.SpellQueries.SpellLevelQueries.GetInputNormalSpellLevel;
+using WpfDnDCommandHandlers.AttackQueries.SpellQueries.SpellTargetsQueries;
 
 namespace DDFight
 {
@@ -13,12 +13,12 @@ namespace DDFight
     {
         public static void Configure()
         {
-            HandlerToUILinker.AddNewPair(typeof(GetInputDamageResultListHandler), typeof(GetInputDamageResultListWindow));
+            HandlerToUILinker.AddNewPair(typeof(DamageResultListQueryHandler), typeof(DamageResultListQueryHandlerWindow));
             HandlerToUILinker.AddNewPair(typeof(GetInputSpellLevelHandler), typeof(GetInputNormalSpellLevelWindow));
-            HandlerToUILinker.AddNewPair(typeof(GetInputCantripLevelHandler), typeof(GetInputCantripLevelWindow));
-            HandlerToUILinker.AddNewPair(typeof(GetInputSpellTargetsHandler), typeof(GetInputSpellTargetsWindow));
-            HandlerToUILinker.AddNewPair(typeof(GetInputAttackSpellResultsHandler), typeof(GetInputAttackSpellResultsWindow));
-            HandlerToUILinker.AddNewPair(typeof(GetInputNonAttackSpellResultsHandler), typeof(GetInputNonAttackSpellResultsWindow));
+            HandlerToUILinker.AddNewPair(typeof(CantripLevelQueryHandler), typeof(CantripLevelQueryWindow));
+            HandlerToUILinker.AddNewPair(typeof(SpellTargetsQueryHandler), typeof(SpellTargetsQueryHandlerWindow));
+            HandlerToUILinker.AddNewPair(typeof(AttackSpellResultsQueryHandler), typeof(AttackSpellResultsQueryHandlerWindow));
+            HandlerToUILinker.AddNewPair(typeof(GetInputNonAttackSpellResultsHandler), typeof(NonAttackSpellResultsQueryHandlerWindow));
         }
     }
 }

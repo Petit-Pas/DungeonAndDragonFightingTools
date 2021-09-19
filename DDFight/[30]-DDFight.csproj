@@ -722,9 +722,9 @@
       <Project>{3578fcfc-1a40-45b7-b2b8-7eecc3f8d6cf}</Project>
       <Name>[20]-WpfCustomControlLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WpfDnDCommandHandlers\[29]-WpfDnDCommandHandlers.csproj">
+    <ProjectReference Include="..\WpfDnDCommandHandlers\[29]-WpfDnDQueryHandlers.csproj">
       <Project>{bc3a9f4d-044e-41f4-9303-40f2c29e1c6a}</Project>
-      <Name>[29]-WpfDnDCommandHandlers</Name>
+      <Name>[29]-WpfDnDQueryHandlers</Name>
     </ProjectReference>
     <ProjectReference Include="..\WpfDnDCustomControlLibrary\[21]-WpfDnDCustomControlLibrary.csproj">
       <Project>{990b5507-d231-4543-bf34-ee5a7342c3e3}</Project>
