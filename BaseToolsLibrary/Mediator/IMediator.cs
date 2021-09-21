@@ -14,5 +14,9 @@ namespace BaseToolsLibrary.Mediator
         void Undo(IMediatorCommand command);
 
         IMediatorCommandResponse Execute(IMediatorCommand command);
+
+        // to allow unit testing injection
+        void RegisterHandler(IMediatorHandler handler, Type command);
+
     }
 }

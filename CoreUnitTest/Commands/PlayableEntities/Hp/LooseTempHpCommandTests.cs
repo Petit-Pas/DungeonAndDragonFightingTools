@@ -29,12 +29,12 @@ namespace CoreUnitTest.Commands.PlayableEntities.Hp
         [SetUp]
         public void Setup()
         {
+            _character.TempHp = 10;
         }
 
         [Test]
         public void Basic()
         {
-            _character.TempHp = 10;
             LooseTempHpCommand command = new LooseTempHpCommand(_character, 5);
 
             _mediator.Execute(command);
@@ -47,7 +47,6 @@ namespace CoreUnitTest.Commands.PlayableEntities.Hp
         [Test]
         public void Full()
         {
-            _character.TempHp = 10;
             LooseTempHpCommand command = new LooseTempHpCommand(_character, 10);
 
             _mediator.Execute(command);
@@ -60,7 +59,6 @@ namespace CoreUnitTest.Commands.PlayableEntities.Hp
         [Test]
         public void Overflow()
         {
-            _character.TempHp = 10;
             LooseTempHpCommand command = new LooseTempHpCommand(_character, 15);
 
             Assert.Throws<InvalidOperationException>(() => _mediator.Execute(command));
@@ -69,7 +67,6 @@ namespace CoreUnitTest.Commands.PlayableEntities.Hp
         [Test]
         public void WrongUndo()
         {
-            _character.TempHp = 10;
             LooseTempHpCommand command = new LooseTempHpCommand(_character, 10);
 
             Assert.Throws<NullReferenceException>(() => _mediator.Undo(command));
@@ -78,7 +75,6 @@ namespace CoreUnitTest.Commands.PlayableEntities.Hp
         [Test]
         public void ReturnValue()
         {
-            _character.TempHp = 10;
             LooseTempHpCommand command = new LooseTempHpCommand(_character, 10);
 
             IMediatorCommandResponse response = _mediator.Execute(command);

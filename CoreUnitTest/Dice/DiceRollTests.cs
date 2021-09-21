@@ -2,7 +2,7 @@ using DnDToolsLibrary.Dice;
 using NUnit.Framework;
 using System;
 
-namespace CoreUnitTest
+namespace CoreUnitTest.Dice
 {
     public class DiceRollTests
     {

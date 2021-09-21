@@ -14,7 +14,7 @@ namespace BaseToolsLibrary.Mediator
     /// </summary>
     public class BaseMediator : IMediator
     {
-        private void register_handler(IMediatorHandler handler, Type command)
+        public void RegisterHandler(IMediatorHandler handler, Type command)
         {
             if (_handlerCommandBinding.ContainsKey(command))
             {
@@ -56,7 +56,7 @@ namespace BaseToolsLibrary.Mediator
                                     if (_interface.GetGenericTypeDefinition() == typeof(IMediatorHandler<,>))
                                     {
                                         Console.WriteLine($"==>INFO : MediatorBase found the '{type.FullName}' handler, its command type is {type.GetInterfaces()[i].GetGenericArguments()[0]}.");
-                                        register_handler(Activator.CreateInstance(type) as IMediatorHandler, type.GetInterfaces()[i].GetGenericArguments()[0]);
+                                        RegisterHandler(Activator.CreateInstance(type) as IMediatorHandler, type.GetInterfaces()[i].GetGenericArguments()[0]);
                                         break;
                                     }
                                 }
@@ -169,13 +169,15 @@ namespace BaseToolsLibrary.Mediator
 
             if (pair.Key == null)
             {
-                Console.WriteLine("ERROR : trying to handle a command that was not detected by BaseMediator");
-                throw new NullReferenceException("Trying to handle a command that was not detected by BaseMediator");
+                string message = $"ERROR : trying to handle a command that was not detected by BaseMediator: \"{command.GetType()}\"";
+                Console.WriteLine(message);
+                throw new NullReferenceException(message);
             }
             if (pair.Value == null)
             {
-                Console.WriteLine("ERROR : trying to handle a command that has no corresponding Handler in BaseMediator");
-                throw new NullReferenceException("Trying to handle a command that has no corresponding Handler in BaseMediator");
+                string message = $"ERROR : trying to handle a command that has no corresponding Handler in BaseMediator: \"{command.GetType()}\"";
+                Console.WriteLine(message);
+                throw new NullReferenceException(message);
             }
             return pair.Value;
         }

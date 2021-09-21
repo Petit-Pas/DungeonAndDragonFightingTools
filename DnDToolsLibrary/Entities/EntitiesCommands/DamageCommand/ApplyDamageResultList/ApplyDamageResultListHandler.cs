@@ -92,7 +92,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageRes
 
             TakeDamageCommand inner_command = new TakeDamageCommand(target, total);
             base._mediator.Value.Execute(inner_command);
-            _command.AddToInnerCommands(inner_command);
+            _command.PushToInnerCommands(inner_command);
 
             return new ApplyDamageResultListResponse(total);
         }

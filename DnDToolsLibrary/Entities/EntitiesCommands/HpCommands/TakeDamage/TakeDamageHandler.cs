@@ -36,7 +36,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.TakeDamage
             LooseHpCommand inner_command = new LooseHpCommand(target, remaining);
 
             _mediator.Value.Execute(inner_command);
-            command.AddToInnerCommands(inner_command);
+            command.PushToInnerCommands(inner_command);
         }
 
         private int handleTempHp(TakeDamageCommand command, PlayableEntity target, int remaining)
@@ -46,7 +46,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.TakeDamage
             LooseTempHpCommand inner_command = new LooseTempHpCommand(target, amount);
 
             _mediator.Value.Execute(inner_command);
-            command.AddToInnerCommands(inner_command);
+            command.PushToInnerCommands(inner_command);
 
             return remaining - amount;
 

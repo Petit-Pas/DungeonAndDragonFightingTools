@@ -22,7 +22,7 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
                 {
                     ApplyDamageResultListCommand damageCommand = new ApplyDamageResultListCommand(spellResult.Target, spellResult.HitDamage);
                     base._mediator.Value.Execute(damageCommand);
-                    _command.AddToInnerCommands(damageCommand);
+                    _command.PushToInnerCommands(damageCommand);
                     // TODO
                     // add On hit status
                 }

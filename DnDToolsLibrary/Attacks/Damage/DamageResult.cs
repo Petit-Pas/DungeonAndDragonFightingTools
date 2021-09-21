@@ -13,6 +13,17 @@ namespace DnDToolsLibrary.Attacks.Damage
         {
         }
 
+        public DamageResult(string damage, DamageTypeEnum type)
+        {
+            Damage = new DiceRoll(damage);
+            DamageType = type;
+        }
+
+        public static DamageResult Create(string damage, DamageTypeEnum type)
+        {
+            return new DamageResult(damage, type);
+        }
+
         public bool IsSameKind(DamageTemplate template)
         {
             if (DamageType == template.DamageType)

@@ -37,22 +37,10 @@ namespace CoreUnitTest.Commands.PlayableEntities.Damage
             _damage = new DamageResultList()
             {
                 Elements = new ObservableCollection<DamageResult>() {
-                    new DamageResult()
-                    {
-                        // using D1 to remove random factor
-                        Damage = new DiceRoll("1d1+9"),
-                        DamageType = DamageTypeEnum.Fire,
-                    },
-                    new DamageResult()
-                    {
-                        Damage = new DiceRoll("1d1+4"),
-                        DamageType = DamageTypeEnum.Cold,
-                    },
-                    new DamageResult()
-                    {
-                        Damage = new DiceRoll("1d1+9"),
-                        DamageType = DamageTypeEnum.Poison,
-                    },
+                    // using D1 to remove random factor
+                    new DamageResult("1d1+9", DamageTypeEnum.Fire),
+                    new DamageResult("1d1+4", DamageTypeEnum.Cold),
+                    new DamageResult("1d1+9", DamageTypeEnum.Poison),
                 },
             };
             foreach (DamageResult dmg in _damage.Elements)

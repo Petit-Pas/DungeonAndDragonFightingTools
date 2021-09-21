@@ -31,7 +31,7 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.HitAttackCommands.ApplyHitAtta
             
             _mediator.Value.Execute(_command);
 
-            _command.AddToInnerCommands(_command);
+            _command.PushToInnerCommands(_command);
         }
     }
 }

@@ -23,7 +23,7 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
                 {
                     ApplyDamageResultListCommand damageCommand = new ApplyDamageResultListCommand(attackSpellResult.Target, attackSpellResult.HitDamage);
                     base._mediator.Value.Execute(damageCommand);
-                    _command.AddToInnerCommands(damageCommand);
+                    _command.PushToInnerCommands(damageCommand);
                     // TODO
                     // apply on hit status
                 }
@@ -47,7 +47,7 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
             AttackSpellResultsQuery query = new AttackSpellResultsQuery(command.Spell.DisplayName, command.CastLevel, spellResults);
             ValidableResponse<AttackSpellResults> response = base._mediator.Value.Execute(query) as ValidableResponse<AttackSpellResults>;
 
-            query.SpellResults = response.IsValid ? response.Response : null;
+            command.SpellResults = response.IsValid ? response.Response : null;
 
             return response.IsValid;
         }

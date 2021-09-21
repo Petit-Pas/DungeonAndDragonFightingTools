@@ -22,12 +22,12 @@ namespace BaseToolsLibrary.Mediator
             InnerCommands = new Stack<IMediatorCommand>();
         }
 
-        public void AddToInnerCommands(IMediatorCommand command)
+        public void PushToInnerCommands(IMediatorCommand command)
         {
             InnerCommands.Push(command);
         }
 
-        public IMediatorCommand GetLastInnerCommand()
+        public IMediatorCommand PopLastInnerCommand()
         {
             return InnerCommands.Pop();
         }

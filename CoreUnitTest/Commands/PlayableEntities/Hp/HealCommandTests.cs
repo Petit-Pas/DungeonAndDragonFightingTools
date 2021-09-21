@@ -29,12 +29,12 @@ namespace CoreUnitTest.Commands.PlayableEntities.Hp
         [SetUp]
         public void Setup()
         {
+            _character.Hp = 50;
         }
 
         [Test]
         public void HealFull()
         {
-            _character.Hp = 50;
             HealCommand command = new HealCommand(_character, 50);
 
             _mediator.Execute(command);
@@ -47,7 +47,6 @@ namespace CoreUnitTest.Commands.PlayableEntities.Hp
         [Test]
         public void HealNormal()
         {
-            _character.Hp = 50;
             HealCommand command = new HealCommand(_character, 40);
 
             _mediator.Execute(command);
@@ -60,7 +59,6 @@ namespace CoreUnitTest.Commands.PlayableEntities.Hp
         [Test]
         public void OverHeal()
         {
-            _character.Hp = 50;
             HealCommand command = new HealCommand(_character, 60);
 
             _mediator.Execute(command);
@@ -73,7 +71,6 @@ namespace CoreUnitTest.Commands.PlayableEntities.Hp
         [Test]
         public void NoHeal()
         {
-            _character.Hp = 50;
             HealCommand command = new HealCommand(_character, 0);
 
             _mediator.Execute(command);
@@ -86,7 +83,6 @@ namespace CoreUnitTest.Commands.PlayableEntities.Hp
         [Test]
         public void NegativeHeal()
         {
-            _character.Hp = 50;
             HealCommand command = new HealCommand(_character, -10);
 
             _mediator.Execute(command);
@@ -99,7 +95,6 @@ namespace CoreUnitTest.Commands.PlayableEntities.Hp
         [Test]
         public void WrongUndo()
         {
-            _character.Hp = 50;
             HealCommand command = new HealCommand(_character, 50);
 
             Assert.Throws<NullReferenceException>(() => _mediator.Undo(command));
@@ -108,7 +103,6 @@ namespace CoreUnitTest.Commands.PlayableEntities.Hp
         [Test]
         public void ReturnValue()
         {
-            _character.Hp = 50;
             HealCommand command = new HealCommand(_character, 50);
 
             IMediatorCommandResponse response = _mediator.Execute(command);
