@@ -36,24 +36,33 @@ namespace DDFight.WpfExtensions
             console.AddEntry(" casts a lvl ");
             console.AddEntry($"{nonAttackSpellResult.Level} {nonAttackSpellResult.Name}\r\n", fontWeightProvider.Bold);
 
+            // TODO Here it doesnt make sense to move him and not the Saving throws
             if (nonAttackSpellResult.Targets.Contains(nonAttackSpellResult.Caster))
             {
+                int position = nonAttackSpellResult.Targets.IndexOf(nonAttackSpellResult.Targets.First(x => x.DisplayName == nonAttackSpellResult.Caster.DisplayName));
                 // This is to move the Caster at the end of the list, organizing things better for the Log Console if there is a Status
                 nonAttackSpellResult.Targets.Remove(nonAttackSpellResult.Caster);
                 nonAttackSpellResult.Targets.Add(nonAttackSpellResult.Caster);
+
+                if (savings.Count > position)
+                {
+                    SavingThrow saving = savings.ElementAt(position);
+                    savings.Remove(saving);
+                    savings.Add(saving);
+                }
             }
 
             bool already_applied = false;
 
             if (nonAttackSpellResult.HasSavingThrow)
             {
-                foreach (OnHitStatus status in nonAttackSpellResult.AppliedStatusList.Elements)
+                foreach (OnHitStatus status in nonAttackSpellResult.AppliedStatusList)
                 {
                     status.ApplySavingCharacteristic = nonAttackSpellResult.SavingCharacteristic;
                     status.ApplySavingDifficulty = nonAttackSpellResult.SavingDifficulty;
                 }
             }
-            foreach (DamageResult dmg in nonAttackSpellResult.HitDamage.Elements)
+            foreach (DamageResult dmg in nonAttackSpellResult.HitDamage)
             {
                 dmg.LastSavingWasSuccesfull = false;
             }
@@ -69,7 +78,7 @@ namespace DDFight.WpfExtensions
                     console.AddEntry(") ==> ");
                     if (savings.ElementAt(i).IsSuccesful)
                     {
-                        foreach (DamageResult dmg in nonAttackSpellResult.HitDamage.Elements)
+                        foreach (DamageResult dmg in nonAttackSpellResult.HitDamage)
                         {
                             dmg.LastSavingWasSuccesfull = true;
                         }
@@ -77,7 +86,7 @@ namespace DDFight.WpfExtensions
                     }
                     else
                     {
-                        foreach (DamageResult dmg in nonAttackSpellResult.HitDamage.Elements)
+                        foreach (DamageResult dmg in nonAttackSpellResult.HitDamage)
                         {
                             dmg.LastSavingWasSuccesfull = false;
                         }
@@ -89,7 +98,7 @@ namespace DDFight.WpfExtensions
                     nonAttackSpellResult.Targets.ElementAt(i).TakeHitDamage(nonAttackSpellResult.HitDamage);
 
                 // OnHitStatus Application
-                foreach (OnHitStatus status in nonAttackSpellResult.AppliedStatusList.Elements)
+                foreach (OnHitStatus status in nonAttackSpellResult.AppliedStatusList)
                 {
                     if (nonAttackSpellResult.HasSavingThrow == false)
                     {
@@ -101,7 +110,7 @@ namespace DDFight.WpfExtensions
                         status.Apply(nonAttackSpellResult.Caster, nonAttackSpellResult.Targets.ElementAt(i), multiple_application: already_applied);
                         already_applied = true;
                     }
-                    else if (nonAttackSpellResult.HasSavingThrow = true && savings.ElementAt(i).IsSuccesful && status.SpellApplicationModifier == ApplicationModifierEnum.Maintained)
+                    else if (nonAttackSpellResult.HasSavingThrow == true && savings.ElementAt(i).IsSuccesful && status.SpellApplicationModifier == ApplicationModifierEnum.Maintained)
                     {
                         status.Apply(nonAttackSpellResult.Caster, nonAttackSpellResult.Targets.ElementAt(i), application_success: false, multiple_application: already_applied);
                         already_applied = true;

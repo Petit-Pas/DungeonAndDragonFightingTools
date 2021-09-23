@@ -23,7 +23,7 @@ namespace WpfDnDCustomControlLibrary.Fight
 
         private void FightersSelectorControl_Initialized(object sender, EventArgs e)
         {
-            this.ItemsSource = FightersList.Instance.Elements;
+            this.ItemsSource = FightersList.Instance;
             this.SelectionChanged += FightersSelectorControl_SelectionChanged;
         }
 

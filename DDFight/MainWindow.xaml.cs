@@ -59,7 +59,7 @@ namespace DDFight
 
             console = DIContainer.GetImplementation<ICustomConsole>();
 
-            GlobalContext.Context.FightContext.FightersList.Elements.CollectionChanged += FightingCharacters_CollectionChanged;
+            GlobalContext.Context.FightContext.FightersList.CollectionChanged += FightingCharacters_CollectionChanged;
 
             DataContext = GlobalContext.Context;
 
@@ -75,7 +75,7 @@ namespace DDFight
 
         private void FightingCharacters_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            FightButton.IsEnabled = GlobalContext.Context.FightContext.FightersList.Elements.Count >= 2;
+            FightButton.IsEnabled = GlobalContext.Context.FightContext.FightersList.Count >= 2;
         }
 
         private void FightButton_Click(object sender, RoutedEventArgs e)
@@ -97,7 +97,7 @@ namespace DDFight
 
                 // Clean up after a Fight
                 fightWindow.UnregisterAllChildren();
-                foreach (Character character in GlobalContext.Context.FightContext.FightersList.Elements.OfType<Character>())
+                foreach (Character character in GlobalContext.Context.FightContext.FightersList.OfType<Character>())
                 {
                     character.GetOutOfFight();
                 }

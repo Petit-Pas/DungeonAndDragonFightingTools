@@ -20,7 +20,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageRes
             : base(target.DisplayName)
         {
             LastSavingWasSuccessfull = lastSavingWasSuccessfull;
-            foreach (DamageResult dmg in damageList.Elements)
+            foreach (DamageResult dmg in damageList)
             {
                 DamageList.Add(new Damage(
                     dmg.Damage.LastResult,

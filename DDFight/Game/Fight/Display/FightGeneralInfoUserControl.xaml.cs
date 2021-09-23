@@ -23,7 +23,7 @@ namespace DDFight.Controlers.Fight
 
         private void setCharactersTurnName()
         {
-            CharacterTurnTextboxCountrol.Text = "Turn of: " + GlobalContext.Context.FightContext.FightersList.Elements.ElementAt((int)GlobalContext.Context.FightContext.TurnIndex).DisplayName;
+            CharacterTurnTextboxCountrol.Text = "Turn of: " + GlobalContext.Context.FightContext.FightersList.ElementAt((int)GlobalContext.Context.FightContext.TurnIndex).DisplayName;
         }
 
         private void GeneralInfoFightUserControl_Loaded(object sender, RoutedEventArgs e)
@@ -57,9 +57,9 @@ namespace DDFight.Controlers.Fight
 
             GlobalContext.Context.FightContext.FightersList.SetTurnOrdersMiddleFight();
 
-            for (int i = 0; i != GlobalContext.Context.FightContext.FightersList.Elements.Count; i++)
+            for (int i = 0; i != GlobalContext.Context.FightContext.FightersList.Count; i++)
             {
-                if (GlobalContext.Context.FightContext.FightersList.Elements[i] == currently_playing)
+                if (GlobalContext.Context.FightContext.FightersList[i] == currently_playing)
                 {
                     GlobalContext.Context.FightContext.TurnIndex = i;
                 }

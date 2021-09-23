@@ -30,7 +30,7 @@ namespace DDFight.Game.Aggression.Display
         {
             if (data_context != null)
             {
-                foreach (DamageResult dmg in data_context.Elements)
+                foreach (DamageResult dmg in data_context)
                 {
                     dmg.PropertyChanged += Dmg_PropertyChanged;
                 }

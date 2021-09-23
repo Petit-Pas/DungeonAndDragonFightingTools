@@ -23,7 +23,7 @@ namespace DDFight.Game.Status.Display
         private void OnHitStatusListPreviewUserControl_DataContextChanged(object sender, System.Windows.DependencyPropertyChangedEventArgs e)
         {
             Visibility = Visibility.Collapsed;
-            if (data_context?.Elements.Count != 0)
+            if (data_context?.Count != 0)
                 Visibility = Visibility.Visible;
         }
     }

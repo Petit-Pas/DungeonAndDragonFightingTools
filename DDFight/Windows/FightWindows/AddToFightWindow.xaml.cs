@@ -21,7 +21,7 @@ namespace DDFight.Windows.FightWindows
             CharacterListControl.DataContext = GlobalContext.Context.CharacterList;
             MonsterListControl.DataContext = GlobalContext.Context.MonsterList;
 
-            FighterListControl.ItemsSource = GlobalContext.Context.FightContext.FightersList.Elements;
+            FighterListControl.ItemsSource = GlobalContext.Context.FightContext.FightersList;
         }
 
         private void FighterListControl_KeyDown(object sender, KeyEventArgs e)

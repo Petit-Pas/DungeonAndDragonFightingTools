@@ -43,7 +43,7 @@ namespace DDFight.Commands.AttackCommands
             if (AttackResult.RollResult.Hits)
             {
                 DnDCommandManager.Instance.TryExecute(new ApplyDamageResultListCommand(target, AttackResult.DamageList, true));
-                foreach (OnHitStatus onHitStatus in AttackResult.OnHitStatuses.Elements)
+                foreach (OnHitStatus onHitStatus in AttackResult.OnHitStatuses)
                 {
                     // TODO in order to allow a correct history here, the fact of handling Statuses should be commands as well
                     onHitStatus.CheckIfApply(attacker, target);

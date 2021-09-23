@@ -14,7 +14,7 @@
             VerticalScrollBarVisibility="Auto"
             Background="{StaticResource Gray}">
             <ItemsControl
-                    ItemsSource="{Binding Elements}">
+                    ItemsSource="{Binding}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <DataTemplate.Resources>

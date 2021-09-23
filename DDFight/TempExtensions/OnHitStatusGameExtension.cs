@@ -27,20 +27,20 @@ namespace TempExtensionsOnHitStatus
             {
                 if ((status.CanRedoSavingThrow && status.SavingIsRemadeAtStartOfTurn) ||
                     (status.HasAMaximumDuration && !status.DurationIsCalculatedOnCasterTurn && status.DurationIsBasedOnStartOfTurn) ||
-                    status.DotDamageList.Elements.Count != 0)
+                    status.DotDamageList.Count != 0)
                     status.Affected.NewTurnStarted += status.Affected_NewTurnStarted;
                 if ((status.CanRedoSavingThrow && status.SavingIsRemadeAtStartOfTurn == false) ||
                     (status.HasAMaximumDuration && !status.DurationIsCalculatedOnCasterTurn && !status.DurationIsBasedOnStartOfTurn) ||
-                    status.DotDamageList.Elements.Count != 0)
+                    status.DotDamageList.Count != 0)
                     status.Affected.TurnEnded += status.Affected_TurnEnded;
             }
             if (status.Caster != null)
             {
                 if ((status.HasAMaximumDuration && status.DurationIsCalculatedOnCasterTurn && status.DurationIsBasedOnStartOfTurn) ||
-                    status.DotDamageList.Elements.Count != 0)
+                    status.DotDamageList.Count != 0)
                     status.Caster.NewTurnStarted += status.Caster_NewTurnStarted;
                 if ((status.HasAMaximumDuration && status.DurationIsCalculatedOnCasterTurn && !status.DurationIsBasedOnStartOfTurn) ||
-                    status.DotDamageList.Elements.Count != 0)
+                    status.DotDamageList.Count != 0)
                     status.Caster.TurnEnded += status.Caster_TurnEnded;
 
                 if (status.EndsOnCasterLossOfConcentration)
@@ -75,12 +75,12 @@ namespace TempExtensionsOnHitStatus
         public static void CheckDotDamage(this OnHitStatus onHitStatus, bool start, bool caster)
         {
             DamageResultList to_apply = new DamageResultList();
-            foreach (DotTemplate dot in onHitStatus.DotDamageList.Elements)
+            foreach (DotTemplate dot in onHitStatus.DotDamageList)
             {
                 if (dot.TriggersStartOfTurn == start && dot.TriggersOnCastersTurn == caster)
                     to_apply.AddElementSilent(new DamageResult(dot));
             }
-            if (to_apply.Elements.Count != 0)
+            if (to_apply.Count != 0)
             {
                 DamageResultListRollableWindow window = new DamageResultListRollableWindow() { DataContext = to_apply, };
                 window.TitleControl.Text = onHitStatus.Header + " inflicts damage to " + onHitStatus.Affected.DisplayName;
@@ -205,10 +205,10 @@ namespace TempExtensionsOnHitStatus
             // the applied status is a copy
             OnHitStatus applied = (OnHitStatus)onHitStatus.Clone();
 
-            if (applied.OnApplyDamageList.Elements.Count != 0)
+            if (applied.OnApplyDamageList.Count != 0)
             {
                 DamageResultList onApplyDamageList = onHitStatus.OnApplyDamageList.GetResultList();
-                foreach (DamageResult dmg in onApplyDamageList.Elements)
+                foreach (DamageResult dmg in onApplyDamageList)
                     dmg.LastSavingWasSuccesfull = !application_success;
                 DamageResultListRollableWindow window = new DamageResultListRollableWindow() { DataContext=onApplyDamageList };
                 window.ShowCentered();

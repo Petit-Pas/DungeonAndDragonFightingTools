@@ -29,7 +29,7 @@ namespace CoreUnitTest.Commands.Attacks.HitAttacks
         public void MainSetup()
         {
             _mediator = DIContainer.GetImplementation<IMediator>();
-            _character = FightersList.Instance.Elements[0];
+            _character = FightersList.Instance[0];
         }
 
         [SetUp]
@@ -39,12 +39,10 @@ namespace CoreUnitTest.Commands.Attacks.HitAttacks
             {
                 DamageList = new DamageResultList()
                 {
-                    Elements = new ObservableCollection<DamageResult>() {
-                        // using D1 to remove random factor
-                        new DamageResult("1d1+9", DamageTypeEnum.Fire),
-                        new DamageResult("1d1+4", DamageTypeEnum.Cold),
-                        new DamageResult("1d1+9", DamageTypeEnum.Poison),
-                    },
+                    // using D1 to remove random factor
+                    new DamageResult("1d1+9", DamageTypeEnum.Fire),
+                    new DamageResult("1d1+4", DamageTypeEnum.Cold),
+                    new DamageResult("1d1+9", DamageTypeEnum.Poison),
                 },
                 Owner = _character,
                 Target = _character,
@@ -55,7 +53,7 @@ namespace CoreUnitTest.Commands.Attacks.HitAttacks
                     Target = _character,
                 },
             };
-            foreach (DamageResult dmg in _attackResult.DamageList.Elements)
+            foreach (DamageResult dmg in _attackResult.DamageList)
             {
                 dmg.Damage.Roll();
             }

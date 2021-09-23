@@ -36,7 +36,7 @@ namespace DDFight.Controlers.Fight
 
         private void FighterActionUserControl_LayoutUpdated(object sender, EventArgs e)
         {
-            DataContext = GlobalContext.Context.FightContext.FightersList.Elements.ElementAt(0);
+            DataContext = GlobalContext.Context.FightContext.FightersList.ElementAt(0);
             this.LayoutUpdated -= FighterActionUserControl_LayoutUpdated;
         }
 

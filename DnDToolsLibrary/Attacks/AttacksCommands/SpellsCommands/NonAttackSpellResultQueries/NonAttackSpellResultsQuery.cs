@@ -13,15 +13,15 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.NonAttackSpellR
 
         public NonAttackSpellResultsQuery(NewNonAttackSpellResult spellTemplate, NonAttackSpellResults spellResults)
         {
-            foreach (DamageResult damageResult in spellTemplate.HitDamage.Elements)
+            foreach (DamageResult damageResult in spellTemplate.HitDamage)
             {
                 // refreshing the damage rolls of the spellEffects depending on the template one.
                 damageResult.Damage.PropertyChanged += (e, o) => {
                     foreach (NewNonAttackSpellResult spell in spellResults)
                     {
-                        for (int i = 0; i != SpellTemplate.HitDamage.Elements.Count; i += 1)
+                        for (int i = 0; i != SpellTemplate.HitDamage.Count; i += 1)
                         {
-                            spell.HitDamage.Elements[i].Damage.LastRoll = spellTemplate.HitDamage.Elements[i].Damage.LastRoll;
+                            spell.HitDamage[i].Damage.LastRoll = spellTemplate.HitDamage[i].Damage.LastRoll;
                         }
                     }
                 };

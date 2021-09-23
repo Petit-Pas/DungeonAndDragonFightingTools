@@ -30,7 +30,7 @@ namespace WpfDnDCommandHandlers.AttackQueries.DamageQueries
         {
             if (data_context != null)
             {
-                foreach (DamageResult dmg in data_context.DamageList.Elements)
+                foreach (DamageResult dmg in data_context.DamageList)
                 {
                     dmg.PropertyChanged += Dmg_PropertyChanged;
                 }

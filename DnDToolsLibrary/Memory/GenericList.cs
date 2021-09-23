@@ -1,6 +1,7 @@
 ﻿using BaseToolsLibrary;
 using BaseToolsLibrary.Extensions;
 using System;
+using System.Linq;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -11,7 +12,7 @@ namespace DnDToolsLibrary.Memory
     ///    This class will be used everywhere where a collection is needed, it will allow easy heritance with BaseListUserControl
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class GenericList<T> : INotifyPropertyChanged, ICloneable, IDisposable
+    public class GenericList<T> : ObservableCollection<T>, INotifyPropertyChanged, ICloneable, IDisposable
         where T : class, ICloneable, new()
     {
 
@@ -73,7 +74,8 @@ namespace DnDToolsLibrary.Memory
         /// <summary>
         ///     PropertyChanged EventHandler
         /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
+        // TODO check if new is required here
+        public new event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// 
@@ -88,25 +90,26 @@ namespace DnDToolsLibrary.Memory
         }
         #endregion
 
-        public ObservableCollection<T> Elements
+        /*public ObservableCollection<T> Elements
         {
-            get => _elements;
+            get => this;
             set
             {
-                _elements = value;
+                this.ClearItems();
+                value.ToList().ForEach(x => this.Add(x));
                 NotifyPropertyChanged();
             }
         }
-        private ObservableCollection<T> _elements = new ObservableCollection<T>();
+        private ObservableCollection<T> _elements = new ObservableCollection<T>();*/
 
-        public void RemoveAt(int index)
+        /*public void RemoveAt(int index)
         {
             Elements.RemoveAt(index);
-        }
+        }*/
 
         public void RemoveElement(T elem)
         {
-            Elements.Remove(elem);
+            Remove(elem);
             OnListChanged(new ListChangedArgs { Operation = GenericListOperation.Deletion, Element = elem });
             OnListElementChanged(new ListElementChangedArgs { Element = elem, Operation = GenericListOperation.Deletion });
         }
@@ -119,14 +122,14 @@ namespace DnDToolsLibrary.Memory
         {
             if (elem == null)
                 elem = new T();
-            Elements.Add(elem);
+            Add(elem);
             OnListChanged(new ListChangedArgs { Operation = GenericListOperation.Addition, Element = elem });
             OnListElementChanged(new ListElementChangedArgs { Operation = GenericListOperation.Addition, Element = elem });
         }
 
         public void SortElements(Comparison<T> comparison)
         {
-            Elements.Sort(comparison);
+            this.Sort(comparison);
             NotifyPropertyChanged();
         }
 
@@ -138,7 +141,7 @@ namespace DnDToolsLibrary.Memory
 
         private void init_copy(GenericList<T> to_copy)
         {
-            Elements = to_copy.Elements.Clone();
+            to_copy.ToList().ForEach(x => this.Add((T)x.Clone()));
         }
 
         protected GenericList(GenericList<T> to_copy)
@@ -153,16 +156,13 @@ namespace DnDToolsLibrary.Memory
 
         public void Dispose()
         {
-            if (Elements.Count != 0 && Elements[0] is IDisposable)
+            if (Count != 0 && this[0] is IDisposable)
             {
-                foreach (IDisposable disposable in Elements)
+                foreach (IDisposable disposable in this)
                 {
                     disposable.Dispose();
                 }
             }
         }
-
-        public int Count
-        { get => Elements.Count;}
     }
 }

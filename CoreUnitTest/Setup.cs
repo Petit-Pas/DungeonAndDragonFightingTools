@@ -34,7 +34,6 @@ namespace CoreUnitTest
         {
             PlayableEntity character = new Character();
             character.MaxHp = 100;
-            FightersList.Instance.Elements = new System.Collections.ObjectModel.ObservableCollection<PlayableEntity>();
             FightersList.Instance.AddElementSilent(character);
         }
 

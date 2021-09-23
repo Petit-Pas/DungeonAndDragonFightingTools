@@ -62,7 +62,7 @@ namespace DDFight.Windows
         private void RollInitiativeWindow_Loaded(object sender, RoutedEventArgs e)
         {
             contextList = new ObservableCollection<InitiativeCellDataContext>();
-            foreach (PlayableEntity entity in data_context.Elements)
+            foreach (PlayableEntity entity in data_context)
             {
                 if (contextList.Any(x => x.Entity.Name == entity.Name))
                 {
@@ -128,7 +128,7 @@ namespace DDFight.Windows
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
-            foreach (PlayableEntity entity in data_context.Elements)
+            foreach (PlayableEntity entity in data_context)
             {
                 if (entity.InitiativeRoll == 0)
                 {

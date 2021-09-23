@@ -42,7 +42,7 @@ namespace DDFight.Windows.FightWindows
             if (damage_list.Count != 0)
             {
                 DamageResultList dmgs = damage_list.GetResultList();
-                foreach (DamageResult dmg in dmgs.Elements)
+                foreach (DamageResult dmg in dmgs)
                 {
                     dmg.Damage.Roll();
                 }

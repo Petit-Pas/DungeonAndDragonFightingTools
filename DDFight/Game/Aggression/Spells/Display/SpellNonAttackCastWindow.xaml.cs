@@ -38,7 +38,7 @@ namespace DDFight.Game.Aggression.Spells.Display
                 TargetListControl.LayoutUpdated += TargetListControl_LayoutUpdated;
                 CastButtonControl.IsEnabled = false;
             }
-            if (data_context.HitDamage.Elements.Count != 0)
+            if (data_context.HitDamage.Count != 0)
                 CastButtonControl.IsEnabled = false;
         }
 

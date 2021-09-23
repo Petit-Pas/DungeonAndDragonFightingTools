@@ -26,7 +26,7 @@ namespace DDFight.Game.Status.Display
 
         private void EditableCustomVerboseStatusList_Loaded(object sender, RoutedEventArgs e)
         {
-            StatusListControl.ItemsSource = data_context.Elements;
+            StatusListControl.ItemsSource = data_context;
         }
 
         private void AddStatusButton_Click(object sender, RoutedEventArgs e)

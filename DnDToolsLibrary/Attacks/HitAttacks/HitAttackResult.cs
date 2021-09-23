@@ -171,7 +171,7 @@ namespace DnDToolsLibrary.Attacks.HitAttacks
 
         public void Reset()
         {
-            foreach (DamageResult dmg in DamageList.Elements)
+            foreach (DamageResult dmg in DamageList)
             {
                 dmg.Reset();
             }

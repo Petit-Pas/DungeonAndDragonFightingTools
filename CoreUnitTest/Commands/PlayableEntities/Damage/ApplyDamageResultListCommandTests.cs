@@ -27,7 +27,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.Damage
         public void MainSetup()
         {
             _mediator = DIContainer.GetImplementation<IMediator>();
-            _character = FightersList.Instance.Elements[0];
+            _character = FightersList.Instance[0];
         }
 
         [SetUp]
@@ -36,14 +36,11 @@ namespace CoreUnitTest.Commands.PlayableEntities.Damage
             _character.Hp = 50;
             _damage = new DamageResultList()
             {
-                Elements = new ObservableCollection<DamageResult>() {
-                    // using D1 to remove random factor
-                    new DamageResult("1d1+9", DamageTypeEnum.Fire),
-                    new DamageResult("1d1+4", DamageTypeEnum.Cold),
-                    new DamageResult("1d1+9", DamageTypeEnum.Poison),
-                },
+                new DamageResult("1d1+9", DamageTypeEnum.Fire),
+                new DamageResult("1d1+4", DamageTypeEnum.Cold),
+                new DamageResult("1d1+9", DamageTypeEnum.Poison),
             };
-            foreach (DamageResult dmg in _damage.Elements)
+            foreach (DamageResult dmg in _damage)
             {
                 dmg.Damage.Roll();
             }
@@ -64,7 +61,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.Damage
         [Test]
         public void ReturnValue()
         {
-            _damage.Elements[0].AffinityModifier = DamageAffinityEnum.Resistant;
+            _damage[0].AffinityModifier = DamageAffinityEnum.Resistant;
             ApplyDamageResultListCommand command = new ApplyDamageResultListCommand(_character, _damage);
 
             ApplyDamageResultListResponse response = _mediator.Execute(command) as ApplyDamageResultListResponse;
@@ -78,7 +75,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.Damage
         [Test]
         public void Resistance()
         {
-            _damage.Elements[0].AffinityModifier = DamageAffinityEnum.Resistant;
+            _damage[0].AffinityModifier = DamageAffinityEnum.Resistant;
 
             ApplyDamageResultListCommand command = new ApplyDamageResultListCommand(_character, _damage);
 
@@ -92,7 +89,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.Damage
         [Test]
         public void Weakness()
         {
-            _damage.Elements[0].AffinityModifier = DamageAffinityEnum.Weak;
+            _damage[0].AffinityModifier = DamageAffinityEnum.Weak;
 
             ApplyDamageResultListCommand command = new ApplyDamageResultListCommand(_character, _damage);
 
@@ -106,7 +103,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.Damage
         [Test]
         public void Immunity()
         {
-            _damage.Elements[0].AffinityModifier = DamageAffinityEnum.Immune;
+            _damage[0].AffinityModifier = DamageAffinityEnum.Immune;
 
             ApplyDamageResultListCommand command = new ApplyDamageResultListCommand(_character, _damage);
 
@@ -132,7 +129,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.Damage
         [Test]
         public void Halved_WithSaving()
         {
-            _damage.Elements[0].SituationalDamageModifier = DamageModifierEnum.Halved;
+            _damage[0].SituationalDamageModifier = DamageModifierEnum.Halved;
 
             ApplyDamageResultListCommand command = new ApplyDamageResultListCommand(_character, _damage, true);
 
@@ -146,7 +143,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.Damage
         [Test]
         public void Cancel_WithSaving()
         {
-            _damage.Elements[0].SituationalDamageModifier = DamageModifierEnum.Canceled;
+            _damage[0].SituationalDamageModifier = DamageModifierEnum.Canceled;
 
             ApplyDamageResultListCommand command = new ApplyDamageResultListCommand(_character, _damage, true);
 
@@ -160,7 +157,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.Damage
         [Test]
         public void NegativeDamage()
         {
-            _damage.Elements[0].Damage.LastRoll = -20;
+            _damage[0].Damage.LastRoll = -20;
 
             ApplyDamageResultListCommand command = new ApplyDamageResultListCommand(_character, _damage, true);
 

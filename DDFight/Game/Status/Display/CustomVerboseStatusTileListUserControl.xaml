@@ -10,7 +10,7 @@
         x:Name="ContainerGrid">
         <ItemsControl 
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-            ItemsSource="{Binding CustomVerboseStatusList.Elements}">
+            ItemsSource="{Binding CustomVerboseStatusList}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <display:CustomVerboseStatusTileUserControl

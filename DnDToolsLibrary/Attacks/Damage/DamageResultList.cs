@@ -22,7 +22,7 @@ namespace DnDToolsLibrary.Attacks.Damage
         public void RefreshDamageAffinityModifier(PlayableEntity newTarget)
         {
             if (newTarget != null)
-                foreach (DamageResult result in Elements)
+                foreach (DamageResult result in this)
                 {
                     result.AffinityModifier = newTarget.DamageAffinities.GetAffinity(result.DamageType).Affinity;
                 }

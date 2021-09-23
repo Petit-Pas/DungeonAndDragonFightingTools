@@ -35,7 +35,7 @@ namespace DDFight.Commands.AttackCommands
             console.AddEntry($"{Target.DisplayName}", fontWeightProvider.Bold);
             console.AddEntry(" takes ");
 
-            foreach (DamageResult dmg in DamageList.Elements)
+            foreach (DamageResult dmg in DamageList)
             {
                 int damage_value = 0;
                 if (dmg.Damage.LastResult > 0)
@@ -76,10 +76,10 @@ namespace DDFight.Commands.AttackCommands
                     }
                 }
 
-                if (i == DamageList.Elements.Count && i != 1)
+                if (i == DamageList.Count && i != 1)
                     console.AddEntry("and ");
                 console.AddEntry($"{damage_value} {dmg.DamageType}", fontWeightProvider.Bold, colorProvider.GetColorByKey(dmg.DamageType.ToString()));
-                console.AddEntry($"{(i == DamageList.Elements.Count ? " damage" : " damage, ")}");
+                console.AddEntry($"{(i == DamageList.Count ? " damage" : " damage, ")}");
                 total += damage_value;
                 i += 1;
             }

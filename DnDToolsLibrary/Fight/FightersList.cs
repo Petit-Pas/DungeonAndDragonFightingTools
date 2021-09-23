@@ -28,7 +28,7 @@ namespace DnDToolsLibrary.Fight
         /// </summary>
         public void Sort()
         {
-            Elements.Sort((x, y) => {
+            this.Sort((x, y) => {
                 int retval = x.Name.CompareTo(y.Name);
                 if (retval != 0)
                     return retval;
@@ -60,7 +60,7 @@ namespace DnDToolsLibrary.Fight
         {
             try
             {
-                if (Elements.SingleOrDefault(x => x.Name == character.Name) == null)
+                if (this.SingleOrDefault(x => x.Name == character.Name) == null)
                     base.AddElementSilent(character);
             }
             catch (Exception err)
@@ -75,7 +75,7 @@ namespace DnDToolsLibrary.Fight
         /// <param name="monster"></param>
         private void add_monster(Monster monster)
         {
-            IEnumerable<PlayableEntity> list = Elements.Where(x => x.Name == monster.Name);
+            IEnumerable<PlayableEntity> list = this.Where(x => x.Name == monster.Name);
             PlayableEntity new_fighter = (PlayableEntity)(monster.Clone());
 
             int i = 0;
@@ -101,7 +101,7 @@ namespace DnDToolsLibrary.Fight
         public void SetTurnOrders()
         {
 
-            Elements.Sort(((x, y) => {
+            this.Sort(((x, y) => {
                 int val = (x.InitiativeRoll + x.Characteristics.GetCharacteristicModifier(CharacteristicsEnum.Dexterity)).CompareTo
                                                 (y.InitiativeRoll + y.Characteristics.GetCharacteristicModifier(CharacteristicsEnum.Dexterity));
                 if (val != 0)
@@ -123,7 +123,7 @@ namespace DnDToolsLibrary.Fight
 
 
             uint i = 1;
-            foreach (PlayableEntity fighter in Elements)
+            foreach (PlayableEntity fighter in this)
             {
                 fighter.TurnOrder = i;
                 i++;
@@ -133,12 +133,12 @@ namespace DnDToolsLibrary.Fight
 
         public void SetTurnOrdersMiddleFight()
         {
-            foreach (PlayableEntity fighter in Elements)
+            foreach (PlayableEntity fighter in this)
             {
                 if (fighter.InitiativeRoll == 0)
                 {
                     fighter.InitiativeRoll = (uint)DiceRoll.Roll("1d20");
-                    foreach (PlayableEntity tmp in Elements)
+                    foreach (PlayableEntity tmp in this)
                     {
                         if (tmp.Name == fighter.Name)
                             tmp.InitiativeRoll = fighter.InitiativeRoll;
@@ -150,7 +150,7 @@ namespace DnDToolsLibrary.Fight
 
         public PlayableEntity GetFighterByDisplayName(string displayName)
         {
-            var result = Elements.FirstOrDefault(x => x.DisplayName == displayName);
+            var result = this.FirstOrDefault(x => x.DisplayName == displayName);
             if (result == null)
                 Console.WriteLine($"WARNING: FightersList could not find a fighter with name {displayName}");
             return result;
@@ -163,7 +163,7 @@ namespace DnDToolsLibrary.Fight
 
         public List<string> GetFightersNames()
         {
-            return Elements.Select(x => x.DisplayName).ToList();
+            return this.Select(x => x.DisplayName).ToList();
         }
     }
 }

@@ -294,7 +294,7 @@ namespace DnDToolsLibrary.Entities
         [XmlIgnore]
         public bool HasSpells
         {
-            get => (Spells.Elements.Count != 0);
+            get => (Spells.Count != 0);
             set
             {
                 NotifyPropertyChanged();
@@ -486,10 +486,10 @@ namespace DnDToolsLibrary.Entities
         {
             Logger.Log("----------");
             Logger.Log(DisplayName + " has " + Hp + " hps");
-            if (CustomVerboseStatusList.Elements.Count != 0)
+            if (CustomVerboseStatusList.Count != 0)
             {
                 Logger.Log("it has the statuses: ");
-                foreach (CustomVerboseStatus status in CustomVerboseStatusList.Elements)
+                foreach (CustomVerboseStatus status in CustomVerboseStatusList)
                 {
                     Logger.Log("\t- " + status.Header);
                 }
@@ -529,7 +529,7 @@ namespace DnDToolsLibrary.Entities
             Characteristics = (CharacteristicList)to_copy.Characteristics.Clone();
             DamageAffinities = (DamageTypeAffinityList)to_copy.DamageAffinities.Clone();
             HitAttacks = (HitAttackTemplateList)to_copy.HitAttacks.Clone();
-            foreach (HitAttackTemplate atk in HitAttacks.Elements)
+            foreach (HitAttackTemplate atk in HitAttacks)
             {
                 atk.Owner = this;
             }

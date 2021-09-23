@@ -35,7 +35,7 @@ namespace DDFight.Game.Status.Display
                 typeof(OnHitStatusListEditableUserControl));
         private void EditableOnHitStatusList_Loaded(object sender, RoutedEventArgs e)
         {
-            StatusListControl.ItemsSource = data_context.Elements;
+            StatusListControl.ItemsSource = data_context;
         }
 
         private void AddStatusButton_Click(object sender, RoutedEventArgs e)

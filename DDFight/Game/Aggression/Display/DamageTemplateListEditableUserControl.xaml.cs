@@ -42,7 +42,7 @@ namespace DDFight.Controlers.Game.Attacks.DamageListControls
 
         private void refresh_damage_list()
         {
-            DamageListView.ItemsSource = data_context.Elements;
+            DamageListView.ItemsSource = data_context;
         }
 
         private void AddDamage_Button_Click(object sender, RoutedEventArgs e)

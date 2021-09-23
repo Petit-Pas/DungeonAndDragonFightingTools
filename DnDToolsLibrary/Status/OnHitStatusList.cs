@@ -21,7 +21,7 @@ namespace DnDToolsLibrary.Status
             set
             {
                 _hasSavingThrow = value;
-                foreach (OnHitStatus status in Elements)
+                foreach (OnHitStatus status in this)
                 {
                     status.HasSpellSaving = value;
                 }

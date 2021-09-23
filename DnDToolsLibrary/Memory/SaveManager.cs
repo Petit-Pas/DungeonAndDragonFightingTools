@@ -134,10 +134,10 @@ namespace DnDToolsLibrary.Memory
         /// <param name="subfolder"></param>
         public static void SaveGenericList<T>(GenericList<T> genericList, string subfolder = null) where T : class, ICloneable, INameable, new()
         {
-            if (genericList.Elements.Count == 0)
+            if (genericList.Count == 0)
                 return;
             if (subfolder == null)
-                subfolder = get_subfolder<T>(genericList.Elements[0]);
+                subfolder = get_subfolder<T>(genericList[0]);
 
             XmlSerializer serializer = new XmlSerializer(typeof(T));
             string folder_name = main_config_folder + subfolder;
@@ -145,7 +145,7 @@ namespace DnDToolsLibrary.Memory
             if (!Directory.Exists(folder_name))
                 Directory.CreateDirectory(folder_name);
 
-            foreach (T elem in genericList.Elements)
+            foreach (T elem in genericList)
             {
                 StreamWriter writer = null;
                 try
@@ -161,7 +161,7 @@ namespace DnDToolsLibrary.Memory
                 writer?.Close();
             }
             //genericList.Elements.Select(x => x.Name).ToList();
-            CleanFolder(subfolder, genericList.Elements.Select(x => folder_name + x.Name + ".xml").ToList());
+            CleanFolder(subfolder, genericList.Select(x => folder_name + x.Name + ".xml").ToList());
         }
 
         /// <summary>

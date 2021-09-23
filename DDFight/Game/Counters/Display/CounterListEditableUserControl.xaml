@@ -37,7 +37,7 @@
 
             <ListBox
                 x:Name="CounterListControl"
-                ItemsSource="{Binding Elements}"
+                ItemsSource="{Binding}"
                 Margin="5"
                 SelectionChanged="CounterListControl_SelectionChanged"
                 KeyDown="CounterListControl_KeyDown"

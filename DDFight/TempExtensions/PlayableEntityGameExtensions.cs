@@ -35,7 +35,7 @@ namespace TempExtensionsPlayableEntity
             playableEntity.InvokeTurnStarted(new StartNewTurnEventArgs()
             {
                 Character = playableEntity,
-                CharacterIndex = FightersList.Instance.Elements.IndexOf(playableEntity),
+                CharacterIndex = FightersList.Instance.IndexOf(playableEntity),
             });
         }
 
@@ -48,7 +48,7 @@ namespace TempExtensionsPlayableEntity
             playableEntity.InvokeTurnEnded(new TurnEndedEventArgs()
             {
                 Character = playableEntity,
-                CharacterIndex = FightersList.Instance.Elements.IndexOf(playableEntity),
+                CharacterIndex = FightersList.Instance.IndexOf(playableEntity),
             });
         }
 
@@ -168,7 +168,7 @@ namespace TempExtensionsPlayableEntity
             console.AddEntry($"{playableEntity.DisplayName}", fontWeightProvider.Bold);
             console.AddEntry(" takes ");
 
-            foreach (DamageResult dmg in damages.Elements)
+            foreach (DamageResult dmg in damages)
             {
                 int damage_value = 0;
                 if (dmg.Damage.LastResult > 0)
@@ -209,10 +209,10 @@ namespace TempExtensionsPlayableEntity
                     }
                 }
 
-                if (i == damages.Elements.Count && i != 1)
+                if (i == damages.Count && i != 1)
                     console.AddEntry("and ");
                 console.AddEntry($"{damage_value} {dmg.DamageType}", fontWeightProvider.Bold, fontColorProvider.GetColorByKey(dmg.DamageType.ToString()));
-                console.AddEntry($"{(i == damages.Elements.Count ? " damage" : " damage, ")}");
+                console.AddEntry($"{(i == damages.Count ? " damage" : " damage, ")}");
                 total += damage_value;
                 i += 1;
             }

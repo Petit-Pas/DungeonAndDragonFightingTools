@@ -5,6 +5,7 @@ using DnDToolsLibrary.Characteristics;
 using DnDToolsLibrary.Dice;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Status;
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -16,6 +17,9 @@ namespace DDFight.Game.Status.Display
     /// <summary>
     /// Logique d'interaction pour OnHitStatusApplyWindow.xaml
     /// </summary>
+    /// 
+
+    // TODO the was this control works is absolutely awful and it should be changed when switching to commands
     public partial class OnHitStatusApplyWindow : Window, INotifyPropertyChanged
     {
         private ICustomConsole console = DIContainer.GetImplementation<ICustomConsole>();
@@ -82,7 +86,7 @@ namespace DDFight.Game.Status.Display
                 refresh_saving_control();
                 refresh_validate_button();
             }
-            foreach (DamageTemplate dmg in data_context.OnApplyDamageList.Elements)
+            foreach (DamageTemplate dmg in data_context.OnApplyDamageList)
             {
                 dmg.Damage.PropertyChanged += Dmg_PropertyChanged;
             }
@@ -102,18 +106,23 @@ namespace DDFight.Game.Status.Display
         {
             //TODO crach tibo
             ValidateButtonControl.IsEnabled = true;
-            if (((SavingThrow)SavingThrowControl.DataContext).SavingRoll == 0)
-                ValidateButtonControl.IsEnabled = false;
-            foreach (DamageTemplate dmg in data_context.OnApplyDamageList.Elements)
+            ;
+            try
             {
-                if (dmg.Damage.LastRoll == 0)
+                if (((SavingThrow)SavingThrowControl.DataContext).SavingRoll == 0)
                     ValidateButtonControl.IsEnabled = false;
+                foreach (DamageTemplate dmg in data_context.OnApplyDamageList)
+                {
+                    if (dmg.Damage.LastRoll == 0)
+                        ValidateButtonControl.IsEnabled = false;
+                }
             }
+            catch (Exception) { }
         }
 
         private void refresh_saving_control()
         {
-            if (data_context != null && data_context.HasApplyCondition)
+            if (data_context != null && (data_context.HasApplyCondition || !first_application))
             {
                 SavingThrowControl.DataContext = data_context.GetSavingThrow(Applicant, Target);
                 SavingThrowControl.Visibility = Visibility.Visible;
@@ -237,7 +246,7 @@ namespace DDFight.Game.Status.Display
             {
                 this.RollRollableChildren();
                 e.Handled = true;
-                foreach (DamageTemplate dmg in data_context.OnApplyDamageList.Elements)
+                foreach (DamageTemplate dmg in data_context.OnApplyDamageList)
                 {
                     if (dmg.Damage.LastRoll == 0)
                         dmg.Damage.Roll();

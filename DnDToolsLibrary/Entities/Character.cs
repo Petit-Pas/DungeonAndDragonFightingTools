@@ -55,9 +55,9 @@ namespace DnDToolsLibrary.Entities
             if (IsTransformed)
                 TransformBack();
             InitiativeRoll = 0;
-            for (int i = 0; i != CustomVerboseStatusList.Elements.Count; i++)
+            for (int i = 0; i != CustomVerboseStatusList.Count; i++)
             {
-                CustomVerboseStatus status = CustomVerboseStatusList.Elements.ElementAt(i);
+                CustomVerboseStatus status = CustomVerboseStatusList.ElementAt(i);
                 if (status.GetType() == typeof(OnHitStatus))
                 {
                     OnHitStatus onHit = (OnHitStatus)status;

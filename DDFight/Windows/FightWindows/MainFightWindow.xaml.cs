@@ -31,9 +31,9 @@ namespace DDFight.Windows.FightWindows
 
         private void setupAttacksOwner()
         {
-            foreach (PlayableEntity tmp in data_context.FightContext.FightersList.Elements)
+            foreach (PlayableEntity tmp in data_context.FightContext.FightersList)
             {
-                foreach (HitAttackTemplate atk in tmp.HitAttacks.Elements)
+                foreach (HitAttackTemplate atk in tmp.HitAttacks)
                 {
                     atk.Owner = tmp;
                 }
@@ -49,7 +49,7 @@ namespace DDFight.Windows.FightWindows
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            foreach (PlayableEntity tmp in GlobalContext.Context.FightContext.FightersList.Elements)
+            foreach (PlayableEntity tmp in GlobalContext.Context.FightContext.FightersList)
             {
                 tmp.HasAction = !tmp.HasAction;
             }

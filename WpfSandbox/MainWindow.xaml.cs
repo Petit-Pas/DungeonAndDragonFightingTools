@@ -68,18 +68,16 @@ namespace BindValidation
 
             DamageTemplateList list = new DamageTemplateList()
             {
-                Elements = new ObservableCollection<DamageTemplate>() {
-                    new DamageTemplate()
-                    {
-                        Damage = new DiceRoll("2d6+3"),
-                        DamageType = DamageTypeEnum.Fire,
-                        SituationalDamageModifier = DamageModifierEnum.Halved,
-                    },
-                    new DamageTemplate()
-                    {
-                        Damage = new DiceRoll("1d10+8"),
-                        DamageType = DamageTypeEnum.Cold,
-                    },
+                new DamageTemplate()
+                {
+                    Damage = new DiceRoll("2d6+3"),
+                    DamageType = DamageTypeEnum.Fire,
+                    SituationalDamageModifier = DamageModifierEnum.Halved,
+                },
+                new DamageTemplate()
+                {
+                    Damage = new DiceRoll("1d10+8"),
+                    DamageType = DamageTypeEnum.Cold,
                 },
             };
 
@@ -135,11 +133,11 @@ namespace BindValidation
 
 
             DamageResultList damageResultList = list.GetResultList();
-            foreach (DamageResult result in damageResultList.Elements)
+            foreach (DamageResult result in damageResultList)
             {
                 result.LinkedToSaving = false;
             }
-            damageResultList.Elements[0].AffinityModifier = DamageAffinityEnum.Resistant;
+            damageResultList[0].AffinityModifier = DamageAffinityEnum.Resistant;
 
 
             DamageResultListQuery command = new DamageResultListQuery(damageResultList, "Because very good reasons");
@@ -212,45 +210,39 @@ namespace BindValidation
                                 "the effect ends for it.",
                 DisplayName = "Slowed",
                 OnApplyDamageList = new DamageTemplateList() {
-                    Elements = new ObservableCollection<DamageTemplate>()
+                    new DamageTemplate()
                     {
-                        new DamageTemplate()
-                        {
-                            Damage = new DiceRoll("1d4+2"),
-                            DamageType = DamageTypeEnum.Necrotic,
-                            SituationalDamageModifier = DamageModifierEnum.Halved,
-                        },
-                        new DamageTemplate()
-                        {
-                            Damage = new DiceRoll("2d5+1"),
-                            DamageType = DamageTypeEnum.Force,
-                            SituationalDamageModifier = DamageModifierEnum.Canceled,
-                        },
-                        new DamageTemplate()
-                        {
-                            Damage = new DiceRoll("3d3+3"),
-                            DamageType = DamageTypeEnum.Acid,
-                            SituationalDamageModifier = DamageModifierEnum.Normal,
-                        },
-                    }
+                        Damage = new DiceRoll("1d4+2"),
+                        DamageType = DamageTypeEnum.Necrotic,
+                        SituationalDamageModifier = DamageModifierEnum.Halved,
+                    },
+                    new DamageTemplate()
+                    {
+                        Damage = new DiceRoll("2d5+1"),
+                        DamageType = DamageTypeEnum.Force,
+                        SituationalDamageModifier = DamageModifierEnum.Canceled,
+                    },
+                    new DamageTemplate()
+                    {
+                        Damage = new DiceRoll("3d3+3"),
+                        DamageType = DamageTypeEnum.Acid,
+                        SituationalDamageModifier = DamageModifierEnum.Normal,
+                    },
                 },
                 DotDamageList = new DotTemplateList()
                 {
-                    Elements = new ObservableCollection<DotTemplate>()
+                    new DotTemplate()
                     {
-                        new DotTemplate()
-                        {
-                            Damage = new DiceRoll("2d6"),
-                            TriggersStartOfTurn = true,
-                            DamageType = DamageTypeEnum.Fire,
-                        },
-                        new DotTemplate()
-                        {
-                            Damage = new DiceRoll("1d6+3"),
-                            TriggersStartOfTurn = true,
-                            DamageType = DamageTypeEnum.Cold,
-                        },
-                    }
+                        Damage = new DiceRoll("2d6"),
+                        TriggersStartOfTurn = true,
+                        DamageType = DamageTypeEnum.Fire,
+                    },
+                    new DotTemplate()
+                    {
+                        Damage = new DiceRoll("1d6+3"),
+                        TriggersStartOfTurn = true,
+                        DamageType = DamageTypeEnum.Cold,
+                    },
                 },
                 HasApplyCondition = true,
                 Header = "Slowed",

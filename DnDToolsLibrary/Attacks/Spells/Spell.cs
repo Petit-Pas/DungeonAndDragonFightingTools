@@ -262,9 +262,9 @@ namespace DnDToolsLibrary.Attacks.Spells
 
             for (int i = castLevel - this.BaseLevel; i > 0; i -= 1)
             {
-                foreach (DamageTemplate damageTemplate in AdditionalHitDamagePerLevel.Elements)
+                foreach (DamageTemplate damageTemplate in AdditionalHitDamagePerLevel)
                 {
-                    DamageResult result = template.HitDamage.Elements.FirstOrDefault(x => x.IsSameKind(damageTemplate));
+                    DamageResult result = template.HitDamage.FirstOrDefault(x => x.IsSameKind(damageTemplate));
                     if (result != null)
                         result.Add(damageTemplate);
                     else
@@ -272,7 +272,7 @@ namespace DnDToolsLibrary.Attacks.Spells
                 }
             }
 
-            foreach (DamageResult result in template.HitDamage.Elements)
+            foreach (DamageResult result in template.HitDamage)
             {
                 result.LinkedToSaving = false;
             }
@@ -300,10 +300,10 @@ namespace DnDToolsLibrary.Attacks.Spells
 
             for (int i = additional_levels; i > 0; i -= 1)
             {
-                foreach (DamageTemplate damageTemplate in AdditionalHitDamagePerLevel.Elements)
+                foreach (DamageTemplate damageTemplate in AdditionalHitDamagePerLevel)
                 {
                     bool added = false;
-                    foreach (DamageResult onHitTemplate in template.HitDamage.Elements)
+                    foreach (DamageResult onHitTemplate in template.HitDamage)
                     {
                         if (onHitTemplate.IsSameKind(damageTemplate))
                         {
@@ -335,9 +335,9 @@ namespace DnDToolsLibrary.Attacks.Spells
 
             for (int i = castLevel - this.BaseLevel; i > 0; i -= 1)
             {
-                foreach (DamageTemplate damageTemplate in AdditionalHitDamagePerLevel.Elements)
+                foreach (DamageTemplate damageTemplate in AdditionalHitDamagePerLevel)
                 {
-                    DamageResult result = template.HitDamage.Elements.FirstOrDefault(x => x.IsSameKind(damageTemplate));
+                    DamageResult result = template.HitDamage.FirstOrDefault(x => x.IsSameKind(damageTemplate));
                     if (result != null)
                         result.Add(damageTemplate);
                     else
@@ -345,7 +345,7 @@ namespace DnDToolsLibrary.Attacks.Spells
                 }
             }
 
-            foreach (DamageResult result in template.HitDamage.Elements)
+            foreach (DamageResult result in template.HitDamage)
             {
                 result.LinkedToSaving = this.HasSavingThrow;
             }
@@ -379,10 +379,10 @@ namespace DnDToolsLibrary.Attacks.Spells
 
             for (int i = additional_levels; i > 0; i -= 1)
             {
-                foreach (DamageTemplate damageTemplate in AdditionalHitDamagePerLevel.Elements)
+                foreach (DamageTemplate damageTemplate in AdditionalHitDamagePerLevel)
                 {
                     bool added = false;
-                    foreach (DamageResult onHitTemplate in template.HitDamage.Elements)
+                    foreach (DamageResult onHitTemplate in template.HitDamage)
                     {
                         if (onHitTemplate.IsSameKind(damageTemplate))
                         {

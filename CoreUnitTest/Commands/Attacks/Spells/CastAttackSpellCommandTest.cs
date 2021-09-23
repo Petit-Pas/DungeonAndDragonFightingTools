@@ -28,7 +28,7 @@ namespace CoreUnitTest.Commands.Attacks.Spells
         public void MainSetup()
         {
             _mediator = DIContainer.GetImplementation<IMediator>();
-            _character = FightersList.Instance.Elements[0];
+            _character = FightersList.Instance[0];
         }
 
         [Test]
@@ -38,17 +38,14 @@ namespace CoreUnitTest.Commands.Attacks.Spells
             AttackSpellResults results = new AttackSpellResults();
             results.Add(new NewAttackSpellResult() { 
                 Target = _character,
-                HitDamage = new DamageResultList()
-                {
-                    Elements = new ObservableCollection<DamageResult>() {
-                        // using D1 to remove random factor
-                        new DamageResult("1d1+9", DamageTypeEnum.Fire),
-                        new DamageResult("1d1+4", DamageTypeEnum.Cold),
-                        new DamageResult("1d1+9", DamageTypeEnum.Poison),
-                    },
+                HitDamage = new DamageResultList() {
+                    // using D1 to remove random factor
+                    new DamageResult("1d1+9", DamageTypeEnum.Fire),
+                    new DamageResult("1d1+4", DamageTypeEnum.Cold),
+                    new DamageResult("1d1+9", DamageTypeEnum.Poison),
                 },
             });
-            foreach (DamageResult dmg in results[0].HitDamage.Elements)
+            foreach (DamageResult dmg in results[0].HitDamage)
                 dmg.Damage.Roll();
             ValidableResponse<AttackSpellResults> test = new ValidableResponse<AttackSpellResults>(true, results);
             Mock<IMediatorHandler> mock = new Mock<IMediatorHandler>();

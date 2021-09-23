@@ -10,7 +10,7 @@ namespace DnDToolsLibrary.Attacks.Damage
         {
             DamageResultList result = new DamageResultList();
 
-            foreach (DamageTemplate template in Elements)
+            foreach (DamageTemplate template in this)
             {
                 result.AddElementSilent(new DamageResult(template, linked_to_saving));
             }

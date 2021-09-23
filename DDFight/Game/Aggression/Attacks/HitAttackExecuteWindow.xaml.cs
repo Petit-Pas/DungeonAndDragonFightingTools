@@ -45,7 +45,7 @@ namespace DDFight.Game.Aggression.Attacks
             {
                 AttackResult.PropertyChanged -= Context_PropertyChanged;
                 AttackResult.RollResult.PropertyChanged -= Context_PropertyChanged;
-                foreach (DamageResult dmg in AttackResult.DamageList.Elements)
+                foreach (DamageResult dmg in AttackResult.DamageList)
                 {
                     dmg.PropertyChanged -= Context_PropertyChanged;
                 }
@@ -58,7 +58,7 @@ namespace DDFight.Game.Aggression.Attacks
             {
                 AttackResult.PropertyChanged += Context_PropertyChanged;
                 AttackResult.RollResult.PropertyChanged += Context_PropertyChanged;
-                foreach (DamageResult dmg in AttackResult.DamageList.Elements)
+                foreach (DamageResult dmg in AttackResult.DamageList)
                 {
                     dmg.PropertyChanged += Context_PropertyChanged;
                 }

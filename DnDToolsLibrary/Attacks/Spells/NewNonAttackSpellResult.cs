@@ -168,7 +168,7 @@ namespace DnDToolsLibrary.Attacks.Spells
         {
             if (e.PropertyName == nameof(Saving.SavingRoll))
             {
-                foreach (DamageResult result in HitDamage.Elements)
+                foreach (DamageResult result in HitDamage)
                 {
                     result.LastSavingWasSuccesfull = Saving.IsSuccesful;
                 }

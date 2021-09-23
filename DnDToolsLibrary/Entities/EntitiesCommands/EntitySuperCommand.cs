@@ -21,7 +21,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands
 
         public PlayableEntity GetEntity()
         {
-            PlayableEntity result = FightersList.Instance.Elements.FirstOrDefault(x => x.DisplayName == _entityName);
+            PlayableEntity result = FightersList.Instance.FirstOrDefault(x => x.DisplayName == _entityName);
 
             if (result == null)
             {

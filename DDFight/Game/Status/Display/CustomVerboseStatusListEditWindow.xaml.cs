@@ -23,7 +23,7 @@ namespace DDFight.Game.Status.Display
 
         private void CustomVerboseStatusListEditWindow_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            StatusListControl.EntityList = data_context.Elements;
+            StatusListControl.EntityList = data_context;
             //data_context.Validated = false;
         }
 
