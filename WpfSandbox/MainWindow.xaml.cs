@@ -13,6 +13,7 @@ using DnDToolsLibrary.Attacks.HitAttacks;
 using DnDToolsLibrary.Attacks.Spells;
 using DnDToolsLibrary.Characteristics;
 using DnDToolsLibrary.Dice;
+using DnDToolsLibrary.Dice.DiceCommancs.SavingThrowCommands.SavingThrowQueries;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Fight;
 using DnDToolsLibrary.Status;
@@ -121,10 +122,18 @@ namespace BindValidation
             roger.DamageAffinities.GetAffinity(DamageTypeEnum.Fire).Affinity = DamageAffinityEnum.Resistant;
             roger.CA = 12;
 
+            SavingThrowQuery savingQuery = new SavingThrowQuery(new SavingThrow() { 
+                Characteristic = CharacteristicsEnum.Intelligence,
+                Difficulty = 15,
+                TargetName = "Roger",
+            }, "A saving for numerous reasons");
+            IMediator mediator = DIContainer.GetImplementation<IMediator>();
+            mediator.Execute(savingQuery);
+
+
 
             CastSpellCommand command_spell = new CastSpellCommand(provider.GetFighterByDisplayName("Roger"), spell);
-            IMediator mediator = DIContainer.GetImplementation<IMediator>();
-
+            
             //mediator.Execute(command_spell);
             command_spell.Spell.BaseLevel = 1;
             command_spell.Spell.AmountTargets = 15;

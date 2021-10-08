@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 
 namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellCommands
 {
-    public class CastSpellCommand : BaseSuperCommand
+    public class CastSpellCommand : SuperCommandBase
     {
         [XmlAttribute]
         public string CasterName { get; set; } = null;

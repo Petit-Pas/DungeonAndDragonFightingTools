@@ -11,19 +11,19 @@ namespace BaseToolsLibrary.Mediator
     ///     Base handler for the BaseSuperCommands implementation
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class BaseSuperHandler<TCommand, TResponse> : BaseMediatorHandler<TCommand, TResponse>
-        where TCommand : BaseSuperCommand
+    public abstract class SuperCommandHandlerBase<TCommand, TResponse> : BaseMediatorHandler<TCommand, TResponse>
+        where TCommand : SuperCommandBase
         where TResponse : class, IMediatorCommandResponse
     {
         protected Lazy<IMediator> _mediator = new Lazy<IMediator>(() => DIContainer.GetImplementation<IMediator>());
 
-        public BaseSuperHandler()
+        public SuperCommandHandlerBase()
         {
         }
 
         public override void Undo(IMediatorCommand command)
         {
-            BaseSuperCommand _command = this.cast_command(command);
+            SuperCommandBase _command = this.castCommand(command);
             
             foreach (IMediatorCommand inner_command in _command.InnerCommands)
             {

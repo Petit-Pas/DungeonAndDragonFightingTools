@@ -13,13 +13,13 @@ using System.Collections.Generic;
 
 namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellCommands
 {
-    public class CastSpellHandler : BaseSuperHandler<CastSpellCommand, ValidableResponse<NoResponse>>
+    public class CastSpellHandler : SuperCommandHandlerBase<CastSpellCommand, ValidableResponse<NoResponse>>
     {
         private static Lazy<IFigtherProvider> _fighterProvider = new Lazy<IFigtherProvider> (() => DIContainer.GetImplementation<IFigtherProvider>());
 
         public override ValidableResponse<NoResponse> Execute(IMediatorCommand command)
         {
-            CastSpellCommand _command = base.cast_command(command);
+            CastSpellCommand _command = base.castCommand(command);
             PlayableEntity caster = _fighterProvider.Value.GetFighterByDisplayName(_command.CasterName);
 
             if (spellLevelSelected(_command) == false)

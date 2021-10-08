@@ -13,7 +13,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.Heal
 
         public override NoResponse Execute(IMediatorCommand command)
         {
-            HealCommand _command = this.cast_command(command);
+            HealCommand _command = this.castCommand(command);
             PlayableEntity target = _command.GetEntity();
 
             if (_command.Amount < 0)
@@ -37,7 +37,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.Heal
 
         public override void Undo(IMediatorCommand command)
         {
-            HealCommand _command = this.cast_command(command);
+            HealCommand _command = this.castCommand(command);
             
             if (false == _command.To.HasValue || false == _command.From.HasValue)
             {

@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellCommands
 {
-    public class CastAttackSpellHandler : BaseSuperHandler<CastAttackSpellCommand, ValidableResponse<NoResponse>>
+    public class CastAttackSpellHandler : SuperCommandHandlerBase<CastAttackSpellCommand, ValidableResponse<NoResponse>>
     {
         private static Lazy<IFigtherProvider> _fighterProvider = new Lazy<IFigtherProvider>(() => DIContainer.GetImplementation<IFigtherProvider>());
 

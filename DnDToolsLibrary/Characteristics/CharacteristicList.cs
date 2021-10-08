@@ -22,6 +22,19 @@ namespace DnDToolsLibrary.Characteristics
                 initCharacteristicsList();
         }
 
+        public CharacteristicList(int str, int dex, int con, int _int, int wis, int cha)
+        {
+            _characteristicsList = new List<Characteristic>
+            {
+                new Characteristic(CharacteristicsEnum.Strength, str),
+                new Characteristic(CharacteristicsEnum.Dexterity, dex),
+                new Characteristic(CharacteristicsEnum.Constitution, con),
+                new Characteristic(CharacteristicsEnum.Intelligence, _int),
+                new Characteristic(CharacteristicsEnum.Wisdom, wis),
+                new Characteristic(CharacteristicsEnum.Charisma, cha)
+            };
+        }
+
         private void initCharacteristicsList()
         {
             _characteristicsList = new List<Characteristic>

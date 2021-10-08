@@ -417,6 +417,17 @@ namespace DnDToolsLibrary.Entities
         }
         private CustomVerboseStatusList _customVerboseStatusList = new CustomVerboseStatusList();
 
+        public StatusReferenceList AffectingStatusList 
+        {
+            get => _affectingStatusList;
+            set
+            {
+                _affectingStatusList = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private StatusReferenceList _affectingStatusList = new StatusReferenceList();
+
         #endregion AffectingStatus
 
         #region Transformation

@@ -7,7 +7,7 @@ using System;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.TakeDamage
 {
-    public class TakeDamageHandler : BaseSuperHandler<TakeDamageCommand, NoResponse>
+    public class TakeDamageHandler : SuperCommandHandlerBase<TakeDamageCommand, NoResponse>
     {
         private static Lazy<ICustomConsole> console = new Lazy<ICustomConsole>(() => DIContainer.GetImplementation<ICustomConsole>());
         private static Lazy<IFontWeightProvider> fontWeightProvider = new Lazy<IFontWeightProvider>(() => DIContainer.GetImplementation<IFontWeightProvider>());
@@ -15,7 +15,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.TakeDamage
 
         public override NoResponse Execute(IMediatorCommand command)
         {
-            TakeDamageCommand _command = base.cast_command(command);
+            TakeDamageCommand _command = base.castCommand(command);
 
             if (_command.Amount == 0)
                 return MediatorCommandResponses.NoResponse;

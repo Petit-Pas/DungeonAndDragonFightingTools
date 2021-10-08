@@ -10,7 +10,7 @@ using static DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamage
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageResultList
 {
-    public class ApplyDamageResultListHandler : BaseSuperHandler<ApplyDamageResultListCommand, ApplyDamageResultListResponse>
+    public class ApplyDamageResultListHandler : SuperCommandHandlerBase<ApplyDamageResultListCommand, ApplyDamageResultListResponse>
     {
         private static Lazy<ICustomConsole> console = new Lazy<ICustomConsole>(() => DIContainer.GetImplementation<ICustomConsole>());
         private static Lazy<IFontWeightProvider> fontWeightProvider = new Lazy<IFontWeightProvider>(() => DIContainer.GetImplementation<IFontWeightProvider>());
@@ -51,7 +51,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageRes
 
         public override ApplyDamageResultListResponse Execute(IMediatorCommand command)
         {
-            ApplyDamageResultListCommand _command = base.cast_command(command);
+            ApplyDamageResultListCommand _command = base.castCommand(command);
 
             if (false == _command.DamageList.Any())
                 return null;

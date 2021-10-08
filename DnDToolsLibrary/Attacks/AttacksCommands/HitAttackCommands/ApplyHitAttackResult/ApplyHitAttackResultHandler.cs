@@ -4,11 +4,11 @@ using System;
 
 namespace DnDToolsLibrary.Attacks.AttacksCommands.HitAttackCommands.ApplyHitAttackResult
 {
-    public class ApplyHitAttackResultHandler : BaseSuperHandler<ApplyHitAttackResultCommand, NoResponse>
+    public class ApplyHitAttackResultHandler : SuperCommandHandlerBase<ApplyHitAttackResultCommand, NoResponse>
     {
         public override NoResponse Execute(IMediatorCommand command)
         {
-            ApplyHitAttackResultCommand _command = base.cast_command(command);
+            ApplyHitAttackResultCommand _command = base.castCommand(command);
 
             if (_command.HitAttackResult.RollResult.Hits)
             {

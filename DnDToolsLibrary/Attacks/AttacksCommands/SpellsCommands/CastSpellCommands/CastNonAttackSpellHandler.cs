@@ -4,11 +4,13 @@ using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.NonAttackSpellResul
 using DnDToolsLibrary.Attacks.Spells;
 using DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageResultList;
 using DnDToolsLibrary.Fight;
+using DnDToolsLibrary.Status;
+using DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands;
 using System;
 
 namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellCommands
 {
-    public class CastNonAttackSpellHandler : BaseSuperHandler<CastNonAttackSpellCommand, ValidableResponse<NoResponse>>
+    public class CastNonAttackSpellHandler : SuperCommandHandlerBase<CastNonAttackSpellCommand, ValidableResponse<NoResponse>>
     {
         private static Lazy<IFigtherProvider> _fighterProvider = new Lazy<IFigtherProvider>(() => DIContainer.GetImplementation<IFigtherProvider>());
 
@@ -23,6 +25,14 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
                     ApplyDamageResultListCommand damageCommand = new ApplyDamageResultListCommand(spellResult.Target, spellResult.HitDamage);
                     base._mediator.Value.Execute(damageCommand);
                     _command.PushToInnerCommands(damageCommand);
+
+                    foreach (OnHitStatus status in spellResult.AppliedStatusList)
+                    {
+                        TryApplyStatusCommand statusCommand = new TryApplyStatusCommand(spellResult.CasterName, spellResult.TargetName, status, spellResult.Saving);
+                        base._mediator.Value.Execute(statusCommand);
+                        _command.PushToInnerCommands(statusCommand);
+                    }
+
                     // TODO
                     // add On hit status
                 }

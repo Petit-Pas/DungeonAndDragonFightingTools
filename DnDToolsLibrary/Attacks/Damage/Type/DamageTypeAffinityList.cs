@@ -10,6 +10,15 @@ namespace DnDToolsLibrary.Attacks.Damage.Type
 {
     public class DamageTypeAffinityList : ICloneable, INotifyPropertyChanged
     {
+        public static DamageTypeAffinityList Default()
+        {
+            DamageTypeAffinityList result = new DamageTypeAffinityList();
+
+            result.initAffinities();
+
+            return result;
+        }
+
         public DamageTypeAffinityList()
         {
             if (!Global.Loading)

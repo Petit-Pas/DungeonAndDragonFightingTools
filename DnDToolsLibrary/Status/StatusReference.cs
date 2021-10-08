@@ -1,31 +1,46 @@
 ﻿using BaseToolsLibrary;
 using BaseToolsLibrary.Memory;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace DnDToolsLibrary.Status
 {
-    public class CustomVerboseStatus : INotifyPropertyChanged, ICopyAssignable, INameable, IEquivalentComparable<CustomVerboseStatus>
+    public class StatusReference : INameable, INotifyPropertyChanged, ICopyAssignable
     {
-        public CustomVerboseStatus() { }
+        public StatusReference()
+        {
+        }
+
+        // WARNING, this creates the ID reference on the status if it doesn't exist
+        public StatusReference(OnHitStatus status)
+        {
+            if (status.Id == default)
+                status.Id = Guid.NewGuid();
+            ActualStatusReference = status.Id;
+            Header = status.Header;
+            ToolTip = status.ToolTip;
+        }
 
         [XmlAttribute]
-        public Guid Id 
+        public Guid ActualStatusReference 
         {
-            get => _id;
+            get => _actualStatusReference;
             set
             {
-                _id = value;
+                _actualStatusReference = value;
                 NotifyPropertyChanged();
             }
         }
-        private Guid _id;
+        private Guid _actualStatusReference;
 
         [XmlAttribute]
-        // Should be 1 single world
-        public string Header
+        public string Header 
         {
             get => _header;
             set
@@ -34,11 +49,10 @@ namespace DnDToolsLibrary.Status
                 NotifyPropertyChanged();
             }
         }
-        private string _header = "";
+        private string _header;
 
         [XmlElement]
-        // Should be a short sentence explaining the condition
-        public string ToolTip
+        public string ToolTip 
         {
             get => _toolTip;
             set
@@ -47,20 +61,7 @@ namespace DnDToolsLibrary.Status
                 NotifyPropertyChanged();
             }
         }
-        private string _toolTip = "";
-
-        [XmlElement]
-        // Should be a long description explaining both condition and the way it gets removed
-        public string Description
-        {
-            get => _description;
-            set
-            {
-                _description = value;
-                NotifyPropertyChanged();
-            }
-        }
-        private string _description = "";
+        private string _toolTip;
 
         #region IListable
         [XmlIgnore]
@@ -69,39 +70,28 @@ namespace DnDToolsLibrary.Status
         public string Name { get => Header; set { } }
         #endregion IListable
 
-        public bool IsEquivalentTo(CustomVerboseStatus toCompare)
-        {
-            if (Description != toCompare.Description)
-                return false;
-            if (Header != toCompare.Header)
-                return false;
-            if (ToolTip != toCompare.ToolTip)
-                return false;
-            return true;
-        }
-
         #region ICloneable
 
-        protected void init_copy(CustomVerboseStatus to_copy)
+        protected void init_copy(StatusReference to_copy)
         {
-            Description = (string)to_copy.Description.Clone();
+            ActualStatusReference = to_copy.ActualStatusReference;
             Header = (string)to_copy.Header.Clone();
             ToolTip = (string)to_copy.ToolTip.Clone();
         }
 
-        public CustomVerboseStatus (CustomVerboseStatus to_copy)
+        public StatusReference(StatusReference to_copy)
         {
             init_copy(to_copy);
         }
 
         public virtual object Clone()
         {
-            return new CustomVerboseStatus(this);
+            return new StatusReference(this);
         }
 
         public virtual void CopyAssign(object to_copy)
         {
-            if (to_copy is CustomVerboseStatus status)
+            if (to_copy is StatusReference status)
             {
                 init_copy(status);
             }
@@ -129,5 +119,7 @@ namespace DnDToolsLibrary.Status
         }
 
         #endregion
+
+
     }
 }

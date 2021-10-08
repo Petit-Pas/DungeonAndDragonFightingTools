@@ -1,4 +1,5 @@
-﻿using WpfDnDCommandHandlers;
+﻿using DnDToolsLibrary.Dice.DiceCommancs.SavingThrowCommands.SavingThrowQueries;
+using WpfDnDCommandHandlers;
 using WpfDnDCommandHandlers.AttackQueries.DamageQueries;
 using WpfDnDCommandHandlers.AttackQueries.DamageQueries.DamageResultListQueries;
 using WpfDnDCommandHandlers.AttackQueries.SpellQueries.AttackSpellResultsQueries;
@@ -6,6 +7,7 @@ using WpfDnDCommandHandlers.AttackQueries.SpellQueries.NonAttackSpellResultsQuer
 using WpfDnDCommandHandlers.AttackQueries.SpellQueries.SpellLevelQueries.CantripLevelQueries;
 using WpfDnDCommandHandlers.AttackQueries.SpellQueries.SpellLevelQueries.GetInputNormalSpellLevel;
 using WpfDnDCommandHandlers.AttackQueries.SpellQueries.SpellTargetsQueries;
+using WpfDnDCommandHandlers.DiceQueries.SavingThrowQueries;
 
 namespace DDFight
 {
@@ -19,6 +21,7 @@ namespace DDFight
             HandlerToUILinker.AddNewPair(typeof(SpellTargetsQueryHandler), typeof(SpellTargetsQueryHandlerWindow));
             HandlerToUILinker.AddNewPair(typeof(AttackSpellResultsQueryHandler), typeof(AttackSpellResultsQueryHandlerWindow));
             HandlerToUILinker.AddNewPair(typeof(GetInputNonAttackSpellResultsHandler), typeof(NonAttackSpellResultsQueryHandlerWindow));
+            HandlerToUILinker.AddNewPair(typeof(SavingThrowQueryHandler), typeof(SavingThrowQueryHandlerWindow));
         }
     }
 }
