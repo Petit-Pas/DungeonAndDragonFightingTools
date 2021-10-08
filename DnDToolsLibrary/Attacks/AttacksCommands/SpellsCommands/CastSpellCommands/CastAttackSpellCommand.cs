@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellCommands
 {
-    public class CastAttackSpellCommand : BaseSuperCommand
+    public class CastAttackSpellCommand : SuperCommandBase
     {
         public CastAttackSpellCommand(string casterName, Spell spell, int castLevel, List<string> targetNames)
         {

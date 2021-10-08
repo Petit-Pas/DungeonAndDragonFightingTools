@@ -10,7 +10,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands
     ///     As such commands are only supposed to be used during a fight, it will store only the name of the entity,
     ///         and lazy load it upon need from the FightersList
     /// </summary>
-    public abstract class EntitySuperCommand : BaseSuperCommand
+    public abstract class EntitySuperCommand : SuperCommandBase
     {
         private readonly string _entityName;
 

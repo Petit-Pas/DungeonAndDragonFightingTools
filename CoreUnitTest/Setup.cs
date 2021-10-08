@@ -1,5 +1,6 @@
 ﻿using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.IO;
+using BaseToolsLibrary.Mediator;
 using BaseToolsLibrary.Memory;
 using DDFight;
 using DnDToolsLibrary.Entities;
@@ -23,6 +24,8 @@ namespace CoreUnitTest
             AddRequiredDependencies();
 
             CreateFirstCharacter();
+
+//          CreateQueryHandlers();
         }
 
         [OneTimeTearDown]
@@ -42,7 +45,16 @@ namespace CoreUnitTest
             DIContainer.RegisterSingleton<ICustomConsole, ICustomConsole>(new Mock<ICustomConsole>().Object);
             DIContainer.RegisterSingleton<IFontWeightProvider, IFontWeightProvider>(new Mock<IFontWeightProvider>().Object);
             DIContainer.RegisterSingleton<IFontColorProvider, IFontColorProvider>(new Mock<IFontColorProvider>().Object);
+
             DIConfigurer.ConfigureCore(true);
         }
+
+        /*private void CreateQueryHandlers()
+        {
+            IMediator mediator = DIContainer.GetImplementation<IMediator>();
+
+            mediator.
+        }*/
+
     }
 }

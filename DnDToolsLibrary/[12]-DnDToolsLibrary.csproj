@@ -91,6 +91,7 @@
     <Compile Include="Characteristics\CharacteristicsEnum.cs" />
     <Compile Include="Counters\Counter.cs" />
     <Compile Include="Counters\CounterList.cs" />
+    <Compile Include="Dice\DiceCommancs\SavingThrowCommands\SavingThrowQueries\SavingThrowQuery.cs" />
     <Compile Include="Dice\DiceRoll.cs" />
     <Compile Include="Dice\Dices.cs" />
     <Compile Include="Dice\SavingThrow.cs" />
@@ -115,6 +116,8 @@
     <Compile Include="Entities\PlayableEntity.cs" />
     <Compile Include="Fight\Events\TurnEvents.cs" />
     <Compile Include="Fight\IFigtherProvider.cs" />
+    <Compile Include="Fight\IStatusProvider.cs" />
+    <Compile Include="Fight\StatusProvider.cs" />
     <Compile Include="Memory\GenericList.cs" />
     <Compile Include="Memory\SaveManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -123,6 +126,10 @@
     <Compile Include="Status\CustomVerboseStatusList.cs" />
     <Compile Include="Status\OnHitStatus.cs" />
     <Compile Include="Status\OnHitStatusList.cs" />
+    <Compile Include="Status\StatusCommands\TryApplyStatusCommands\TryApplyStatusCommand.cs" />
+    <Compile Include="Status\StatusCommands\TryApplyStatusCommands\TryApplyStatusCommandHandler.cs" />
+    <Compile Include="Status\StatusReference.cs" />
+    <Compile Include="Status\StatusReferenceList.cs" />
     <Compile Include="Status\TempCommands\OnHitStatusTempCommands.cs" />
   </ItemGroup>
   <ItemGroup>

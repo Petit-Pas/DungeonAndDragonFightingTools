@@ -165,5 +165,13 @@ namespace DnDToolsLibrary.Fight
         {
             return this.Select(x => x.DisplayName).ToList();
         }
+
+        public void AddOrUpdateFighter(PlayableEntity fighter)
+        {
+            PlayableEntity inPlace = this.FirstOrDefault(x => x.DisplayName == fighter.DisplayName);
+            if (inPlace != null)
+                this.RemoveElement(inPlace);
+            this.AddElementSilent(fighter);
+        }
     }
 }

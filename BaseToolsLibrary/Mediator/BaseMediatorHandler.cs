@@ -23,7 +23,7 @@ namespace BaseToolsLibrary.Mediator
 
         public abstract void Undo(IMediatorCommand command);
 
-        protected TCommand cast_command(IMediatorCommand command)
+        protected TCommand castCommand(IMediatorCommand command)
         {
             if (command is TCommand _command)
                 return _command;

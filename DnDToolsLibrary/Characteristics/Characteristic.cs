@@ -23,6 +23,12 @@ namespace DnDToolsLibrary.Characteristics
             _name = name;
         }
 
+        public Characteristic(CharacteristicsEnum name, int modifier)
+        {
+            _name = name;
+            _modifier = modifier;
+        }
+
         #region CharacteristicsProperties
 
         /// <summary>

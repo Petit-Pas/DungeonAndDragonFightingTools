@@ -74,6 +74,10 @@
     </Compile>
     <Compile Include="AttackQueries\SpellQueries\SpellTargetsQueries\SpellTargetsQueryHandler.cs" />
     <Compile Include="BaseResultCommandHandler.cs" />
+    <Compile Include="DiceQueries\SavingThrowQueries\SavingThrowQueryHandler.cs" />
+    <Compile Include="DiceQueries\SavingThrowQueries\SavingThrowQueryHandlerWindow.xaml.cs">
+      <DependentUpon>SavingThrowQueryHandlerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="HandlerToUILinker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -122,6 +126,10 @@
     <Page Include="AttackQueries\SpellQueries\SpellTargetsQueries\SpellTargetsQueryHandlerWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DiceQueries\SavingThrowQueries\SavingThrowQueryHandlerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

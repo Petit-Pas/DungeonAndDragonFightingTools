@@ -1,4 +1,5 @@
 ﻿using BaseToolsLibrary.DependencyInjection;
+using BaseToolsLibrary.Mediator;
 using DnDToolsLibrary.Attacks;
 using DnDToolsLibrary.Characteristics;
 using DnDToolsLibrary.Entities;
@@ -10,12 +11,19 @@ using System.Xml.Serialization;
 
 namespace DnDToolsLibrary.Dice
 { 
-    public class SavingThrow : INotifyPropertyChanged, ICloneable
+    public class SavingThrow : INotifyPropertyChanged, ICloneable, IMediatorCommandResponse
     {
         #region Properties
 
         public SavingThrow()
         {
+        }
+
+        public SavingThrow(CharacteristicsEnum characteristic, int difficulty, string targetName)
+        {
+            Characteristic = characteristic;
+            Difficulty = difficulty;
+            TargetName = targetName;
         }
 
         private static IFigtherProvider fighterProvider = DIContainer.GetImplementation<IFigtherProvider>();

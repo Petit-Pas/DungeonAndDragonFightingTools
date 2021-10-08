@@ -59,8 +59,8 @@
     <Compile Include="Mediator\BaseHistoryMediator.cs" />
     <Compile Include="Mediator\BaseMediator.cs" />
     <Compile Include="Mediator\BaseMediatorHandler.cs" />
-    <Compile Include="Mediator\BaseSuperCommand.cs" />
-    <Compile Include="Mediator\BaseSuperHandler.cs" />
+    <Compile Include="Mediator\SuperCommandBase.cs" />
+    <Compile Include="Mediator\SuperCommandHandlerBase.cs" />
     <Compile Include="Mediator\IMediatorCommandResponse.cs" />
     <Compile Include="Mediator\IHistoryMediator.cs" />
     <Compile Include="Mediator\IMediator.cs" />

@@ -13,7 +13,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.LooseTempHp
 
         public override NoResponse Execute(IMediatorCommand command)
         {
-            LooseTempHpCommand _command = this.cast_command(command);
+            LooseTempHpCommand _command = this.castCommand(command);
             PlayableEntity target = _command.GetEntity();
 
             console.Value.AddEntry($"{target.DisplayName} looses {_command.Amount} temporary HPs.\r\n", fontWeightProvider.Value.Bold);
@@ -32,7 +32,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.LooseTempHp
 
         public override void Undo(IMediatorCommand command)
         {
-            LooseTempHpCommand _command = this.cast_command(command);
+            LooseTempHpCommand _command = this.castCommand(command);
 
             if (false == _command.To.HasValue || false == _command.From.HasValue)
             {

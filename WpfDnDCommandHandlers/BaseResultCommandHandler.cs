@@ -18,7 +18,7 @@ namespace WpfDnDCommandHandlers
         {
             Window window = HandlerToUILinker.GetWindow(this.GetType()) as Window;
             IResultWindow<TInput, TOutput> result_window = window as IResultWindow<TInput, TOutput>;
-            TInput _command = base.cast_command(command);
+            TInput _command = base.castCommand(command);
 
             result_window.LoadContext(_command);
 

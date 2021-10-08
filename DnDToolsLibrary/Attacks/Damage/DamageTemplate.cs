@@ -17,10 +17,11 @@ namespace DnDToolsLibrary.Attacks.Damage
         { 
         }
 
-        public DamageTemplate(string damageFormat, DamageTypeEnum damageType)
+        public DamageTemplate(string damageFormat, DamageTypeEnum damageType, DamageModifierEnum situationalDamageModifier = DamageModifierEnum.Normal)
         {
             Damage = new DiceRoll(damageFormat);
             DamageType = damageType;
+            SituationalDamageModifier = situationalDamageModifier;
         }
 
         #region Properties

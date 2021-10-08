@@ -3,7 +3,7 @@ using DnDToolsLibrary.Attacks.HitAttacks;
 
 namespace DnDToolsLibrary.Attacks.AttacksCommands.HitAttackCommands.ApplyHitAttackResult
 {
-    public class ApplyHitAttackResultCommand : BaseSuperCommand
+    public class ApplyHitAttackResultCommand : SuperCommandBase
     {
         public HitAttackResult HitAttackResult { get; set; }
 

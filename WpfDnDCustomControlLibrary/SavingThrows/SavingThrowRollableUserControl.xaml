@@ -76,7 +76,7 @@
                 <situationalmodifiers:SituationalAdvantageModifiersControl 
                 Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
                 Margin="0, 5"
-                DataContext="{Binding Modifiers}"/>
+                DataContext="{Binding AdvantageModifiers}"/>
 
                 <Grid
                     Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">

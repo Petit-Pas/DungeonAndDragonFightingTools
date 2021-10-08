@@ -13,7 +13,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.TempHeal
 
         public override NoResponse Execute(IMediatorCommand command)
         {
-            TempHealCommand _command = this.cast_command(command);
+            TempHealCommand _command = this.castCommand(command);
             PlayableEntity target = _command.GetEntity();
 
             console.Value.AddEntry($"{target.DisplayName} regains {_command.Amount} temporary HPs.\r\n", fontWeightProvider.Value.Bold);
@@ -29,7 +29,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.TempHeal
 
         public override void Undo(IMediatorCommand command)
         {
-            TempHealCommand _command = this.cast_command(command);
+            TempHealCommand _command = this.castCommand(command);
 
             if (false == _command.To.HasValue || false == _command.From.HasValue)
             {
