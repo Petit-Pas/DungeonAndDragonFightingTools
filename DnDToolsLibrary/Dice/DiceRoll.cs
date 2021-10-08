@@ -1,4 +1,6 @@
-﻿using BaseToolsLibrary.Extensions;
+﻿using BaseToolsLibrary;
+using BaseToolsLibrary.Extensions;
+using DnDToolsLibrary.Memory;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,7 +13,7 @@ namespace DnDToolsLibrary.Dice
     /// <summary>
     ///     Represents a given dice throw, example : 1d12+2d6+3
     /// </summary>
-    public class DiceRoll : INotifyPropertyChanged, ICloneable
+    public class DiceRoll : INotifyPropertyChanged, ICloneable, IEquivalentComparable<DiceRoll>
     {
         public DiceRoll()
         {
@@ -41,7 +43,7 @@ namespace DnDToolsLibrary.Dice
         public DiceRoll(string format)
         {
             format.Replace("D", "d");
-            DicesList = new List<Dices>();
+            DicesList = new GenericList<Dices>();
 
             Match match = rgx.Match(format);
             if (match.Success)
@@ -76,7 +78,7 @@ namespace DnDToolsLibrary.Dice
 
         private void init()
         {
-            DicesList = new List<Dices>();
+            DicesList = new GenericList<Dices>();
         }
 
         /// <summary>
@@ -202,7 +204,7 @@ namespace DnDToolsLibrary.Dice
         /// <summary>
         ///     the dices to throw
         /// </summary>
-        public List<Dices> DicesList
+        public GenericList<Dices> DicesList
         {
             get => _dicesList;
             set
@@ -211,7 +213,7 @@ namespace DnDToolsLibrary.Dice
                 NotifyPropertyChanged();
             }
         }
-        private List<Dices> _dicesList = null;
+        private GenericList<Dices> _dicesList = null;
 
         [XmlAttribute]
         /// <summary>
@@ -255,7 +257,7 @@ namespace DnDToolsLibrary.Dice
         protected DiceRoll(DiceRoll to_copy)
         {
             this.Modifier = to_copy.Modifier;
-            this.DicesList = (List<Dices>)to_copy.DicesList.Clone();
+            this.DicesList = (GenericList<Dices>)to_copy.DicesList.Clone();
             this.LastRoll = to_copy.LastRoll;
         }
 
@@ -265,5 +267,18 @@ namespace DnDToolsLibrary.Dice
         }
 
         #endregion
+
+        public bool IsEquivalentTo(DiceRoll toCompare)
+        {
+            if (!this.DicesList.IsEquivalentTo(toCompare.DicesList))
+                return false;
+            if (this.LastResult != toCompare.LastResult)
+                return false;
+            if (this.LastRoll != toCompare.LastRoll)
+                return false;
+            if (this.Modifier != toCompare.Modifier)
+                return false;
+            return true;
+        }
     }
 }

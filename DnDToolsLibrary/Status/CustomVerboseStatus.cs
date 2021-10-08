@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 
 namespace DnDToolsLibrary.Status
 {
-    public class CustomVerboseStatus : INotifyPropertyChanged, ICopyAssignable, INameable
+    public class CustomVerboseStatus : INotifyPropertyChanged, ICopyAssignable, INameable, IEquivalentComparable<CustomVerboseStatus>
     {
         public CustomVerboseStatus() { }
 
@@ -55,6 +55,17 @@ namespace DnDToolsLibrary.Status
         [XmlIgnore]
         public string Name { get => Header; set { } }
         #endregion IListable
+
+        public bool IsEquivalentTo(CustomVerboseStatus toCompare)
+        {
+            if (Description != toCompare.Description)
+                return false;
+            if (Header != toCompare.Header)
+                return false;
+            if (ToolTip != toCompare.ToolTip)
+                return false;
+            return true;
+        }
 
         #region ICloneable
 

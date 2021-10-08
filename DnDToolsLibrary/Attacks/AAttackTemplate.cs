@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace DnDToolsLibrary.Attacks
 {
-    public abstract class AAttackTemplate : INotifyPropertyChanged, ICopyAssignable, INameable
+    public abstract class AAttackTemplate : INotifyPropertyChanged, ICopyAssignable, INameable, IEquivalentComparable<AAttackTemplate>
     {
         public AAttackTemplate()
         {
@@ -144,6 +144,14 @@ namespace DnDToolsLibrary.Attacks
         #endregion ICopyAssignable
 
         #endregion IConeable
+        public virtual bool IsEquivalentTo(AAttackTemplate toCompare)
+        {
+            if (Name != toCompare.Name)
+                return false;
+            if (Range != toCompare.Range)
+                return false;
+            return true;
+        }
 
     }
 }

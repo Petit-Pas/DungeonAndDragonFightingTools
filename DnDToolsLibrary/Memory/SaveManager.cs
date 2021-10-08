@@ -132,7 +132,7 @@ namespace DnDToolsLibrary.Memory
         /// <typeparam name="T"></typeparam>
         /// <param name="genericList"></param>
         /// <param name="subfolder"></param>
-        public static void SaveGenericList<T>(GenericList<T> genericList, string subfolder = null) where T : class, ICloneable, INameable, new()
+        public static void SaveGenericList<T>(GenericList<T> genericList, string subfolder = null) where T : class, ICloneable, INameable, IEquivalentComparable<T>, new()
         {
             if (genericList.Count == 0)
                 return;
@@ -170,7 +170,7 @@ namespace DnDToolsLibrary.Memory
         /// <typeparam name="T"></typeparam>
         /// <param name="subfolder"></param>
         /// <returns></returns>
-        public static U LoadGenericList<T, U>(string subfolder) where T : class, INameable, ICloneable, new() where U : GenericList<T>, new ()
+        public static U LoadGenericList<T, U>(string subfolder) where T : class, INameable, ICloneable, IEquivalentComparable<T>, new() where U : GenericList<T>, new ()
         {
             XmlSerializer serializer = new XmlSerializer(typeof(T));
             U result = new U();

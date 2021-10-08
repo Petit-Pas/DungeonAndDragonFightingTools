@@ -1,4 +1,6 @@
 ﻿using DnDToolsLibrary.Memory;
+using System;
+using System.Linq;
 
 namespace DnDToolsLibrary.Counters
 {
@@ -20,6 +22,22 @@ namespace DnDToolsLibrary.Counters
         public override object Clone()
         {
             return new CounterList(this);
+        }
+    }
+
+    public static class CounterListExtensions
+    {
+        public static bool IsEquivalentTo(this CounterList list, CounterList otherList)
+        {
+            if (list.Count != otherList.Count)
+                return false;
+
+            foreach (Tuple<Counter, Counter> counters in list.Zip<Counter, Counter, Tuple<Counter, Counter>>(otherList, (x, y) => new Tuple<Counter, Counter>(x, y) ))
+            {
+                if (!counters.Item1.IsEquivalentTo(counters.Item2))
+                    return false;
+            }
+            return true;
         }
     }
 }

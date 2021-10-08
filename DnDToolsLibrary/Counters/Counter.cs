@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 
 namespace DnDToolsLibrary.Counters
 {
-    public class Counter : INotifyPropertyChanged, ICloneable, INameable
+    public class Counter : INotifyPropertyChanged, ICloneable, INameable, IEquivalentComparable<Counter>
     {
         public Counter() { }
 
@@ -121,5 +121,17 @@ namespace DnDToolsLibrary.Counters
         }
 
         #endregion
+
+        public bool IsEquivalentTo(Counter toCompare)
+        {
+            if (Name != toCompare.Name)
+                return false;
+            if (MaxValue != toCompare.MaxValue)
+                return false;
+            if (CurrentValue != toCompare.CurrentValue)
+                return false;
+            return true;
+        }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using DnDToolsLibrary.Attacks.Damage.Type;
+﻿using BaseToolsLibrary;
+using DnDToolsLibrary.Attacks.Damage.Type;
 using DnDToolsLibrary.Dice;
 using System;
 using System.ComponentModel;
@@ -11,7 +12,7 @@ namespace DnDToolsLibrary.Attacks.Damage
     ///     Represents a possible damage, example: 1d6+2 of Fire Damage
     ///     Default Values : 1d4 of Force Damage
     /// </summary>
-    public class DamageTemplate : ICloneable, INotifyPropertyChanged
+    public class DamageTemplate : ICloneable, INotifyPropertyChanged, IEquivalentComparable<DamageTemplate>
     {
         public DamageTemplate() 
         { 
@@ -95,6 +96,17 @@ namespace DnDToolsLibrary.Attacks.Damage
             }
         }
         #endregion
+
+        public bool IsEquivalentTo(DamageTemplate toCompare)
+        {
+            if (!Damage.IsEquivalentTo(toCompare.Damage))
+                return false;
+            if (DamageType != toCompare.DamageType)
+                return false;
+            if (SituationalDamageModifier != toCompare.SituationalDamageModifier)
+                return false;
+            return true;
+        }
 
         #region ICloneable 
 

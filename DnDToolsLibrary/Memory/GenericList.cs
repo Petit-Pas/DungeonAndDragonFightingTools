@@ -12,8 +12,8 @@ namespace DnDToolsLibrary.Memory
     ///    This class will be used everywhere where a collection is needed, it will allow easy heritance with BaseListUserControl
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class GenericList<T> : ObservableCollection<T>, INotifyPropertyChanged, ICloneable, IDisposable
-        where T : class, ICloneable, new()
+    public class GenericList<T> : ObservableCollection<T>, INotifyPropertyChanged, ICloneable, IDisposable, IEquivalentComparable<GenericList<T>>
+        where T : class, ICloneable, IEquivalentComparable<T>, new()
     {
 
         public GenericList()
@@ -90,23 +90,6 @@ namespace DnDToolsLibrary.Memory
         }
         #endregion
 
-        /*public ObservableCollection<T> Elements
-        {
-            get => this;
-            set
-            {
-                this.ClearItems();
-                value.ToList().ForEach(x => this.Add(x));
-                NotifyPropertyChanged();
-            }
-        }
-        private ObservableCollection<T> _elements = new ObservableCollection<T>();*/
-
-        /*public void RemoveAt(int index)
-        {
-            Elements.RemoveAt(index);
-        }*/
-
         public void RemoveElement(T elem)
         {
             Remove(elem);
@@ -134,7 +117,7 @@ namespace DnDToolsLibrary.Memory
         }
 
         public static void SaveAll<U>(GenericList<U> list)
-            where U : class, INameable, ICloneable, new()
+            where U : class, INameable, ICloneable, IEquivalentComparable<U>, new()
         {
             SaveManager.SaveGenericList<U>(list);
         }
@@ -163,6 +146,19 @@ namespace DnDToolsLibrary.Memory
                     disposable.Dispose();
                 }
             }
+        }
+
+        public bool IsEquivalentTo(GenericList<T> toCompare)
+        {
+            if (this.Count != toCompare.Count)
+                return false;
+
+            foreach (Tuple<T, T> counters in this.Zip<T, T, Tuple<T, T>>(toCompare, (x, y) => new Tuple<T, T>(x, y)))
+            {
+                if (!counters.Item1.IsEquivalentTo(counters.Item2))
+                    return false;
+            }
+            return true;
         }
     }
 }

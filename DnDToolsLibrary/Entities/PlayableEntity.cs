@@ -15,7 +15,7 @@ using BaseToolsLibrary;
 
 namespace DnDToolsLibrary.Entities
 {
-    public partial class PlayableEntity : INameable, ICopyAssignable, INotifyPropertyChanged, IDisposable
+    public partial class PlayableEntity : INameable, ICopyAssignable, INotifyPropertyChanged, IDisposable, IEquivalentComparable<PlayableEntity>
     {
         public PlayableEntity()
         {
@@ -513,6 +513,43 @@ namespace DnDToolsLibrary.Entities
         }
 
         #endregion
+
+        public bool IsEquivalentTo(PlayableEntity toCompare)
+        {
+            if (Name != toCompare.Name)
+                return false;
+            if (CA != toCompare.CA)
+                return false;
+            if (Hp != toCompare.Hp)
+                return false;
+            if (MaxHp != toCompare.MaxHp)
+                return false;
+            if (SpellSave != toCompare.SpellSave)
+                return false;
+            if (!Characteristics.IsEquivalentTo(toCompare.Characteristics))
+                return false;
+            if (!HitAttacks.IsEquivalentTo(toCompare.HitAttacks))
+                return false;
+            if (!CustomVerboseStatusList.IsEquivalentTo(toCompare.CustomVerboseStatusList))
+                return false;
+            if (TurnOrder != toCompare.TurnOrder)
+                return false;
+            if (InitiativeRoll != toCompare.InitiativeRoll)
+                return false;
+            if (ActionDescription != toCompare.ActionDescription)
+                return false;
+            if (SpecialAbilities != toCompare.SpecialAbilities)
+                return false;
+            if (!Counters.IsEquivalentTo(toCompare.Counters))
+                return false;
+            if (Spells.IsEquivalentTo(toCompare.Spells))
+                return false;
+            if (TempHp != toCompare.TempHp)
+                return false;
+            if (SpellHitModifier != toCompare.SpellHitModifier)
+                return false;
+            return true;
+        }
 
         #region IClonable
 

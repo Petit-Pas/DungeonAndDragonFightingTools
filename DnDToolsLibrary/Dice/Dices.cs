@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BaseToolsLibrary;
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Xml.Serialization;
@@ -8,7 +9,7 @@ namespace DnDToolsLibrary.Dice
     /// <summary>
     ///     represent an amount of one given dice, example: 1d6 or 3d12
     /// </summary>
-    public class Dices : ICloneable, INotifyPropertyChanged
+    public class Dices : ICloneable, INotifyPropertyChanged, IEquivalentComparable<Dices>
     {
         static private Random rand = new Random();
 
@@ -146,5 +147,16 @@ namespace DnDToolsLibrary.Dice
         }
 
         #endregion
+
+        public bool IsEquivalentTo(Dices toCompare)
+        {
+            if (this.DiceAmount != toCompare.DiceAmount)
+                return false;
+            if (this.DiceValue != toCompare.DiceValue)
+                return false;
+            if (this.RolledDices != toCompare.RolledDices)
+                return false;
+            return true;
+        }
     }
 }

@@ -1,11 +1,12 @@
-﻿using BaseToolsLibrary.Memory;
+﻿using BaseToolsLibrary;
+using BaseToolsLibrary.Memory;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Memory;
 
 namespace DDFight.Game.Entities
 {
     public class PlayableEntityList<T> : GenericList<T>
-        where T : PlayableEntity, new()
+        where T : PlayableEntity, IEquivalentComparable<T>, new()
     {
         public PlayableEntityList() : base()
         {

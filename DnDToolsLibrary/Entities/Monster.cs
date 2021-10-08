@@ -1,8 +1,9 @@
-﻿using System.Xml.Serialization;
+﻿using BaseToolsLibrary;
+using System.Xml.Serialization;
 
 namespace DnDToolsLibrary.Entities
 {
-    public class Monster : PlayableEntity
+    public class Monster : PlayableEntity, IEquivalentComparable<Monster>
     {
         public Monster()
         {
@@ -63,5 +64,15 @@ namespace DnDToolsLibrary.Entities
         }
 
         #endregion
+
+        public bool IsEquivalentTo(Monster toCompare)
+        {
+            if (!base.IsEquivalentTo(toCompare))
+                return false;
+            if (Level != toCompare.Level)
+                return false;
+            return true;
+        }
+
     }
 }

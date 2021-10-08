@@ -1,4 +1,5 @@
-﻿using BaseToolsLibrary.Extensions;
+﻿using BaseToolsLibrary;
+using BaseToolsLibrary.Extensions;
 using BaseToolsLibrary.Memory;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace DnDToolsLibrary.Characteristics
     /// <summary>
     ///     Contains all the characteristic of a character
     /// </summary>
-    public class CharacteristicList : ICloneable, INotifyPropertyChanged
+    public class CharacteristicList : ICloneable, INotifyPropertyChanged, IEquivalentComparable<CharacteristicList>
     {
 
         public CharacteristicList()
@@ -148,5 +149,16 @@ namespace DnDToolsLibrary.Characteristics
         }
 
         #endregion
+
+        public bool IsEquivalentTo(CharacteristicList toCompare)
+        {
+            foreach (Tuple<Characteristic, Characteristic> characteristics in CharacteristicsList.Zip<Characteristic, Characteristic, Tuple<Characteristic, Characteristic>>(toCompare.CharacteristicsList, (x, y) => new Tuple<Characteristic, Characteristic>(x, y)))
+            {
+                if (!characteristics.Item1.IsEquivalentTo(characteristics.Item2))
+                    return false;
+            }
+            return true;
+        }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using DDFight.Controlers;
+﻿using BaseToolsLibrary;
+using DDFight.Controlers;
 using DDFight.WpfExtensions;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Memory;
@@ -7,7 +8,7 @@ using System.Windows.Input;
 namespace DDFight.Game.Entities.Display
 {
     public class PlayableEntityListUserControl<T> : SpecializedListUserControl<T>
-        where T : PlayableEntity, new ()
+        where T : PlayableEntity, IEquivalentComparable<T>, new ()
     {
         public PlayableEntityListUserControl() : base ()
         {

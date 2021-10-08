@@ -1,4 +1,5 @@
-﻿using DnDToolsLibrary.Attacks.Damage.Type;
+﻿using BaseToolsLibrary;
+using DnDToolsLibrary.Attacks.Damage.Type;
 using DnDToolsLibrary.Dice;
 using System;
 using System.ComponentModel;
@@ -7,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace DnDToolsLibrary.Attacks.Damage
 {
-    public class DamageResult : ICloneable, INotifyPropertyChanged
+    public class DamageResult : ICloneable, INotifyPropertyChanged, IEquivalentComparable<DamageResult>
     {
         public DamageResult()
         {
@@ -209,7 +210,29 @@ namespace DnDToolsLibrary.Attacks.Damage
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
         #endregion
+
+        public bool IsEquivalentTo(DamageResult toCompare)
+        {
+            if (this.AffinityModifier != toCompare.AffinityModifier)
+                return false;
+            if (!this.Damage.IsEquivalentTo(toCompare.Damage))
+                return false;
+            if (this.DamageType != toCompare.DamageType)
+                return false;
+            if (this.LastSavingWasSuccesfull != toCompare.LastSavingWasSuccesfull)
+                return false;
+            if (this.LinkedToSaving != toCompare.LinkedToSaving)
+                return false;
+            if (this.SituationalDamageModifier != toCompare.SituationalDamageModifier)
+                return false;
+            if (this.ToRollBonus != toCompare.ToRollBonus)
+                return false;
+            if (this.ToRollDamage != ToRollDamage)
+                return false;
+            return true;
+        }
 
     }
 }

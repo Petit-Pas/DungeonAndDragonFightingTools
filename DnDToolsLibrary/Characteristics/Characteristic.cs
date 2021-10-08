@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BaseToolsLibrary;
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Xml.Serialization;
@@ -8,7 +9,7 @@ namespace DnDToolsLibrary.Characteristics
     /// <summary>
     ///     Respresents 1 characteristic
     /// </summary>
-    public class Characteristic : ICloneable, INotifyPropertyChanged
+    public class Characteristic : ICloneable, INotifyPropertyChanged, IEquivalentComparable<Characteristic>
     {
         /// <summary>
         ///     Ctor
@@ -120,5 +121,17 @@ namespace DnDToolsLibrary.Characteristics
         }
 
         #endregion
+
+        public bool IsEquivalentTo(Characteristic toCompare)
+        {
+            if (Mastery != toCompare.Mastery)
+                return false;
+            if (Modifier != toCompare.Modifier)
+                return false;
+            if (Name != toCompare.Name)
+                return false;
+            return true;
+        }
+
     }
 }

@@ -47,6 +47,7 @@
     <Compile Include="DependencyInjection\DIContainer.cs" />
     <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="IEquivalentComparable.cs" />
     <Compile Include="INameable.cs" />
     <Compile Include="IO\FontColorProvider.cs" />
     <Compile Include="IO\ICustomConsole.cs" />

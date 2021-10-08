@@ -1,4 +1,5 @@
-﻿using DnDToolsLibrary.Status;
+﻿using BaseToolsLibrary;
+using DnDToolsLibrary.Status;
 using System.Linq;
 using System.Xml.Serialization;
 
@@ -7,7 +8,7 @@ namespace DnDToolsLibrary.Entities
     /// <summary>
     ///     Represents a Character for D&D (not to confound with Monsters)
     /// </summary>
-    public class Character : PlayableEntity
+    public class Character : PlayableEntity, IEquivalentComparable<Character>
     {
         public Character() : base()
         {
@@ -97,6 +98,17 @@ namespace DnDToolsLibrary.Entities
         {
             base.CopyAssign(to_copy);
             init_copy(to_copy as Character);
+        }
+
+        public bool IsEquivalentTo(Character toCompare)
+        {
+            if (!base.IsEquivalentTo(toCompare))
+                return false;
+            if (Level != toCompare.Level)
+                return false;
+            if (HasInspiration != toCompare.HasInspiration)
+                return false;
+            return true;
         }
         #endregion IClonable
 

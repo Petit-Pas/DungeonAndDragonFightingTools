@@ -12,7 +12,7 @@ using System.Xml.Serialization;
 
 namespace DnDToolsLibrary.Attacks.Spells
 {
-    public class Spell : AAttackTemplate, ICloneable, INameable, INotifyPropertyChanged
+    public class Spell : AAttackTemplate, ICloneable, INameable, INotifyPropertyChanged, IEquivalentComparable<Spell>
     {
         public Spell () : base()
         {
@@ -401,6 +401,39 @@ namespace DnDToolsLibrary.Attacks.Spells
         #region EditWindow
 
         #endregion EditWindow
+
+        public bool IsEquivalentTo(Spell toCompare)
+        {
+            if (BaseLevel != toCompare.BaseLevel)
+                return false;
+            if (Description != toCompare.Description)
+                return false;
+            if (AmountTargets != toCompare.AmountTargets)
+                return false;
+            if (CanSelectSameTargetTwice != toCompare.CanSelectSameTargetTwice)
+                return false;
+            if (IsAnAttack != toCompare.IsAnAttack)
+                return false;
+            if (HasSavingThrow != toCompare.HasSavingThrow)
+                return false;
+            if (SavingDifficulty != toCompare.SavingDifficulty)
+                return false;
+            if (!HitDamage.IsEquivalentTo(toCompare.HitDamage))
+                return false;
+            if (!AppliedStatus.IsEquivalentTo(toCompare.AppliedStatus))
+                return false;
+            if (CanBeCastAtHigherLevel != toCompare.CanBeCastAtHigherLevel)
+                return false;
+            if (!AdditionalHitDamagePerLevel.IsEquivalentTo(toCompare.AdditionalHitDamagePerLevel))
+                return false;
+            if (AdditionalTargetPerLevel != toCompare.AdditionalTargetPerLevel)
+                return false;
+            if (HitRollBonus != toCompare.HitRollBonus)
+                return false;
+            if (AutomaticalyHits != toCompare.AutomaticalyHits)
+                return false;
+            return true;
+        }
 
         #region ICloneable
 

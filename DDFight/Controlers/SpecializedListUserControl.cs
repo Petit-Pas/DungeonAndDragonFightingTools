@@ -5,7 +5,7 @@ using System;
 namespace DDFight.Controlers
 {
     public class SpecializedListUserControl<T> : BaseListUserControl
-        where T : class, ICloneable, new()
+        where T : class, ICloneable, IEquivalentComparable<T>, new()
     {
         public SpecializedListUserControl() : base ()
         {

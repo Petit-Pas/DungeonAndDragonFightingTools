@@ -1,4 +1,5 @@
-﻿using DnDToolsLibrary.Attacks.Damage;
+﻿using BaseToolsLibrary;
+using DnDToolsLibrary.Attacks.Damage;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Status;
 using System;
@@ -9,7 +10,7 @@ namespace DnDToolsLibrary.Attacks.HitAttacks
     /// <summary>
     ///     Represents a possible attack, example: inflamed two handed sword, +7 to Hit, 2d6+3 of Slashing Damage + 1d4 of Fire Damage 
     /// </summary>
-    public class HitAttackTemplate : AAttackTemplate, ICloneable
+    public class HitAttackTemplate : AAttackTemplate, ICloneable, IEquivalentComparable<HitAttackTemplate>
     {
         public HitAttackTemplate() : base()
         {
@@ -106,6 +107,19 @@ namespace DnDToolsLibrary.Attacks.HitAttacks
         }
 
         #endregion ICopyAssignable
+
+        public bool IsEquivalentTo(HitAttackTemplate toCompare)
+        {
+            if (!base.IsEquivalentTo(toCompare))
+                return false;
+            if (HitBonus != toCompare.HitBonus)
+                return false;
+            if (!DamageList.IsEquivalentTo(toCompare.DamageList))
+                return false;
+            if (!OnHitStatuses.IsEquivalentTo(toCompare.OnHitStatuses))
+                return false;
+            return true;
+        }
 
         #endregion
     }

@@ -1,10 +1,11 @@
-﻿using DnDToolsLibrary.Attacks.Damage.Type;
+﻿using BaseToolsLibrary;
+using DnDToolsLibrary.Attacks.Damage.Type;
 using System;
 using System.Xml.Serialization;
 
 namespace DnDToolsLibrary.Attacks.Damage
 {
-    public class DotTemplate : DamageTemplate, ICloneable
+    public class DotTemplate : DamageTemplate, ICloneable, IEquivalentComparable<DotTemplate>
     {
 
         public DotTemplate(string damage, DamageTypeEnum damage_type) : base(damage, damage_type) { }
@@ -58,6 +59,17 @@ namespace DnDToolsLibrary.Attacks.Damage
         public override object Clone()
         {
             return new DotTemplate(this);
+        }
+
+        public bool IsEquivalentTo(DotTemplate toCompare)
+        {
+            if (!base.IsEquivalentTo(toCompare))
+                return false;
+            if (TriggersOnCastersTurn != toCompare.TriggersOnCastersTurn)
+                return false;
+            if (TriggersStartOfTurn != toCompare.TriggersStartOfTurn)
+                return false;
+            return true;
         }
 
         #endregion

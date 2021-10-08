@@ -6,10 +6,11 @@ using DnDToolsLibrary.Characteristics;
 using DnDToolsLibrary.Attacks.Damage;
 using DnDToolsLibrary.Dice;
 using BaseToolsLibrary.Memory;
+using BaseToolsLibrary;
 
 namespace DnDToolsLibrary.Status
 {
-    public class OnHitStatus : CustomVerboseStatus, IEventUnregisterable, IDisposable, ICopyAssignable
+    public class OnHitStatus : CustomVerboseStatus, IEventUnregisterable, IDisposable, ICopyAssignable, IEquivalentComparable<OnHitStatus>
     {
         /// <summary>
         ///     As event handling is moved to higher layers of the application, these actions allow us to inject Register and Unregister comportment from other layers
@@ -309,6 +310,48 @@ namespace DnDToolsLibrary.Status
             };
             return result;
         }
+        
+        public bool IsEquivalentTo(OnHitStatus toCompare)
+        {
+            if (!base.IsEquivalentTo(toCompare))
+                return false;
+
+            if (HasApplyCondition != toCompare.HasApplyCondition)
+                return false;
+            if (ApplySavingCharacteristic != toCompare.ApplySavingCharacteristic)
+                return false;
+            if (ApplySavingDifficulty != toCompare.ApplySavingDifficulty)
+                return false;
+            if (EndsOnCasterLossOfConcentration != toCompare.EndsOnCasterLossOfConcentration)
+                return false;
+            if (CanRedoSavingThrow != toCompare.CanRedoSavingThrow)
+                return false;
+            if (SavingIsRemadeAtStartOfTurn != toCompare.SavingIsRemadeAtStartOfTurn)
+                return false;
+            if (RemainingRounds != toCompare.RemainingRounds)
+                return false;
+            if (HasAMaximumDuration != toCompare.HasAMaximumDuration)
+                return false;
+            if (DurationIsBasedOnStartOfTurn != toCompare.DurationIsBasedOnStartOfTurn)
+                return false;
+            if (DurationIsCalculatedOnCasterTurn != toCompare.DurationIsCalculatedOnCasterTurn)
+                return false;
+            if (!OnApplyDamageList.IsEquivalentTo(toCompare.OnApplyDamageList))
+                return false;
+            if (!DotDamageList.IsEquivalentTo(toCompare.DotDamageList))
+                return false;
+            if (HasSpellSaving != toCompare.HasSpellSaving)
+                return false;
+            if (SpellApplicationModifier != toCompare.SpellApplicationModifier)
+                return false;
+            if (SpellSavingWasSuccessful != toCompare.SpellSavingWasSuccessful)
+                return false;
+            if (!Caster.IsEquivalentTo(toCompare.Caster))
+                return false;
+            if (!Affected.IsEquivalentTo(toCompare.Affected))
+                return false;
+            return true;
+        }
 
         #region ICloneable
 
@@ -368,7 +411,6 @@ namespace DnDToolsLibrary.Status
         {
             UnregisterEvents(this);
         }
-
         #endregion ICloneable
     }
 }
