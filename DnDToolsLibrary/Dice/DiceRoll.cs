@@ -17,8 +17,6 @@ namespace DnDToolsLibrary.Dice
     {
         public DiceRoll()
         {
-            //if (!Global.Loading)
-            init();
         }
 
         public void AddDice(Dices to_add)
@@ -74,11 +72,6 @@ namespace DnDToolsLibrary.Dice
                 }
             else
                 Console.WriteLine("WARNING: wrong format for constructor format in DiceRoll(string): " + format);
-        }
-
-        private void init()
-        {
-            DicesList = new GenericList<Dices>();
         }
 
         /// <summary>
@@ -213,7 +206,7 @@ namespace DnDToolsLibrary.Dice
                 NotifyPropertyChanged();
             }
         }
-        private GenericList<Dices> _dicesList = null;
+        private GenericList<Dices> _dicesList = new GenericList<Dices>();
 
         [XmlAttribute]
         /// <summary>

@@ -45,6 +45,12 @@ namespace CoreUnitTest.Dice
         }
 
         [Test]
+        public void EmptyConstructor()
+        {
+            DiceRoll diceRoll = new DiceRoll();
+        }
+
+        [Test]
         public void TestCombination()
         {
             test("1d6+1d6+1+1", "2d6+2");
@@ -121,6 +127,47 @@ namespace CoreUnitTest.Dice
             failing_test("1d4+");
             failing_test("1dd4");
             failing_test("");
+        }
+
+        [Test]
+        public void TestIsEquivalentTo_Ok()
+        {
+            DiceRoll diceRoll = new DiceRoll("2d8+1");
+
+            Assert.IsTrue(diceRoll.IsEquivalentTo(diceRoll));
+        }
+
+        [Test]
+        public void TestIsEquivalentTo_NotOk()
+        {
+            DiceRoll diceRoll = new DiceRoll("2d8+1");
+            DiceRoll diceRoll2 = new DiceRoll("2d8+2");
+
+            Assert.IsFalse(diceRoll.IsEquivalentTo(diceRoll2));
+        }
+
+        [Test]
+        public void TestReset()
+        {
+            DiceRoll diceRoll = new DiceRoll("2d8+1");
+            DiceRoll diceRoll2 = new DiceRoll("2d8+1");
+
+            Assert.IsTrue(diceRoll.IsEquivalentTo(diceRoll2));
+            diceRoll.Roll();
+            Assert.IsFalse(diceRoll.IsEquivalentTo(diceRoll2));
+            diceRoll.Reset();
+            Assert.IsTrue(diceRoll.IsEquivalentTo(diceRoll2));
+        }
+
+        [Test]
+        public void TestStaticRoll()
+        {
+            DiceRoll diceRoll = new DiceRoll("1d1+9");
+
+            int result = DiceRoll.Roll("1d1+9");
+            diceRoll.Roll();
+
+            Assert.AreEqual(diceRoll.LastResult, result);
         }
 
     }
