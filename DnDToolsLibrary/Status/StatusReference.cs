@@ -11,7 +11,7 @@ using System.Xml.Serialization;
 
 namespace DnDToolsLibrary.Status
 {
-    public class StatusReference : INameable, INotifyPropertyChanged, ICopyAssignable
+    public class StatusReference : INameable, INotifyPropertyChanged, ICopyAssignable, IEquivalentComparable<StatusReference>
     {
         public StatusReference()
         {
@@ -69,6 +69,18 @@ namespace DnDToolsLibrary.Status
         [XmlIgnore]
         public string Name { get => Header; set { } }
         #endregion IListable
+
+        public bool IsEquivalentTo(StatusReference toCompare)
+        {
+            if (ActualStatusReference != toCompare.ActualStatusReference)
+                return false;
+            if (Header != toCompare.Header)
+                return false;
+            if (ToolTip != toCompare.ToolTip)
+                return false;
+            return true;
+        }
+
 
         #region ICloneable
 
