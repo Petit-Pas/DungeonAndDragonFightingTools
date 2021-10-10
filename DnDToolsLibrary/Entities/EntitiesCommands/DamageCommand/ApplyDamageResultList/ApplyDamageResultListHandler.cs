@@ -52,48 +52,46 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageRes
         public override ApplyDamageResultListResponse Execute(IMediatorCommand command)
         {
             ApplyDamageResultListCommand _command = base.castCommand(command);
-
-            if (false == _command.DamageList.Any())
-                return null;
-
-            PlayableEntity target = _command.GetEntity();
             int total = 0;
+            PlayableEntity target = _command.GetEntity();
 
-            console.Value.AddEntry($"{target.DisplayName}", fontWeightProvider.Value.Bold);
-            console.Value.AddEntry(" takes ");
-
-            int i = 1;
-            foreach (Damage damage in _command.DamageList)
+            if (_command.DamageList.Any())
             {
-                int final_damage = damage.RawAmount;
+                console.Value.AddEntry($"{target.DisplayName}", fontWeightProvider.Value.Bold);
+                console.Value.AddEntry(" takes ");
 
-                if (final_damage < 0)
+                int i = 1;
+                foreach (Damage damage in _command.DamageList)
                 {
-                    Console.WriteLine($"WARNING : Trying to inflict {final_damage} damage on {target.DisplayName}," +
-                        $" will be treated as 0.");
-                    final_damage = 0;
+                    int final_damage = damage.RawAmount;
+
+                    if (final_damage < 0)
+                    {
+                        Console.WriteLine($"WARNING : Trying to inflict {final_damage} damage on {target.DisplayName}," +
+                            $" will be treated as 0.");
+                        final_damage = 0;
+                    }
+
+                    applyDamageAffinity(ref final_damage, damage.TypeAffinity);
+
+                    if (_command.LastSavingWasSuccessfull)
+                        applySavingModifier(ref final_damage, damage.SavingModifer);
+
+                    total += final_damage;
+
+                    if (i == _command.DamageList.Count && i != 1)
+                        console.Value.AddEntry("and ");
+                    console.Value.AddEntry($"{final_damage} {damage.Type}", fontWeightProvider.Value.Bold, colorProvider.Value.GetColorByKey(damage.Type.ToString()));
+                    console.Value.AddEntry($"{(i == _command.DamageList.Count ? " damage" : " damage, ")}");
+
+                    i += 1;
                 }
+                console.Value.AddEntry("\r\n");
 
-                applyDamageAffinity(ref final_damage, damage.TypeAffinity);
-
-                if (_command.LastSavingWasSuccessfull)
-                    applySavingModifier(ref final_damage, damage.SavingModifer);
-
-                total += final_damage;
-
-                if (i == _command.DamageList.Count && i != 1)
-                    console.Value.AddEntry("and ");
-                console.Value.AddEntry($"{final_damage} {damage.Type}", fontWeightProvider.Value.Bold, colorProvider.Value.GetColorByKey(damage.Type.ToString()));
-                console.Value.AddEntry($"{(i == _command.DamageList.Count ? " damage" : " damage, ")}");
-                
-                i += 1;
+                TakeDamageCommand inner_command = new TakeDamageCommand(target, total);
+                base._mediator.Value.Execute(inner_command);
+                _command.PushToInnerCommands(inner_command);
             }
-            console.Value.AddEntry("\r\n");
-
-            TakeDamageCommand inner_command = new TakeDamageCommand(target, total);
-            base._mediator.Value.Execute(inner_command);
-            _command.PushToInnerCommands(inner_command);
-
             return new ApplyDamageResultListResponse(total);
         }
     }

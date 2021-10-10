@@ -1,11 +1,15 @@
 ﻿using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.Mediator;
 using CoreUnitTest.TestFactories;
+using DnDToolsLibrary.Attacks.Damage;
+using DnDToolsLibrary.Attacks.Damage.Type;
 using DnDToolsLibrary.Dice;
+using DnDToolsLibrary.Dice.DiceCommancs.SavingThrowCommands.SavingThrowQueries;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Fight;
 using DnDToolsLibrary.Status;
 using DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands;
+using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -39,6 +43,7 @@ namespace CoreUnitTest.Commands.Status
             _statusProvider.Clear();
         }
 
+        // Used in Status applied by a spell that already has a saving throw, then the saving throw of the spell is usually used for the status itself
         #region StatusProvided
 
         [Test]
@@ -76,9 +81,8 @@ namespace CoreUnitTest.Commands.Status
             Assert.AreEqual(1, _statusProvider.Count);
         }
 
-
         [Test]
-        public void OnHitDamageSavingFailed()
+        public void OnApplyDamageSavingFailed()
         {
             TryApplyStatusCommand command = new TryApplyStatusCommand("Warrior1", "Warrior2", StatusFactory.ImmediateDamageNormal, SavingThrowFactory.Failed(FightersList.Instance.GetFighterByDisplayName("Warrior2")));
 
@@ -88,7 +92,7 @@ namespace CoreUnitTest.Commands.Status
         }
 
         [Test]
-        public void OnHitDamageNormal()
+        public void OnApplyDamageNormal()
         {
             TryApplyStatusCommand command = new TryApplyStatusCommand("Warrior1", "Warrior2", StatusFactory.ImmediateDamageNormal , SavingThrowFactory.Successful(FightersList.Instance.GetFighterByDisplayName("Warrior2")));
 
@@ -98,7 +102,7 @@ namespace CoreUnitTest.Commands.Status
         }
 
         [Test]
-        public void OnHitDamageHalved()
+        public void OnApplyDamageHalved()
         {
             TryApplyStatusCommand command = new TryApplyStatusCommand("Warrior1", "Warrior2", StatusFactory.ImmediateDamageHalved, SavingThrowFactory.Successful(FightersList.Instance.GetFighterByDisplayName("Warrior2")));
 
@@ -108,7 +112,7 @@ namespace CoreUnitTest.Commands.Status
         }
 
         [Test]
-        public void OnHitDamageCanceled()
+        public void OnApplyDamageCanceled()
         {
             TryApplyStatusCommand command = new TryApplyStatusCommand("Warrior1", "Warrior2", StatusFactory.ImmediateDamageCanceled, SavingThrowFactory.Successful(FightersList.Instance.GetFighterByDisplayName("Warrior2")));
 
@@ -133,5 +137,91 @@ namespace CoreUnitTest.Commands.Status
         }
 
         #endregion StatusProvided
+
+        // Used when the status has its own Saving throw (or none) that are not linked to the attack/spell that applies it
+        #region StatusNotProvided
+
+        [Test]
+        public void NoSavingNeeded()
+        {
+            OnHitStatus automatic = StatusFactory.AutomaticApplication;
+            TryApplyStatusCommand command = new TryApplyStatusCommand("Warrior1", "Warrior2", automatic);
+            PlayableEntity affected = FightersList.Instance.GetFighterByDisplayName("Warrior2");
+
+            _mediator.Execute(command);
+
+            Assert.AreEqual(1, _statusProvider.Count);
+            Assert.AreEqual(1, affected.AffectingStatusList.Count);
+        }
+
+        [Test]
+        public void SavingFail()
+        {
+            PlayableEntity affected = FightersList.Instance.GetFighterByDisplayName("Warrior2");
+            ValidableResponse<SavingThrow> response = new ValidableResponse<SavingThrow>(true, SavingThrowFactory.Failed(affected));
+            Mock<IMediatorHandler> mock = new Mock<IMediatorHandler>();
+            mock.Setup(x => x.Execute(It.IsAny<IMediatorCommand>())).Returns((IMediatorCommandResponse)response);
+            _mediator.RegisterHandler(mock.Object, typeof(SavingThrowQuery));
+            TryApplyStatusCommand command = new TryApplyStatusCommand("Warrior1", "Warrior2", StatusFactory.InfernalWound);
+
+            _mediator.Execute(command);
+
+            mock.Verify(x => x.Execute(It.IsAny<IMediatorCommand>()), Times.Once());
+            Assert.AreEqual(1, _statusProvider.Count);
+            Assert.AreEqual(1, affected.AffectingStatusList.Count);
+        }
+
+        [Test]
+        public void SavingSuccess()
+        {
+            PlayableEntity affected = FightersList.Instance.GetFighterByDisplayName("Warrior2");
+            ValidableResponse<SavingThrow> response = new ValidableResponse<SavingThrow>(true, SavingThrowFactory.Successful(affected));
+            Mock<IMediatorHandler> mock = new Mock<IMediatorHandler>();
+            mock.Setup(x => x.Execute(It.IsAny<IMediatorCommand>())).Returns((IMediatorCommandResponse)response);
+            _mediator.RegisterHandler(mock.Object, typeof(SavingThrowQuery));
+            TryApplyStatusCommand command = new TryApplyStatusCommand("Warrior1", "Warrior2", StatusFactory.InfernalWound);
+
+            _mediator.Execute(command);
+
+            mock.Verify(x => x.Execute(It.IsAny<IMediatorCommand>()), Times.Once());
+            Assert.AreEqual(0, _statusProvider.Count);
+            Assert.AreEqual(0, affected.AffectingStatusList.Count);
+        }
+
+        [Test]
+        public void NoSavingNeeded_DamageUnImpacted()
+        {
+            OnHitStatus automatic = StatusFactory.AutomaticApplication;
+            TryApplyStatusCommand command = new TryApplyStatusCommand("Warrior1", "Warrior2", automatic);
+            command.Status.OnApplyDamageList.AddElementSilent(new DamageTemplate("10", DamageTypeEnum.Force));
+            command.Status.OnApplyDamageList.AddElementSilent(new DamageTemplate("10", DamageTypeEnum.Force));
+            command.Status.OnApplyDamageList[0].SituationalDamageModifier = DamageModifierEnum.Halved;
+            command.Status.OnApplyDamageList[1].SituationalDamageModifier = DamageModifierEnum.Normal;
+            PlayableEntity affected = FightersList.Instance.GetFighterByDisplayName("Warrior2");
+            affected.Hp = 50;
+
+            _mediator.Execute(command);
+
+            Assert.AreEqual(30, affected.Hp);
+        }
+
+        [Test]
+        public void SavingCanceled()
+        {
+            PlayableEntity affected = FightersList.Instance.GetFighterByDisplayName("Warrior2");
+            ValidableResponse<SavingThrow> response = new ValidableResponse<SavingThrow>(false, SavingThrowFactory.Failed(affected));
+            Mock<IMediatorHandler> mock = new Mock<IMediatorHandler>();
+            mock.Setup(x => x.Execute(It.IsAny<IMediatorCommand>())).Returns((IMediatorCommandResponse)response);
+            _mediator.RegisterHandler(mock.Object, typeof(SavingThrowQuery));
+            TryApplyStatusCommand command = new TryApplyStatusCommand("Warrior1", "Warrior2", StatusFactory.InfernalWound);
+
+            _mediator.Execute(command);
+
+            mock.Verify(x => x.Execute(It.IsAny<IMediatorCommand>()), Times.Once());
+            Assert.AreEqual(0, _statusProvider.Count);
+            Assert.AreEqual(0, affected.AffectingStatusList.Count);
+        }
+
+        #endregion StatusNotProvided
     }
 }

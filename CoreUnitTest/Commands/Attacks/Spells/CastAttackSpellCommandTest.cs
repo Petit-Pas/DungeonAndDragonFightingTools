@@ -47,9 +47,9 @@ namespace CoreUnitTest.Commands.Attacks.Spells
             });
             foreach (DamageResult dmg in results[0].HitDamage)
                 dmg.Damage.Roll();
-            ValidableResponse<AttackSpellResults> test = new ValidableResponse<AttackSpellResults>(true, results);
+            ValidableResponse<AttackSpellResults> response = new ValidableResponse<AttackSpellResults>(true, results);
             Mock<IMediatorHandler> mock = new Mock<IMediatorHandler>();
-            mock.Setup(x => x.Execute(It.IsAny<IMediatorCommand>())).Returns((IMediatorCommandResponse)test);
+            mock.Setup(x => x.Execute(It.IsAny<IMediatorCommand>())).Returns((IMediatorCommandResponse)response);
             _mediator.RegisterHandler(mock.Object, typeof(AttackSpellResultsQuery));
 
             _mediator.Execute(command);

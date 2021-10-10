@@ -4,10 +4,6 @@ using DnDToolsLibrary.Attacks.Damage;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Fight;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DnDToolsLibrary.Attacks.AttacksCommands.DamageCommands.DamageResultListQueries;
 using DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageResultList;
 using DnDToolsLibrary.Dice;
@@ -57,7 +53,6 @@ namespace DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands
 
             if (_command.Status.OnApplyDamageList.Count != 0)
             {
-
                 applyOnHitDamage(target, _command, _command.Saving?.IsSuccesful ?? false);
             }
 
