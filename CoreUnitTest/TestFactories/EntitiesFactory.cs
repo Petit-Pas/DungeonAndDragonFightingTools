@@ -39,5 +39,30 @@ namespace CoreUnitTest.TestFactories
             };
             return warrior;
         }
+
+        public static PlayableEntity GetWizard()
+        {
+            Character wizard = new Character()
+            {
+                ActionDescription = "Action Description",
+                CA = 15,
+                Characteristics = new CharacteristicList(-1, 2, 2, 4, 2, 1),
+                DamageAffinities = DamageTypeAffinityList.Default(),
+                DisplayName = "Wizard",
+                HitAttacks = new HitAttackTemplateList() {
+                    HitAttackTemplateFactory.Staff,
+                },
+                Hp = 30,
+                HpString = "30",
+                Level = 5,
+                MaxHp = 30,
+                Name = "Wizard",
+                SpecialAbilities = "Special Abilities",
+                SpellHitModifier = 5,
+                Spells = new SpellList() { },
+                SpellSave = 15,
+            };
+            return wizard;
+        }
     }
 }

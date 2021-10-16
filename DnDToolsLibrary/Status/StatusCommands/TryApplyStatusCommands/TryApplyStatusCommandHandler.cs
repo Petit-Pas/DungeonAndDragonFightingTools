@@ -11,12 +11,12 @@ using DnDToolsLibrary.Dice.DiceCommancs.SavingThrowCommands.SavingThrowQueries;
 
 namespace DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands
 {
-    public class TryApplyStatusCommandHandler : SuperCommandHandlerBase<TryApplyStatusCommand, NoResponse>
+    public class TryApplyStatusCommandHandler : SuperCommandHandlerBase<TryApplyStatusCommand, ValidableResponse<NoResponse>>
     {
         private Lazy<IStatusProvider> _statusProvider = new Lazy<IStatusProvider>(() => DIContainer.GetImplementation<IStatusProvider>());
         private Lazy<IFigtherProvider> _fighterProvider = new Lazy<IFigtherProvider>(() => DIContainer.GetImplementation<IFigtherProvider>());
 
-        public override NoResponse Execute(IMediatorCommand command)
+        public override ValidableResponse<NoResponse> Execute(IMediatorCommand command)
         {
             TryApplyStatusCommand _command = this.castCommand(command);
             PlayableEntity target = _fighterProvider.Value.GetFighterByDisplayName(_command.TargetName);
@@ -34,7 +34,7 @@ namespace DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands
                     ValidableResponse<SavingThrow> response = base._mediator.Value.Execute(savingQuery) as ValidableResponse<SavingThrow>;
 
                     if (!response.IsValid)
-                        return MediatorCommandResponses.NoResponse;
+                        return new ValidableResponse<NoResponse>(false, MediatorCommandResponses.NoResponse);
                     _command.Saving = response.Response;
                 }
             }
@@ -56,7 +56,7 @@ namespace DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands
                 applyOnHitDamage(target, _command, _command.Saving?.IsSuccesful ?? false);
             }
 
-            return MediatorCommandResponses.NoResponse;
+            return new ValidableResponse<NoResponse>(true, MediatorCommandResponses.NoResponse);
         }
 
         private void applyOnHitDamage(PlayableEntity target, TryApplyStatusCommand command, bool savingIsSuccess)

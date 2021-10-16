@@ -1,13 +1,18 @@
 ﻿using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.Mediator;
+using CoreUnitTest.TestFactories;
 using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.AttackSpellResultsQueries;
 using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellCommands;
 using DnDToolsLibrary.Attacks.Damage;
 using DnDToolsLibrary.Attacks.Damage.Type;
 using DnDToolsLibrary.Attacks.Spells;
+using DnDToolsLibrary.Dice;
+using DnDToolsLibrary.Dice.DiceCommancs.SavingThrowCommands.SavingThrowQueries;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageResultList;
 using DnDToolsLibrary.Fight;
+using DnDToolsLibrary.Status;
+using DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands;
 using Moq;
 using NUnit.Framework;
 using System;
@@ -29,6 +34,17 @@ namespace CoreUnitTest.Commands.Attacks.Spells
         {
             _mediator = DIContainer.GetImplementation<IMediator>();
             _character = FightersList.Instance[0];
+        }
+
+        [SetUp]
+        public void Setup()
+        {
+            PlayableEntity entity = EntitiesFactory.GetWarrior();
+            entity.DisplayName = "Warrior1";
+            FightersList.Instance.AddOrUpdateFighter(entity);
+            entity = EntitiesFactory.GetWizard();
+            entity.DisplayName = "Wizard1";
+            FightersList.Instance.AddOrUpdateFighter(entity);
         }
 
         [Test]
@@ -56,6 +72,66 @@ namespace CoreUnitTest.Commands.Attacks.Spells
 
             Assert.AreEqual(1, command.InnerCommands.Count);
             Assert.AreEqual(25, ((ApplyDamageResultListCommand)command.PopLastInnerCommand()).DamageList.Sum(x => x.RawAmount));
+        }
+
+        [Test]
+        public void GenerateCorrectTryApplyStatusCommand()
+        {
+            CastAttackSpellCommand command = new CastAttackSpellCommand(_character.DisplayName, new Mock<Spell>().Object, 1, new List<string>() { });
+            AttackSpellResults results = new AttackSpellResults();
+            Mock<IMediatorHandler> mockSaving = new Mock<IMediatorHandler>();
+            OnHitStatus status = StatusFactory.InfernalWound;
+            status.Caster = _character;
+            status.Affected = _character;
+
+            results.Add(new NewAttackSpellResult()
+            {
+                Target = _character,
+                HitDamage = new DamageResultList() {
+                },
+                AppliedStatusList = new OnHitStatusList() { status },
+                Caster = _character,
+            });
+            ValidableResponse<AttackSpellResults> response = new ValidableResponse<AttackSpellResults>(true, results);
+            Mock<IMediatorHandler> mock = new Mock<IMediatorHandler>();
+            mock.Setup(x => x.Execute(It.IsAny<IMediatorCommand>())).Returns((IMediatorCommandResponse)response);
+            _mediator.RegisterHandler(mock.Object, typeof(AttackSpellResultsQuery));
+
+            mockSaving.Setup(x => x.Execute(It.IsAny<IMediatorCommand>())).Returns((IMediatorCommandResponse)new ValidableResponse<SavingThrow>(true, SavingThrowFactory.Successful(_character)));
+            _mediator.RegisterHandler(mockSaving.Object, typeof(SavingThrowQuery));
+
+            _mediator.Execute(command);
+
+            Assert.AreEqual(2, command.InnerCommands.Count);
+            Assert.IsTrue(status.IsEquivalentTo(((TryApplyStatusCommand)command.PopLastInnerCommand()).Status));
+        }
+
+        [Test]
+        public void GenerateAttackResultsForCorrectCharacters()
+        {
+            CastAttackSpellCommand command = new CastAttackSpellCommand(_character.DisplayName, new Mock<Spell>().Object, 1, new List<string>() { "Warrior1", "Wizard1" });
+            Mock<IMediatorHandler> mock = new Mock<IMediatorHandler>();
+            mock.Setup(x => x.Execute(It.IsAny<IMediatorCommand>())).Returns<AttackSpellResultsQuery>(x => new ValidableResponse<AttackSpellResults>(true, ((AttackSpellResultsQuery)x).SpellResults));
+            _mediator.RegisterHandler(mock.Object, typeof(AttackSpellResultsQuery));
+
+            _mediator.Execute(command);
+
+            Assert.AreEqual(2, command.InnerCommands.Count);
+            Assert.AreEqual("Wizard1", ((ApplyDamageResultListCommand)command.PopLastInnerCommand()).GetEntity().DisplayName);
+            Assert.AreEqual("Warrior1", ((ApplyDamageResultListCommand)command.PopLastInnerCommand()).GetEntity().DisplayName);
+        }
+
+        [Test]
+        public void AttackResultQueryCanceled()
+        {
+            CastAttackSpellCommand command = new CastAttackSpellCommand(_character.DisplayName, new Mock<Spell>().Object, 1, new List<string>() { "Warrior1", "Wizard1" });
+            Mock<IMediatorHandler> mock = new Mock<IMediatorHandler>();
+            mock.Setup(x => x.Execute(It.IsAny<IMediatorCommand>())).Returns(new ValidableResponse<AttackSpellResults>(false, null));
+            _mediator.RegisterHandler(mock.Object, typeof(AttackSpellResultsQuery));
+
+            ValidableResponse<NoResponse> response = _mediator.Execute(command) as ValidableResponse<NoResponse>;
+
+            Assert.IsFalse(response.IsValid);
         }
     }
 }

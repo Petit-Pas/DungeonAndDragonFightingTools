@@ -21,7 +21,7 @@ namespace CoreUnitTest.TestFactories
             HitBonus = 7,
             IsCloseRanged = true,
             IsLongRanged = false,
-            Name = "sword",
+            Name = "Sword",
             OnHitStatuses = new OnHitStatusList(),
             Owner = null,
             Range = AttackRangeEnum.CloseRange
@@ -35,10 +35,24 @@ namespace CoreUnitTest.TestFactories
                         },
             DisplayName = "Bow",
             HitBonus = 7,
-            Name = "bow",
+            Name = "Bow",
             OnHitStatuses = new OnHitStatusList(),
             Owner = null,
             Range = AttackRangeEnum.LongRange
+        };
+
+        public static HitAttackTemplate Staff => new HitAttackTemplate()
+        {
+            DamageList = new DamageTemplateList()
+                        {
+                            new DamageTemplate("1d6+1", DamageTypeEnum.Piercing)
+                        },
+            DisplayName = "Staff",
+            HitBonus = 3,
+            Name = "Staff",
+            OnHitStatuses = new OnHitStatusList(),
+            Owner = null,
+            Range = AttackRangeEnum.CloseRange
         };
     }
 }

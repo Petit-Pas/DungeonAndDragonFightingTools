@@ -553,7 +553,7 @@ namespace DnDToolsLibrary.Entities
                 return false;
             if (!Counters.IsEquivalentTo(toCompare.Counters))
                 return false;
-            if (Spells.IsEquivalentTo(toCompare.Spells))
+            if (!Spells.IsEquivalentTo(toCompare.Spells))
                 return false;
             if (TempHp != toCompare.TempHp)
                 return false;

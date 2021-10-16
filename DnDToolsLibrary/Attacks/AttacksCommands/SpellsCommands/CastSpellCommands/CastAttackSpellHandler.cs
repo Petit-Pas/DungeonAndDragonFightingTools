@@ -4,6 +4,8 @@ using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.AttackSpellResultsQ
 using DnDToolsLibrary.Attacks.Spells;
 using DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageResultList;
 using DnDToolsLibrary.Fight;
+using DnDToolsLibrary.Status;
+using DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands;
 using System;
 using System.Collections.Generic;
 
@@ -24,8 +26,13 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
                     ApplyDamageResultListCommand damageCommand = new ApplyDamageResultListCommand(attackSpellResult.Target, attackSpellResult.HitDamage);
                     base._mediator.Value.Execute(damageCommand);
                     _command.PushToInnerCommands(damageCommand);
-                    // TODO
-                    // apply on hit status
+
+                    foreach (OnHitStatus status in attackSpellResult.AppliedStatusList)
+                    {
+                        TryApplyStatusCommand statusCommand = new TryApplyStatusCommand(_command.CasterName, attackSpellResult.TargetName, status);
+                        base._mediator.Value.Execute(statusCommand);
+                        _command.PushToInnerCommands(statusCommand);
+                    }
                 }
                 return new ValidableResponse<NoResponse>(true, MediatorCommandResponses.NoResponse);
             }
