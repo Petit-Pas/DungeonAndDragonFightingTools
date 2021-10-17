@@ -8,6 +8,7 @@ using DnDToolsLibrary.Attacks.AttacksCommands.DamageCommands.DamageResultListQue
 using DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageResultList;
 using DnDToolsLibrary.Dice;
 using DnDToolsLibrary.Dice.DiceCommancs.SavingThrowCommands.SavingThrowQueries;
+using DnDToolsLibrary.Entities.EntitiesCommands.StatusCommands.AddStatus;
 
 namespace DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands
 {
@@ -48,7 +49,7 @@ namespace DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands
             // sometimes it is applied anyway
             if (applyIsSuccess)
             {
-                applyToTarget(target, _command.Status, _command.Saving); 
+                applyToTarget(target, _command);
             }
 
             if (_command.Status.OnApplyDamageList.Count != 0)
@@ -79,16 +80,17 @@ namespace DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands
             }
         }
 
-        public void applyToTarget(PlayableEntity target, OnHitStatus status, SavingThrow savingThrow)
+        public void applyToTarget(PlayableEntity target, TryApplyStatusCommand initialCommand)
         {
-            if (savingThrow != null)
+            if (initialCommand.Saving != null)
             {
-                status.ApplySavingDifficulty = savingThrow.Difficulty;
-                status.ApplySavingCharacteristic = savingThrow.Characteristic;
+                initialCommand.Status.ApplySavingDifficulty = initialCommand.Saving.Difficulty;
+                initialCommand.Status.ApplySavingCharacteristic = initialCommand.Saving.Characteristic;
             }
 
-            _statusProvider.Value.Add(status);
-            target.AffectingStatusList.Add(new StatusReference(status));
+            AddStatusCommand command = new AddStatusCommand(target, initialCommand.Status);
+            base._mediator.Value.Execute(command);
+            initialCommand.PushToInnerCommands(command);
         }
     }
 }

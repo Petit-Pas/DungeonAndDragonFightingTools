@@ -111,6 +111,8 @@
     <Compile Include="Entities\EntitiesCommands\HpCommands\TakeDamage\TakeDamageHandler.cs" />
     <Compile Include="Entities\EntitiesCommands\HpCommands\TempHeal\TempHealCommand.cs" />
     <Compile Include="Entities\EntitiesCommands\HpCommands\TempHeal\TempHealHandler.cs" />
+    <Compile Include="Entities\EntitiesCommands\StatusCommands\AddStatus\AddStatusCommand.cs" />
+    <Compile Include="Entities\EntitiesCommands\StatusCommands\AddStatus\AddStatusCommandHandler.cs" />
     <Compile Include="Fight\FightersList.cs" />
     <Compile Include="Entities\Monster.cs" />
     <Compile Include="Entities\PlayableEntity.cs" />
