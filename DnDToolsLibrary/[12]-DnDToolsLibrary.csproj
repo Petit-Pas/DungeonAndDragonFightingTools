@@ -96,6 +96,12 @@
     <Compile Include="Dice\Dices.cs" />
     <Compile Include="Dice\SavingThrow.cs" />
     <Compile Include="Entities\Character.cs" />
+    <Compile Include="Entities\EntitiesCommands\ConcentrationCommands\AcquireConcentration\AcquireConcentrationCommand.cs" />
+    <Compile Include="Entities\EntitiesCommands\ConcentrationCommands\AcquireConcentration\AcquireConcentrationCommandHandler.cs" />
+    <Compile Include="Entities\EntitiesCommands\ConcentrationCommands\ChallengeConcentration\ChallengeConcentrationCommand.cs" />
+    <Compile Include="Entities\EntitiesCommands\ConcentrationCommands\ChallengeConcentration\ChallengeConcentrationCommandHandler.cs" />
+    <Compile Include="Entities\EntitiesCommands\ConcentrationCommands\LoseConcentration\LoseConcentrationCommand.cs" />
+    <Compile Include="Entities\EntitiesCommands\ConcentrationCommands\LoseConcentration\LoseConcentrationCommandHandler.cs" />
     <Compile Include="Entities\EntitiesCommands\DamageCommand\ApplyDamageResultList\ApplyDamageResultListCommand.cs" />
     <Compile Include="Entities\EntitiesCommands\DamageCommand\ApplyDamageResultList\ApplyDamageResultListHandler.cs" />
     <Compile Include="Entities\EntitiesCommands\DamageCommand\ApplyDamageResultList\ApplyDamageResultListResponse.cs" />
