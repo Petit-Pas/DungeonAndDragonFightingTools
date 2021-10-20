@@ -167,6 +167,5 @@ namespace CoreUnitTest.Commands.PlayableEntities.Damage
             _mediator.Undo(command);
             Assert.AreEqual(50, _character.Hp);
         }
-
     }
 }

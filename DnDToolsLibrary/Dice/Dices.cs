@@ -21,7 +21,7 @@ namespace DnDToolsLibrary.Dice
         ///     Warning, should be a string formatted as follows: "2d6"
         /// </summary>
         /// <param name="format"></param>
-        public Dices(string format)
+        public Dices(string format) : this()
         {
             try
             {
