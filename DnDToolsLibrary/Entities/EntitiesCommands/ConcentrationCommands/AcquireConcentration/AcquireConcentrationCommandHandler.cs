@@ -20,7 +20,9 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.Acquir
             if (entity.IsFocused)
             {
                 // will take care of removing already applied statuses
-                LoseConcentrationCommand loseConcentrationCommand = new LoseConcentrationCommand()
+                LoseConcentrationCommand loseConcentrationCommand = new LoseConcentrationCommand(entity.DisplayName);
+                base._mediator.Value.Execute(loseConcentrationCommand);
+                _command.PushToInnerCommands(loseConcentrationCommand);
             }
 
             entity.IsFocused = true;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.ChallengeConcentration
 {
-    internal class ChallengeConcentrationCommandHandler
+    public class ChallengeConcentrationCommandHandler
     {
     }
 }
