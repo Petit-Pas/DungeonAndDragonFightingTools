@@ -32,9 +32,6 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
                         base._mediator.Value.Execute(statusCommand);
                         _command.PushToInnerCommands(statusCommand);
                     }
-
-                    // TODO
-                    // add On hit status
                 }
                 return new ValidableResponse<NoResponse>(true, MediatorCommandResponses.NoResponse);
             }
@@ -45,6 +42,7 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
         {
             NewNonAttackSpellResult template = command.Spell.GetNonAttackSpellResultTemplate(_fighterProvider.Value.GetFighterByDisplayName(command.CasterName), command.CastLevel);
             NonAttackSpellResults spellResults = new NonAttackSpellResults();
+            
             foreach (string name in command.TargetNames)
             {
                 NewNonAttackSpellResult spellResult = template.Clone() as NewNonAttackSpellResult;

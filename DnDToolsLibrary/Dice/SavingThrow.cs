@@ -1,4 +1,5 @@
-﻿using BaseToolsLibrary.DependencyInjection;
+﻿using BaseToolsLibrary;
+using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.Mediator;
 using DnDToolsLibrary.Attacks;
 using DnDToolsLibrary.Characteristics;
@@ -11,7 +12,7 @@ using System.Xml.Serialization;
 
 namespace DnDToolsLibrary.Dice
 { 
-    public class SavingThrow : INotifyPropertyChanged, ICloneable, IMediatorCommandResponse
+    public class SavingThrow : INotifyPropertyChanged, ICloneable, IMediatorCommandResponse, IEquivalentComparable<SavingThrow>
     {
         #region Properties
 
@@ -153,6 +154,23 @@ namespace DnDToolsLibrary.Dice
             this.TargetName = to_copy.TargetName;
         }
 
+        public bool IsEquivalentTo(SavingThrow toCompare)
+        {
+            if (this.SavingRoll != toCompare.SavingRoll)
+                return false;
+            if (!this.AdvantageModifiers.IsEquivalentTo(toCompare.AdvantageModifiers))
+                return false;
+            if (this.Characteristic != toCompare.Characteristic)
+                return false;
+            if (this.Difficulty != toCompare.Difficulty)
+                return false;
+            if (this.Modifier != toCompare.Modifier)
+                return false;
+            if (this.TargetName != toCompare.TargetName)
+                return false;
+            return true;
+        }
+
         public SavingThrow(SavingThrow to_copy)
         {
             init_copy(to_copy);
@@ -182,6 +200,8 @@ namespace DnDToolsLibrary.Dice
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
         #endregion
+
     }
 }

@@ -1,10 +1,11 @@
-﻿using System;
+﻿using BaseToolsLibrary;
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace DnDToolsLibrary.Attacks
 {
-    public class SituationalAdvantageModifiers : INotifyPropertyChanged, ICloneable
+    public class SituationalAdvantageModifiers : INotifyPropertyChanged, ICloneable, IEquivalentComparable<SituationalAdvantageModifiers>
     {
 
         public SituationalAdvantageModifiers() { }
@@ -13,6 +14,15 @@ namespace DnDToolsLibrary.Attacks
         {
             this.SituationalAdvantage = to_copy.SituationalAdvantage;
             this.SituationalDisadvantage = to_copy.SituationalDisadvantage;
+        }
+
+        public bool IsEquivalentTo(SituationalAdvantageModifiers toCompare)
+        {
+            if (this.SituationalAdvantage != toCompare.SituationalAdvantage)
+                return false;
+            if (this.SituationalDisadvantage != toCompare.SituationalDisadvantage)
+                return false;
+            return true;
         }
 
         public SituationalAdvantageModifiers(SituationalAdvantageModifiers to_copy) { init_copy(to_copy); }

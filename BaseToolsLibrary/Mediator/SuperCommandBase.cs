@@ -31,6 +31,11 @@ namespace BaseToolsLibrary.Mediator
         {
             return InnerCommands.Pop();
         }
+
+        public IMediatorCommand PeekLastInnerCommand()
+        {
+            return InnerCommands.Peek();
+        }
         
     }
 }

@@ -330,7 +330,6 @@ namespace DnDToolsLibrary.Attacks.Spells
                 Target = null,
                 HasSavingThrow = this.HasSavingThrow,
                 Name = this.Name,
-                Saving = null,
             };
 
             for (int i = castLevel - this.BaseLevel; i > 0; i -= 1)

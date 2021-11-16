@@ -162,7 +162,7 @@ namespace DnDToolsLibrary.Attacks.Spells
                 NotifyPropertyChanged();
             }
         }
-        private SavingThrow _saving = null;
+        private SavingThrow _saving = new SavingThrow();
 
         private void refreshLastSavingSuccesfulOfHitDamage(object sender, PropertyChangedEventArgs e)
         {
