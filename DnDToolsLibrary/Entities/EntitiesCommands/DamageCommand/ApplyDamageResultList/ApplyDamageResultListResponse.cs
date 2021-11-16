@@ -10,7 +10,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageRes
         {
         }
 
-        public ApplyDamageResultListResponse(int amount)
+        public ApplyDamageResultListResponse(int amount) : this()
         {
             Amount = amount;
         }

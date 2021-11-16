@@ -76,7 +76,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.Status
 
             _mediator.Execute(command);
 
-            Assert.AreEqual(_character.AffectingStatusList[0].ActualStatusReference, _statusProvider[0].Id);
+            Assert.AreEqual(_character.AffectingStatusList[0].ActualStatusReferenceId, _statusProvider[0].Id);
         }
 
         [Test]
@@ -90,7 +90,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.Status
 
             _mediator.Execute(command);
 
-            Assert.AreEqual(_character.AffectingStatusList.First().ActualStatusReference, _statusProvider.First().Id);
+            Assert.AreEqual(_character.AffectingStatusList.First().ActualStatusReferenceId, _statusProvider.First().Id);
         }
 
         [Test]

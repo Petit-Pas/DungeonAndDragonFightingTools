@@ -169,6 +169,5 @@ namespace CoreUnitTest.Dice
 
             Assert.AreEqual(diceRoll.LastResult, result);
         }
-
     }
 }

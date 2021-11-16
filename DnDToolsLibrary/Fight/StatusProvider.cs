@@ -1,4 +1,5 @@
-﻿using DnDToolsLibrary.Status;
+﻿using DnDToolsLibrary.Entities;
+using DnDToolsLibrary.Status;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,16 @@ namespace DnDToolsLibrary.Fight
         {
             return this.FirstOrDefault(x => x.Id == id);
         }
+
+        public List<OnHitStatus> GetOnHitStatusesAppliedBy(string casterName)
+        {
+            return this.OfType<OnHitStatus>().Where(x => x.Caster.DisplayName == casterName).Cast<OnHitStatus>().ToList();
+        }
+
+        public List<OnHitStatus> GetOnHitStatusesAppliedBy(PlayableEntity caster)
+        {
+            return GetOnHitStatusesAppliedBy(caster.DisplayName);
+        }
+
     }
 }

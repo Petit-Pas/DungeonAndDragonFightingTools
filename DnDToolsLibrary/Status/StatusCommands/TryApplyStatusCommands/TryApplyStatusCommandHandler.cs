@@ -14,7 +14,6 @@ namespace DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands
 {
     public class TryApplyStatusCommandHandler : SuperCommandHandlerBase<TryApplyStatusCommand, ValidableResponse<NoResponse>>
     {
-        private Lazy<IStatusProvider> _statusProvider = new Lazy<IStatusProvider>(() => DIContainer.GetImplementation<IStatusProvider>());
         private Lazy<IFigtherProvider> _fighterProvider = new Lazy<IFigtherProvider>(() => DIContainer.GetImplementation<IFigtherProvider>());
 
         public override ValidableResponse<NoResponse> Execute(IMediatorCommand command)

@@ -14,7 +14,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageRes
         [XmlAttribute]
         public bool LastSavingWasSuccessfull { get; set; } = false;
 
-        public List<Damage> DamageList { get; set; } = new List<Damage>();
+        public List<Damage> DamageList { get; } = new List<Damage>();
 
         public ApplyDamageResultListCommand(PlayableEntity target, DamageResultList damageList, bool lastSavingWasSuccessfull = false) 
             : base(target.DisplayName)
@@ -35,10 +35,9 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageRes
         {
             private Damage()
             {
-
             }
 
-            public Damage(int rawAmount, DamageModifierEnum savingModifier, DamageAffinityEnum typeAffinity, DamageTypeEnum type)
+            public Damage(int rawAmount, DamageModifierEnum savingModifier, DamageAffinityEnum typeAffinity, DamageTypeEnum type) : this()
             {
                 RawAmount = rawAmount;
                 SavingModifer = savingModifier;

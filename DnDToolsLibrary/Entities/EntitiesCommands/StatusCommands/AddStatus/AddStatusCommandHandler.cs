@@ -31,7 +31,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.StatusCommands.AddStatus
             PlayableEntity target = _command.GetEntity();
 
             _statusProvider.Value.Remove(_command.Status);
-            StatusReference statusReference = target.AffectingStatusList.First(x => x.ActualStatusReference == _command.Status.Id);
+            StatusReference statusReference = target.AffectingStatusList.First(x => x.ActualStatusReferenceId == _command.Status.Id);
             target.AffectingStatusList.Remove(statusReference);
         }
     }

@@ -22,13 +22,13 @@ namespace DnDToolsLibrary.Status
         {
             if (status.Id == default)
                 status.Id = Guid.NewGuid();
-            ActualStatusReference = status.Id;
+            ActualStatusReferenceId = status.Id;
             Header = status.Header;
             ToolTip = status.ToolTip;
         }
 
         [XmlAttribute]
-        public Guid ActualStatusReference 
+        public Guid ActualStatusReferenceId 
         {
             get => _actualStatusReference;
             set
@@ -72,7 +72,7 @@ namespace DnDToolsLibrary.Status
 
         public bool IsEquivalentTo(StatusReference toCompare)
         {
-            if (ActualStatusReference != toCompare.ActualStatusReference)
+            if (ActualStatusReferenceId != toCompare.ActualStatusReferenceId)
                 return false;
             if (Header != toCompare.Header)
                 return false;
@@ -86,7 +86,7 @@ namespace DnDToolsLibrary.Status
 
         protected void init_copy(StatusReference to_copy)
         {
-            ActualStatusReference = to_copy.ActualStatusReference;
+            ActualStatusReferenceId = to_copy.ActualStatusReferenceId;
             Header = (string)to_copy.Header.Clone();
             ToolTip = (string)to_copy.ToolTip.Clone();
         }
