@@ -4,11 +4,8 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.SpellLevelQueri
 {
     public class NormalSpellLevelQuery : SpellLevelBaseQuery, IMediatorCommand, IUiCommand
     {
-        public int BaseLevel = -1;
-
-        public NormalSpellLevelQuery(int base_level)
+        public NormalSpellLevelQuery(int baseLevel) : base(baseLevel)
         {
-            BaseLevel = base_level;
         }
     }
 }

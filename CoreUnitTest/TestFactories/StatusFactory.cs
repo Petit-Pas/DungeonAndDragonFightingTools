@@ -36,6 +36,19 @@ namespace CoreUnitTest.TestFactories
             ToolTip = "Tooltip",
         };
 
+        public static OnHitStatus Bless => new OnHitStatus()
+        {
+            DurationIsBasedOnStartOfTurn = true,
+            DurationIsCalculatedOnCasterTurn = true,
+            DisplayName = "Blessed",
+            EndsOnCasterLossOfConcentration = true,
+            Description = "Description",
+            HasAMaximumDuration = true,
+            Header = "Header",
+            Name = "Name",
+            RemainingRounds = 10,
+        };
+
         public static OnHitStatus ImmediateDamageNormal => new OnHitStatus()
         {
             ApplySavingCharacteristic = CharacteristicsEnum.Wisdom,

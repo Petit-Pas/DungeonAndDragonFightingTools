@@ -385,14 +385,20 @@ namespace DnDToolsLibrary.Status
         public OnHitStatus(OnHitStatus to_copy)
         {
             init_copy(to_copy);
-            RegisterEvents(this);
+            if (RegisterEvents != null) 
+            {
+                RegisterEvents(this);
+            }
         }
 
         public override void CopyAssign(object to_copy)
         {
             if (to_copy is OnHitStatus status)
             {
-                UnregisterEvents(this);
+                if (UnregisterEvents != null)
+                {
+                    UnregisterEvents(this);
+                }
                 init_copy(status);
                 RegisterEvents(this);
             }

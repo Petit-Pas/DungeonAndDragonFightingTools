@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.SpellTargetsQueries
 {
-    public class GetInputSpellTargetsResponse : IMediatorCommandResponse
+    public class SpellTargets : IMediatorCommandResponse
     {
-        public GetInputSpellTargetsResponse(List<string> targetNames)
+        public SpellTargets(List<string> targetNames)
         {
             TargetNames = targetNames;
         }
-        private GetInputSpellTargetsResponse() { }
+        private SpellTargets() { }
 
         public List<string> TargetNames;
     }

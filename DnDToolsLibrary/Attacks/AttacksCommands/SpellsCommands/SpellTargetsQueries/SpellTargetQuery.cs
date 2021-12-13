@@ -2,9 +2,9 @@
 
 namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.SpellTargetsQueries
 {
-    public class GetInputSpellTargetsCommand : IMediatorCommand
+    public class SpellTargetQuery : IMediatorCommand
     {
-        public GetInputSpellTargetsCommand(int amountTargets, bool targetCanBeSelectedMoreThanOnce)
+        public SpellTargetQuery(int amountTargets, bool targetCanBeSelectedMoreThanOnce)
         {
             AmountTargets = amountTargets;
             TargetCanBeSelectedMoreThanOnce = targetCanBeSelectedMoreThanOnce;

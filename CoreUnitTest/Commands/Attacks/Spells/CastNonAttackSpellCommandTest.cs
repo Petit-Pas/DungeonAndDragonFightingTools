@@ -147,5 +147,21 @@ namespace CoreUnitTest.Commands.Attacks.Spells
             Assert.IsTrue(SavingThrowFactory.Failed(FightersList.Instance.GetFighterByDisplayName("Warrior1")).IsEquivalentTo(statusCommand.Saving));
             Assert.IsTrue(results[0].AppliedStatusList[0].IsEquivalentTo(statusCommand.Status));
         }
+
+        [Test]
+        public void NonAttackSpellResultsQuery_Canceled()
+        {
+            CastNonAttackSpellCommand command = new CastNonAttackSpellCommand(_character.DisplayName, new Mock<Spell>().Object, 1, new List<string>() { "Warrior1", "Wizard1" });
+
+            ValidableResponse<NonAttackSpellResults> response = new ValidableResponse<NonAttackSpellResults>(false, null);
+            Mock<IMediatorHandler> mock = new Mock<IMediatorHandler>();
+            mock.Setup(x => x.Execute(It.IsAny<IMediatorCommand>())).Returns(response);
+            _mediator.RegisterHandler(mock.Object, typeof(NonAttackSpellResultsQuery));
+
+            ValidableResponse<NoResponse> commandResponse = _mediator.Execute(command) as ValidableResponse<NoResponse>;
+
+            Assert.AreEqual(0, command.InnerCommands.Count);
+            Assert.IsFalse(commandResponse.IsValid);
+        }
     }
 }

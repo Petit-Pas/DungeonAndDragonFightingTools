@@ -63,8 +63,8 @@
     <Compile Include="Attacks\AttacksCommands\SpellsCommands\SpellLevelQueries\SpellLevelBaseQuery.cs" />
     <Compile Include="Attacks\AttacksCommands\SpellsCommands\SpellLevelQueries\NormalSpellLevelQuery.cs" />
     <Compile Include="Attacks\AttacksCommands\SpellsCommands\SpellLevelQueries\SpellLevel.cs" />
-    <Compile Include="Attacks\AttacksCommands\SpellsCommands\SpellTargetsQueries\SpellsTargetQuery.cs" />
-    <Compile Include="Attacks\AttacksCommands\SpellsCommands\SpellTargetsQueries\SpellsTargets.cs" />
+    <Compile Include="Attacks\AttacksCommands\SpellsCommands\SpellTargetsQueries\SpellTargetQuery.cs" />
+    <Compile Include="Attacks\AttacksCommands\SpellsCommands\SpellTargetsQueries\SpellTargets.cs" />
     <Compile Include="Attacks\Damage\DamageModifierEnum.cs" />
     <Compile Include="Attacks\Damage\DamageResult.cs" />
     <Compile Include="Attacks\Damage\DamageResultList.cs" />

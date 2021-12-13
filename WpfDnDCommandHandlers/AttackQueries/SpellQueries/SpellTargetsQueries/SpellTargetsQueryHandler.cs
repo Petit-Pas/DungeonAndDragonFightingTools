@@ -12,7 +12,7 @@ using WpfToolsLibrary.Navigation;
 
 namespace WpfDnDCommandHandlers.AttackQueries.SpellQueries.SpellTargetsQueries
 {
-    public class SpellTargetsQueryHandler : BaseResultCommandHandler<GetInputSpellTargetsCommand, GetInputSpellTargetsResponse>
+    public class SpellTargetsQueryHandler : BaseResultCommandHandler<SpellTargetQuery, SpellTargets>
     {
     }
 }

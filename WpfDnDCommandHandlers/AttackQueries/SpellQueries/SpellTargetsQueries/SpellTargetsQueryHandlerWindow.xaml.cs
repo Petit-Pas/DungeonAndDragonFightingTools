@@ -16,7 +16,7 @@ namespace WpfDnDCommandHandlers.AttackQueries.SpellQueries.SpellTargetsQueries
     /// <summary>
     /// Logique d'interaction pour GetInputSpellTargetsWindow.xaml
     /// </summary>
-    public partial class SpellTargetsQueryHandlerWindow : Window, IResultWindow<GetInputSpellTargetsCommand, GetInputSpellTargetsResponse>
+    public partial class SpellTargetsQueryHandlerWindow : Window, IResultWindow<SpellTargetQuery, SpellTargets>
     {
 
         public ObservableCollection<string> Selected
@@ -43,9 +43,9 @@ namespace WpfDnDCommandHandlers.AttackQueries.SpellQueries.SpellTargetsQueries
 
         public bool Validated { get; set; } = false;
 
-        private GetInputSpellTargetsCommand data_context
+        private SpellTargetQuery data_context
         {
-            get => DataContext as GetInputSpellTargetsCommand;
+            get => DataContext as SpellTargetQuery;
         }
 
         public SpellTargetsQueryHandlerWindow()
@@ -95,12 +95,12 @@ namespace WpfDnDCommandHandlers.AttackQueries.SpellQueries.SpellTargetsQueries
                 e.Accepted = true;
         }
 
-        public GetInputSpellTargetsResponse GetResult()
+        public SpellTargets GetResult()
         {
-            return new GetInputSpellTargetsResponse(Selected.ToList());
+            return new SpellTargets(Selected.ToList());
         }
 
-        public void LoadContext(GetInputSpellTargetsCommand context)
+        public void LoadContext(SpellTargetQuery context)
         {
             DataContext = context;
         }

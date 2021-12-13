@@ -43,14 +43,14 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
 
         private bool targetsSelected(CastSpellCommand command)
         {
-            GetInputSpellTargetsCommand target_command = new GetInputSpellTargetsCommand(command.Spell.AmountTargets, command.Spell.CanSelectSameTargetTwice);
+            SpellTargetQuery target_command = new SpellTargetQuery(command.Spell.AmountTargets, command.Spell.CanSelectSameTargetTwice);
 
             if (command.CastLevel != command.Spell.BaseLevel && command.Spell.AdditionalTargetPerLevel != 0)
             {
                 target_command.AmountTargets += command.Spell.AdditionalTargetPerLevel * (command.CastLevel - command.Spell.BaseLevel);
             }
             
-            ValidableResponse<GetInputSpellTargetsResponse> response = base._mediator.Value.Execute(target_command) as ValidableResponse<GetInputSpellTargetsResponse>;
+            ValidableResponse<SpellTargets> response = base._mediator.Value.Execute(target_command) as ValidableResponse<SpellTargets>;
             
             if (response.IsValid)
                 command.TargetNames = response.Response.TargetNames;
