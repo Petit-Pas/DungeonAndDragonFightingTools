@@ -47,5 +47,3 @@ Ils permettent à eux seuls de savoir quand refresh l'UI, mais pour fonctionner 
 	binding.NotifyOnSourceUpdated = true;
 	binding.NotifyOnTargetUpdated = true;
 Il pourrait donc être bon de revor tout les bindings et d'y ajouter ceci, puis de revoir toute les fenetres validables et de jouer avec les events de la window plutot que les nouveaux
-
-Les cantrip devraient avoir un tag plutot qu'etre reconnu par un baseLevel de 0, sinon un cantrip lançé au niveau 1 est considéré comme lançé au niveau 0 + 1 ce qui le lancerait donc au niveau 2.

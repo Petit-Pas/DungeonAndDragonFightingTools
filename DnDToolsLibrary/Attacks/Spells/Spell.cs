@@ -34,6 +34,25 @@ namespace DnDToolsLibrary.Attacks.Spells
         #region Properties_Level
 
         [XmlAttribute]
+        public bool IsCantrip
+        {
+            get => _isCantrip;
+            set
+            {
+                if (_isCantrip != value)
+                {
+                    _isCantrip = value;
+                    NotifyPropertyChanged();
+                }
+                if (_isCantrip)
+                {
+                    BaseLevel = 1;
+                }
+            }
+        }
+        private bool _isCantrip = false;
+
+        [XmlAttribute]
         public bool CanBeCastAtHigherLevel
         {
             get => _canBeCastAtHigherLevel;
@@ -83,6 +102,7 @@ namespace DnDToolsLibrary.Attacks.Spells
                 _baseLevel = value;
                 NotifyPropertyChanged();
             }
+
         }
         private int _baseLevel = 0;
 
@@ -439,6 +459,7 @@ namespace DnDToolsLibrary.Attacks.Spells
         private void init_copy(Spell to_copy)
         {
             this.BaseLevel = to_copy.BaseLevel;
+            this.IsCantrip = to_copy.IsCantrip;
             this.Description = (string)to_copy.Description.Clone();
             this.AmountTargets = to_copy.AmountTargets;
             this.CanSelectSameTargetTwice = to_copy.CanSelectSameTargetTwice;

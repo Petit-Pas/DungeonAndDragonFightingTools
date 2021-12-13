@@ -4,9 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DDFight.Game.Aggression.Spells.Display"
-             xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes" xmlns:inttextboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.IntTextBoxes;assembly=WpfCustomControlLibrary" xmlns:stringtextboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.StringTextBoxes;assembly=WpfCustomControlLibrary"
+             xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes" xmlns:inttextboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.IntTextBoxes;assembly=WpfCustomControlLibrary" xmlns:stringtextboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.StringTextBoxes;assembly=WpfCustomControlLibrary" xmlns:sliderbutton="clr-namespace:WpfCustomControlLibrary.SliderButton;assembly=WpfCustomControlLibrary" xmlns:visibilities="clr-namespace:WpfToolsLibrary.Converters.Visibilities;assembly=WpfToolsLibrary"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <visibilities:BoolToReversedVisibilityConverter x:Key="BoolToReversedVisibilityConverter" />
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -20,15 +23,25 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
             <stringtextboxes:NotEmptyStringTextBoxControl
                 Grid.Row="0"
                 Grid.Column="0"
                 String="{Binding Name}"/>
-            <DockPanel
+            <WrapPanel 
                 Grid.Row="1"
+                Orientation="Horizontal"
+                Margin="10"
+                >
+                <TextBlock> Is a cantrip </TextBlock>
+                <sliderbutton:SliderButtonControl IsChecked="{Binding IsCantrip}"></sliderbutton:SliderButtonControl>
+            </WrapPanel>
+            <DockPanel
+                Visibility="{Binding IsCantrip, Converter={StaticResource BoolToReversedVisibilityConverter}}"
+                Grid.Row="2"
                 Grid.Column="0">
                 <TextBlock
                     DockPanel.Dock="Left"
@@ -37,7 +50,7 @@
                     Level
                 </TextBlock>
                 <inttextboxes:RangedIntTextBoxControl
-                    Min="0"
+                    Min="1"
                     Max="9"
                     Integer="{Binding BaseLevel}"
                     DockPanel.Dock="Right"
@@ -46,7 +59,7 @@
 
                 <Slider
                     Value="{Binding BaseLevel}"
-                    Minimum="0" Maximum="9"
+                    Minimum="1" Maximum="9"
                     TickFrequency="1"
                     TickPlacement="BottomRight"
                     IsSnapToTickEnabled="True"
