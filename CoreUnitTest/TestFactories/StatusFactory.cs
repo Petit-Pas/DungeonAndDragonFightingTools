@@ -27,8 +27,8 @@ namespace CoreUnitTest.TestFactories
             HasAMaximumDuration = true,
             HasApplyCondition = false,
             HasSpellSaving = true,
-            Header = "Header",
-            Name = "Name",
+            Header = "Slow",
+            Name = "Slow",
             OnApplyDamageList = new DamageTemplateList(),
             RemainingRounds = 10,
             SpellApplicationModifier = ApplicationModifierEnum.Canceled,
@@ -45,7 +45,7 @@ namespace CoreUnitTest.TestFactories
             Description = "Description",
             HasAMaximumDuration = true,
             Header = "Header",
-            Name = "Name",
+            Name = "Bless",
             RemainingRounds = 10,
         };
 
@@ -152,7 +152,7 @@ namespace CoreUnitTest.TestFactories
             HasAMaximumDuration = false,
             HasApplyCondition = true,
             HasSpellSaving = false,
-            Header = "Header",
+            Header = "InfernalWound",
             Name = "Name",
             OnApplyDamageList = new DamageTemplateList()
             {

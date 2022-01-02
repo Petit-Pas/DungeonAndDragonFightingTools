@@ -39,6 +39,12 @@ namespace DnDToolsLibrary.Dice
         }
 
         [XmlIgnore]
+        public bool IsFailed
+        {
+            get => !IsSuccesful;
+        }
+
+        [XmlIgnore]
         public int Result
         {
             get => Modifier + SavingRoll + Target.Characteristics.GetSavingModifier(Characteristic);

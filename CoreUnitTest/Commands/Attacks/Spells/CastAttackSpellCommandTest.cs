@@ -1,5 +1,6 @@
 ﻿using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.Mediator;
+using BaseToolsLibrary.Mediator.CommandStatii;
 using CoreUnitTest.TestFactories;
 using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.AttackSpellResultsQueries;
 using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellCommands;
@@ -129,7 +130,7 @@ namespace CoreUnitTest.Commands.Attacks.Spells
             mock.Setup(x => x.Execute(It.IsAny<IMediatorCommand>())).Returns(new ValidableResponse<AttackSpellResults>(false, null));
             _mediator.RegisterHandler(mock.Object, typeof(AttackSpellResultsQuery));
 
-            ValidableResponse<NoResponse> response = _mediator.Execute(command) as ValidableResponse<NoResponse>;
+            ValidableResponse<MediatorCommandNoResponse> response = _mediator.Execute(command) as ValidableResponse<MediatorCommandNoResponse>;
 
             Assert.IsFalse(response.IsValid);
         }

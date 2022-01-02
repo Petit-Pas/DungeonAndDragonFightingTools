@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BaseToolsLibrary.Mediator.CommandStatii;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,8 +11,10 @@ namespace BaseToolsLibrary.Mediator
     {
     }
 
-    public static class MediatorCommandResponses
+    public static class MediatorCommandStatii
     {
-        public static NoResponse NoResponse { get; } = new NoResponse();
+        public static MediatorCommandNoResponse NoResponse { get; } = new MediatorCommandNoResponse();
+        public static MediatorCommandCanceled Canceled { get; } = new MediatorCommandCanceled();
+        public static MediatorCommandSuccess Success { get; } = new MediatorCommandSuccess();
     }
 }

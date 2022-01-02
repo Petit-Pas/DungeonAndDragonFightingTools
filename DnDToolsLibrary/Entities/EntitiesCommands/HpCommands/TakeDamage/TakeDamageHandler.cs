@@ -1,23 +1,24 @@
 ﻿using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.IO;
 using BaseToolsLibrary.Mediator;
+using BaseToolsLibrary.Mediator.CommandStatii;
 using DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.LooseHp;
 using DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.LooseTempHp;
 using System;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.TakeDamage
 {
-    public class TakeDamageHandler : SuperCommandHandlerBase<TakeDamageCommand, NoResponse>
+    public class TakeDamageHandler : SuperCommandHandlerBase<TakeDamageCommand, MediatorCommandNoResponse>
     {
         private static Lazy<ICustomConsole> console = new Lazy<ICustomConsole>(() => DIContainer.GetImplementation<ICustomConsole>());
         private static Lazy<IFontWeightProvider> fontWeightProvider = new Lazy<IFontWeightProvider>(() => DIContainer.GetImplementation<IFontWeightProvider>());
 
-        public override NoResponse Execute(IMediatorCommand command)
+        public override MediatorCommandNoResponse Execute(IMediatorCommand command)
         {
             TakeDamageCommand _command = base.castCommand(command);
 
             if (_command.Amount == 0)
-                return MediatorCommandResponses.NoResponse;
+                return MediatorCommandStatii.NoResponse;
 
             PlayableEntity target = _command.GetEntity();
             int remaining = _command.Amount;
@@ -27,7 +28,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.TakeDamage
             if (target.TempHp != 0)
                 remaining = handleTempHp(_command, target, remaining);
             handleHp(_command, target, remaining);
-            return MediatorCommandResponses.NoResponse;
+            return MediatorCommandStatii.NoResponse;
         }
 
         private void handleHp(TakeDamageCommand command, PlayableEntity target, int remaining)

@@ -9,14 +9,15 @@ using DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageResultL
 using DnDToolsLibrary.Dice;
 using DnDToolsLibrary.Dice.DiceCommancs.SavingThrowCommands.SavingThrowQueries;
 using DnDToolsLibrary.Entities.EntitiesCommands.StatusCommands.AddStatus;
+using BaseToolsLibrary.Mediator.CommandStatii;
 
 namespace DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands
 {
-    public class TryApplyStatusCommandHandler : SuperCommandHandlerBase<TryApplyStatusCommand, ValidableResponse<NoResponse>>
+    public class TryApplyStatusCommandHandler : SuperCommandHandlerBase<TryApplyStatusCommand, ValidableResponse<MediatorCommandNoResponse>>
     {
         private Lazy<IFigtherProvider> _fighterProvider = new Lazy<IFigtherProvider>(() => DIContainer.GetImplementation<IFigtherProvider>());
 
-        public override ValidableResponse<NoResponse> Execute(IMediatorCommand command)
+        public override ValidableResponse<MediatorCommandNoResponse> Execute(IMediatorCommand command)
         {
             TryApplyStatusCommand _command = this.castCommand(command);
             PlayableEntity target = _fighterProvider.Value.GetFighterByDisplayName(_command.TargetName);
@@ -34,7 +35,7 @@ namespace DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands
                     ValidableResponse<SavingThrow> response = base._mediator.Value.Execute(savingQuery) as ValidableResponse<SavingThrow>;
 
                     if (!response.IsValid)
-                        return new ValidableResponse<NoResponse>(false, MediatorCommandResponses.NoResponse);
+                        return new ValidableResponse<MediatorCommandNoResponse>(false, MediatorCommandStatii.NoResponse);
                     _command.Saving = response.Response;
                 }
             }
@@ -56,7 +57,7 @@ namespace DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands
                 applyOnHitDamage(target, _command, _command.Saving?.IsSuccesful ?? false);
             }
 
-            return new ValidableResponse<NoResponse>(true, MediatorCommandResponses.NoResponse);
+            return new ValidableResponse<MediatorCommandNoResponse>(true, MediatorCommandStatii.NoResponse);
         }
 
         private void applyOnHitDamage(PlayableEntity target, TryApplyStatusCommand command, bool savingIsSuccess)

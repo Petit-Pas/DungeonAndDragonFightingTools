@@ -1,5 +1,6 @@
 ﻿using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.Mediator;
+using BaseToolsLibrary.Mediator.CommandStatii;
 using DDFight;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Entities.EntitiesCommands.HpCommands;
@@ -160,7 +161,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.Hp
             TakeDamageCommand command = new TakeDamageCommand(_character, 0);
 
             IMediatorCommandResponse response = _mediator.Execute(command);
-            NoResponse _response = response as NoResponse;
+            MediatorCommandNoResponse _response = response as MediatorCommandNoResponse;
 
             Assert.IsNotNull(_response);
         }

@@ -18,7 +18,7 @@ namespace DnDToolsLibrary.Status
         }
 
         // WARNING, this creates the ID reference on the status if it doesn't exist
-        public StatusReference(OnHitStatus status)
+        public StatusReference(CustomVerboseStatus status)
         {
             if (status.Id == default)
                 status.Id = Guid.NewGuid();

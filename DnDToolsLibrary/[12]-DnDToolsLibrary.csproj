@@ -101,6 +101,8 @@
     <Compile Include="Entities\EntitiesCommands\ConcentrationCommands\AcquireConcentration\AcquireConcentrationCommandHandler.cs" />
     <Compile Include="Entities\EntitiesCommands\ConcentrationCommands\ChallengeConcentration\ChallengeConcentrationCommand.cs" />
     <Compile Include="Entities\EntitiesCommands\ConcentrationCommands\ChallengeConcentration\ChallengeConcentrationCommandHandler.cs" />
+    <Compile Include="Entities\EntitiesCommands\ConcentrationCommands\ConcentrationCheckQueries\ConcentrationCheckQuery.cs" />
+    <Compile Include="Entities\EntitiesCommands\ConcentrationCommands\ConcentrationCheckQueries\ConcentrationCheckQueryResponse.cs" />
     <Compile Include="Entities\EntitiesCommands\ConcentrationCommands\LoseConcentration\LoseConcentrationCommand.cs" />
     <Compile Include="Entities\EntitiesCommands\ConcentrationCommands\LoseConcentration\LoseConcentrationCommandHandler.cs" />
     <Compile Include="Entities\EntitiesCommands\DamageCommand\ApplyDamageResultList\ApplyDamageResultListCommand.cs" />
@@ -120,6 +122,8 @@
     <Compile Include="Entities\EntitiesCommands\HpCommands\TempHeal\TempHealHandler.cs" />
     <Compile Include="Entities\EntitiesCommands\StatusCommands\AddStatus\AddStatusCommand.cs" />
     <Compile Include="Entities\EntitiesCommands\StatusCommands\AddStatus\AddStatusCommandHandler.cs" />
+    <Compile Include="Entities\EntitiesCommands\StatusCommands\RemoveStatus\RemoveStatusCommand.cs" />
+    <Compile Include="Entities\EntitiesCommands\StatusCommands\RemoveStatus\RemoveStatusCommandHandler.cs" />
     <Compile Include="Fight\FightersList.cs" />
     <Compile Include="Entities\Monster.cs" />
     <Compile Include="Entities\PlayableEntity.cs" />

@@ -1,5 +1,6 @@
 ﻿using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.Mediator;
+using BaseToolsLibrary.Mediator.CommandStatii;
 using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.NonAttackSpellResultsQueries;
 using DnDToolsLibrary.Attacks.Spells;
 using DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageResultList;
@@ -10,11 +11,11 @@ using System;
 
 namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellCommands
 {
-    public class CastNonAttackSpellHandler : SuperCommandHandlerBase<CastNonAttackSpellCommand, ValidableResponse<NoResponse>>
+    public class CastNonAttackSpellHandler : SuperCommandHandlerBase<CastNonAttackSpellCommand, ValidableResponse<MediatorCommandNoResponse>>
     {
         private static Lazy<IFigtherProvider> _fighterProvider = new Lazy<IFigtherProvider>(() => DIContainer.GetImplementation<IFigtherProvider>());
 
-        public override ValidableResponse<NoResponse> Execute(IMediatorCommand command)
+        public override ValidableResponse<MediatorCommandNoResponse> Execute(IMediatorCommand command)
         {
             CastNonAttackSpellCommand _command = command as CastNonAttackSpellCommand;
 
@@ -33,9 +34,9 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
                         _command.PushToInnerCommands(statusCommand);
                     }
                 }
-                return new ValidableResponse<NoResponse>(true, MediatorCommandResponses.NoResponse);
+                return new ValidableResponse<MediatorCommandNoResponse>(true, MediatorCommandStatii.NoResponse);
             }
-            return new ValidableResponse<NoResponse>(false, MediatorCommandResponses.NoResponse);
+            return new ValidableResponse<MediatorCommandNoResponse>(false, MediatorCommandStatii.NoResponse);
         }
 
         private bool spellResultObtained(CastNonAttackSpellCommand command)

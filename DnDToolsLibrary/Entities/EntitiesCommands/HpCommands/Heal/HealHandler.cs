@@ -1,16 +1,17 @@
 ﻿using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.IO;
 using BaseToolsLibrary.Mediator;
+using BaseToolsLibrary.Mediator.CommandStatii;
 using System;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.Heal
 {
-    public class HealHandler : BaseMediatorHandler<HealCommand, NoResponse>
+    public class HealHandler : BaseMediatorHandler<HealCommand, MediatorCommandNoResponse>
     {
         private static Lazy<ICustomConsole> console = new Lazy<ICustomConsole>(() => DIContainer.GetImplementation<ICustomConsole>());
         private static Lazy<IFontWeightProvider> fontWeightProvider = new Lazy<IFontWeightProvider>(() => DIContainer.GetImplementation<IFontWeightProvider>());
 
-        public override NoResponse Execute(IMediatorCommand command)
+        public override MediatorCommandNoResponse Execute(IMediatorCommand command)
         {
             HealCommand _command = this.castCommand(command);
             PlayableEntity target = _command.GetEntity();
@@ -31,7 +32,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.Heal
                 target.Hp += _command.Amount;
 
             _command.To = target.Hp;
-            return MediatorCommandResponses.NoResponse;
+            return MediatorCommandStatii.NoResponse;
         }
 
         public override void Undo(IMediatorCommand command)

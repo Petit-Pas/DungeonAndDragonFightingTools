@@ -12,6 +12,7 @@ using DnDToolsLibrary.Attacks.Spells;
 using DnDToolsLibrary.Counters;
 using DnDToolsLibrary.Status;
 using BaseToolsLibrary;
+using DnDToolsLibrary.Dice;
 
 namespace DnDToolsLibrary.Entities
 {
@@ -488,6 +489,17 @@ namespace DnDToolsLibrary.Entities
             {
                 NotifyPropertyChanged();
             }
+        }
+
+        public SavingThrow GetSavingThrowTemplate(CharacteristicsEnum characteristic, int difficulty)
+        {
+            SavingThrow result = new SavingThrow();
+            
+            result.Characteristic = characteristic;
+            result.Difficulty = difficulty;
+            result.Modifier = this.Characteristics.GetSavingModifier(characteristic);
+
+            return result;
         }
 
         /// <summary>

@@ -31,6 +31,12 @@ namespace CoreUnitTest.Commands.Status
             _statusProvider = DIContainer.GetImplementation<IStatusProvider>();
         }
 
+        [OneTimeTearDown]
+        public void MainTearDown()
+        {
+            _statusProvider.Clear();
+        }
+
         [SetUp]
         public void Setup()
         {

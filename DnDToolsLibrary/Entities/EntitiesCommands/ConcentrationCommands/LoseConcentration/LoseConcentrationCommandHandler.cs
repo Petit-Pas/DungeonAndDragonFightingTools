@@ -1,5 +1,7 @@
 ﻿using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.Mediator;
+using BaseToolsLibrary.Mediator.CommandStatii;
+using DnDToolsLibrary.Entities.EntitiesCommands.StatusCommands.RemoveStatus;
 using DnDToolsLibrary.Fight;
 using DnDToolsLibrary.Status;
 using System;
@@ -10,34 +12,40 @@ using System.Threading.Tasks;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.LoseConcentration
 {
-    public class LoseConcentrationCommandHandler : SuperCommandHandlerBase<LoseConcentrationCommand, NoResponse>
+    public class LoseConcentrationCommandHandler : SuperCommandHandlerBase<LoseConcentrationCommand, IMediatorCommandResponse>
     {
         private IStatusProvider _statusProvider { get => __lazyStatusProvider.Value; }
         private Lazy<IStatusProvider> __lazyStatusProvider = new Lazy<IStatusProvider>(() => DIContainer.GetImplementation<IStatusProvider>());
 
-        public override NoResponse Execute(IMediatorCommand command)
+        public override IMediatorCommandResponse Execute(IMediatorCommand command)
         {
             LoseConcentrationCommand _command = base.castCommand(command);
             PlayableEntity entity = _command.GetEntity();
 
             if (!entity.IsFocused)
             {
-                return MediatorCommandResponses.NoResponse;
+                return MediatorCommandStatii.Canceled;
             }
+            _command.WasFocused = true;
+            entity.IsFocused = false;
 
             // removes the statuses that were applied by entity AND required concentration
-            var statuses = _statusProvider.GetOnHitStatusesAppliedBy(entity.DisplayName).Where(x => x.EndsOnCasterLossOfConcentration);
+            var statuses = _statusProvider.GetOnHitStatusesAppliedBy(entity.DisplayName).Where(x => x.EndsOnCasterLossOfConcentration).ToList();
             foreach (OnHitStatus status in statuses)
             {
-                //TODO this should be in a command by itself
-
-                // remove from status provider
-                _statusProvider.Remove(status);
-                // remove from affected
-                StatusReference reference = status.Affected.AffectingStatusList.First(x => x.ActualStatusReferenceId == status.Id);
-                status.Affected.AffectingStatusList.Remove(reference);
+                RemoveStatusCommand innerCommand = new RemoveStatusCommand(status.Id, status.Affected.DisplayName);
+                _command.PushToInnerCommands(innerCommand);
+                _mediator.Value.Execute(innerCommand);
             }
-            return MediatorCommandResponses.NoResponse;
+            return MediatorCommandStatii.Success;
+        }
+
+        public override void Undo(IMediatorCommand command)
+        {
+            LoseConcentrationCommand _command = base.castCommand(command);
+            PlayableEntity entity = _command.GetEntity();
+
+            entity.IsFocused = _command.WasFocused;
         }
     }
 }

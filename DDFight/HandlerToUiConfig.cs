@@ -7,6 +7,7 @@ using WpfDnDCommandHandlers.AttackQueries.SpellQueries.NonAttackSpellResultsQuer
 using WpfDnDCommandHandlers.AttackQueries.SpellQueries.SpellLevelQueries.CantripLevelQueries;
 using WpfDnDCommandHandlers.AttackQueries.SpellQueries.SpellLevelQueries.GetInputNormalSpellLevel;
 using WpfDnDCommandHandlers.AttackQueries.SpellQueries.SpellTargetsQueries;
+using WpfDnDCommandHandlers.DiceQueries.ConcentrationCheckQueries;
 using WpfDnDCommandHandlers.DiceQueries.SavingThrowQueries;
 
 namespace DDFight
@@ -22,6 +23,7 @@ namespace DDFight
             HandlerToUILinker.AddNewPair(typeof(AttackSpellResultsQueryHandler), typeof(AttackSpellResultsQueryHandlerWindow));
             HandlerToUILinker.AddNewPair(typeof(GetInputNonAttackSpellResultsHandler), typeof(NonAttackSpellResultsQueryHandlerWindow));
             HandlerToUILinker.AddNewPair(typeof(SavingThrowQueryHandler), typeof(SavingThrowQueryHandlerWindow));
+            HandlerToUILinker.AddNewPair(typeof(ConcentrationCheckQueryHandler), typeof(SavingThrowQueryHandlerWindow));
         }
     }
 }

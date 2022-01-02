@@ -1,4 +1,5 @@
 ﻿using BaseToolsLibrary.Mediator;
+using BaseToolsLibrary.Mediator.CommandStatii;
 using DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.LoseConcentration;
 using System;
 using System.Collections.Generic;
@@ -8,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.AcquireConcentration
 {
-    public class AcquireConcentrationCommandHandler : SuperCommandHandlerBase<AcquireConcentrationCommand, NoResponse>
+    public class AcquireConcentrationCommandHandler : SuperCommandHandlerBase<AcquireConcentrationCommand, MediatorCommandNoResponse>
     {
-        public override NoResponse Execute(IMediatorCommand command)
+        public override MediatorCommandNoResponse Execute(IMediatorCommand command)
         {
             AcquireConcentrationCommand _command = base.castCommand(command);
             PlayableEntity entity = _command.GetEntity();
@@ -27,7 +28,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.Acquir
 
             entity.IsFocused = true;
 
-            return MediatorCommandResponses.NoResponse;
+            return MediatorCommandStatii.NoResponse;
         }
 
         public override void Undo(IMediatorCommand command)

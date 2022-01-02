@@ -1,5 +1,6 @@
 ﻿using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.Mediator;
+using BaseToolsLibrary.Mediator.CommandStatii;
 using DnDToolsLibrary.Fight;
 using DnDToolsLibrary.Status;
 using System;
@@ -10,19 +11,20 @@ using System.Threading.Tasks;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.StatusCommands.AddStatus
 {
-    public class AddStatusCommandHandler : BaseMediatorHandler<AddStatusCommand, NoResponse>
+    public class AddStatusCommandHandler : BaseMediatorHandler<AddStatusCommand, MediatorCommandNoResponse>
     {
         private Lazy<IStatusProvider> _statusProvider = new Lazy<IStatusProvider>(() => DIContainer.GetImplementation<IStatusProvider>());
 
-        public override NoResponse Execute(IMediatorCommand command)
+        public override MediatorCommandNoResponse Execute(IMediatorCommand command)
         {
             AddStatusCommand _command = this.castCommand(command);
             PlayableEntity target = _command.GetEntity();
 
+            _command.Status.Affected = target;
             _statusProvider.Value.Add(_command.Status);
             target.AffectingStatusList.Add(new StatusReference(_command.Status));
 
-            return MediatorCommandResponses.NoResponse;
+            return MediatorCommandStatii.NoResponse;
         }
 
         public override void Undo(IMediatorCommand command)

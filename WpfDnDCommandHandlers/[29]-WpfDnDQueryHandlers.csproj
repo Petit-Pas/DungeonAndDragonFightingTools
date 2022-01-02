@@ -74,6 +74,7 @@
     </Compile>
     <Compile Include="AttackQueries\SpellQueries\SpellTargetsQueries\SpellTargetsQueryHandler.cs" />
     <Compile Include="BaseResultCommandHandler.cs" />
+    <Compile Include="DiceQueries\ConcentrationCheckQueries\ConcentrationCheckQueryHandler.cs" />
     <Compile Include="DiceQueries\SavingThrowQueries\SavingThrowQueryHandler.cs" />
     <Compile Include="DiceQueries\SavingThrowQueries\SavingThrowQueryHandlerWindow.xaml.cs">
       <DependentUpon>SavingThrowQueryHandlerWindow.xaml</DependentUpon>

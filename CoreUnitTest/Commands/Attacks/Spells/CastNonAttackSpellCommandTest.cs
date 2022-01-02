@@ -17,6 +17,7 @@ using System.Linq;
 using DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageResultList;
 using DnDToolsLibrary.Status;
 using DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands;
+using BaseToolsLibrary.Mediator.CommandStatii;
 
 namespace CoreUnitTest.Commands.Attacks.Spells
 {
@@ -31,6 +32,13 @@ namespace CoreUnitTest.Commands.Attacks.Spells
         {
             _mediator = DIContainer.GetImplementation<IMediator>();
             _character = FightersList.Instance[0];
+        }
+
+        [OneTimeTearDown]
+        public void MainTearDown()
+        {
+            var statusProvider = DIContainer.GetImplementation<IStatusProvider>();
+            statusProvider.Clear();
         }
 
         [SetUp]
@@ -158,7 +166,7 @@ namespace CoreUnitTest.Commands.Attacks.Spells
             mock.Setup(x => x.Execute(It.IsAny<IMediatorCommand>())).Returns(response);
             _mediator.RegisterHandler(mock.Object, typeof(NonAttackSpellResultsQuery));
 
-            ValidableResponse<NoResponse> commandResponse = _mediator.Execute(command) as ValidableResponse<NoResponse>;
+            ValidableResponse<MediatorCommandNoResponse> commandResponse = _mediator.Execute(command) as ValidableResponse<MediatorCommandNoResponse>;
 
             Assert.AreEqual(0, command.InnerCommands.Count);
             Assert.IsFalse(commandResponse.IsValid);

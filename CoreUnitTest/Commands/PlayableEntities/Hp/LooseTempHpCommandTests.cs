@@ -1,5 +1,6 @@
 ﻿using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.Mediator;
+using BaseToolsLibrary.Mediator.CommandStatii;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Entities.EntitiesCommands.HpCommands;
 using DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.LooseTempHp;
@@ -78,7 +79,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.Hp
             LooseTempHpCommand command = new LooseTempHpCommand(_character, 10);
 
             IMediatorCommandResponse response = _mediator.Execute(command);
-            NoResponse _response = response as NoResponse;
+            MediatorCommandNoResponse _response = response as MediatorCommandNoResponse;
 
             Assert.IsNotNull(_response);
         }

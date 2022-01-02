@@ -61,6 +61,8 @@
     <Compile Include="Mediator\BaseHistoryMediator.cs" />
     <Compile Include="Mediator\BaseMediator.cs" />
     <Compile Include="Mediator\BaseMediatorHandler.cs" />
+    <Compile Include="Mediator\CommandStatii\MediatorCommandCanceled.cs" />
+    <Compile Include="Mediator\CommandStatii\MediatorCommandSuccess.cs" />
     <Compile Include="Mediator\SuperCommandBase.cs" />
     <Compile Include="Mediator\SuperCommandHandlerBase.cs" />
     <Compile Include="Mediator\IMediatorCommandResponse.cs" />
@@ -69,7 +71,7 @@
     <Compile Include="Mediator\IMediatorCommand.cs" />
     <Compile Include="Mediator\IMediatorHandler.cs" />
     <Compile Include="Mediator\IUiCommand.cs" />
-    <Compile Include="Mediator\NoResponse.cs" />
+    <Compile Include="Mediator\CommandStatii\MediatorCommandNoResponse.cs" />
     <Compile Include="Mediator\ValidableResponse.cs" />
     <Compile Include="Memory\DisposableExtensions.cs" />
     <Compile Include="Memory\Global.cs" />

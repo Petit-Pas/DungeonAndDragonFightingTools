@@ -19,6 +19,12 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands
             _entityName = entity_name;
         }
 
+        // this method should preffered to GetEntity since it does not call the FighterProvider
+        public string GetEntityName()
+        {
+            return _entityName;
+        }
+
         public PlayableEntity GetEntity()
         {
             PlayableEntity result = FightersList.Instance.FirstOrDefault(x => x.DisplayName == _entityName);

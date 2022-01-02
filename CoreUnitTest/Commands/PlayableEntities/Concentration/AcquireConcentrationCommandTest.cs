@@ -3,6 +3,7 @@ using BaseToolsLibrary.Mediator;
 using CoreUnitTest.TestFactories;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.AcquireConcentration;
+using DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.LoseConcentration;
 using DnDToolsLibrary.Fight;
 using NUnit.Framework;
 using System;
@@ -73,6 +74,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.Concentration
 
             Assert.IsTrue(entity.IsFocused);
             Assert.AreEqual(1, command.InnerCommands.Count);
+            Assert.AreEqual(typeof(LoseConcentrationCommand), command.InnerCommands.Peek().GetType());
         }
 
         [Test]

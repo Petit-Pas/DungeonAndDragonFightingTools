@@ -1,16 +1,17 @@
 ﻿using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.IO;
 using BaseToolsLibrary.Mediator;
+using BaseToolsLibrary.Mediator.CommandStatii;
 using System;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.LooseHp
 {
-    public class LooseHpHandler : BaseMediatorHandler<LooseHpCommand, NoResponse>
+    public class LooseHpHandler : BaseMediatorHandler<LooseHpCommand, MediatorCommandNoResponse>
     {
         private static Lazy<ICustomConsole> console = new Lazy<ICustomConsole>(() => DIContainer.GetImplementation<ICustomConsole>());
         private static Lazy<IFontWeightProvider> fontWeightProvider = new Lazy<IFontWeightProvider>(() => DIContainer.GetImplementation<IFontWeightProvider>());
 
-        public override NoResponse Execute(IMediatorCommand command)
+        public override MediatorCommandNoResponse Execute(IMediatorCommand command)
         {
             LooseHpCommand _command = this.castCommand(command);
             PlayableEntity target = _command.GetEntity();
@@ -24,7 +25,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.LooseHp
                 target.Hp = 0;
 
             _command.To = target.Hp;
-            return MediatorCommandResponses.NoResponse;
+            return MediatorCommandStatii.NoResponse;
         }
 
         public override void Undo(IMediatorCommand command)
