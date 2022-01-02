@@ -1,8 +1,14 @@
 ﻿using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.Mediator;
+using BaseToolsLibrary.Mediator.CommandStatii;
 using CoreUnitTest.TestFactories;
+using DnDToolsLibrary.Dice;
 using DnDToolsLibrary.Entities;
+using DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.ChallengeConcentration;
+using DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.ConcentrationCheckQueries;
+using DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.LoseConcentration;
 using DnDToolsLibrary.Fight;
+using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -17,23 +23,141 @@ namespace CoreUnitTest.Commands.PlayableEntities.Concentration
         private PlayableEntity _character;
 
         [OneTimeSetUp]
-        public void MainSetup()
+        public virtual void MainSetup()
         {
             _mediator = DIContainer.GetImplementation<IMediator>();
             _character = FightersList.Instance[0];
+            _character.IsFocused = true;
         }
 
-        [SetUp]
-        public void Setup()
+        [TestFixture]
+        public class EntityNotFocused : ChallengeConcentrationCommandTest
         {
-            PlayableEntity entity = EntitiesFactory.GetWarrior();
-            entity.DisplayName = "Warrior1";
-            FightersList.Instance.AddOrUpdateFighter(entity);
-            entity = EntitiesFactory.GetWizard();
-            entity.DisplayName = "Wizard1";
-            FightersList.Instance.AddOrUpdateFighter(entity);
+            IMediatorCommandResponse _response;
+
+            [OneTimeSetUp]
+            public override void MainSetup()
+            {
+                base.MainSetup();
+                // arrange
+                ChallengeConcentrationCommand command = new ChallengeConcentrationCommand(_character.Name);
+                _character.IsFocused = false;
+
+                _response = _mediator.Execute(command);
+            }
+
+            [Test]
+            public void ConcentrationRemainsTheSame()
+            {
+                Assert.IsFalse(_character.IsFocused);
+            }
+
+            [Test]
+            public void ReturnsCancel()
+            {
+                Assert.AreEqual(typeof(MediatorCommandCanceled), _response.GetType());
+            }
         }
 
+        [TestFixture]
+        public class QueryCanceled : ChallengeConcentrationCommandTest
+        {
+            IMediatorCommandResponse _response;
+
+            [OneTimeSetUp]
+            public override void MainSetup()
+            {
+                base.MainSetup();
+                // arrange
+                ChallengeConcentrationCommand command = new ChallengeConcentrationCommand(_character.Name);
+                IMediatorCommandResponse response = new ValidableResponse<SavingThrow>(false, null);
+                Mock<IMediatorHandler> mock = new Mock<IMediatorHandler>();
+                mock.Setup(x => x.Execute(It.IsAny<IMediatorCommand>())).Returns(response);
+                _mediator.RegisterHandler(mock.Object, typeof(ConcentrationCheckQuery));
+
+                _response = _mediator.Execute(command);
+            }
+
+            [Test]
+            public void ConcentrationRemain()
+            {
+                Assert.IsTrue(_character.IsFocused);
+            }
+
+            [Test]
+            public void ReturnsCancel()
+            {
+                Assert.AreEqual(typeof(MediatorCommandCanceled), _response.GetType());
+            }
+        }
+
+        [TestFixture]
+        public class CheckSuccess : ChallengeConcentrationCommandTest
+        {
+            IMediatorCommandResponse _response;
+
+            [OneTimeSetUp]
+            public override void MainSetup()
+            {
+                base.MainSetup();
+                // arrange
+                ChallengeConcentrationCommand command = new ChallengeConcentrationCommand(_character.Name);
+                IMediatorCommandResponse response = new ValidableResponse<SavingThrow>(true, SavingThrowFactory.Successful(_character));
+                Mock<IMediatorHandler> mock = new Mock<IMediatorHandler>();
+                mock.Setup(x => x.Execute(It.IsAny<IMediatorCommand>())).Returns(response);
+                _mediator.RegisterHandler(mock.Object, typeof(ConcentrationCheckQuery));
+
+                _response = _mediator.Execute(command);
+            }
+
+            [Test]
+            public void ConcentrationRemain()
+            {
+                Assert.IsTrue(_character.IsFocused);
+            }
+
+            [Test]
+            public void ReturnsSuccess()
+            {
+                Assert.AreEqual(typeof(MediatorCommandSuccess), _response.GetType());
+            }
+        }
+
+        [TestFixture]
+        public class CheckFails : ChallengeConcentrationCommandTest
+        {
+            IMediatorCommandResponse _response;
+            ChallengeConcentrationCommand _command;
+
+            [OneTimeSetUp]
+            public override void MainSetup()
+            {
+                base.MainSetup();
+                // arrange
+                _command = new ChallengeConcentrationCommand(_character.Name);
+                IMediatorCommandResponse response = new ValidableResponse<SavingThrow>(true, SavingThrowFactory.Failed(_character));
+                Mock<IMediatorHandler> mock = new Mock<IMediatorHandler>();
+                mock.Setup(x => x.Execute(It.IsAny<IMediatorCommand>())).Returns(response);
+                _mediator.RegisterHandler(mock.Object, typeof(ConcentrationCheckQuery));
+
+                // act
+                _response = _mediator.Execute(_command);
+            }
+
+            [Test]
+            public void LoseConcentrationCommandUsed()
+            {
+                LoseConcentrationCommand command = _command.InnerCommands.Peek() as LoseConcentrationCommand;
+
+                Assert.IsNotNull(command);
+            }
+
+            [Test]
+            public void ReturnsSuccess()
+            {
+                Assert.AreEqual(typeof(MediatorCommandSuccess), _response.GetType());
+            }
+        }
 
     }
 }
