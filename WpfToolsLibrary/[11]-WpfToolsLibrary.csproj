@@ -1,124 +1,22 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{84709264-0A0B-4C58-A52F-BA8ADE84AB74}</ProjectGuid>
-    <OutputType>library</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <OutputType>Library</OutputType>
     <RootNamespace>WpfToolsLibrary</RootNamespace>
     <AssemblyName>WpfToolsLibrary</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <WarningLevel>4</WarningLevel>
-    <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWPF>true</UseWPF>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xaml">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
+    <ProjectReference Include="..\BaseToolsLibrary\[10]-BaseToolsLibrary.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BindingTools\BindableObjectReference.cs" />
-    <Compile Include="Commands\WindowCommands\CloseCommand.cs" />
-    <Compile Include="Commands\WindowCommands\DragMoveCommands.cs" />
-    <Compile Include="ConsoleTools\WpfConsole.cs" />
-    <Compile Include="ConsoleTools\WpfFontColorProvider.cs" />
-    <Compile Include="ConsoleTools\WpfFontWeight.cs" />
-    <Compile Include="ConsoleTools\WpfFontColor.cs" />
-    <Compile Include="ConsoleTools\WpfFontWeightProvider.cs" />
-    <Compile Include="Converters\BaseTypes\BoolToCustomStringConverter.cs" />
-    <Compile Include="Converters\BaseTypes\BoolToReversedBoolConverter.cs" />
-    <Compile Include="Converters\BaseTypes\IntToStringConverter.cs" />
-    <Compile Include="Converters\BaseTypes\StringListToStringConverter.cs" />
-    <Compile Include="Converters\CornerRadii\CornerRadiusMaskConverter.cs" />
-    <Compile Include="Converters\Math\BasicOperationConverter.cs" />
-    <Compile Include="Converters\Visibilities\BoolToReversedVisibilityConverter.cs" />
-    <Compile Include="Converters\Visibilities\BoolToVisibilityConverter.cs" />
-    <Compile Include="Converters\Visibilities\IntDifferentToOneToVisibility.cs" />
-    <Compile Include="Converters\Visibilities\IntEqualToOneToVisibility.cs" />
-    <Compile Include="Converters\Visibilities\IntEqualToZeroToVisibility.cs" />
-    <Compile Include="Converters\Visibilities\IntGreaterThanOneToVisibility.cs" />
-    <Compile Include="Converters\Visibilities\IntGreaterThanZeroToVisibility.cs" />
-    <Compile Include="Converters\Visibilities\StringToVisibilityConverter.cs" />
-    <Compile Include="Converters\Visibilities\VisibleToCollapsedConverter.cs" />
-    <Compile Include="Extensions\ApplicationExtension.cs" />
-    <Compile Include="Extensions\BindingExtensions.cs" />
-    <Compile Include="Extensions\ColorExtension.cs" />
-    <Compile Include="Extensions\RunExtensions.cs" />
-    <Compile Include="Extensions\TreeReflexionExtensions.cs" />
-    <Compile Include="Extensions\FrameworkElementExtensions.cs" />
-    <Compile Include="Extensions\WindowExtensions.cs" />
-    <Compile Include="Navigation\IRollableControl.cs" />
-    <Compile Include="Navigation\IValidableWindow.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="ValidationRules\IValidable.cs" />
-    <Compile Include="ValidationRules\Text\NotEmptyStringValidationRule.cs" />
-    <Compile Include="ValidationRules\Numeric\IntValidationRule.cs" />
-    <Compile Include="ValidationRules\Numeric\PositiveIntValidationRule.cs" />
-    <Compile Include="ValidationRules\Numeric\RangedIntValidationRule.cs" />
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+    <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.3.310801">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Windows.Compatibility" Version="6.0.0" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BaseToolsLibrary\[10]-BaseToolsLibrary.csproj">
-      <Project>{47d47e7e-85c8-4a4e-91d5-019e64072b1e}</Project>
-      <Name>[10]-BaseToolsLibrary</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="Converters\BaseConvertersImports.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

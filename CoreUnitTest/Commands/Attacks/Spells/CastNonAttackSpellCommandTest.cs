@@ -141,6 +141,7 @@ namespace CoreUnitTest.Commands.Attacks.Spells
             {
                 TargetName = "Warrior1",
                 CasterName = "Wizard1",
+
                 AppliedStatusList = new OnHitStatusList()
                 {
                     StatusFactory.Slow
