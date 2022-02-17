@@ -122,7 +122,7 @@ namespace WpfDnDCustomControlLibrary.Statuses
         {
             if (data_context != null)
             {
-                Saving = data_context.GetSavingThrow(data_context.Caster, data_context.Affected);
+                Saving = data_context.GetSavingThrow(data_context.Caster, data_context.Target);
             }
         }
 
@@ -132,12 +132,12 @@ namespace WpfDnDCustomControlLibrary.Statuses
                 if (_application)
                 {
                     DamageList = data_context.OnApplyDamageList.GetResultList(data_context.HasApplyCondition);
-                    DamageList.RefreshDamageAffinityModifier(data_context.Affected);
+                    DamageList.RefreshDamageAffinityModifier(data_context.Target);
                 }
                 else
                 {
                     DamageList = data_context.DotDamageList.GetResultList(false);
-                    DamageList.RefreshDamageAffinityModifier(data_context.Affected);
+                    DamageList.RefreshDamageAffinityModifier(data_context.Target);
                 }
         }
 

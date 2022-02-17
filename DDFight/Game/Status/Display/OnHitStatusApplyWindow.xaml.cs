@@ -214,7 +214,7 @@ namespace DDFight.Game.Status.Display
             {
                 //resist
                 console.AddEntry("Success\r\n", fontWeightProvider.Bold);
-                data_context.Affected.CustomVerboseStatusList.RemoveElement(data_context);
+                data_context.Target.CustomVerboseStatusList.RemoveElement(data_context);
                 //TODO check if not too dangerous
                 //data_context.Unregister();
                 data_context.Dispose();

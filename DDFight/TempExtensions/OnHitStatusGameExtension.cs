@@ -23,16 +23,16 @@ namespace TempExtensionsOnHitStatus
         /// <param name="status"></param>
         public static void Register(OnHitStatus status)
         {
-            if (status.Affected != null)
+            if (status.Target != null)
             {
                 if ((status.CanRedoSavingThrow && status.SavingIsRemadeAtStartOfTurn) ||
                     (status.HasAMaximumDuration && !status.DurationIsCalculatedOnCasterTurn && status.DurationIsBasedOnStartOfTurn) ||
                     status.DotDamageList.Count != 0)
-                    status.Affected.NewTurnStarted += status.Affected_NewTurnStarted;
+                    status.Target.NewTurnStarted += status.Affected_NewTurnStarted;
                 if ((status.CanRedoSavingThrow && status.SavingIsRemadeAtStartOfTurn == false) ||
                     (status.HasAMaximumDuration && !status.DurationIsCalculatedOnCasterTurn && !status.DurationIsBasedOnStartOfTurn) ||
                     status.DotDamageList.Count != 0)
-                    status.Affected.TurnEnded += status.Affected_TurnEnded;
+                    status.Target.TurnEnded += status.Affected_TurnEnded;
             }
             if (status.Caster != null)
             {
@@ -60,10 +60,10 @@ namespace TempExtensionsOnHitStatus
                 status.Caster.NewTurnStarted -= status.Caster_NewTurnStarted;
                 status.Caster.TurnEnded -= status.Caster_TurnEnded;
             }
-            if (status.Affected != null)
+            if (status.Target != null)
             {
-                status.Affected.NewTurnStarted -= status.Affected_NewTurnStarted;
-                status.Affected.TurnEnded -= status.Affected_TurnEnded;
+                status.Target.NewTurnStarted -= status.Affected_NewTurnStarted;
+                status.Target.TurnEnded -= status.Affected_TurnEnded;
             }
         }
 
@@ -83,12 +83,12 @@ namespace TempExtensionsOnHitStatus
             if (to_apply.Count != 0)
             {
                 DamageResultListRollableWindow window = new DamageResultListRollableWindow() { DataContext = to_apply, };
-                window.TitleControl.Text = onHitStatus.Header + " inflicts damage to " + onHitStatus.Affected.DisplayName;
+                window.TitleControl.Text = onHitStatus.Header + " inflicts damage to " + onHitStatus.Target.DisplayName;
                 window.ShowCentered();
 
                 if (window.Validated)
                 {
-                    onHitStatus.Affected.TakeHitDamage(to_apply);
+                    onHitStatus.Target.TakeHitDamage(to_apply);
                 }
             }
         }
@@ -103,7 +103,7 @@ namespace TempExtensionsOnHitStatus
                 expired = onHitStatus.RemoveDuration();
             if (!expired && onHitStatus.CanRedoSavingThrow && !onHitStatus.SavingIsRemadeAtStartOfTurn)
             {
-                OnHitStatusApplyWindow window = new OnHitStatusApplyWindow(onHitStatus.Caster, onHitStatus.Affected, false);
+                OnHitStatusApplyWindow window = new OnHitStatusApplyWindow(onHitStatus.Caster, onHitStatus.Target, false);
                 window.DataContext = onHitStatus;
                 window.ShowCentered();
             }
@@ -146,7 +146,7 @@ namespace TempExtensionsOnHitStatus
                 expired = onHitStatus.RemoveDuration();
             if (!expired && onHitStatus.CanRedoSavingThrow && onHitStatus.SavingIsRemadeAtStartOfTurn)
             {
-                OnHitStatusApplyWindow window = new OnHitStatusApplyWindow(onHitStatus.Caster, onHitStatus.Affected, false);
+                OnHitStatusApplyWindow window = new OnHitStatusApplyWindow(onHitStatus.Caster, onHitStatus.Target, false);
                 window.DataContext = onHitStatus;
 
                 window.ShowCentered();
@@ -169,7 +169,7 @@ namespace TempExtensionsOnHitStatus
                 onHitStatus.RemoveStatus();
 
                 // if caster was focused on this, he can now be "un"focused
-                if (onHitStatus.EndsOnCasterLossOfConcentration && onHitStatus.Caster.IsFocused && onHitStatus.Caster == onHitStatus.Affected)
+                if (onHitStatus.EndsOnCasterLossOfConcentration && onHitStatus.Caster.IsFocused && onHitStatus.Caster == onHitStatus.Target)
                     onHitStatus.Caster.IsFocused = false;
 
                 return true;
@@ -182,12 +182,12 @@ namespace TempExtensionsOnHitStatus
         /// </summary>
         public static void RemoveStatus(this OnHitStatus onHitStatus)
         {
-            console.AddEntry($"{onHitStatus.Affected.DisplayName}", fontWeightProvider.SemiBold);
+            console.AddEntry($"{onHitStatus.Target.DisplayName}", fontWeightProvider.SemiBold);
             console.AddEntry(" is no more affected by ");
             console.AddEntry($"{onHitStatus.Header}", fontWeightProvider.SemiBold);
             console.AddEntry(".\r\n");
 
-            onHitStatus.Affected.CustomVerboseStatusList.RemoveElement(onHitStatus);
+            onHitStatus.Target.CustomVerboseStatusList.RemoveElement(onHitStatus);
             onHitStatus.Unregister();
         }
 
@@ -225,7 +225,7 @@ namespace TempExtensionsOnHitStatus
                 console.AddEntry($"{target.DisplayName}\r\n", fontWeightProvider.Bold);
 
                 applied.Caster = caster;
-                applied.Affected = target;
+                applied.Target = target;
                 target.CustomVerboseStatusList.AddElementSilent(applied);
                 OnHitStatus.RegisterEvents(applied);
                 

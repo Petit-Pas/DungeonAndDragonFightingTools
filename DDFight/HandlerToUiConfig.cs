@@ -17,7 +17,7 @@ namespace DDFight
         public static void Configure()
         {
             HandlerToUILinker.AddNewPair(typeof(DamageResultListQueryHandler), typeof(DamageResultListQueryHandlerWindow));
-            HandlerToUILinker.AddNewPair(typeof(GetInputSpellLevelHandler), typeof(GetInputNormalSpellLevelWindow));
+            HandlerToUILinker.AddNewPair(typeof(NormalSpellLevelQueryHandler), typeof(NormalSpellLevelQueryHandlerWindow));
             HandlerToUILinker.AddNewPair(typeof(CantripLevelQueryHandler), typeof(CantripLevelQueryWindow));
             HandlerToUILinker.AddNewPair(typeof(SpellTargetsQueryHandler), typeof(SpellTargetsQueryHandlerWindow));
             HandlerToUILinker.AddNewPair(typeof(AttackSpellResultsQueryHandler), typeof(AttackSpellResultsQueryHandlerWindow));

@@ -13,14 +13,14 @@ using BaseToolsLibrary.Mediator.CommandStatii;
 
 namespace DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands
 {
-    public class TryApplyStatusCommandHandler : SuperCommandHandlerBase<TryApplyStatusCommand, ValidableResponse<MediatorCommandNoResponse>>
+    public class TryApplyStatusCommandHandler : SuperCommandHandlerBase<TryApplyStatusCommand, IMediatorCommandResponse>
     {
         private Lazy<IFigtherProvider> _fighterProvider = new Lazy<IFigtherProvider>(() => DIContainer.GetImplementation<IFigtherProvider>());
 
-        public override ValidableResponse<MediatorCommandNoResponse> Execute(IMediatorCommand command)
+        public override IMediatorCommandResponse Execute(IMediatorCommand command)
         {
             TryApplyStatusCommand _command = this.castCommand(command);
-            PlayableEntity target = _fighterProvider.Value.GetFighterByDisplayName(_command.TargetName);
+            PlayableEntity target = _fighterProvider.Value.GetFighterByDisplayName(_command.Status.TargetName);
 
             bool applyIsSuccess = true;
 
@@ -30,12 +30,12 @@ namespace DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands
                 if (_command.Status.HasApplyCondition)
                 {
                     SavingThrowQuery savingQuery = new SavingThrowQuery(
-                        new SavingThrow(_command.Status.ApplySavingCharacteristic, _command.Status.ApplySavingDifficulty, _command.TargetName),
+                        new SavingThrow(_command.Status.ApplySavingCharacteristic, _command.Status.ApplySavingDifficulty, _command.Status.TargetName),
                         "Saving from Status application");
                     ValidableResponse<SavingThrow> response = base._mediator.Value.Execute(savingQuery) as ValidableResponse<SavingThrow>;
 
                     if (!response.IsValid)
-                        return new ValidableResponse<MediatorCommandNoResponse>(false, MediatorCommandStatii.NoResponse);
+                        return MediatorCommandStatii.Canceled;
                     _command.Saving = response.Response;
                 }
             }
@@ -57,7 +57,7 @@ namespace DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands
                 applyOnHitDamage(target, _command, _command.Saving?.IsSuccesful ?? false);
             }
 
-            return new ValidableResponse<MediatorCommandNoResponse>(true, MediatorCommandStatii.NoResponse);
+            return applyIsSuccess ? MediatorCommandStatii.Success : MediatorCommandStatii.Failed;
         }
 
         private void applyOnHitDamage(PlayableEntity target, TryApplyStatusCommand command, bool savingIsSuccess)
@@ -69,7 +69,7 @@ namespace DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands
                 damageResult.AffinityModifier = target.DamageAffinities.GetAffinity(damageResult.DamageType).Affinity;
             }
 
-            DamageResultListQuery damageQuery = new DamageResultListQuery(damageResultList, $"The status {command.Status.DisplayName} inflicted by {command.CasterName} will inflict damage to {command.TargetName}.");
+            DamageResultListQuery damageQuery = new DamageResultListQuery(damageResultList, $"The status {command.Status.DisplayName} inflicted by {command.Status.CasterName} will inflict damage to {command.Status.TargetName}.");
             ValidableResponse<GetInputDamageResultListResponse> damageQueryResponse = _mediator.Value.Execute(damageQuery) as ValidableResponse<GetInputDamageResultListResponse>;
 
             if (damageQueryResponse.IsValid)

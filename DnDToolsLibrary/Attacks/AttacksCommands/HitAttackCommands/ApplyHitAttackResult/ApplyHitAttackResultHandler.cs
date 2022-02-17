@@ -5,9 +5,9 @@ using System;
 
 namespace DnDToolsLibrary.Attacks.AttacksCommands.HitAttackCommands.ApplyHitAttackResult
 {
-    public class ApplyHitAttackResultHandler : SuperCommandHandlerBase<ApplyHitAttackResultCommand, MediatorCommandNoResponse>
+    public class ApplyHitAttackResultHandler : SuperCommandHandlerBase<ApplyHitAttackResultCommand, IMediatorCommandResponse>
     {
-        public override MediatorCommandNoResponse Execute(IMediatorCommand command)
+        public override IMediatorCommandResponse Execute(IMediatorCommand command)
         {
             ApplyHitAttackResultCommand _command = base.castCommand(command);
 
@@ -16,9 +16,10 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.HitAttackCommands.ApplyHitAtta
                 apply_damage(_command);
 
                 apply_on_hit(_command);
+                return MediatorCommandStatii.Success;
             }
 
-            return MediatorCommandStatii.NoResponse;
+            return MediatorCommandStatii.Failed;
         }
 
         private void apply_on_hit(ApplyHitAttackResultCommand command)

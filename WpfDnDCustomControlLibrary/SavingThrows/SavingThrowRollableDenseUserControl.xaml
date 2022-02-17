@@ -4,7 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:inttextboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.IntTextBoxes;assembly=WpfCustomControlLibrary" 
-             xmlns:checkboxes="clr-namespace:WpfCustomControlLibrary.CheckBoxes;assembly=WpfCustomControlLibrary" xmlns:situationalmodifiers="clr-namespace:WpfDnDCustomControlLibrary.SituationalModifiers" xmlns:shadowboxes="clr-namespace:WpfCustomControlLibrary.ShadowBoxes;assembly=WpfCustomControlLibrary" xmlns:converters="clr-namespace:WpfDnDCustomControlLibrary.Converters"
+             xmlns:checkboxes="clr-namespace:WpfCustomControlLibrary.CheckBoxes;assembly=WpfCustomControlLibrary"
+             xmlns:situationalmodifiers="clr-namespace:WpfDnDCustomControlLibrary.SituationalModifiers" 
+             xmlns:shadowboxes="clr-namespace:WpfCustomControlLibrary.ShadowBoxes;assembly=WpfCustomControlLibrary" 
+             xmlns:converters="clr-namespace:WpfDnDCustomControlLibrary.Converters"
+             xmlns:local="clr-namespace:WpfDnDCustomControlLibrary.SavingThrows"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              x:Name="SavingThrowRollableDenseControl"
@@ -37,7 +41,7 @@
                 VerticalAlignment="Center">
                 <Run Text="{Binding Characteristic, Converter={StaticResource CharacteristicToShortConverter}}"></Run>
                 <Run> Saving Throw DC </Run>
-                <Run Text="{Binding Difficulty}">  </Run>
+                <Run Text="{Binding SavingThrow.Difficulty, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:SavingThrowRollableDenseUserControl}}}">  </Run>
                 <Run>(</Run>
                 <Run x:Name="AbilityModifierControl2"/>
                 <Run>)</Run>
@@ -45,7 +49,7 @@
 
             <situationalmodifiers:SituationalAdvantageModifiersControl 
                     Grid.Row="1"
-                    Modifiers="{Binding AdvantageModifiers}"/>
+                    Modifiers="{Binding SavingThrow.AdvantageModifiers, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:SavingThrowRollableDenseUserControl}}}"/>
 
             <StackPanel
                     Grid.Row="2"
@@ -60,7 +64,7 @@
                         Margin="5, 0"
                         Min="0"
                         Max="20"
-                        Integer="{Binding SavingRoll}"
+                        Integer="{Binding SavingThrow.SavingRoll, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:SavingThrowRollableDenseUserControl}}}"
                         VerticalAlignment="Center"
                     />
                 <TextBlock
@@ -71,7 +75,7 @@
                 <inttextboxes:IntTextBoxControl
                         Width="40"
                         Margin="5, 0"
-                        Integer="{Binding Modifier}"
+                        Integer="{Binding SavingThrow.Modifier, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:SavingThrowRollableDenseUserControl}}}"
                         VerticalAlignment="Center"
                     />
                 <TextBlock

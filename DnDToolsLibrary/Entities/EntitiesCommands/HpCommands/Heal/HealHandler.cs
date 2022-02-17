@@ -6,12 +6,12 @@ using System;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.Heal
 {
-    public class HealHandler : BaseMediatorHandler<HealCommand, MediatorCommandNoResponse>
+    public class HealHandler : BaseMediatorHandler<HealCommand, IMediatorCommandResponse>
     {
-        private static Lazy<ICustomConsole> console = new Lazy<ICustomConsole>(() => DIContainer.GetImplementation<ICustomConsole>());
-        private static Lazy<IFontWeightProvider> fontWeightProvider = new Lazy<IFontWeightProvider>(() => DIContainer.GetImplementation<IFontWeightProvider>());
+        private static Lazy<ICustomConsole> console = new Lazy<ICustomConsole>(DIContainer.GetImplementation<ICustomConsole>);
+        private static Lazy<IFontWeightProvider> fontWeightProvider = new Lazy<IFontWeightProvider>(DIContainer.GetImplementation<IFontWeightProvider>);
 
-        public override MediatorCommandNoResponse Execute(IMediatorCommand command)
+        public override IMediatorCommandResponse Execute(IMediatorCommand command)
         {
             HealCommand _command = this.castCommand(command);
             PlayableEntity target = _command.GetEntity();

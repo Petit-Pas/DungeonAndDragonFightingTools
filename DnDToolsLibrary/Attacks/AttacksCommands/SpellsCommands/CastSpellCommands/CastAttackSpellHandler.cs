@@ -12,11 +12,11 @@ using System.Collections.Generic;
 
 namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellCommands
 {
-    public class CastAttackSpellHandler : SuperCommandHandlerBase<CastAttackSpellCommand, ValidableResponse<MediatorCommandNoResponse>>
+    public class CastAttackSpellHandler : SuperCommandHandlerBase<CastAttackSpellCommand, IMediatorCommandResponse>
     {
         private static Lazy<IFigtherProvider> _fighterProvider = new Lazy<IFigtherProvider>(() => DIContainer.GetImplementation<IFigtherProvider>());
 
-        public override ValidableResponse<MediatorCommandNoResponse> Execute(IMediatorCommand command)
+        public override IMediatorCommandResponse Execute(IMediatorCommand command)
         {
             CastAttackSpellCommand _command = command as CastAttackSpellCommand;
 
@@ -35,9 +35,9 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
                         _command.PushToInnerCommands(statusCommand);
                     }
                 }
-                return new ValidableResponse<MediatorCommandNoResponse>(true, MediatorCommandStatii.NoResponse);
+                return MediatorCommandStatii.Success;
             }
-            return new ValidableResponse<MediatorCommandNoResponse>(false, MediatorCommandStatii.NoResponse);
+            return MediatorCommandStatii.Canceled;
         }
 
         private bool spellResultObtained(CastAttackSpellCommand command)

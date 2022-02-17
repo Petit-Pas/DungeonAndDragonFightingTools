@@ -33,7 +33,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.LoseCo
             var statuses = _statusProvider.GetOnHitStatusesAppliedBy(entity.DisplayName).Where(x => x.EndsOnCasterLossOfConcentration).ToList();
             foreach (OnHitStatus status in statuses)
             {
-                RemoveStatusCommand innerCommand = new RemoveStatusCommand(status.Id, status.Affected.DisplayName);
+                RemoveStatusCommand innerCommand = new RemoveStatusCommand(status.Id, status.Target.DisplayName);
                 _command.PushToInnerCommands(innerCommand);
                 _mediator.Value.Execute(innerCommand);
             }

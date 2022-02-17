@@ -157,6 +157,12 @@
       <DependentUpon>ApplicationModifierEnumListSelectableUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Game\Status\Display\CustomVerboseStatusListUserControl.cs" />
+    <Compile Include="Game\Status\Display\StatusReferenceListTileUserControl.xaml.cs">
+      <DependentUpon>StatusReferenceListTileUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Game\Status\Display\StatusReferenceTileUserControl.xaml.cs">
+      <DependentUpon>StatusReferenceTileUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="HandlerToUiConfig.cs" />
     <Compile Include="TempExtensions\AttackSpellResultExtensions.cs" />
     <Compile Include="TempExtensions\ModifyListExtension.cs" />
@@ -334,6 +340,14 @@
       <DependentUpon>StatusMessageWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\ModalWindows\StatusModal\StatusMessageWindowDataContext.cs" />
+    <Page Include="Game\Status\Display\StatusReferenceListTileUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\Status\Display\StatusReferenceTileUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Theme\ColorTheme.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -199,7 +199,7 @@ namespace BindValidation
 
             OnHitStatus status = new OnHitStatus()
             {
-                Affected = target,
+                Target = target,
                 Caster = caster,
                 ApplySavingCharacteristic = CharacteristicsEnum.Constitution,
                 ApplySavingDifficulty = 14,

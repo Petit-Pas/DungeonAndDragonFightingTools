@@ -13,25 +13,34 @@ namespace WpfDnDCustomControlLibrary.SavingThrows
     public partial class SavingThrowRollableDenseUserControl : UserControl, IRollableControl
     {
 
-        private SavingThrow data_context { get => DataContext as SavingThrow; }
+        public SavingThrow SavingThrow
+        {
+            get { return (SavingThrow)this.GetValue(savingThrowProperty); }
+            set { this.SetValue(savingThrowProperty, value); }
+        }
+        private static readonly DependencyProperty savingThrowProperty = DependencyProperty.Register(
+            nameof(SavingThrow),
+            typeof(SavingThrow),
+            typeof(SavingThrowRollableDenseUserControl),
+            new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, (o, a) => ((SavingThrowRollableDenseUserControl)o).SavingThrow_Changed(o, a))
+        );
 
         public SavingThrowRollableDenseUserControl()
         {
-            DataContextChanged += SavingThrowRollableDenseUserControl_DataContextChanged;
             InitializeComponent();
         }
 
-        private void SavingThrowRollableDenseUserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private void SavingThrow_Changed(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
             if (e.OldValue is SavingThrow oldSaving)
                 oldSaving.PropertyChanged -= savingPropertyChanged;
 
-            if (data_context != null)
+            if (SavingThrow != null)
             {
-                int modifier = data_context.Target?.Characteristics.GetSavingModifier(data_context.Characteristic) ?? 0;
+                int modifier = SavingThrow.Target?.Characteristics.GetSavingModifier(SavingThrow.Characteristic) ?? 0;
                 AbilityModifierControl.Text = modifier < 0 ? modifier.ToString() : "+" + modifier.ToString();
                 AbilityModifierControl2.Text = modifier < 0 ? modifier.ToString() : "+" + modifier.ToString();
-                data_context.PropertyChanged += savingPropertyChanged;
+                SavingThrow.PropertyChanged += savingPropertyChanged;
             }
         }
 
@@ -42,10 +51,10 @@ namespace WpfDnDCustomControlLibrary.SavingThrows
 
         private void refreshResult()
         {
-            if (data_context != null)
+            if (SavingThrow != null)
             {
-                int result = data_context.Target.Characteristics.GetSavingModifier(data_context.Characteristic) + data_context.SavingRoll + data_context.Modifier;
-                int target = data_context.Difficulty;
+                int result = SavingThrow.Target.Characteristics.GetSavingModifier(SavingThrow.Characteristic) + SavingThrow.SavingRoll + SavingThrow.Modifier;
+                int target = SavingThrow.Difficulty;
 
                 ResultControl.Text = result + "/" + target;
             }
@@ -53,20 +62,20 @@ namespace WpfDnDCustomControlLibrary.SavingThrows
         
         public void RollControl()
         {
-            if (data_context != null)
+            if (SavingThrow != null)
             {
-                if (data_context.SavingRoll == 0)
+                if (SavingThrow.SavingRoll == 0)
                 {
-                    data_context.SavingRoll = DiceRoll.Roll("1d20", data_context.AdvantageModifiers.SituationalAdvantage, data_context.AdvantageModifiers.SituationalDisadvantage);
+                    SavingThrow.SavingRoll = DiceRoll.Roll("1d20", SavingThrow.AdvantageModifiers.SituationalAdvantage, SavingThrow.AdvantageModifiers.SituationalDisadvantage);
                 }
             }
         }
 
         public bool IsFullyRolled()
         {
-            if (data_context == null)
+            if (SavingThrow == null)
                 return true;
-            if (data_context.SavingRoll == 0)
+            if (SavingThrow.SavingRoll == 0)
             {
                 return false;
             }

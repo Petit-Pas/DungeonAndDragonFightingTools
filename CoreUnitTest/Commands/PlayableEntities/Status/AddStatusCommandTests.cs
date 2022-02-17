@@ -41,7 +41,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.Status
         public void StatusIsWellApplied()
         {
             OnHitStatus status = StatusFactory.InfernalWound;
-            status.Affected = _character;
+            status.Target = _character;
             status.Caster = _character;
             AddStatusCommand command = new AddStatusCommand(_character, status);
 
@@ -55,7 +55,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.Status
         public void UndoWorks()
         {
             OnHitStatus status = StatusFactory.InfernalWound;
-            status.Affected = _character;
+            status.Target = _character;
             status.Caster = _character;
             AddStatusCommand command = new AddStatusCommand(_character, status);
 
@@ -70,7 +70,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.Status
         public void StatusReferenceCorresponds()
         {
             OnHitStatus status = StatusFactory.InfernalWound;
-            status.Affected = _character;
+            status.Target = _character;
             status.Caster = _character;
             AddStatusCommand command = new AddStatusCommand(_character.DisplayName, status);
 
@@ -83,7 +83,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.Status
         public void StatusReferenceCorresponds_IdWasPresent()
         {
             OnHitStatus status = StatusFactory.InfernalWound;
-            status.Affected = _character;
+            status.Target = _character;
             status.Caster = _character;
             status.Id = new Guid();
             AddStatusCommand command = new AddStatusCommand(_character, status);
@@ -97,7 +97,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.Status
         public void UndoRemoveCorrectStatusFromMany()
         {
             OnHitStatus status = StatusFactory.InfernalWound;
-            status.Affected = _character;
+            status.Target = _character;
             status.Caster = _character;
             status.Id = new Guid();
             AddStatusCommand command = new AddStatusCommand(_character, status);

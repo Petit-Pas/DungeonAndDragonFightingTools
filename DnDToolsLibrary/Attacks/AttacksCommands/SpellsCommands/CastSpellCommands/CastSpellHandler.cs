@@ -14,19 +14,19 @@ using System.Collections.Generic;
 
 namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellCommands
 {
-    public class CastSpellHandler : SuperCommandHandlerBase<CastSpellCommand, ValidableResponse<MediatorCommandNoResponse>>
+    public class CastSpellHandler : SuperCommandHandlerBase<CastSpellCommand, IMediatorCommandResponse>
     {
         private static Lazy<IFigtherProvider> _fighterProvider = new Lazy<IFigtherProvider> (() => DIContainer.GetImplementation<IFigtherProvider>());
 
-        public override ValidableResponse<MediatorCommandNoResponse> Execute(IMediatorCommand command)
+        public override IMediatorCommandResponse Execute(IMediatorCommand command)
         {
             CastSpellCommand _command = base.castCommand(command);
             PlayableEntity caster = _fighterProvider.Value.GetFighterByDisplayName(_command.CasterName);
 
             if (spellLevelSelected(_command) == false)
-                return new ValidableResponse<MediatorCommandNoResponse>(false, MediatorCommandStatii.NoResponse);
+                return MediatorCommandStatii.Canceled;
             if (targetsSelected(_command) == false)
-                return new ValidableResponse<MediatorCommandNoResponse>(false, MediatorCommandStatii.NoResponse);
+                return MediatorCommandStatii.Canceled;
 
             ValidableResponse<MediatorCommandNoResponse> response;
             if (_command.Spell.IsAnAttack)
@@ -39,7 +39,7 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
                 CastNonAttackSpellCommand castNonAttackSpellCommand = new CastNonAttackSpellCommand(_command.CasterName, _command.Spell, _command.CastLevel, _command.TargetNames);
                 response = base._mediator.Value.Execute(castNonAttackSpellCommand) as ValidableResponse<MediatorCommandNoResponse>;
             }
-            return new ValidableResponse<MediatorCommandNoResponse>(response.IsValid, MediatorCommandStatii.NoResponse);
+            return MediatorCommandStatii.Success;
         }
 
         private bool targetsSelected(CastSpellCommand command)

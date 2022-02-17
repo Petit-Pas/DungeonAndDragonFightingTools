@@ -7,6 +7,8 @@ using DnDToolsLibrary.Attacks.Damage;
 using DnDToolsLibrary.Dice;
 using BaseToolsLibrary.Memory;
 using BaseToolsLibrary;
+using DnDToolsLibrary.Fight;
+using BaseToolsLibrary.DependencyInjection;
 
 namespace DnDToolsLibrary.Status
 {
@@ -27,17 +29,71 @@ namespace DnDToolsLibrary.Status
 
         #region Properties_Concerned
 
-        /// <summary>
-        ///     The Entity that initiated the status, can be used when its concentration loss provokes the annulation of the status
-        /// </summary>
-        [XmlIgnore]
-        public PlayableEntity Caster { get; set; } = null;
+        private static Lazy<IFigtherProvider> _lazyFighterProvider = new Lazy<IFigtherProvider>(() => DIContainer.GetImplementation<IFigtherProvider>());
+        private static IFigtherProvider _fighterProvider => _lazyFighterProvider.Value;
 
-        /// <summary>
-        ///     The Entity that is affected by the status, can be used to remove the status from its list of Statuses   
-        /// </summary>
         [XmlIgnore]
-        public PlayableEntity Affected { get; set; } = null;
+        public PlayableEntity Caster
+        {
+            get
+            {
+                return _fighterProvider.GetFighterByDisplayName(CasterName);
+            }
+            set
+            {
+                if (value != null)
+                    CasterName = value.DisplayName;
+                else
+                    CasterName = null;
+                NotifyPropertyChanged();
+            }
+        }
+        [XmlAttribute]
+        public string CasterName
+        {
+            get
+            {
+                return _casterName;
+            }
+            set
+            {
+                _casterName = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private string _casterName = null;
+
+        [XmlIgnore]
+        public PlayableEntity Target
+        {
+            get
+            {
+                return _fighterProvider.GetFighterByDisplayName(TargetName);
+            }
+            set
+            {
+                if (value != null)
+                    TargetName = value.DisplayName;
+                else
+                    TargetName = null;
+                NotifyPropertyChanged();
+            }
+        }
+
+        [XmlAttribute]
+        public string TargetName
+        {
+            get
+            {
+                return _targetName;
+            }
+            set
+            {
+                _targetName = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private string _targetName = null;
 
         #endregion Properties_Concerned
 
@@ -348,7 +404,7 @@ namespace DnDToolsLibrary.Status
                 return false;
             if (!Caster.IsEquivalentTo(toCompare.Caster))
                 return false;
-            if (!Affected.IsEquivalentTo(toCompare.Affected))
+            if (!Target.IsEquivalentTo(toCompare.Target))
                 return false;
             return true;
         }
@@ -379,7 +435,7 @@ namespace DnDToolsLibrary.Status
             SpellApplicationModifier = to_copy.SpellApplicationModifier;
             SpellSavingWasSuccessful = to_copy.SpellSavingWasSuccessful;
             Caster = to_copy.Caster;
-            Affected = to_copy.Affected;
+            Target = to_copy.Target;
         }
 
         public OnHitStatus(OnHitStatus to_copy)

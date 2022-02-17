@@ -22,9 +22,9 @@ namespace WpfDnDCommandHandlers.AttackQueries.SpellQueries.SpellLevelQueries.Get
     /// <summary>
     /// Logique d'interaction pour NormalSpellLevelSelectorWindow.xaml
     /// </summary>
-    public partial class GetInputNormalSpellLevelWindow : Window, IResultWindow<NormalSpellLevelQuery, SpellLevel>
+    public partial class NormalSpellLevelQueryHandlerWindow : Window, IResultWindow<NormalSpellLevelQuery, SpellLevel>
     {
-        public GetInputNormalSpellLevelWindow()
+        public NormalSpellLevelQueryHandlerWindow()
         {
             Initialized += NormalSpellLevelSelectorWindow_Initialized;
             InitializeComponent();

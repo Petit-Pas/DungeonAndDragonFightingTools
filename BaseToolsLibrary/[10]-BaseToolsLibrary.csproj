@@ -62,6 +62,7 @@
     <Compile Include="Mediator\BaseMediator.cs" />
     <Compile Include="Mediator\BaseMediatorHandler.cs" />
     <Compile Include="Mediator\CommandStatii\MediatorCommandCanceled.cs" />
+    <Compile Include="Mediator\CommandStatii\MediatorCommandFailed.cs" />
     <Compile Include="Mediator\CommandStatii\MediatorCommandSuccess.cs" />
     <Compile Include="Mediator\SuperCommandBase.cs" />
     <Compile Include="Mediator\SuperCommandHandlerBase.cs" />

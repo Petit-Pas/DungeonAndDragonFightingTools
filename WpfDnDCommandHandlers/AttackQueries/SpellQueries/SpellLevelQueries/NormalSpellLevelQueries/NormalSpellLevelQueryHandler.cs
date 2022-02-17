@@ -12,7 +12,7 @@ using WpfToolsLibrary.Navigation;
 
 namespace WpfDnDCommandHandlers.AttackQueries.SpellQueries.SpellLevelQueries.GetInputNormalSpellLevel
 {
-    public class GetInputSpellLevelHandler : BaseResultCommandHandler<NormalSpellLevelQuery, SpellLevel>
+    public class NormalSpellLevelQueryHandler : BaseResultCommandHandler<NormalSpellLevelQuery, SpellLevel>
     {
     }
 }

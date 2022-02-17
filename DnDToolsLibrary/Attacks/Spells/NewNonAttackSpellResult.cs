@@ -162,7 +162,7 @@ namespace DnDToolsLibrary.Attacks.Spells
                 NotifyPropertyChanged();
             }
         }
-        private SavingThrow _saving = new SavingThrow();
+        private SavingThrow _saving = null;
 
         private void refreshLastSavingSuccesfulOfHitDamage(object sender, PropertyChangedEventArgs e)
         {
@@ -204,7 +204,7 @@ public event PropertyChangedEventHandler PropertyChanged;
             this.Level = to_copy.Level;
             this.Name = to_copy.Name;
             this.TargetName = to_copy.TargetName;
-            this.Saving = to_copy.Saving.Clone() as SavingThrow;
+            this.Saving = to_copy.Saving?.Clone() as SavingThrow;
         }
 
         public NewNonAttackSpellResult(NewNonAttackSpellResult to_copy)

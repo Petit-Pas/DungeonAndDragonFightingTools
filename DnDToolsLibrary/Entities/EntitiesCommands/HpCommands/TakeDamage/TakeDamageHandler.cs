@@ -8,12 +8,12 @@ using System;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.TakeDamage
 {
-    public class TakeDamageHandler : SuperCommandHandlerBase<TakeDamageCommand, MediatorCommandNoResponse>
+    public class TakeDamageHandler : SuperCommandHandlerBase<TakeDamageCommand, IMediatorCommandResponse>
     {
         private static Lazy<ICustomConsole> console = new Lazy<ICustomConsole>(() => DIContainer.GetImplementation<ICustomConsole>());
         private static Lazy<IFontWeightProvider> fontWeightProvider = new Lazy<IFontWeightProvider>(() => DIContainer.GetImplementation<IFontWeightProvider>());
 
-        public override MediatorCommandNoResponse Execute(IMediatorCommand command)
+        public override IMediatorCommandResponse Execute(IMediatorCommand command)
         {
             TakeDamageCommand _command = base.castCommand(command);
 

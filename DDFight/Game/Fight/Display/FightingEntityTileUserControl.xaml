@@ -5,7 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:inputboxes="clr-namespace:DDFight.Controlers.InputBoxes"
              xmlns:display="clr-namespace:DDFight.Game.Status.Display" 
-             xmlns:basetypes="clr-namespace:WpfToolsLibrary.Converters.BaseTypes;assembly=WpfToolsLibrary" xmlns:converters="clr-namespace:DDFight.Converters" xmlns:converters2="clr-namespace:WpfToolsLibrary.Converters.Visibilities;assembly=WpfToolsLibrary"
+             xmlns:basetypes="clr-namespace:WpfToolsLibrary.Converters.BaseTypes;assembly=WpfToolsLibrary" 
+             xmlns:converters="clr-namespace:DDFight.Converters"
+             xmlns:converters2="clr-namespace:WpfToolsLibrary.Converters.Visibilities;assembly=WpfToolsLibrary"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -47,6 +49,7 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -137,6 +140,7 @@
                 ConverterParameter=Focused|Not\ Focused}"/>
 
             <display:CustomVerboseStatusTileListUserControl Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"/>
+            <display:StatusReferenceListTileUserControl Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"/>
         </Grid>
     </GroupBox>
 </UserControl>

@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.AcquireConcentration
 {
-    public class AcquireConcentrationCommandHandler : SuperCommandHandlerBase<AcquireConcentrationCommand, MediatorCommandNoResponse>
+    public class AcquireConcentrationCommandHandler : SuperCommandHandlerBase<AcquireConcentrationCommand, IMediatorCommandResponse>
     {
-        public override MediatorCommandNoResponse Execute(IMediatorCommand command)
+        public override IMediatorCommandResponse Execute(IMediatorCommand command)
         {
             AcquireConcentrationCommand _command = base.castCommand(command);
             PlayableEntity entity = _command.GetEntity();

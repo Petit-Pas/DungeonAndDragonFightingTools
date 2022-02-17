@@ -25,15 +25,13 @@ namespace DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands
         /// <param name="target"> The entity that is affected by the status </param>
         public TryApplyStatusCommand(string casterName, string targetName, OnHitStatus status, SavingThrow saving = null)
         {
-            Status = status;
-            Saving = saving;
-            CasterName = casterName;
-            TargetName = targetName;
+            Status = status.Clone() as OnHitStatus;
+            Status.CasterName = casterName;
+            Status.TargetName = targetName;
+            Saving = saving;         
         }
 
         public OnHitStatus Status { get; }
         public SavingThrow Saving { get; set; }
-        public string CasterName { get; }
-        public string TargetName { get; }
     }
 }

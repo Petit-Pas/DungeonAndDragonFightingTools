@@ -127,9 +127,17 @@
                                     FontWeight="SemiBold"
                                     />
 
+                                <!-- Visibility="{Binding HasSavingThrow, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                     -->
                                 <savingthrows:SavingThrowRollableDenseUserControl
+                                    Visibility="{Binding HasSavingThrow, Converter={StaticResource BooleanToVisibilityConverter}}"
                                     Grid.Row="1"
-                                    DataContext="{Binding Saving}"/>
+                                    SavingThrow="{Binding Saving}"/>
+                                <TextBlock
+                                    Grid.Row="1"
+                                    Visibility="{Binding HasSavingThrow, Converter={StaticResource BoolToReversedVisibilityConverter}}">
+                                    No Saving.
+                                </TextBlock>
 
                                 <damage:DamageResultListRollableControl
                                     x:Name="DamageControl"

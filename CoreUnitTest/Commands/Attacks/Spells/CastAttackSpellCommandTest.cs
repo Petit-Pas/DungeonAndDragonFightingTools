@@ -83,7 +83,7 @@ namespace CoreUnitTest.Commands.Attacks.Spells
             Mock<IMediatorHandler> mockSaving = new Mock<IMediatorHandler>();
             OnHitStatus status = StatusFactory.InfernalWound;
             status.Caster = _character;
-            status.Affected = _character;
+            status.Target = _character;
 
             results.Add(new NewAttackSpellResult()
             {
@@ -130,9 +130,9 @@ namespace CoreUnitTest.Commands.Attacks.Spells
             mock.Setup(x => x.Execute(It.IsAny<IMediatorCommand>())).Returns(new ValidableResponse<AttackSpellResults>(false, null));
             _mediator.RegisterHandler(mock.Object, typeof(AttackSpellResultsQuery));
 
-            ValidableResponse<MediatorCommandNoResponse> response = _mediator.Execute(command) as ValidableResponse<MediatorCommandNoResponse>;
+            IMediatorCommandResponse response = _mediator.Execute(command);
 
-            Assert.IsFalse(response.IsValid);
+            Assert.IsInstanceOf<MediatorCommandCanceled>(response);
         }
     }
 }

@@ -40,20 +40,22 @@ namespace DDFight
             // this lines serves the purpose of force loading its .dll, enabling the mediator to find the handler.
             DamageResultListQueryHandler handler = new DamageResultListQueryHandler();
 
+            Logger.Init();
 
             OnHitStatus.RegisterEvents = OnHitStatusGameExtension.Register;
             OnHitStatus.UnregisterEvents = OnHitStatusGameExtension.Unregister;
-
-            Logger.Init();
 
             DIConfigurer.ConfigureCore();
             DIConfigurer.ConfigureWpf();
             DIConfigurer.Verify();
 
+
             GlobalContext.Context.CharacterList = SaveManager.LoadGenericList<Character, CharacterList>(SaveManager.players_folder);
             GlobalContext.Context.MonsterList = SaveManager.LoadGenericList<Monster, MonsterList>(SaveManager.monsters_folder);
             GlobalContext.Context.SpellList = SaveManager.LoadGenericList<Spell, SpellList>(SaveManager.spells_folder);
             GlobalContext.Context.SpellList.IsMainSpellList = true;
+
+            HandlerToUiConfig.Configure();
 
             Global.Loading = false;
 

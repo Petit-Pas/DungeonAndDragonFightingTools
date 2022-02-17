@@ -2,7 +2,7 @@
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.LooseHp
 {
-    public class LooseHpCommand : EntityCommand
+    public class LooseHpCommand : EntitySuperCommand
     {
         [XmlAttribute]
         public int Amount { get; set; }

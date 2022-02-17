@@ -1,4 +1,7 @@
-﻿using DDFight.WpfExtensions;
+﻿using BaseToolsLibrary.DependencyInjection;
+using BaseToolsLibrary.Mediator;
+using DDFight.WpfExtensions;
+using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellCommands;
 using DnDToolsLibrary.Attacks.Spells;
 using DnDToolsLibrary.Entities;
 using System.Windows.Controls;
@@ -11,6 +14,8 @@ namespace DDFight.Game.Aggression.Spells.Display
     /// </summary>
     public partial class SpellListPreviewUserControl : UserControl
     {
+        private static IMediator _mediator = DIContainer.GetImplementation<IMediator>();
+
         private PlayableEntity data_context
         {
             get => (PlayableEntity)DataContext;
@@ -41,7 +46,8 @@ namespace DDFight.Game.Aggression.Spells.Display
             if (SpellListControl.EntityListControl.SelectedIndex != -1) 
             {
                 Spell spell = (Spell)SpellListControl.EntityListControl.SelectedItem;
-                spell.CastSpell(data_context);
+                CastSpellCommand castSpellCommand = new CastSpellCommand(data_context, spell);
+                _mediator.Execute(castSpellCommand);
             }
         }
     }
