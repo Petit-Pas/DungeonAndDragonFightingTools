@@ -153,7 +153,7 @@ namespace CoreUnitTest.TestFactories
             HasApplyCondition = true,
             HasSpellSaving = false,
             Header = "InfernalWound",
-            Name = "Name",
+            Name = "InfernalWound",
             OnApplyDamageList = new DamageTemplateList()
             {
             },
@@ -180,8 +180,8 @@ namespace CoreUnitTest.TestFactories
             HasAMaximumDuration = false,
             HasApplyCondition = false,
             HasSpellSaving = false,
-            Header = "Header",
-            Name = "Name",
+            Header = "AutomaticApplication",
+            Name = "AutomaticApplication",
             OnApplyDamageList = new DamageTemplateList()
             {
             },
