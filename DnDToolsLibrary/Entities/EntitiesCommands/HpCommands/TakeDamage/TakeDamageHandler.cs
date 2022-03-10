@@ -10,8 +10,8 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.TakeDamage
 {
     public class TakeDamageHandler : SuperCommandHandlerBase<TakeDamageCommand, IMediatorCommandResponse>
     {
-        private static Lazy<ICustomConsole> console = new Lazy<ICustomConsole>(() => DIContainer.GetImplementation<ICustomConsole>());
-        private static Lazy<IFontWeightProvider> fontWeightProvider = new Lazy<IFontWeightProvider>(() => DIContainer.GetImplementation<IFontWeightProvider>());
+        private static readonly Lazy<ICustomConsole> console = new Lazy<ICustomConsole>(() => DIContainer.GetImplementation<ICustomConsole>());
+        private static readonly Lazy<IFontWeightProvider> fontWeightProvider = new Lazy<IFontWeightProvider>(() => DIContainer.GetImplementation<IFontWeightProvider>());
 
         public override IMediatorCommandResponse Execute(IMediatorCommand command)
         {
@@ -49,7 +49,6 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.TakeDamage
             command.PushToInnerCommands(inner_command);
 
             return remaining - amount;
-
         }
     }
 }
