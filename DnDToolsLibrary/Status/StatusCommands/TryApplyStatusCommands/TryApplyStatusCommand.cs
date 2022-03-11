@@ -21,8 +21,8 @@ namespace DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands
         /// </summary>
         /// <param name="status"> The status to apply </param>
         /// <param name="saving"> The saving implied with the status. </param>
-        /// <param name="caster"> The entity that applies the status </param>
-        /// <param name="target"> The entity that is affected by the status </param>
+        /// <param name="casterName"> The entity that applies the status </param>
+        /// <param name="targetName"> The entity that is affected by the status </param>
         public TryApplyStatusCommand(string casterName, string targetName, OnHitStatus status, SavingThrow saving = null)
         {
             Status = status.Clone() as OnHitStatus;

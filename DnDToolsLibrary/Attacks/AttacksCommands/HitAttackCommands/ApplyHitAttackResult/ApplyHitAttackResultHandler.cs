@@ -2,6 +2,8 @@
 using BaseToolsLibrary.Mediator.CommandStatii;
 using DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageResultList;
 using System;
+using DnDToolsLibrary.Status;
+using DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands;
 
 namespace DnDToolsLibrary.Attacks.AttacksCommands.HitAttackCommands.ApplyHitAttackResult
 {
@@ -11,7 +13,7 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.HitAttackCommands.ApplyHitAtta
         {
             ApplyHitAttackResultCommand _command = base.castCommand(command);
 
-            if (_command.HitAttackResult.RollResult.Hits)
+            if (_command.HitAttackResult.RollResult.Hits || _command.HitAttackResult.AutomaticallyHits)
             {
                 apply_damage(_command);
 
@@ -24,7 +26,12 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.HitAttackCommands.ApplyHitAtta
 
         private void apply_on_hit(ApplyHitAttackResultCommand command)
         {
-            Console.WriteLine("ERROR : apply_on_hit() not implemented in ApplyHitAttackResultHandler");
+            foreach (OnHitStatus status in command.HitAttackResult.OnHitStatuses)
+            {
+                var statusCommand = new TryApplyStatusCommand(command.HitAttackResult.OwnerName, command.HitAttackResult.TargetName, status);
+                base._mediator.Value.Execute(statusCommand);
+                command.PushToInnerCommands(statusCommand);
+            }
         }
 
         private void apply_damage(ApplyHitAttackResultCommand command)

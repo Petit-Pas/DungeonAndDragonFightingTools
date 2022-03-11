@@ -18,7 +18,6 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
         public override IMediatorCommandResponse Execute(IMediatorCommand command)
         {
             CastNonAttackSpellCommand _command = command as CastNonAttackSpellCommand;
-            //bool should
 
             if (spellResultObtained(_command))
             {
