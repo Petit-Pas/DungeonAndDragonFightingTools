@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,6 +13,22 @@ using System.Windows.Media;
 
 namespace WpfToolsLibrary.ConsoleTools
 {
+    internal static class InlineCollectionExtensions
+    {
+        internal static void InsertAfter(this InlineCollection inlineCollection, Run run, int lastHash)
+        {
+            if (lastHash == -1)
+            {
+                inlineCollection.Add(run);
+            }
+            else
+            {
+                Inline previous = inlineCollection.First(i => i.GetHashCode() == lastHash);
+                inlineCollection.InsertAfter(previous, run);
+            }
+        }
+    }
+
     public class WpfConsole : ICustomConsole, INotifyPropertyChanged
     {
         public FlowDocument ConsoleContent
@@ -32,45 +49,71 @@ namespace WpfToolsLibrary.ConsoleTools
         public int DefaultFontSize { get; set; } = 15;
 
         private FlowDocument _consoleContent = new FlowDocument();
+        private Paragraph currentParagraph { get => ConsoleContent.Blocks.LastBlock as Paragraph; set { } }
 
         #region AddEntry()
 
-        public void AddEntry(string text)
+        public int AddEntry(string text)
         {
-            AddEntry(text, DefaultFontWeight, DefaultFontColor, DefaultFontSize);
+            return AddEntry(text, DefaultFontWeight, DefaultFontColor, DefaultFontSize);
         }
 
-        public void AddEntry(string text, IFontWeight fontWeight)
+        public int AddEntry(string text, IFontWeight fontWeight)
         {
-            AddEntry(text, fontWeight, DefaultFontColor, DefaultFontSize);
+            return AddEntry(text, fontWeight, DefaultFontColor, DefaultFontSize);
         }
 
-        public void AddEntry(string text, IFontWeight fontWeight, IFontColor fontColor)
+        public int AddEntry(string text, IFontWeight fontWeight, IFontColor fontColor)
         {
-            AddEntry(text, fontWeight, fontColor, DefaultFontSize);
+            return AddEntry(text, fontWeight, fontColor, DefaultFontSize);
         }
 
-        private Paragraph currentParagraph { get => ConsoleContent.Blocks.LastBlock as Paragraph; set { } }
+        public int AddEntry(string text, IFontWeight fontWeight, IFontColor fontColor, int fontSize)
+        {
+            return ActuallyAddEntry(text, -1, fontWeight, fontColor, fontSize);
+        }
 
-        public void AddEntry(string text, IFontWeight fontWeight, IFontColor fontColor, int fontSize)
+        public int AddEntryAfter(int previousHash, string text)
+        {
+            return AddEntryAfter(previousHash, text, DefaultFontWeight);
+        }
+
+        public int AddEntryAfter(int previousHash, string text, IFontWeight fontWeight)
+        {
+            return AddEntryAfter(previousHash, text, fontWeight, DefaultFontColor);
+        }
+
+        public int AddEntryAfter(int previousHash, string text, IFontWeight fontWeight, IFontColor fontColor)
+        {
+            return AddEntryAfter(previousHash, text, fontWeight, DefaultFontColor, DefaultFontSize);
+        }
+
+        public int AddEntryAfter(int previousHash, string text, IFontWeight fontWeight, IFontColor fontColor, int fontSize)
+        {
+            return ActuallyAddEntry(text, previousHash, fontWeight, fontColor, fontSize);
+        }
+
+        private int ActuallyAddEntry(string text, int previousHash, IFontWeight fontWeight, IFontColor fontColor, int fontSize)
         {
             if (fontColor is WpfFontColor color && fontWeight is WpfFontWeight weight)
             {
                 if (currentParagraph != null)
                 {
-                    currentParagraph.Inlines.Add(new Run()
+                    var run = new Run()
                     {
                         Text = text,
                         Foreground = color.Brush,
                         FontSize = fontSize,
                         FontWeight = weight.FontWeight,
-                    });
+                    };
+
+                    currentParagraph.Inlines.InsertAfter(run, previousHash);
+
+                    return run.GetHashCode();
                 }
             }
-            else
-            {
-                Logger.Log($"WARNING: invalid type in WpfConsole.AddEntry(): {fontColor.GetType().ToString()} and {fontWeight.GetType().ToString()}");
-            }
+            Logger.Log($"WARNING: invalid type in WpfConsole.AddEntry(): {fontColor.GetType().ToString()} and {fontWeight.GetType().ToString()}");
+            return -1;
         }
 
         #endregion AddEntry()

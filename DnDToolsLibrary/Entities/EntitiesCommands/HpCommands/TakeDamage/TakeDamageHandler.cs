@@ -22,12 +22,19 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.TakeDamage
 
             PlayableEntity target = _command.GetEntity();
             int remaining = _command.Amount;
+            var startingHPs = target.HpString;
 
-            console.Value.AddEntry($"Total: {remaining} Damages\r\n", fontWeightProvider.Value.Bold);
+            console.Value.AddEntry($"{remaining}", fontWeightProvider.Value.Bold);
+            console.Value.AddEntry(" total damages: ", fontWeightProvider.Value.Normal);
+            console.Value.AddEntry($"{startingHPs}", fontWeightProvider.Value.Bold);
+            var entryHash = console.Value.AddEntry(" => ", fontWeightProvider.Value.Bold);
 
             if (target.TempHp != 0)
                 remaining = handleTempHp(_command, target, remaining);
             handleHp(_command, target, remaining);
+
+            console.Value.AddEntryAfter(entryHash, $"{target.HpString}\r\n", fontWeightProvider.Value.Bold);
+
             return MediatorCommandStatii.NoResponse;
         }
 
