@@ -17,9 +17,9 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.LoseCo
         private IStatusProvider _statusProvider { get => __lazyStatusProvider.Value; }
         private Lazy<IStatusProvider> __lazyStatusProvider = new Lazy<IStatusProvider>(() => DIContainer.GetImplementation<IStatusProvider>());
 
-        public override IMediatorCommandResponse Execute(IMediatorCommand command)
+        public override IMediatorCommandResponse Execute(IMediatorCommand genericCommand)
         {
-            LoseConcentrationCommand _command = base.castCommand(command);
+            LoseConcentrationCommand _command = base.castCommand(genericCommand);
             PlayableEntity entity = _command.GetEntity();
 
             if (!entity.IsFocused)
@@ -40,9 +40,9 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.LoseCo
             return MediatorCommandStatii.Success;
         }
 
-        public override void Undo(IMediatorCommand command)
+        public override void Undo(IMediatorCommand genericCommand)
         {
-            LoseConcentrationCommand _command = base.castCommand(command);
+            LoseConcentrationCommand _command = base.castCommand(genericCommand);
             PlayableEntity entity = _command.GetEntity();
 
             entity.IsFocused = _command.WasFocused;

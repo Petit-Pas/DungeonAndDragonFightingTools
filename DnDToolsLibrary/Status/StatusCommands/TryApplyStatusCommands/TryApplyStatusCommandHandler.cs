@@ -17,9 +17,9 @@ namespace DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands
     {
         private Lazy<IFigtherProvider> _fighterProvider = new Lazy<IFigtherProvider>(() => DIContainer.GetImplementation<IFigtherProvider>());
 
-        public override IMediatorCommandResponse Execute(IMediatorCommand command)
+        public override IMediatorCommandResponse Execute(IMediatorCommand genericCommand)
         {
-            TryApplyStatusCommand _command = this.castCommand(command);
+            TryApplyStatusCommand _command = this.castCommand(genericCommand);
             PlayableEntity target = _fighterProvider.Value.GetFighterByDisplayName(_command.Status.TargetName);
 
             bool applyIsSuccess = true;

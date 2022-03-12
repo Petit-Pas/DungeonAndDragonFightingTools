@@ -49,9 +49,9 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageRes
             }
         }
 
-        public override ApplyDamageResultListResponse Execute(IMediatorCommand command)
+        public override ApplyDamageResultListResponse Execute(IMediatorCommand genericCommand)
         {
-            ApplyDamageResultListCommand _command = base.castCommand(command);
+            ApplyDamageResultListCommand _command = base.castCommand(genericCommand);
             int total = 0;
             PlayableEntity target = _command.GetEntity();
 

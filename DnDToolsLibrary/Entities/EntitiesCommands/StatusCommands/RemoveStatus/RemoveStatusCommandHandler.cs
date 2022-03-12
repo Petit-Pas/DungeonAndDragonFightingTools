@@ -15,9 +15,9 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.StatusCommands.RemoveStatus
         private IStatusProvider _statusProvider { get => _lazyStatusProvider.Value; }
         private Lazy<IStatusProvider> _lazyStatusProvider = new Lazy<IStatusProvider>(() => DIContainer.GetImplementation<IStatusProvider>());
 
-        public override IMediatorCommandResponse Execute(IMediatorCommand command)
+        public override IMediatorCommandResponse Execute(IMediatorCommand genericCommand)
         {
-            RemoveStatusCommand _command = this.castCommand(command);
+            RemoveStatusCommand _command = this.castCommand(genericCommand);
             PlayableEntity target = _command.GetEntity();
 
             _statusProvider.Remove(_command.Status);
@@ -27,9 +27,9 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.StatusCommands.RemoveStatus
             return MediatorCommandStatii.Success;
         }
 
-        public override void Undo(IMediatorCommand command)
+        public override void Undo(IMediatorCommand genericCommand)
         {
-            RemoveStatusCommand _command = this.castCommand(command);
+            RemoveStatusCommand _command = this.castCommand(genericCommand);
             PlayableEntity target = _command.GetEntity();
 
             _statusProvider.Add(_command.Status);

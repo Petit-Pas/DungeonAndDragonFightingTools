@@ -11,9 +11,9 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.Heal
         private static Lazy<ICustomConsole> console = new Lazy<ICustomConsole>(DIContainer.GetImplementation<ICustomConsole>);
         private static Lazy<IFontWeightProvider> fontWeightProvider = new Lazy<IFontWeightProvider>(DIContainer.GetImplementation<IFontWeightProvider>);
 
-        public override IMediatorCommandResponse Execute(IMediatorCommand command)
+        public override IMediatorCommandResponse Execute(IMediatorCommand genericCommand)
         {
-            HealCommand _command = this.castCommand(command);
+            HealCommand _command = this.castCommand(genericCommand);
             PlayableEntity target = _command.GetEntity();
 
             if (_command.Amount < 0)
@@ -35,14 +35,14 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.Heal
             return MediatorCommandStatii.NoResponse;
         }
 
-        public override void Undo(IMediatorCommand command)
+        public override void Undo(IMediatorCommand genericCommand)
         {
-            HealCommand _command = this.castCommand(command);
+            HealCommand _command = this.castCommand(genericCommand);
             
             if (false == _command.To.HasValue || false == _command.From.HasValue)
             {
-                Console.WriteLine($"ERROR : Trying to undo a {this.GetType()} command that was not executed first");
-                throw new NullReferenceException($"Trying to undo a {this.GetType()} command that was not executed first");
+                Console.WriteLine($"ERROR : Trying to undo a {this.GetType()} genericCommand that was not executed first");
+                throw new NullReferenceException($"Trying to undo a {this.GetType()} genericCommand that was not executed first");
             }
             
             PlayableEntity target = _command.GetEntity();

@@ -15,7 +15,7 @@ namespace BaseToolsLibrary.Mediator
         where TReturn : class, IMediatorCommandResponse
     {
         // declarations should be in the other interface, the non generic one
-        new TReturn Execute(IMediatorCommand command);
+        new TReturn Execute(IMediatorCommand genericCommand);
     }
 
     public interface IMediatorHandler
@@ -24,6 +24,6 @@ namespace BaseToolsLibrary.Mediator
 
         IMediatorCommandResponse Execute(IMediatorCommand command);
 
-        void Undo(IMediatorCommand command);
+        void Undo(IMediatorCommand genericCommand);
     }
 }

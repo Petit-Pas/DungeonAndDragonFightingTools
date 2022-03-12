@@ -18,9 +18,9 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.StatusCommands.AddStatus
         private static readonly Lazy<IFontWeightProvider> _fontWeightProvider = new Lazy<IFontWeightProvider>(DIContainer.GetImplementation<IFontWeightProvider>);
         private static readonly Lazy<IStatusProvider> _statusProvider = new Lazy<IStatusProvider>(DIContainer.GetImplementation<IStatusProvider>);
 
-        public override IMediatorCommandResponse Execute(IMediatorCommand command)
+        public override IMediatorCommandResponse Execute(IMediatorCommand genericCommand)
         {
-            AddStatusCommand _command = this.castCommand(command);
+            AddStatusCommand _command = this.castCommand(genericCommand);
             PlayableEntity target = _command.GetEntity();
 
             _command.Status.Target = target;
@@ -36,9 +36,9 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.StatusCommands.AddStatus
             return MediatorCommandStatii.NoResponse;
         }
 
-        public override void Undo(IMediatorCommand command)
+        public override void Undo(IMediatorCommand genericCommand)
         {
-            AddStatusCommand _command = this.castCommand(command);
+            AddStatusCommand _command = this.castCommand(genericCommand);
             PlayableEntity target = _command.GetEntity();
 
             _statusProvider.Value.Remove(_command.Status);

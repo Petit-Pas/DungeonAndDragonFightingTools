@@ -14,9 +14,9 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.Challe
 {
     public class ChallengeConcentrationCommandHandler : SuperCommandHandlerBase<ChallengeConcentrationCommand, IMediatorCommandResponse>
     {
-        public override IMediatorCommandResponse Execute(IMediatorCommand command)
+        public override IMediatorCommandResponse Execute(IMediatorCommand genericCommand)
         {
-            ChallengeConcentrationCommand _command = command as ChallengeConcentrationCommand;
+            ChallengeConcentrationCommand _command = genericCommand as ChallengeConcentrationCommand;
             PlayableEntity entity = _command.GetEntity();
 
             if (!entity.IsFocused)

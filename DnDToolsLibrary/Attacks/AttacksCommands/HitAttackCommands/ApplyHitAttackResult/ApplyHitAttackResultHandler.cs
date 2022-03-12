@@ -9,9 +9,9 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.HitAttackCommands.ApplyHitAtta
 {
     public class ApplyHitAttackResultHandler : SuperCommandHandlerBase<ApplyHitAttackResultCommand, IMediatorCommandResponse>
     {
-        public override IMediatorCommandResponse Execute(IMediatorCommand command)
+        public override IMediatorCommandResponse Execute(IMediatorCommand genericCommand)
         {
-            ApplyHitAttackResultCommand _command = base.castCommand(command);
+            ApplyHitAttackResultCommand _command = base.castCommand(genericCommand);
 
             if (_command.HitAttackResult.RollResult.Hits || _command.HitAttackResult.AutomaticallyHits)
             {

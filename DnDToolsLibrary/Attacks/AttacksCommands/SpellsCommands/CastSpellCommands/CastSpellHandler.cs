@@ -18,9 +18,9 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
     {
         private static Lazy<IFigtherProvider> _fighterProvider = new Lazy<IFigtherProvider> (() => DIContainer.GetImplementation<IFigtherProvider>());
 
-        public override IMediatorCommandResponse Execute(IMediatorCommand command)
+        public override IMediatorCommandResponse Execute(IMediatorCommand genericCommand)
         {
-            CastSpellCommand _command = base.castCommand(command);
+            CastSpellCommand _command = base.castCommand(genericCommand);
             PlayableEntity caster = _fighterProvider.Value.GetFighterByDisplayName(_command.CasterName);
 
             if (spellLevelSelected(_command) == false)

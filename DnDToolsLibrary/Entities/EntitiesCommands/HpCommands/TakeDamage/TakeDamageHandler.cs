@@ -13,9 +13,9 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.TakeDamage
         private static readonly Lazy<ICustomConsole> console = new Lazy<ICustomConsole>(() => DIContainer.GetImplementation<ICustomConsole>());
         private static readonly Lazy<IFontWeightProvider> fontWeightProvider = new Lazy<IFontWeightProvider>(() => DIContainer.GetImplementation<IFontWeightProvider>());
 
-        public override IMediatorCommandResponse Execute(IMediatorCommand command)
+        public override IMediatorCommandResponse Execute(IMediatorCommand genericCommand)
         {
-            TakeDamageCommand _command = base.castCommand(command);
+            TakeDamageCommand _command = base.castCommand(genericCommand);
 
             if (_command.Amount == 0)
                 return MediatorCommandStatii.NoResponse;

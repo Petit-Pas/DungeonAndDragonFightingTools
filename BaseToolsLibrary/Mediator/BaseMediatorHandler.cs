@@ -14,21 +14,21 @@ namespace BaseToolsLibrary.Mediator
         where   TCommand : class, IMediatorCommand
         where   TResponse : class, IMediatorCommandResponse
     {
-        public abstract TResponse Execute(IMediatorCommand command);
+        public abstract TResponse Execute(IMediatorCommand genericCommand);
 
-        IMediatorCommandResponse IMediatorHandler.Execute(IMediatorCommand command)
+        IMediatorCommandResponse IMediatorHandler.Execute(IMediatorCommand genericCommand)
         {
-            return this.Execute(command);
+            return this.Execute(genericCommand);
         }
 
-        public abstract void Undo(IMediatorCommand command);
+        public abstract void Undo(IMediatorCommand genericCommand);
 
         protected TCommand castCommand(IMediatorCommand command)
         {
             if (command is TCommand _command)
                 return _command;
-            Console.WriteLine($"ERROR : Wrong kind of command recieved for the MediatorHandler {this.GetType()}");
-            throw new InvalidOperationException($"Wrong kind of command recieved for the MediatorHandler {this.GetType()}");
+            Console.WriteLine($"ERROR : Wrong kind of genericCommand recieved for the MediatorHandler {this.GetType()}");
+            throw new InvalidOperationException($"Wrong kind of genericCommand recieved for the MediatorHandler {this.GetType()}");
         }
     }
 }

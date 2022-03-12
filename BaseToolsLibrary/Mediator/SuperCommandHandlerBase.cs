@@ -21,9 +21,9 @@ namespace BaseToolsLibrary.Mediator
         {
         }
 
-        public override void Undo(IMediatorCommand command)
+        public override void Undo(IMediatorCommand genericCommand)
         {
-            SuperCommandBase _command = this.castCommand(command);
+            SuperCommandBase _command = this.castCommand(genericCommand);
             
             foreach (IMediatorCommand inner_command in _command.InnerCommands)
             {
