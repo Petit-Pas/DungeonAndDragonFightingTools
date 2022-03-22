@@ -49,3 +49,5 @@ Ils permettent à eux seuls de savoir quand refresh l'UI, mais pour fonctionner 
 Il pourrait donc être bon de revor tout les bindings et d'y ajouter ceci, puis de revoir toute les fenetres validables et de jouer avec les events de la window plutot que les nouveaux
 
 A command that would be Canceled should not be added in the history
+
+Maybe a command that queries something should store the query result in order to be able to REDO 

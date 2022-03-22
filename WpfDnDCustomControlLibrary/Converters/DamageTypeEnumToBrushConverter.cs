@@ -3,9 +3,7 @@ using BaseToolsLibrary.IO;
 using DnDToolsLibrary.Attacks.Damage.Type;
 using System;
 using System.Globalization;
-using System.Windows;
 using System.Windows.Data;
-using System.Windows.Media;
 using WpfToolsLibrary.ConsoleTools;
 
 namespace WpfDnDCustomControlLibrary.Converters

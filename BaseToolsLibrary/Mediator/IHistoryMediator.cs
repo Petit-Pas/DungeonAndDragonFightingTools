@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BaseToolsLibrary.Mediator
+﻿namespace BaseToolsLibrary.Mediator
 {
     /// <summary>
     ///     Describes method to handle history on the mediator itself

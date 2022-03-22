@@ -1,10 +1,4 @@
-﻿using BaseToolsLibrary.Mediator;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WpfToolsLibrary.Navigation;
+﻿using WpfToolsLibrary.Navigation;
 
 namespace WpfCustomControlLibrary.ModalWindows
 {

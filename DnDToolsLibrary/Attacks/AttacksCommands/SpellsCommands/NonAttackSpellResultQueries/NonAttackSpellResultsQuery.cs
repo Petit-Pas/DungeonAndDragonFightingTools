@@ -1,7 +1,6 @@
 ﻿using BaseToolsLibrary.Mediator;
 using DnDToolsLibrary.Attacks.Damage;
 using DnDToolsLibrary.Attacks.Spells;
-using System.Collections.Generic;
 
 namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.NonAttackSpellResultsQueries
 {

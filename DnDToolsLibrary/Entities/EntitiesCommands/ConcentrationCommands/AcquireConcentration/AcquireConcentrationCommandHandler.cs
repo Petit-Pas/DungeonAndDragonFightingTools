@@ -1,11 +1,5 @@
 ﻿using BaseToolsLibrary.Mediator;
-using BaseToolsLibrary.Mediator.CommandStatii;
 using DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.LoseConcentration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.AcquireConcentration
 {

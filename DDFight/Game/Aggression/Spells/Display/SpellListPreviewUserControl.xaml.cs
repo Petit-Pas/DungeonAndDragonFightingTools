@@ -1,6 +1,5 @@
 ﻿using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.Mediator;
-using DDFight.WpfExtensions;
 using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellCommands;
 using DnDToolsLibrary.Attacks.Spells;
 using DnDToolsLibrary.Entities;

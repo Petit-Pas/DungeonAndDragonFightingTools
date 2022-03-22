@@ -1,6 +1,4 @@
-﻿
-using BaseToolsLibrary;
-using DnDToolsLibrary.Entities;
+﻿using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Memory;
 
 namespace DnDToolsLibrary.Attacks.Damage

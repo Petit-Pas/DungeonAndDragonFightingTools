@@ -1,11 +1,5 @@
-﻿using BaseToolsLibrary.Mediator;
-using System;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System;
 using System.Collections.Generic;
-using WpfDnDCustomControlLibrary.Attacks.Damage;
 using WpfToolsLibrary.Navigation;
 
 namespace WpfDnDCommandHandlers

@@ -9,7 +9,6 @@ using DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageResultL
 using DnDToolsLibrary.Dice;
 using DnDToolsLibrary.Dice.DiceCommancs.SavingThrowCommands.SavingThrowQueries;
 using DnDToolsLibrary.Entities.EntitiesCommands.StatusCommands.AddStatus;
-using BaseToolsLibrary.Mediator.CommandStatii;
 
 namespace DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands
 {

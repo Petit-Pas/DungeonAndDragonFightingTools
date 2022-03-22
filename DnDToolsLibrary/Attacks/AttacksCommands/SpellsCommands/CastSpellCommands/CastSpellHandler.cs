@@ -1,16 +1,11 @@
 ﻿using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.Mediator;
 using BaseToolsLibrary.Mediator.CommandStatii;
-using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.AttackSpellResultsQueries;
-using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.NonAttackSpellResultsQueries;
 using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.SpellLevelQueries;
 using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.SpellTargetsQueries;
-using DnDToolsLibrary.Attacks.Spells;
 using DnDToolsLibrary.Entities;
-using DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageResultList;
 using DnDToolsLibrary.Fight;
 using System;
-using System.Collections.Generic;
 
 namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellCommands
 {

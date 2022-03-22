@@ -2,13 +2,10 @@
 using BaseToolsLibrary.Mediator;
 using BaseToolsLibrary.Mediator.CommandStatii;
 using DnDToolsLibrary.Entities;
-using DnDToolsLibrary.Entities.EntitiesCommands.HpCommands;
 using DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.LooseHp;
 using DnDToolsLibrary.Fight;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CoreUnitTest.Commands.PlayableEntities.Hp
 {

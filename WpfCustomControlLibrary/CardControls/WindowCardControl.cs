@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using WpfToolsLibrary.Commands.WindowCommands;
-using WpfToolsLibrary.Extensions;
 
 namespace WpfCustomControlLibrary.CardControls
 {

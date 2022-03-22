@@ -7,8 +7,6 @@ using DnDToolsLibrary.Fight;
 using DnDToolsLibrary.Status;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Linq;
 
 namespace CoreUnitTest.Commands.PlayableEntities.Status

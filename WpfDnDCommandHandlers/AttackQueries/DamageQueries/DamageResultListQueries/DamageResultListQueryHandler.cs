@@ -1,8 +1,4 @@
-﻿using BaseToolsLibrary.Mediator;
-using DnDToolsLibrary.Attacks.AttacksCommands.DamageCommands.DamageResultListQueries;
-using System.Windows;
-using WpfToolsLibrary.Extensions;
-using WpfToolsLibrary.Navigation;
+﻿using DnDToolsLibrary.Attacks.AttacksCommands.DamageCommands.DamageResultListQueries;
 
 namespace WpfDnDCommandHandlers.AttackQueries.DamageQueries.DamageResultListQueries
 {
