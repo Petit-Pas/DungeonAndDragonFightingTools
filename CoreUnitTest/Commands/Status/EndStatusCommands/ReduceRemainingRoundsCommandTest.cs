@@ -104,5 +104,19 @@ namespace CoreUnitTest.Commands.Status.EndStatusCommands
                 .And
                 .ContainItemsAssignableTo<RemoveStatusCommand>();
         }
+
+        [Test]
+        public void Undo_Should_Reset_Remaining_Rounds()
+        {
+            // Arrange
+            var command = new ReduceRemainingRoundsCommand(_onHitStatus.Id);
+            _mediator.Execute(command);
+
+            // Act
+            _mediator.Undo(command);
+
+            // Assert
+            _onHitStatus.RemainingRounds.Should().Be(5);
+        }
     }
 }

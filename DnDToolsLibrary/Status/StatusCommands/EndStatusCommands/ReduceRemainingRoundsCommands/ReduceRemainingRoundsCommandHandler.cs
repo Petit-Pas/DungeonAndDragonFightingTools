@@ -35,5 +35,17 @@ namespace DnDToolsLibrary.Status.StatusCommands.EndStatusCommands.ReduceRemainin
 
             return MediatorCommandStatii.Canceled;
         }
+
+        public override void Undo(IMediatorCommand genericCommand)
+        {
+            base.Undo(genericCommand);
+            var command = base.castCommand(genericCommand);
+            var status = _statusProvider.GetOnHitStatusById(command.StatusId);
+
+            if (status != null)
+            {
+                status.RemainingRounds += 1;
+            }
+        }
     }
 }
