@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DnDToolsLibrary.Fight
 {
-    public interface IFigtherProvider
+    public interface IFigtherProvider : IList<PlayableEntity>
     {
         List<string> GetFightersNames();
 

@@ -17,6 +17,7 @@ namespace DnDToolsLibrary.Status
         /// <summary>
         ///     As event handling is moved to higher layers of the application, these actions allow us to inject Register and Unregister comportment from other layers
         /// </summary>
+        ///  TODO these are going to be removed when all Mediator - Command are implemented
         public static Action<OnHitStatus> RegisterEvents { get; set; } = null;
         public static Action<OnHitStatus> UnregisterEvents { get; set; } = null;
 

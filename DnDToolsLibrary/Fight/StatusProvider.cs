@@ -14,6 +14,10 @@ namespace DnDToolsLibrary.Fight
         {
             return this.FirstOrDefault(x => x.Id == id);
         }
+        public OnHitStatus GetOnHitStatusById(Guid id)
+        {
+            return this.OfType<OnHitStatus>().FirstOrDefault(x => x.Id == id);
+        }
 
         public List<OnHitStatus> GetOnHitStatusesAppliedBy(string casterName)
         {
@@ -24,6 +28,5 @@ namespace DnDToolsLibrary.Fight
         {
             return GetOnHitStatusesAppliedBy(caster.DisplayName);
         }
-
     }
 }

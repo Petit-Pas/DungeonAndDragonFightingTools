@@ -27,8 +27,8 @@ namespace BaseToolsLibrary.Mediator
         {
             if (command is TCommand _command)
                 return _command;
-            Console.WriteLine($"ERROR : Wrong kind of genericCommand recieved for the MediatorHandler {this.GetType()}");
-            throw new InvalidOperationException($"Wrong kind of genericCommand recieved for the MediatorHandler {this.GetType()}");
+            Console.WriteLine($"ERROR : Wrong kind of genericCommand received for the MediatorHandler {this.GetType()}");
+            throw new InvalidOperationException($"Wrong kind of genericCommand received for the MediatorHandler {this.GetType()}");
         }
     }
 }
