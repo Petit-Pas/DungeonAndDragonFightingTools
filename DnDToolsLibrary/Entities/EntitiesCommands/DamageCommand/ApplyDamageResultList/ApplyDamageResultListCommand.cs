@@ -17,7 +17,12 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageRes
         public List<Damage> DamageList { get; } = new List<Damage>();
 
         public ApplyDamageResultListCommand(PlayableEntity target, DamageResultList damageList, bool lastSavingWasSuccessfull = false) 
-            : base(target.DisplayName)
+            : this(target.DisplayName, damageList, lastSavingWasSuccessfull)
+        {
+        }
+
+        public ApplyDamageResultListCommand(string targetName, DamageResultList damageList, bool lastSavingWasSuccessfull = false)
+            : base(targetName)
         {
             LastSavingWasSuccessfull = lastSavingWasSuccessfull;
             foreach (DamageResult dmg in damageList)
@@ -27,7 +32,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageRes
                     dmg.SituationalDamageModifier,
                     dmg.AffinityModifier,
                     dmg.DamageType
-                    ));
+                ));
             }
         }
 

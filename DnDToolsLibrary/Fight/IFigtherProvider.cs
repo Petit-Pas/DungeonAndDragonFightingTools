@@ -10,5 +10,7 @@ namespace DnDToolsLibrary.Fight
         PlayableEntity GetFighterByDisplayName(string name);
 
         void AddFighter(PlayableEntity fighter);
+
+        void AddOrUpdateFighter(PlayableEntity fighter);
     }
 }
