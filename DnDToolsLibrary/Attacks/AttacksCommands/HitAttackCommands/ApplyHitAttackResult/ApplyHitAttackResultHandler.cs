@@ -7,15 +7,14 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.HitAttackCommands.ApplyHitAtta
 {
     public class ApplyHitAttackResultHandler : SuperCommandHandlerBase<ApplyHitAttackResultCommand, IMediatorCommandResponse>
     {
-        public override IMediatorCommandResponse Execute(IMediatorCommand genericCommand)
+        public override IMediatorCommandResponse Execute(ApplyHitAttackResultCommand command)
         {
-            ApplyHitAttackResultCommand _command = base.castCommand(genericCommand);
 
-            if (_command.HitAttackResult.RollResult.Hits || _command.HitAttackResult.AutomaticallyHits)
+            if (command.HitAttackResult.RollResult.Hits || command.HitAttackResult.AutomaticallyHits)
             {
-                apply_damage(_command);
+                apply_damage(command);
 
-                apply_on_hit(_command);
+                apply_on_hit(command);
                 return MediatorCommandStatii.Success;
             }
 

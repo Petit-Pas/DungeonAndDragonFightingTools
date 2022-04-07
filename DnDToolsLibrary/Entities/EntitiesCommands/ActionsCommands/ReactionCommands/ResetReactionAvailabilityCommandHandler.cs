@@ -4,9 +4,8 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.ReactionComm
 
 public class ResetReactionAvailabilityCommandHandler : SuperCommandHandlerBase<ResetReactionAvailabilityCommand, IMediatorCommandResponse>
 {
-    public override IMediatorCommandResponse Execute(IMediatorCommand genericCommand)
+    public override IMediatorCommandResponse Execute(ResetReactionAvailabilityCommand command)
     {
-        var command = base.castCommand(genericCommand);
         var target = command.GetEntity();
 
         if (!target.HasReaction)

@@ -17,15 +17,13 @@ namespace BaseToolsLibrary.Mediator
         {
         }
 
-        public override void Undo(IMediatorCommand genericCommand)
+        public override void Undo(TCommand command)
         {
-            SuperCommandBase _command = this.castCommand(genericCommand);
-            
-            foreach (IMediatorCommand inner_command in _command.InnerCommands)
+            foreach (IMediatorCommand innerCommand in command.InnerCommands)
             {
-                _mediator.Value.Undo(inner_command);
+                _mediator.Value.Undo(innerCommand);
             }
-            _command.InnerCommands.Clear();
+            command.InnerCommands.Clear();
         }
     }
 }

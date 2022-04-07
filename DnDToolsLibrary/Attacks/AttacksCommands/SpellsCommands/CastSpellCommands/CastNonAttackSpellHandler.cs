@@ -14,24 +14,22 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
     {
         private static Lazy<IFigtherProvider> _fighterProvider = new Lazy<IFigtherProvider>(() => DIContainer.GetImplementation<IFigtherProvider>());
 
-        public override IMediatorCommandResponse Execute(IMediatorCommand genericCommand)
+        public override IMediatorCommandResponse Execute(CastNonAttackSpellCommand command)
         {
-            CastNonAttackSpellCommand _command = genericCommand as CastNonAttackSpellCommand;
-
-            if (spellResultObtained(_command))
+            if (spellResultObtained(command))
             {
-                _fighterProvider.Value.GetFighterByDisplayName(_command.CasterName).IsFocused = true;
-                foreach (NewNonAttackSpellResult spellResult in _command.SpellResults)
+                _fighterProvider.Value.GetFighterByDisplayName(command.CasterName).IsFocused = true;
+                foreach (NewNonAttackSpellResult spellResult in command.SpellResults)
                 {
                     ApplyDamageResultListCommand damageCommand = new ApplyDamageResultListCommand(spellResult.Target, spellResult.HitDamage);
                     base._mediator.Value.Execute(damageCommand);
-                    _command.PushToInnerCommands(damageCommand);
+                    command.PushToInnerCommands(damageCommand);
 
                     foreach (OnHitStatus status in spellResult.AppliedStatusList)
                     {
                         TryApplyStatusCommand statusCommand = new TryApplyStatusCommand(spellResult.CasterName, spellResult.TargetName, status, spellResult.Saving);
                         base._mediator.Value.Execute(statusCommand);
-                        _command.PushToInnerCommands(statusCommand);
+                        command.PushToInnerCommands(statusCommand);
                     }
                 }
                 return MediatorCommandStatii.Success;

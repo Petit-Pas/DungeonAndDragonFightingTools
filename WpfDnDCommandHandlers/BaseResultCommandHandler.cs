@@ -9,7 +9,7 @@ namespace WpfDnDCommandHandlers
         where TInput : class, IMediatorCommand
         where TOutput : class, IMediatorCommandResponse
     {
-        public override ValidableResponse<TOutput> Execute(IMediatorCommand genericCommand)
+        public override ValidableResponse<TOutput> Execute(TInput genericCommand)
         {
             Window window = HandlerToUILinker.GetWindow(this.GetType()) as Window;
             IResultWindow<TInput, TOutput> result_window = window as IResultWindow<TInput, TOutput>;
@@ -24,7 +24,7 @@ namespace WpfDnDCommandHandlers
                     result_window.GetResult());
         }
 
-        public override void Undo(IMediatorCommand genericCommand)
+        public override void Undo(TInput genericCommand)
         {
             // undoing a user input won't do much
         }

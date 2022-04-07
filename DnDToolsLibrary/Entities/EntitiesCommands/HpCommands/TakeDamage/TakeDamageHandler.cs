@@ -12,15 +12,13 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.TakeDamage
         private static readonly Lazy<ICustomConsole> console = new Lazy<ICustomConsole>(() => DIContainer.GetImplementation<ICustomConsole>());
         private static readonly Lazy<IFontWeightProvider> fontWeightProvider = new Lazy<IFontWeightProvider>(() => DIContainer.GetImplementation<IFontWeightProvider>());
 
-        public override IMediatorCommandResponse Execute(IMediatorCommand genericCommand)
+        public override IMediatorCommandResponse Execute(TakeDamageCommand command)
         {
-            TakeDamageCommand _command = base.castCommand(genericCommand);
-
-            if (_command.Amount == 0)
+            if (command.Amount == 0)
                 return MediatorCommandStatii.NoResponse;
 
-            PlayableEntity target = _command.GetEntity();
-            int remaining = _command.Amount;
+            PlayableEntity target = command.GetEntity();
+            int remaining = command.Amount;
             var startingHPs = target.HpString;
 
             console.Value.AddEntry($"{remaining}", fontWeightProvider.Value.Bold);
@@ -29,8 +27,8 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.TakeDamage
             var entryHash = console.Value.AddEntry(" => ", fontWeightProvider.Value.Bold);
 
             if (target.TempHp != 0)
-                remaining = handleTempHp(_command, target, remaining);
-            handleHp(_command, target, remaining);
+                remaining = handleTempHp(command, target, remaining);
+            handleHp(command, target, remaining);
 
             console.Value.AddEntryAfter(entryHash, $"{target.HpString}\r\n", fontWeightProvider.Value.Bold);
 

@@ -6,10 +6,8 @@ namespace CoreUnitTest.QueryHandlers
 {
     public class DamageResultListQueryHandler : BaseMediatorHandler<DamageResultListQuery, ValidableResponse<GetInputDamageResultListResponse>>
     {
-        public override ValidableResponse<GetInputDamageResultListResponse> Execute(IMediatorCommand genericCommand)
+        public override ValidableResponse<GetInputDamageResultListResponse> Execute(DamageResultListQuery query)
         {
-            DamageResultListQuery query = this.castCommand(genericCommand);
-
             foreach (DamageResult damage in query.DamageList)
             {
                 damage.Damage.Roll();
@@ -18,7 +16,7 @@ namespace CoreUnitTest.QueryHandlers
             return new ValidableResponse<GetInputDamageResultListResponse>(true, new GetInputDamageResultListResponse(query.DamageList));
         }
 
-        public override void Undo(IMediatorCommand genericCommand)
+        public override void Undo(DamageResultListQuery genericCommand)
         {
         }
     }

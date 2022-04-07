@@ -5,9 +5,8 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.BonusActionC
 
 public class RemoveBonusActionCommandHandler : BaseMediatorHandler<RemoveBonusActionCommand, IMediatorCommandResponse>
 {
-    public override IMediatorCommandResponse Execute(IMediatorCommand genericCommand)
+    public override IMediatorCommandResponse Execute(RemoveBonusActionCommand command)
     {
-        var command = base.castCommand(genericCommand);
         var target = command.GetEntity();
 
         if (target.HasBonusAction)
@@ -24,10 +23,8 @@ public class RemoveBonusActionCommandHandler : BaseMediatorHandler<RemoveBonusAc
         return command.CommandStatus;
     }
 
-    public override void Undo(IMediatorCommand genericCommand)
+    public override void Undo(RemoveBonusActionCommand command)
     {
-        var command = base.castCommand(genericCommand);
-
         if (command.CommandStatus == MediatorCommandStatii.Success)
         {
             command.GetEntity().HasBonusAction = true;

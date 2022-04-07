@@ -14,31 +14,29 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.StatusCommands.AddStatus
         private static readonly Lazy<IFontWeightProvider> _fontWeightProvider = new Lazy<IFontWeightProvider>(DIContainer.GetImplementation<IFontWeightProvider>);
         private static readonly Lazy<IStatusProvider> _statusProvider = new Lazy<IStatusProvider>(DIContainer.GetImplementation<IStatusProvider>);
 
-        public override IMediatorCommandResponse Execute(IMediatorCommand genericCommand)
+        public override IMediatorCommandResponse Execute(AddStatusCommand command)
         {
-            AddStatusCommand _command = this.castCommand(genericCommand);
-            PlayableEntity target = _command.GetEntity();
+            PlayableEntity target = command.GetEntity();
 
-            _command.Status.Target = target;
-            _statusProvider.Value.Add(_command.Status);
-            target.AffectingStatusList.Add(new StatusReference(_command.Status));
+            command.Status.Target = target;
+            _statusProvider.Value.Add(command.Status);
+            target.AffectingStatusList.Add(new StatusReference(command.Status));
 
-            _console.Value.AddEntry($"{_command.Status.Caster.DisplayName}", _fontWeightProvider.Value.Bold);
+            _console.Value.AddEntry($"{command.Status.Caster.DisplayName}", _fontWeightProvider.Value.Bold);
             _console.Value.AddEntry($" applies ", _fontWeightProvider.Value.Normal);
-            _console.Value.AddEntry($"{_command.Status.DisplayName}", _fontWeightProvider.Value.Bold);
+            _console.Value.AddEntry($"{command.Status.DisplayName}", _fontWeightProvider.Value.Bold);
             _console.Value.AddEntry($" to ", _fontWeightProvider.Value.Normal);
-            _console.Value.AddEntry($"{_command.Status.Target.DisplayName}\r\n", _fontWeightProvider.Value.Bold);
+            _console.Value.AddEntry($"{command.Status.Target.DisplayName}\r\n", _fontWeightProvider.Value.Bold);
 
             return MediatorCommandStatii.NoResponse;
         }
 
-        public override void Undo(IMediatorCommand genericCommand)
+        public override void Undo(AddStatusCommand command)
         {
-            AddStatusCommand _command = this.castCommand(genericCommand);
-            PlayableEntity target = _command.GetEntity();
+            PlayableEntity target = command.GetEntity();
 
-            _statusProvider.Value.Remove(_command.Status);
-            StatusReference statusReference = target.AffectingStatusList.First(x => x.ActualStatusReferenceId == _command.Status.Id);
+            _statusProvider.Value.Remove(command.Status);
+            StatusReference statusReference = target.AffectingStatusList.First(x => x.ActualStatusReferenceId == command.Status.Id);
             target.AffectingStatusList.Remove(statusReference);
         }
     }

@@ -10,42 +10,39 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.Heal
         private static Lazy<ICustomConsole> console = new Lazy<ICustomConsole>(DIContainer.GetImplementation<ICustomConsole>);
         private static Lazy<IFontWeightProvider> fontWeightProvider = new Lazy<IFontWeightProvider>(DIContainer.GetImplementation<IFontWeightProvider>);
 
-        public override IMediatorCommandResponse Execute(IMediatorCommand genericCommand)
+        public override IMediatorCommandResponse Execute(HealCommand command)
         {
-            HealCommand _command = this.castCommand(genericCommand);
-            PlayableEntity target = _command.GetEntity();
+            PlayableEntity target = command.GetEntity();
 
-            if (_command.Amount < 0)
+            if (command.Amount < 0)
             {
-                Console.WriteLine($"WARNING : Trying to heal {target.DisplayName} for {_command.Amount}, will be set to 0 instead");
-                _command.Amount = 0;
+                Console.WriteLine($"WARNING : Trying to heal {target.DisplayName} for {command.Amount}, will be set to 0 instead");
+                command.Amount = 0;
             }
 
-            console.Value.AddEntry($"{target.DisplayName} regains {_command.Amount} HPs.\r\n", fontWeightProvider.Value.Bold);
+            console.Value.AddEntry($"{target.DisplayName} regains {command.Amount} HPs.\r\n", fontWeightProvider.Value.Bold);
 
-            _command.From = target.Hp;
+            command.From = target.Hp;
 
-            if (target.Hp + _command.Amount > target.MaxHp)
+            if (target.Hp + command.Amount > target.MaxHp)
                 target.Hp = (int)target.MaxHp;
             else
-                target.Hp += _command.Amount;
+                target.Hp += command.Amount;
 
-            _command.To = target.Hp;
+            command.To = target.Hp;
             return MediatorCommandStatii.NoResponse;
         }
 
-        public override void Undo(IMediatorCommand genericCommand)
+        public override void Undo(HealCommand command)
         {
-            HealCommand _command = this.castCommand(genericCommand);
-            
-            if (false == _command.To.HasValue || false == _command.From.HasValue)
+            if (false == command.To.HasValue || false == command.From.HasValue)
             {
                 Console.WriteLine($"ERROR : Trying to undo a {this.GetType()} genericCommand that was not executed first");
                 throw new NullReferenceException($"Trying to undo a {this.GetType()} genericCommand that was not executed first");
             }
             
-            PlayableEntity target = _command.GetEntity();
-            target.Hp = _command.From.Value;
+            PlayableEntity target = command.GetEntity();
+            target.Hp = command.From.Value;
         }
     }
 }

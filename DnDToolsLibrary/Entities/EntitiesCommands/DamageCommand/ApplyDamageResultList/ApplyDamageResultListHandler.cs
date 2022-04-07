@@ -49,19 +49,18 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageRes
             }
         }
 
-        public override ApplyDamageResultListResponse Execute(IMediatorCommand genericCommand)
+        public override ApplyDamageResultListResponse Execute(ApplyDamageResultListCommand command)
         {
-            ApplyDamageResultListCommand _command = base.castCommand(genericCommand);
             int total = 0;
-            PlayableEntity target = _command.GetEntity();
+            PlayableEntity target = command.GetEntity();
 
-            if (_command.DamageList.Any())
+            if (command.DamageList.Any())
             {
                 console.Value.AddEntry($"{target.DisplayName}", fontWeightProvider.Value.Bold);
                 console.Value.AddEntry(" takes ");
 
                 int i = 1;
-                foreach (Damage damage in _command.DamageList)
+                foreach (Damage damage in command.DamageList)
                 {
                     int final_damage = damage.RawAmount;
 
@@ -74,15 +73,15 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageRes
 
                     applyDamageAffinity(ref final_damage, damage.TypeAffinity);
 
-                    if (_command.LastSavingWasSuccessfull)
+                    if (command.LastSavingWasSuccessfull)
                         applySavingModifier(ref final_damage, damage.SavingModifer);
 
                     total += final_damage;
 
-                    if (i == _command.DamageList.Count && i != 1)
+                    if (i == command.DamageList.Count && i != 1)
                         console.Value.AddEntry("and ");
                     console.Value.AddEntry($"{final_damage} {damage.Type}", fontWeightProvider.Value.Bold, colorProvider.Value.GetColorByKey(damage.Type.ToString()));
-                    console.Value.AddEntry($"{(i == _command.DamageList.Count ? " damage" : " damage, ")}");
+                    console.Value.AddEntry($"{(i == command.DamageList.Count ? " damage" : " damage, ")}");
 
                     i += 1;
                 }
@@ -90,7 +89,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageRes
 
                 TakeDamageCommand inner_command = new TakeDamageCommand(target, total);
                 base._mediator.Value.Execute(inner_command);
-                _command.PushToInnerCommands(inner_command);
+                command.PushToInnerCommands(inner_command);
             }
             return new ApplyDamageResultListResponse(total);
         }

@@ -16,14 +16,13 @@ namespace DnDToolsLibrary.Status.StatusCommands.ApplyDotCommands
         private static readonly Lazy<IStatusProvider> _lazyStatusProvider = new (DIContainer.GetImplementation<IStatusProvider>);
         private static  IStatusProvider _statusProvider => _lazyStatusProvider.Value;
 
-        public override IMediatorCommandResponse Execute(IMediatorCommand genericCommand)
+        public override IMediatorCommandResponse Execute(ApplyDotCommand command)
         {
-            var command = genericCommand as ApplyDotCommand;
-            var status = _statusProvider.GetOnHitStatusById(command?.StatusReference ?? Guid.Empty);
+            var status = _statusProvider.GetOnHitStatusById(command.StatusReference);
             if (status == null)
             {
                 Console.WriteLine("Error: Something went wrong when trying to execute ApplyDotCommand for status: " +
-                                  $"{(command?.StatusReference.ToString() ?? $"No Guid could be found for the command of type {genericCommand.GetType()}")}");
+                                  $"{(command.StatusReference.ToString() ?? $"No Guid could be found for the command of type {command.GetType()}")}");
                 return MediatorCommandStatii.Canceled;
             }
 
@@ -39,7 +38,7 @@ namespace DnDToolsLibrary.Status.StatusCommands.ApplyDotCommands
 
                 var applyDamageCommand = new ApplyDamageResultListCommand(status.TargetName, response.Response.DamageResultList);
                 _mediator.Value.Execute(applyDamageCommand);
-                command!.PushToInnerCommands(applyDamageCommand);
+                command.PushToInnerCommands(applyDamageCommand);
                 return MediatorCommandStatii.Success;
             }
             return MediatorCommandStatii.Canceled;

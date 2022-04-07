@@ -14,9 +14,9 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands
     {
         private readonly string _entityName;
 
-        public EntitySuperCommand(string entity_name)
+        public EntitySuperCommand(string entityName)
         {
-            _entityName = entity_name;
+            _entityName = entityName;
         }
 
         // this method should preffered to GetEntity since it does not call the FighterProvider

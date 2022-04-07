@@ -5,9 +5,8 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.ReactionComm
 
 public class AddReactionCommandHandler : BaseMediatorHandler<AddReactionCommand, IMediatorCommandResponse>
 {
-    public override IMediatorCommandResponse Execute(IMediatorCommand genericCommand)
+    public override IMediatorCommandResponse Execute(AddReactionCommand command)
     {
-        var command = base.castCommand(genericCommand);
         var target = command.GetEntity();
 
         if (!target.HasReaction)
@@ -24,10 +23,8 @@ public class AddReactionCommandHandler : BaseMediatorHandler<AddReactionCommand,
         return command.CommandStatus;
     }
 
-    public override void Undo(IMediatorCommand genericCommand)
+    public override void Undo(AddReactionCommand command)
     {
-        var command = base.castCommand(genericCommand);
-
         if (command.CommandStatus == MediatorCommandStatii.Success)
         {
             command.GetEntity().HasReaction = false;

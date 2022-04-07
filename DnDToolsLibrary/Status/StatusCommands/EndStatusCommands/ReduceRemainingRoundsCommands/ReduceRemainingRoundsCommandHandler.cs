@@ -11,9 +11,8 @@ namespace DnDToolsLibrary.Status.StatusCommands.EndStatusCommands.ReduceRemainin
         private static readonly Lazy<IStatusProvider> _lazyStatusProvider = new Lazy<IStatusProvider>(DIContainer.GetImplementation<IStatusProvider>);
         private static IStatusProvider _statusProvider => _lazyStatusProvider.Value;
 
-        public override IMediatorCommandResponse Execute(IMediatorCommand genericCommand)
+        public override IMediatorCommandResponse Execute(ReduceRemainingRoundsCommand command)
         {
-            var command = base.castCommand(genericCommand);
             var status = _statusProvider.GetOnHitStatusById(command.StatusId);
 
             if (status != null)
@@ -22,7 +21,7 @@ namespace DnDToolsLibrary.Status.StatusCommands.EndStatusCommands.ReduceRemainin
                 if (status.RemainingRounds <= 0)
                 {
                     var removeStatusCommand = new RemoveStatusCommand(status.Id, status.TargetName);
-                    
+
                     command.PushToInnerCommands(removeStatusCommand);
                     base._mediator.Value.Execute(removeStatusCommand);
                 }
@@ -32,10 +31,9 @@ namespace DnDToolsLibrary.Status.StatusCommands.EndStatusCommands.ReduceRemainin
             return MediatorCommandStatii.Canceled;
         }
 
-        public override void Undo(IMediatorCommand genericCommand)
+        public override void Undo(ReduceRemainingRoundsCommand command)
         {
-            base.Undo(genericCommand);
-            var command = base.castCommand(genericCommand);
+            base.Undo(command);
             var status = _statusProvider.GetOnHitStatusById(command.StatusId);
 
             if (status != null)

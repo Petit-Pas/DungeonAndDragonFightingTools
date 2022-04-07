@@ -4,10 +4,9 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.ReactionComm
 
 public class InvertReactionAvailabilityCommandHandler : SuperCommandHandlerBase<InvertReactionAvailabilityCommand, IMediatorCommandResponse>
 {
-    public override IMediatorCommandResponse Execute(IMediatorCommand genericCommand)
+    public override IMediatorCommandResponse Execute(InvertReactionAvailabilityCommand command)
     {
         IMediatorCommand innerCommand;
-        var command = base.castCommand(genericCommand);
         var target = command.GetEntity();
 
         if (target.HasReaction)

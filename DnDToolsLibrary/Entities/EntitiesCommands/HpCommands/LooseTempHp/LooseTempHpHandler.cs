@@ -5,36 +5,33 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.LooseTempHp
 {
     public class LooseTempHpHandler : BaseMediatorHandler<LooseTempHpCommand, IMediatorCommandResponse>
     {
-        public override IMediatorCommandResponse Execute(IMediatorCommand genericCommand)
+        public override IMediatorCommandResponse Execute(LooseTempHpCommand command)
         {
-            LooseTempHpCommand _command = this.castCommand(genericCommand);
-            PlayableEntity target = _command.GetEntity();
+            PlayableEntity target = command.GetEntity();
 
-            _command.From = target.TempHp;
+            command.From = target.TempHp;
 
-            target.TempHp -= _command.Amount;
+            target.TempHp -= command.Amount;
             if (target.TempHp < 0)
             {
                 throw new InvalidOperationException($"WARNING : Trying to remove more TempHps than what {target.DisplayName} has. TempsHps will be set to 0");
             }
 
-            _command.To = target.TempHp;
+            command.To = target.TempHp;
             return MediatorCommandStatii.NoResponse;
         }
 
-        public override void Undo(IMediatorCommand genericCommand)
+        public override void Undo(LooseTempHpCommand command)
         {
-            LooseTempHpCommand _command = this.castCommand(genericCommand);
-
-            if (!_command.To.HasValue || 
-                !_command.From.HasValue)
+            if (!command.To.HasValue || 
+                !command.From.HasValue)
             {
                 Console.WriteLine($"ERROR : Trying to undo a {this.GetType()} genericCommand that was not executed first");
                 throw new NullReferenceException($"Trying to undo a {this.GetType()} genericCommand that was not executed first");
             }
 
-            PlayableEntity target = _command.GetEntity();
-            target.TempHp = _command.From.Value;
+            PlayableEntity target = command.GetEntity();
+            target.TempHp = command.From.Value;
         }
     }
 }

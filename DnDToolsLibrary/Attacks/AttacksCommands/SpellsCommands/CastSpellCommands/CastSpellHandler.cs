@@ -3,7 +3,6 @@ using BaseToolsLibrary.Mediator;
 using BaseToolsLibrary.Mediator.CommandStatii;
 using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.SpellLevelQueries;
 using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.SpellTargetsQueries;
-using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Fight;
 using System;
 
@@ -13,25 +12,22 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
     {
         private static Lazy<IFigtherProvider> _fighterProvider = new Lazy<IFigtherProvider> (() => DIContainer.GetImplementation<IFigtherProvider>());
 
-        public override IMediatorCommandResponse Execute(IMediatorCommand genericCommand)
+        public override IMediatorCommandResponse Execute(CastSpellCommand command)
         {
-            CastSpellCommand _command = base.castCommand(genericCommand);
-            PlayableEntity caster = _fighterProvider.Value.GetFighterByDisplayName(_command.CasterName);
-
-            if (spellLevelSelected(_command) == false)
+            if (spellLevelSelected(command) == false)
                 return MediatorCommandStatii.Canceled;
-            if (targetsSelected(_command) == false)
+            if (targetsSelected(command) == false)
                 return MediatorCommandStatii.Canceled;
 
             ValidableResponse<MediatorCommandNoResponse> response;
-            if (_command.Spell.IsAnAttack)
+            if (command.Spell.IsAnAttack)
             {
-                CastAttackSpellCommand castAttackSpellCommand = new CastAttackSpellCommand(_command.CasterName, _command.Spell, _command.CastLevel, _command.TargetNames);
+                CastAttackSpellCommand castAttackSpellCommand = new CastAttackSpellCommand(command.CasterName, command.Spell, command.CastLevel, command.TargetNames);
                 response = base._mediator.Value.Execute(castAttackSpellCommand) as ValidableResponse<MediatorCommandNoResponse>;
             }
             else
             {
-                CastNonAttackSpellCommand castNonAttackSpellCommand = new CastNonAttackSpellCommand(_command.CasterName, _command.Spell, _command.CastLevel, _command.TargetNames);
+                CastNonAttackSpellCommand castNonAttackSpellCommand = new CastNonAttackSpellCommand(command.CasterName, command.Spell, command.CastLevel, command.TargetNames);
                 response = base._mediator.Value.Execute(castNonAttackSpellCommand) as ValidableResponse<MediatorCommandNoResponse>;
             }
             return MediatorCommandStatii.Success;

@@ -16,44 +16,43 @@ namespace DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands
     {
         private Lazy<IFigtherProvider> _fighterProvider = new Lazy<IFigtherProvider>(() => DIContainer.GetImplementation<IFigtherProvider>());
 
-        public override IMediatorCommandResponse Execute(IMediatorCommand genericCommand)
+        public override IMediatorCommandResponse Execute(TryApplyStatusCommand command)
         {
-            TryApplyStatusCommand _command = this.castCommand(genericCommand);
-            PlayableEntity target = _fighterProvider.Value.GetFighterByDisplayName(_command.Status.TargetName);
+            PlayableEntity target = _fighterProvider.Value.GetFighterByDisplayName(command.Status.TargetName);
 
             bool applyIsSuccess = true;
 
-            if (_command.Saving == null)
+            if (command.Saving == null)
             {
                 // check if we need to do one anyway
-                if (_command.Status.HasApplyCondition)
+                if (command.Status.HasApplyCondition)
                 {
                     SavingThrowQuery savingQuery = new SavingThrowQuery(
-                        new SavingThrow(_command.Status.ApplySavingCharacteristic, _command.Status.ApplySavingDifficulty, _command.Status.TargetName),
+                        new SavingThrow(command.Status.ApplySavingCharacteristic, command.Status.ApplySavingDifficulty, command.Status.TargetName),
                         "Saving from Status application");
                     ValidableResponse<SavingThrow> response = base._mediator.Value.Execute(savingQuery) as ValidableResponse<SavingThrow>;
 
                     if (!response.IsValid)
                         return MediatorCommandStatii.Canceled;
-                    _command.Saving = response.Response;
+                    command.Saving = response.Response;
                 }
             }
 
-            if (_command.Saving != null)
+            if (command.Saving != null)
             {
                 // if the saving is failed, or if the status is maintained when the status is succesfull
-                applyIsSuccess = !_command.Saving.IsSuccesful || _command.Status.SpellApplicationModifier == ApplicationModifierEnum.Maintained;
+                applyIsSuccess = !command.Saving.IsSuccesful || command.Status.SpellApplicationModifier == ApplicationModifierEnum.Maintained;
             }
 
             // sometimes it is applied anyway
             if (applyIsSuccess)
             {
-                applyToTarget(target, _command);
+                applyToTarget(target, command);
             }
 
-            if (_command.Status.OnApplyDamageList.Count != 0)
+            if (command.Status.OnApplyDamageList.Count != 0)
             {
-                applyOnHitDamage(target, _command, _command.Saving?.IsSuccesful ?? false);
+                applyOnHitDamage(target, command, command.Saving?.IsSuccesful ?? false);
             }
 
             return applyIsSuccess ? MediatorCommandStatii.Success : MediatorCommandStatii.Failed;

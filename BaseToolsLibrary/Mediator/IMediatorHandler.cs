@@ -9,7 +9,7 @@
         where TReturn : class, IMediatorCommandResponse
     {
         // declarations should be in the other interface, the non generic one
-        new TReturn Execute(IMediatorCommand genericCommand);
+        new TReturn Execute(TCommand genericCommand);
     }
 
     public interface IMediatorHandler

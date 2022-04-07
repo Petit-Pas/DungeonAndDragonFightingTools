@@ -5,19 +5,18 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.Acquir
 {
     public class AcquireConcentrationCommandHandler : SuperCommandHandlerBase<AcquireConcentrationCommand, IMediatorCommandResponse>
     {
-        public override IMediatorCommandResponse Execute(IMediatorCommand genericCommand)
+        public override IMediatorCommandResponse Execute(AcquireConcentrationCommand command)
         {
-            AcquireConcentrationCommand _command = base.castCommand(genericCommand);
-            PlayableEntity entity = _command.GetEntity();
+            PlayableEntity entity = command.GetEntity();
 
-            _command.WasFocused = entity.IsFocused;
+            command.WasFocused = entity.IsFocused;
 
             if (entity.IsFocused)
             {
                 // will take care of removing already applied statuses
                 LoseConcentrationCommand loseConcentrationCommand = new LoseConcentrationCommand(entity.DisplayName);
                 base._mediator.Value.Execute(loseConcentrationCommand);
-                _command.PushToInnerCommands(loseConcentrationCommand);
+                command.PushToInnerCommands(loseConcentrationCommand);
             }
 
             entity.IsFocused = true;
@@ -25,16 +24,15 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.Acquir
             return MediatorCommandStatii.NoResponse;
         }
 
-        public override void Undo(IMediatorCommand genericCommand)
+        public override void Undo(AcquireConcentrationCommand command)
         {
-            AcquireConcentrationCommand _command = base.castCommand(genericCommand);
-            PlayableEntity entity = _command.GetEntity();
+            PlayableEntity entity = command.GetEntity();
 
             // resets the possible status linked to the concentration
-            base.Undo(genericCommand);
+            base.Undo(command);
             
             // resets the focus status to the previous state
-            entity.IsFocused = _command.WasFocused;
+            entity.IsFocused = command.WasFocused;
         }
     }
 }

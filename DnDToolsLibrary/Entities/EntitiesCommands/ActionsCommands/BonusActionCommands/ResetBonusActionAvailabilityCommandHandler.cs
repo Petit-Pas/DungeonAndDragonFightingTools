@@ -4,9 +4,8 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.BonusActionC
 
 public class ResetBonusActionAvailabilityCommandHandler : SuperCommandHandlerBase<ResetBonusActionAvailabilityCommand, IMediatorCommandResponse>
 {
-    public override IMediatorCommandResponse Execute(IMediatorCommand genericCommand)
+    public override IMediatorCommandResponse Execute(ResetBonusActionAvailabilityCommand command)
     {
-        var command = base.castCommand(genericCommand);
         var target = command.GetEntity();
 
         if (!target.HasBonusAction)

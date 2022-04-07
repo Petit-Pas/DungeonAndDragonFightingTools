@@ -13,9 +13,8 @@ namespace DnDToolsLibrary.Status.StatusCommands.EndStatusCommands.RetrySavingCom
         private static readonly Lazy<IStatusProvider> _lazyStatusProvider = new Lazy<IStatusProvider>(DIContainer.GetImplementation<IStatusProvider>);
         private static IStatusProvider _statusProvider => _lazyStatusProvider.Value;
 
-        public override IMediatorCommandResponse Execute(IMediatorCommand genericCommand)
+        public override IMediatorCommandResponse Execute(RetrySavingCommand command)
         {
-            var command = base.castCommand(genericCommand);
             var status = _statusProvider.GetOnHitStatusById(command.StatusId);
 
             if (status != null)
