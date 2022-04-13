@@ -197,9 +197,23 @@ namespace DnDToolsLibrary.Status
             {
                 _durationIsCalculatedOnCasterTurn = value;
                 NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(DurationIsCalculatedOnTargetTurn));
             }
         }
         private bool _durationIsCalculatedOnCasterTurn = true;
+
+        [XmlAttribute]
+        public bool DurationIsCalculatedOnTargetTurn
+        {
+            get => !DurationIsCalculatedOnCasterTurn;
+            set
+            {
+                if (value != DurationIsCalculatedOnTargetTurn)
+                {
+                    DurationIsCalculatedOnCasterTurn = !value;
+                }
+            }
+        }
 
         [XmlAttribute]
         public bool DurationIsBasedOnStartOfTurn
@@ -209,10 +223,23 @@ namespace DnDToolsLibrary.Status
             {
                 _durationIsBasedOnStartOfTurn = value;
                 NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(DurationIsBasedOnEndOfTurn));
             }
         }
         private bool _durationIsBasedOnStartOfTurn = false;
 
+        [XmlIgnore]
+        public bool DurationIsBasedOnEndOfTurn
+        {
+            get => !DurationIsBasedOnStartOfTurn;
+            set
+            {
+                if (value != DurationIsBasedOnEndOfTurn)
+                {
+                    DurationIsBasedOnStartOfTurn = !value;
+                }
+            }
+        }
         [XmlAttribute]
         public int RemainingRounds
         {
@@ -254,9 +281,23 @@ namespace DnDToolsLibrary.Status
             {
                 _savingIsRemadeAtStartOfTurn = value;
                 NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(SavingIsRemadeAtEndOfTurn));
             }
         }
         private bool _savingIsRemadeAtStartOfTurn = true;
+
+        [XmlIgnore]
+        public bool SavingIsRemadeAtEndOfTurn
+        {
+            get => !SavingIsRemadeAtStartOfTurn;
+            set
+            {
+                if (value != SavingIsRemadeAtEndOfTurn)
+                {
+                    SavingIsRemadeAtStartOfTurn = !value;
+                }
+            }
+        }
 
         #endregion properties_EndCondition_SavingRemade
 

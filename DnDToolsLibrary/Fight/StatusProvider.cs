@@ -17,14 +17,19 @@ namespace DnDToolsLibrary.Fight
             return this.OfType<OnHitStatus>().FirstOrDefault(x => x.Id == id);
         }
 
-        public List<OnHitStatus> GetOnHitStatusesAppliedBy(string casterName)
+        public IEnumerable<OnHitStatus> GetOnHitStatusesAppliedBy(string casterName)
         {
-            return this.OfType<OnHitStatus>().Where(x => x.Caster.DisplayName == casterName).Cast<OnHitStatus>().ToList();
+            return this.OfType<OnHitStatus>().Where(x => x.Caster.DisplayName == casterName).ToList();
         }
 
-        public List<OnHitStatus> GetOnHitStatusesAppliedBy(PlayableEntity caster)
+        public IEnumerable<OnHitStatus> GetOnHitStatusesAppliedBy(PlayableEntity caster)
         {
             return GetOnHitStatusesAppliedBy(caster.DisplayName);
+        }
+
+        public IEnumerable<OnHitStatus> GetOnHitStatusesAppliedOn(string affectedName)
+        {
+            return this.OfType<OnHitStatus>().Where(x => x.TargetName == affectedName);
         }
     }
 }

@@ -9,8 +9,9 @@ namespace DnDToolsLibrary.Fight
     {
         CustomVerboseStatus GetStatusById(Guid id);
         OnHitStatus GetOnHitStatusById(Guid id);
-        List<OnHitStatus> GetOnHitStatusesAppliedBy(string casterName);
-        List<OnHitStatus> GetOnHitStatusesAppliedBy(PlayableEntity caster);// => GetOnHitStatusesAppliedBy(caster.DisplayName);
+        IEnumerable<OnHitStatus> GetOnHitStatusesAppliedBy(string casterName);
+        IEnumerable<OnHitStatus> GetOnHitStatusesAppliedBy(PlayableEntity caster);// => GetOnHitStatusesAppliedBy(caster.DisplayName);
 
+        IEnumerable<OnHitStatus> GetOnHitStatusesAppliedOn(string affectedName);
     }
 }

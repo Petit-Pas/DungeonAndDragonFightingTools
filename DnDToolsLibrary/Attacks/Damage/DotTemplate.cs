@@ -24,10 +24,24 @@ namespace DnDToolsLibrary.Attacks.Damage
                 {
                     _triggersStartOfTurn = value;
                     NotifyPropertyChanged();
+                    NotifyPropertyChanged(nameof(TriggersEndOfTurn));
                 }
             }
         }
         private bool _triggersStartOfTurn = true;
+
+        [XmlIgnore]
+        public bool TriggersEndOfTurn
+        {
+            get => !TriggersStartOfTurn;
+            set
+            {
+                if (value != TriggersEndOfTurn)
+                {
+                    TriggersStartOfTurn = !value;
+                }
+            }
+        }
 
         [XmlAttribute]
         public bool TriggersOnCastersTurn
@@ -39,10 +53,25 @@ namespace DnDToolsLibrary.Attacks.Damage
                 {
                     _triggersOnCastersTurn = value;
                     NotifyPropertyChanged();
+                    NotifyPropertyChanged(nameof(TriggersOnAffectedsTurn));
                 }
             }
         }
         private bool _triggersOnCastersTurn = false;
+
+        [XmlIgnore]
+        public bool TriggersOnAffectedsTurn
+        {
+            get => !TriggersOnCastersTurn;
+            set
+            {
+                if (TriggersOnAffectedsTurn != value)
+                {
+                    TriggersOnCastersTurn = !value;
+                }
+            }
+        }
+
 
         #region ICloneable
 
