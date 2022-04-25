@@ -16,7 +16,7 @@ namespace CoreUnitTest.Commands.Status.EndStatusCommands
     {
         private IMediator _mediator;
         private IStatusProvider _statusProvider;
-        private IFigtherProvider _fighterProvider;
+        private IFighterProvider _fighterProvider;
 
         private OnHitStatus _onHitStatus;
 
@@ -25,7 +25,7 @@ namespace CoreUnitTest.Commands.Status.EndStatusCommands
         {
             _mediator = DIContainer.GetImplementation<IMediator>();
             _statusProvider = DIContainer.GetImplementation<IStatusProvider>();
-            _fighterProvider = DIContainer.GetImplementation<IFigtherProvider>();
+            _fighterProvider = DIContainer.GetImplementation<IFighterProvider>();
         }
 
         [SetUp]

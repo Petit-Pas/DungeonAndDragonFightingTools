@@ -4,6 +4,8 @@ using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.Extensions;
 using BaseToolsLibrary.Mediator;
 using CoreUnitTest.TestFactories;
+using DnDToolsLibrary.Dice;
+using DnDToolsLibrary.Dice.DiceCommancs.SavingThrowCommands.SavingThrowQueries;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.ActionCommands;
 using DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.BonusActionCommands;
@@ -14,6 +16,7 @@ using DnDToolsLibrary.Fight;
 using DnDToolsLibrary.Status;
 using DnDToolsLibrary.Status.StatusCommands.EndStatusCommands.ReduceRemainingRoundsCommands;
 using DnDToolsLibrary.Status.StatusCommands.EndStatusCommands.RetrySavingCommands;
+using FakeItEasy;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -31,9 +34,14 @@ namespace CoreUnitTest.Commands.PlayableEntities.TurnCommands
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
+            FightersList.Instance.Clear();
             _mediator = DIContainer.GetImplementation<IMediator>();
             _statusProvider = DIContainer.GetImplementation<IStatusProvider>();
             _statusProvider.Clear();
+
+            var savingHandler = A.Fake<IMediatorHandler>();
+            A.CallTo(() => savingHandler.Execute(A<IMediatorCommand>._)).Returns(A.Fake<SavingThrow>());
+            _mediator.RegisterHandler(savingHandler, typeof(SavingThrowQuery));
         }
 
         [SetUp]

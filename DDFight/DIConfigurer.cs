@@ -16,7 +16,7 @@ namespace DDFight
             // Mediator
             DIContainer.RegisterSingleton<IMediator, BaseMediator>(new BaseMediator(mediator_param));
             
-            DIContainer.RegisterSingleton<IFigtherProvider, FightersList>(FightersList.Instance);
+            DIContainer.RegisterSingleton<IFighterProvider, FightersList>(FightersList.Instance);
             DIContainer.RegisterSingleton<IStatusProvider, StatusProvider>();
 
             // CONFIGURE

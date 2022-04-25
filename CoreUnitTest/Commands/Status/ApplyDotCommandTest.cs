@@ -22,7 +22,7 @@ namespace CoreUnitTest.Commands.Status
     {
         private IMediator _mediator;
         private IStatusProvider _statusProvider;
-        private IFigtherProvider _fighterProvider;
+        private IFighterProvider _fighterProvider;
 
         private IMediatorHandler _userInputHandler;
         private ValidableResponse<GetInputDamageResultListResponse> _userInputResponse;
@@ -36,7 +36,7 @@ namespace CoreUnitTest.Commands.Status
         {
             _mediator = DIContainer.GetImplementation<IMediator>();
             _statusProvider = DIContainer.GetImplementation<IStatusProvider>();
-            _fighterProvider = DIContainer.GetImplementation<IFigtherProvider>();
+            _fighterProvider = DIContainer.GetImplementation<IFighterProvider>();
         }
 
         [SetUp]

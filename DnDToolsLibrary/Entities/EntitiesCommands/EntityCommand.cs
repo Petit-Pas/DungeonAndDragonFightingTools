@@ -12,7 +12,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands
     /// </summary>
     public abstract class EntityCommand : IMediatorCommand
     {
-        private static IFigtherProvider fighterProvider = DIContainer.GetImplementation<IFigtherProvider>();
+        private static IFighterProvider fighterProvider = DIContainer.GetImplementation<IFighterProvider>();
 
         private readonly string _entityName;
 

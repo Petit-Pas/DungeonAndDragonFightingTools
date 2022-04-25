@@ -30,8 +30,8 @@ namespace DnDToolsLibrary.Status
 
         #region Properties_Concerned
 
-        private static Lazy<IFigtherProvider> _lazyFighterProvider = new Lazy<IFigtherProvider>(() => DIContainer.GetImplementation<IFigtherProvider>());
-        private static IFigtherProvider _fighterProvider => _lazyFighterProvider.Value;
+        private static Lazy<IFighterProvider> _lazyFighterProvider = new Lazy<IFighterProvider>(() => DIContainer.GetImplementation<IFighterProvider>());
+        private static IFighterProvider _fighterProvider => _lazyFighterProvider.Value;
 
         [XmlIgnore]
         public PlayableEntity Caster

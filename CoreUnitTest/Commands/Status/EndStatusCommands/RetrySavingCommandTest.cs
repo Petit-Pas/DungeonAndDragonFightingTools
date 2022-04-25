@@ -20,7 +20,7 @@ namespace CoreUnitTest.Commands.Status.EndStatusCommands
     {
         private IMediator _mediator;
         private IStatusProvider _statusProvider;
-        private IFigtherProvider _fighterProvider;
+        private IFighterProvider _fighterProvider;
 
         private IMediatorHandler _savingQueryHandler;
         private bool _queryCanceled;
@@ -36,7 +36,7 @@ namespace CoreUnitTest.Commands.Status.EndStatusCommands
         {
             _statusProvider = DIContainer.GetImplementation<IStatusProvider>();
             _mediator = DIContainer.GetImplementation<IMediator>();
-            _fighterProvider = DIContainer.GetImplementation<IFigtherProvider>();
+            _fighterProvider = DIContainer.GetImplementation<IFighterProvider>();
 
             _savingQueryHandler = A.Fake<IMediatorHandler>();
             _queryCanceled = false;

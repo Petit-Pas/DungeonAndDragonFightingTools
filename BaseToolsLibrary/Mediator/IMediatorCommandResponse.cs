@@ -12,5 +12,6 @@ namespace BaseToolsLibrary.Mediator
         public static IMediatorCommandResponse Canceled { get; } = new MediatorCommandCanceled();
         public static IMediatorCommandResponse Success { get; } = new MediatorCommandSuccess();
         public static IMediatorCommandResponse Failed { get; } = new MediatorCommandFailed();
+        public static IMediatorCommandResponse Error { get; set; } = new MediatorCommandError();
     }
 }

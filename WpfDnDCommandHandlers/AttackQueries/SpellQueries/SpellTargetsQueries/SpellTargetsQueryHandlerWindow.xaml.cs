@@ -58,7 +58,7 @@ namespace WpfDnDCommandHandlers.AttackQueries.SpellQueries.SpellTargetsQueries
         private void FightersListSelectorWindow_Loaded(object sender, RoutedEventArgs e)
         {
             Selected = new ObservableCollection<string>();
-            Fighters = DIContainer.GetImplementation<IFigtherProvider>().GetFightersNames().ToObservableCollection();
+            Fighters = DIContainer.GetImplementation<IFighterProvider>().GetFightersNames().ToObservableCollection();
         }
 
         private void FightersListSelectorWindow_Initialized(object sender, EventArgs e)

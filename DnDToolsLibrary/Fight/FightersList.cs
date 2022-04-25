@@ -7,10 +7,11 @@ using DnDToolsLibrary.Memory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml;
 
 namespace DnDToolsLibrary.Fight
 {
-    public class FightersList : GenericList<PlayableEntity>, IFigtherProvider
+    public class FightersList : GenericList<PlayableEntity>, IFighterProvider
     {
 
         private FightersList()
@@ -156,9 +157,15 @@ namespace DnDToolsLibrary.Fight
             return result;
         }
 
+        public int CountWithName(string name)
+        {
+            return this.Count(x => x.Name == name);
+        }
+
         public void AddFighter(PlayableEntity fighter)
         {
             this.AddElementSilent(fighter);
+            this.Sort();
         }
 
         public List<string> GetFightersNames()

@@ -1,9 +1,13 @@
 ﻿using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.IO;
+using BaseToolsLibrary.Mediator;
 using BaseToolsLibrary.Memory;
 using DDFight;
+using DnDToolsLibrary.Dice;
+using DnDToolsLibrary.Dice.DiceCommancs.SavingThrowCommands.SavingThrowQueries;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Fight;
+using FakeItEasy;
 using Moq;
 using NUnit.Framework;
 
@@ -20,8 +24,8 @@ namespace CoreUnitTest
             AddRequiredDependencies();
 
             CreateFirstCharacter();
-
-//          CreateQueryHandlers();
+            
+            //CreateDefaultQueryHandlers();
         }
 
         [OneTimeTearDown]
@@ -45,12 +49,16 @@ namespace CoreUnitTest
             DIConfigurer.ConfigureCore(true);
         }
 
-        /*private void CreateQueryHandlers()
+        private void CreateDefaultQueryHandlers()
         {
             IMediator mediator = DIContainer.GetImplementation<IMediator>();
 
-            mediator.
-        }*/
+            // SavingThrowQuery
+            var savingHandler = A.Fake<IMediatorHandler>();
+            A.CallTo(() => savingHandler.Execute(A<IMediatorCommand>._)).Returns(A.Fake<SavingThrow>());
+            mediator.RegisterHandler(savingHandler, typeof(SavingThrowQuery));
+
+        }
 
     }
 }

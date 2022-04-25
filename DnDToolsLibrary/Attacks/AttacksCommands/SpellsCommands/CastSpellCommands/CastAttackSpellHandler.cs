@@ -12,7 +12,7 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
 {
     public class CastAttackSpellHandler : SuperCommandHandlerBase<CastAttackSpellCommand, IMediatorCommandResponse>
     {
-        private static Lazy<IFigtherProvider> _fighterProvider = new Lazy<IFigtherProvider>(() => DIContainer.GetImplementation<IFigtherProvider>());
+        private static Lazy<IFighterProvider> _fighterProvider = new Lazy<IFighterProvider>(() => DIContainer.GetImplementation<IFighterProvider>());
 
         public override IMediatorCommandResponse Execute(CastAttackSpellCommand command)
         {

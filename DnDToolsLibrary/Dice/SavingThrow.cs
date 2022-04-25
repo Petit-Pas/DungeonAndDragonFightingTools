@@ -27,7 +27,7 @@ namespace DnDToolsLibrary.Dice
             TargetName = targetName;
         }
 
-        private static IFigtherProvider fighterProvider = DIContainer.GetImplementation<IFigtherProvider>();
+        private static IFighterProvider fighterProvider = DIContainer.GetImplementation<IFighterProvider>();
 
         [XmlIgnore]
         public bool IsSuccesful

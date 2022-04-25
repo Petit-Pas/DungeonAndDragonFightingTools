@@ -39,7 +39,7 @@ namespace DnDToolsLibrary.Attacks.Spells
         }
         private int _level = 0;
 
-        private static IFigtherProvider fighterProvider = DIContainer.GetImplementation<IFigtherProvider>();
+        private static IFighterProvider fighterProvider = DIContainer.GetImplementation<IFighterProvider>();
 
         [XmlIgnore]
         public PlayableEntity Caster
