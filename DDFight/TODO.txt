@@ -51,3 +51,6 @@ Il pourrait donc être bon de revor tout les bindings et d'y ajouter ceci, puis 
 A command that would be Canceled should not be added in the history (also true for subcommands, for instance the retrial of a saving on a status)
 
 Maybe a command that queries something should store the query result in order to be able to REDO 
+
+// INVESTIGATE // 
+Avec la commande concentrationCheckQuery, le situational bonus est rempli avec le modificateur de caractéritique par défaut.. ptit soucis dans l'UI

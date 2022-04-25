@@ -1,15 +1,22 @@
-﻿using BaseToolsLibrary;
+﻿using System;
+using BaseToolsLibrary;
 using DDFight.Controlers;
 using DDFight.WpfExtensions;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Memory;
 using System.Windows.Input;
+using BaseToolsLibrary.DependencyInjection;
+using BaseToolsLibrary.Mediator;
+using DnDToolsLibrary.Fight.FightCommands.FighterCommands.AddFighterCommands;
 
 namespace DDFight.Game.Entities.Display
 {
     public class PlayableEntityListUserControl<T> : SpecializedListUserControl<T>
         where T : PlayableEntity, IEquivalentComparable<T>, new ()
     {
+        private Lazy<IMediator> _lazyMediator = new(() => DIContainer.GetImplementation<IMediator>());
+        private IMediator _mediator => _lazyMediator.Value;
+
         public PlayableEntityListUserControl() : base ()
         {
         }
@@ -41,7 +48,7 @@ namespace DDFight.Game.Entities.Display
                     e.Handled = true;
                     if (EntityListControl.SelectedIndex != -1)
                     {
-                        GlobalContext.Context.FightContext.FightersList.AddElement(EntityListControl.SelectedItem as T);
+                        _mediator.Execute(new AddFighterCommand(EntityListControl.SelectedItem as T));
                     }
                 }
             }

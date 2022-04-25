@@ -22,7 +22,7 @@ namespace DDFight
             HandlerToUILinker.AddNewPair(typeof(AttackSpellResultsQueryHandler), typeof(AttackSpellResultsQueryHandlerWindow));
             HandlerToUILinker.AddNewPair(typeof(GetInputNonAttackSpellResultsHandler), typeof(NonAttackSpellResultsQueryHandlerWindow));
             HandlerToUILinker.AddNewPair(typeof(SavingThrowQueryHandler), typeof(SavingThrowQueryHandlerWindow));
-            HandlerToUILinker.AddNewPair(typeof(ConcentrationCheckQueryHandler), typeof(SavingThrowQueryHandlerWindow));
+            HandlerToUILinker.AddNewPair(typeof(ConcentrationCheckQueryHandler), typeof(ConcentrationCheckQueryHandlerWindow));
         }
     }
 }

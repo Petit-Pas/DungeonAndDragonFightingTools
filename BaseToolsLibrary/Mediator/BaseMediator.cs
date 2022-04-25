@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
@@ -183,12 +184,16 @@ namespace BaseToolsLibrary.Mediator
         {
             IMediatorHandler handler = get_handler_from_command(command);
 
+            Trace.WriteLine($"executing command {command.GetType()}");
+
             return handler.Execute(command);
         }
 
         public void Undo(IMediatorCommand command)
         {
             IMediatorHandler handler = get_handler_from_command(command);
+
+            Console.WriteLine($"undoing command {command.GetType()}");
 
             handler.Undo(command);
         }

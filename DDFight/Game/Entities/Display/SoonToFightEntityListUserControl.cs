@@ -1,13 +1,20 @@
-﻿using DDFight.Controlers;
+﻿using System;
+using DDFight.Controlers;
 using DDFight.WpfExtensions;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Fight;
 using System.Windows.Input;
+using BaseToolsLibrary.DependencyInjection;
+using BaseToolsLibrary.Mediator;
+using DnDToolsLibrary.Fight.FightCommands.FighterCommands.RemoveFighterCommands;
 
 namespace DDFight.Game.Entities.Display
 {
     public class SoonToFightEntityListUserControl : BaseListUserControl
     {
+        private Lazy<IMediator> _lazyMediator = new(() => DIContainer.GetImplementation<IMediator>());
+        private IMediator _mediator => _lazyMediator.Value;
+
         public SoonToFightEntityListUserControl() : base ()
         {
             DataContextChanged += SoonToFightEntityListUserControl_DataContextChanged;
@@ -49,8 +56,7 @@ namespace DDFight.Game.Entities.Display
 
         public override void remove(object obj)
         {
-            PlayableEntity entity = obj as PlayableEntity;
-            data_context.RemoveElement(entity);
+            _mediator.Execute(new RemoveFighterCommand(obj as PlayableEntity));
         }
 
         public override void duplicate(object obj)
