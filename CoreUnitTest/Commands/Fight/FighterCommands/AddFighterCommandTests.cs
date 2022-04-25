@@ -1,4 +1,5 @@
-﻿using System.Security.RightsManagement;
+﻿using System.Linq;
+using System.Security.RightsManagement;
 using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.Mediator;
 using CoreUnitTest.TestFactories;
@@ -101,16 +102,24 @@ namespace CoreUnitTest.Commands.Fight.FighterCommands
             public void Should_Not_Add_Fighter_When_Fighter_Is_Already_Fighting()
             {
                 // Arrange 
+                _mediator.Execute(_command);
+                var previousCount = _fighterProvider.Count;
                 // Act
+
+                _mediator.Execute(_command);
                 // Assert
+                _fighterProvider.Count.Should().Be(previousCount);
             }
 
             [Test]
             public void Should_Return_Canceled_When_A_Fighter_Was_Already_Fighting()
             {
                 // Arrange 
+                _mediator.Execute(_command);
                 // Act
+                var result = _mediator.Execute(_command);
                 // Assert
+                result.Should().Be(MediatorCommandStatii.Canceled);
             }
 
         }
@@ -130,7 +139,9 @@ namespace CoreUnitTest.Commands.Fight.FighterCommands
             {
                 // Arrange
                 // Act
+                _mediator.Execute(_command);
                 // Assert
+                _fighterProvider.Should().Contain(x => x.Name == _entity.Name);
             }
 
             [Test]
@@ -138,31 +149,47 @@ namespace CoreUnitTest.Commands.Fight.FighterCommands
             {
                 // Arrange
                 // Act
+                _mediator.Execute(_command);
                 // Assert
+                _fighterProvider.First().DisplayName.Should().EndWith("- 0");
             }
 
             [Test]
             public void Should_Add_Monster_When_Second_Instance()
             {
                 // Arrange
+                _mediator.Execute(_command);
                 // Act
+                _mediator.Execute(_command);
                 // Assert
+                _fighterProvider.Should().HaveCount(2);
             }
 
             [Test]
+            [Order(1)]
             public void Should_Give_Name_With_Increasing_Index_When_Second_Instance()
             {
                 // Arrange
+                _mediator.Execute(_command);
                 // Act
+                _mediator.Execute(_command);
                 // Assert
+                _fighterProvider.Should().Contain(x => x.DisplayName.EndsWith("- 1"));
             }
 
             [Test]
+            [Order(2)]
             public void Should_Fill_Missing_Index_When_More_Than_First_Instance()
             {
                 // Arrange
+                _mediator.Execute(_command);
+                _mediator.Execute(_command);
+                _mediator.Execute(_command);
+                _fighterProvider.Remove(_fighterProvider.First(x => x.DisplayName.Contains("1")));
                 // Act
+                _mediator.Execute(_command);
                 // Assert
+                _fighterProvider.Should().Contain(x => x.DisplayName.EndsWith("- 1"));
             }
 
             [Test]
@@ -170,7 +197,9 @@ namespace CoreUnitTest.Commands.Fight.FighterCommands
             {
                 // Arrange
                 // Act
+                var result = _mediator.Execute(_command);
                 // Assert
+                result.Should().Be(MediatorCommandStatii.Success);
             }
 
         }
@@ -182,8 +211,11 @@ namespace CoreUnitTest.Commands.Fight.FighterCommands
             public void Should_Remove_Added_Fighter()
             {
                 // Arrange 
+                _mediator.Execute(_command);
                 // Act
+                _mediator.Undo(_command);
                 // Assert
+                _fighterProvider.Should().BeEmpty();
             }
         }
     }

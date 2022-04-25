@@ -59,25 +59,24 @@ namespace CoreUnitTest.TestFactories
         }
 
         public static PlayableEntity Goblin => new Monster()
-            {
-                ActionDescription = "Action Description",
-                CA = 12,
-                Characteristics = new CharacteristicList(4, 2, 2, 0, -1, 1),
-                DamageAffinities = DamageTypeAffinityList.Default(),
-                DisplayName = "Goblin",
-                HitAttacks = new HitAttackTemplateList() {
-                    HitAttackTemplateFactory.LongSword,
-                },
-                Hp = 50,
-                HpString = "50",
-                Level = 5,
-                MaxHp = 100,
-                Name = "Goblin",
-                SpecialAbilities = "Special Abilities",
-                SpellHitModifier = 0,
-                Spells = new SpellList(),
-                SpellSave = 10,
-            };
-        }
+        {
+            ActionDescription = "Action Description",
+            CA = 12,
+            Characteristics = new CharacteristicList(4, 2, 2, 0, -1, 1),
+            DamageAffinities = DamageTypeAffinityList.Default(),
+            DisplayName = "Goblin",
+            HitAttacks = new HitAttackTemplateList() {
+                HitAttackTemplateFactory.LongSword,
+            },
+            Hp = 50,
+            HpString = "50",
+            Level = 5,
+            MaxHp = 100,
+            Name = "Goblin",
+            SpecialAbilities = "Special Abilities",
+            SpellHitModifier = 0,
+            Spells = new SpellList(),
+            SpellSave = 10,
+        };
     }
 }

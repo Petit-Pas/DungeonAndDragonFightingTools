@@ -42,7 +42,7 @@ namespace DnDToolsLibrary.Fight.FightCommands.FighterCommands.AddFighterCommands
                 var alreadyUsedNumbers = others.Select(x => int.Parse(x.DisplayName.Substring(x.Name.Length + 2))).ToArray();
                 for (; i < others.Length; i += 1)
                 {
-                    if (alreadyUsedNumbers.Contains(i))
+                    if (!alreadyUsedNumbers.Contains(i))
                     {
                         break;
                     }

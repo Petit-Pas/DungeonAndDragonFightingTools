@@ -20,6 +20,8 @@ namespace DnDToolsLibrary.Fight.FightCommands.FighterCommands.RemoveFighterComma
             return MediatorCommandStatii.Error;
         }
 
+        // TODO what if a monster with the same name was added since then ?
+        // TODO what about the numbers they have in their display name ?
         public override void Undo(RemoveFighterCommand genericCommand)
         {
             _fighterProvider.AddFighter(genericCommand.Entity);
