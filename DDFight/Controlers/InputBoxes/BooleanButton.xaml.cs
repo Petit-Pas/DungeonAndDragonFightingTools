@@ -8,7 +8,7 @@ namespace DDFight.Controlers.InputBoxes
     /// <summary>
     /// Logique d'interaction pour BooleanButton.xaml
     /// </summary>
-    public partial class BooleanButton : Button, IEventUnregisterable
+    public partial class BooleanButton : Button
     {
         public bool Boolean
         {
@@ -36,7 +36,6 @@ namespace DDFight.Controlers.InputBoxes
 
         private void BooleanButton_Loaded(object sender, RoutedEventArgs e)
         {
-            this.Click += ButtonControl_Click;
             UpdateButtonColors();
         }
 
@@ -53,16 +52,5 @@ namespace DDFight.Controlers.InputBoxes
                 Foreground = (Brush)Application.Current.Resources["Light"];
             }
         }
-
-        private void ButtonControl_Click(object sender, RoutedEventArgs e)
-        {
-            Boolean = !Boolean;
-        }
-
-        public void UnregisterToAll()
-        {
-            this.Click -= ButtonControl_Click;
-        }
-
     }
 }

@@ -79,17 +79,20 @@
                     Style="{StaticResource ActionsButtons}"
                     Grid.Column="0"
                     Boolean="{Binding HasAction}"
-                    Content="A" />
+                    Content="A" 
+                    Click="ActionButton_Click"/>
                 <inputboxes:BooleanButton
                     Style="{StaticResource ActionsButtons}"
                     Grid.Column="1"
                     Boolean="{Binding HasReaction, Mode=TwoWay}"
-                    Content="R" />
+                    Content="R"
+                    Click="ReactionButton_Click"/>
                 <inputboxes:BooleanButton
                     Style="{StaticResource ActionsButtons}"
                     Grid.Column="2"
                     Boolean="{Binding HasBonusAction}"
-                    Content="B"/>
+                    Content="B"
+                    Click="BonusActionButton_Click"/>
 
             </Grid>
 

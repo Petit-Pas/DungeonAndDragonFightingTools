@@ -1,4 +1,5 @@
-﻿using BaseToolsLibrary.Extensions;
+﻿using System;
+using BaseToolsLibrary.Extensions;
 using BaseToolsLibrary.IO;
 using DDFight.Game.Fight.FightEvents;
 using DDFight.Game.Status.Display;
@@ -16,6 +17,11 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using BaseToolsLibrary.DependencyInjection;
+using BaseToolsLibrary.Mediator;
+using DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.ActionCommands;
+using DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.BonusActionCommands;
+using DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.ReactionCommands;
 using TempExtensionsPlayableEntity;
 using WpfToolsLibrary.Extensions;
 
@@ -26,6 +32,10 @@ namespace DDFight.Controlers.Fight
     /// </summary>
     public partial class FightingEntityTileUserControl : UserControl, IEventUnregisterable
     {
+        private Lazy<IMediator> _lazyMediator = new(() => DIContainer.GetImplementation<IMediator>());
+        private IMediator _mediator => _lazyMediator.Value;
+
+
         public PlayableEntity data_context
         {
             get {
@@ -236,5 +246,22 @@ namespace DDFight.Controlers.Fight
             refresh_InspirationButton();
         }
 
+        private void ActionButton_Click(object sender, RoutedEventArgs e)
+        {
+            var command = new InvertActionAvailabilityCommand(data_context.DisplayName);
+            _mediator.Execute(command);
+        }
+
+        private void ReactionButton_Click(object sender, RoutedEventArgs e)
+        {
+            var command = new InvertReactionAvailabilityCommand(data_context.DisplayName);
+            _mediator.Execute(command);
+        }
+
+        private void BonusActionButton_Click(object sender, RoutedEventArgs e)
+        {
+            var command = new InvertBonusActionAvailabilityCommand(data_context.DisplayName);
+            _mediator.Execute(command);
+        }
     }
 }
