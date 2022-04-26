@@ -22,6 +22,7 @@ using BaseToolsLibrary.Mediator;
 using DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.ActionCommands;
 using DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.BonusActionCommands;
 using DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.ReactionCommands;
+using DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.InvertConcentration;
 using TempExtensionsPlayableEntity;
 using WpfToolsLibrary.Extensions;
 
@@ -261,6 +262,12 @@ namespace DDFight.Controlers.Fight
         private void BonusActionButton_Click(object sender, RoutedEventArgs e)
         {
             var command = new InvertBonusActionAvailabilityCommand(data_context.DisplayName);
+            _mediator.Execute(command);
+        }
+
+        private void ConcentrationButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var command = new InvertConcentrationCommand(data_context.DisplayName);
             _mediator.Execute(command);
         }
     }
