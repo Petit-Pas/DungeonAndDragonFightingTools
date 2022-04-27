@@ -24,7 +24,9 @@ namespace CoreUnitTest.Commands.PlayableEntities.Status
         {
             _mediator = DIContainer.GetImplementation<IMediator>();
             _statusProvider = DIContainer.GetImplementation<IStatusProvider>();
-            _character = FightersList.Instance[0];
+            _character = EntitiesFactory.GetWarrior();
+            FightersList.Instance.AddOrUpdateFighter(_character);
+
         }
 
         // occurs before each test

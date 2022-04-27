@@ -23,6 +23,8 @@ using DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.ActionCommands;
 using DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.BonusActionCommands;
 using DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.ReactionCommands;
 using DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.InvertConcentration;
+using DnDToolsLibrary.Entities.EntitiesCommands.InspirationCommands;
+using DnDToolsLibrary.Entities.EntitiesCommands.InspirationCommands.InvertInspiration;
 using TempExtensionsPlayableEntity;
 using WpfToolsLibrary.Extensions;
 
@@ -243,7 +245,8 @@ namespace DDFight.Controlers.Fight
 
         private void Inspiration_Click(object sender, RoutedEventArgs e)
         {
-            ((Character)data_context).HasInspiration = !((Character)data_context).HasInspiration;
+            var command = new InvertInspirationCommand(data_context.DisplayName);
+            _mediator.Execute(command);
             refresh_InspirationButton();
         }
 

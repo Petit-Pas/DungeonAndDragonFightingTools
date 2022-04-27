@@ -2,43 +2,43 @@
 using BaseToolsLibrary.Mediator;
 using CoreUnitTest.TestFactories;
 using DnDToolsLibrary.Entities;
-using DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.ActionCommands;
-using DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.AcquireConcentration;
-using DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.InvertConcentration;
-using DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.LoseConcentration;
+using DnDToolsLibrary.Entities.EntitiesCommands.InspirationCommands;
+using DnDToolsLibrary.Entities.EntitiesCommands.InspirationCommands.AcquireInspiration;
+using DnDToolsLibrary.Entities.EntitiesCommands.InspirationCommands.InvertInspiration;
+using DnDToolsLibrary.Entities.EntitiesCommands.InspirationCommands.LoseInspiration;
 using DnDToolsLibrary.Fight;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace CoreUnitTest.Commands.PlayableEntities.Concentration
+namespace CoreUnitTest.Commands.PlayableEntities.Inspirations
 {
     [TestFixture]
-    public class InvertConcentrationCommandTests
+    public class InvertInspirationCommandTests
     {
-        private PlayableEntity _character;
+        private Character _character;
         private IMediator _mediator;
-        private InvertConcentrationCommand _command;
+        private InvertInspirationCommand _command;
 
         [SetUp]
         public void SetUp()
         {
             _mediator = DIContainer.GetImplementation<IMediator>();
-            _character = EntitiesFactory.GetWarrior();
+            _character = EntitiesFactory.GetWarrior() as Character;
             FightersList.Instance.AddOrUpdateFighter(_character);
-            _command = new InvertConcentrationCommand(_character.DisplayName);
+            _command = new InvertInspirationCommand(_character.DisplayName);
         }
 
         [Test]
         public void Should_Lose_Concentration_When_He_Had()
         {
             // Arrange
-            _character.IsFocused = true;
+            _character.HasInspiration = true;
 
             // Act
             var result = _mediator.Execute(_command);
 
             // Assert
-            _command.InnerCommands.Should().ContainItemsAssignableTo<LoseConcentrationCommand>();
+            _command.InnerCommands.Should().ContainItemsAssignableTo<LoseInspirationCommand>();
             result.Should().Be(MediatorCommandStatii.NoResponse);
         }
 
@@ -46,13 +46,13 @@ namespace CoreUnitTest.Commands.PlayableEntities.Concentration
         public void Should_Acquire_Concentration_When_Had_Not()
         {
             // Arrange
-            _character.IsFocused = false;
+            _character.HasInspiration = false;
 
             // Act
             var result = _mediator.Execute(_command);
 
             // Assert
-            _command.PeekLastInnerCommand().Should().BeAssignableTo<AcquireConcentrationCommand>();
+            _command.PeekLastInnerCommand().Should().BeAssignableTo<AcquireInspirationCommand>();
             result.Should().Be(MediatorCommandStatii.NoResponse);
         }
     }
