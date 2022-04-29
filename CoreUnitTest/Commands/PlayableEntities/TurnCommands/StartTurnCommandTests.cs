@@ -294,5 +294,20 @@ namespace CoreUnitTest.Commands.PlayableEntities.TurnCommands
             // Assert
             _command.InnerCommands.Should().ContainSingle(x => x.IsOfType(typeof(ReduceRemainingRoundsCommand)));
         }
+
+        [Test]
+        public void Should_Raise_Turn_Ended()
+        {
+            // Arrange
+            var commandArg = "";
+            _character.TurnStarted += (obj, args) => commandArg = args.EntityName;
+            ApplyStatus(_character, _character2, _reduceOnEndCaster);
+
+            // Act
+            _mediator.Execute(_command);
+
+            // Assert
+            commandArg.Should().Be(_character.DisplayName);
+        }
     }
 }

@@ -17,7 +17,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.Challe
             }
 
             ConcentrationCheckQuery query = new ConcentrationCheckQuery(command.GetEntityName());
-            ValidableResponse<SavingThrow> queryResponse = this._mediator.Value.Execute(query) as ValidableResponse<SavingThrow>;
+            ValidableResponse<SavingThrow> queryResponse = _mediator.Value.Execute(query) as ValidableResponse<SavingThrow>;
 
             if (queryResponse.IsValid)
             {
@@ -26,7 +26,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.Challe
                 {
                     LoseConcentrationCommand loseConcentrationCommand = new LoseConcentrationCommand(command.GetEntityName());
                     command.InnerCommands.Push(loseConcentrationCommand);
-                    this._mediator.Value.Execute(loseConcentrationCommand);
+                    _mediator.Value.Execute(loseConcentrationCommand);
                 }
                 return MediatorCommandStatii.Success;
             }

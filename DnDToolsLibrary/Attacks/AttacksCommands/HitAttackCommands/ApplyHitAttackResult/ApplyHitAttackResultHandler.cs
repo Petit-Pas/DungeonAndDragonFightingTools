@@ -26,7 +26,7 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.HitAttackCommands.ApplyHitAtta
             foreach (OnHitStatus status in command.HitAttackResult.OnHitStatuses)
             {
                 var statusCommand = new TryApplyStatusCommand(command.HitAttackResult.OwnerName, command.HitAttackResult.TargetName, status);
-                base._mediator.Value.Execute(statusCommand);
+                _mediator.Value.Execute(statusCommand);
                 command.PushToInnerCommands(statusCommand);
             }
         }

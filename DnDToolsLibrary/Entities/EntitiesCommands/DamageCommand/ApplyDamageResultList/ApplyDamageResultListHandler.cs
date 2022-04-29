@@ -88,7 +88,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageRes
                 console.Value.AddEntry("\r\n");
 
                 TakeDamageCommand inner_command = new TakeDamageCommand(target, total);
-                base._mediator.Value.Execute(inner_command);
+                _mediator.Value.Execute(inner_command);
                 command.PushToInnerCommands(inner_command);
             }
             return new ApplyDamageResultListResponse(total);

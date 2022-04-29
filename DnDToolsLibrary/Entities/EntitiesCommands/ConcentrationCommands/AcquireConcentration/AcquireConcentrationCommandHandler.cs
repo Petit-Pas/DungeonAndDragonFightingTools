@@ -7,15 +7,15 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.Acquir
     {
         public override IMediatorCommandResponse Execute(AcquireConcentrationCommand command)
         {
-            PlayableEntity entity = command.GetEntity();
+            var entity = command.GetEntity();
 
             command.WasFocused = entity.IsFocused;
 
             if (entity.IsFocused)
             {
                 // will take care of removing already applied statuses
-                LoseConcentrationCommand loseConcentrationCommand = new LoseConcentrationCommand(entity.DisplayName);
-                base._mediator.Value.Execute(loseConcentrationCommand);
+                var loseConcentrationCommand = new LoseConcentrationCommand(entity.DisplayName);
+                _mediator.Value.Execute(loseConcentrationCommand);
                 command.PushToInnerCommands(loseConcentrationCommand);
             }
 
@@ -26,7 +26,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.Acquir
 
         public override void Undo(AcquireConcentrationCommand command)
         {
-            PlayableEntity entity = command.GetEntity();
+            var entity = command.GetEntity();
 
             // resets the possible status linked to the concentration
             base.Undo(command);

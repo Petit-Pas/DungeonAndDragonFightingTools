@@ -17,7 +17,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.TurnCommands
 
         protected static IStatusProvider _statusProvider => _lazyStatusProvider.Value;
 
-        protected void TriggerDot(SuperCommandBase command, IEnumerable<OnHitStatus> statii, bool startOfTurn, bool casterTurn)
+        protected static void TriggerDot(SuperCommandBase command, IEnumerable<OnHitStatus> statii, bool startOfTurn, bool casterTurn)
         {
             foreach (var status in statii)
             {
@@ -27,7 +27,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.TurnCommands
             }
         }
 
-        protected void RetrySavings(SuperCommandBase command, IEnumerable<OnHitStatus> statii)
+        protected static void RetrySavings(SuperCommandBase command, IEnumerable<OnHitStatus> statii)
         {
             foreach (var status in statii)
             {
@@ -37,7 +37,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.TurnCommands
             }
         }
 
-        protected void ReduceDuration(SuperCommandBase command, IEnumerable<OnHitStatus> statii)
+        protected static void ReduceDuration(SuperCommandBase command, IEnumerable<OnHitStatus> statii)
         {
             foreach (var status in statii)
             {

@@ -28,7 +28,7 @@ namespace TempExtensionsOnHitStatus
                 if ((status.CanRedoSavingThrow && status.SavingIsRemadeAtStartOfTurn) ||
                     (status.HasAMaximumDuration && !status.DurationIsCalculatedOnCasterTurn && status.DurationIsBasedOnStartOfTurn) ||
                     status.DotDamageList.Count != 0)
-                    status.Target.NewTurnStarted += status.Affected_NewTurnStarted;
+                    status.Target.TurnStarted += status.AffectedTurnStarted;
                 if ((status.CanRedoSavingThrow && status.SavingIsRemadeAtStartOfTurn == false) ||
                     (status.HasAMaximumDuration && !status.DurationIsCalculatedOnCasterTurn && !status.DurationIsBasedOnStartOfTurn) ||
                     status.DotDamageList.Count != 0)
@@ -38,7 +38,7 @@ namespace TempExtensionsOnHitStatus
             {
                 if ((status.HasAMaximumDuration && status.DurationIsCalculatedOnCasterTurn && status.DurationIsBasedOnStartOfTurn) ||
                     status.DotDamageList.Count != 0)
-                    status.Caster.NewTurnStarted += status.Caster_NewTurnStarted;
+                    status.Caster.TurnStarted += status.CasterTurnStarted;
                 if ((status.HasAMaximumDuration && status.DurationIsCalculatedOnCasterTurn && !status.DurationIsBasedOnStartOfTurn) ||
                     status.DotDamageList.Count != 0)
                     status.Caster.TurnEnded += status.Caster_TurnEnded;
@@ -57,12 +57,12 @@ namespace TempExtensionsOnHitStatus
             if (status.Caster != null)
             {
                 status.Caster.PropertyChanged -= status.Caster_PropertyChanged;
-                status.Caster.NewTurnStarted -= status.Caster_NewTurnStarted;
+                status.Caster.TurnStarted -= status.CasterTurnStarted;
                 status.Caster.TurnEnded -= status.Caster_TurnEnded;
             }
             if (status.Target != null)
             {
-                status.Target.NewTurnStarted -= status.Affected_NewTurnStarted;
+                status.Target.TurnStarted -= status.AffectedTurnStarted;
                 status.Target.TurnEnded -= status.Affected_TurnEnded;
             }
         }
@@ -117,7 +117,7 @@ namespace TempExtensionsOnHitStatus
                 onHitStatus.RemoveDuration();
         }
 
-        public static void Caster_NewTurnStarted(this OnHitStatus onHitStatus, object sender, StartNewTurnEventArgs args)
+        public static void CasterTurnStarted(this OnHitStatus onHitStatus, object sender, StartNewTurnEventArgs args)
         {
             onHitStatus.CheckDotDamage(true, true);
 
@@ -136,7 +136,7 @@ namespace TempExtensionsOnHitStatus
             }
         }
 
-        public static void Affected_NewTurnStarted(this OnHitStatus onHitStatus, object sender, StartNewTurnEventArgs args)
+        public static void AffectedTurnStarted(this OnHitStatus onHitStatus, object sender, StartNewTurnEventArgs args)
         {
             bool expired = false;
 

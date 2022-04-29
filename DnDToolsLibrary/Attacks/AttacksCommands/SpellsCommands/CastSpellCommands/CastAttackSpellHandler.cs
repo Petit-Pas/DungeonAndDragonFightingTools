@@ -19,16 +19,16 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
 
             if (spellResultObtained(command))
             {
-                foreach (NewAttackSpellResult attackSpellResult in command.SpellResults)
+                foreach (var attackSpellResult in command.SpellResults)
                 {
-                    ApplyDamageResultListCommand damageCommand = new ApplyDamageResultListCommand(attackSpellResult.Target, attackSpellResult.HitDamage);
-                    base._mediator.Value.Execute(damageCommand);
+                    var damageCommand = new ApplyDamageResultListCommand(attackSpellResult.Target, attackSpellResult.HitDamage);
+                    _mediator.Value.Execute(damageCommand);
                     command.PushToInnerCommands(damageCommand);
 
-                    foreach (OnHitStatus status in attackSpellResult.AppliedStatusList)
+                    foreach (var status in attackSpellResult.AppliedStatusList)
                     {
-                        TryApplyStatusCommand statusCommand = new TryApplyStatusCommand(command.CasterName, attackSpellResult.TargetName, status);
-                        base._mediator.Value.Execute(statusCommand);
+                        var statusCommand = new TryApplyStatusCommand(command.CasterName, attackSpellResult.TargetName, status);
+                        _mediator.Value.Execute(statusCommand);
                         command.PushToInnerCommands(statusCommand);
                     }
                 }
@@ -39,18 +39,18 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
 
         private bool spellResultObtained(CastAttackSpellCommand command)
         {
-            NewAttackSpellResult template = command.Spell.GetAttackSpellResultTemplate(_fighterProvider.Value.GetFighterByDisplayName(command.CasterName), command.CastLevel);
-            AttackSpellResults spellResults = new AttackSpellResults();
+            var template = command.Spell.GetAttackSpellResultTemplate(_fighterProvider.Value.GetFighterByDisplayName(command.CasterName), command.CastLevel);
+            var spellResults = new AttackSpellResults();
 
             foreach (string name in command.TargetNames)
             {
-                NewAttackSpellResult spellResult = template.Clone() as NewAttackSpellResult;
+                var spellResult = template.Clone() as NewAttackSpellResult;
                 spellResult.Target = _fighterProvider.Value.GetFighterByDisplayName(name);
                 spellResults.Add(spellResult);
             }
 
-            AttackSpellResultsQuery query = new AttackSpellResultsQuery(command.Spell.DisplayName, command.CastLevel, spellResults);
-            ValidableResponse<AttackSpellResults> response = base._mediator.Value.Execute(query) as ValidableResponse<AttackSpellResults>;
+            var query = new AttackSpellResultsQuery(command.Spell.DisplayName, command.CastLevel, spellResults);
+            var response = _mediator.Value.Execute(query) as ValidableResponse<AttackSpellResults>;
 
             command.SpellResults = response.IsValid ? response.Response : null;
 

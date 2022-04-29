@@ -1,34 +1,32 @@
-﻿using DnDToolsLibrary.Entities;
-
-namespace DnDToolsLibrary.Fight.Events
+﻿namespace DnDToolsLibrary.Fight.Events
 {
     public delegate void StartNewTurnEventHandler(object sender, StartNewTurnEventArgs args);
 
-    public class StartNewTurnEventArgs
+    public struct StartNewTurnEventArgs
     {
-        /// <summary>
-        ///     The character that starts its turn
-        /// </summary>
-        public PlayableEntity Character;
+        public StartNewTurnEventArgs(string entityName)
+        {
+            EntityName = entityName;
+        }
 
         /// <summary>
-        ///     The index of the character that starts its turn among the Fighter list
+        ///     The entity that starts its turn
         /// </summary>
-        public int CharacterIndex;
+        public string EntityName { get; }
     }
 
     public delegate void EndTurnEventHandler(object sender, TurnEndedEventArgs args);
 
-    public class TurnEndedEventArgs
+    public struct TurnEndedEventArgs
     {
-        /// <summary>
-        ///     The character that ends its turn
-        /// </summary>
-        public PlayableEntity Character;
+        public TurnEndedEventArgs(string entityName)
+        {
+            EntityName = entityName;
+        }
 
         /// <summary>
-        ///     The index of the character that ends its turn among the Fighter list
+        ///     The Entity that ends its turn
         /// </summary>
-        public int CharacterIndex;
+        public string EntityName { get; }
     }
 }

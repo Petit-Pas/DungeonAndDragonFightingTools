@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using BaseToolsLibrary.Mediator;
 using DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.ActionCommands;
 using DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.BonusActionCommands;
 using DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.ReactionCommands;
-using DnDToolsLibrary.Status;
+using DnDToolsLibrary.Fight.Events;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.TurnCommands.StartTurnCommands
 {
@@ -13,6 +11,8 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.TurnCommands.StartTurnComman
     {
         public override IMediatorCommandResponse Execute(StartTurnCommand command)
         {
+            NotifyStartOfTurn(command);
+
             ResetActions(command);
 
             HandleAffectingStatii(command);
@@ -20,6 +20,13 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.TurnCommands.StartTurnComman
             HandleAppliedStatii(command);
 
             return MediatorCommandStatii.NoResponse;
+        }
+
+        private void NotifyStartOfTurn(StartTurnCommand command)
+        {
+            var entity = command.GetEntity();
+
+            entity.InvokeTurnStarted(new StartNewTurnEventArgs(entity.DisplayName));
         }
 
         private void HandleAffectingStatii(StartTurnCommand command)
@@ -55,9 +62,9 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.TurnCommands.StartTurnComman
             var bonusActionCommand = new ResetBonusActionAvailabilityCommand(command.GetEntityName());
             var reactionCommand = new ResetReactionAvailabilityCommand(command.GetEntityName());
 
-            this._mediator.Value.Execute(actionCommand);
-            this._mediator.Value.Execute(bonusActionCommand);
-            this._mediator.Value.Execute(reactionCommand);
+            _mediator.Value.Execute(actionCommand);
+            _mediator.Value.Execute(bonusActionCommand);
+            _mediator.Value.Execute(reactionCommand);
 
             command.PushToInnerCommands(actionCommand);
             command.PushToInnerCommands(bonusActionCommand);

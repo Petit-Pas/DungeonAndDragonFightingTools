@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using BaseToolsLibrary.Mediator;
+using DnDToolsLibrary.Fight.Events;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.TurnCommands.EndTurnCommands
 {
@@ -10,10 +11,19 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.TurnCommands.EndTurnCommands
             HandleAffectingStatii(command);
             HandleAppliedStatii(command);
 
+            NotifyEndOfTurn(command);
+
             return MediatorCommandStatii.NoResponse;
         }
 
-        private void HandleAffectingStatii(EndTurnCommand command)
+        private static void NotifyEndOfTurn(EndTurnCommand command)
+        {
+            var entity = command.GetEntity();
+
+            entity.InvokeTurnEnded(new TurnEndedEventArgs(entity.DisplayName));
+        }
+
+        private static void HandleAffectingStatii(EndTurnCommand command)
         {
             var affectingStatii = _statusProvider.GetOnHitStatusesAppliedOn(command.GetEntityName()).ToArray();
 
@@ -28,7 +38,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.TurnCommands.EndTurnCommands
                 x.HasAMaximumDuration && x.DurationIsBasedOnEndOfTurn && x.DurationIsCalculatedOnTargetTurn));
         }
 
-        private void HandleAppliedStatii(EndTurnCommand command)
+        private static void HandleAppliedStatii(EndTurnCommand command)
         {
             var appliedStatii = _statusProvider.GetOnHitStatusesAppliedBy(command.GetEntityName()).ToArray();
 

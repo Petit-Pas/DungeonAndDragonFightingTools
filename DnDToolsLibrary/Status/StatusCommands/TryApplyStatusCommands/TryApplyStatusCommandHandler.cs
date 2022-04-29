@@ -30,7 +30,7 @@ namespace DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands
                     SavingThrowQuery savingQuery = new SavingThrowQuery(
                         new SavingThrow(command.Status.ApplySavingCharacteristic, command.Status.ApplySavingDifficulty, command.Status.TargetName),
                         "Saving from Status application");
-                    ValidableResponse<SavingThrow> response = base._mediator.Value.Execute(savingQuery) as ValidableResponse<SavingThrow>;
+                    ValidableResponse<SavingThrow> response = _mediator.Value.Execute(savingQuery) as ValidableResponse<SavingThrow>;
 
                     if (!response.IsValid)
                         return MediatorCommandStatii.Canceled;
@@ -86,8 +86,8 @@ namespace DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands
                 initialCommand.Status.ApplySavingCharacteristic = initialCommand.Saving.Characteristic;
             }
 
-            AddStatusCommand command = new AddStatusCommand(target, initialCommand.Status);
-            base._mediator.Value.Execute(command);
+            var command = new AddStatusCommand(target, initialCommand.Status);
+            _mediator.Value.Execute(command);
             initialCommand.PushToInnerCommands(command);
         }
     }

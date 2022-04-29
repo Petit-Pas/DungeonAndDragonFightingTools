@@ -138,7 +138,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.TurnCommands
         }
 
         [Test]
-        public void Should_Not_Apply_Dots_That_Apply_At_Start_Of_Turn()
+        public void Should_Not_Execute_Dots_That_Apply_At_Start_Of_Turn()
         {
             // Arrange
             ApplyStatus(_character, _character2, _dotStartAffected);
@@ -152,7 +152,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.TurnCommands
         }
 
         [Test]
-        public void Should_Apply_Casted_Dots_That_Triggers_On_End_Of_Turn()
+        public void Should_Execute_Casted_Dots_That_Triggers_On_End_Of_Turn()
         {
             // Arrange
             ApplyStatus(_character2, _character, _dotEndCaster);
@@ -166,7 +166,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.TurnCommands
         }
 
         [Test]
-        public void Should_Apply_Affecting_Dots_That_Triggers_On_End_Of_Turn()
+        public void Should_Execute_Affecting_Dots_That_Triggers_On_End_Of_Turn()
         {
             // Arrange
             ApplyStatus(_character, _character2, _dotEndAffected);
@@ -256,6 +256,21 @@ namespace CoreUnitTest.Commands.PlayableEntities.TurnCommands
 
             // Assert
             _command.InnerCommands.Should().ContainSingle(x => x.IsOfType(typeof(ReduceRemainingRoundsCommand)));
+        }
+
+        [Test]
+        public void Should_Raise_Turn_Ended()
+        {
+            // Arrange
+            var commandArg = "";
+            _character.TurnEnded += (obj, args) => commandArg = args.EntityName;
+            ApplyStatus(_character, _character2, _reduceOnEndCaster);
+            
+            // Act
+            _mediator.Execute(_command);
+
+            // Assert
+            commandArg.Should().Be(_character.DisplayName);
         }
     }
 }

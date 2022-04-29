@@ -21,7 +21,7 @@ namespace DnDToolsLibrary.Status.StatusCommands.EndStatusCommands.RetrySavingCom
             {
                 var saving = status.GetSavingThrow(status.Caster, status.Target);
                 var savingThrowQuery = new SavingThrowQuery(saving, $"{status.TargetName} attempts to end the {status.DisplayName} status...");
-                var savingResult = base._mediator.Value.Execute(savingThrowQuery) as ValidableResponse<SavingThrow>;
+                var savingResult = _mediator.Value.Execute(savingThrowQuery) as ValidableResponse<SavingThrow>;
 
                 if (savingResult?.IsValid == false)
                 {
@@ -33,7 +33,7 @@ namespace DnDToolsLibrary.Status.StatusCommands.EndStatusCommands.RetrySavingCom
                     var removeStatusCommand = new RemoveStatusCommand(status.Id, status.TargetName);
 
                     command.PushToInnerCommands(removeStatusCommand);
-                    base._mediator.Value.Execute(removeStatusCommand);
+                    _mediator.Value.Execute(removeStatusCommand);
                     return MediatorCommandStatii.Success;
                 }
                 else

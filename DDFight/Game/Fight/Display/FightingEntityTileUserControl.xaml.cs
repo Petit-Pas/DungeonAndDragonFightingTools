@@ -23,7 +23,6 @@ using DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.ActionCommands;
 using DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.BonusActionCommands;
 using DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.ReactionCommands;
 using DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.InvertConcentration;
-using DnDToolsLibrary.Entities.EntitiesCommands.InspirationCommands;
 using DnDToolsLibrary.Entities.EntitiesCommands.InspirationCommands.InvertInspiration;
 using TempExtensionsPlayableEntity;
 using WpfToolsLibrary.Extensions;
@@ -75,7 +74,7 @@ namespace DDFight.Controlers.Fight
             CharacterTileGroupBoxControl.Background = (Brush)Application.Current.Resources["Gray"];
         }
 
-        private void Data_context_NewTurnStarted(object sender, StartNewTurnEventArgs args)
+        private void DataContextTurnStarted(object sender, StartNewTurnEventArgs args)
         {
             CharacterTileGroupBoxControl.Background = (Brush)Application.Current.Resources["Indigo"];
         }
@@ -94,7 +93,7 @@ namespace DDFight.Controlers.Fight
                 Logger.Log($"WARN: Null DataContext found in {this.GetType()}.RegisterToALl()");
             else
             {
-                data_context.NewTurnStarted += Data_context_NewTurnStarted;
+                data_context.TurnStarted += DataContextTurnStarted;
                 data_context.TurnEnded += Data_context_TurnEnded;
                 GlobalContext.Context.FightContext.CharacterSelected += FightContext_CharacterSelected;
             }
@@ -107,7 +106,7 @@ namespace DDFight.Controlers.Fight
             else
             {
                 this.UnregisterAllChildren();
-                data_context.NewTurnStarted -= Data_context_NewTurnStarted;
+                data_context.TurnStarted -= DataContextTurnStarted;
                 data_context.TurnEnded -= Data_context_TurnEnded;
                 GlobalContext.Context.FightContext.CharacterSelected -= FightContext_CharacterSelected;
             }

@@ -34,7 +34,7 @@ namespace DDFight.Controlers.Fight
 
         private void FightContext_NewTurnStarted(object sender, StartNewTurnEventArgs args)
         {
-            CharacterTurnTextboxCountrol.Text = "Turn of: " + args.Character.DisplayName;
+            CharacterTurnTextboxCountrol.Text = "Turn of: " + args.EntityName;
         }
 
         public void UnregisterToAll()

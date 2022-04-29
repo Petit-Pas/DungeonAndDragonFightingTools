@@ -64,14 +64,11 @@ namespace DDFight.Game.Fight
             Console.WriteLine("Next Turn");
             if (TurnIndex != -1)
             {
-                GlobalContext.Context.FightContext.FightersList.ElementAt((int)TurnIndex).EndTurn();
-                OnEndTurn(new TurnEndedEventArgs()
-                {
-                    Character = GlobalContext.Context.FightContext.FightersList.ElementAt((int)TurnIndex),
-                    CharacterIndex = (int)TurnIndex,
-                });
+                var entityEnd = GlobalContext.Context.FightContext.FightersList.ElementAt(TurnIndex);
+                entityEnd.EndTurn();
+                OnEndTurn(new TurnEndedEventArgs(entityEnd.DisplayName));
             }
-            int newTurn = TurnIndex + 1;
+            var newTurn = TurnIndex + 1;
             if (newTurn >= FightersList.Count())
             {
                 TurnIndex = 0;
@@ -81,16 +78,13 @@ namespace DDFight.Game.Fight
             {
                 TurnIndex = newTurn;
             }
-            PlayableEntity tmp = GlobalContext.Context.FightContext.FightersList.ElementAt((int)TurnIndex);
-            tmp.StartNewTurn();
-            OnStartNewTurn(new StartNewTurnEventArgs() 
-            { 
-                Character = tmp,  
-                CharacterIndex = (int)TurnIndex,
-            });
+            var entityStart = GlobalContext.Context.FightContext.FightersList.ElementAt(TurnIndex);
+            entityStart.StartNewTurn();
+            OnStartNewTurn(new StartNewTurnEventArgs(entityStart.DisplayName));
+            // TODO should be implemented somewhere in the commands, should also probably go through an event of the character
             OnSelectedCharacter(new SelectedCharacterEventArgs()
             {
-                Character = tmp,
+                Character = entityStart,
             });
         }
 

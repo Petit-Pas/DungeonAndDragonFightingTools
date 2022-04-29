@@ -19,7 +19,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.LooseHp
             if (target.IsFocused && (target.Hp <= 0 || command.Amount > 0))
             {
                 ChallengeConcentrationCommand concentrationCommand = new ChallengeConcentrationCommand(target.DisplayName);
-                base._mediator.Value.Execute(concentrationCommand);
+                _mediator.Value.Execute(concentrationCommand);
                 command.PushToInnerCommands(concentrationCommand);
             }
 

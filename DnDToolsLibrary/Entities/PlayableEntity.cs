@@ -395,10 +395,10 @@ namespace DnDToolsLibrary.Entities
         }
         public void InvokeTurnStarted(StartNewTurnEventArgs args)
         {
-            NewTurnStarted?.Invoke(this, args);
+            TurnStarted?.Invoke(this, args);
         }
 
-        public event StartNewTurnEventHandler NewTurnStarted;
+        public event StartNewTurnEventHandler TurnStarted;
         public event EndTurnEventHandler TurnEnded;
 
         #endregion Events_Turn

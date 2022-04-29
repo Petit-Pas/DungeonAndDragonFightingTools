@@ -23,7 +23,7 @@ namespace DnDToolsLibrary.Status.StatusCommands.EndStatusCommands.ReduceRemainin
                     var removeStatusCommand = new RemoveStatusCommand(status.Id, status.TargetName);
 
                     command.PushToInnerCommands(removeStatusCommand);
-                    base._mediator.Value.Execute(removeStatusCommand);
+                    _mediator.Value.Execute(removeStatusCommand);
                 }
                 return MediatorCommandStatii.Success;
             }

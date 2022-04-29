@@ -20,7 +20,7 @@ namespace TempExtensionsPlayableEntity
         #region Turn
         /// <summary>
         ///     Functions to ask the PlayableEntity to setup eveyrthing for a new turn
-        ///     Will raise the NewTurnStarted event
+        ///     Will raise the TurnStarted event
         /// </summary>
         public static void StartNewTurn(this PlayableEntity playableEntity)
         {
@@ -32,11 +32,7 @@ namespace TempExtensionsPlayableEntity
             console.AddEntry(playableEntity.DisplayName, fontWeightProvider.Bold);
             console.AddEntry(" starts its turn!\r\n", fontWeightProvider.Normal);
 
-            playableEntity.InvokeTurnStarted(new StartNewTurnEventArgs()
-            {
-                Character = playableEntity,
-                CharacterIndex = FightersList.Instance.IndexOf(playableEntity),
-            });
+            playableEntity.InvokeTurnStarted(new StartNewTurnEventArgs(playableEntity.DisplayName));
         }
 
         /// <summary>
@@ -45,11 +41,7 @@ namespace TempExtensionsPlayableEntity
         /// </summary>
         public static void EndTurn(this PlayableEntity playableEntity)
         {
-            playableEntity.InvokeTurnEnded(new TurnEndedEventArgs()
-            {
-                Character = playableEntity,
-                CharacterIndex = FightersList.Instance.IndexOf(playableEntity),
-            });
+            playableEntity.InvokeTurnEnded(new TurnEndedEventArgs(playableEntity.DisplayName));
         }
 
         #endregion Turn
