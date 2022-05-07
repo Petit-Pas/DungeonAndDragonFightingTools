@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using System.Windows.Automation;
 using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.Extensions;
 using BaseToolsLibrary.Mediator;
@@ -79,7 +78,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.TurnCommands
         private OnHitStatus _reduceOnStartAffected;
         private OnHitStatus _reduceOnEndAffected;
 
-        public void InitReduces()
+        private void InitReduces()
         {
             _reduceOnStartCaster = StatusFactory.Bless;
             _reduceOnEndCaster = StatusFactory.Bless;
@@ -99,7 +98,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.TurnCommands
             _reduceOnEndAffected.DurationIsCalculatedOnTargetTurn = true;
         }
 
-        public void InitRetries()
+        private void InitRetries()
         {
             _retryStart = StatusFactory.Slow;
             _retryEnd = StatusFactory.Slow;
@@ -109,7 +108,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.TurnCommands
             _retryEnd.SavingIsRemadeAtEndOfTurn = true;
         }
 
-        public void InitDots()
+        private void InitDots()
         {
             _dotStartCaster = StatusFactory.InfernalWound;
             _dotEndCaster = StatusFactory.InfernalWound;
@@ -133,7 +132,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.TurnCommands
             _dotEndAffected.DisplayName = "_dotEndAffected";
         }
 
-        public void ApplyStatus(PlayableEntity target, PlayableEntity caster, OnHitStatus status)
+        private void ApplyStatus(PlayableEntity target, PlayableEntity caster, OnHitStatus status)
         {
             status.TargetName = target.DisplayName;
             status.CasterName = caster.DisplayName;
@@ -300,7 +299,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.TurnCommands
         {
             // Arrange
             var commandArg = "";
-            _character.TurnStarted += (obj, args) => commandArg = args.EntityName;
+            _character.TurnStarted += (_, args) => commandArg = args.EntityName;
             ApplyStatus(_character, _character2, _reduceOnEndCaster);
 
             // Act

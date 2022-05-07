@@ -1,35 +1,40 @@
-﻿using DDFight.Tools;
-using DDFight.Windows;
-using DDFight.Windows.FightWindows;
-using DnDToolsLibrary.Entities;
-using DnDToolsLibrary.Fight.Events;
-using System.Linq;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using BaseToolsLibrary.DependencyInjection;
+using DDFight.Tools;
+using DDFight.Windows;
+using DDFight.Windows.FightWindows;
+using DnDToolsLibrary.Fight;
+using DnDToolsLibrary.Fight.Events;
 using WpfToolsLibrary.Extensions;
 
-namespace DDFight.Controlers.Fight
+namespace DDFight.Game.Fight.Display
 {
     /// <summary>
-    /// Logique d'interaction pour GeneralInfoFightUserControl.xaml
+    /// Interaction logic pour GeneralInfoFightUserControl.xaml
     /// </summary>
     public partial class FightGeneralInfoUserControl : UserControl, IEventUnregisterable
     {
+        private static readonly Lazy<IFighterProvider> _lazyFighterProvider = new(DIContainer.GetImplementation<IFighterProvider>);
+        private static readonly IFighterProvider _fighterProvider = _lazyFighterProvider.Value;
+
+
         public FightGeneralInfoUserControl()
         {
             InitializeComponent();
             Loaded += GeneralInfoFightUserControl_Loaded;
         }
 
-        private void setCharactersTurnName()
+        private void SetCharactersTurnName()
         {
-            CharacterTurnTextboxCountrol.Text = "Turn of: " + GlobalContext.Context.FightContext.FightersList.ElementAt((int)GlobalContext.Context.FightContext.TurnIndex).DisplayName;
+            CharacterTurnTextboxCountrol.Text = "Turn of: " + _fighterProvider.ElementAt((int)GlobalContext.Context.FightContext.TurnIndex).DisplayName;
         }
 
         private void GeneralInfoFightUserControl_Loaded(object sender, RoutedEventArgs e)
         {
             GlobalContext.Context.FightContext.NewTurnStarted += FightContext_NewTurnStarted;
-            setCharactersTurnName();
+            SetCharactersTurnName();
         }
 
         private void FightContext_NewTurnStarted(object sender, StartNewTurnEventArgs args)
@@ -44,22 +49,25 @@ namespace DDFight.Controlers.Fight
 
         private void AddToFightButton_Click(object sender, RoutedEventArgs e)
         {
-            PlayableEntity currently_playing = GlobalContext.Context.FightContext.CurrentlyPlaying;
+            var currentlyPlaying = GlobalContext.Context.FightContext.CurrentlyPlaying;
 
-            AddToFightWindow window = new AddToFightWindow();
+            var window = new AddToFightWindow();
              
             window.ShowCentered();
 
-            RollInitiativeWindow rollInitiativeWindow = new RollInitiativeWindow();
-            rollInitiativeWindow.DataContext = GlobalContext.Context.FightContext.FightersList;
+            var rollInitiativeWindow = new RollInitiativeWindow
+            {
+                // TODO the window should probably not take anything into account, and this could be made through a command
+                DataContext = _fighterProvider
+            };
 
             rollInitiativeWindow.ShowCentered();
 
             GlobalContext.Context.FightContext.FightersList.SetTurnOrdersMiddleFight();
 
-            for (int i = 0; i != GlobalContext.Context.FightContext.FightersList.Count; i++)
+            for (var i = 0; i != GlobalContext.Context.FightContext.FightersList.Count; i++)
             {
-                if (GlobalContext.Context.FightContext.FightersList[i] == currently_playing)
+                if (GlobalContext.Context.FightContext.FightersList[i] == currentlyPlaying)
                 {
                     GlobalContext.Context.FightContext.TurnIndex = i;
                 }

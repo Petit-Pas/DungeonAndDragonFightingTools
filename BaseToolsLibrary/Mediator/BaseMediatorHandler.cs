@@ -1,4 +1,5 @@
 ﻿using System;
+using BaseToolsLibrary.DependencyInjection;
 
 namespace BaseToolsLibrary.Mediator
 {

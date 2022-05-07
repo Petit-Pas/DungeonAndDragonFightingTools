@@ -7,7 +7,6 @@ using DnDToolsLibrary.Memory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml;
 
 namespace DnDToolsLibrary.Fight
 {
@@ -18,28 +17,25 @@ namespace DnDToolsLibrary.Fight
         {
         }
 
-        public static FightersList Instance
-        {
-            get => _instance;
-        }
-        private static FightersList _instance = new FightersList();
+        public static FightersList Instance => _instance;
+        private static FightersList _instance = new ();
 
         /// <summary>
         ///     Sorts the fighters according to their displayName
         /// </summary>
-        public void Sort()
+        private void Sort()
         {
             this.Sort((x, y) => {
-                int retval = x.Name.CompareTo(y.Name);
-                if (retval != 0)
-                    return retval;
-                int num1 = Int32.Parse(x.DisplayName.Substring(x.Name.Length + 2));
-                int num2 = Int32.Parse(y.DisplayName.Substring(x.Name.Length + 2));
+                var retVal = string.Compare(x.Name, y.Name, StringComparison.Ordinal);
+                if (retVal != 0)
+                    return retVal;
+                var num1 = int.Parse(x.DisplayName[(x.Name.Length + 2)..]);
+                var num2 = int.Parse(y.DisplayName[(x.Name.Length + 2)..]);
                 return num1.CompareTo(num2);
             });
         }
 
-        public void AddElement(PlayableEntity entity = null)
+        public void AddElement(PlayableEntity entity)
         {
             if (entity != null)
             {
@@ -62,7 +58,7 @@ namespace DnDToolsLibrary.Fight
             try
             {
                 if (this.SingleOrDefault(x => x.Name == character.Name) == null)
-                    base.AddElementSilent(character);
+                    AddElementSilent(character);
             }
             catch (Exception err)
             {
@@ -76,34 +72,34 @@ namespace DnDToolsLibrary.Fight
         /// <param name="monster"></param>
         private void add_monster(Monster monster)
         {
-            IEnumerable<PlayableEntity> list = this.Where(x => x.Name == monster.Name);
-            PlayableEntity new_fighter = (PlayableEntity)(monster.Clone());
+            var list = this.Where(x => x.Name == monster.Name).ToList();
+            var newFighter = (PlayableEntity)(monster.Clone());
 
-            int i = 0;
-            if (list.Count() != 0)
-                new_fighter.InitiativeRoll = list.ElementAt(i).InitiativeRoll;
-            for (; i < list.Count(); i++)
+            var i = 0;
+            if (list.Count != 0)
+                newFighter.InitiativeRoll = list.ElementAt(i).InitiativeRoll;
+            for (; i < list.Count; i++)
             {
-                string tmp = new_fighter.Name + " - " + i;
+                var tmp = newFighter.Name + " - " + i;
                 if (list.ElementAt(i).DisplayName != tmp)
                     break;
             }
-            new_fighter.DisplayName = new_fighter.Name + " - " + i;
-            base.AddElementSilent(new_fighter);
+            newFighter.DisplayName = newFighter.Name + " - " + i;
+            AddElementSilent(newFighter);
         }
 
 
         /// <summary>
-        ///     Will sort the list in Initiative + Dexterity order, then sets the PlyableEntity.TurnOrder value
+        ///     Will sort the list in Initiative + Dexterity order, then sets the PlayableEntity.TurnOrder value
         ///     
-        ///     /!\ should only be called at start of fight, thera is a more complicate handling for when in middle of a fight
+        ///     /!\ should only be called at start of fight, there is a more complicate handling for when in middle of a fight
         ///     See SetTurnOrdersMiddleFight()
         /// </summary>
         public void SetTurnOrders()
         {
 
             this.Sort(((x, y) => {
-                int val = (x.InitiativeRoll + x.Characteristics.GetCharacteristicModifier(CharacteristicsEnum.Dexterity)).CompareTo
+                var val = (x.InitiativeRoll + x.Characteristics.GetCharacteristicModifier(CharacteristicsEnum.Dexterity)).CompareTo
                                                 (y.InitiativeRoll + y.Characteristics.GetCharacteristicModifier(CharacteristicsEnum.Dexterity));
                 if (val != 0)
                     return -val;
@@ -113,18 +109,18 @@ namespace DnDToolsLibrary.Fight
                 if (val != 0)
                     return -val;
 
-                val = x.Name.CompareTo(y.Name);
+                val = string.Compare(x.Name, y.Name, StringComparison.Ordinal);
                 if (val != 0)
                     return val;
-                int num1 = Int32.Parse(x.DisplayName.Substring(x.Name.Length + 2));
-                int num2 = Int32.Parse(y.DisplayName.Substring(x.Name.Length + 2));
+                var num1 = int.Parse(x.DisplayName[(x.Name.Length + 2)..]);
+                var num2 = int.Parse(y.DisplayName[(x.Name.Length + 2)..]);
                 return num1.CompareTo(num2);
 
             }));
 
 
             uint i = 1;
-            foreach (PlayableEntity fighter in this)
+            foreach (var fighter in this)
             {
                 fighter.TurnOrder = i;
                 i++;
@@ -134,12 +130,12 @@ namespace DnDToolsLibrary.Fight
 
         public void SetTurnOrdersMiddleFight()
         {
-            foreach (PlayableEntity fighter in this)
+            foreach (var fighter in this)
             {
                 if (fighter.InitiativeRoll == 0)
                 {
                     fighter.InitiativeRoll = (uint)DiceRoll.Roll("1d20");
-                    foreach (PlayableEntity tmp in this)
+                    foreach (var tmp in this)
                     {
                         if (tmp.Name == fighter.Name)
                             tmp.InitiativeRoll = fighter.InitiativeRoll;
@@ -164,8 +160,8 @@ namespace DnDToolsLibrary.Fight
 
         public void AddFighter(PlayableEntity fighter)
         {
-            this.AddElementSilent(fighter);
-            this.Sort();
+            AddElementSilent(fighter);
+            Sort();
         }
 
         public List<string> GetFightersNames()
@@ -175,10 +171,10 @@ namespace DnDToolsLibrary.Fight
 
         public void AddOrUpdateFighter(PlayableEntity fighter)
         {
-            PlayableEntity inPlace = this.FirstOrDefault(x => x.DisplayName == fighter.DisplayName);
+            var inPlace = this.FirstOrDefault(x => x.DisplayName == fighter.DisplayName);
             if (inPlace != null)
-                this.RemoveElement(inPlace);
-            this.AddElementSilent(fighter);
+                RemoveElement(inPlace);
+            AddElementSilent(fighter);
         }
     }
 }

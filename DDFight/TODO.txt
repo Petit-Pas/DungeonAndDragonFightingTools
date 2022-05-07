@@ -54,3 +54,7 @@ Maybe a command that queries something should store the query result in order to
 
 // INVESTIGATE // 
 Avec la commande concentrationCheckQuery, le situational bonus est rempli avec le modificateur de caractéritique par défaut.. ptit soucis dans l'UI
+
+Should use GUID instead of DisplayName for both save files AND comparison
+
+remove anything from GlobalContext and use DI instead
