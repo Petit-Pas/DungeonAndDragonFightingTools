@@ -12,8 +12,8 @@ namespace DDFight.Windows.FightWindows
     /// </summary>
     public partial class AddToFightWindow : Window
     {
-        private static readonly Lazy<IFightManager> _lazyFightManager = new (DIContainer.GetImplementation<IFightManager>());
-        protected static IFightManager _fightManager => _lazyFightManager.Value;
+        private static readonly Lazy<IFightersProvider> _lazyFightManager = new (DIContainer.GetImplementation<IFightersProvider>());
+        protected static IFightersProvider FightersProvider => _lazyFightManager.Value;
 
         public AddToFightWindow()
         {
@@ -27,7 +27,7 @@ namespace DDFight.Windows.FightWindows
             CharacterListControl.DataContext = GlobalContext.Context.CharacterList;
             MonsterListControl.DataContext = GlobalContext.Context.MonsterList;
 
-            FighterListControl.ItemsSource = _fightManager.GetObservableCollection();
+            FighterListControl.ItemsSource = FightersProvider.GetObservableCollection();
         }
 
         private void FighterListControl_KeyDown(object sender, KeyEventArgs e)
@@ -36,7 +36,7 @@ namespace DDFight.Windows.FightWindows
             {
                 if (FighterListControl.SelectedIndex >= 0)
                 {
-                    _fightManager.RemoveFighter(FighterListControl.SelectedItem as PlayableEntity);
+                    FightersProvider.RemoveFighter(FighterListControl.SelectedItem as PlayableEntity);
                 }
             }
         }

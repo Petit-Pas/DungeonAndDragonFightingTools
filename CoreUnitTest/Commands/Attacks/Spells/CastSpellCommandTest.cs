@@ -21,12 +21,12 @@ namespace CoreUnitTest.Commands.Attacks.Spells
         private PlayableEntity _character;
 
         private IMediator _mediator;
-        private IFightManager _fightManager;
+        private IFightersProvider _fightersProvider;
 
         [OneTimeSetUp]
         public void OneTimeSetup()
         {
-            _fightManager = DIContainer.GetImplementation<IFightManager>();
+            _fightersProvider = DIContainer.GetImplementation<IFightersProvider>();
             _mediator = DIContainer.GetImplementation<IMediator>();
         }
 
@@ -36,7 +36,7 @@ namespace CoreUnitTest.Commands.Attacks.Spells
             PlayableEntity entity = EntitiesFactory.GetWarrior();
             entity.DisplayName = "Warrior1";
             _character = entity;
-            _fightManager.AddOrUpdateFighter(entity);
+            _fightersProvider.AddOrUpdateFighter(entity);
         }
 
         [Test]

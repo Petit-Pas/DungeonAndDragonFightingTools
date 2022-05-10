@@ -17,8 +17,8 @@ namespace DDFight.Game.Fight.Display
     /// </summary>
     public partial class FightingEntityListSelectableWindow : Window, INotifyPropertyChanged
     {
-        private static readonly Lazy<IFightManager> _lazyFightManager = new(DIContainer.GetImplementation<IFightManager>());
-        protected static IFightManager _fightManager => _lazyFightManager.Value;
+        private static readonly Lazy<IFightersProvider> _lazyFightManager = new(DIContainer.GetImplementation<IFightersProvider>());
+        protected static IFightersProvider FightersProvider => _lazyFightManager.Value;
 
         #region Properties
 
@@ -78,7 +78,7 @@ namespace DDFight.Game.Fight.Display
         #endregion Filter
         private void FightingEntityListSelectableWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            SelectFromListControl.ItemsSource = _fightManager.GetObservableCollection();
+            SelectFromListControl.ItemsSource = FightersProvider.GetObservableCollection();
             Selected = new ObservableCollection<PlayableEntity>();
             SelectedListControl.ItemsSource = Selected;
             Selected.CollectionChanged += Selected_CollectionChanged;

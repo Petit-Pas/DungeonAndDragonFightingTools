@@ -2,18 +2,14 @@
 using DnDToolsLibrary.Entities;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Runtime.InteropServices.ComTypes;
 
 namespace DnDToolsLibrary.Fight
 {
-    public interface IFightManager : INotifyPropertyChanged
+    public interface IFightersProvider : INotifyPropertyChanged
     {
         List<string> GetFightersNames();
-
         PlayableEntity GetFighterByDisplayName(string name);
-
         int CountWithName(string name);
 
         void AddFighter(PlayableEntity fighter);
@@ -26,20 +22,17 @@ namespace DnDToolsLibrary.Fight
         int FighterCount { get; }
 
         PlayableEntity GetFighterByIndex(int fightContextTurnIndex);
-        IEnumerable<PlayableEntity> GetAllFighters();
-        IEnumerable<PlayableEntity> GetAllMonsters();
-        IEnumerable<Character> GetAllCharacters();
+        
+        IEnumerable<Monster> Monsters { get; }
+        IEnumerable<Character> Characters { get; }
+        IEnumerable<PlayableEntity> Fighters { get; }
 
         IEnumerable<PlayableEntity> GetMonstersByName(string name);
 
         ObservableCollection<PlayableEntity> GetObservableCollection();
 
-        void SetTurnOrdersMiddleFight();
-
-        // 
-        int GetCurrentTurnIndex();
         void Clear();
         PlayableEntity First();
-        void SetTurnOrders();
+        void OrderFighters(Comparison<PlayableEntity> initiativeSorter);
     }
 }

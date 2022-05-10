@@ -14,15 +14,15 @@ namespace DDFight.Controlers.Fight
     /// </summary>
     public partial class FightingEntityListUserControl : UserControl, IEventUnregisterable
     {
-        private static readonly Lazy<IFightManager> _lazyFightManager = new(DIContainer.GetImplementation<IFightManager>());
-        protected static IFightManager _fightManager => _lazyFightManager.Value;
+        private static readonly Lazy<IFightersProvider> _lazyFightManager = new(DIContainer.GetImplementation<IFightersProvider>());
+        protected static IFightersProvider FightersProvider => _lazyFightManager.Value;
 
         public FightingEntityListUserControl()
         {
             InitializeComponent();
             Loaded += FightingCharacterListUserControl_Loaded;
             FightersControl.LayoutUpdated += FightersControl_LayoutUpdated;
-            _fightManager.PropertyChanged += FightersList_PropertyChanged;
+            FightersProvider.PropertyChanged += FightersList_PropertyChanged;
         }
 
         private void FightersList_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -44,7 +44,7 @@ namespace DDFight.Controlers.Fight
 
         private void FightingCharacterListUserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            FightersControl.ItemsSource = _fightManager.GetObservableCollection();
+            FightersControl.ItemsSource = FightersProvider.GetObservableCollection();
         }
 
         public void UnregisterToAll()

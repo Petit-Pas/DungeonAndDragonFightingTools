@@ -14,15 +14,15 @@ public class AddActionCommandTests
 {
     private PlayableEntity _character;
     private IMediator _mediator;
-    private IFightManager _fightManager;
+    private IFightersProvider _fightersProvider;
 
     [SetUp]
     public void SetUp()
     {
         _mediator = DIContainer.GetImplementation<IMediator>();
-        _fightManager = DIContainer.GetImplementation<IFightManager>(); 
+        _fightersProvider = DIContainer.GetImplementation<IFightersProvider>(); 
         _character = EntitiesFactory.GetWarrior();
-        _fightManager.AddOrUpdateFighter(_character);
+        _fightersProvider.AddOrUpdateFighter(_character);
     }
 
     [Test]

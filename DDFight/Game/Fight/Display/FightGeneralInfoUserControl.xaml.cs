@@ -16,8 +16,11 @@ namespace DDFight.Game.Fight.Display
     /// </summary>
     public partial class FightGeneralInfoUserControl : UserControl, IEventUnregisterable
     {
-        private static readonly Lazy<IFightManager> _lazyFighterProvider = new(DIContainer.GetImplementation<IFightManager>);
-        private static readonly IFightManager _fightManager = _lazyFighterProvider.Value;
+        private static readonly Lazy<IFightersProvider> _lazyFighterProvider = new(DIContainer.GetImplementation<IFightersProvider>);
+        private static readonly IFightersProvider FightersProvider = _lazyFighterProvider.Value;
+
+        private static readonly Lazy<ITurnManager> _lazyTurnManager = new(DIContainer.GetImplementation<ITurnManager>());
+        private static ITurnManager _turnManager => _lazyTurnManager.Value;
 
 
         public FightGeneralInfoUserControl()
@@ -28,7 +31,7 @@ namespace DDFight.Game.Fight.Display
 
         private void SetCharactersTurnName()
         {
-            CharacterTurnTextboxCountrol.Text = "Turn of: " + _fightManager.GetFighterByIndex((int)GlobalContext.Context.FightContext.TurnIndex).DisplayName;
+            CharacterTurnTextboxCountrol.Text = "Turn of: " + FightersProvider.GetFighterByIndex((int)GlobalContext.Context.FightContext.TurnIndex).DisplayName;
         }
 
         private void GeneralInfoFightUserControl_Loaded(object sender, RoutedEventArgs e)
@@ -58,16 +61,16 @@ namespace DDFight.Game.Fight.Display
             var rollInitiativeWindow = new RollInitiativeWindow
             {
                 // TODO the window should probably not take anything into account, and this could be made through a command
-                DataContext = _fightManager
+                DataContext = FightersProvider
             };
 
             rollInitiativeWindow.ShowCentered();
 
-            _fightManager.SetTurnOrdersMiddleFight();
+            _turnManager.SetTurnOrders();
 
-            for (var i = 0; i != _fightManager.FighterCount; i++)
+            for (var i = 0; i != FightersProvider.FighterCount; i++)
             {
-                if (_fightManager.GetFighterByIndex(i) == currentlyPlaying)
+                if (FightersProvider.GetFighterByIndex(i) == currentlyPlaying)
                 {
                     GlobalContext.Context.FightContext.TurnIndex = i;
                 }

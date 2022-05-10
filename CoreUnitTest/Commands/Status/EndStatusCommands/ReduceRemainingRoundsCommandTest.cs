@@ -15,7 +15,7 @@ namespace CoreUnitTest.Commands.Status.EndStatusCommands
     {
         private IMediator _mediator;
         private IStatusProvider _statusProvider;
-        private IFightManager _fightManager;
+        private IFightersProvider _fightersProvider;
 
         private OnHitStatus _onHitStatus;
 
@@ -24,7 +24,7 @@ namespace CoreUnitTest.Commands.Status.EndStatusCommands
         {
             _mediator = DIContainer.GetImplementation<IMediator>();
             _statusProvider = DIContainer.GetImplementation<IStatusProvider>();
-            _fightManager = DIContainer.GetImplementation<IFightManager>();
+            _fightersProvider = DIContainer.GetImplementation<IFightersProvider>();
         }
 
         [SetUp]
@@ -35,9 +35,9 @@ namespace CoreUnitTest.Commands.Status.EndStatusCommands
             {
                 RemainingRounds = 5,
                 Id = Guid.NewGuid(),
-                TargetName = _fightManager.GetFighterByIndex(0).DisplayName,
+                TargetName = _fightersProvider.GetFighterByIndex(0).DisplayName,
             };
-            _fightManager.GetFighterByIndex(0).AffectingStatusList.Add(new StatusReference(_onHitStatus));
+            _fightersProvider.GetFighterByIndex(0).AffectingStatusList.Add(new StatusReference(_onHitStatus));
             _statusProvider.Add(_onHitStatus);
         }
 
@@ -45,7 +45,7 @@ namespace CoreUnitTest.Commands.Status.EndStatusCommands
         public void TearDown()
         {
             _statusProvider.Clear();
-            _fightManager.GetFighterByIndex(0).AffectingStatusList.Clear();
+            _fightersProvider.GetFighterByIndex(0).AffectingStatusList.Clear();
         }
 
         [Test]

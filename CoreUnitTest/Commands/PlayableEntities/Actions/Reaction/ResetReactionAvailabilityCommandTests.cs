@@ -20,7 +20,7 @@ public class ResetReactionAvailabilityCommandTests
     {
         _mediator = DIContainer.GetImplementation<IMediator>();
         _character = EntitiesFactory.GetWarrior();
-        DIContainer.GetImplementation<IFightManager>().AddOrUpdateFighter(_character);
+        DIContainer.GetImplementation<IFightersProvider>().AddOrUpdateFighter(_character);
     }
 
     [Test]

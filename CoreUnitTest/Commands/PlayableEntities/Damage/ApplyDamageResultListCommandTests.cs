@@ -21,7 +21,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.Damage
         public void MainSetup()
         {
             _mediator = DIContainer.GetImplementation<IMediator>();
-            _character = DIContainer.GetImplementation<IFightManager>().First();
+            _character = DIContainer.GetImplementation<IFightersProvider>().First();
         }
 
         [SetUp]

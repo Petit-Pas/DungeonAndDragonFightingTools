@@ -22,7 +22,7 @@ namespace CoreUnitTest.Commands.Status
     {
         private IMediator _mediator;
         private IStatusProvider _statusProvider;
-        private IFightManager _fightManager;
+        private IFightersProvider _fightersProvider;
 
         private IMediatorHandler _userInputHandler;
         private ValidableResponse<GetInputDamageResultListResponse> _userInputResponse;
@@ -36,7 +36,7 @@ namespace CoreUnitTest.Commands.Status
         {
             _mediator = DIContainer.GetImplementation<IMediator>();
             _statusProvider = DIContainer.GetImplementation<IStatusProvider>();
-            _fightManager = DIContainer.GetImplementation<IFightManager>();
+            _fightersProvider = DIContainer.GetImplementation<IFightersProvider>();
         }
 
         [SetUp]
@@ -46,7 +46,7 @@ namespace CoreUnitTest.Commands.Status
             _status = StatusFactory.InfernalWound;
             _warrior = EntitiesFactory.GetWarrior();
             _wizard = EntitiesFactory.GetWizard();
-            _fightManager.AddOrUpdateFighter(EntitiesFactory.GetWarrior());
+            _fightersProvider.AddOrUpdateFighter(EntitiesFactory.GetWarrior());
 
             _status.CasterName = _wizard.DisplayName;
             _status.TargetName = _warrior.DisplayName;

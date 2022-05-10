@@ -8,12 +8,12 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands
     /// <summary>
     ///     Base class for super commands related to PlayableEntity
     ///     As such commands are only supposed to be used during a fight, it will store only the name of the entity,
-    ///         and lazy load it upon need from the FightersManager
+    ///         and lazy load it upon need from the FightersProvider
     /// </summary>
     public abstract class EntitySuperCommand : SuperCommandBase
     {
-        private static readonly Lazy<IFightManager> _lazyFighterProvider = new(DIContainer.GetImplementation<IFightManager>);
-        protected static IFightManager FightManager => _lazyFighterProvider.Value;
+        private static readonly Lazy<IFightersProvider> _lazyFighterProvider = new(DIContainer.GetImplementation<IFightersProvider>);
+        protected static IFightersProvider FightersProvider => _lazyFighterProvider.Value;
 
 
         private readonly string _entityName;
@@ -23,7 +23,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands
             _entityName = entityName;
         }
 
-        // this method should preffered to GetEntity since it does not call the FighterProvider
+        // this method should preffered to GetEntity since it does not call the FightersProvider
         public string GetEntityName()
         {
             return _entityName;
@@ -31,7 +31,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands
 
         public PlayableEntity GetEntity()
         {
-            var result = FightManager.GetFighterByDisplayName(_entityName);
+            var result = FightersProvider.GetFighterByDisplayName(_entityName);
 
             if (result == null)
             {

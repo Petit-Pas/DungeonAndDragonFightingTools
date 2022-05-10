@@ -16,7 +16,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.Inspirations
     {
         private Character _character;
         private IMediator _mediator;
-        private IFightManager _fightManager;
+        private IFightersProvider _fightersProvider;
         private InvertInspirationCommand _command;
 
         [SetUp]
@@ -24,8 +24,8 @@ namespace CoreUnitTest.Commands.PlayableEntities.Inspirations
         {
             _mediator = DIContainer.GetImplementation<IMediator>();
             _character = EntitiesFactory.GetWarrior() as Character;
-            _fightManager = DIContainer.GetImplementation<IFightManager>();
-            _fightManager.AddOrUpdateFighter(_character);
+            _fightersProvider = DIContainer.GetImplementation<IFightersProvider>();
+            _fightersProvider.AddOrUpdateFighter(_character);
             _command = new InvertInspirationCommand(_character.DisplayName);
         }
 

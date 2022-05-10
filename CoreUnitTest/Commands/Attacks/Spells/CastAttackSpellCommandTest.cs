@@ -25,15 +25,15 @@ namespace CoreUnitTest.Commands.Attacks.Spells
     public class CastAttackSpellCommandTest
     {
         private IMediator _mediator;
-        private IFightManager _fightManager;
+        private IFightersProvider _fightersProvider;
         private PlayableEntity _character;
 
         [OneTimeSetUp]
         public void MainSetup()
         {
             _mediator = DIContainer.GetImplementation<IMediator>();
-            _fightManager = DIContainer.GetImplementation<IFightManager>();
-            _character = _fightManager.First();
+            _fightersProvider = DIContainer.GetImplementation<IFightersProvider>();
+            _character = _fightersProvider.First();
         }
 
         [SetUp]
@@ -41,10 +41,10 @@ namespace CoreUnitTest.Commands.Attacks.Spells
         {
             var entity = EntitiesFactory.GetWarrior();
             entity.DisplayName = "Warrior1";
-            _fightManager.AddOrUpdateFighter(entity);
+            _fightersProvider.AddOrUpdateFighter(entity);
             entity = EntitiesFactory.GetWizard();
             entity.DisplayName = "Wizard1";
-            _fightManager.AddOrUpdateFighter(entity);
+            _fightersProvider.AddOrUpdateFighter(entity);
         }
 
         [Test]

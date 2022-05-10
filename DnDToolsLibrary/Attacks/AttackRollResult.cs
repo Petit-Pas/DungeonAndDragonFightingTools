@@ -48,7 +48,7 @@ namespace DnDToolsLibrary.Attacks
         {
             get
             {
-                return _fightManager.GetFighterByDisplayName(CasterName);
+                return _fightersProvider.GetFighterByDisplayName(CasterName);
             }
             set
             {
@@ -74,14 +74,14 @@ namespace DnDToolsLibrary.Attacks
         }
         private string _casterName = null;
 
-        private static IFightManager _fightManager = DIContainer.GetImplementation<IFightManager>();
+        private static IFightersProvider _fightersProvider = DIContainer.GetImplementation<IFightersProvider>();
 
         [XmlIgnore]
         public PlayableEntity Target
         {
             get
             {
-                return _fightManager.GetFighterByDisplayName(TargetName);
+                return _fightersProvider.GetFighterByDisplayName(TargetName);
             }
             set
             {

@@ -22,7 +22,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.Status
         {
             _mediator = DIContainer.GetImplementation<IMediator>();
             _statusProvider = DIContainer.GetImplementation<IStatusProvider>();
-            _character = DIContainer.GetImplementation<IFightManager>().First();
+            _character = DIContainer.GetImplementation<IFightersProvider>().First();
         }
 
         // occurs before each test

@@ -4,6 +4,7 @@ using BaseToolsLibrary.Mediator;
 using DnDToolsLibrary.Fight;
 using System.Windows;
 using System.Windows.Media;
+using DnDToolsLibrary.Status;
 using WpfToolsLibrary.ConsoleTools;
 
 namespace DDFight
@@ -16,10 +17,11 @@ namespace DDFight
             // Mediator
             DIContainer.RegisterSingleton<IMediator, BaseMediator>(new BaseMediator(mediator_param));
 
-            var _ = new FightersManager();
+            var _ = new FightersProvider();
 
-            DIContainer.RegisterSingleton<IFightManager, FightersManager>(_);
+            DIContainer.RegisterSingleton<IFightersProvider, FightersProvider>(_);
             DIContainer.RegisterSingleton<IStatusProvider, StatusProvider>();
+            DIContainer.RegisterSingleton<ITurnManager, TurnManager>();
 
             // CONFIGURE
         }

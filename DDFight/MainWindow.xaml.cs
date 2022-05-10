@@ -34,8 +34,11 @@ namespace DDFight
     /// </summary>
     public partial class MainWindow : Window
     {
-        private static readonly Lazy<IFightManager> _lazyFightManager = new(DIContainer.GetImplementation<IFightManager>());
-        protected static IFightManager _fightManager => _lazyFightManager.Value;
+        private static readonly Lazy<IFightersProvider> _lazyFightManager = new(DIContainer.GetImplementation<IFightersProvider>());
+        protected static IFightersProvider _fightersProvider => _lazyFightManager.Value;
+
+        private static readonly Lazy<ITurnManager> _lazyTurnManager = new(DIContainer.GetImplementation<ITurnManager>());
+        protected static ITurnManager _turnManager => _lazyTurnManager.Value;
 
         private ICustomConsole console;
 
@@ -65,7 +68,7 @@ namespace DDFight
 
             console = DIContainer.GetImplementation<ICustomConsole>();
 
-            _fightManager.GetObservableCollection().CollectionChanged += FightingCharacters_CollectionChanged;
+            _fightersProvider.GetObservableCollection().CollectionChanged += FightingCharacters_CollectionChanged;
 
             DataContext = GlobalContext.Context;
 
@@ -81,19 +84,19 @@ namespace DDFight
 
         private void FightingCharacters_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            FightButton.IsEnabled = _fightManager.FighterCount >= 2;
+            FightButton.IsEnabled = _fightersProvider.FighterCount >= 2;
         }
 
         private void FightButton_Click(object sender, RoutedEventArgs e)
         {
             RollInitiativeWindow window = new RollInitiativeWindow();
-            window.DataContext = _fightManager.GetAllFighters();
+            window.DataContext = _fightersProvider.Fighters;
 
             window.ShowCentered();
 
             if (window.Cancelled == false)
             {
-                _fightManager.SetTurnOrders();
+                _turnManager.SetTurnOrders();
 
                 console.Reset();
 
@@ -103,7 +106,7 @@ namespace DDFight
 
                 // Clean up after a Fight
                 fightWindow.UnregisterAllChildren();
-                foreach (Character character in _fightManager.GetAllCharacters())
+                foreach (var character in _fightersProvider.Characters)
                 {
                     character.GetOutOfFight();
                 }

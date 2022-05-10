@@ -24,15 +24,15 @@ namespace CoreUnitTest.Commands.Attacks.Spells
     public class CastNonAttackSpellCommandTest
     {
         private IMediator _mediator;
-        private IFightManager _fightManager;
+        private IFightersProvider _fightersProvider;
         private PlayableEntity _character;
 
         [OneTimeSetUp]
         public void MainSetup()
         {
             _mediator = DIContainer.GetImplementation<IMediator>();
-            _fightManager = DIContainer.GetImplementation<IFightManager>();
-            _character = _fightManager.First();
+            _fightersProvider = DIContainer.GetImplementation<IFightersProvider>();
+            _character = _fightersProvider.First();
         }
 
         [OneTimeTearDown]
@@ -47,10 +47,10 @@ namespace CoreUnitTest.Commands.Attacks.Spells
         {
             var entity = EntitiesFactory.GetWarrior();
             entity.DisplayName = "Warrior1";
-            _fightManager.AddOrUpdateFighter(entity);
+            _fightersProvider.AddOrUpdateFighter(entity);
             entity = EntitiesFactory.GetWizard();
             entity.DisplayName = "Wizard1";
-            _fightManager.AddOrUpdateFighter(entity);
+            _fightersProvider.AddOrUpdateFighter(entity);
         }
 
         [Test]
@@ -102,8 +102,8 @@ namespace CoreUnitTest.Commands.Attacks.Spells
         {
             CastNonAttackSpellCommand command = new CastNonAttackSpellCommand(_character.DisplayName, new Mock<Spell>().Object, 1, new List<string>() { "Warrior1", "Wizard1" });
             NonAttackSpellResults results = new NonAttackSpellResults();
-            PlayableEntity warrior = _fightManager.GetFighterByDisplayName("Warrior1");
-            PlayableEntity wizard = _fightManager.GetFighterByDisplayName("Wizard1");
+            PlayableEntity warrior = _fightersProvider.GetFighterByDisplayName("Warrior1");
+            PlayableEntity wizard = _fightersProvider.GetFighterByDisplayName("Wizard1");
             results.Add(new NewNonAttackSpellResult()
             {
                 TargetName = "Warrior1",
@@ -126,7 +126,7 @@ namespace CoreUnitTest.Commands.Attacks.Spells
             _mediator.Execute(command);
 
             TryApplyStatusCommand statusCommand = command.PopLastInnerCommand() as TryApplyStatusCommand;
-            Assert.IsTrue(SavingThrowFactory.Successful(_fightManager.GetFighterByDisplayName("Warrior1")).IsEquivalentTo(statusCommand.Saving));
+            Assert.IsTrue(SavingThrowFactory.Successful(_fightersProvider.GetFighterByDisplayName("Warrior1")).IsEquivalentTo(statusCommand.Saving));
             Assert.IsTrue(results[0].AppliedStatusList[0].IsEquivalentTo(statusCommand.Status));
         }
 
@@ -135,9 +135,9 @@ namespace CoreUnitTest.Commands.Attacks.Spells
         {
             CastNonAttackSpellCommand command = new CastNonAttackSpellCommand(_character.DisplayName, new Mock<Spell>().Object, 1, new List<string>() { "Warrior1", "Wizard1" });
             NonAttackSpellResults results = new NonAttackSpellResults();
-            SavingThrow failingSaving = SavingThrowFactory.Failed(_fightManager.GetFighterByDisplayName("Warrior1"));
-            PlayableEntity warrior = _fightManager.GetFighterByDisplayName("Warrior1");
-            PlayableEntity wizard = _fightManager.GetFighterByDisplayName("Wizard1");
+            SavingThrow failingSaving = SavingThrowFactory.Failed(_fightersProvider.GetFighterByDisplayName("Warrior1"));
+            PlayableEntity warrior = _fightersProvider.GetFighterByDisplayName("Warrior1");
+            PlayableEntity wizard = _fightersProvider.GetFighterByDisplayName("Wizard1");
 
             results.Add(new NewNonAttackSpellResult()
             {

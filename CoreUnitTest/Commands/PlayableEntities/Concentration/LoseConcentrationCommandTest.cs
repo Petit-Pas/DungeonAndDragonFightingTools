@@ -22,7 +22,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.Concentration
         public virtual void MainSetup()
         {
             _mediator = DIContainer.GetImplementation<IMediator>();
-            _character = DIContainer.GetImplementation<IFightManager>().First();
+            _character = DIContainer.GetImplementation<IFightersProvider>().First();
             _character.IsFocused = false;
         }
 
@@ -61,7 +61,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.Concentration
 
                 // arrange
                 _affected = EntitiesFactory.GetWizard() as Character;
-                DIContainer.GetImplementation<IFightManager>().AddOrUpdateFighter(_affected);
+                DIContainer.GetImplementation<IFightersProvider>().AddOrUpdateFighter(_affected);
                 _character.IsFocused = true;
                 _slow = StatusFactory.Slow;
                 _infernalWound = StatusFactory.InfernalWound;
@@ -116,7 +116,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.Concentration
 
                 // arrange
                 _affected = EntitiesFactory.GetWizard() as Character;
-                DIContainer.GetImplementation<IFightManager>().AddOrUpdateFighter(_affected);
+                DIContainer.GetImplementation<IFightersProvider>().AddOrUpdateFighter(_affected);
                 _character.IsFocused = true;
                 _slow = StatusFactory.Slow;
                 _infernalWound = StatusFactory.InfernalWound;

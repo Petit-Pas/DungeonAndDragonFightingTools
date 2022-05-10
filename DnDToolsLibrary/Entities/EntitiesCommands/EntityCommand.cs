@@ -8,11 +8,11 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands
     /// <summary>
     ///     Base class for basic commands related to PlayableEntity
     ///     As such commands are only supposed to be used during a fight, it will store only the name of the entity,
-    ///         and lazy load it upon need from the FightersManager
+    ///         and lazy load it upon need from the FightersProvider
     /// </summary>
     public abstract class EntityCommand : IMediatorCommand
     {
-        private static IFightManager _fightManager = DIContainer.GetImplementation<IFightManager>();
+        private static IFightersProvider _fightersProvider = DIContainer.GetImplementation<IFightersProvider>();
 
         private readonly string _entityName;
 
@@ -21,7 +21,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands
             _entityName = entity_name;
         }
 
-        // this method should preffered to GetEntity since it does not call the FighterProvider
+        // this method should preffered to GetEntity since it does not call the FightersProvider
         public string GetEntityName()
         {
             return _entityName;
@@ -29,7 +29,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands
 
         public PlayableEntity GetEntity()
         {
-            PlayableEntity result = _fightManager.GetFighterByDisplayName(_entityName);
+            PlayableEntity result = _fightersProvider.GetFighterByDisplayName(_entityName);
 
             if (result == null)
             {

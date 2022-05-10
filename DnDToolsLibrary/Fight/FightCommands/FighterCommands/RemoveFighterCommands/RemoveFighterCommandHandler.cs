@@ -6,12 +6,12 @@ namespace DnDToolsLibrary.Fight.FightCommands.FighterCommands.RemoveFighterComma
 {
     public class RemoveFighterCommandHandler : BaseMediatorHandler<RemoveFighterCommand, IMediatorCommandResponse>
     {
-        private Lazy<IFightManager> _lazyFighterProvider = new(DIContainer.GetImplementation<IFightManager>);
-        private IFightManager _fightManager => _lazyFighterProvider.Value;
+        private Lazy<IFightersProvider> _lazyFighterProvider = new(DIContainer.GetImplementation<IFightersProvider>);
+        private IFightersProvider FightersProvider => _lazyFighterProvider.Value;
 
         public override IMediatorCommandResponse Execute(RemoveFighterCommand genericCommand)
         {
-            if (_fightManager.RemoveFighter(genericCommand.Entity))
+            if (FightersProvider.RemoveFighter(genericCommand.Entity))
             {
                 return MediatorCommandStatii.Success;
             }
@@ -24,7 +24,7 @@ namespace DnDToolsLibrary.Fight.FightCommands.FighterCommands.RemoveFighterComma
         // TODO what about the numbers they have in their display name ?
         public override void Undo(RemoveFighterCommand genericCommand)
         {
-            _fightManager.AddFighter(genericCommand.Entity);
+            FightersProvider.AddFighter(genericCommand.Entity);
         }
     }
 }

@@ -27,7 +27,7 @@ namespace DnDToolsLibrary.Dice
             TargetName = targetName;
         }
 
-        private static IFightManager _fightManager = DIContainer.GetImplementation<IFightManager>();
+        private static IFightersProvider _fightersProvider = DIContainer.GetImplementation<IFightersProvider>();
 
         [XmlIgnore]
         public bool IsSuccesful
@@ -118,7 +118,7 @@ namespace DnDToolsLibrary.Dice
         {
             get
             {
-                return _fightManager.GetFighterByDisplayName(TargetName);
+                return _fightersProvider.GetFighterByDisplayName(TargetName);
             }
             set
             {

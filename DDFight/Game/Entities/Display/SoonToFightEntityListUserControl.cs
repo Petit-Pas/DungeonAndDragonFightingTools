@@ -30,9 +30,9 @@ namespace DDFight.Game.Entities.Display
             refresh_entityList();
         }
 
-        private FightersManager data_context
+        private FightersProvider data_context
         {
-            get => DataContext as FightersManager;
+            get => DataContext as FightersProvider;
         }
 
         protected override void EntityListControl_KeyDown(object sender, KeyEventArgs e)

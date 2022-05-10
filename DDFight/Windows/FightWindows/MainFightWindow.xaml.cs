@@ -14,8 +14,8 @@ namespace DDFight.Windows.FightWindows
     /// </summary>
     public partial class MainFightWindow : Window
     {
-        private static readonly Lazy<IFightManager> _lazyFightManager = new(DIContainer.GetImplementation<IFightManager>);
-        private static readonly IFightManager _fightManager = _lazyFightManager.Value;
+        private static readonly Lazy<IFightersProvider> _lazyFightManager = new(DIContainer.GetImplementation<IFightersProvider>);
+        private static readonly IFightersProvider FightersProvider = _lazyFightManager.Value;
 
         private GameDataContext data_context
         {
@@ -30,7 +30,7 @@ namespace DDFight.Windows.FightWindows
 
         private void setupAttacksOwner()
         {
-            foreach (PlayableEntity tmp in _fightManager.GetAllFighters())
+            foreach (PlayableEntity tmp in FightersProvider.Fighters)
             {
                 foreach (HitAttackTemplate atk in tmp.HitAttacks)
                 {
@@ -48,7 +48,7 @@ namespace DDFight.Windows.FightWindows
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            foreach (PlayableEntity tmp in _fightManager.GetAllFighters())
+            foreach (PlayableEntity tmp in FightersProvider.Fighters)
             {
                 tmp.HasAction = !tmp.HasAction;
             }

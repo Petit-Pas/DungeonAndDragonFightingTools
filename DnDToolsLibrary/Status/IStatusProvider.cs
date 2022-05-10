@@ -1,9 +1,8 @@
-﻿using DnDToolsLibrary.Entities;
-using DnDToolsLibrary.Status;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using DnDToolsLibrary.Entities;
 
-namespace DnDToolsLibrary.Fight
+namespace DnDToolsLibrary.Status
 {
     public interface IStatusProvider : IList<CustomVerboseStatus>
     {

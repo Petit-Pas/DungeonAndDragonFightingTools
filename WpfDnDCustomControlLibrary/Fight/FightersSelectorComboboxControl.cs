@@ -12,8 +12,8 @@ namespace WpfDnDCustomControlLibrary.Fight
     /// </summary>
     public class FightersSelectorComboboxControl : ComboBoxControl
     {
-        private static readonly Lazy<IFightManager> _lazyFightManager = new(DIContainer.GetImplementation<IFightManager>);
-        private static readonly IFightManager _fightManager = _lazyFightManager.Value;
+        private static readonly Lazy<IFightersProvider> _lazyFightManager = new(DIContainer.GetImplementation<IFightersProvider>);
+        private static readonly IFightersProvider _fightersProvider = _lazyFightManager.Value;
 
         public FightersSelectorComboboxControl() : base()
         {
@@ -23,7 +23,7 @@ namespace WpfDnDCustomControlLibrary.Fight
 
         private void FightersSelectorControl_Initialized(object sender, EventArgs e)
         {
-            this.ItemsSource = _fightManager.GetAllFighters();
+            this.ItemsSource = _fightersProvider.Fighters;
             this.SelectionChanged += FightersSelectorControl_SelectionChanged;
         }
 

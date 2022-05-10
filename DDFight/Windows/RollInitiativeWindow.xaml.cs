@@ -18,8 +18,8 @@ namespace DDFight.Windows
     /// </summary>
     public partial class RollInitiativeWindow : Window
     {
-        private static readonly Lazy<IFightManager> _lazyFightManager = new(DIContainer.GetImplementation<IFightManager>);
-        private static readonly IFightManager _fightManager = _lazyFightManager.Value;
+        private static readonly Lazy<IFightersProvider> _lazyFightManager = new(DIContainer.GetImplementation<IFightersProvider>);
+        private static readonly IFightersProvider FightersProvider = _lazyFightManager.Value;
 
         public class InitiativeCellDataContext
         {
@@ -62,7 +62,7 @@ namespace DDFight.Windows
         private void RollInitiativeWindow_Loaded(object sender, RoutedEventArgs e)
         {
             contextList = new ObservableCollection<InitiativeCellDataContext>();
-            foreach (var entity in _fightManager.GetAllFighters())
+            foreach (var entity in FightersProvider.Fighters)
             {
                 if (contextList.Any(x => x.Entity.Name == entity.Name))
                 {
@@ -128,7 +128,7 @@ namespace DDFight.Windows
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
-            foreach (PlayableEntity entity in _fightManager.GetAllFighters())
+            foreach (PlayableEntity entity in FightersProvider.Fighters)
             {
                 if (entity.InitiativeRoll == 0)
                 {

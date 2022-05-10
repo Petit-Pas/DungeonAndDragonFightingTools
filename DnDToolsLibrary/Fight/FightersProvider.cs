@@ -7,14 +7,15 @@ using DnDToolsLibrary.Memory;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 
 namespace DnDToolsLibrary.Fight
 {
-    public class FightersManager : GenericList<PlayableEntity>, IFightManager
+    public class FightersProvider : GenericList<PlayableEntity>, IFightersProvider
     {
 
-        public FightersManager()
+        public FightersProvider()
         {
         }
 
@@ -92,76 +93,21 @@ namespace DnDToolsLibrary.Fight
             return this.ElementAt(0);
         }
 
-        /// <summary>
-        ///     Will sort the list in Initiative + Dexterity order, then sets the PlayableEntity.TurnOrder value
-        ///     
-        ///     /!\ should only be called at start of fight, there is a more complicate handling for when in middle of a fight
-        ///     See SetTurnOrdersMiddleFight()
-        /// </summary>
-        public void SetTurnOrders()
+        public void OrderFighters(Comparison<PlayableEntity> initiativeSorter)
         {
-
-            this.Sort(((x, y) => {
-                var val = (x.InitiativeRoll + x.Characteristics.GetCharacteristicModifier(CharacteristicsEnum.Dexterity)).CompareTo
-                                                (y.InitiativeRoll + y.Characteristics.GetCharacteristicModifier(CharacteristicsEnum.Dexterity));
-                if (val != 0)
-                    return -val;
-
-                val = (x.Characteristics.GetCharacteristicModifier(CharacteristicsEnum.Dexterity).CompareTo(
-                    y.Characteristics.GetCharacteristicModifier(CharacteristicsEnum.Dexterity)));
-                if (val != 0)
-                    return -val;
-
-                val = string.Compare(x.Name, y.Name, StringComparison.Ordinal);
-                if (val != 0)
-                    return val;
-                var num1 = int.Parse(x.DisplayName[(x.Name.Length + 2)..]);
-                var num2 = int.Parse(y.DisplayName[(x.Name.Length + 2)..]);
-                return num1.CompareTo(num2);
-
-            }));
-
-
-            uint i = 1;
-            foreach (var fighter in this)
-            {
-                fighter.TurnOrder = i;
-                i++;
-            }
-
+            this.Sort(initiativeSorter);
         }
 
-        public IEnumerable<Character> GetAllCharacters()
-        {
-            return this.OfType<Character>();
-        }
-
-        public IEnumerable<PlayableEntity> GetAllMonsters()
-        {
-            return this.OfType<Monster>();
-        }
+        public IEnumerable<Monster> Monsters => this.OfType<Monster>();
+        public IEnumerable<Character> Characters => this.OfType<Character>();
+        public IEnumerable<PlayableEntity> Fighters => this;
 
         public ObservableCollection<PlayableEntity> GetObservableCollection()
         {
             return this;
         }
 
-        public void SetTurnOrdersMiddleFight()
-        {
-            foreach (var fighter in this)
-            {
-                if (fighter.InitiativeRoll == 0)
-                {
-                    fighter.InitiativeRoll = (uint)DiceRoll.Roll("1d20");
-                    foreach (var tmp in this)
-                    {
-                        if (tmp.Name == fighter.Name)
-                            tmp.InitiativeRoll = fighter.InitiativeRoll;
-                    }
-                }
-            }
-            SetTurnOrders();
-        }
+
 
         public int GetCurrentTurnIndex()
         {
@@ -173,7 +119,7 @@ namespace DnDToolsLibrary.Fight
         {
             var result = this.FirstOrDefault(x => x.DisplayName == displayName);
             if (result == null)
-                Console.WriteLine($"WARNING: FightersManager could not find a fighter with name {displayName}");
+                Console.WriteLine($"WARNING: FightersProvider could not find a fighter with name {displayName}");
             return result;
         }
 
@@ -223,14 +169,36 @@ namespace DnDToolsLibrary.Fight
             return null;
         }
 
-        public IEnumerable<PlayableEntity> GetAllFighters()
-        {
-            return this;
-        }
-
         public IEnumerable<PlayableEntity> GetMonstersByName(string name)
         {
-            return this.GetAllMonsters().Where(x => x.Name == name);
+            return this.Monsters.Where(x => x.Name == name);
+        }
+
+        /// <summary>
+        ///     Keeps tracks of the index of the fighter in the round
+        /// </summary>
+        public int TurnIndex
+        {
+            get => _turnIndex;
+            set
+            {
+                _turnIndex = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private int _turnIndex = -1;
+
+        public void NextTurn()
+        {
+            Trace.WriteLine("Info: Switching to next turn");
+
+            // finishing current turn
+            if (TurnIndex != -1)
+            {
+                
+            }
+
+
         }
 
     }

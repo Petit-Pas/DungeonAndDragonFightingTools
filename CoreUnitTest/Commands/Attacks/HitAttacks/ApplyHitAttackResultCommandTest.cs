@@ -23,7 +23,7 @@ namespace CoreUnitTest.Commands.Attacks.HitAttacks
     public class ApplyHitAttackResultCommandTest
     {
         private IMediator _mediator;
-        private IFightManager _fightManager;
+        private IFightersProvider _fightersProvider;
         private PlayableEntity _target;
         private PlayableEntity _caster;
         // Defaults to a 12 to hit, with 10 fire, 5 cold and 10 poison damage
@@ -34,7 +34,7 @@ namespace CoreUnitTest.Commands.Attacks.HitAttacks
         public void MainSetup()
         {
             _mediator = DIContainer.GetImplementation<IMediator>();
-            _fightManager = DIContainer.GetImplementation<IFightManager>();
+            _fightersProvider = DIContainer.GetImplementation<IFightersProvider>();
         }
 
         [SetUp]
@@ -43,8 +43,8 @@ namespace CoreUnitTest.Commands.Attacks.HitAttacks
             _caster = EntitiesFactory.GetWarrior();
             _target = EntitiesFactory.GetWizard();
             _target.CA = 10; // tests were designed for a target with 10 CA
-            _fightManager.AddOrUpdateFighter(_target);
-            _fightManager.AddOrUpdateFighter(_caster);
+            _fightersProvider.AddOrUpdateFighter(_target);
+            _fightersProvider.AddOrUpdateFighter(_caster);
 
             _attackResult = new HitAttackResult()
             {

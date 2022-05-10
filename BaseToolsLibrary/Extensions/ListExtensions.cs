@@ -18,7 +18,7 @@ namespace BaseToolsLibrary.Extensions
             var sortableList = new List<T>(collection);
             sortableList.Sort(comparison);
 
-            for (int i = 0; i < sortableList.Count; i++)
+            for (var i = 0; i < sortableList.Count; i++)
             {
                 collection.Move(collection.IndexOf(sortableList[i]), i);
             }
@@ -31,7 +31,7 @@ namespace BaseToolsLibrary.Extensions
 
         public static ObservableCollection<T> ToObservableCollection<T>(this List<T> listToTransform)
         {
-            ObservableCollection<T> result = new ObservableCollection<T>();
+            var result = new ObservableCollection<T>();
 
             foreach (T obj in listToTransform)
                 result.Add(obj);

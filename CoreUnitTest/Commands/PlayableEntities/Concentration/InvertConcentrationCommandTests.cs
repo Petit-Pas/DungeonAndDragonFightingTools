@@ -23,7 +23,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.Concentration
         {
             _mediator = DIContainer.GetImplementation<IMediator>();
             _character = EntitiesFactory.GetWarrior();
-            DIContainer.GetImplementation<IFightManager>().AddOrUpdateFighter(_character);
+            DIContainer.GetImplementation<IFightersProvider>().AddOrUpdateFighter(_character);
             _command = new InvertConcentrationCommand(_character.DisplayName);
         }
 

@@ -14,8 +14,8 @@ namespace DDFight.Controlers.Fight
     /// </summary>
     public partial class FightingEntityActionsUserControl : UserControl, IEventUnregisterable
     {
-        private static readonly Lazy<IFightManager> _lazyFightManager = new(DIContainer.GetImplementation<IFightManager>());
-        protected static IFightManager _fightManager => _lazyFightManager.Value;
+        private static readonly Lazy<IFightersProvider> _lazyFightManager = new(DIContainer.GetImplementation<IFightersProvider>());
+        protected static IFightersProvider FightersProvider => _lazyFightManager.Value;
 
 
         public PlayableEntity data_context
@@ -40,7 +40,7 @@ namespace DDFight.Controlers.Fight
 
         private void FighterActionUserControl_LayoutUpdated(object sender, EventArgs e)
         {
-            DataContext = _fightManager.First();
+            DataContext = FightersProvider.First();
             this.LayoutUpdated -= FighterActionUserControl_LayoutUpdated;
         }
 

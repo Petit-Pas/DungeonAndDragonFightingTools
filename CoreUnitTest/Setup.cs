@@ -38,7 +38,7 @@ namespace CoreUnitTest
         {
             PlayableEntity character = new Character();
             character.MaxHp = 100;
-            ((GenericList<PlayableEntity>)DIContainer.GetImplementation<IFightManager>()).AddElementSilent(character);
+            ((GenericList<PlayableEntity>)DIContainer.GetImplementation<IFightersProvider>()).AddElementSilent(character);
         }
 
         private void AddRequiredDependencies()

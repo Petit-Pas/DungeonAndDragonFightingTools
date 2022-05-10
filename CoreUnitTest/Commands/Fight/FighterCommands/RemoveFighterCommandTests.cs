@@ -12,7 +12,7 @@ namespace CoreUnitTest.Commands.Fight.FighterCommands
     [TestFixture]
     public class RemoveFighterCommandTests
     {
-        private IFightManager _fightManager;
+        private IFightersProvider _fightersProvider;
         private IMediator _mediator;
 
         private RemoveFighterCommand _command;
@@ -21,8 +21,8 @@ namespace CoreUnitTest.Commands.Fight.FighterCommands
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            _fightManager = DIContainer.GetImplementation<IFightManager>();
-            _fightManager.Clear();
+            _fightersProvider = DIContainer.GetImplementation<IFightersProvider>();
+            _fightersProvider.Clear();
             _mediator = DIContainer.GetImplementation<IMediator>();
             _character = EntitiesFactory.GetWarrior();
         }
@@ -30,13 +30,13 @@ namespace CoreUnitTest.Commands.Fight.FighterCommands
         [OneTimeTearDown]
         public void OneTimeTearDown()
         {
-            _fightManager.Clear();
+            _fightersProvider.Clear();
         }
 
         [SetUp]
         public void SetUp()
         {
-            _fightManager.AddOrUpdateFighter(_character);
+            _fightersProvider.AddOrUpdateFighter(_character);
             _command = new RemoveFighterCommand(_character);
         }
 
@@ -44,7 +44,7 @@ namespace CoreUnitTest.Commands.Fight.FighterCommands
         public void Should_Return_An_Error_When_Entity_Was_Not_Fighting()
         {
             // Arrange
-            _fightManager.RemoveFighter(_character);
+            _fightersProvider.RemoveFighter(_character);
 
             // Act
             var result = _mediator.Execute(_command);
@@ -73,7 +73,7 @@ namespace CoreUnitTest.Commands.Fight.FighterCommands
             _mediator.Execute(_command);
 
             // Assert
-            _fightManager.GetAllFighters().Should().BeEmpty();
+            _fightersProvider.Fighters.Should().BeEmpty();
         }
 
         [Test]
@@ -87,7 +87,7 @@ namespace CoreUnitTest.Commands.Fight.FighterCommands
             _mediator.Undo(_command);
 
             // Assert
-            _fightManager.GetAllFighters().Should().Contain(x => x.DisplayName == _character.DisplayName);
+            _fightersProvider.Fighters.Should().Contain(x => x.DisplayName == _character.DisplayName);
         }
     }
 }

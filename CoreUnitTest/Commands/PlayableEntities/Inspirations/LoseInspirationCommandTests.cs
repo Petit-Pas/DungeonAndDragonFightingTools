@@ -15,15 +15,15 @@ namespace CoreUnitTest.Commands.PlayableEntities.Inspirations
         private PlayableEntity _monster;
         private PlayableEntity _character;
 
-        private IFightManager _fightManager;
+        private IFightersProvider _fightersProvider;
         private IMediator _mediator;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
             _mediator = DIContainer.GetImplementation<IMediator>();
-            _fightManager = DIContainer.GetImplementation<IFightManager>();
-            _fightManager.Clear();
+            _fightersProvider = DIContainer.GetImplementation<IFightersProvider>();
+            _fightersProvider.Clear();
         }
 
         [SetUp]
@@ -32,14 +32,14 @@ namespace CoreUnitTest.Commands.PlayableEntities.Inspirations
             _character = EntitiesFactory.GetWarrior();
             _monster = EntitiesFactory.Goblin;
 
-            _fightManager.AddOrUpdateFighter(_character);
-            _fightManager.AddOrUpdateFighter(_monster);
+            _fightersProvider.AddOrUpdateFighter(_character);
+            _fightersProvider.AddOrUpdateFighter(_monster);
         }
 
         [TearDown]
         public void TearDown()
         {
-            _fightManager.Clear();
+            _fightersProvider.Clear();
         }
 
         [Test]

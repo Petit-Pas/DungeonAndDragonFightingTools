@@ -23,7 +23,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.Concentration
         public virtual void MainSetup()
         {
             _mediator = DIContainer.GetImplementation<IMediator>();
-            _character = DIContainer.GetImplementation<IFightManager>().First();
+            _character = DIContainer.GetImplementation<IFightersProvider>().First();
             _character.IsFocused = true;
         }
 

@@ -8,7 +8,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.Concen
 {
     public class ConcentrationCheckQuery : SavingThrowQuery
     {
-        private static Lazy<IFightManager> fighterProvider = new(() => DIContainer.GetImplementation<IFightManager>());
+        private static Lazy<IFightersProvider> fighterProvider = new(() => DIContainer.GetImplementation<IFightersProvider>());
 
         public ConcentrationCheckQuery(string entityName) : base(null, "Concentration check")
         {

@@ -99,14 +99,14 @@ namespace DnDToolsLibrary.Attacks.Spells
         }
         private OnHitStatusList _appliedStatusList = new OnHitStatusList();
 
-        private static IFightManager _fightManager = DIContainer.GetImplementation<IFightManager>();
+        private static IFightersProvider _fightersProvider = DIContainer.GetImplementation<IFightersProvider>();
 
         [XmlIgnore]
         public PlayableEntity Caster
         {
             get
             {
-                return _fightManager.GetFighterByDisplayName(CasterName);
+                return _fightersProvider.GetFighterByDisplayName(CasterName);
             }
             set
             {
@@ -143,7 +143,7 @@ namespace DnDToolsLibrary.Attacks.Spells
         {
             get
             {
-                return _fightManager.GetFighterByDisplayName(TargetName);
+                return _fightersProvider.GetFighterByDisplayName(TargetName);
             }
             set
             {

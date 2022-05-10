@@ -6,10 +6,10 @@ namespace DnDToolsLibrary.Fight.FightCommands.TurnCommands.StartNextTurnCommands
 {
     public class StartNextTurnCommandHandler : SuperCommandHandlerBase<StartNextTurnCommand, IMediatorCommandResponse>
     {
-        private static readonly Lazy<IFightManager> _lazyFighterProvider =
-            new(DIContainer.GetImplementation<IFightManager>);
+        private static readonly Lazy<IFightersProvider> _lazyFighterProvider =
+            new(DIContainer.GetImplementation<IFightersProvider>);
 
-        private static IFightManager _fightManager = _lazyFighterProvider.Value;
+        private static IFightersProvider _fightersProvider = _lazyFighterProvider.Value;
 
         public override IMediatorCommandResponse Execute(StartNextTurnCommand genericCommand)
         {
