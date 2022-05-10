@@ -13,30 +13,32 @@ namespace CoreUnitTest.Commands.PlayableEntities.Concentration
     public class AcquireConcentrationCommandTest
     {
         private IMediator _mediator;
+        private IFightManager _fightManager;
         private PlayableEntity _character;
 
         [OneTimeSetUp]
         public void MainSetup()
         {
+            _fightManager = DIContainer.GetImplementation<IFightManager>();
             _mediator = DIContainer.GetImplementation<IMediator>();
-            _character = FightersList.Instance[0];
+            _character = _fightManager.First();
         }
 
         [SetUp]
         public void Setup()
         {
-            PlayableEntity entity = EntitiesFactory.GetWarrior();
+            var entity = EntitiesFactory.GetWarrior();
             entity.DisplayName = "Warrior1";
-            FightersList.Instance.AddOrUpdateFighter(entity);
+            _fightManager.AddOrUpdateFighter(entity);
             entity = EntitiesFactory.GetWizard();
             entity.DisplayName = "Wizard1";
-            FightersList.Instance.AddOrUpdateFighter(entity);
+            _fightManager.AddOrUpdateFighter(entity);
         }
 
         [Test]
         public void ConcentrationAcquired()
         {
-            PlayableEntity entity = FightersList.Instance.GetFighterByDisplayName("Warrior1");
+            PlayableEntity entity = _fightManager.GetFighterByDisplayName("Warrior1");
             entity.IsFocused = false;
             AcquireConcentrationCommand command = new AcquireConcentrationCommand(entity.DisplayName);
 
@@ -49,7 +51,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.Concentration
         [Test]
         public void ConcentrationAcquired_Undo()
         {
-            PlayableEntity entity = FightersList.Instance.GetFighterByDisplayName("Warrior1");
+            PlayableEntity entity = _fightManager.GetFighterByDisplayName("Warrior1");
             entity.IsFocused = false;
             AcquireConcentrationCommand command = new AcquireConcentrationCommand(entity.DisplayName);
 
@@ -63,7 +65,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.Concentration
         [Test]
         public void ConcentrationReacquired()
         {
-            PlayableEntity entity = FightersList.Instance.GetFighterByDisplayName("Warrior1");
+            PlayableEntity entity = _fightManager.GetFighterByDisplayName("Warrior1");
             entity.IsFocused = true;
             AcquireConcentrationCommand command = new AcquireConcentrationCommand(entity.DisplayName);
 
@@ -77,7 +79,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.Concentration
         [Test]
         public void ConcentrationReacquired_Undo()
         {
-            PlayableEntity entity = FightersList.Instance.GetFighterByDisplayName("Warrior1");
+            PlayableEntity entity = _fightManager.GetFighterByDisplayName("Warrior1");
             entity.IsFocused = true;
             AcquireConcentrationCommand command = new AcquireConcentrationCommand(entity.DisplayName);
 

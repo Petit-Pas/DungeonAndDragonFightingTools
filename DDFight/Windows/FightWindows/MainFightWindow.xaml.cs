@@ -5,6 +5,7 @@ using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Fight;
 using System;
 using System.Windows;
+using BaseToolsLibrary.DependencyInjection;
 
 namespace DDFight.Windows.FightWindows
 {
@@ -13,14 +14,12 @@ namespace DDFight.Windows.FightWindows
     /// </summary>
     public partial class MainFightWindow : Window
     {
+        private static readonly Lazy<IFightManager> _lazyFightManager = new(DIContainer.GetImplementation<IFightManager>);
+        private static readonly IFightManager _fightManager = _lazyFightManager.Value;
+
         private GameDataContext data_context
         {
             get => (GameDataContext)DataContext;
-        }
-
-        private FightersList fighters
-        {
-            get => data_context.FightContext.FightersList;
         }
 
         public MainFightWindow()
@@ -31,7 +30,7 @@ namespace DDFight.Windows.FightWindows
 
         private void setupAttacksOwner()
         {
-            foreach (PlayableEntity tmp in data_context.FightContext.FightersList)
+            foreach (PlayableEntity tmp in _fightManager.GetAllFighters())
             {
                 foreach (HitAttackTemplate atk in tmp.HitAttacks)
                 {
@@ -49,7 +48,7 @@ namespace DDFight.Windows.FightWindows
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            foreach (PlayableEntity tmp in GlobalContext.Context.FightContext.FightersList)
+            foreach (PlayableEntity tmp in _fightManager.GetAllFighters())
             {
                 tmp.HasAction = !tmp.HasAction;
             }

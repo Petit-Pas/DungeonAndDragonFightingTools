@@ -5,7 +5,6 @@ using DnDToolsLibrary.Attacks.Damage;
 using DnDToolsLibrary.Attacks.Damage.Type;
 using DnDToolsLibrary.Dice;
 using DnDToolsLibrary.Entities;
-using DnDToolsLibrary.Fight;
 using DnDToolsLibrary.Fight.Events;
 using WpfToolsLibrary.Extensions;
 

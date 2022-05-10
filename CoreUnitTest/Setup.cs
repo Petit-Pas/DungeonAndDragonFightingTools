@@ -7,6 +7,7 @@ using DnDToolsLibrary.Dice;
 using DnDToolsLibrary.Dice.DiceCommancs.SavingThrowCommands.SavingThrowQueries;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Fight;
+using DnDToolsLibrary.Memory;
 using FakeItEasy;
 using Moq;
 using NUnit.Framework;
@@ -37,7 +38,7 @@ namespace CoreUnitTest
         {
             PlayableEntity character = new Character();
             character.MaxHp = 100;
-            FightersList.Instance.AddElementSilent(character);
+            ((GenericList<PlayableEntity>)DIContainer.GetImplementation<IFightManager>()).AddElementSilent(character);
         }
 
         private void AddRequiredDependencies()

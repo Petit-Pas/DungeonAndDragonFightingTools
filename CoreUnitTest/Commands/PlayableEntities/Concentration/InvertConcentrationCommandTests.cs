@@ -2,7 +2,6 @@
 using BaseToolsLibrary.Mediator;
 using CoreUnitTest.TestFactories;
 using DnDToolsLibrary.Entities;
-using DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.ActionCommands;
 using DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.AcquireConcentration;
 using DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.InvertConcentration;
 using DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.LoseConcentration;
@@ -24,7 +23,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.Concentration
         {
             _mediator = DIContainer.GetImplementation<IMediator>();
             _character = EntitiesFactory.GetWarrior();
-            FightersList.Instance.AddOrUpdateFighter(_character);
+            DIContainer.GetImplementation<IFightManager>().AddOrUpdateFighter(_character);
             _command = new InvertConcentrationCommand(_character.DisplayName);
         }
 

@@ -1,4 +1,5 @@
-﻿using DDFight.Resources;
+﻿using System;
+using DDFight.Resources;
 using DnDToolsLibrary.Dice;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Fight;
@@ -6,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
+using BaseToolsLibrary.DependencyInjection;
 using WpfToolsLibrary.Extensions;
 using WpfToolsLibrary.Navigation;
 
@@ -16,6 +18,9 @@ namespace DDFight.Windows
     /// </summary>
     public partial class RollInitiativeWindow : Window
     {
+        private static readonly Lazy<IFightManager> _lazyFightManager = new(DIContainer.GetImplementation<IFightManager>);
+        private static readonly IFightManager _fightManager = _lazyFightManager.Value;
+
         public class InitiativeCellDataContext
         {
             public PlayableEntity Entity
@@ -46,11 +51,6 @@ namespace DDFight.Windows
 
         public bool Cancelled = true;
 
-        private FightersList data_context
-        {
-            get => (FightersList)DataContext;
-        }
-
         public RollInitiativeWindow()
         {
             InitializeComponent();
@@ -62,7 +62,7 @@ namespace DDFight.Windows
         private void RollInitiativeWindow_Loaded(object sender, RoutedEventArgs e)
         {
             contextList = new ObservableCollection<InitiativeCellDataContext>();
-            foreach (PlayableEntity entity in data_context)
+            foreach (var entity in _fightManager.GetAllFighters())
             {
                 if (contextList.Any(x => x.Entity.Name == entity.Name))
                 {
@@ -128,7 +128,7 @@ namespace DDFight.Windows
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
-            foreach (PlayableEntity entity in data_context)
+            foreach (PlayableEntity entity in _fightManager.GetAllFighters())
             {
                 if (entity.InitiativeRoll == 0)
                 {

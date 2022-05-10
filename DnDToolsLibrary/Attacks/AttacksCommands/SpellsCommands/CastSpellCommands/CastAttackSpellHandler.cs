@@ -4,7 +4,6 @@ using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.AttackSpellResultsQ
 using DnDToolsLibrary.Attacks.Spells;
 using DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageResultList;
 using DnDToolsLibrary.Fight;
-using DnDToolsLibrary.Status;
 using DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands;
 using System;
 
@@ -12,7 +11,7 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
 {
     public class CastAttackSpellHandler : SuperCommandHandlerBase<CastAttackSpellCommand, IMediatorCommandResponse>
     {
-        private static Lazy<IFighterProvider> _fighterProvider = new Lazy<IFighterProvider>(() => DIContainer.GetImplementation<IFighterProvider>());
+        private static Lazy<IFightManager> _fighterProvider = new Lazy<IFightManager>(() => DIContainer.GetImplementation<IFightManager>());
 
         public override IMediatorCommandResponse Execute(CastAttackSpellCommand command)
         {

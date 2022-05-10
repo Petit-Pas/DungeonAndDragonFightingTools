@@ -14,7 +14,7 @@ namespace DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands
 {
     public class TryApplyStatusCommandHandler : SuperCommandHandlerBase<TryApplyStatusCommand, IMediatorCommandResponse>
     {
-        private Lazy<IFighterProvider> _fighterProvider = new Lazy<IFighterProvider>(() => DIContainer.GetImplementation<IFighterProvider>());
+        private Lazy<IFightManager> _fighterProvider = new Lazy<IFightManager>(() => DIContainer.GetImplementation<IFightManager>());
 
         public override IMediatorCommandResponse Execute(TryApplyStatusCommand command)
         {

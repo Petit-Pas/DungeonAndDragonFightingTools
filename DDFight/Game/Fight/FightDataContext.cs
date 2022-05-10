@@ -5,7 +5,6 @@ using DnDToolsLibrary.Fight;
 using DnDToolsLibrary.Fight.Events;
 using System;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using BaseToolsLibrary.DependencyInjection;
 using TempExtensionsPlayableEntity;
@@ -16,8 +15,8 @@ namespace DDFight.Game.Fight
 {
     public class FightDataContext : INotifyPropertyChanged
     {
-        private static readonly Lazy<IFighterProvider> _lazyFighterProvider = new(DIContainer.GetImplementation<IFighterProvider>);
-        private static readonly IFighterProvider _fighterProvider = _lazyFighterProvider.Value;
+        private static readonly Lazy<IFightManager> _lazyFighterProvider = new(DIContainer.GetImplementation<IFightManager>);
+        private static readonly IFightManager _fightManager = _lazyFighterProvider.Value;
 
         /// <summary>
         ///     Counts the amount of rounds of a fight
@@ -55,12 +54,12 @@ namespace DDFight.Game.Fight
             Console.WriteLine("Next Turn");
             if (TurnIndex != -1)
             {
-                var entityEnd = _fighterProvider.ElementAt(TurnIndex);
+                var entityEnd = _fightManager.GetFighterByIndex(TurnIndex);
                 entityEnd.EndTurn();
                 OnEndTurn(new TurnEndedEventArgs(entityEnd.DisplayName));
             }
             var newTurn = TurnIndex + 1;
-            if (newTurn >= _fighterProvider.Count)
+            if (newTurn >= _fightManager.FighterCount)
             {
                 TurnIndex = 0;
                 RoundCount += 1;
@@ -69,7 +68,7 @@ namespace DDFight.Game.Fight
             {
                 TurnIndex = newTurn;
             }
-            var entityStart = _fighterProvider.ElementAt(TurnIndex);
+            var entityStart = _fightManager.GetFighterByIndex(TurnIndex);
             entityStart.StartNewTurn();
             OnStartNewTurn(new StartNewTurnEventArgs(entityStart.DisplayName));
             // TODO should be implemented somewhere in the commands, should also probably go through an event of the character
@@ -96,7 +95,7 @@ namespace DDFight.Game.Fight
             Logger.Log("==============================");
             Logger.Log("End of the turn of " + CurrentlyPlaying.DisplayName);
             Logger.Log("");
-            foreach (var tmp in _fighterProvider)
+            foreach (var tmp in _fightManager.GetAllFighters())
             {
                 tmp.Dump();
             }
@@ -117,11 +116,11 @@ namespace DDFight.Game.Fight
         {
             get
             {
-                if (_fighterProvider.Count == 0)
+                if (_fightManager.FighterCount == 0)
                     return null;
-                if (TurnIndex < 0 || TurnIndex >= _fighterProvider.Count)
+                if (TurnIndex < 0 || TurnIndex >= _fightManager.FighterCount)
                     return null;
-                return _fighterProvider.ElementAt(TurnIndex);
+                return _fightManager.GetFighterByIndex(TurnIndex);
             }
         }
 
@@ -141,7 +140,7 @@ namespace DDFight.Game.Fight
             var wasPlaying = (toRemove.DisplayName == CurrentlyPlaying.DisplayName);
 
             // modifies the turn order of the character that were playing after the removed character
-            foreach (var tmp in _fighterProvider)
+            foreach (var tmp in _fightManager.GetAllFighters())
             {
                 if (tmp.TurnOrder > toRemove.TurnOrder)
                     tmp.TurnOrder -= 1;
@@ -158,7 +157,7 @@ namespace DDFight.Game.Fight
             {
                 TurnIndex -= 1;
             }
-            _fighterProvider.Remove(toRemove);
+            _fightManager.RemoveFighter(toRemove);
         }
 
         #endregion turn
@@ -184,7 +183,7 @@ namespace DDFight.Game.Fight
         {
             TurnIndex = -1;
             RoundCount = 0;
-            _fighterProvider.Clear();
+            _fightManager.Clear();
         }
     }
 }

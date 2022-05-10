@@ -2,6 +2,7 @@
 using DnDToolsLibrary.Fight;
 using System;
 using System.Windows;
+using BaseToolsLibrary.DependencyInjection;
 using WpfCustomControlLibrary.ComboBoxes;
 
 namespace WpfDnDCustomControlLibrary.Fight
@@ -11,6 +12,9 @@ namespace WpfDnDCustomControlLibrary.Fight
     /// </summary>
     public class FightersSelectorComboboxControl : ComboBoxControl
     {
+        private static readonly Lazy<IFightManager> _lazyFightManager = new(DIContainer.GetImplementation<IFightManager>);
+        private static readonly IFightManager _fightManager = _lazyFightManager.Value;
+
         public FightersSelectorComboboxControl() : base()
         {
             Initialized += FightersSelectorControl_Initialized;
@@ -19,7 +23,7 @@ namespace WpfDnDCustomControlLibrary.Fight
 
         private void FightersSelectorControl_Initialized(object sender, EventArgs e)
         {
-            this.ItemsSource = FightersList.Instance;
+            this.ItemsSource = _fightManager.GetAllFighters();
             this.SelectionChanged += FightersSelectorControl_SelectionChanged;
         }
 

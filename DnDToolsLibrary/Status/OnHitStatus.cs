@@ -30,15 +30,15 @@ namespace DnDToolsLibrary.Status
 
         #region Properties_Concerned
 
-        private static Lazy<IFighterProvider> _lazyFighterProvider = new Lazy<IFighterProvider>(() => DIContainer.GetImplementation<IFighterProvider>());
-        private static IFighterProvider _fighterProvider => _lazyFighterProvider.Value;
+        private static Lazy<IFightManager> _lazyFighterProvider = new Lazy<IFightManager>(() => DIContainer.GetImplementation<IFightManager>());
+        private static IFightManager FightManager => _lazyFighterProvider.Value;
 
         [XmlIgnore]
         public PlayableEntity Caster
         {
             get
             {
-                return _fighterProvider.GetFighterByDisplayName(CasterName);
+                return FightManager.GetFighterByDisplayName(CasterName);
             }
             set
             {
@@ -69,7 +69,7 @@ namespace DnDToolsLibrary.Status
         {
             get
             {
-                return _fighterProvider.GetFighterByDisplayName(TargetName);
+                return FightManager.GetFighterByDisplayName(TargetName);
             }
             set
             {

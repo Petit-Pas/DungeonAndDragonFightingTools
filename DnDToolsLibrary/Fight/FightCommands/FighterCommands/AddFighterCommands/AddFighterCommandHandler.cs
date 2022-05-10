@@ -8,8 +8,8 @@ namespace DnDToolsLibrary.Fight.FightCommands.FighterCommands.AddFighterCommands
 {
     public class AddFighterCommandHandler : BaseMediatorHandler<AddFighterCommand, IMediatorCommandResponse>
     {
-        private Lazy<IFighterProvider> _lazyFighterProvider = new(DIContainer.GetImplementation<IFighterProvider>);
-        private IFighterProvider _fighterProvider => _lazyFighterProvider.Value;
+        private Lazy<IFightManager> _lazyFighterProvider = new(DIContainer.GetImplementation<IFightManager>);
+        private IFightManager _fightManager => _lazyFighterProvider.Value;
 
         public override IMediatorCommandResponse Execute(AddFighterCommand genericCommand)
         {
@@ -30,7 +30,7 @@ namespace DnDToolsLibrary.Fight.FightCommands.FighterCommands.AddFighterCommands
 
         private IMediatorCommandResponse AddMonsterToFight(Monster monster)
         {
-            var others = _fighterProvider.Where(x => x.Name == monster.Name).ToArray();
+            var others = _fightManager.GetMonstersByName(monster.Name).ToArray();
             var i = 0;
 
             if (others.Any())
@@ -50,24 +50,24 @@ namespace DnDToolsLibrary.Fight.FightCommands.FighterCommands.AddFighterCommands
             }
 
             monster.DisplayName = $"{monster.Name} - {i}";
-            _fighterProvider.AddFighter(monster);
+            _fightManager.AddFighter(monster);
             return MediatorCommandStatii.Success;
         }
 
         private IMediatorCommandResponse AddCharacterToFights(Character character)
         {
-            if (_fighterProvider.GetFighterByDisplayName(character.DisplayName) != null)
+            if (_fightManager.GetFighterByDisplayName(character.DisplayName) != null)
             {
                 // Character already exists in fight
                 return MediatorCommandStatii.Canceled;
             }
-            _fighterProvider.AddFighter(character);
+            _fightManager.AddFighter(character);
             return MediatorCommandStatii.Success;
         }
 
         public override void Undo(AddFighterCommand genericCommand)
         {
-            _fighterProvider.Remove(genericCommand.Entity);
+            _fightManager.RemoveFighter(genericCommand.Entity);
         }
     }
 }

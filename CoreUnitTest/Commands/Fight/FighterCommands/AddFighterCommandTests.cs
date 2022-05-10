@@ -1,12 +1,10 @@
 ﻿using System.Linq;
-using System.Security.RightsManagement;
 using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.Mediator;
 using CoreUnitTest.TestFactories;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Fight;
 using DnDToolsLibrary.Fight.FightCommands.FighterCommands.AddFighterCommands;
-using DnDToolsLibrary.Fight.FightCommands.FighterCommands.RemoveFighterCommands;
 using FakeItEasy;
 using FluentAssertions;
 using NUnit.Framework;
@@ -16,7 +14,7 @@ namespace CoreUnitTest.Commands.Fight.FighterCommands
     [TestFixture]
     public class AddFighterCommandTests
     {
-        private IFighterProvider _fighterProvider;
+        private IFightManager _fightManager;
         private IMediator _mediator;
 
         private AddFighterCommand _command;
@@ -25,8 +23,8 @@ namespace CoreUnitTest.Commands.Fight.FighterCommands
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            _fighterProvider = DIContainer.GetImplementation<IFighterProvider>();
-            _fighterProvider.Clear();
+            _fightManager = DIContainer.GetImplementation<IFightManager>();
+            _fightManager.Clear();
             _mediator = DIContainer.GetImplementation<IMediator>();
             _entity = EntitiesFactory.GetWarrior();
         }
@@ -34,13 +32,13 @@ namespace CoreUnitTest.Commands.Fight.FighterCommands
         [OneTimeTearDown]
         public void OneTimeTearDown()
         {
-            _fighterProvider.Clear();
+            _fightManager.Clear();
         }
 
         [SetUp]
         public virtual void SetUp()
         {
-            _fighterProvider.Clear();
+            _fightManager.Clear();
             _command = new AddFighterCommand(_entity);
         }
 
@@ -83,7 +81,7 @@ namespace CoreUnitTest.Commands.Fight.FighterCommands
                 _mediator.Execute(_command);
 
                 // Assert
-                _fighterProvider.Should().HaveCount(1);
+                _fightManager.FighterCount.Should().Be(1);
             }
 
             [Test]
@@ -103,12 +101,12 @@ namespace CoreUnitTest.Commands.Fight.FighterCommands
             {
                 // Arrange 
                 _mediator.Execute(_command);
-                var previousCount = _fighterProvider.Count;
+                var previousCount = _fightManager.FighterCount;
                 // Act
 
                 _mediator.Execute(_command);
                 // Assert
-                _fighterProvider.Count.Should().Be(previousCount);
+                _fightManager.FighterCount.Should().Be(previousCount);
             }
 
             [Test]
@@ -141,7 +139,7 @@ namespace CoreUnitTest.Commands.Fight.FighterCommands
                 // Act
                 _mediator.Execute(_command);
                 // Assert
-                _fighterProvider.Should().Contain(x => x.Name == _entity.Name);
+                _fightManager.GetAllFighters().Should().Contain(x => x.Name == _entity.Name);
             }
 
             [Test]
@@ -151,7 +149,7 @@ namespace CoreUnitTest.Commands.Fight.FighterCommands
                 // Act
                 _mediator.Execute(_command);
                 // Assert
-                _fighterProvider.First().DisplayName.Should().EndWith("- 0");
+                _fightManager.First().DisplayName.Should().EndWith("- 0");
             }
 
             [Test]
@@ -162,7 +160,7 @@ namespace CoreUnitTest.Commands.Fight.FighterCommands
                 // Act
                 _mediator.Execute(_command);
                 // Assert
-                _fighterProvider.Should().HaveCount(2);
+                _fightManager.FighterCount.Should().Be(2);
             }
 
             [Test]
@@ -174,7 +172,7 @@ namespace CoreUnitTest.Commands.Fight.FighterCommands
                 // Act
                 _mediator.Execute(_command);
                 // Assert
-                _fighterProvider.Should().Contain(x => x.DisplayName.EndsWith("- 1"));
+                _fightManager.GetAllFighters().Should().Contain(x => x.DisplayName.EndsWith("- 1"));
             }
 
             [Test]
@@ -185,11 +183,11 @@ namespace CoreUnitTest.Commands.Fight.FighterCommands
                 _mediator.Execute(_command);
                 _mediator.Execute(_command);
                 _mediator.Execute(_command);
-                _fighterProvider.Remove(_fighterProvider.First(x => x.DisplayName.Contains("1")));
+                _fightManager.RemoveFighter(_fightManager.GetAllFighters().First(x => x.DisplayName.Contains("1")));
                 // Act
                 _mediator.Execute(_command);
                 // Assert
-                _fighterProvider.Should().Contain(x => x.DisplayName.EndsWith("- 1"));
+                _fightManager.GetAllFighters().Should().Contain(x => x.DisplayName.EndsWith("- 1"));
             }
 
             [Test]
@@ -215,7 +213,7 @@ namespace CoreUnitTest.Commands.Fight.FighterCommands
                 // Act
                 _mediator.Undo(_command);
                 // Assert
-                _fighterProvider.Should().BeEmpty();
+                _fightManager.FighterCount.Should().Be(0);
             }
         }
     }

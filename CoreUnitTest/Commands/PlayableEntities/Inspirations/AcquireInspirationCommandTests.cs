@@ -2,7 +2,6 @@
 using BaseToolsLibrary.Mediator;
 using CoreUnitTest.TestFactories;
 using DnDToolsLibrary.Entities;
-using DnDToolsLibrary.Entities.EntitiesCommands.InspirationCommands;
 using DnDToolsLibrary.Entities.EntitiesCommands.InspirationCommands.AcquireInspiration;
 using DnDToolsLibrary.Fight;
 using FluentAssertions;
@@ -16,15 +15,15 @@ namespace CoreUnitTest.Commands.PlayableEntities.Inspirations
         private PlayableEntity _monster;
         private PlayableEntity _character;
 
-        private IFighterProvider _fighterProvider;
+        private IFightManager _fightManager;
         private IMediator _mediator;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
             _mediator = DIContainer.GetImplementation<IMediator>();
-            _fighterProvider = DIContainer.GetImplementation<IFighterProvider>();
-            _fighterProvider.Clear();
+            _fightManager = DIContainer.GetImplementation<IFightManager>();
+            _fightManager.Clear();
         }
 
         [SetUp]
@@ -33,14 +32,14 @@ namespace CoreUnitTest.Commands.PlayableEntities.Inspirations
             _character = EntitiesFactory.GetWarrior();
             _monster = EntitiesFactory.Goblin;
 
-            _fighterProvider.AddOrUpdateFighter(_character);
-            _fighterProvider.AddOrUpdateFighter(_monster);
+            _fightManager.AddOrUpdateFighter(_character);
+            _fightManager.AddOrUpdateFighter(_monster);
         }
 
         [TearDown]
         public void TearDown()
         {
-            _fighterProvider.Clear();
+            _fightManager.Clear();
         }
 
         [Test]

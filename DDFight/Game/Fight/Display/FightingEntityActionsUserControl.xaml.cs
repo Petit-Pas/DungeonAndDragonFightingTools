@@ -2,9 +2,10 @@
 using DDFight.Tools;
 using DnDToolsLibrary.Entities;
 using System;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using BaseToolsLibrary.DependencyInjection;
+using DnDToolsLibrary.Fight;
 
 namespace DDFight.Controlers.Fight
 {
@@ -13,6 +14,9 @@ namespace DDFight.Controlers.Fight
     /// </summary>
     public partial class FightingEntityActionsUserControl : UserControl, IEventUnregisterable
     {
+        private static readonly Lazy<IFightManager> _lazyFightManager = new(DIContainer.GetImplementation<IFightManager>());
+        protected static IFightManager _fightManager => _lazyFightManager.Value;
+
 
         public PlayableEntity data_context
         {
@@ -36,7 +40,7 @@ namespace DDFight.Controlers.Fight
 
         private void FighterActionUserControl_LayoutUpdated(object sender, EventArgs e)
         {
-            DataContext = GlobalContext.Context.FightContext.FightersList.ElementAt(0);
+            DataContext = _fightManager.First();
             this.LayoutUpdated -= FighterActionUserControl_LayoutUpdated;
         }
 

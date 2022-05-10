@@ -24,13 +24,15 @@ namespace CoreUnitTest.Commands.Attacks.Spells
     public class CastNonAttackSpellCommandTest
     {
         private IMediator _mediator;
+        private IFightManager _fightManager;
         private PlayableEntity _character;
 
         [OneTimeSetUp]
         public void MainSetup()
         {
             _mediator = DIContainer.GetImplementation<IMediator>();
-            _character = FightersList.Instance[0];
+            _fightManager = DIContainer.GetImplementation<IFightManager>();
+            _character = _fightManager.First();
         }
 
         [OneTimeTearDown]
@@ -43,38 +45,40 @@ namespace CoreUnitTest.Commands.Attacks.Spells
         [SetUp]
         public void Setup()
         {
-            PlayableEntity entity = EntitiesFactory.GetWarrior();
+            var entity = EntitiesFactory.GetWarrior();
             entity.DisplayName = "Warrior1";
-            FightersList.Instance.AddOrUpdateFighter(entity);
+            _fightManager.AddOrUpdateFighter(entity);
             entity = EntitiesFactory.GetWizard();
             entity.DisplayName = "Wizard1";
-            FightersList.Instance.AddOrUpdateFighter(entity);
+            _fightManager.AddOrUpdateFighter(entity);
         }
 
         [Test]
         public void GenerateCorrectDamageInnerCommands()
         {
-            CastNonAttackSpellCommand command = new CastNonAttackSpellCommand(_character.DisplayName, new Mock<Spell>().Object, 1, new List<string>() { "Warrior1", "Wizard1" });
-            NonAttackSpellResults results = new NonAttackSpellResults();
-            results.Add(new NewNonAttackSpellResult() { 
-                HitDamage = new DamageResultList()
-                {
-                    new DamageResult("1d1+9", DamageTypeEnum.Fire),
-                    new DamageResult("1d1+9", DamageTypeEnum.Cold),
-                },
-                TargetName = "Warrior1",
-                CasterName = "Warrior1",
-            });
-            results.Add(new NewNonAttackSpellResult()
+            CastNonAttackSpellCommand command = new CastNonAttackSpellCommand(_character.DisplayName, new Mock<Spell>().Object, 1, new List<string>{ "Warrior1", "Wizard1" });
+            NonAttackSpellResults results = new NonAttackSpellResults
             {
-                HitDamage = new DamageResultList()
-                {
-                    new DamageResult("1d1+9", DamageTypeEnum.Fire),
-                    new DamageResult("1d1+9", DamageTypeEnum.Cold),
+                new () { 
+                    HitDamage = new DamageResultList()
+                    {
+                        new ("1d1+9", DamageTypeEnum.Fire),
+                        new ("1d1+9", DamageTypeEnum.Cold),
+                    },
+                    TargetName = "Warrior1",
+                    CasterName = "Warrior1",
                 },
-                TargetName = "Wizard1",
-                CasterName = "Warrior1",
-            });
+                new ()
+                {
+                    HitDamage = new DamageResultList()
+                    {
+                        new ("1d1+9", DamageTypeEnum.Fire),
+                        new ("1d1+9", DamageTypeEnum.Cold),
+                    },
+                    TargetName = "Wizard1",
+                    CasterName = "Warrior1",
+                }
+            };
             results.ForEach(x => x.HitDamage.ToList().ForEach(x => x.Damage.Roll()));
             
             ValidableResponse<NonAttackSpellResults> response = new ValidableResponse<NonAttackSpellResults>(true, results);
@@ -98,8 +102,8 @@ namespace CoreUnitTest.Commands.Attacks.Spells
         {
             CastNonAttackSpellCommand command = new CastNonAttackSpellCommand(_character.DisplayName, new Mock<Spell>().Object, 1, new List<string>() { "Warrior1", "Wizard1" });
             NonAttackSpellResults results = new NonAttackSpellResults();
-            PlayableEntity warrior = FightersList.Instance.GetFighterByDisplayName("Warrior1");
-            PlayableEntity wizard = FightersList.Instance.GetFighterByDisplayName("Wizard1");
+            PlayableEntity warrior = _fightManager.GetFighterByDisplayName("Warrior1");
+            PlayableEntity wizard = _fightManager.GetFighterByDisplayName("Wizard1");
             results.Add(new NewNonAttackSpellResult()
             {
                 TargetName = "Warrior1",
@@ -122,7 +126,7 @@ namespace CoreUnitTest.Commands.Attacks.Spells
             _mediator.Execute(command);
 
             TryApplyStatusCommand statusCommand = command.PopLastInnerCommand() as TryApplyStatusCommand;
-            Assert.IsTrue(SavingThrowFactory.Successful(FightersList.Instance.GetFighterByDisplayName("Warrior1")).IsEquivalentTo(statusCommand.Saving));
+            Assert.IsTrue(SavingThrowFactory.Successful(_fightManager.GetFighterByDisplayName("Warrior1")).IsEquivalentTo(statusCommand.Saving));
             Assert.IsTrue(results[0].AppliedStatusList[0].IsEquivalentTo(statusCommand.Status));
         }
 
@@ -131,9 +135,9 @@ namespace CoreUnitTest.Commands.Attacks.Spells
         {
             CastNonAttackSpellCommand command = new CastNonAttackSpellCommand(_character.DisplayName, new Mock<Spell>().Object, 1, new List<string>() { "Warrior1", "Wizard1" });
             NonAttackSpellResults results = new NonAttackSpellResults();
-            SavingThrow failingSaving = SavingThrowFactory.Failed(FightersList.Instance.GetFighterByDisplayName("Warrior1"));
-            PlayableEntity warrior = FightersList.Instance.GetFighterByDisplayName("Warrior1");
-            PlayableEntity wizard = FightersList.Instance.GetFighterByDisplayName("Wizard1");
+            SavingThrow failingSaving = SavingThrowFactory.Failed(_fightManager.GetFighterByDisplayName("Warrior1"));
+            PlayableEntity warrior = _fightManager.GetFighterByDisplayName("Warrior1");
+            PlayableEntity wizard = _fightManager.GetFighterByDisplayName("Wizard1");
 
             results.Add(new NewNonAttackSpellResult()
             {

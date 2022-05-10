@@ -1,4 +1,5 @@
-﻿using BaseToolsLibrary.DependencyInjection;
+﻿using System;
+using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.IO;
 using BaseToolsLibrary.Memory;
 using DDFight.Game;
@@ -9,8 +10,8 @@ using DnDToolsLibrary.Attacks.Spells;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Memory;
 using DnDToolsLibrary.Status;
-using System.Linq;
 using System.Windows;
+using DnDToolsLibrary.Fight;
 using TempExtensionsOnHitStatus;
 using WpfDnDCommandHandlers.AttackQueries.DamageQueries.DamageResultListQueries;
 using WpfToolsLibrary.Extensions;
@@ -33,6 +34,9 @@ namespace DDFight
     /// </summary>
     public partial class MainWindow : Window
     {
+        private static readonly Lazy<IFightManager> _lazyFightManager = new(DIContainer.GetImplementation<IFightManager>());
+        protected static IFightManager _fightManager => _lazyFightManager.Value;
+
         private ICustomConsole console;
 
         public MainWindow()
@@ -61,7 +65,7 @@ namespace DDFight
 
             console = DIContainer.GetImplementation<ICustomConsole>();
 
-            GlobalContext.Context.FightContext.FightersList.CollectionChanged += FightingCharacters_CollectionChanged;
+            _fightManager.GetObservableCollection().CollectionChanged += FightingCharacters_CollectionChanged;
 
             DataContext = GlobalContext.Context;
 
@@ -77,19 +81,19 @@ namespace DDFight
 
         private void FightingCharacters_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            FightButton.IsEnabled = GlobalContext.Context.FightContext.FightersList.Count >= 2;
+            FightButton.IsEnabled = _fightManager.FighterCount >= 2;
         }
 
         private void FightButton_Click(object sender, RoutedEventArgs e)
         {
             RollInitiativeWindow window = new RollInitiativeWindow();
-            window.DataContext = GlobalContext.Context.FightContext.FightersList;
+            window.DataContext = _fightManager.GetAllFighters();
 
             window.ShowCentered();
 
             if (window.Cancelled == false)
             {
-                GlobalContext.Context.FightContext.FightersList.SetTurnOrders();
+                _fightManager.SetTurnOrders();
 
                 console.Reset();
 
@@ -99,7 +103,7 @@ namespace DDFight
 
                 // Clean up after a Fight
                 fightWindow.UnregisterAllChildren();
-                foreach (Character character in GlobalContext.Context.FightContext.FightersList.OfType<Character>())
+                foreach (Character character in _fightManager.GetAllCharacters())
                 {
                     character.GetOutOfFight();
                 }

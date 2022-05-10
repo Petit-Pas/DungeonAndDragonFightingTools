@@ -39,14 +39,14 @@ namespace DnDToolsLibrary.Attacks.Spells
         }
         private int _level = 0;
 
-        private static IFighterProvider fighterProvider = DIContainer.GetImplementation<IFighterProvider>();
+        private static IFightManager _fightManager = DIContainer.GetImplementation<IFightManager>();
 
         [XmlIgnore]
         public PlayableEntity Caster
         {
             get
             {
-                return fighterProvider.GetFighterByDisplayName(CasterName);
+                return _fightManager.GetFighterByDisplayName(CasterName);
             }
             set
             {
@@ -78,7 +78,7 @@ namespace DnDToolsLibrary.Attacks.Spells
         {
             get
             {
-                return fighterProvider.GetFighterByDisplayName(TargetName);
+                return _fightManager.GetFighterByDisplayName(TargetName);
             }
             set
             {

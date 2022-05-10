@@ -6,19 +6,17 @@ using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Memory;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace DnDToolsLibrary.Fight
 {
-    public class FightersList : GenericList<PlayableEntity>, IFighterProvider
+    public class FightersManager : GenericList<PlayableEntity>, IFightManager
     {
 
-        private FightersList()
+        public FightersManager()
         {
         }
-
-        public static FightersList Instance => _instance;
-        private static FightersList _instance = new ();
 
         /// <summary>
         ///     Sorts the fighters according to their displayName
@@ -89,6 +87,11 @@ namespace DnDToolsLibrary.Fight
         }
 
 
+        public PlayableEntity First()
+        {
+            return this.ElementAt(0);
+        }
+
         /// <summary>
         ///     Will sort the list in Initiative + Dexterity order, then sets the PlayableEntity.TurnOrder value
         ///     
@@ -128,6 +131,21 @@ namespace DnDToolsLibrary.Fight
 
         }
 
+        public IEnumerable<Character> GetAllCharacters()
+        {
+            return this.OfType<Character>();
+        }
+
+        public IEnumerable<PlayableEntity> GetAllMonsters()
+        {
+            return this.OfType<Monster>();
+        }
+
+        public ObservableCollection<PlayableEntity> GetObservableCollection()
+        {
+            return this;
+        }
+
         public void SetTurnOrdersMiddleFight()
         {
             foreach (var fighter in this)
@@ -145,11 +163,17 @@ namespace DnDToolsLibrary.Fight
             SetTurnOrders();
         }
 
+        public int GetCurrentTurnIndex()
+        {
+            // TODO 
+            throw new NotImplementedException();
+        }
+
         public PlayableEntity GetFighterByDisplayName(string displayName)
         {
             var result = this.FirstOrDefault(x => x.DisplayName == displayName);
             if (result == null)
-                Console.WriteLine($"WARNING: FightersList could not find a fighter with name {displayName}");
+                Console.WriteLine($"WARNING: FightersManager could not find a fighter with name {displayName}");
             return result;
         }
 
@@ -176,5 +200,38 @@ namespace DnDToolsLibrary.Fight
                 RemoveElement(inPlace);
             AddElementSilent(fighter);
         }
+
+        public bool RemoveFighter(PlayableEntity fighter)
+        {
+            return Remove(fighter);
+        }
+
+        public bool RemoveFighter(string displayName)
+        {
+            return RemoveFighter(this.FirstOrDefault(x => x.DisplayName == displayName));
+        }
+
+        public int FighterCount => Count;
+
+        public PlayableEntity GetFighterByIndex(int fightContextTurnIndex)
+        {
+            if (fightContextTurnIndex < Count)
+            {
+                return this.ElementAt(fightContextTurnIndex);
+            }
+
+            return null;
+        }
+
+        public IEnumerable<PlayableEntity> GetAllFighters()
+        {
+            return this;
+        }
+
+        public IEnumerable<PlayableEntity> GetMonstersByName(string name)
+        {
+            return this.GetAllMonsters().Where(x => x.Name == name);
+        }
+
     }
 }

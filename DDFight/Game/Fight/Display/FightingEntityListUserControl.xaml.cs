@@ -3,6 +3,8 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using BaseToolsLibrary.DependencyInjection;
+using DnDToolsLibrary.Fight;
 using WpfToolsLibrary.Extensions;
 
 namespace DDFight.Controlers.Fight
@@ -12,12 +14,15 @@ namespace DDFight.Controlers.Fight
     /// </summary>
     public partial class FightingEntityListUserControl : UserControl, IEventUnregisterable
     {
+        private static readonly Lazy<IFightManager> _lazyFightManager = new(DIContainer.GetImplementation<IFightManager>());
+        protected static IFightManager _fightManager => _lazyFightManager.Value;
+
         public FightingEntityListUserControl()
         {
             InitializeComponent();
             Loaded += FightingCharacterListUserControl_Loaded;
             FightersControl.LayoutUpdated += FightersControl_LayoutUpdated;
-            GlobalContext.Context.FightContext.FightersList.PropertyChanged += FightersList_PropertyChanged;
+            _fightManager.PropertyChanged += FightersList_PropertyChanged;
         }
 
         private void FightersList_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -39,7 +44,7 @@ namespace DDFight.Controlers.Fight
 
         private void FightingCharacterListUserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            FightersControl.ItemsSource = GlobalContext.Context.FightContext.FightersList;
+            FightersControl.ItemsSource = _fightManager.GetObservableCollection();
         }
 
         public void UnregisterToAll()

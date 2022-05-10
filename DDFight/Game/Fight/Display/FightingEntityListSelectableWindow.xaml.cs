@@ -1,10 +1,13 @@
-﻿using DDFight.Windows;
+﻿using System;
+using DDFight.Windows;
 using DnDToolsLibrary.Entities;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
+using BaseToolsLibrary.DependencyInjection;
+using DnDToolsLibrary.Fight;
 using WpfToolsLibrary.Extensions;
 
 namespace DDFight.Game.Fight.Display
@@ -14,6 +17,8 @@ namespace DDFight.Game.Fight.Display
     /// </summary>
     public partial class FightingEntityListSelectableWindow : Window, INotifyPropertyChanged
     {
+        private static readonly Lazy<IFightManager> _lazyFightManager = new(DIContainer.GetImplementation<IFightManager>());
+        protected static IFightManager _fightManager => _lazyFightManager.Value;
 
         #region Properties
 
@@ -73,7 +78,7 @@ namespace DDFight.Game.Fight.Display
         #endregion Filter
         private void FightingEntityListSelectableWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            SelectFromListControl.ItemsSource = GlobalContext.Context.FightContext.FightersList;
+            SelectFromListControl.ItemsSource = _fightManager.GetObservableCollection();
             Selected = new ObservableCollection<PlayableEntity>();
             SelectedListControl.ItemsSource = Selected;
             Selected.CollectionChanged += Selected_CollectionChanged;

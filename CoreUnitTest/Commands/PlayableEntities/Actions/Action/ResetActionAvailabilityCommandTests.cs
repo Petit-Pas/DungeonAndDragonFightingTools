@@ -21,7 +21,7 @@ public class ResetActionAvailabilityCommandTests
     {
         _mediator = DIContainer.GetImplementation<IMediator>();
         _character = EntitiesFactory.GetWarrior();
-        FightersList.Instance.AddOrUpdateFighter(_character);
+        DIContainer.GetImplementation<IFightManager>().AddOrUpdateFighter(_character);
     }
 
     [Test]

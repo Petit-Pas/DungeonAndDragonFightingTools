@@ -15,7 +15,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.Status
     public class AddStatusCommandTests
     {
         private IMediator _mediator;
-        private IStatusProvider _statusProvider;
+        private IFightManager _fightManager; private IStatusProvider _statusProvider;
         private PlayableEntity _character;
 
         // occurs once before every test in this class
@@ -23,9 +23,9 @@ namespace CoreUnitTest.Commands.PlayableEntities.Status
         public void MainSetup()
         {
             _mediator = DIContainer.GetImplementation<IMediator>();
-            _statusProvider = DIContainer.GetImplementation<IStatusProvider>();
+            _fightManager = DIContainer.GetImplementation<IFightManager>(); _statusProvider = DIContainer.GetImplementation<IStatusProvider>();
             _character = EntitiesFactory.GetWarrior();
-            FightersList.Instance.AddOrUpdateFighter(_character);
+            _fightManager.AddOrUpdateFighter(_character);
 
         }
 

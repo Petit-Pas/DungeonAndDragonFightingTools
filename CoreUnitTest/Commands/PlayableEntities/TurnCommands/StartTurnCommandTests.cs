@@ -25,6 +25,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.TurnCommands
     public class StartTurnCommandTests
     {
         private IMediator _mediator;
+        private IFightManager _fightManager;
         private PlayableEntity _character;
         private PlayableEntity _character2;
         private StartTurnCommand _command;
@@ -33,7 +34,8 @@ namespace CoreUnitTest.Commands.PlayableEntities.TurnCommands
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            FightersList.Instance.Clear();
+            _fightManager = DIContainer.GetImplementation<IFightManager>();
+            _fightManager.Clear();
             _mediator = DIContainer.GetImplementation<IMediator>();
             _statusProvider = DIContainer.GetImplementation<IStatusProvider>();
             _statusProvider.Clear();
@@ -49,8 +51,8 @@ namespace CoreUnitTest.Commands.PlayableEntities.TurnCommands
             _character = EntitiesFactory.GetWarrior();
             _character2 = EntitiesFactory.GetWizard();
 
-            FightersList.Instance.AddOrUpdateFighter(_character);
-            FightersList.Instance.AddOrUpdateFighter(_character2);
+            _fightManager.AddOrUpdateFighter(_character);
+            _fightManager.AddOrUpdateFighter(_character2);
 
             _command = new StartTurnCommand(_character.DisplayName);
             InitDots();

@@ -25,14 +25,14 @@ namespace DnDToolsLibrary.Attacks.HitAttacks
         }
         private string _name;
 
-        private static IFighterProvider fighterProvider = DIContainer.GetImplementation<IFighterProvider>();
+        private static IFightManager _fightManager = DIContainer.GetImplementation<IFightManager>();
 
         [XmlIgnore]
         public PlayableEntity Owner
         {
             get
             {
-                return fighterProvider.GetFighterByDisplayName(OwnerName);
+                return _fightManager.GetFighterByDisplayName(OwnerName);
             }
             set
             {
@@ -69,7 +69,7 @@ namespace DnDToolsLibrary.Attacks.HitAttacks
         {
             get
             {
-                return fighterProvider.GetFighterByDisplayName(TargetName);
+                return _fightManager.GetFighterByDisplayName(TargetName);
             }
             set
             {

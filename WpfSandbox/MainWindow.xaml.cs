@@ -90,7 +90,7 @@ namespace BindValidation
 
             Global.Loading = false;
 
-            IFighterProvider provider = DIContainer.GetImplementation<IFighterProvider>();
+            IFightManager provider = DIContainer.GetImplementation<IFightManager>();
             provider.AddFighter(new PlayableEntity() { DisplayName = "Roger" });
             provider.AddFighter(new PlayableEntity() { DisplayName = "Pierre" });
             provider.AddFighter(new PlayableEntity() { DisplayName = "Paul" });
@@ -179,7 +179,7 @@ namespace BindValidation
                 Name = "Target"
             };
 
-            IFighterProvider provider = DIContainer.GetImplementation<IFighterProvider>();
+            IFightManager provider = DIContainer.GetImplementation<IFightManager>();
             provider.AddFighter(target);
             provider.AddFighter(caster);
 

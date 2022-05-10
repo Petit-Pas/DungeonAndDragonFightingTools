@@ -11,7 +11,7 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
 {
     public class CastNonAttackSpellHandler : SuperCommandHandlerBase<CastNonAttackSpellCommand, IMediatorCommandResponse>
     {
-        private static Lazy<IFighterProvider> _fighterProvider = new Lazy<IFighterProvider>(() => DIContainer.GetImplementation<IFighterProvider>());
+        private static Lazy<IFightManager> _fighterProvider = new Lazy<IFightManager>(() => DIContainer.GetImplementation<IFightManager>());
 
         public override IMediatorCommandResponse Execute(CastNonAttackSpellCommand command)
         {

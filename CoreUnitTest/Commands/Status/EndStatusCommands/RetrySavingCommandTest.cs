@@ -20,7 +20,7 @@ namespace CoreUnitTest.Commands.Status.EndStatusCommands
     {
         private IMediator _mediator;
         private IStatusProvider _statusProvider;
-        private IFighterProvider _fighterProvider;
+        private IFightManager _fightManager;
 
         private IMediatorHandler _savingQueryHandler;
         private bool _queryCanceled;
@@ -36,21 +36,21 @@ namespace CoreUnitTest.Commands.Status.EndStatusCommands
         {
             _statusProvider = DIContainer.GetImplementation<IStatusProvider>();
             _mediator = DIContainer.GetImplementation<IMediator>();
-            _fighterProvider = DIContainer.GetImplementation<IFighterProvider>();
+            _fightManager = DIContainer.GetImplementation<IFightManager>();
 
             _savingQueryHandler = A.Fake<IMediatorHandler>();
             _queryCanceled = false;
-            _success = SavingThrowFactory.Successful(_fighterProvider.First());
-            _failure = SavingThrowFactory.Failed(_fighterProvider.First());
+            _success = SavingThrowFactory.Successful(_fightManager.GetFighterByIndex(0));
+            _failure = SavingThrowFactory.Failed(_fightManager.First());
             _savingToReturn = _success;
             A.CallTo(() => _savingQueryHandler.Execute(A<IMediatorCommand>._)).ReturnsLazily((x) => new ValidableResponse<SavingThrow>(!_queryCanceled, _savingToReturn));
             _mediator.RegisterHandler(_savingQueryHandler, typeof(SavingThrowQuery));
 
             _onHitStatus = StatusFactory.Slow;
-            _onHitStatus.TargetName = _fighterProvider.First().DisplayName;
-            _onHitStatus.CasterName = _fighterProvider.First().DisplayName;
+            _onHitStatus.TargetName = _fightManager.First().DisplayName;
+            _onHitStatus.CasterName = _fightManager.First().DisplayName;
             _statusReference = new StatusReference(_onHitStatus);
-            _fighterProvider.First().AffectingStatusList.Add(_statusReference);
+            _fightManager.First().AffectingStatusList.Add(_statusReference);
             _statusProvider.Add(_onHitStatus);
         }
 

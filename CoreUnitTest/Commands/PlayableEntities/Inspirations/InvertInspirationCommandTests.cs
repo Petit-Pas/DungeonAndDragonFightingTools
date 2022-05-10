@@ -2,7 +2,6 @@
 using BaseToolsLibrary.Mediator;
 using CoreUnitTest.TestFactories;
 using DnDToolsLibrary.Entities;
-using DnDToolsLibrary.Entities.EntitiesCommands.InspirationCommands;
 using DnDToolsLibrary.Entities.EntitiesCommands.InspirationCommands.AcquireInspiration;
 using DnDToolsLibrary.Entities.EntitiesCommands.InspirationCommands.InvertInspiration;
 using DnDToolsLibrary.Entities.EntitiesCommands.InspirationCommands.LoseInspiration;
@@ -17,6 +16,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.Inspirations
     {
         private Character _character;
         private IMediator _mediator;
+        private IFightManager _fightManager;
         private InvertInspirationCommand _command;
 
         [SetUp]
@@ -24,7 +24,8 @@ namespace CoreUnitTest.Commands.PlayableEntities.Inspirations
         {
             _mediator = DIContainer.GetImplementation<IMediator>();
             _character = EntitiesFactory.GetWarrior() as Character;
-            FightersList.Instance.AddOrUpdateFighter(_character);
+            _fightManager = DIContainer.GetImplementation<IFightManager>();
+            _fightManager.AddOrUpdateFighter(_character);
             _command = new InvertInspirationCommand(_character.DisplayName);
         }
 

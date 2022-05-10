@@ -19,7 +19,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.Hp
         public void MainSetup()
         {
             _mediator = DIContainer.GetImplementation<IMediator>();
-            _character = FightersList.Instance[0];
+            _character = DIContainer.GetImplementation<IFightManager>().First();
         }
 
         // occurs before each test
