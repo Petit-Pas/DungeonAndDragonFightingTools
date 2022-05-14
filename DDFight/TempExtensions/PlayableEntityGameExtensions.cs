@@ -47,27 +47,6 @@ namespace TempExtensionsPlayableEntity
 
         #region HpManagement
 
-        public static void HealTempHP(this PlayableEntity playableEntity, DiceRoll to_roll)
-        {
-            to_roll.Roll();
-            int amount = to_roll.LastResult;
-
-            console.AddEntry(playableEntity.DisplayName, fontWeightProvider.Bold);
-
-            if (playableEntity.TempHp < amount)
-            {
-                console.AddEntry(" now has ");
-                console.AddEntry($"{amount}", fontWeightProvider.Bold);
-                console.AddEntry(" temporary Hps.\n");
-                playableEntity.TempHp = amount;
-            }
-            else
-            {
-                console.AddEntry(" keeps his ");
-                console.AddEntry($"{amount}", fontWeightProvider.Bold);
-                console.AddEntry(" temporary Hps.\n");
-            }
-        }
 
         public static void Heal(this PlayableEntity playableEntity, DiceRoll to_roll)
         {

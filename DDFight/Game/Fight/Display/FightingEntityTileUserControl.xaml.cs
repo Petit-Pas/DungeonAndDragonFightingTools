@@ -22,6 +22,7 @@ using DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.ActionCommands;
 using DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.BonusActionCommands;
 using DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.ReactionCommands;
 using DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.InvertConcentration;
+using DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.TempHeal;
 using DnDToolsLibrary.Entities.EntitiesCommands.InspirationCommands.InvertInspiration;
 using DnDToolsLibrary.Fight;
 using DnDToolsLibrary.Fight.FightCommands.FighterCommands.RemoveFighterCommands;
@@ -153,7 +154,9 @@ namespace DDFight.Controlers.Fight
             window.ShowCentered();
             if (context.Validated == true)
             {
-                data_context.HealTempHP(context.DiceRoll);
+                context.DiceRoll.Roll();
+                var tempHealCommand = new TempHealCommand(data_context, context.DiceRoll.LastResult);
+                _mediator.Execute(tempHealCommand);
             }
         }
 
