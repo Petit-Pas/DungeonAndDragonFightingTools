@@ -1,7 +1,12 @@
-﻿using DnDToolsLibrary.Attacks.Damage;
+﻿using System;
+using DnDToolsLibrary.Attacks.Damage;
 using DnDToolsLibrary.Entities;
 using System.Windows;
 using System.Windows.Input;
+using BaseToolsLibrary.DependencyInjection;
+using BaseToolsLibrary.IO;
+using BaseToolsLibrary.Mediator;
+using DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageResultList;
 using TempExtensionsPlayableEntity;
 using WpfToolsLibrary.Extensions;
 
@@ -12,6 +17,8 @@ namespace DDFight.Windows.FightWindows
     /// </summary>
     public partial class TakeDamageWindow : Window
     {
+        private static Lazy<IMediator> _lazyMediator = new (DIContainer.GetImplementation<IMediator>());
+        private static IMediator _mediator => _lazyMediator.Value;
 
         private PlayableEntity data_context {
             get => (PlayableEntity)DataContext;
@@ -41,12 +48,14 @@ namespace DDFight.Windows.FightWindows
 
             if (damage_list.Count != 0)
             {
-                DamageResultList dmgs = damage_list.GetResultList();
-                foreach (DamageResult dmg in dmgs)
+                var dmgList = damage_list.GetResultList();
+                foreach (var dmg in dmgList)
                 {
                     dmg.Damage.Roll();
                 }
-                data_context.TakeHitDamage(dmgs);
+
+                var damageResultListCommand = new ApplyDamageResultListCommand(data_context, dmgList);
+                _mediator.Execute(damageResultListCommand);
             }
             this.Close();
         }
