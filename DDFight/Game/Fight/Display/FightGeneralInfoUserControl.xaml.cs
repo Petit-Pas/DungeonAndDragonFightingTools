@@ -41,6 +41,7 @@ namespace DDFight.Game.Fight.Display
 
         private void GeneralInfoFightUserControl_Loaded(object sender, RoutedEventArgs e)
         {
+            DataContext = _turnManager;
             _turnManager.TurnStarted += FightContext_NewTurnStarted;
             SetCharactersTurnName();
         }

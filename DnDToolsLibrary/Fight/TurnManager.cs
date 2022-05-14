@@ -1,6 +1,8 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using BaseToolsLibrary.DependencyInjection;
 using DnDToolsLibrary.Dice;
 using DnDToolsLibrary.Entities;
@@ -8,7 +10,7 @@ using DnDToolsLibrary.Fight.Events;
 
 namespace DnDToolsLibrary.Fight
 {
-    public class TurnManager : ITurnManager
+    public class TurnManager : ITurnManager, INotifyPropertyChanged
     {
         private Lazy<IFightersProvider> _lazyFightersProvider = new(DIContainer.GetImplementation<IFightersProvider>());
         private IFightersProvider _fightersProvider => _lazyFightersProvider.Value;
@@ -100,7 +102,11 @@ namespace DnDToolsLibrary.Fight
             get => _roundCount;
             set
             {
-                _roundCount = value;
+                if (_roundCount != value)
+                {
+                    _roundCount = value;
+                    NotifyPropertyChanged();
+                }
             }
         }
 
@@ -111,7 +117,11 @@ namespace DnDToolsLibrary.Fight
             get => _turnIndex;
             set
             {
-                _turnIndex = value;
+                if (_turnIndex != value)
+                {
+                    _turnIndex = value;
+                    NotifyPropertyChanged();
+                }
             }
         }
         private int _turnIndex = -1;
@@ -129,5 +139,23 @@ namespace DnDToolsLibrary.Fight
         {
             TurnEnded?.Invoke(this, args);
         }
+
+        #region INotifyPropertyChanged
+
+        /// <summary>
+        ///     PropertyChanged EventHandler
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
+        protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        #endregion
     }
 }

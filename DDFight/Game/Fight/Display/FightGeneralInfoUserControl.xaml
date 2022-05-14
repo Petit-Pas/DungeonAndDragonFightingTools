@@ -44,7 +44,6 @@
                 <TextBlock
                     Grid.Column="0" Grid.Row="0"
                     Style="{StaticResource ResourceKey=TurnInfo}"
-                    DataContext="{Binding FightContext}"
                     Text="{Binding RoundCount, StringFormat='{}Round n°: {0}'}"
                     >
                 </TextBlock>
