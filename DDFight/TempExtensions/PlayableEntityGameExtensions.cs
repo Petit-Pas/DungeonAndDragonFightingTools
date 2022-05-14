@@ -17,22 +17,6 @@ namespace TempExtensionsPlayableEntity
         private static IFontColorProvider fontColorProvider = DIContainer.GetImplementation<IFontColorProvider>();
 
         #region Turn
-        /// <summary>
-        ///     Functions to ask the PlayableEntity to setup eveyrthing for a new turn
-        ///     Will raise the TurnStarted event
-        /// </summary>
-        public static void StartNewTurn(this PlayableEntity playableEntity)
-        {
-            playableEntity.HasAction = true;
-            playableEntity.HasReaction = true;
-            playableEntity.HasBonusAction = true;
-
-            console.NewParagraph();
-            console.AddEntry(playableEntity.DisplayName, fontWeightProvider.Bold);
-            console.AddEntry(" starts its turn!\r\n", fontWeightProvider.Normal);
-
-            playableEntity.InvokeTurnStarted(new TurnStartedEventArgs(playableEntity.DisplayName));
-        }
 
         /// <summary>
         ///     Function called to end the Turn of the PlayableEntity
