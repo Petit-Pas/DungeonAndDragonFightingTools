@@ -17,6 +17,7 @@ namespace DDFight
             // Mediator
             DIContainer.RegisterSingleton<IMediator, BaseMediator>(new BaseMediator(mediator_param));
 
+            // this avoids cyclic dependency error
             var _ = new FightersProvider();
 
             DIContainer.RegisterSingleton<IFightersProvider, FightersProvider>(_);

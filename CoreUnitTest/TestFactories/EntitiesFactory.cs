@@ -64,7 +64,7 @@ namespace CoreUnitTest.TestFactories
             CA = 12,
             Characteristics = new CharacteristicList(4, 2, 2, 0, -1, 1),
             DamageAffinities = DamageTypeAffinityList.Default(),
-            DisplayName = "Goblin",
+            DisplayName = "Goblin - 1",
             HitAttacks = new HitAttackTemplateList() {
                 HitAttackTemplateFactory.LongSword,
             },

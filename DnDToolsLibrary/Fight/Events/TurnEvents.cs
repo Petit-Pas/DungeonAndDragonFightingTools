@@ -1,10 +1,11 @@
 ﻿namespace DnDToolsLibrary.Fight.Events
 {
-    public delegate void StartNewTurnEventHandler(object sender, StartNewTurnEventArgs args);
+    // this event is dedicated to any UI that should catch this event => it should not be used to do any domain logic, only UI
+    public delegate void TurnStarted(object sender, TurnStartedEventArgs args);
 
-    public struct StartNewTurnEventArgs
+    public struct TurnStartedEventArgs
     {
-        public StartNewTurnEventArgs(string entityName)
+        public TurnStartedEventArgs(string entityName)
         {
             EntityName = entityName;
         }
@@ -15,7 +16,8 @@
         public string EntityName { get; }
     }
 
-    public delegate void EndTurnEventHandler(object sender, TurnEndedEventArgs args);
+    // this event is dedicated to any UI that should catch this event => it should not be used to do any domain logic, only UI
+    public delegate void TurnEnded(object sender, TurnEndedEventArgs args);
 
     public struct TurnEndedEventArgs
     {

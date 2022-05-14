@@ -1,11 +1,11 @@
-﻿using DDFight.Game.Fight.FightEvents;
-using DDFight.Tools;
+﻿using DDFight.Tools;
 using DnDToolsLibrary.Entities;
 using System;
 using System.Windows;
 using System.Windows.Controls;
 using BaseToolsLibrary.DependencyInjection;
 using DnDToolsLibrary.Fight;
+using DnDToolsLibrary.Fight.Events;
 
 namespace DDFight.Controlers.Fight
 {
@@ -15,7 +15,7 @@ namespace DDFight.Controlers.Fight
     public partial class FightingEntityActionsUserControl : UserControl, IEventUnregisterable
     {
         private static readonly Lazy<IFightersProvider> _lazyFightManager = new(DIContainer.GetImplementation<IFightersProvider>());
-        protected static IFightersProvider FightersProvider => _lazyFightManager.Value;
+        protected static IFightersProvider _fightersProvider => _lazyFightManager.Value;
 
 
         public PlayableEntity data_context
@@ -34,24 +34,24 @@ namespace DDFight.Controlers.Fight
 
         private void FighterActionUserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            GlobalContext.Context.FightContext.CharacterSelected += FightContext_CharacterSelected;
+            _fightersProvider.FighterSelected += FightContext_CharacterSelected;
             this.LayoutUpdated += FighterActionUserControl_LayoutUpdated;
         }
 
         private void FighterActionUserControl_LayoutUpdated(object sender, EventArgs e)
         {
-            DataContext = FightersProvider.First();
+            DataContext = _fightersProvider.First();
             this.LayoutUpdated -= FighterActionUserControl_LayoutUpdated;
         }
 
-        private void FightContext_CharacterSelected(object sender, SelectedCharacterEventArgs args)
+        private void FightContext_CharacterSelected(object sender, FighterSelectedEventArgs args)
         {
-            DataContext = args.Character;
+            DataContext = _fightersProvider.GetFighterByDisplayName(args.EntityName);
         }
 
         public void UnregisterToAll()
         {
-            GlobalContext.Context.FightContext.CharacterSelected -= FightContext_CharacterSelected;
+            _fightersProvider.FighterSelected -= FightContext_CharacterSelected;
         }
 
     }

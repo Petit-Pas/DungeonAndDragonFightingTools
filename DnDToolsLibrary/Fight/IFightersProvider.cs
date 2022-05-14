@@ -3,11 +3,15 @@ using DnDToolsLibrary.Entities;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using DnDToolsLibrary.Fight.Events;
 
 namespace DnDToolsLibrary.Fight
 {
     public interface IFightersProvider : INotifyPropertyChanged
     {
+        void InvokeFighterSelected(FighterSelectedEventArgs args);
+        event FighterSelected FighterSelected;
+
         List<string> GetFightersNames();
         PlayableEntity GetFighterByDisplayName(string name);
         int CountWithName(string name);
@@ -34,5 +38,8 @@ namespace DnDToolsLibrary.Fight
         void Clear();
         PlayableEntity First();
         void OrderFighters(Comparison<PlayableEntity> initiativeSorter);
+
+        PlayableEntity CurrentlyPlaying { get; }
+        bool Contains(string entityDisplayName);
     }
 }

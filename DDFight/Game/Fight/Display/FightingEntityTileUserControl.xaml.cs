@@ -1,7 +1,6 @@
 ﻿using System;
 using BaseToolsLibrary.Extensions;
 using BaseToolsLibrary.IO;
-using DDFight.Game.Fight.FightEvents;
 using DDFight.Game.Status.Display;
 using DDFight.Tools;
 using DDFight.Windows;
@@ -24,6 +23,8 @@ using DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.BonusActionComma
 using DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.ReactionCommands;
 using DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.InvertConcentration;
 using DnDToolsLibrary.Entities.EntitiesCommands.InspirationCommands.InvertInspiration;
+using DnDToolsLibrary.Fight;
+using DnDToolsLibrary.Fight.FightCommands.FighterCommands.RemoveFighterCommands;
 using TempExtensionsPlayableEntity;
 using WpfToolsLibrary.Extensions;
 
@@ -34,8 +35,15 @@ namespace DDFight.Controlers.Fight
     /// </summary>
     public partial class FightingEntityTileUserControl : UserControl, IEventUnregisterable
     {
-        private Lazy<IMediator> _lazyMediator = new(() => DIContainer.GetImplementation<IMediator>());
-        private IMediator _mediator => _lazyMediator.Value;
+        private static Lazy<IMediator> _lazyMediator = new(DIContainer.GetImplementation<IMediator>);
+        private static IMediator _mediator => _lazyMediator.Value;
+
+        private static Lazy<ITurnManager> _lazyTurnManager = new(DIContainer.GetImplementation<ITurnManager>);
+        private static ITurnManager _turnManager => _lazyTurnManager.Value;
+
+        private static readonly Lazy<IFightersProvider> _lazyFighterProvider = new(DIContainer.GetImplementation<IFightersProvider>);
+        private static readonly IFightersProvider _fightersProvider = _lazyFighterProvider.Value;
+
 
 
         public PlayableEntity data_context
@@ -57,9 +65,9 @@ namespace DDFight.Controlers.Fight
             refresh_InspirationButton();
         }
 
-        private void FightContext_CharacterSelected(object sender, SelectedCharacterEventArgs args)
+        private void FightContext_CharacterSelected(object sender, FighterSelectedEventArgs args)
         {
-            if (args.Character == data_context)
+            if (args.EntityName == data_context.DisplayName)
             {
                 CharacterTileGroupBoxControl.BorderThickness = new Thickness(2);
             }
@@ -74,17 +82,14 @@ namespace DDFight.Controlers.Fight
             CharacterTileGroupBoxControl.Background = (Brush)Application.Current.Resources["Gray"];
         }
 
-        private void DataContextTurnStarted(object sender, StartNewTurnEventArgs args)
+        private void DataContextTurnStarted(object sender, TurnStartedEventArgs args)
         {
             CharacterTileGroupBoxControl.Background = (Brush)Application.Current.Resources["Indigo"];
         }
 
         private void MainControl_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            GlobalContext.Context.FightContext.OnSelectedCharacter(new SelectedCharacterEventArgs()
-            {
-                Character = data_context,
-            });
+            _fightersProvider.InvokeFighterSelected(new FighterSelectedEventArgs(data_context.DisplayName));
         }
 
         private void RegisterToAll()
@@ -95,7 +100,7 @@ namespace DDFight.Controlers.Fight
             {
                 data_context.TurnStarted += DataContextTurnStarted;
                 data_context.TurnEnded += Data_context_TurnEnded;
-                GlobalContext.Context.FightContext.CharacterSelected += FightContext_CharacterSelected;
+                _fightersProvider.FighterSelected += FightContext_CharacterSelected;
             }
         }
 
@@ -108,7 +113,7 @@ namespace DDFight.Controlers.Fight
                 this.UnregisterAllChildren();
                 data_context.TurnStarted -= DataContextTurnStarted;
                 data_context.TurnEnded -= Data_context_TurnEnded;
-                GlobalContext.Context.FightContext.CharacterSelected -= FightContext_CharacterSelected;
+                _fightersProvider.FighterSelected -= FightContext_CharacterSelected;
             }
         }
 
@@ -179,8 +184,8 @@ namespace DDFight.Controlers.Fight
 
         private void RemoveFromFight_Click(object sender, RoutedEventArgs e)
         {
-            AskYesNoWindow window = new AskYesNoWindow();
-            AskYesNoDataContext dc = new AskYesNoDataContext()
+            AskYesNoWindow window = new ();
+            AskYesNoDataContext dc = new ()
             {
                 Message = "Are you sure you want to remove " + data_context.DisplayName + " from the fight?",
             };
@@ -191,7 +196,8 @@ namespace DDFight.Controlers.Fight
             if (dc.Yes)
             {
                 UnregisterToAll();
-                GlobalContext.Context.FightContext.RemoveCharacterFromFight(data_context);
+                var removeFighterCommand = new RemoveFighterCommand(data_context);
+                _mediator.Execute(removeFighterCommand);
             }
         }
 

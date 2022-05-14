@@ -1,27 +1,17 @@
 ﻿using System.Xml.Serialization;
 using System;
-using BaseToolsLibrary.Tools;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Characteristics;
 using DnDToolsLibrary.Attacks.Damage;
 using DnDToolsLibrary.Dice;
-using BaseToolsLibrary.Memory;
 using BaseToolsLibrary;
 using DnDToolsLibrary.Fight;
 using BaseToolsLibrary.DependencyInjection;
 
 namespace DnDToolsLibrary.Status
 {
-    public class OnHitStatus : CustomVerboseStatus, IEventUnregisterable, IDisposable, ICopyAssignable, IEquivalentComparable<OnHitStatus>
+    public class OnHitStatus : CustomVerboseStatus, IEquivalentComparable<OnHitStatus>
     {
-        /// <summary>
-        ///     As event handling is moved to higher layers of the application, these actions allow us to inject Register and Unregister comportment from other layers
-        /// </summary>
-        ///  TODO these are going to be removed when all Mediator - Command are implemented
-        public static Action<OnHitStatus> RegisterEvents { get; set; } = null;
-        public static Action<OnHitStatus> UnregisterEvents { get; set; } = null;
-
-
         public OnHitStatus()
         {
         }
@@ -483,38 +473,16 @@ namespace DnDToolsLibrary.Status
         public OnHitStatus(OnHitStatus to_copy)
         {
             init_copy(to_copy);
-            if (RegisterEvents != null) 
-            {
-                RegisterEvents(this);
-            }
         }
 
         public override void CopyAssign(object to_copy)
         {
             if (to_copy is OnHitStatus status)
             {
-                if (UnregisterEvents != null)
-                {
-                    UnregisterEvents(this);
-                }
                 init_copy(status);
-                RegisterEvents(this);
             }
         }
 
-        ~OnHitStatus()
-        {
-        }
-
-        public void Dispose()
-        {
-            UnregisterEvents(this);
-        }
-
-        public void Unregister()
-        {
-            UnregisterEvents(this);
-        }
         #endregion ICloneable
     }
 }

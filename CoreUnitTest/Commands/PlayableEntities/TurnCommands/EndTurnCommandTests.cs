@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.Extensions;
 using BaseToolsLibrary.Mediator;
@@ -9,6 +10,7 @@ using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Entities.EntitiesCommands.StatusCommands.ApplyDotCommands;
 using DnDToolsLibrary.Entities.EntitiesCommands.TurnCommands.EndTurnCommands;
 using DnDToolsLibrary.Fight;
+using DnDToolsLibrary.Fight.Events;
 using DnDToolsLibrary.Status;
 using DnDToolsLibrary.Status.StatusCommands.EndStatusCommands.ReduceRemainingRoundsCommands;
 using DnDToolsLibrary.Status.StatusCommands.EndStatusCommands.RetrySavingCommands;
@@ -27,6 +29,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.TurnCommands
         private PlayableEntity _character2;
         private EndTurnCommand _command;
         private IStatusProvider _statusProvider;
+        private ITurnManager _turnManager;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
@@ -35,6 +38,7 @@ namespace CoreUnitTest.Commands.PlayableEntities.TurnCommands
             _fightersProvider.Clear();
             _mediator = DIContainer.GetImplementation<IMediator>();
             _statusProvider = DIContainer.GetImplementation<IStatusProvider>();
+            _turnManager = DIContainer.GetImplementation<ITurnManager>();
             _statusProvider.Clear();
 
             var savingHandler = A.Fake<IMediatorHandler>();
@@ -273,6 +277,41 @@ namespace CoreUnitTest.Commands.PlayableEntities.TurnCommands
 
             // Assert
             commandArg.Should().Be(_character.DisplayName);
+        }
+
+        [Test]
+        public void Should_Notify_End_Turn_On_Entity()
+        {
+            // this test is not at the right place
+
+            // Arrange
+            using var monitoredTurnManager = _turnManager.Monitor();
+
+            // Act
+            _mediator.Execute(_command);
+
+            // Assert
+            monitoredTurnManager.Should().Raise("TurnEnded")
+                .WithArgs<TurnEndedEventArgs>(args => args.EntityName == _command.GetEntityName());
+        }
+
+        [Test]
+        public void Should_Notify_End_Of_Turn_On_TurnManager()
+        {
+            // these 4 tests should be implemented in Start as well
+            throw new NotImplementedException();
+        }
+
+        [Test]
+        public void Undo_Should_Notify_Start_Of_Turn_On_Entity()
+        {
+
+        }
+
+        [Test]
+        public void Undo_Should_Notify_Start_Of_Turn_On_TurnManager()
+        {
+
         }
     }
 }

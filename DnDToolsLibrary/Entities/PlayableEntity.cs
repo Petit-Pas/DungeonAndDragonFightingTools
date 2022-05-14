@@ -393,13 +393,14 @@ namespace DnDToolsLibrary.Entities
         {
             TurnEnded?.Invoke(this, args);
         }
-        public void InvokeTurnStarted(StartNewTurnEventArgs args)
+        public void InvokeTurnStarted(TurnStartedEventArgs args)
         {
             TurnStarted?.Invoke(this, args);
         }
 
-        public event StartNewTurnEventHandler TurnStarted;
-        public event EndTurnEventHandler TurnEnded;
+        // these events are dedicated to any UI that should catch these event => it should not be used to do any domain logic, only UI
+        public event TurnStarted TurnStarted;
+        public event TurnEnded TurnEnded;
 
         #endregion Events_Turn
 

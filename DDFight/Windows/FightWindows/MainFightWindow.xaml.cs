@@ -6,6 +6,8 @@ using DnDToolsLibrary.Fight;
 using System;
 using System.Windows;
 using BaseToolsLibrary.DependencyInjection;
+using BaseToolsLibrary.Mediator;
+using DnDToolsLibrary.Fight.FightCommands.TurnCommands.StartNextTurnCommands;
 
 namespace DDFight.Windows.FightWindows
 {
@@ -16,6 +18,10 @@ namespace DDFight.Windows.FightWindows
     {
         private static readonly Lazy<IFightersProvider> _lazyFightManager = new(DIContainer.GetImplementation<IFightersProvider>);
         private static readonly IFightersProvider FightersProvider = _lazyFightManager.Value;
+
+        private static Lazy<IMediator> _lazyMediator = new(DIContainer.GetImplementation<IMediator>);
+        private static IMediator _mediator => _lazyMediator.Value;
+
 
         private GameDataContext data_context
         {
@@ -43,7 +49,9 @@ namespace DDFight.Windows.FightWindows
         {
             GeneralInfoControl.DataContext = GlobalContext.Context;
             setupAttacksOwner();
-            GlobalContext.Context.FightContext.NextTurn();
+
+            var startNextTurnCommand = new StartNextTurnCommand();
+            _mediator.Execute(startNextTurnCommand);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

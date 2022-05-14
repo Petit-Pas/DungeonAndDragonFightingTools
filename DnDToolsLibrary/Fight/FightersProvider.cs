@@ -1,7 +1,5 @@
 ﻿using BaseToolsLibrary.Extensions;
 using BaseToolsLibrary.IO;
-using DnDToolsLibrary.Characteristics;
-using DnDToolsLibrary.Dice;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Memory;
 using System;
@@ -9,11 +7,16 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using BaseToolsLibrary.DependencyInjection;
+using DnDToolsLibrary.Fight.Events;
 
 namespace DnDToolsLibrary.Fight
 {
     public class FightersProvider : GenericList<PlayableEntity>, IFightersProvider
     {
+
+        private static readonly Lazy<ITurnManager> _lazyTurnManager = new(DIContainer.GetImplementation<ITurnManager>);
+        private static readonly ITurnManager _turnManager = _lazyTurnManager.Value;
 
         public FightersProvider()
         {
@@ -98,6 +101,12 @@ namespace DnDToolsLibrary.Fight
             this.Sort(initiativeSorter);
         }
 
+        public PlayableEntity CurrentlyPlaying => this.ElementAt(_turnManager.TurnIndex);
+        public bool Contains(string entityDisplayName)
+        {
+            return this.Any(x => x.DisplayName == entityDisplayName);
+        }
+
         public IEnumerable<Monster> Monsters => this.OfType<Monster>();
         public IEnumerable<Character> Characters => this.OfType<Character>();
         public IEnumerable<PlayableEntity> Fighters => this;
@@ -105,14 +114,6 @@ namespace DnDToolsLibrary.Fight
         public ObservableCollection<PlayableEntity> GetObservableCollection()
         {
             return this;
-        }
-
-
-
-        public int GetCurrentTurnIndex()
-        {
-            // TODO 
-            throw new NotImplementedException();
         }
 
         public PlayableEntity GetFighterByDisplayName(string displayName)
@@ -133,6 +134,13 @@ namespace DnDToolsLibrary.Fight
             AddElementSilent(fighter);
             Sort();
         }
+
+        public void InvokeFighterSelected(FighterSelectedEventArgs args)
+        {
+            FighterSelected?.Invoke(this, args);
+        }
+
+        public event FighterSelected FighterSelected;
 
         public List<string> GetFightersNames()
         {
@@ -161,6 +169,11 @@ namespace DnDToolsLibrary.Fight
 
         public PlayableEntity GetFighterByIndex(int fightContextTurnIndex)
         {
+            if (fightContextTurnIndex == -1)
+            {
+                Trace.WriteLine("WARNING: trying to GetFighterByIndex with index -1");
+                return null;
+            }
             if (fightContextTurnIndex < Count)
             {
                 return this.ElementAt(fightContextTurnIndex);

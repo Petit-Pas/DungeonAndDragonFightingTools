@@ -7,6 +7,7 @@ using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Fight.Events;
 using DnDToolsLibrary.Status;
 using System.ComponentModel;
+using System.Diagnostics;
 using TempExtensionsPlayableEntity;
 using WpfToolsLibrary.Extensions;
 
@@ -117,7 +118,7 @@ namespace TempExtensionsOnHitStatus
                 onHitStatus.RemoveDuration();
         }
 
-        public static void CasterTurnStarted(this OnHitStatus onHitStatus, object sender, StartNewTurnEventArgs args)
+        public static void CasterTurnStarted(this OnHitStatus onHitStatus, object sender, TurnStartedEventArgs args)
         {
             onHitStatus.CheckDotDamage(true, true);
 
@@ -136,7 +137,7 @@ namespace TempExtensionsOnHitStatus
             }
         }
 
-        public static void AffectedTurnStarted(this OnHitStatus onHitStatus, object sender, StartNewTurnEventArgs args)
+        public static void AffectedTurnStarted(this OnHitStatus onHitStatus, object sender, TurnStartedEventArgs args)
         {
             bool expired = false;
 
@@ -188,7 +189,6 @@ namespace TempExtensionsOnHitStatus
             console.AddEntry(".\r\n");
 
             onHitStatus.Target.CustomVerboseStatusList.RemoveElement(onHitStatus);
-            onHitStatus.Unregister();
         }
 
 
@@ -202,40 +202,7 @@ namespace TempExtensionsOnHitStatus
         /// <param name="multiple_application"> tells that a status will be applied more than once ==> to avoid the removal of concentration on every new affected ==> false for the first call, true for the other ones </param>
         public static void Apply(this OnHitStatus onHitStatus, PlayableEntity caster, PlayableEntity target, bool application_success = true, bool multiple_application = false)
         {
-            // the applied status is a copy
-            OnHitStatus applied = (OnHitStatus)onHitStatus.Clone();
-
-            if (applied.OnApplyDamageList.Count != 0)
-            {
-                DamageResultList onApplyDamageList = onHitStatus.OnApplyDamageList.GetResultList();
-                foreach (DamageResult dmg in onApplyDamageList)
-                    dmg.LastSavingWasSuccesfull = !application_success;
-                DamageResultListRollableWindow window = new DamageResultListRollableWindow() { DataContext=onApplyDamageList };
-                window.ShowCentered();
-                if (window.Validated)
-                    target.TakeHitDamage(onApplyDamageList);
-            }
-
-            if (application_success)
-            {
-                console.AddEntry($"{caster.DisplayName}", fontWeightProvider.Bold);
-                console.AddEntry(" applies ");
-                console.AddEntry($"{onHitStatus.Header}", fontWeightProvider.Bold);
-                console.AddEntry(" on ");
-                console.AddEntry($"{target.DisplayName}\r\n", fontWeightProvider.Bold);
-
-                applied.Caster = caster;
-                applied.Target = target;
-                target.CustomVerboseStatusList.AddElementSilent(applied);
-                OnHitStatus.RegisterEvents(applied);
-                
-                if (applied.EndsOnCasterLossOfConcentration)
-                {
-                    if (caster.IsFocused == true && multiple_application == false)
-                        caster.IsFocused = false;
-                    caster.IsFocused = true;
-                }
-            }
+            Trace.WriteLine("WARNING OnHitStatusGameExtensions.Apply(OnHitStatus) is still being called");
         }
 
         /// <summary>
@@ -247,7 +214,7 @@ namespace TempExtensionsOnHitStatus
         {
             if (onHitStatus.HasApplyCondition)
             {
-                OnHitStatusApplyWindow window = new OnHitStatusApplyWindow(caster, target);
+                var window = new OnHitStatusApplyWindow(caster, target);
                 window.DataContext = onHitStatus;
                 window.ShowCentered();
             }

@@ -17,18 +17,18 @@ namespace BaseToolsLibrary.Mediator
             if (_handlerCommandBinding.ContainsKey(command))
             {
                 if (_handlerCommandBinding[command] != null)
-                    Console.WriteLine($"WARNING : registering a new handler for the command type '{command}' that already had one");
+                    Trace.WriteLine($"WARNING : registering a new handler for the command type '{command}' that already had one");
                 _handlerCommandBinding[command] = handler;
             }
             else
             {
                 if (ignore_broken_pairs)
-                    Console.WriteLine($"ERROR : trying to register a handler for the command type '{command.FullName}' that was not found by {this.GetType()}. This will be ignored." +
-                        "Set the ignore_broken_pairs constructor parameter to true (false by default) to treat this as an error");
+                    Trace.WriteLine($"ERROR : trying to register a handler for the command type '{command.FullName}' that was not found by {this.GetType()}. This will be ignored." +
+                                    "Set the ignore_broken_pairs constructor parameter to true (false by default) to treat this as an error");
                 else
                 {
-                    Console.WriteLine($"FATAL : trying to register a handler for the command type '{command.FullName}' that was not found by {this.GetType()}. This will be treated as an error." +
-                        "Set the ignore_broken_pairs constructor parameter to false (default) to ignore this error.");
+                    Trace.WriteLine($"FATAL : trying to register a handler for the command type '{command.FullName}' that was not found by {this.GetType()}. This will be treated as an error." +
+                                    "Set the ignore_broken_pairs constructor parameter to false (default) to ignore this error.");
                     throw new NullReferenceException($"trying to register a handler for the command type '{command.FullName}' that was not found by {this.GetType()}");
                 }
             }
@@ -36,10 +36,10 @@ namespace BaseToolsLibrary.Mediator
 
         private void gather_handlers()
         {
-            Console.WriteLine("INFO : MediatorBase is scanning application for handlers");
+            Trace.WriteLine("INFO : MediatorBase is scanning application for handlers");
             foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
-                Console.WriteLine($"DEBUG : MediatorBase is scanning '{assembly.FullName}' assembly looking for handlers");
+                Trace.WriteLine($"DEBUG : MediatorBase is scanning '{assembly.FullName}' assembly looking for handlers");
                 try
                 {
                     foreach (Type type in assembly.GetTypes())
@@ -53,7 +53,7 @@ namespace BaseToolsLibrary.Mediator
                                 {
                                     if (_interface.GetGenericTypeDefinition() == typeof(IMediatorHandler<,>))
                                     {
-                                        Console.WriteLine($"==>INFO : MediatorBase found the '{type.FullName}' handler, its command type is {type.GetInterfaces()[i].GetGenericArguments()[0]}.");
+                                        Trace.WriteLine($"==>INFO : MediatorBase found the '{type.FullName}' handler, its command type is {type.GetInterfaces()[i].GetGenericArguments()[0]}.");
                                         RegisterHandler(Activator.CreateInstance(type) as IMediatorHandler, type.GetInterfaces()[i].GetGenericArguments()[0]);
                                         break;
                                     }

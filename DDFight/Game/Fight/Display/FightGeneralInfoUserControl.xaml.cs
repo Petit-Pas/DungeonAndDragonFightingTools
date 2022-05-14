@@ -2,11 +2,13 @@
 using System.Windows;
 using System.Windows.Controls;
 using BaseToolsLibrary.DependencyInjection;
+using BaseToolsLibrary.Mediator;
 using DDFight.Tools;
 using DDFight.Windows;
 using DDFight.Windows.FightWindows;
 using DnDToolsLibrary.Fight;
 using DnDToolsLibrary.Fight.Events;
+using DnDToolsLibrary.Fight.FightCommands.TurnCommands.StartNextTurnCommands;
 using WpfToolsLibrary.Extensions;
 
 namespace DDFight.Game.Fight.Display
@@ -17,10 +19,13 @@ namespace DDFight.Game.Fight.Display
     public partial class FightGeneralInfoUserControl : UserControl, IEventUnregisterable
     {
         private static readonly Lazy<IFightersProvider> _lazyFighterProvider = new(DIContainer.GetImplementation<IFightersProvider>);
-        private static readonly IFightersProvider FightersProvider = _lazyFighterProvider.Value;
+        private static readonly IFightersProvider _fightersProvider = _lazyFighterProvider.Value;
 
         private static readonly Lazy<ITurnManager> _lazyTurnManager = new(DIContainer.GetImplementation<ITurnManager>());
         private static ITurnManager _turnManager => _lazyTurnManager.Value;
+
+        private static readonly Lazy<IMediator> _lazyMediator = new(DIContainer.GetImplementation<IMediator>());
+        private static IMediator _mediator => _lazyMediator.Value;
 
 
         public FightGeneralInfoUserControl()
@@ -31,28 +36,29 @@ namespace DDFight.Game.Fight.Display
 
         private void SetCharactersTurnName()
         {
-            CharacterTurnTextboxCountrol.Text = "Turn of: " + FightersProvider.GetFighterByIndex((int)GlobalContext.Context.FightContext.TurnIndex).DisplayName;
+            CharacterTurnTextboxCountrol.Text = "Turn of: " + _fightersProvider.GetFighterByIndex((int)_turnManager.TurnIndex).DisplayName;
         }
 
         private void GeneralInfoFightUserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            GlobalContext.Context.FightContext.NewTurnStarted += FightContext_NewTurnStarted;
+            _turnManager.TurnStarted += FightContext_NewTurnStarted;
             SetCharactersTurnName();
         }
 
-        private void FightContext_NewTurnStarted(object sender, StartNewTurnEventArgs args)
+        private void FightContext_NewTurnStarted(object sender, TurnStartedEventArgs args)
         {
             CharacterTurnTextboxCountrol.Text = "Turn of: " + args.EntityName;
         }
 
         public void UnregisterToAll()
         {
-            GlobalContext.Context.FightContext.NewTurnStarted -= FightContext_NewTurnStarted;
+            _turnManager.TurnStarted -= FightContext_NewTurnStarted;
         }
 
         private void AddToFightButton_Click(object sender, RoutedEventArgs e)
         {
-            var currentlyPlaying = GlobalContext.Context.FightContext.CurrentlyPlaying;
+            // TODO this should probably be enhanced
+            var currentlyPlaying = _fightersProvider.GetFighterByIndex(_turnManager.TurnIndex);
 
             var window = new AddToFightWindow();
              
@@ -60,19 +66,19 @@ namespace DDFight.Game.Fight.Display
 
             var rollInitiativeWindow = new RollInitiativeWindow
             {
-                // TODO the window should probably not take anything into account, and this could be made through a command
-                DataContext = FightersProvider
+                // TODO the window should probably not take anything in parameter account, and this could be made through a command
+                DataContext = _fightersProvider
             };
 
             rollInitiativeWindow.ShowCentered();
 
             _turnManager.SetTurnOrders();
 
-            for (var i = 0; i != FightersProvider.FighterCount; i++)
+            for (var i = 0; i != _fightersProvider.FighterCount; i++)
             {
-                if (FightersProvider.GetFighterByIndex(i) == currentlyPlaying)
+                if (_fightersProvider.GetFighterByIndex(i) == currentlyPlaying)
                 {
-                    GlobalContext.Context.FightContext.TurnIndex = i;
+                    _turnManager.TurnIndex = i;
                 }
             }
 
@@ -80,7 +86,8 @@ namespace DDFight.Game.Fight.Display
 
         private void NextTurnButton_Click(object sender, RoutedEventArgs e)
         {
-            GlobalContext.Context.FightContext.NextTurn();
+            var startNextTurnCommand = new StartNextTurnCommand();
+            _mediator.Execute(startNextTurnCommand);
         }
     }
 }

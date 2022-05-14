@@ -19,7 +19,7 @@ namespace DDFight.Game.Status.Display
     /// </summary>
     /// 
 
-    // TODO the was this control works is absolutely awful and it should be changed when switching to commands
+    // TODO the way this control works is absolutely awful and it should be changed when switching to commands
     public partial class OnHitStatusApplyWindow : Window, INotifyPropertyChanged
     {
         private ICustomConsole console = DIContainer.GetImplementation<ICustomConsole>();
@@ -217,7 +217,6 @@ namespace DDFight.Game.Status.Display
                 data_context.Target.CustomVerboseStatusList.RemoveElement(data_context);
                 //TODO check if not too dangerous
                 //data_context.Unregister();
-                data_context.Dispose();
             }
             else
             {

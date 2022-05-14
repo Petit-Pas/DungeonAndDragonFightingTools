@@ -26,7 +26,7 @@ namespace BaseToolsLibrary.DependencyInjection
         {
             container.RegisterInstance<T>(instance);
         }
-
+        
         public static T GetImplementation<T>()
             where T : class
         {

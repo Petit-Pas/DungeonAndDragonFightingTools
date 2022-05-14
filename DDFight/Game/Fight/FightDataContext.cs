@@ -1,5 +1,4 @@
 ﻿using BaseToolsLibrary.IO;
-using DDFight.Game.Fight.FightEvents;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Fight;
 using DnDToolsLibrary.Fight.Events;
@@ -16,7 +15,7 @@ namespace DDFight.Game.Fight
     public class FightDataContext : INotifyPropertyChanged
     {
         private static readonly Lazy<IFightersProvider> _lazyFighterProvider = new(DIContainer.GetImplementation<IFightersProvider>);
-        private static readonly IFightersProvider FightersProvider = _lazyFighterProvider.Value;
+        private static readonly IFightersProvider _fightersProvider = _lazyFighterProvider.Value;
 
         /// <summary>
         ///     Counts the amount of rounds of a fight
@@ -54,12 +53,12 @@ namespace DDFight.Game.Fight
             Console.WriteLine("Next Turn");
             if (TurnIndex != -1)
             {
-                var entityEnd = FightersProvider.GetFighterByIndex(TurnIndex);
+                var entityEnd = _fightersProvider.GetFighterByIndex(TurnIndex);
                 entityEnd.EndTurn();
-                OnEndTurn(new TurnEndedEventArgs(entityEnd.DisplayName));
+                //OnEndTurn(new TurnEndedEventArgs(entityEnd.DisplayName));
             }
             var newTurn = TurnIndex + 1;
-            if (newTurn >= FightersProvider.FighterCount)
+            if (newTurn >= _fightersProvider.FighterCount)
             {
                 TurnIndex = 0;
                 RoundCount += 1;
@@ -68,59 +67,44 @@ namespace DDFight.Game.Fight
             {
                 TurnIndex = newTurn;
             }
-            var entityStart = FightersProvider.GetFighterByIndex(TurnIndex);
+            var entityStart = _fightersProvider.GetFighterByIndex(TurnIndex);
             entityStart.StartNewTurn();
-            OnStartNewTurn(new StartNewTurnEventArgs(entityStart.DisplayName));
+            OnStartNewTurn(new TurnStartedEventArgs(entityStart.DisplayName));
             // TODO should be implemented somewhere in the commands, should also probably go through an event of the character
-            OnSelectedCharacter(new SelectedCharacterEventArgs()
-            {
-                Character = entityStart,
-            });
+            //OnSelectedCharacter(new SelectedCharacterEventArgs()
+            //{
+            //    Character = entityStart,
+            //});
         }
 
-        private void OnStartNewTurn(StartNewTurnEventArgs args)
+        private void OnStartNewTurn(TurnStartedEventArgs args)
         {
             NewTurnStarted?.Invoke(this, args);
         }
-        public event StartNewTurnEventHandler NewTurnStarted;
-
-        private void OnEndTurn(TurnEndedEventArgs args)
-        {
-            TurnEnded?.Invoke(this, args);
-            DumpFightState();
-        }
+        public event TurnStarted NewTurnStarted;
 
         private void DumpFightState()
         {
             Logger.Log("==============================");
             Logger.Log("End of the turn of " + CurrentlyPlaying.DisplayName);
             Logger.Log("");
-            foreach (var tmp in FightersProvider.Fighters)
+            foreach (var tmp in _fightersProvider.Fighters)
             {
                 tmp.Dump();
             }
             Logger.Log("==============================");
         }
 
-        public event EndTurnEventHandler TurnEnded;
-
-        // TODO check if this even could only take the displayName of the entity instead
-        public void OnSelectedCharacter(SelectedCharacterEventArgs args)
-        {
-            CurrentlySelected = args.Character;
-            CharacterSelected?.Invoke(this, args);
-        }
-        public event SelectedCharacterEventHandler CharacterSelected;
 
         public PlayableEntity CurrentlyPlaying
         {
             get
             {
-                if (FightersProvider.FighterCount == 0)
+                if (_fightersProvider.FighterCount == 0)
                     return null;
-                if (TurnIndex < 0 || TurnIndex >= FightersProvider.FighterCount)
+                if (TurnIndex < 0 || TurnIndex >= _fightersProvider.FighterCount)
                     return null;
-                return FightersProvider.GetFighterByIndex(TurnIndex);
+                return _fightersProvider.GetFighterByIndex(TurnIndex);
             }
         }
 
@@ -140,7 +124,7 @@ namespace DDFight.Game.Fight
             var wasPlaying = (toRemove.DisplayName == CurrentlyPlaying.DisplayName);
 
             // modifies the turn order of the character that were playing after the removed character
-            foreach (var tmp in FightersProvider.Fighters)
+            foreach (var tmp in _fightersProvider.Fighters)
             {
                 if (tmp.TurnOrder > toRemove.TurnOrder)
                     tmp.TurnOrder -= 1;
@@ -157,7 +141,7 @@ namespace DDFight.Game.Fight
             {
                 TurnIndex -= 1;
             }
-            FightersProvider.RemoveFighter(toRemove);
+            _fightersProvider.RemoveFighter(toRemove);
         }
 
         #endregion turn
@@ -183,7 +167,7 @@ namespace DDFight.Game.Fight
         {
             TurnIndex = -1;
             RoundCount = 0;
-            FightersProvider.Clear();
+            _fightersProvider.Clear();
         }
     }
 }

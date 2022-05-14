@@ -31,7 +31,7 @@ namespace TempExtensionsPlayableEntity
             console.AddEntry(playableEntity.DisplayName, fontWeightProvider.Bold);
             console.AddEntry(" starts its turn!\r\n", fontWeightProvider.Normal);
 
-            playableEntity.InvokeTurnStarted(new StartNewTurnEventArgs(playableEntity.DisplayName));
+            playableEntity.InvokeTurnStarted(new TurnStartedEventArgs(playableEntity.DisplayName));
         }
 
         /// <summary>

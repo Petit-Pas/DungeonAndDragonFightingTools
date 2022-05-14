@@ -1,14 +1,23 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.Mediator;
 using DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.ActionCommands;
 using DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.BonusActionCommands;
 using DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.ReactionCommands;
+using DnDToolsLibrary.Fight;
 using DnDToolsLibrary.Fight.Events;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.TurnCommands.StartTurnCommands
 {
     internal class StartTurnCommandHandler : BaseTurnCommandHandler<StartTurnCommand>
     {
+        private static Lazy<ITurnManager> _lazyTurnManager = new(DIContainer.GetImplementation<ITurnManager>);
+        private static ITurnManager _turnManager => _lazyTurnManager.Value;
+
+        private static Lazy<IFightersProvider> _lazyFighterProvider = new(DIContainer.GetImplementation<IFightersProvider>);
+        private static IFightersProvider _fighterProvider => _lazyFighterProvider.Value;
+
         public override IMediatorCommandResponse Execute(StartTurnCommand command)
         {
             NotifyStartOfTurn(command);
@@ -25,8 +34,15 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.TurnCommands.StartTurnComman
         private void NotifyStartOfTurn(StartTurnCommand command)
         {
             var entity = command.GetEntity();
+            var eventArgs = new TurnStartedEventArgs(entity.DisplayName);
 
-            entity.InvokeTurnStarted(new StartNewTurnEventArgs(entity.DisplayName));
+            // notifying through the entity itself => specified for controls that have only this entity as DataContext
+            entity.InvokeTurnStarted(eventArgs);
+
+            // notifying through the turnManager => broader for controls that have all fighters as DataContext
+            _turnManager.InvokeTurnStarted(eventArgs);
+
+            _fighterProvider.InvokeFighterSelected(new FighterSelectedEventArgs(entity.DisplayName));
         }
 
         private void HandleAffectingStatii(StartTurnCommand command)
@@ -71,5 +87,18 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.TurnCommands.StartTurnComman
             command.PushToInnerCommands(reactionCommand);
         }
 
+        public override void Undo(StartTurnCommand command)
+        {
+            base.Undo(command);
+
+            var entity = command.GetEntity();
+            var eventArgs = new TurnEndedEventArgs(entity.DisplayName);
+
+            // notifying through the entity itself => specified for controls that have only this entity as DataContext
+            entity.InvokeTurnEnded(eventArgs);
+
+            // notifying through the turnManager => broader for controls that have all fighters as DataContext
+            _turnManager.InvokeTurnEnded(eventArgs);
+        }
     }
 }

@@ -15,24 +15,13 @@ namespace DDFight.Game.Entities.Display
         private Lazy<IMediator> _lazyMediator = new(() => DIContainer.GetImplementation<IMediator>());
         private IMediator _mediator => _lazyMediator.Value;
 
+        private Lazy<IFightersProvider> _lazyFightersProvider = new(() => DIContainer.GetImplementation<IFightersProvider>());
+        private IFightersProvider _fighterProvider => _lazyFightersProvider.Value;
+
+
         public SoonToFightEntityListUserControl() : base ()
         {
-            DataContextChanged += SoonToFightEntityListUserControl_DataContextChanged;
-        }
-
-        private void refresh_entityList()
-        {
-            EntityList = data_context;
-        }
-
-        private void SoonToFightEntityListUserControl_DataContextChanged(object sender, System.Windows.DependencyPropertyChangedEventArgs e)
-        {
-            refresh_entityList();
-        }
-
-        private FightersProvider data_context
-        {
-            get => DataContext as FightersProvider;
+            Loaded += (sender, args) => EntityList = _fighterProvider.GetObservableCollection();
         }
 
         protected override void EntityListControl_KeyDown(object sender, KeyEventArgs e)

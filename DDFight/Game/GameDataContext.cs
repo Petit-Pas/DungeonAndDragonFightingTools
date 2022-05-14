@@ -71,18 +71,5 @@ namespace DDFight.Game
             }
         }
         #endregion
-
-        [XmlIgnore]
-        public FightDataContext FightContext
-        {
-            get => _fightContext;
-            set
-            {
-                _fightContext = value;
-                NotifyPropertyChanged();
-            }
-        }
-        private FightDataContext _fightContext = new FightDataContext();
-
     }
 }

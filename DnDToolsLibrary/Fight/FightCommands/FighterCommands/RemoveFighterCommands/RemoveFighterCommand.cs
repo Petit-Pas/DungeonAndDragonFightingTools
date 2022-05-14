@@ -3,7 +3,7 @@ using DnDToolsLibrary.Entities;
 
 namespace DnDToolsLibrary.Fight.FightCommands.FighterCommands.RemoveFighterCommands
 {
-    public class RemoveFighterCommand : IMediatorCommand
+    public class RemoveFighterCommand : SuperCommandBase
     {
         public RemoveFighterCommand(PlayableEntity entity)
         {

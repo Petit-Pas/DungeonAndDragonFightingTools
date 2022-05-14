@@ -64,7 +64,7 @@ namespace DnDToolsLibrary.Entities
                     OnHitStatus onHit = (OnHitStatus)status;
                     if (onHit.HasEndCondition())
                     {
-                        onHit.Unregister();
+                        // TODO should use commands ?
                         CustomVerboseStatusList.RemoveElement(status);
                         i--;
                     }

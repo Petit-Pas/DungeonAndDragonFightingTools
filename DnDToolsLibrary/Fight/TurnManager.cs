@@ -2,20 +2,20 @@
 using System.Diagnostics;
 using System.Linq;
 using BaseToolsLibrary.DependencyInjection;
-using DnDToolsLibrary.Characteristics;
 using DnDToolsLibrary.Dice;
 using DnDToolsLibrary.Entities;
+using DnDToolsLibrary.Fight.Events;
 
 namespace DnDToolsLibrary.Fight
 {
     public class TurnManager : ITurnManager
     {
+        private Lazy<IFightersProvider> _lazyFightersProvider = new(DIContainer.GetImplementation<IFightersProvider>());
+        private IFightersProvider _fightersProvider => _lazyFightersProvider.Value;
+
         public TurnManager()
         {
         }
-
-        private Lazy<IFightersProvider> _lazyFightersProvider = new(DIContainer.GetImplementation<IFightersProvider>());
-        private IFightersProvider _fightersProvider => _lazyFightersProvider.Value;
 
         private static readonly Comparison<PlayableEntity> _initiativeSorter = (x, y) =>
         {
@@ -53,10 +53,10 @@ namespace DnDToolsLibrary.Fight
             
             _fightersProvider.OrderFighters(_initiativeSorter);
 
-            var i = 1;
+            uint i = 1;
             foreach (var fighter in _fightersProvider.Fighters)
             {
-                fighter.TurnOrder = 1;
+                fighter.TurnOrder = i;
                 i += 1;
             }
         }
@@ -95,9 +95,39 @@ namespace DnDToolsLibrary.Fight
             }
         }
 
-        public int GetCurrentTurnIndex()
+        public uint RoundCount
         {
-            throw new NotImplementedException();
+            get => _roundCount;
+            set
+            {
+                _roundCount = value;
+            }
+        }
+
+        private uint _roundCount = 0;
+
+        public int TurnIndex
+        {
+            get => _turnIndex;
+            set
+            {
+                _turnIndex = value;
+            }
+        }
+        private int _turnIndex = -1;
+
+
+        public event TurnStarted TurnStarted;
+        public event TurnEnded TurnEnded;
+        
+        public void InvokeTurnStarted(TurnStartedEventArgs args)
+        {
+            TurnStarted?.Invoke(this, args);
+        }
+
+        public void InvokeTurnEnded(TurnEndedEventArgs args)
+        {
+            TurnEnded?.Invoke(this, args);
         }
     }
 }
