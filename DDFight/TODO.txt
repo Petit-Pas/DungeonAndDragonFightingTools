@@ -57,4 +57,4 @@ Avec la commande concentrationCheckQuery, le situational bonus est rempli avec l
 
 Should use GUID instead of DisplayName for both save files AND comparison
 
-remove anything from GlobalContext and use DI instead
+save log message hashes to remove them from undone commands

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using BaseToolsLibrary.DependencyInjection;
+using BaseToolsLibrary.IO;
 using BaseToolsLibrary.Mediator;
 using DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.ActionCommands;
 using DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.BonusActionCommands;
@@ -18,8 +19,17 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.TurnCommands.StartTurnComman
         private static Lazy<IFightersProvider> _lazyFighterProvider = new(DIContainer.GetImplementation<IFightersProvider>);
         private static IFightersProvider _fighterProvider => _lazyFighterProvider.Value;
 
+        private static ICustomConsole console = DIContainer.GetImplementation<ICustomConsole>();
+        private static IFontWeightProvider fontWeightProvider = DIContainer.GetImplementation<IFontWeightProvider>();
+        private static IFontColorProvider fontColorProvider = DIContainer.GetImplementation<IFontColorProvider>();
+
+
         public override IMediatorCommandResponse Execute(StartTurnCommand command)
         {
+            console.NewParagraph();
+            console.AddEntry(command.GetEntityName(), fontWeightProvider.Bold, fontColorProvider.GetDefault(), 20);
+            console.AddEntry(" starts its turn!\r\n", fontWeightProvider.Normal, fontColorProvider.GetDefault(), 20);
+
             NotifyStartOfTurn(command);
 
             ResetActions(command);
