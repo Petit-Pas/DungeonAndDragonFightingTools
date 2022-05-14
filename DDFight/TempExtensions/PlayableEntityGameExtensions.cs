@@ -47,24 +47,6 @@ namespace TempExtensionsPlayableEntity
 
         #region HpManagement
 
-
-        public static void Heal(this PlayableEntity playableEntity, DiceRoll to_roll)
-        {
-            to_roll.Roll();
-            int amount = to_roll.LastResult;
-
-            if (playableEntity.Hp + amount >= playableEntity.MaxHp)
-                amount = (int)playableEntity.MaxHp - playableEntity.Hp;
-
-
-            console.AddEntry(playableEntity.DisplayName, fontWeightProvider.Bold);
-            console.AddEntry(" regains ");
-            console.AddEntry($"{amount}", fontWeightProvider.Bold);
-            console.AddEntry(" Hps.\r\n");
-
-            playableEntity.Hp += amount;
-        }
-
         public static void LooseHp(this PlayableEntity playableEntity, int amount)
         {
             console.AddEntry("\nTotal: ");

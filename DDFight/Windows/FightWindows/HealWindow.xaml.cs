@@ -1,6 +1,10 @@
-﻿using DnDToolsLibrary.Dice;
+﻿using System;
+using DnDToolsLibrary.Dice;
 using DnDToolsLibrary.Entities;
 using System.Windows;
+using BaseToolsLibrary.DependencyInjection;
+using BaseToolsLibrary.Mediator;
+using DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.Heal;
 using TempExtensionsPlayableEntity;
 using WpfToolsLibrary.Extensions;
 
@@ -11,6 +15,9 @@ namespace DDFight.Windows.FightWindows
     /// </summary>
     public partial class HealWindow : Window
     {
+        private Lazy<IMediator> _lazyMediator = new(DIContainer.GetImplementation<IMediator>());
+        private IMediator _mediator => _lazyMediator.Value;
+
         public PlayableEntity data_context
         {
             get => (PlayableEntity)DataContext;
@@ -53,7 +60,10 @@ namespace DDFight.Windows.FightWindows
                 return;
             }
 
-            data_context.Heal(context.Roll);
+            context.Roll.Roll();
+            var healCommand = new HealCommand(data_context, context.Roll.LastResult);
+            _mediator.Execute(healCommand);
+
             this.Close();            
         }
     }
