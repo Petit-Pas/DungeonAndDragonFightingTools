@@ -1,9 +1,7 @@
 ﻿using DDFight.Game.Entities;
-using DDFight.Game.Fight;
 using DnDToolsLibrary.Attacks.Spells;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Xml.Serialization;
 
 namespace DDFight.Game
 {

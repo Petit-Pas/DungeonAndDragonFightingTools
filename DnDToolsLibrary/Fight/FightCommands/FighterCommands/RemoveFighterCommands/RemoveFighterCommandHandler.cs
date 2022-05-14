@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.Mediator;
 using DnDToolsLibrary.Fight.Events;
 using DnDToolsLibrary.Fight.FightCommands.TurnCommands.StartNextTurnCommands;
-using DnDToolsLibrary.Status;
 
 namespace DnDToolsLibrary.Fight.FightCommands.FighterCommands.RemoveFighterCommands
 {

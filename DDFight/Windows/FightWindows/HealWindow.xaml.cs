@@ -5,7 +5,6 @@ using System.Windows;
 using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.Mediator;
 using DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.Heal;
-using TempExtensionsPlayableEntity;
 using WpfToolsLibrary.Extensions;
 
 namespace DDFight.Windows.FightWindows

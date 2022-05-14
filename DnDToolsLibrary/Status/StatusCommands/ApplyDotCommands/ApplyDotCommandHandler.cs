@@ -6,7 +6,6 @@ using DnDToolsLibrary.Attacks.AttacksCommands.DamageCommands.DamageResultListQue
 using DnDToolsLibrary.Attacks.Damage;
 using DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageResultList;
 using DnDToolsLibrary.Entities.EntitiesCommands.StatusCommands.ApplyDotCommands;
-using DnDToolsLibrary.Fight;
 
 namespace DnDToolsLibrary.Status.StatusCommands.ApplyDotCommands
 {

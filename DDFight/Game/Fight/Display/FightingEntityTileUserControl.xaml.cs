@@ -26,7 +26,6 @@ using DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.TempHeal;
 using DnDToolsLibrary.Entities.EntitiesCommands.InspirationCommands.InvertInspiration;
 using DnDToolsLibrary.Fight;
 using DnDToolsLibrary.Fight.FightCommands.FighterCommands.RemoveFighterCommands;
-using TempExtensionsPlayableEntity;
 using WpfToolsLibrary.Extensions;
 
 namespace DDFight.Controlers.Fight

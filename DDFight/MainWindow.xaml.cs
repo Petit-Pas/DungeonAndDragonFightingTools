@@ -9,10 +9,8 @@ using DDFight.Windows.FightWindows;
 using DnDToolsLibrary.Attacks.Spells;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Memory;
-using DnDToolsLibrary.Status;
 using System.Windows;
 using DnDToolsLibrary.Fight;
-using TempExtensionsOnHitStatus;
 using WpfDnDCommandHandlers.AttackQueries.DamageQueries.DamageResultListQueries;
 using WpfToolsLibrary.Extensions;
 

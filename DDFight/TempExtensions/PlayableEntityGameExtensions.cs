@@ -3,9 +3,7 @@ using BaseToolsLibrary.IO;
 using DDFight.Windows.FightWindows;
 using DnDToolsLibrary.Attacks.Damage;
 using DnDToolsLibrary.Attacks.Damage.Type;
-using DnDToolsLibrary.Dice;
 using DnDToolsLibrary.Entities;
-using DnDToolsLibrary.Fight.Events;
 using WpfToolsLibrary.Extensions;
 
 namespace TempExtensionsPlayableEntity
