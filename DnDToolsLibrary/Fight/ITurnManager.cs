@@ -16,5 +16,6 @@ namespace DnDToolsLibrary.Fight
         
         void InvokeTurnStarted(TurnStartedEventArgs args);
         void InvokeTurnEnded(TurnEndedEventArgs args);
+        void Reset();
     }
 }

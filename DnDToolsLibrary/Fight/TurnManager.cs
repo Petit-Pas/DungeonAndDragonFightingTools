@@ -140,6 +140,12 @@ namespace DnDToolsLibrary.Fight
             TurnEnded?.Invoke(this, args);
         }
 
+        public void Reset()
+        {
+            TurnIndex = -1;
+            RoundCount = 0;
+        }
+
         #region INotifyPropertyChanged
 
         /// <summary>

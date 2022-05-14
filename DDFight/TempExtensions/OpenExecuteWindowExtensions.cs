@@ -118,51 +118,5 @@ namespace DDFight.WpfExtensions
                 }
             }
         }
-
-        public static void CastSpell(this Spell spell, PlayableEntity caster)
-        {
-            AskPositiveIntWindow levelWindow = new AskPositiveIntWindow();
-            levelWindow.DescriptionTextBoxControl.Text = "at which level do you wish to cast this spell?";
-            levelWindow.Number = spell.BaseLevel;
-            levelWindow.ShowCentered();
-
-            if (levelWindow.Validated == false)
-                return;
-
-            int level = levelWindow.Number;
-            int additional_levels = level - spell.BaseLevel;
-            int amountTargets = spell.AmountTargets;
-
-            if (amountTargets != 0)
-                for (int i = additional_levels; i > 0; i--)
-                {
-                    amountTargets += spell.AdditionalTargetPerLevel;
-                }
-
-            FightingEntityListSelectableWindow targetWindow = new FightingEntityListSelectableWindow {
-                MaximumSelected = amountTargets,
-                CanSelectSameTargetTwice = spell.CanSelectSameTargetTwice,
-            };
-            targetWindow.ShowCentered();
-
-            if (targetWindow.Validated == true)
-            {
-                if (spell.IsAnAttack)
-                {
-                    SpellAttackCastWindow window = new SpellAttackCastWindow()
-                    {
-                        DataContext = spell.GetAttackSpellResult(caster, targetWindow.Selected, additional_levels)
-                    };
-                    window.ShowCentered();
-                }
-                else
-                {
-                    SpellNonAttackCastWindow window = new SpellNonAttackCastWindow() { 
-                        DataContext = spell.GetNonAttackSpellResult(caster, targetWindow.Selected, additional_levels) 
-                    };
-                    window.ShowCentered();
-                }
-            }
-        }
     }
 }

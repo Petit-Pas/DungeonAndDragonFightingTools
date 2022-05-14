@@ -107,10 +107,11 @@ namespace DDFight
                 {
                     character.GetOutOfFight();
                 }
+
+                _fightersProvider.Clear();
+                _turnManager.Reset();
                 
-                // TODO to update on TurnManger
-                //GlobalContext.Context.FightContext.Reset();
-                GenericList<Character>.SaveAll<Character>(GlobalContext.Context.CharacterList);
+                GenericList<Character>.SaveAll(GlobalContext.Context.CharacterList);
             }
 
         }

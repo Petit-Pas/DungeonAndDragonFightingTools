@@ -16,19 +16,6 @@ namespace TempExtensionsPlayableEntity
         private static IFontWeightProvider fontWeightProvider = DIContainer.GetImplementation<IFontWeightProvider>();
         private static IFontColorProvider fontColorProvider = DIContainer.GetImplementation<IFontColorProvider>();
 
-        #region Turn
-
-        /// <summary>
-        ///     Function called to end the Turn of the PlayableEntity
-        ///     Will raise the OnEndTurn event
-        /// </summary>
-        public static void EndTurn(this PlayableEntity playableEntity)
-        {
-            playableEntity.InvokeTurnEnded(new TurnEndedEventArgs(playableEntity.DisplayName));
-        }
-
-        #endregion Turn
-
         #region HpManagement
 
         public static void LooseHp(this PlayableEntity playableEntity, int amount)
