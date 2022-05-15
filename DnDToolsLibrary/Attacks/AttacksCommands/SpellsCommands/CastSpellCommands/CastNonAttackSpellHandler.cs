@@ -20,7 +20,8 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
                 _fighterProvider.Value.GetFighterByDisplayName(command.CasterName).IsFocused = true;
                 foreach (var spellResult in command.SpellResults)
                 {
-                    var damageCommand = new ApplyDamageResultListCommand(spellResult.Target, spellResult.HitDamage);
+                    // TODO the fact that the saving is passed is not tested
+                    var damageCommand = new ApplyDamageResultListCommand(spellResult.Target, spellResult.HitDamage, spellResult.Saving.IsSuccesful);
                     _mediator.Value.Execute(damageCommand);
                     command.PushToInnerCommands(damageCommand);
 
