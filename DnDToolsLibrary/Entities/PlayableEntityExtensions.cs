@@ -15,7 +15,7 @@ namespace DnDToolsLibrary.Entities
 
         public static int GetInitiative(this PlayableEntity entity)
         {
-            return (int) entity.InitiativeRoll + entity.Characteristics.GetCharacteristicModifier(CharacteristicsEnum.Dexterity);
+            return (int)entity.InitiativeRoll + entity.Characteristics.GetCharacteristicModifier(CharacteristicsEnum.Dexterity);
         }
 
         public static int GetStrModifier(this PlayableEntity entity)

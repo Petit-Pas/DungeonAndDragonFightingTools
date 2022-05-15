@@ -55,6 +55,16 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
+            <TextBlock
+                x:Name="Initiative"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Grid.ColumnSpan="2"
+                Grid.RowSpan="4"
+                Margin="-8 -8"
+                Text="{Binding Initiative}">
+            </TextBlock>
+
             <TextBlock 
                 x:Name="DisplayNameTextBlock"
                 Margin="10, 10"

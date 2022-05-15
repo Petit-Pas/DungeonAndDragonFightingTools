@@ -503,6 +503,15 @@ namespace DnDToolsLibrary.Entities
             return result;
         }
 
+        public int Initiative
+        {
+            get => (int)InitiativeRoll + Characteristics.GetCharacteristicModifier(CharacteristicsEnum.Dexterity);
+            set
+            {
+                ;
+            }
+        }
+
         /// <summary>
         ///     used to dump a character in log file (in case of crash, it at least gives information back)
         /// </summary>

@@ -25,7 +25,7 @@ namespace DnDToolsLibrary.Fight
             // initiative is different, easy case
             if (comparison != 0)
             {
-                return comparison;
+                return -comparison;
             }
             // initiative is the same, we need to compare the dexterity now
 

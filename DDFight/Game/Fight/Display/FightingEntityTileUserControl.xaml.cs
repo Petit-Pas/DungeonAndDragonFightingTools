@@ -67,6 +67,11 @@ namespace DDFight.Controlers.Fight
 
         private void FightContext_CharacterSelected(object sender, FighterSelectedEventArgs args)
         {
+            if (data_context == null)
+            {
+                return;
+            }
+                
             if (args.EntityName == data_context.DisplayName)
             {
                 CharacterTileGroupBoxControl.BorderThickness = new Thickness(2);
