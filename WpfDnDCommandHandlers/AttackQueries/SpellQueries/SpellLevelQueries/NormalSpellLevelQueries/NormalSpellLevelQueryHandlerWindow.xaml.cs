@@ -1,5 +1,6 @@
 ﻿using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.SpellLevelQueries;
 using System;
+using System.Linq;
 using System.Windows;
 using WpfCustomControlLibrary.ModalWindows;
 using WpfToolsLibrary.Extensions;
@@ -66,8 +67,12 @@ namespace WpfDnDCommandHandlers.AttackQueries.SpellQueries.SpellLevelQueries.Get
             return new SpellLevel(this.SelectedLevel);
         }
 
+        public static int[] Levels = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+
         public void LoadContext(NormalSpellLevelQuery context)
         {
+
+            CircularSelector.DisabledLevels = Levels.Take(context.BaseLevel - 1).ToArray();
         }
     }
 }

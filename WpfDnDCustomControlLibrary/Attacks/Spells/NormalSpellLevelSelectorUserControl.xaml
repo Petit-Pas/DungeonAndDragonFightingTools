@@ -33,6 +33,7 @@
             >
             <Grid Focusable="False">
                 <circularselector:CircularSelectorRadioButtonControl
+                    Name="Level1"
                     Angle="-240" 
                     Content="1"
                     circularselector:CircularSelectorCenterControl.LabelXOffset="10"
@@ -43,6 +44,7 @@
                         RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:NormalSpellLevelSelectorUserControl}}}"
                     />
                 <circularselector:CircularSelectorRadioButtonControl
+                    Name="Level2"
                     Angle="-202.5" 
                     Content="2"
                     circularselector:CircularSelectorCenterControl.LabelXOffset="12"
@@ -53,6 +55,7 @@
                         RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:NormalSpellLevelSelectorUserControl}}}"
                     />
                 <circularselector:CircularSelectorRadioButtonControl
+                    Name="Level3"
                     Angle="-165" 
                     Content="3"
                     circularselector:CircularSelectorCenterControl.LabelXOffset="12"
@@ -63,6 +66,7 @@
                         RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:NormalSpellLevelSelectorUserControl}}}"
                     />
                 <circularselector:CircularSelectorRadioButtonControl
+                    Name="Level4"
                     Angle="-127.5" 
                     Content="4"
                     circularselector:CircularSelectorCenterControl.LabelXOffset="14"
@@ -73,6 +77,7 @@
                         RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:NormalSpellLevelSelectorUserControl}}}"
                     />
                 <circularselector:CircularSelectorRadioButtonControl
+                    Name="Level5"
                     Angle="-90" 
                     Content="5"
                     circularselector:CircularSelectorCenterControl.LabelXOffset="16"
@@ -83,6 +88,7 @@
                         RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:NormalSpellLevelSelectorUserControl}}}"
                     />
                 <circularselector:CircularSelectorRadioButtonControl
+                    Name="Level6"
                     Angle="-52.5" 
                     Content="6"
                     circularselector:CircularSelectorCenterControl.LabelXOffset="14"
@@ -93,6 +99,7 @@
                         RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:NormalSpellLevelSelectorUserControl}}}"
                     />
                 <circularselector:CircularSelectorRadioButtonControl
+                    Name="Level7"
                     Angle="-15" 
                     Content="7"
                     circularselector:CircularSelectorCenterControl.LabelXOffset="12"
@@ -103,6 +110,7 @@
                         RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:NormalSpellLevelSelectorUserControl}}}"
                     />
                 <circularselector:CircularSelectorRadioButtonControl
+                    Name="Level8"
                     Angle="22.5" 
                     Content="8"
                     circularselector:CircularSelectorCenterControl.LabelXOffset="12"
@@ -113,6 +121,7 @@
                         RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:NormalSpellLevelSelectorUserControl}}}"
                     />
                 <circularselector:CircularSelectorRadioButtonControl
+                    Name="Level9"
                     Angle="60" 
                     Content="9"
                     circularselector:CircularSelectorCenterControl.LabelXOffset="10"
