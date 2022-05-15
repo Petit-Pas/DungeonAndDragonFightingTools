@@ -51,7 +51,7 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
 
         private bool spellLevelSelected(CastSpellCommand command)
         {
-            if (command.Spell.BaseLevel == 0)
+            if (command.Spell.IsCantrip)
                 return cantripLevelSelected(command);
             return normalSpellLevelSelected(command);
         }
