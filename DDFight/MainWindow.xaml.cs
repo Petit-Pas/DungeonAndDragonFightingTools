@@ -106,6 +106,11 @@ namespace DDFight
                     character.GetOutOfFight();
                 }
 
+                foreach (var monster in _fightersProvider.Monsters)
+                {
+                    monster.GetOutOfFight();
+                }
+
                 _fightersProvider.Clear();
                 _turnManager.Reset();
                 

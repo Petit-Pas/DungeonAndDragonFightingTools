@@ -1,5 +1,7 @@
 ﻿using BaseToolsLibrary;
 using System.Xml.Serialization;
+using DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.LoseConcentration;
+using DnDToolsLibrary.Entities.EntitiesCommands.StatusCommands.RemoveStatus;
 
 namespace DnDToolsLibrary.Entities
 {
@@ -56,6 +58,18 @@ namespace DnDToolsLibrary.Entities
         {
             base.CopyAssign(to_copy);
             init_copy(to_copy as Monster);
+        }
+
+        /// <summary>
+        ///     Should be called after any fight to reset Character
+        /// </summary>
+        public void GetOutOfFight()
+        {
+            if (IsFocused)
+            {
+                var loseConcentrationCommand = new LoseConcentrationCommand(this.DisplayName);
+                _mediator.Execute(loseConcentrationCommand);
+            }
         }
 
         ~Monster()

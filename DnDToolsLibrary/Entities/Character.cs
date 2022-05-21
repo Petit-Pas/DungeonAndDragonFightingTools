@@ -1,7 +1,13 @@
-﻿using BaseToolsLibrary;
+﻿using System;
+using BaseToolsLibrary;
 using DnDToolsLibrary.Status;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Xml.Serialization;
+using BaseToolsLibrary.DependencyInjection;
+using BaseToolsLibrary.Mediator;
+using DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.LoseConcentration;
+using DnDToolsLibrary.Entities.EntitiesCommands.StatusCommands.RemoveStatus;
 
 namespace DnDToolsLibrary.Entities
 {
@@ -54,20 +60,22 @@ namespace DnDToolsLibrary.Entities
         public void GetOutOfFight()
         {
             if (IsTransformed)
-                TransformBack();
-            InitiativeRoll = 0;
-            for (int i = 0; i != CustomVerboseStatusList.Count; i++)
             {
-                CustomVerboseStatus status = CustomVerboseStatusList.ElementAt(i);
-                if (status.GetType() == typeof(OnHitStatus))
+                TransformBack();
+            }
+            if (IsFocused)
+            {
+                var loseConcentrationCommand = new LoseConcentrationCommand(this.DisplayName);
+                _mediator.Execute(loseConcentrationCommand);
+            }
+            InitiativeRoll = 0;
+            var affectingStatus = _statusProvider.GetOnHitStatusesAppliedOn(DisplayName).ToArray();
+            foreach (var status in affectingStatus)
+            {
+                if (status.HasEndCondition())
                 {
-                    OnHitStatus onHit = (OnHitStatus)status;
-                    if (onHit.HasEndCondition())
-                    {
-                        // TODO should use commands ?
-                        CustomVerboseStatusList.RemoveElement(status);
-                        i--;
-                    }
+                    var removeStatusCommand = new RemoveStatusCommand(status.Id, DisplayName);
+                    _mediator.Execute(removeStatusCommand);
                 }
             }
         }

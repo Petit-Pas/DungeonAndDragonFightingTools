@@ -12,12 +12,20 @@ using DnDToolsLibrary.Attacks.Spells;
 using DnDToolsLibrary.Counters;
 using DnDToolsLibrary.Status;
 using BaseToolsLibrary;
+using BaseToolsLibrary.DependencyInjection;
+using BaseToolsLibrary.Mediator;
 using DnDToolsLibrary.Dice;
 
 namespace DnDToolsLibrary.Entities
 {
     public partial class PlayableEntity : INameable, ICopyAssignable, INotifyPropertyChanged, IDisposable, IEquivalentComparable<PlayableEntity>
     {
+        protected static Lazy<IMediator> _lazyMediator = new(DIContainer.GetImplementation<IMediator>);
+        protected static IMediator _mediator => _lazyMediator.Value;
+
+        protected static Lazy<IStatusProvider> _lazyStatusProvider = new(DIContainer.GetImplementation<IStatusProvider>);
+        protected static IStatusProvider _statusProvider => _lazyStatusProvider.Value;
+
         public PlayableEntity()
         {
         }
@@ -611,6 +619,7 @@ namespace DnDToolsLibrary.Entities
             Spells = (SpellList)to_copy.Spells.Clone();
             TempHp = to_copy.TempHp;
             SpellHitModifier = to_copy.SpellHitModifier;
+            AffectingStatusList = to_copy.AffectingStatusList.Clone() as StatusReferenceList;
         }
 
         /// <summary>
