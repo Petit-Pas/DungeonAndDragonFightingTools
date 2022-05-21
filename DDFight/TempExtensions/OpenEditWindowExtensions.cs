@@ -8,6 +8,7 @@ using DnDToolsLibrary.Attacks.Spells;
 using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Status;
 using System.Windows;
+using WpfDnDCustomControlLibrary.Statuses;
 using WpfToolsLibrary.Extensions;
 using WpfToolsLibrary.Navigation;
 
@@ -41,6 +42,11 @@ namespace DDFight.WpfExtensions
         public static bool OpenEditWindow(this OnHitStatus onHitStatus)
         {
             return OpenEditWindowGeneric<OnHitStatus, OnHitStatusEditWindow>(onHitStatus);
+        }
+
+        public static bool OpenEditWindow(this StatusReference statusRef)
+        {
+            return OpenEditWindowGeneric<StatusReference, StatusReferenceEditWindow>(statusRef);
         }
 
         public static bool OpenEditWindow(this CustomVerboseStatus status)

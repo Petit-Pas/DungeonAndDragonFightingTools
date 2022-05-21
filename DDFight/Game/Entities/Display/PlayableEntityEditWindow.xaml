@@ -126,8 +126,8 @@
                         Statuses
                     </TextBlock>
                 </TabItem.Header>
-                <status:CustomVerboseStatusListUserControl 
-                    DataContext="{Binding CustomVerboseStatusList}"/>
+                <status:StatusReferenceListEditableUserControl 
+                    DataContext="{Binding AffectingStatusList}"/>
             </TabItem>
 
             <TabItem Style="{StaticResource TabItemStyle}"

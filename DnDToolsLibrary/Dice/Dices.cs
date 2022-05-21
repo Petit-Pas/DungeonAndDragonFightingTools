@@ -1,6 +1,7 @@
 ﻿using BaseToolsLibrary;
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Xml.Serialization;
 
@@ -81,16 +82,16 @@ namespace DnDToolsLibrary.Dice
             int result = 0;
             string output = "";
 
-            Console.Write("rolling " + DiceAmount.ToString() + " " + DiceValue.ToString() + ": ");
+            Trace.Write("rolling " + DiceAmount.ToString() + " " + DiceValue.ToString() + ": ");
             for (int i = 0; i != Math.Abs(DiceAmount) * (critical ? 2 : 1); i++)
             {
                 int new_val = rand.Next(1, DiceValue + 1);
-                Console.Write(new_val.ToString() + (i + 1 == DiceAmount ? "" : ", "));
+                Trace.Write(new_val.ToString() + (i + 1 == DiceAmount ? "" : ", "));
                 output = output + (output.Length == 0 ? "" : ", ") + new_val.ToString();
                 result += new_val;
             }
             result = DiceAmount > 0 ? result : -result;
-            Console.WriteLine(" ==> result: " + result.ToString());
+            Trace.WriteLine(" ==> result: " + result.ToString());
 
             output = this.ToString() + (critical ? " (crit) " : "") + " => " + output + " (" + result + ")";
             RolledDices = output;

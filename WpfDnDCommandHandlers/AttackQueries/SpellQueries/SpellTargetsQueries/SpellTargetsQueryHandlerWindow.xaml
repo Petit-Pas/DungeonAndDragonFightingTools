@@ -90,7 +90,8 @@
                 ItemsSource="{Binding Source={StaticResource Fighters}}"
                 Focusable="False"
                 ScrollbarSmallChange="1"
-                ScrollbarLargeChange="5">
+                ScrollbarLargeChange="5"
+                MouseDoubleClick="FightersList_OnMouseDoubleClick">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding}"/>

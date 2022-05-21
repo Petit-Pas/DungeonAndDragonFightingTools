@@ -6,6 +6,9 @@ using DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageResultL
 using DnDToolsLibrary.Fight;
 using DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands;
 using System;
+using System.Linq;
+using DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.AcquireConcentration;
+using DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.LoseConcentration;
 
 namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellCommands
 {
@@ -17,11 +20,18 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
         {
             if (spellResultObtained(command))
             {
-                _fighterProvider.Value.GetFighterByDisplayName(command.CasterName).IsFocused = true;
+                if (command.Spell.AppliedStatus.Any(x => x.EndsOnCasterLossOfConcentration))
+                {
+                    // TODO this is not tested either
+                    var acquireConcentrationCommand = new AcquireConcentrationCommand(command.CasterName);
+                    _mediator.Value.Execute(acquireConcentrationCommand);
+                    command.PushToInnerCommands(acquireConcentrationCommand);
+                }
+
                 foreach (var spellResult in command.SpellResults)
                 {
                     // TODO the fact that the saving is passed is not tested
-                    var damageCommand = new ApplyDamageResultListCommand(spellResult.Target, spellResult.HitDamage, spellResult.Saving.IsSuccesful);
+                    var damageCommand = new ApplyDamageResultListCommand(spellResult.Target, spellResult.HitDamage, spellResult.Saving?.IsSuccesful ?? false);
                     _mediator.Value.Execute(damageCommand);
                     command.PushToInnerCommands(damageCommand);
 

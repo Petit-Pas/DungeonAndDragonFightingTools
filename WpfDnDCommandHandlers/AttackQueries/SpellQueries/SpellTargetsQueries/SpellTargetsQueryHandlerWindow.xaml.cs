@@ -165,5 +165,10 @@ namespace WpfDnDCommandHandlers.AttackQueries.SpellQueries.SpellTargetsQueries
             this.Validated = true;
             this.Close();
         }
+
+        private void FightersList_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            add_selected();
+        }
     }
 }

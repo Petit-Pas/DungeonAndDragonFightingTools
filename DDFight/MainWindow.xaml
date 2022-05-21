@@ -147,9 +147,8 @@
                                                 Fighting
                                             </TextBlock>
                                         </TabItem.Header>
-                                        <display:SoonToFightEntityListUserControl 
-                                        DataContext="{Binding FightContext.FightersList}"
-                                        ButtonsVisibility="Collapsed"/>
+                                        <display:SoonToFightEntityListUserControl
+                                            ButtonsVisibility="Collapsed"/>
                                     </TabItem>
                                 </TabControl>
                             </Grid>

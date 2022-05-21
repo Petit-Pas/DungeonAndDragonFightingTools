@@ -498,7 +498,6 @@ namespace DnDToolsLibrary.Entities
             
             result.Characteristic = characteristic;
             result.Difficulty = difficulty;
-            result.Modifier = this.Characteristics.GetSavingModifier(characteristic);
 
             return result;
         }

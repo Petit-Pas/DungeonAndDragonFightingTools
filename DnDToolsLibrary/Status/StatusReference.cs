@@ -45,7 +45,7 @@ namespace DnDToolsLibrary.Status
                 NotifyPropertyChanged();
             }
         }
-        private string _header;
+        private string _header = "";
 
         [XmlElement]
         public string ToolTip 
@@ -57,7 +57,7 @@ namespace DnDToolsLibrary.Status
                 NotifyPropertyChanged();
             }
         }
-        private string _toolTip;
+        private string _toolTip = "";
 
         #region IListable
         [XmlIgnore]

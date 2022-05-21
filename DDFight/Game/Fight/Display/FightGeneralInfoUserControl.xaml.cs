@@ -42,18 +42,18 @@ namespace DDFight.Game.Fight.Display
         private void GeneralInfoFightUserControl_Loaded(object sender, RoutedEventArgs e)
         {
             DataContext = _turnManager;
-            _turnManager.TurnStarted += FightContext_NewTurnStarted;
+            _turnManager.TurnStarted += OnNewTurnStarted;
             SetCharactersTurnName();
         }
 
-        private void FightContext_NewTurnStarted(object sender, TurnStartedEventArgs args)
+        private void OnNewTurnStarted(object sender, TurnStartedEventArgs args)
         {
             CharacterTurnTextboxCountrol.Text = "Turn of: " + args.EntityName;
         }
 
         public void UnregisterToAll()
         {
-            _turnManager.TurnStarted -= FightContext_NewTurnStarted;
+            _turnManager.TurnStarted -= OnNewTurnStarted;
         }
 
         private void AddToFightButton_Click(object sender, RoutedEventArgs e)
