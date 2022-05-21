@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:input="clr-namespace:DDFight.Controlers.InputBoxes"
              xmlns:characteristics="clr-namespace:DDFight.Controlers.Game.Characteristics"
              xmlns:converters="clr-namespace:DDFight.Converters"
              xmlns:inttextboxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.IntTextBoxes;assembly=WpfCustomControlLibrary"
@@ -94,15 +93,39 @@
                         Visibility="{Binding Converter={StaticResource VisibleIfCharacterConverter}}"/>
 
 
-                    <TextBlock 
-                        Grid.Row="2" Grid.Column="0">
-                        Armor class
+                    <TextBlock
+                        Grid.Column="0" Grid.Row="2">
+                        Base Armor class
                     </TextBlock>
-                    <inttextboxes:PositiveIntTextBoxControl 
-                        x:Name="CABoxUserControl" 
-                        Grid.Row="2" Grid.Column="1" 
-                        Margin="0, 5, 10, 5" 
-                        Integer="{Binding CA}"/>
+
+                    <StackPanel 
+                        Grid.Column="1" Grid.Row="2"
+                        Orientation="Horizontal">
+                        <inttextboxes:PositiveIntTextBoxControl 
+                            x:Name="CABoxUserControl" 
+                            Width="40"
+                            Integer="{Binding CA}"/>
+                        <TextBlock
+                            Margin="15 0 0 0">
+                            Has a shield:
+                        </TextBlock>
+
+                        <checkboxes:CheckBoxControl
+                            IsChecked="{Binding HasAShield}"
+                            VerticalAlignment="Center">
+                        </checkboxes:CheckBoxControl>
+
+                        <TextBlock
+                            Margin="15 0 0 0 ">
+                            Shield Value:
+                        </TextBlock>
+                        <inttextboxes:PositiveIntTextBoxControl 
+                            x:Name="ShieldValueTextBox" 
+                            Width="40"
+                            Integer="{Binding ShieldValue}"/>
+
+                    </StackPanel>
+
 
                     <TextBlock
                         Grid.Row="3" Grid.Column="0">

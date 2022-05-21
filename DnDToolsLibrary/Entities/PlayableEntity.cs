@@ -77,8 +77,12 @@ namespace DnDToolsLibrary.Entities
 
         #region Properties_Stats
 
+        [XmlIgnore] 
+        public uint EffectiveCA => CA + (HasAShield ? ShieldValue : 0);
+
         /// <summary>
         ///     Armor Class
+        /// WARNING: does not count the shield, only base CA
         /// </summary>
         [XmlAttribute]
         public uint CA
@@ -94,6 +98,36 @@ namespace DnDToolsLibrary.Entities
             }
         }
         private uint _cA = 10;
+
+        [XmlAttribute]
+        public bool HasAShield
+        {
+            get => _hasAShield;
+            set
+            {
+                if (value != _hasAShield)
+                {
+                    _hasAShield = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        private bool _hasAShield = false;
+
+        [XmlAttribute]
+        public uint ShieldValue
+        {
+            get => _shieldValue;
+            set
+            {
+                if (value != _shieldValue)
+                {
+                    _shieldValue = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        private uint _shieldValue = 2;
 
         #region Properties_Stats_Hp
 
@@ -588,6 +622,10 @@ namespace DnDToolsLibrary.Entities
                 return false;
             if (SpellHitModifier != toCompare.SpellHitModifier)
                 return false;
+            if (HasAShield != toCompare.HasAShield)
+                return false;
+            if (ShieldValue != toCompare.ShieldValue)
+                return false;
             return true;
         }
 
@@ -620,6 +658,8 @@ namespace DnDToolsLibrary.Entities
             TempHp = to_copy.TempHp;
             SpellHitModifier = to_copy.SpellHitModifier;
             AffectingStatusList = to_copy.AffectingStatusList.Clone() as StatusReferenceList;
+            HasAShield = to_copy.HasAShield;
+            ShieldValue = to_copy.ShieldValue;
         }
 
         /// <summary>

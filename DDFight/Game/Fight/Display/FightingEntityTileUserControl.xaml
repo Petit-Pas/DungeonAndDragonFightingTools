@@ -8,6 +8,7 @@
              xmlns:basetypes="clr-namespace:WpfToolsLibrary.Converters.BaseTypes;assembly=WpfToolsLibrary" 
              xmlns:converters="clr-namespace:DDFight.Converters"
              xmlns:converters2="clr-namespace:WpfToolsLibrary.Converters.Visibilities;assembly=WpfToolsLibrary"
+             xmlns:checkBoxes="clr-namespace:WpfCustomControlLibrary.CheckBoxes;assembly=WpfCustomControlLibrary"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -153,7 +154,18 @@
                 Boolean="{Binding IsFocused}"
                 Click="ConcentrationButton_OnClick"/>
 
-            <display:CustomVerboseStatusTileListUserControl Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"/>
+            <StackPanel
+                Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                Orientation="Horizontal"
+                Margin="10">
+                <TextBlock Margin="0 0 5 0">
+                    Has a Shield: 
+                </TextBlock>
+                <checkBoxes:CheckBoxControl
+                    IsChecked="{Binding HasAShield}">
+                </checkBoxes:CheckBoxControl>
+            </StackPanel>
+
             <display:StatusReferenceListTileUserControl Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"/>
         </Grid>
     </GroupBox>
