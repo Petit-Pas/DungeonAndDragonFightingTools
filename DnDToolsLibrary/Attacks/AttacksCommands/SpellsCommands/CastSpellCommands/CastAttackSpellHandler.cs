@@ -2,6 +2,7 @@
 using BaseToolsLibrary.Mediator;
 using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.AttackSpellResultsQueries;
 using DnDToolsLibrary.Attacks.Spells;
+using DnDToolsLibrary.BaseCommandHandlers;
 using DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageResultList;
 using DnDToolsLibrary.Fight;
 using DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands;
@@ -9,7 +10,7 @@ using System;
 
 namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellCommands
 {
-    public class CastAttackSpellHandler : SuperCommandHandlerBase<CastAttackSpellCommand, IMediatorCommandResponse>
+    public class CastAttackSpellHandler : SuperDndCommandHandler<CastAttackSpellCommand, IMediatorCommandResponse>
     {
         private static Lazy<IFightersProvider> _fighterProvider = new Lazy<IFightersProvider>(() => DIContainer.GetImplementation<IFightersProvider>());
 
@@ -21,13 +22,13 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
                 foreach (var attackSpellResult in command.SpellResults)
                 {
                     var damageCommand = new ApplyDamageResultListCommand(attackSpellResult.Target, attackSpellResult.HitDamage);
-                    _mediator.Value.Execute(damageCommand);
+                    Mediator.Execute(damageCommand);
                     command.PushToInnerCommands(damageCommand);
 
                     foreach (var status in attackSpellResult.AppliedStatusList)
                     {
                         var statusCommand = new TryApplyStatusCommand(command.CasterName, attackSpellResult.TargetName, status);
-                        _mediator.Value.Execute(statusCommand);
+                        Mediator.Execute(statusCommand);
                         command.PushToInnerCommands(statusCommand);
                     }
                 }
@@ -49,7 +50,7 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
             }
 
             var query = new AttackSpellResultsQuery(command.Spell.DisplayName, command.CastLevel, spellResults);
-            var response = _mediator.Value.Execute(query) as ValidableResponse<AttackSpellResults>;
+            var response = Mediator.Execute(query) as ValidableResponse<AttackSpellResults>;
 
             command.SpellResults = response.IsValid ? response.Response : null;
 

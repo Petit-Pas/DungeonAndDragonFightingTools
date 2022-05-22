@@ -1,26 +1,23 @@
 ﻿using System;
-using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.Mediator;
+using DnDToolsLibrary.BaseCommandHandlers;
 using DnDToolsLibrary.Dice;
 using DnDToolsLibrary.Dice.DiceCommancs.SavingThrowCommands.SavingThrowQueries;
 using DnDToolsLibrary.Entities.EntitiesCommands.StatusCommands.RemoveStatus;
 
 namespace DnDToolsLibrary.Status.StatusCommands.EndStatusCommands.RetrySavingCommands
 {
-    internal class RetrySavingCommandHandler : SuperCommandHandlerBase<RetrySavingCommand, IMediatorCommandResponse>
+    internal class RetrySavingCommandHandler : SuperDndCommandHandler<RetrySavingCommand, IMediatorCommandResponse>
     {
-        private static readonly Lazy<IStatusProvider> _lazyStatusProvider = new Lazy<IStatusProvider>(DIContainer.GetImplementation<IStatusProvider>);
-        private static IStatusProvider _statusProvider => _lazyStatusProvider.Value;
-
         public override IMediatorCommandResponse Execute(RetrySavingCommand command)
         {
-            var status = _statusProvider.GetOnHitStatusById(command.StatusId);
+            var status = StatusProvider.GetOnHitStatusById(command.StatusId);
 
             if (status != null)
             {
                 var saving = status.GetSavingThrow(status.Caster, status.Target);
                 var savingThrowQuery = new SavingThrowQuery(saving, $"{status.TargetName} attempts to end the {status.DisplayName} status...");
-                var savingResult = _mediator.Value.Execute(savingThrowQuery) as ValidableResponse<SavingThrow>;
+                var savingResult = Mediator.Execute(savingThrowQuery) as ValidableResponse<SavingThrow>;
 
                 if (savingResult?.IsValid == false)
                 {
@@ -32,7 +29,7 @@ namespace DnDToolsLibrary.Status.StatusCommands.EndStatusCommands.RetrySavingCom
                     var removeStatusCommand = new RemoveStatusCommand(status.Id, status.TargetName);
 
                     command.PushToInnerCommands(removeStatusCommand);
-                    _mediator.Value.Execute(removeStatusCommand);
+                    Mediator.Execute(removeStatusCommand);
                     return MediatorCommandStatii.Success;
                 }
                 else

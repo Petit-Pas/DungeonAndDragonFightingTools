@@ -9,10 +9,11 @@ using DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageResultL
 using DnDToolsLibrary.Dice;
 using DnDToolsLibrary.Dice.DiceCommancs.SavingThrowCommands.SavingThrowQueries;
 using DnDToolsLibrary.Entities.EntitiesCommands.StatusCommands.AddStatus;
+using DnDToolsLibrary.BaseCommandHandlers;
 
 namespace DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands
 {
-    public class TryApplyStatusCommandHandler : SuperCommandHandlerBase<TryApplyStatusCommand, IMediatorCommandResponse>
+    public class TryApplyStatusCommandHandler : SuperDndCommandHandler<TryApplyStatusCommand, IMediatorCommandResponse>
     {
         private Lazy<IFightersProvider> _fighterProvider = new Lazy<IFightersProvider>(() => DIContainer.GetImplementation<IFightersProvider>());
 
@@ -30,7 +31,7 @@ namespace DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands
                     SavingThrowQuery savingQuery = new SavingThrowQuery(
                         new SavingThrow(command.Status.ApplySavingCharacteristic, command.Status.ApplySavingDifficulty, command.Status.TargetName),
                         "Saving from Status application");
-                    ValidableResponse<SavingThrow> response = _mediator.Value.Execute(savingQuery) as ValidableResponse<SavingThrow>;
+                    ValidableResponse<SavingThrow> response = Mediator.Execute(savingQuery) as ValidableResponse<SavingThrow>;
 
                     if (!response.IsValid)
                         return MediatorCommandStatii.Canceled;
@@ -68,12 +69,12 @@ namespace DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands
             }
 
             DamageResultListQuery damageQuery = new DamageResultListQuery(damageResultList, $"The status {command.Status.DisplayName} inflicted by {command.Status.CasterName} will inflict damage to {command.Status.TargetName}.");
-            ValidableResponse<GetInputDamageResultListResponse> damageQueryResponse = _mediator.Value.Execute(damageQuery) as ValidableResponse<GetInputDamageResultListResponse>;
+            ValidableResponse<GetInputDamageResultListResponse> damageQueryResponse = Mediator.Execute(damageQuery) as ValidableResponse<GetInputDamageResultListResponse>;
 
             if (damageQueryResponse.IsValid)
             {
                 ApplyDamageResultListCommand applyOnHitCommand = new ApplyDamageResultListCommand(target, damageQueryResponse.Response.DamageResultList, savingIsSuccess);
-                _mediator.Value.Execute(applyOnHitCommand);
+                Mediator.Execute(applyOnHitCommand);
                 command.PushToInnerCommands(applyOnHitCommand);
             }
         }
@@ -87,7 +88,7 @@ namespace DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands
             }
 
             var command = new AddStatusCommand(target, initialCommand.Status);
-            _mediator.Value.Execute(command);
+            Mediator.Execute(command);
             initialCommand.PushToInnerCommands(command);
         }
     }

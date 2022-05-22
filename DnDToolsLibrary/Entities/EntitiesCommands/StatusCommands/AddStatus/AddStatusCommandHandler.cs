@@ -1,13 +1,14 @@
 ﻿using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.IO;
 using BaseToolsLibrary.Mediator;
+using DnDToolsLibrary.BaseCommandHandlers;
 using DnDToolsLibrary.Status;
 using System;
 using System.Linq;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.StatusCommands.AddStatus
 {
-    public class AddStatusCommandHandler : BaseMediatorHandler<AddStatusCommand, IMediatorCommandResponse>
+    public class AddStatusCommandHandler : BaseDndCommandHandler<AddStatusCommand, IMediatorCommandResponse>
     {
         private static readonly Lazy<ICustomConsole> _console = new Lazy<ICustomConsole>(DIContainer.GetImplementation<ICustomConsole>);
         private static readonly Lazy<IFontWeightProvider> _fontWeightProvider = new Lazy<IFontWeightProvider>(DIContainer.GetImplementation<IFontWeightProvider>);

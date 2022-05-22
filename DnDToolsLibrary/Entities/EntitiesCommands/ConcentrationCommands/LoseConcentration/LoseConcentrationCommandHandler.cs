@@ -1,17 +1,13 @@
-﻿using BaseToolsLibrary.DependencyInjection;
-using BaseToolsLibrary.Mediator;
+﻿using BaseToolsLibrary.Mediator;
+using DnDToolsLibrary.BaseCommandHandlers;
 using DnDToolsLibrary.Entities.EntitiesCommands.StatusCommands.RemoveStatus;
 using DnDToolsLibrary.Status;
-using System;
 using System.Linq;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.LoseConcentration
 {
-    public class LoseConcentrationCommandHandler : SuperCommandHandlerBase<LoseConcentrationCommand, IMediatorCommandResponse>
+    public class LoseConcentrationCommandHandler : SuperDndCommandHandler<LoseConcentrationCommand, IMediatorCommandResponse>
     {
-        private IStatusProvider _statusProvider { get => __lazyStatusProvider.Value; }
-        private Lazy<IStatusProvider> __lazyStatusProvider = new Lazy<IStatusProvider>(() => DIContainer.GetImplementation<IStatusProvider>());
-
         public override IMediatorCommandResponse Execute(LoseConcentrationCommand command)
         {
             PlayableEntity entity = command.GetEntity();
@@ -24,12 +20,12 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.LoseCo
             entity.IsFocused = false;
 
             // removes the statuses that were applied by entity AND required concentration
-            var statuses = _statusProvider.GetOnHitStatusesAppliedBy(entity.DisplayName).Where(x => x.EndsOnCasterLossOfConcentration).ToList();
+            var statuses = StatusProvider.GetOnHitStatusesAppliedBy(entity.DisplayName).Where(x => x.EndsOnCasterLossOfConcentration).ToList();
             foreach (OnHitStatus status in statuses)
             {
                 RemoveStatusCommand innerCommand = new RemoveStatusCommand(status.Id, status.Target.DisplayName);
                 command.PushToInnerCommands(innerCommand);
-                _mediator.Value.Execute(innerCommand);
+                Mediator.Execute(innerCommand);
             }
             return MediatorCommandStatii.Success;
         }

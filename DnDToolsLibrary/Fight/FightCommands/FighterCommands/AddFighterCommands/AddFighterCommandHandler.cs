@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Linq;
-using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.Mediator;
+using DnDToolsLibrary.BaseCommandHandlers;
 using DnDToolsLibrary.Entities;
 
 namespace DnDToolsLibrary.Fight.FightCommands.FighterCommands.AddFighterCommands
 {
-    public class AddFighterCommandHandler : BaseMediatorHandler<AddFighterCommand, IMediatorCommandResponse>
+    public class AddFighterCommandHandler : BaseDndCommandHandler<AddFighterCommand, IMediatorCommandResponse>
     {
-        private Lazy<IFightersProvider> _lazyFighterProvider = new(DIContainer.GetImplementation<IFightersProvider>);
-        private IFightersProvider FightersProvider => _lazyFighterProvider.Value;
-
         public override IMediatorCommandResponse Execute(AddFighterCommand genericCommand)
         {
             if (genericCommand.Entity is Monster monster)

@@ -1,8 +1,9 @@
 ﻿using BaseToolsLibrary.Mediator;
+using DnDToolsLibrary.BaseCommandHandlers;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.ActionCommands;
 
-public class InvertActionAvailabilityCommandHandler : SuperCommandHandlerBase<InvertActionAvailabilityCommand, IMediatorCommandResponse>
+public class InvertActionAvailabilityCommandHandler : SuperDndCommandHandler<InvertActionAvailabilityCommand, IMediatorCommandResponse>
 {
     public override IMediatorCommandResponse Execute(InvertActionAvailabilityCommand command)
     {
@@ -19,7 +20,7 @@ public class InvertActionAvailabilityCommandHandler : SuperCommandHandlerBase<In
         }
 
         command.PushToInnerCommands(innerCommand);
-        _mediator.Value.Execute(innerCommand);
+        Mediator.Execute(innerCommand);
 
         return MediatorCommandStatii.NoResponse;
     }

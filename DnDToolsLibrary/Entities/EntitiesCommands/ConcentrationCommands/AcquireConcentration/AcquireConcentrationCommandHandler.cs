@@ -1,9 +1,10 @@
 ﻿using BaseToolsLibrary.Mediator;
+using DnDToolsLibrary.BaseCommandHandlers;
 using DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.LoseConcentration;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.AcquireConcentration
 {
-    public class AcquireConcentrationCommandHandler : SuperCommandHandlerBase<AcquireConcentrationCommand, IMediatorCommandResponse>
+    public class AcquireConcentrationCommandHandler : SuperDndCommandHandler<AcquireConcentrationCommand, IMediatorCommandResponse>
     {
         public override IMediatorCommandResponse Execute(AcquireConcentrationCommand command)
         {
@@ -15,7 +16,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.Acquir
             {
                 // will take care of removing already applied statuses
                 var loseConcentrationCommand = new LoseConcentrationCommand(entity.DisplayName);
-                _mediator.Value.Execute(loseConcentrationCommand);
+                Mediator.Execute(loseConcentrationCommand);
                 command.PushToInnerCommands(loseConcentrationCommand);
             }
 

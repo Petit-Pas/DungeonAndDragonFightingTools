@@ -1,9 +1,10 @@
 ﻿using System;
 using BaseToolsLibrary.Mediator;
+using DnDToolsLibrary.BaseCommandHandlers;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.BonusActionCommands;
 
-public class RemoveBonusActionCommandHandler : BaseMediatorHandler<RemoveBonusActionCommand, IMediatorCommandResponse>
+public class RemoveBonusActionCommandHandler : BaseDndCommandHandler<RemoveBonusActionCommand, IMediatorCommandResponse>
 {
     public override IMediatorCommandResponse Execute(RemoveBonusActionCommand command)
     {

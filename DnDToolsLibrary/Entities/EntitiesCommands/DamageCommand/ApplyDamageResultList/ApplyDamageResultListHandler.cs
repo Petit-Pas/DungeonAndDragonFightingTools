@@ -1,8 +1,8 @@
 ﻿using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.IO;
-using BaseToolsLibrary.Mediator;
 using DnDToolsLibrary.Attacks.Damage;
 using DnDToolsLibrary.Attacks.Damage.Type;
+using DnDToolsLibrary.BaseCommandHandlers;
 using DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.TakeDamage;
 using System;
 using System.Linq;
@@ -10,7 +10,7 @@ using static DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamage
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageResultList
 {
-    public class ApplyDamageResultListHandler : SuperCommandHandlerBase<ApplyDamageResultListCommand, ApplyDamageResultListResponse>
+    public class ApplyDamageResultListHandler : SuperDndCommandHandler<ApplyDamageResultListCommand, ApplyDamageResultListResponse>
     {
         private static Lazy<ICustomConsole> console = new Lazy<ICustomConsole>(() => DIContainer.GetImplementation<ICustomConsole>());
         private static Lazy<IFontWeightProvider> fontWeightProvider = new Lazy<IFontWeightProvider>(() => DIContainer.GetImplementation<IFontWeightProvider>());
@@ -88,7 +88,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageRes
                 console.Value.AddEntry("\r\n");
 
                 TakeDamageCommand inner_command = new TakeDamageCommand(target, total);
-                _mediator.Value.Execute(inner_command);
+                Mediator.Execute(inner_command);
                 command.PushToInnerCommands(inner_command);
             }
             return new ApplyDamageResultListResponse(total);

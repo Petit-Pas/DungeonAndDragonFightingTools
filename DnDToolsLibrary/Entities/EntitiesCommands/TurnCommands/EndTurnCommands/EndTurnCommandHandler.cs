@@ -1,17 +1,11 @@
-﻿using System;
-using System.Linq;
-using BaseToolsLibrary.DependencyInjection;
+﻿using System.Linq;
 using BaseToolsLibrary.Mediator;
-using DnDToolsLibrary.Fight;
 using DnDToolsLibrary.Fight.Events;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.TurnCommands.EndTurnCommands
 {
     public class EndTurnCommandHandler : BaseTurnCommandHandler<EndTurnCommand>
     {
-        private static Lazy<ITurnManager> _lazyTurnManager = new(DIContainer.GetImplementation<ITurnManager>);
-        private static ITurnManager _turnManager => _lazyTurnManager.Value;
-
         public override IMediatorCommandResponse Execute(EndTurnCommand command)
         {
             HandleAffectingStatii(command);
@@ -31,12 +25,12 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.TurnCommands.EndTurnCommands
             entity.InvokeTurnEnded(eventArgs);
 
             // notifying through the turnManager => broader for controls that have all fighters as DataContext
-            _turnManager.InvokeTurnEnded(eventArgs);
+            TurnManager.InvokeTurnEnded(eventArgs);
         }
 
         private static void HandleAffectingStatii(EndTurnCommand command)
         {
-            var affectingStatii = _statusProvider.GetOnHitStatusesAppliedOn(command.GetEntityName()).ToArray();
+            var affectingStatii = StatusProvider.GetOnHitStatusesAppliedOn(command.GetEntityName()).ToArray();
 
             TriggerDot(command, affectingStatii.Where(x =>
                     x.DotDamageList.Any(dot => dot.TriggersEndOfTurn && dot.TriggersOnAffectedsTurn)),
@@ -51,7 +45,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.TurnCommands.EndTurnCommands
 
         private static void HandleAppliedStatii(EndTurnCommand command)
         {
-            var appliedStatii = _statusProvider.GetOnHitStatusesAppliedBy(command.GetEntityName()).ToArray();
+            var appliedStatii = StatusProvider.GetOnHitStatusesAppliedBy(command.GetEntityName()).ToArray();
 
             TriggerDot(command, appliedStatii.Where(x =>
                     x.DotDamageList.Any(dot => dot.TriggersEndOfTurn && dot.TriggersOnCastersTurn)),
@@ -72,7 +66,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.TurnCommands.EndTurnCommands
             entity.InvokeTurnStarted(eventArgs);
 
             // notifying through the turnManager => broader for controls that have all fighters as DataContext
-            _turnManager.InvokeTurnStarted(eventArgs);
+            TurnManager.InvokeTurnStarted(eventArgs);
         }
     }
 }

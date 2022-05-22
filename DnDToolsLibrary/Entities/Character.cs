@@ -2,7 +2,6 @@
 using BaseToolsLibrary;
 using DnDToolsLibrary.Status;
 using System.Linq;
-using System.Net.NetworkInformation;
 using System.Xml.Serialization;
 using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.Mediator;
@@ -16,6 +15,12 @@ namespace DnDToolsLibrary.Entities
     /// </summary>
     public class Character : PlayableEntity, IEquivalentComparable<Character>
     {
+        private static readonly Lazy<IStatusProvider> _statusProvider = new(DIContainer.GetImplementation<IStatusProvider>());
+        protected static IStatusProvider StatusProvider => _statusProvider.Value;
+        
+        private static readonly Lazy<IMediator> _mediator = new(DIContainer.GetImplementation<IMediator>);
+        protected static IMediator Mediator => _mediator.Value;
+        
         public Character() : base()
         {
         }
@@ -66,16 +71,16 @@ namespace DnDToolsLibrary.Entities
             if (IsFocused)
             {
                 var loseConcentrationCommand = new LoseConcentrationCommand(this.DisplayName);
-                _mediator.Execute(loseConcentrationCommand);
+                Mediator.Execute(loseConcentrationCommand);
             }
             InitiativeRoll = 0;
-            var affectingStatus = _statusProvider.GetOnHitStatusesAppliedOn(DisplayName).ToArray();
+            var affectingStatus = StatusProvider.GetOnHitStatusesAppliedOn(DisplayName).ToArray();
             foreach (var status in affectingStatus)
             {
                 if (status.HasEndCondition())
                 {
                     var removeStatusCommand = new RemoveStatusCommand(status.Id, DisplayName);
-                    _mediator.Execute(removeStatusCommand);
+                    Mediator.Execute(removeStatusCommand);
                 }
             }
         }

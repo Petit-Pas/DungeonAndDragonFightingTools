@@ -1,23 +1,19 @@
 ﻿using System;
 using System.Linq;
-using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.Mediator;
 using DnDToolsLibrary.Attacks.AttacksCommands.DamageCommands.DamageResultListQueries;
 using DnDToolsLibrary.Attacks.Damage;
+using DnDToolsLibrary.BaseCommandHandlers;
 using DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageResultList;
 using DnDToolsLibrary.Entities.EntitiesCommands.StatusCommands.ApplyDotCommands;
 
 namespace DnDToolsLibrary.Status.StatusCommands.ApplyDotCommands
 {
-    public class ApplyDotCommandHandler : SuperCommandHandlerBase<ApplyDotCommand, IMediatorCommandResponse>
+    public class ApplyDotCommandHandler : SuperDndCommandHandler<ApplyDotCommand, IMediatorCommandResponse>
     {
-
-        private static readonly Lazy<IStatusProvider> _lazyStatusProvider = new (DIContainer.GetImplementation<IStatusProvider>);
-        private static  IStatusProvider _statusProvider => _lazyStatusProvider.Value;
-
         public override IMediatorCommandResponse Execute(ApplyDotCommand command)
         {
-            var status = _statusProvider.GetOnHitStatusById(command.StatusReference);
+            var status = StatusProvider.GetOnHitStatusById(command.StatusReference);
             if (status == null)
             {
                 Console.WriteLine("Error: Something went wrong when trying to execute ApplyDotCommand for status: " +
@@ -29,14 +25,14 @@ namespace DnDToolsLibrary.Status.StatusCommands.ApplyDotCommands
 
             if (damageQuery.DamageList.Count != 0)
             {
-                var response = _mediator.Value.Execute(damageQuery) as ValidableResponse<GetInputDamageResultListResponse>;
+                var response = Mediator.Execute(damageQuery) as ValidableResponse<GetInputDamageResultListResponse>;
                 if (response == null || response.IsValid == false)
                 {
                     return MediatorCommandStatii.Canceled;
                 }
 
                 var applyDamageCommand = new ApplyDamageResultListCommand(status.TargetName, response.Response.DamageResultList);
-                _mediator.Value.Execute(applyDamageCommand);
+                Mediator.Execute(applyDamageCommand);
                 command.PushToInnerCommands(applyDamageCommand);
                 return MediatorCommandStatii.Success;
             }

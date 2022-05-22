@@ -1,10 +1,11 @@
 ﻿using BaseToolsLibrary.Mediator;
+using DnDToolsLibrary.BaseCommandHandlers;
 using DnDToolsLibrary.Entities.EntitiesCommands.InspirationCommands.AcquireInspiration;
 using DnDToolsLibrary.Entities.EntitiesCommands.InspirationCommands.LoseInspiration;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.InspirationCommands.InvertInspiration
 {
-    public class InvertInspirationCommandHandler : SuperCommandHandlerBase<InvertInspirationCommand, IMediatorCommandResponse>
+    public class InvertInspirationCommandHandler : SuperDndCommandHandler<InvertInspirationCommand, IMediatorCommandResponse>
     {
         public override IMediatorCommandResponse Execute(InvertInspirationCommand command)
         {
@@ -27,7 +28,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.InspirationCommands.InvertIn
                     innerCommand = new AcquireInspirationCommand(character.DisplayName);
                 }
 
-                _mediator.Value.Execute(innerCommand);
+                Mediator.Execute(innerCommand);
                 command.PushToInnerCommands(innerCommand);
 
                 return MediatorCommandStatii.NoResponse;

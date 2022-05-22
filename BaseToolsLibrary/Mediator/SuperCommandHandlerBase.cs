@@ -11,7 +11,9 @@ namespace BaseToolsLibrary.Mediator
         where TCommand : SuperCommandBase
         where TResponse : class, IMediatorCommandResponse
     {
-        protected static Lazy<IMediator> _mediator = new Lazy<IMediator>(() => DIContainer.GetImplementation<IMediator>());
+
+        private static readonly Lazy<IMediator> _mediator = new(DIContainer.GetImplementation<IMediator>);
+        protected static IMediator Mediator => _mediator.Value;
 
         public SuperCommandHandlerBase()
         {

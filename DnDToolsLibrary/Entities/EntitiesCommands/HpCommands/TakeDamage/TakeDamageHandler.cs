@@ -1,13 +1,14 @@
 ﻿using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.IO;
 using BaseToolsLibrary.Mediator;
+using DnDToolsLibrary.BaseCommandHandlers;
 using DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.LooseHp;
 using DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.LooseTempHp;
 using System;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.TakeDamage
 {
-    public class TakeDamageHandler : SuperCommandHandlerBase<TakeDamageCommand, IMediatorCommandResponse>
+    public class TakeDamageHandler : SuperDndCommandHandler<TakeDamageCommand, IMediatorCommandResponse>
     {
         private static readonly Lazy<ICustomConsole> console = new Lazy<ICustomConsole>(() => DIContainer.GetImplementation<ICustomConsole>());
         private static readonly Lazy<IFontWeightProvider> fontWeightProvider = new Lazy<IFontWeightProvider>(() => DIContainer.GetImplementation<IFontWeightProvider>());
@@ -39,7 +40,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.TakeDamage
         {
             LooseHpCommand inner_command = new LooseHpCommand(target, remaining);
 
-            _mediator.Value.Execute(inner_command);
+            Mediator.Execute(inner_command);
             command.PushToInnerCommands(inner_command);
         }
 
@@ -49,7 +50,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.TakeDamage
 
             LooseTempHpCommand inner_command = new LooseTempHpCommand(target, amount);
 
-            _mediator.Value.Execute(inner_command);
+            Mediator.Execute(inner_command);
             command.PushToInnerCommands(inner_command);
 
             return remaining - amount;

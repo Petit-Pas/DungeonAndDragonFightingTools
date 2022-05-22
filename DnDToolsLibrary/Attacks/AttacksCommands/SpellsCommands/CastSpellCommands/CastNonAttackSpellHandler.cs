@@ -8,11 +8,11 @@ using DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands;
 using System;
 using System.Linq;
 using DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.AcquireConcentration;
-using DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.LoseConcentration;
+using DnDToolsLibrary.BaseCommandHandlers;
 
 namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellCommands
 {
-    public class CastNonAttackSpellHandler : SuperCommandHandlerBase<CastNonAttackSpellCommand, IMediatorCommandResponse>
+    public class CastNonAttackSpellHandler : SuperDndCommandHandler<CastNonAttackSpellCommand, IMediatorCommandResponse>
     {
         private static Lazy<IFightersProvider> _fighterProvider = new Lazy<IFightersProvider>(() => DIContainer.GetImplementation<IFightersProvider>());
 
@@ -24,7 +24,7 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
                 {
                     // TODO this is not tested either
                     var acquireConcentrationCommand = new AcquireConcentrationCommand(command.CasterName);
-                    _mediator.Value.Execute(acquireConcentrationCommand);
+                    Mediator.Execute(acquireConcentrationCommand);
                     command.PushToInnerCommands(acquireConcentrationCommand);
                 }
 
@@ -32,13 +32,13 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
                 {
                     // TODO the fact that the saving is passed is not tested
                     var damageCommand = new ApplyDamageResultListCommand(spellResult.Target, spellResult.HitDamage, spellResult.Saving?.IsSuccesful ?? false);
-                    _mediator.Value.Execute(damageCommand);
+                    Mediator.Execute(damageCommand);
                     command.PushToInnerCommands(damageCommand);
 
                     foreach (var status in spellResult.AppliedStatusList)
                     {
                         var statusCommand = new TryApplyStatusCommand(spellResult.CasterName, spellResult.TargetName, status, spellResult.Saving);
-                        _mediator.Value.Execute(statusCommand);
+                        Mediator.Execute(statusCommand);
                         command.PushToInnerCommands(statusCommand);
                     }
                 }
@@ -60,7 +60,7 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
             }
 
             var query = new NonAttackSpellResultsQuery(template, spellResults);
-            var response = _mediator.Value.Execute(query) as ValidableResponse<NonAttackSpellResults>;
+            var response = Mediator.Execute(query) as ValidableResponse<NonAttackSpellResults>;
 
             command.SpellResults = response.IsValid ? response.Response : null;
 

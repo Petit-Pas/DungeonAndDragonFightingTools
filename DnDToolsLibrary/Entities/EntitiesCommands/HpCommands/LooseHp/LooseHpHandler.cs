@@ -1,10 +1,11 @@
 ﻿using BaseToolsLibrary.Mediator;
+using DnDToolsLibrary.BaseCommandHandlers;
 using DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.ChallengeConcentration;
 using System;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.LooseHp
 {
-    public class LooseHpHandler : SuperCommandHandlerBase<LooseHpCommand, IMediatorCommandResponse>
+    public class LooseHpHandler : SuperDndCommandHandler<LooseHpCommand, IMediatorCommandResponse>
     {
         public override IMediatorCommandResponse Execute(LooseHpCommand command)
         {
@@ -19,7 +20,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.LooseHp
             if (target.IsFocused && (target.Hp <= 0 || command.Amount > 0))
             {
                 ChallengeConcentrationCommand concentrationCommand = new ChallengeConcentrationCommand(target.DisplayName);
-                _mediator.Value.Execute(concentrationCommand);
+                Mediator.Execute(concentrationCommand);
                 command.PushToInnerCommands(concentrationCommand);
             }
 

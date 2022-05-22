@@ -1,33 +1,35 @@
 ﻿using System;
 using BaseToolsLibrary.Mediator;
+using DnDToolsLibrary.BaseCommandHandlers;
 
-namespace DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.ReactionCommands;
-
-public class RemoveReactionCommandHandler : BaseMediatorHandler<RemoveReactionCommand, IMediatorCommandResponse>
+namespace DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.ReactionCommands
 {
-    public override IMediatorCommandResponse Execute(RemoveReactionCommand command)
+    public class RemoveReactionCommandHandler : BaseDndCommandHandler<RemoveReactionCommand, IMediatorCommandResponse>
     {
-        var target = command.GetEntity();
-
-        if (target.HasReaction)
+        public override IMediatorCommandResponse Execute(RemoveReactionCommand command)
         {
-            target.HasReaction = false;
-            command.CommandStatus = MediatorCommandStatii.Success;
+            var target = command.GetEntity();
+
+            if (target.HasReaction)
+            {
+                target.HasReaction = false;
+                command.CommandStatus = MediatorCommandStatii.Success;
+            }
+            else
+            {
+                Console.WriteLine($"WARN: trying to remove action for {target.DisplayName} while he has none");
+                command.CommandStatus = MediatorCommandStatii.Canceled;
+            }
+
+            return command.CommandStatus;
         }
-        else
-        {
-            Console.WriteLine($"WARN: trying to remove action for {target.DisplayName} while he has none");
-            command.CommandStatus = MediatorCommandStatii.Canceled;
-        }
 
-        return command.CommandStatus;
-    }
-
-    public override void Undo(RemoveReactionCommand command)
-    {
-        if (command.CommandStatus == MediatorCommandStatii.Success)
+        public override void Undo(RemoveReactionCommand command)
         {
-            command.GetEntity().HasReaction = true;
+            if (command.CommandStatus == MediatorCommandStatii.Success)
+            {
+                command.GetEntity().HasReaction = true;
+            }
         }
     }
 }

@@ -1,11 +1,12 @@
 ﻿using BaseToolsLibrary.Mediator;
+using DnDToolsLibrary.BaseCommandHandlers;
 using DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageResultList;
 using DnDToolsLibrary.Status;
 using DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands;
 
 namespace DnDToolsLibrary.Attacks.AttacksCommands.HitAttackCommands.ApplyHitAttackResult
 {
-    public class ApplyHitAttackResultHandler : SuperCommandHandlerBase<ApplyHitAttackResultCommand, IMediatorCommandResponse>
+    public class ApplyHitAttackResultHandler : SuperDndCommandHandler<ApplyHitAttackResultCommand, IMediatorCommandResponse>
     {
         public override IMediatorCommandResponse Execute(ApplyHitAttackResultCommand command)
         {
@@ -26,7 +27,7 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.HitAttackCommands.ApplyHitAtta
             foreach (OnHitStatus status in command.HitAttackResult.OnHitStatuses)
             {
                 var statusCommand = new TryApplyStatusCommand(command.HitAttackResult.OwnerName, command.HitAttackResult.TargetName, status);
-                _mediator.Value.Execute(statusCommand);
+                Mediator.Execute(statusCommand);
                 command.PushToInnerCommands(statusCommand);
             }
         }
@@ -34,8 +35,8 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.HitAttackCommands.ApplyHitAtta
         private void apply_damage(ApplyHitAttackResultCommand command)
         {
             ApplyDamageResultListCommand _command = new ApplyDamageResultListCommand(command.HitAttackResult.Target, command.HitAttackResult.DamageList);
-            
-            _mediator.Value.Execute(_command);
+
+            Mediator.Execute(_command);
 
             _command.PushToInnerCommands(_command);
         }

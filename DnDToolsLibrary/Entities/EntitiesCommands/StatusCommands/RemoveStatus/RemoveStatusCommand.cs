@@ -6,12 +6,12 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.StatusCommands.RemoveStatus
 {
     public class RemoveStatusCommand : EntityCommand
     {
-        private IStatusProvider _statusProvider { get => __lazyStatusProvider.Value; }
-        private Lazy<IStatusProvider> __lazyStatusProvider = new Lazy<IStatusProvider>(() => DIContainer.GetImplementation<IStatusProvider>());
+        private static readonly Lazy<IStatusProvider> _statusProvider = new(DIContainer.GetImplementation<IStatusProvider>());
+        protected static IStatusProvider StatusProvider => _statusProvider.Value;
 
         public RemoveStatusCommand(Guid statusReference, string affectedEntity) : base(affectedEntity)
         {
-            Status = _statusProvider.GetStatusById(statusReference);
+            Status = StatusProvider.GetStatusById(statusReference);
         }
 
         public CustomVerboseStatus Status { get; set; }

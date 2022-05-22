@@ -1,7 +1,6 @@
 ﻿using BaseToolsLibrary;
 using System.Xml.Serialization;
 using DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.LoseConcentration;
-using DnDToolsLibrary.Entities.EntitiesCommands.StatusCommands.RemoveStatus;
 
 namespace DnDToolsLibrary.Entities
 {
@@ -68,7 +67,7 @@ namespace DnDToolsLibrary.Entities
             if (IsFocused)
             {
                 var loseConcentrationCommand = new LoseConcentrationCommand(this.DisplayName);
-                _mediator.Execute(loseConcentrationCommand);
+                Mediator.Execute(loseConcentrationCommand);
             }
         }
 

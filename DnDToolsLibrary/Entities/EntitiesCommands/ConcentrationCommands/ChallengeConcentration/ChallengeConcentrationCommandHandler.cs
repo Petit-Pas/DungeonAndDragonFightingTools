@@ -1,11 +1,12 @@
 ﻿using BaseToolsLibrary.Mediator;
+using DnDToolsLibrary.BaseCommandHandlers;
 using DnDToolsLibrary.Dice;
 using DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.ConcentrationCheckQueries;
 using DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.LoseConcentration;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.ChallengeConcentration
 {
-    public class ChallengeConcentrationCommandHandler : SuperCommandHandlerBase<ChallengeConcentrationCommand, IMediatorCommandResponse>
+    public class ChallengeConcentrationCommandHandler : SuperDndCommandHandler<ChallengeConcentrationCommand, IMediatorCommandResponse>
     {
         public override IMediatorCommandResponse Execute(ChallengeConcentrationCommand command)
         {
@@ -17,7 +18,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.Challe
             }
 
             ConcentrationCheckQuery query = new ConcentrationCheckQuery(command.GetEntityName());
-            ValidableResponse<SavingThrow> queryResponse = _mediator.Value.Execute(query) as ValidableResponse<SavingThrow>;
+            ValidableResponse<SavingThrow> queryResponse = Mediator.Execute(query) as ValidableResponse<SavingThrow>;
 
             if (queryResponse.IsValid)
             {
@@ -26,7 +27,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.Challe
                 {
                     LoseConcentrationCommand loseConcentrationCommand = new LoseConcentrationCommand(command.GetEntityName());
                     command.InnerCommands.Push(loseConcentrationCommand);
-                    _mediator.Value.Execute(loseConcentrationCommand);
+                    Mediator.Execute(loseConcentrationCommand);
                 }
                 return MediatorCommandStatii.Success;
             }

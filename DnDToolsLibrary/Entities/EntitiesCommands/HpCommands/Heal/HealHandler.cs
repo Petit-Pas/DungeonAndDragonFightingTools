@@ -2,10 +2,11 @@
 using BaseToolsLibrary.IO;
 using BaseToolsLibrary.Mediator;
 using System;
+using DnDToolsLibrary.BaseCommandHandlers;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.Heal
 {
-    public class HealHandler : BaseMediatorHandler<HealCommand, IMediatorCommandResponse>
+    public class HealHandler : BaseDndCommandHandler<HealCommand, IMediatorCommandResponse>
     {
         private static Lazy<ICustomConsole> console = new Lazy<ICustomConsole>(DIContainer.GetImplementation<ICustomConsole>);
         private static Lazy<IFontWeightProvider> fontWeightProvider = new Lazy<IFontWeightProvider>(DIContainer.GetImplementation<IFontWeightProvider>);

@@ -3,12 +3,13 @@ using BaseToolsLibrary.Mediator;
 using BaseToolsLibrary.Mediator.CommandStatii;
 using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.SpellLevelQueries;
 using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.SpellTargetsQueries;
+using DnDToolsLibrary.BaseCommandHandlers;
 using DnDToolsLibrary.Fight;
 using System;
 
 namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellCommands
 {
-    public class CastSpellHandler : SuperCommandHandlerBase<CastSpellCommand, IMediatorCommandResponse>
+    public class CastSpellHandler : SuperDndCommandHandler<CastSpellCommand, IMediatorCommandResponse>
     {
         private static Lazy<IFightersProvider> _fighterProvider = new Lazy<IFightersProvider> (() => DIContainer.GetImplementation<IFightersProvider>());
 
@@ -23,12 +24,12 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
             if (command.Spell.IsAnAttack)
             {
                 var castAttackSpellCommand = new CastAttackSpellCommand(command.CasterName, command.Spell, command.CastLevel, command.TargetNames);
-                response = _mediator.Value.Execute(castAttackSpellCommand) as ValidableResponse<MediatorCommandNoResponse>;
+                response = Mediator.Execute(castAttackSpellCommand) as ValidableResponse<MediatorCommandNoResponse>;
             }
             else
             {
                 var castNonAttackSpellCommand = new CastNonAttackSpellCommand(command.CasterName, command.Spell, command.CastLevel, command.TargetNames);
-                response = _mediator.Value.Execute(castNonAttackSpellCommand) as ValidableResponse<MediatorCommandNoResponse>;
+                response = Mediator.Execute(castNonAttackSpellCommand) as ValidableResponse<MediatorCommandNoResponse>;
             }
             return MediatorCommandStatii.Success;
         }
@@ -42,7 +43,7 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
                 target_command.AmountTargets += command.Spell.AdditionalTargetPerLevel * (command.CastLevel - command.Spell.BaseLevel);
             }
             
-            ValidableResponse<SpellTargets> response = _mediator.Value.Execute(target_command) as ValidableResponse<SpellTargets>;
+            ValidableResponse<SpellTargets> response = Mediator.Execute(target_command) as ValidableResponse<SpellTargets>;
             
             if (response.IsValid)
                 command.TargetNames = response.Response.TargetNames;
@@ -58,7 +59,7 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
 
         private bool normalSpellLevelSelected(CastSpellCommand command)
         {
-            ValidableResponse<SpellLevel> response = _mediator.Value.Execute(new NormalSpellLevelQuery(command.Spell.BaseLevel)) as ValidableResponse<SpellLevel>;
+            ValidableResponse<SpellLevel> response = Mediator.Execute(new NormalSpellLevelQuery(command.Spell.BaseLevel)) as ValidableResponse<SpellLevel>;
             
             if (response.IsValid)
                 command.CastLevel = response.Response.Value;
@@ -67,7 +68,7 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
 
         private bool cantripLevelSelected(CastSpellCommand command)
         {
-            ValidableResponse<SpellLevel> response = _mediator.Value.Execute(new CantripLevelQuery()) as ValidableResponse<SpellLevel>;
+            ValidableResponse<SpellLevel> response = Mediator.Execute(new CantripLevelQuery()) as ValidableResponse<SpellLevel>;
             if (response.IsValid)
                 command.CastLevel = response.Response.Value;
             return response.IsValid;

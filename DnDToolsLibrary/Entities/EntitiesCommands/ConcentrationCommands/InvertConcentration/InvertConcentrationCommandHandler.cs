@@ -1,11 +1,12 @@
 ﻿
 using BaseToolsLibrary.Mediator;
+using DnDToolsLibrary.BaseCommandHandlers;
 using DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.AcquireConcentration;
 using DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.LoseConcentration;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.InvertConcentration
 {
-    public class InvertConcentrationCommandHandler : SuperCommandHandlerBase<InvertConcentrationCommand, IMediatorCommandResponse>
+    public class InvertConcentrationCommandHandler : SuperDndCommandHandler<InvertConcentrationCommand, IMediatorCommandResponse>
     {
         public override IMediatorCommandResponse Execute(InvertConcentrationCommand command)
         {
@@ -22,7 +23,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.Invert
             }
 
             command.PushToInnerCommands(innerCommand);
-            _mediator.Value.Execute(innerCommand);
+            Mediator.Execute(innerCommand);
 
             return MediatorCommandStatii.NoResponse;
         }

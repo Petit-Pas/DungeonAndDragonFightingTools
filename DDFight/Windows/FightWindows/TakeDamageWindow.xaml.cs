@@ -4,10 +4,8 @@ using DnDToolsLibrary.Entities;
 using System.Windows;
 using System.Windows.Input;
 using BaseToolsLibrary.DependencyInjection;
-using BaseToolsLibrary.IO;
 using BaseToolsLibrary.Mediator;
 using DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageResultList;
-using TempExtensionsPlayableEntity;
 using WpfToolsLibrary.Extensions;
 
 namespace DDFight.Windows.FightWindows

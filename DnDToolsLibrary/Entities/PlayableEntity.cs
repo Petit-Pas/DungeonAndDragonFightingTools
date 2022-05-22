@@ -20,11 +20,11 @@ namespace DnDToolsLibrary.Entities
 {
     public partial class PlayableEntity : INameable, ICopyAssignable, INotifyPropertyChanged, IDisposable, IEquivalentComparable<PlayableEntity>
     {
-        protected static Lazy<IMediator> _lazyMediator = new(DIContainer.GetImplementation<IMediator>);
-        protected static IMediator _mediator => _lazyMediator.Value;
+        private static readonly Lazy<IMediator> _mediator = new(DIContainer.GetImplementation<IMediator>);
+        protected static IMediator Mediator => _mediator.Value;
 
-        protected static Lazy<IStatusProvider> _lazyStatusProvider = new(DIContainer.GetImplementation<IStatusProvider>);
-        protected static IStatusProvider _statusProvider => _lazyStatusProvider.Value;
+        private static readonly Lazy<IStatusProvider> _statusProvider = new(DIContainer.GetImplementation<IStatusProvider>());
+        protected static IStatusProvider StatusProvider => _statusProvider.Value;
 
         public PlayableEntity()
         {

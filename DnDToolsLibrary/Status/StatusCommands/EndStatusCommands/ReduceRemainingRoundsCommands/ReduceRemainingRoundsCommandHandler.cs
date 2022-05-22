@@ -1,18 +1,14 @@
-﻿using System;
-using BaseToolsLibrary.DependencyInjection;
-using BaseToolsLibrary.Mediator;
+﻿using BaseToolsLibrary.Mediator;
+using DnDToolsLibrary.BaseCommandHandlers;
 using DnDToolsLibrary.Entities.EntitiesCommands.StatusCommands.RemoveStatus;
 
 namespace DnDToolsLibrary.Status.StatusCommands.EndStatusCommands.ReduceRemainingRoundsCommands
 {
-    public class ReduceRemainingRoundsCommandHandler : SuperCommandHandlerBase<ReduceRemainingRoundsCommand, IMediatorCommandResponse>
+    public class ReduceRemainingRoundsCommandHandler : SuperDndCommandHandler<ReduceRemainingRoundsCommand, IMediatorCommandResponse>
     {
-        private static readonly Lazy<IStatusProvider> _lazyStatusProvider = new Lazy<IStatusProvider>(DIContainer.GetImplementation<IStatusProvider>);
-        private static IStatusProvider _statusProvider => _lazyStatusProvider.Value;
-
         public override IMediatorCommandResponse Execute(ReduceRemainingRoundsCommand command)
         {
-            var status = _statusProvider.GetOnHitStatusById(command.StatusId);
+            var status = StatusProvider.GetOnHitStatusById(command.StatusId);
 
             if (status != null)
             {
@@ -22,7 +18,7 @@ namespace DnDToolsLibrary.Status.StatusCommands.EndStatusCommands.ReduceRemainin
                     var removeStatusCommand = new RemoveStatusCommand(status.Id, status.TargetName);
 
                     command.PushToInnerCommands(removeStatusCommand);
-                    _mediator.Value.Execute(removeStatusCommand);
+                    Mediator.Execute(removeStatusCommand);
                 }
                 return MediatorCommandStatii.Success;
             }
@@ -33,7 +29,7 @@ namespace DnDToolsLibrary.Status.StatusCommands.EndStatusCommands.ReduceRemainin
         public override void Undo(ReduceRemainingRoundsCommand command)
         {
             base.Undo(command);
-            var status = _statusProvider.GetOnHitStatusById(command.StatusId);
+            var status = StatusProvider.GetOnHitStatusById(command.StatusId);
 
             if (status != null)
             {
