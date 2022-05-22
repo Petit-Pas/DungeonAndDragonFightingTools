@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:WpfDnDCustomControlLibrary.Statuses"
         xmlns:stringTextBoxes="clr-namespace:WpfCustomControlLibrary.InputBoxes.StringTextBoxes;assembly=WpfCustomControlLibrary"
         mc:Ignorable="d"
-        Title="StatusReferenceEditWindow" Height="450" Width="800">
+        Title="StatusReferenceEditWindow" Height="450" Width="800"
+        Style="{StaticResource WindowStyle}">
     <Window.Resources>
         <ResourceDictionary>
             <Style TargetType="TextBlock" x:Key="LabelStyle">
