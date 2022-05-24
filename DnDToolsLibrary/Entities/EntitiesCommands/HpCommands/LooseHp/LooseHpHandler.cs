@@ -1,11 +1,11 @@
 ﻿using BaseToolsLibrary.Mediator;
-using DnDToolsLibrary.BaseCommandHandlers;
 using DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.ChallengeConcentration;
 using System;
+using DnDToolsLibrary.BaseCommands;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.LooseHp
 {
-    public class LooseHpHandler : SuperDndCommandHandler<LooseHpCommand, IMediatorCommandResponse>
+    public class LooseHpHandler : SuperDndCommandHandlerBase<LooseHpCommand, IMediatorCommandResponse>
     {
         public override IMediatorCommandResponse Execute(LooseHpCommand command)
         {

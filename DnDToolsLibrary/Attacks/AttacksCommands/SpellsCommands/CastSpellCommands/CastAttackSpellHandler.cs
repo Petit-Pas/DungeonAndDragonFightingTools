@@ -2,15 +2,15 @@
 using BaseToolsLibrary.Mediator;
 using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.AttackSpellResultsQueries;
 using DnDToolsLibrary.Attacks.Spells;
-using DnDToolsLibrary.BaseCommandHandlers;
 using DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageResultList;
 using DnDToolsLibrary.Fight;
 using DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands;
 using System;
+using DnDToolsLibrary.BaseCommands;
 
 namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellCommands
 {
-    public class CastAttackSpellHandler : SuperDndCommandHandler<CastAttackSpellCommand, IMediatorCommandResponse>
+    public class CastAttackSpellHandler : SuperDndCommandHandlerBase<CastAttackSpellCommand, IMediatorCommandResponse>
     {
         private static Lazy<IFightersProvider> _fighterProvider = new Lazy<IFightersProvider>(() => DIContainer.GetImplementation<IFightersProvider>());
 

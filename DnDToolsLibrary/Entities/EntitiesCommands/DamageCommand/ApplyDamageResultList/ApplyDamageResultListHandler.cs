@@ -2,15 +2,15 @@
 using BaseToolsLibrary.IO;
 using DnDToolsLibrary.Attacks.Damage;
 using DnDToolsLibrary.Attacks.Damage.Type;
-using DnDToolsLibrary.BaseCommandHandlers;
 using DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.TakeDamage;
 using System;
 using System.Linq;
+using DnDToolsLibrary.BaseCommands;
 using static DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageResultList.ApplyDamageResultListCommand;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageResultList
 {
-    public class ApplyDamageResultListHandler : SuperDndCommandHandler<ApplyDamageResultListCommand, ApplyDamageResultListResponse>
+    public class ApplyDamageResultListHandler : SuperDndCommandHandlerBase<ApplyDamageResultListCommand, ApplyDamageResultListResponse>
     {
         private static Lazy<ICustomConsole> console = new Lazy<ICustomConsole>(() => DIContainer.GetImplementation<ICustomConsole>());
         private static Lazy<IFontWeightProvider> fontWeightProvider = new Lazy<IFontWeightProvider>(() => DIContainer.GetImplementation<IFontWeightProvider>());

@@ -2,7 +2,7 @@
 
 namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.SpellLevelQueries
 {
-    public class CantripLevelQuery : SpellLevelBaseQuery, IMediatorCommand, IUiCommand
+    public class CantripLevelQuery : SpellLevelBaseQuery, IUiCommand
     {
         public CantripLevelQuery() : base(1)
         {

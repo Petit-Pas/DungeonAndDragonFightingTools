@@ -3,10 +3,11 @@ using DnDToolsLibrary.Attacks.Spells;
 using DnDToolsLibrary.Entities;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using DnDToolsLibrary.BaseCommands;
 
 namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellCommands
 {
-    public class CastSpellCommand : SuperCommandBase
+    public class CastSpellCommand : SuperDndCommandBase
     {
         [XmlAttribute]
         public string CasterName { get; set; } = null;

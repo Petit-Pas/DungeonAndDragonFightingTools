@@ -1,9 +1,10 @@
 ﻿using BaseToolsLibrary.Mediator;
+using DnDToolsLibrary.BaseCommands;
 using DnDToolsLibrary.Dice;
 
 namespace DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands
 {
-    public class TryApplyStatusCommand : SuperCommandBase
+    public class TryApplyStatusCommand : SuperDndCommandBase
     {
         /// <summary>
         ///     Will try to apply a status on a given target

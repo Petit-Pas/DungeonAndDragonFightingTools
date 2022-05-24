@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.NonAttackSpellResultQueries;
 using WpfCustomControlLibrary.ModalWindows;
 using WpfToolsLibrary.Extensions;
 using WpfToolsLibrary.Navigation;

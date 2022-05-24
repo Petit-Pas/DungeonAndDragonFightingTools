@@ -1,8 +1,9 @@
 ﻿using BaseToolsLibrary.Mediator;
+using DnDToolsLibrary.BaseCommands;
 
 namespace DnDToolsLibrary.Dice.DiceCommancs.SavingThrowCommands.SavingThrowQueries
 {
-    public class SavingThrowQuery : IMediatorCommand
+    public class SavingThrowQuery : DndCommandBase
     {
         public SavingThrowQuery(SavingThrow saving, string reason)
         {

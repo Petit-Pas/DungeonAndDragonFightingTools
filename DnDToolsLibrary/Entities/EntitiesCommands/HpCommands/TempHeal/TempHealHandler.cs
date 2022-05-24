@@ -2,11 +2,11 @@
 using BaseToolsLibrary.IO;
 using BaseToolsLibrary.Mediator;
 using System;
-using DnDToolsLibrary.BaseCommandHandlers;
+using DnDToolsLibrary.BaseCommands;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.TempHeal
 {
-    public class TempHealHandler : BaseDndCommandHandler<TempHealCommand, IMediatorCommandResponse>
+    public class TempHealHandler : DndCommandHandlerBase<TempHealCommand, IMediatorCommandResponse>
     {
         private static Lazy<ICustomConsole> console = new Lazy<ICustomConsole>(() => DIContainer.GetImplementation<ICustomConsole>());
         private static Lazy<IFontWeightProvider> fontWeightProvider = new Lazy<IFontWeightProvider>(() => DIContainer.GetImplementation<IFontWeightProvider>());

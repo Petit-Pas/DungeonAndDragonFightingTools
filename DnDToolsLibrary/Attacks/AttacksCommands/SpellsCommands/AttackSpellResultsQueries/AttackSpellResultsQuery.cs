@@ -1,8 +1,9 @@
 ﻿using BaseToolsLibrary.Mediator;
+using DnDToolsLibrary.BaseCommands;
 
 namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.AttackSpellResultsQueries
 {
-    public class AttackSpellResultsQuery : IMediatorCommand
+    public class AttackSpellResultsQuery : DndCommandBase
     {
         private AttackSpellResultsQuery()
         {

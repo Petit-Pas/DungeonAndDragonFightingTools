@@ -1,11 +1,11 @@
 ﻿using BaseToolsLibrary.Mediator;
 using DnDToolsLibrary.Status;
 using System.Linq;
-using DnDToolsLibrary.BaseCommandHandlers;
+using DnDToolsLibrary.BaseCommands;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.StatusCommands.RemoveStatus
 {
-    public class RemoveStatusCommandHandler : BaseDndCommandHandler<RemoveStatusCommand, IMediatorCommandResponse>
+    public class RemoveStatusCommandHandler : DndCommandHandlerBase<RemoveStatusCommand, IMediatorCommandResponse>
     {
         public override IMediatorCommandResponse Execute(RemoveStatusCommand command)
         {

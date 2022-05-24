@@ -15,12 +15,6 @@ namespace DnDToolsLibrary.Entities
     /// </summary>
     public class Character : PlayableEntity, IEquivalentComparable<Character>
     {
-        private static readonly Lazy<IStatusProvider> _statusProvider = new(DIContainer.GetImplementation<IStatusProvider>());
-        protected static IStatusProvider StatusProvider => _statusProvider.Value;
-        
-        private static readonly Lazy<IMediator> _mediator = new(DIContainer.GetImplementation<IMediator>);
-        protected static IMediator Mediator => _mediator.Value;
-        
         public Character() : base()
         {
         }

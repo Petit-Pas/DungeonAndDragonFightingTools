@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
 using BaseToolsLibrary.Mediator;
-using DnDToolsLibrary.BaseCommandHandlers;
+using DnDToolsLibrary.BaseCommands;
 using DnDToolsLibrary.Entities;
 
 namespace DnDToolsLibrary.Fight.FightCommands.FighterCommands.AddFighterCommands
 {
-    public class AddFighterCommandHandler : BaseDndCommandHandler<AddFighterCommand, IMediatorCommandResponse>
+    public class AddFighterCommandHandler : DndCommandHandlerBase<AddFighterCommand, IMediatorCommandResponse>
     {
         public override IMediatorCommandResponse Execute(AddFighterCommand genericCommand)
         {

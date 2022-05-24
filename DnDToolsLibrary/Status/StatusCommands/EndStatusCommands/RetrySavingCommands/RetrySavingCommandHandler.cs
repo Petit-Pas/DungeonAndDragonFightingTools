@@ -1,13 +1,13 @@
 ﻿using System;
 using BaseToolsLibrary.Mediator;
-using DnDToolsLibrary.BaseCommandHandlers;
+using DnDToolsLibrary.BaseCommands;
 using DnDToolsLibrary.Dice;
 using DnDToolsLibrary.Dice.DiceCommancs.SavingThrowCommands.SavingThrowQueries;
 using DnDToolsLibrary.Entities.EntitiesCommands.StatusCommands.RemoveStatus;
 
 namespace DnDToolsLibrary.Status.StatusCommands.EndStatusCommands.RetrySavingCommands
 {
-    internal class RetrySavingCommandHandler : SuperDndCommandHandler<RetrySavingCommand, IMediatorCommandResponse>
+    internal class RetrySavingCommandHandler : SuperDndCommandHandlerBase<RetrySavingCommand, IMediatorCommandResponse>
     {
         public override IMediatorCommandResponse Execute(RetrySavingCommand command)
         {

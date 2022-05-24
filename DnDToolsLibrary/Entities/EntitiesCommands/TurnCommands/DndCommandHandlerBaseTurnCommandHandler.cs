@@ -1,16 +1,17 @@
 ﻿using System.Collections.Generic;
 using BaseToolsLibrary.Mediator;
-using DnDToolsLibrary.Entities.EntitiesCommands.StatusCommands.ApplyDotCommands;
+using DnDToolsLibrary.BaseCommands;
 using DnDToolsLibrary.Status;
+using DnDToolsLibrary.Status.StatusCommands.ApplyDotCommands;
 using DnDToolsLibrary.Status.StatusCommands.EndStatusCommands.ReduceRemainingRoundsCommands;
 using DnDToolsLibrary.Status.StatusCommands.EndStatusCommands.RetrySavingCommands;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.TurnCommands
 {
-    public abstract class BaseTurnCommandHandler<TCommand> : BaseCommandHandlers.SuperDndCommandHandler<TCommand, IMediatorCommandResponse>
-        where TCommand : SuperCommandBase 
+    public abstract class DndCommandHandlerBaseTurnCommandHandler<TCommand> : SuperDndCommandHandlerBase<TCommand, IMediatorCommandResponse>
+        where TCommand : SuperDndCommandBase
     {
-        protected static void TriggerDot(SuperCommandBase command, IEnumerable<OnHitStatus> statii, bool startOfTurn, bool casterTurn)
+        protected static void TriggerDot(SuperDndCommandBase command, IEnumerable<OnHitStatus> statii, bool startOfTurn, bool casterTurn)
         {
             foreach (var status in statii)
             {
@@ -20,7 +21,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.TurnCommands
             }
         }
 
-        protected static void RetrySavings(SuperCommandBase command, IEnumerable<OnHitStatus> statii)
+        protected static void RetrySavings(SuperDndCommandBase command, IEnumerable<OnHitStatus> statii)
         {
             foreach (var status in statii)
             {
@@ -30,7 +31,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.TurnCommands
             }
         }
 
-        protected static void ReduceDuration(SuperCommandBase command, IEnumerable<OnHitStatus> statii)
+        protected static void ReduceDuration(SuperDndCommandBase command, IEnumerable<OnHitStatus> statii)
         {
             foreach (var status in statii)
             {

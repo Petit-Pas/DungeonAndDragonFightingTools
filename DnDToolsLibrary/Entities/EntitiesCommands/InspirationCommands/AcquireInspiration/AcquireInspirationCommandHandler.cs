@@ -1,9 +1,9 @@
 ﻿using BaseToolsLibrary.Mediator;
-using DnDToolsLibrary.BaseCommandHandlers;
+using DnDToolsLibrary.BaseCommands;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.InspirationCommands.AcquireInspiration
 {
-    public class AcquireInspirationCommandHandler : BaseDndCommandHandler<AcquireInspirationCommand, IMediatorCommandResponse>
+    public class AcquireInspirationCommandHandler : DndCommandHandlerBase<AcquireInspirationCommand, IMediatorCommandResponse>
     {
         public override IMediatorCommandResponse Execute(AcquireInspirationCommand command)
         {

@@ -1,10 +1,10 @@
 ﻿using BaseToolsLibrary.Mediator;
-using DnDToolsLibrary.BaseCommandHandlers;
+using DnDToolsLibrary.BaseCommands;
 using DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.LoseConcentration;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.AcquireConcentration
 {
-    public class AcquireConcentrationCommandHandler : SuperDndCommandHandler<AcquireConcentrationCommand, IMediatorCommandResponse>
+    public class AcquireConcentrationCommandHandler : SuperDndCommandHandlerBase<AcquireConcentrationCommand, IMediatorCommandResponse>
     {
         public override IMediatorCommandResponse Execute(AcquireConcentrationCommand command)
         {

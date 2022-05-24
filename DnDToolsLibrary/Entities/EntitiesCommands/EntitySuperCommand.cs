@@ -2,6 +2,7 @@
 using DnDToolsLibrary.Fight;
 using System;
 using BaseToolsLibrary.DependencyInjection;
+using DnDToolsLibrary.BaseCommands;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands
 {
@@ -10,7 +11,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands
     ///     As such commands are only supposed to be used during a fight, it will store only the name of the entity,
     ///         and lazy load it upon need from the FightersProvider
     /// </summary>
-    public abstract class EntitySuperCommand : SuperCommandBase
+    public abstract class EntitySuperCommand : SuperDndCommandBase
     {
         private static readonly Lazy<IFightersProvider> _lazyFighterProvider = new(DIContainer.GetImplementation<IFightersProvider>);
         protected static IFightersProvider FightersProvider => _lazyFighterProvider.Value;

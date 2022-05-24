@@ -3,13 +3,13 @@ using BaseToolsLibrary.Mediator;
 using BaseToolsLibrary.Mediator.CommandStatii;
 using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.SpellLevelQueries;
 using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.SpellTargetsQueries;
-using DnDToolsLibrary.BaseCommandHandlers;
 using DnDToolsLibrary.Fight;
 using System;
+using DnDToolsLibrary.BaseCommands;
 
 namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellCommands
 {
-    public class CastSpellHandler : SuperDndCommandHandler<CastSpellCommand, IMediatorCommandResponse>
+    public class CastSpellHandler : SuperDndCommandHandlerBase<CastSpellCommand, IMediatorCommandResponse>
     {
         private static Lazy<IFightersProvider> _fighterProvider = new Lazy<IFightersProvider> (() => DIContainer.GetImplementation<IFightersProvider>());
 

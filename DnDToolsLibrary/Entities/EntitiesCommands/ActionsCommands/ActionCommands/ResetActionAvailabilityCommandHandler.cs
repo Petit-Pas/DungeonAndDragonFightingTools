@@ -1,9 +1,9 @@
 ﻿using BaseToolsLibrary.Mediator;
-using DnDToolsLibrary.BaseCommandHandlers;
+using DnDToolsLibrary.BaseCommands;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.ActionCommands;
 
-public class ResetActionAvailabilityCommandHandler : SuperDndCommandHandler<ResetActionAvailabilityCommand, IMediatorCommandResponse>
+public class ResetActionAvailabilityCommandHandler : SuperDndCommandHandlerBase<ResetActionAvailabilityCommand, IMediatorCommandResponse>
 {
     public override IMediatorCommandResponse Execute(ResetActionAvailabilityCommand command)
     {

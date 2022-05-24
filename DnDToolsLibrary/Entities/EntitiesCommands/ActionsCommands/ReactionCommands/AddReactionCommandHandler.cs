@@ -1,10 +1,10 @@
 ﻿using System;
 using BaseToolsLibrary.Mediator;
-using DnDToolsLibrary.BaseCommandHandlers;
+using DnDToolsLibrary.BaseCommands;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.ReactionCommands;
 
-public class AddReactionCommandHandler : BaseDndCommandHandler<AddReactionCommand, IMediatorCommandResponse>
+public class AddReactionCommandHandler : DndCommandHandlerBase<AddReactionCommand, IMediatorCommandResponse>
 {
     public override IMediatorCommandResponse Execute(AddReactionCommand command)
     {

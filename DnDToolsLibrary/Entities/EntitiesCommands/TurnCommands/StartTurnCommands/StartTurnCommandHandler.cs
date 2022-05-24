@@ -7,7 +7,7 @@ using DnDToolsLibrary.Fight.Events;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.TurnCommands.StartTurnCommands
 {
-    internal class StartTurnCommandHandler : BaseTurnCommandHandler<StartTurnCommand>
+    internal class StartTurnCommandHandler : DndCommandHandlerBaseTurnCommandHandler<StartTurnCommand>
     {
         public override IMediatorCommandResponse Execute(StartTurnCommand command)
         {
@@ -94,6 +94,8 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.TurnCommands.StartTurnComman
 
             // notifying through the turnManager => broader for controls that have all fighters as DataContext
             TurnManager.InvokeTurnEnded(eventArgs);
+
+            FightConsole.RemoveLastParagraph();
         }
     }
 }

@@ -1,9 +1,9 @@
 ﻿using BaseToolsLibrary.Mediator;
-using DnDToolsLibrary.BaseCommandHandlers;
+using DnDToolsLibrary.BaseCommands;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.ActionCommands;
 
-public class InvertActionAvailabilityCommandHandler : SuperDndCommandHandler<InvertActionAvailabilityCommand, IMediatorCommandResponse>
+public class InvertActionAvailabilityCommandHandler : SuperDndCommandHandlerBase<InvertActionAvailabilityCommand, IMediatorCommandResponse>
 {
     public override IMediatorCommandResponse Execute(InvertActionAvailabilityCommand command)
     {

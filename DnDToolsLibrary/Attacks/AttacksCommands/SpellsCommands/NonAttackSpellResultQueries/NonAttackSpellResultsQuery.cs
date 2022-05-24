@@ -1,10 +1,11 @@
-﻿using BaseToolsLibrary.Mediator;
+﻿using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.NonAttackSpellResultsQueries;
 using DnDToolsLibrary.Attacks.Damage;
 using DnDToolsLibrary.Attacks.Spells;
+using DnDToolsLibrary.BaseCommands;
 
-namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.NonAttackSpellResultsQueries
+namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.NonAttackSpellResultQueries
 {
-    public class NonAttackSpellResultsQuery : IMediatorCommand
+    public class NonAttackSpellResultsQuery : DndCommandBase
     {
         private NonAttackSpellResultsQuery()
         {

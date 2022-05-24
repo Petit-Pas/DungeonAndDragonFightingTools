@@ -1,27 +1,27 @@
 ﻿using BaseToolsLibrary.Mediator;
 using System.Windows;
+using DnDToolsLibrary.BaseCommands;
 using WpfCustomControlLibrary.ModalWindows;
 using WpfToolsLibrary.Extensions;
 
 namespace WpfDnDCommandHandlers
 {
     public abstract class BaseResultCommandHandler<TInput, TOutput> : BaseMediatorHandler<TInput, ValidableResponse<TOutput>>
-        where TInput : class, IMediatorCommand
+        where TInput : DndCommandBase
         where TOutput : class, IMediatorCommandResponse
     {
-        public override ValidableResponse<TOutput> Execute(TInput genericCommand)
+        public override ValidableResponse<TOutput> Execute(TInput command)
         {
             Window window = HandlerToUILinker.GetWindow(this.GetType()) as Window;
-            IResultWindow<TInput, TOutput> result_window = window as IResultWindow<TInput, TOutput>;
-            TInput _command = base.castCommand(genericCommand);
-
-            result_window.LoadContext(_command);
+            IResultWindow<TInput, TOutput> resultWindow = window as IResultWindow<TInput, TOutput>;
+            
+            resultWindow.LoadContext(command);
 
             window.ShowCentered();
 
             return new ValidableResponse<TOutput>(
-                    result_window.Validated,
-                    result_window.GetResult());
+                    resultWindow.Validated,
+                    resultWindow.GetResult());
         }
 
         public override void Undo(TInput genericCommand)

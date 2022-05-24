@@ -1,12 +1,12 @@
 ﻿using BaseToolsLibrary.Mediator;
-using DnDToolsLibrary.BaseCommandHandlers;
+using DnDToolsLibrary.BaseCommands;
 using DnDToolsLibrary.Dice;
 using DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.ConcentrationCheckQueries;
 using DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.LoseConcentration;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.ChallengeConcentration
 {
-    public class ChallengeConcentrationCommandHandler : SuperDndCommandHandler<ChallengeConcentrationCommand, IMediatorCommandResponse>
+    public class ChallengeConcentrationCommandHandler : SuperDndCommandHandlerBase<ChallengeConcentrationCommand, IMediatorCommandResponse>
     {
         public override IMediatorCommandResponse Execute(ChallengeConcentrationCommand command)
         {

@@ -1,9 +1,10 @@
 ﻿using BaseToolsLibrary.Mediator;
+using DnDToolsLibrary.BaseCommands;
 using DnDToolsLibrary.Entities;
 
 namespace DnDToolsLibrary.Fight.FightCommands.FighterCommands.AddFighterCommands
 {
-    public class AddFighterCommand : IMediatorCommand
+    public class AddFighterCommand : DndCommandBase
     {
         public AddFighterCommand(PlayableEntity entity)
         {

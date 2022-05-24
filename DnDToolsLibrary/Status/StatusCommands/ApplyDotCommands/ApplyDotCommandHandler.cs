@@ -3,13 +3,12 @@ using System.Linq;
 using BaseToolsLibrary.Mediator;
 using DnDToolsLibrary.Attacks.AttacksCommands.DamageCommands.DamageResultListQueries;
 using DnDToolsLibrary.Attacks.Damage;
-using DnDToolsLibrary.BaseCommandHandlers;
+using DnDToolsLibrary.BaseCommands;
 using DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageResultList;
-using DnDToolsLibrary.Entities.EntitiesCommands.StatusCommands.ApplyDotCommands;
 
 namespace DnDToolsLibrary.Status.StatusCommands.ApplyDotCommands
 {
-    public class ApplyDotCommandHandler : SuperDndCommandHandler<ApplyDotCommand, IMediatorCommandResponse>
+    public class ApplyDotCommandHandler : SuperDndCommandHandlerBase<ApplyDotCommand, IMediatorCommandResponse>
     {
         public override IMediatorCommandResponse Execute(ApplyDotCommand command)
         {

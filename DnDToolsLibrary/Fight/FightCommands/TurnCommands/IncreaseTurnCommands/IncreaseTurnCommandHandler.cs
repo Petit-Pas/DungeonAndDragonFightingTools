@@ -1,10 +1,10 @@
 ﻿using BaseToolsLibrary.Mediator;
-using DnDToolsLibrary.BaseCommandHandlers;
+using DnDToolsLibrary.BaseCommands;
 using DnDToolsLibrary.Fight.FightCommands.TurnCommands.IncreaseRoundCommands;
 
 namespace DnDToolsLibrary.Fight.FightCommands.TurnCommands.IncreaseTurnCommands
 {
-    public class IncreaseTurnCommandHandler : SuperDndCommandHandler<IncreaseTurnCommand, IMediatorCommandResponse>
+    public class IncreaseTurnCommandHandler : SuperDndCommandHandlerBase<IncreaseTurnCommand, IMediatorCommandResponse>
     {
         public override IMediatorCommandResponse Execute(IncreaseTurnCommand increaseTurnCommand)
         {

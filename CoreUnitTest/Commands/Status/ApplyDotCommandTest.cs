@@ -8,9 +8,9 @@ using DnDToolsLibrary.Attacks.AttacksCommands.DamageCommands.DamageResultListQue
 using DnDToolsLibrary.Attacks.Damage;
 using DnDToolsLibrary.Attacks.Damage.Type;
 using DnDToolsLibrary.Entities;
-using DnDToolsLibrary.Entities.EntitiesCommands.StatusCommands.ApplyDotCommands;
 using DnDToolsLibrary.Fight;
 using DnDToolsLibrary.Status;
+using DnDToolsLibrary.Status.StatusCommands.ApplyDotCommands;
 using FakeItEasy;
 using FluentAssertions;
 using NUnit.Framework;

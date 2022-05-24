@@ -2,10 +2,11 @@
 using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.AttackSpellResultsQueries;
 using DnDToolsLibrary.Attacks.Spells;
 using System.Collections.Generic;
+using DnDToolsLibrary.BaseCommands;
 
 namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellCommands
 {
-    public class CastAttackSpellCommand : SuperCommandBase
+    public class CastAttackSpellCommand : SuperDndCommandBase
     {
         public CastAttackSpellCommand(string casterName, Spell spell, int castLevel, List<string> targetNames)
         {

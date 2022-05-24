@@ -1,4 +1,5 @@
-﻿using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.NonAttackSpellResultsQueries;
+﻿using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.NonAttackSpellResultQueries;
+using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.NonAttackSpellResultsQueries;
 
 namespace WpfDnDCommandHandlers.AttackQueries.SpellQueries.NonAttackSpellResultsQueries
 {

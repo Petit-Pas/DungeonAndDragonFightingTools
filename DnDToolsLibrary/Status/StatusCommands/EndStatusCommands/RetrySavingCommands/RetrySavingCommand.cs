@@ -1,9 +1,10 @@
 ﻿using System;
 using BaseToolsLibrary.Mediator;
+using DnDToolsLibrary.BaseCommands;
 
 namespace DnDToolsLibrary.Status.StatusCommands.EndStatusCommands.RetrySavingCommands
 {
-    public class RetrySavingCommand : SuperCommandBase
+    public class RetrySavingCommand : SuperDndCommandBase
     {
         public RetrySavingCommand(Guid statusId)
         {

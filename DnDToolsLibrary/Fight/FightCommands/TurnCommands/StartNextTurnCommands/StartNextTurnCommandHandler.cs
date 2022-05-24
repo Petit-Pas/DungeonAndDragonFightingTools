@@ -1,12 +1,12 @@
 ﻿using BaseToolsLibrary.Mediator;
-using DnDToolsLibrary.BaseCommandHandlers;
+using DnDToolsLibrary.BaseCommands;
 using DnDToolsLibrary.Entities.EntitiesCommands.TurnCommands.EndTurnCommands;
 using DnDToolsLibrary.Entities.EntitiesCommands.TurnCommands.StartTurnCommands;
 using DnDToolsLibrary.Fight.FightCommands.TurnCommands.IncreaseTurnCommands;
 
 namespace DnDToolsLibrary.Fight.FightCommands.TurnCommands.StartNextTurnCommands
 {
-    public class StartNextTurnCommandHandler : SuperDndCommandHandler<StartNextTurnCommand, IMediatorCommandResponse>
+    public class StartNextTurnCommandHandler : SuperDndCommandHandlerBase<StartNextTurnCommand, IMediatorCommandResponse>
     {
         public override IMediatorCommandResponse Execute(StartNextTurnCommand startNextTurnCommand)
         {

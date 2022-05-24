@@ -2,6 +2,7 @@
 using BaseToolsLibrary.Mediator;
 using DnDToolsLibrary.Fight;
 using System;
+using DnDToolsLibrary.BaseCommands;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands
 {
@@ -10,7 +11,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands
     ///     As such commands are only supposed to be used during a fight, it will store only the name of the entity,
     ///         and lazy load it upon need from the FightersProvider
     /// </summary>
-    public abstract class EntityCommand : IMediatorCommand
+    public abstract class EntityCommand : DndCommandBase
     {
         private static IFightersProvider _fightersProvider = DIContainer.GetImplementation<IFightersProvider>();
 

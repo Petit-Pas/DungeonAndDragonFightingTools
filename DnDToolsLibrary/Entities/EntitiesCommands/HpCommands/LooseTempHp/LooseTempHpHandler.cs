@@ -1,10 +1,10 @@
 ﻿using BaseToolsLibrary.Mediator;
 using System;
-using DnDToolsLibrary.BaseCommandHandlers;
+using DnDToolsLibrary.BaseCommands;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.LooseTempHp
 {
-    public class LooseTempHpHandler : BaseDndCommandHandler<LooseTempHpCommand, IMediatorCommandResponse>
+    public class LooseTempHpHandler : DndCommandHandlerBase<LooseTempHpCommand, IMediatorCommandResponse>
     {
         public override IMediatorCommandResponse Execute(LooseTempHpCommand command)
         {

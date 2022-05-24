@@ -1,4 +1,6 @@
-﻿namespace BaseToolsLibrary.IO
+﻿using System.Collections.Generic;
+
+namespace BaseToolsLibrary.IO
 {
     public interface ICustomConsole
     {
@@ -26,5 +28,7 @@
         IFontWeight DefaultFontWeight { get; set; }
         IFontColor DefaultFontColor { get; set; }
         int DefaultFontSize { get; set; }
+        void RemoveLastParagraph();
+        void RemoveEntries(List<int> commandLogMessages);
     }
 }

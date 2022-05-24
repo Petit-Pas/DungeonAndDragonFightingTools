@@ -1,9 +1,9 @@
 ﻿using BaseToolsLibrary.Mediator;
-using DnDToolsLibrary.BaseCommandHandlers;
+using DnDToolsLibrary.BaseCommands;
 
 namespace DnDToolsLibrary.Fight.FightCommands.TurnCommands.IncreaseRoundCommands
 {
-    public class IncreaseRoundCommandHandler : BaseDndCommandHandler<IncreaseRoundCommand, IMediatorCommandResponse>
+    public class IncreaseRoundCommandHandler : DndCommandHandlerBase<IncreaseRoundCommand, IMediatorCommandResponse>
     {
         public override IMediatorCommandResponse Execute(IncreaseRoundCommand genericCommand)
         {

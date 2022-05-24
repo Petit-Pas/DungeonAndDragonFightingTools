@@ -4,7 +4,7 @@ using DnDToolsLibrary.Fight.Events;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.TurnCommands.EndTurnCommands
 {
-    public class EndTurnCommandHandler : BaseTurnCommandHandler<EndTurnCommand>
+    public class EndTurnCommandHandler : DndCommandHandlerBaseTurnCommandHandler<EndTurnCommand>
     {
         public override IMediatorCommandResponse Execute(EndTurnCommand command)
         {

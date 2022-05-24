@@ -1,12 +1,12 @@
 ﻿using System;
 using BaseToolsLibrary.Mediator;
-using DnDToolsLibrary.BaseCommandHandlers;
+using DnDToolsLibrary.BaseCommands;
 using DnDToolsLibrary.Fight.Events;
 using DnDToolsLibrary.Fight.FightCommands.TurnCommands.StartNextTurnCommands;
 
 namespace DnDToolsLibrary.Fight.FightCommands.FighterCommands.RemoveFighterCommands
 {
-    public class RemoveFighterCommandHandler : SuperDndCommandHandler<RemoveFighterCommand, IMediatorCommandResponse>
+    public class RemoveFighterCommandHandler : SuperDndCommandHandlerBase<RemoveFighterCommand, IMediatorCommandResponse>
     {
         public override IMediatorCommandResponse Execute(RemoveFighterCommand removeFighterCommand)
         {

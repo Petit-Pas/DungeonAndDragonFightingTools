@@ -1,9 +1,9 @@
 ﻿using System;
-using BaseToolsLibrary.Mediator;
+using DnDToolsLibrary.BaseCommands;
 
-namespace DnDToolsLibrary.Entities.EntitiesCommands.StatusCommands.ApplyDotCommands
+namespace DnDToolsLibrary.Status.StatusCommands.ApplyDotCommands
 {
-    public class ApplyDotCommand : SuperCommandBase
+    public class ApplyDotCommand : SuperDndCommandBase
     {
         /// <summary>
         /// 

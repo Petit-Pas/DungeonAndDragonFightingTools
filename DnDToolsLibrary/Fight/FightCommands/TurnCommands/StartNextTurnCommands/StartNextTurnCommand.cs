@@ -1,8 +1,9 @@
 ﻿using BaseToolsLibrary.Mediator;
+using DnDToolsLibrary.BaseCommands;
 
 namespace DnDToolsLibrary.Fight.FightCommands.TurnCommands.StartNextTurnCommands
 {
-    public class StartNextTurnCommand : SuperCommandBase
+    public class StartNextTurnCommand : SuperDndCommandBase
     {
     }
 }

@@ -1,9 +1,10 @@
 ﻿using BaseToolsLibrary.Mediator;
 using DnDToolsLibrary.Attacks.Damage;
+using DnDToolsLibrary.BaseCommands;
 
 namespace DnDToolsLibrary.Attacks.AttacksCommands.DamageCommands.DamageResultListQueries
 {
-    public class DamageResultListQuery : IMediatorCommand, IUiCommand
+    public class DamageResultListQuery : DndCommandBase, IUiCommand
     {
         public DamageResultList DamageList { get; set; }
 

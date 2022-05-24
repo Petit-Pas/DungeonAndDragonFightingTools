@@ -1,9 +1,9 @@
 ﻿using BaseToolsLibrary.Mediator;
-using DnDToolsLibrary.BaseCommandHandlers;
+using DnDToolsLibrary.BaseCommands;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.InspirationCommands.LoseInspiration
 {
-    internal class LoseInspirationCommandHandler : BaseDndCommandHandler<LoseInspirationCommand, IMediatorCommandResponse>
+    internal class LoseInspirationCommandHandler : DndCommandHandlerBase<LoseInspirationCommand, IMediatorCommandResponse>
     {
         public override IMediatorCommandResponse Execute(LoseInspirationCommand command)
         {

@@ -5,15 +5,15 @@ using DnDToolsLibrary.Entities;
 using DnDToolsLibrary.Fight;
 using System;
 using DnDToolsLibrary.Attacks.AttacksCommands.DamageCommands.DamageResultListQueries;
+using DnDToolsLibrary.BaseCommands;
 using DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageResultList;
 using DnDToolsLibrary.Dice;
 using DnDToolsLibrary.Dice.DiceCommancs.SavingThrowCommands.SavingThrowQueries;
 using DnDToolsLibrary.Entities.EntitiesCommands.StatusCommands.AddStatus;
-using DnDToolsLibrary.BaseCommandHandlers;
 
 namespace DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands
 {
-    public class TryApplyStatusCommandHandler : SuperDndCommandHandler<TryApplyStatusCommand, IMediatorCommandResponse>
+    public class TryApplyStatusCommandHandler : SuperDndCommandHandlerBase<TryApplyStatusCommand, IMediatorCommandResponse>
     {
         private Lazy<IFightersProvider> _fighterProvider = new Lazy<IFightersProvider>(() => DIContainer.GetImplementation<IFightersProvider>());
 

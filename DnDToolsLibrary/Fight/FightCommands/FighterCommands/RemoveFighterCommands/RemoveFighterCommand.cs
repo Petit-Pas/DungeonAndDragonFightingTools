@@ -1,9 +1,10 @@
 ﻿using BaseToolsLibrary.Mediator;
+using DnDToolsLibrary.BaseCommands;
 using DnDToolsLibrary.Entities;
 
 namespace DnDToolsLibrary.Fight.FightCommands.FighterCommands.RemoveFighterCommands
 {
-    public class RemoveFighterCommand : SuperCommandBase
+    public class RemoveFighterCommand : SuperDndCommandBase
     {
         public RemoveFighterCommand(PlayableEntity entity)
         {

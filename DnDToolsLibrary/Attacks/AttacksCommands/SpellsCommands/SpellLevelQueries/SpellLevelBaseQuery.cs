@@ -1,6 +1,8 @@
-﻿namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.SpellLevelQueries
+﻿using DnDToolsLibrary.BaseCommands;
+
+namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.SpellLevelQueries
 {
-    public class SpellLevelBaseQuery
+    public abstract class SpellLevelBaseQuery : DndCommandBase
     {
         public int BaseLevel = -1;
 

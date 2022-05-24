@@ -1,12 +1,12 @@
 ﻿using BaseToolsLibrary.Mediator;
-using DnDToolsLibrary.BaseCommandHandlers;
+using DnDToolsLibrary.BaseCommands;
 using DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageResultList;
 using DnDToolsLibrary.Status;
 using DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands;
 
 namespace DnDToolsLibrary.Attacks.AttacksCommands.HitAttackCommands.ApplyHitAttackResult
 {
-    public class ApplyHitAttackResultHandler : SuperDndCommandHandler<ApplyHitAttackResultCommand, IMediatorCommandResponse>
+    public class ApplyHitAttackResultHandler : SuperDndCommandHandlerBase<ApplyHitAttackResultCommand, IMediatorCommandResponse>
     {
         public override IMediatorCommandResponse Execute(ApplyHitAttackResultCommand command)
         {

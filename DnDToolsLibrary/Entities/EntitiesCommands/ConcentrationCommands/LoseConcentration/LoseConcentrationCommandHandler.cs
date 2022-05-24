@@ -1,12 +1,12 @@
 ﻿using BaseToolsLibrary.Mediator;
-using DnDToolsLibrary.BaseCommandHandlers;
 using DnDToolsLibrary.Entities.EntitiesCommands.StatusCommands.RemoveStatus;
 using DnDToolsLibrary.Status;
 using System.Linq;
+using DnDToolsLibrary.BaseCommands;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.LoseConcentration
 {
-    public class LoseConcentrationCommandHandler : SuperDndCommandHandler<LoseConcentrationCommand, IMediatorCommandResponse>
+    public class LoseConcentrationCommandHandler : SuperDndCommandHandlerBase<LoseConcentrationCommand, IMediatorCommandResponse>
     {
         public override IMediatorCommandResponse Execute(LoseConcentrationCommand command)
         {

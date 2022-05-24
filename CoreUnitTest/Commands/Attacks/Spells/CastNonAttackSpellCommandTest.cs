@@ -16,6 +16,7 @@ using DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageResultL
 using DnDToolsLibrary.Status;
 using DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands;
 using BaseToolsLibrary.Mediator.CommandStatii;
+using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.NonAttackSpellResultQueries;
 using DnDToolsLibrary.Dice;
 
 namespace CoreUnitTest.Commands.Attacks.Spells

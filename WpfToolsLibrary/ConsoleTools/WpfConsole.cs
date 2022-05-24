@@ -1,4 +1,5 @@
-﻿using BaseToolsLibrary.IO;
+﻿using System.Collections.Generic;
+using BaseToolsLibrary.IO;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -42,6 +43,19 @@ namespace WpfToolsLibrary.ConsoleTools
         public IFontWeight DefaultFontWeight { get; set; } = new WpfFontWeight() { FontWeight = FontWeights.Normal };
         public IFontColor DefaultFontColor { get; set; } = new WpfFontColor() { Brush = new SolidColorBrush(Colors.White) };
         public int DefaultFontSize { get; set; } = 15;
+        public void RemoveLastParagraph()
+        {
+            ConsoleContent.Blocks.Remove(currentParagraph);
+        }
+
+        public void RemoveEntries(List<int> commandLogMessages)
+        {
+            var inlinesToRemove = currentParagraph.Inlines.Where(x => commandLogMessages.Contains(x.GetHashCode()));
+            foreach (var inline in inlinesToRemove)
+            {
+                currentParagraph.Inlines.Remove(inline);
+            }
+        }
 
         private FlowDocument _consoleContent = new FlowDocument();
         private Paragraph currentParagraph { get => ConsoleContent.Blocks.LastBlock as Paragraph; set { } }

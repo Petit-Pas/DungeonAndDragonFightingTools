@@ -1,8 +1,9 @@
 ﻿using BaseToolsLibrary.Mediator;
+using DnDToolsLibrary.BaseCommands;
 
 namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.SpellTargetsQueries
 {
-    public class SpellTargetQuery : IMediatorCommand
+    public class SpellTargetQuery : DndCommandBase
     {
         public SpellTargetQuery(int amountTargets, bool targetCanBeSelectedMoreThanOnce)
         {

@@ -1,10 +1,10 @@
 ﻿using BaseToolsLibrary.Mediator;
-using DnDToolsLibrary.BaseCommandHandlers;
+using DnDToolsLibrary.BaseCommands;
 using DnDToolsLibrary.Entities.EntitiesCommands.StatusCommands.RemoveStatus;
 
 namespace DnDToolsLibrary.Status.StatusCommands.EndStatusCommands.ReduceRemainingRoundsCommands
 {
-    public class ReduceRemainingRoundsCommandHandler : SuperDndCommandHandler<ReduceRemainingRoundsCommand, IMediatorCommandResponse>
+    public class ReduceRemainingRoundsCommandHandler : SuperDndCommandHandlerBase<ReduceRemainingRoundsCommand, IMediatorCommandResponse>
     {
         public override IMediatorCommandResponse Execute(ReduceRemainingRoundsCommand command)
         {

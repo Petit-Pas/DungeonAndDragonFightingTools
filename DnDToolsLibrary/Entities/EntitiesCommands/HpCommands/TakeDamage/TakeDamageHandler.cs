@@ -1,14 +1,14 @@
 ﻿using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.IO;
 using BaseToolsLibrary.Mediator;
-using DnDToolsLibrary.BaseCommandHandlers;
 using DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.LooseHp;
 using DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.LooseTempHp;
 using System;
+using DnDToolsLibrary.BaseCommands;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.TakeDamage
 {
-    public class TakeDamageHandler : SuperDndCommandHandler<TakeDamageCommand, IMediatorCommandResponse>
+    public class TakeDamageHandler : SuperDndCommandHandlerBase<TakeDamageCommand, IMediatorCommandResponse>
     {
         private static readonly Lazy<ICustomConsole> console = new Lazy<ICustomConsole>(() => DIContainer.GetImplementation<ICustomConsole>());
         private static readonly Lazy<IFontWeightProvider> fontWeightProvider = new Lazy<IFontWeightProvider>(() => DIContainer.GetImplementation<IFontWeightProvider>());

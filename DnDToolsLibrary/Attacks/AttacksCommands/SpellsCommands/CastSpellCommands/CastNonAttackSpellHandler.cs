@@ -7,12 +7,13 @@ using DnDToolsLibrary.Fight;
 using DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands;
 using System;
 using System.Linq;
+using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.NonAttackSpellResultQueries;
+using DnDToolsLibrary.BaseCommands;
 using DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.AcquireConcentration;
-using DnDToolsLibrary.BaseCommandHandlers;
 
 namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellCommands
 {
-    public class CastNonAttackSpellHandler : SuperDndCommandHandler<CastNonAttackSpellCommand, IMediatorCommandResponse>
+    public class CastNonAttackSpellHandler : SuperDndCommandHandlerBase<CastNonAttackSpellCommand, IMediatorCommandResponse>
     {
         private static Lazy<IFightersProvider> _fighterProvider = new Lazy<IFightersProvider>(() => DIContainer.GetImplementation<IFightersProvider>());
 
