@@ -31,5 +31,8 @@ namespace BaseToolsLibrary.IO
         int DefaultFontSize { get; set; }
         void RemoveLastParagraph();
         void RemoveEntries(IEnumerable<int> commandLogMessages);
+
+        void AddIndentation(int amount);
+        void RemoveIndentation(int amount);
     }
 }

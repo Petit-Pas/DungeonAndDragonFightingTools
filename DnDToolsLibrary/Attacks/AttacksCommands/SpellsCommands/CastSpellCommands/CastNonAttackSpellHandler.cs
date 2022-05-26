@@ -7,6 +7,7 @@ using DnDToolsLibrary.Fight;
 using DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands;
 using System;
 using System.Linq;
+using BaseToolsLibrary.IO;
 using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.NonAttackSpellResultQueries;
 using DnDToolsLibrary.BaseCommands;
 using DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.AcquireConcentration;
@@ -31,16 +32,23 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
 
                 foreach (var spellResult in command.SpellResults)
                 {
-                    // TODO the fact that the saving is passed is not tested
-                    var damageCommand = new ApplyDamageResultListCommand(spellResult.Target, spellResult.HitDamage, spellResult.Saving?.IsSuccesful ?? false);
-                    Mediator.Execute(damageCommand);
-                    command.PushToInnerCommands(damageCommand);
+                    command.AddLog("- ");
+                    command.AddLog(spellResult.TargetName, FontWeightProvider.Bold);
+                    command.AddLog(": ");
 
-                    foreach (var status in spellResult.AppliedStatusList)
+                    using (new Indenter(2))
                     {
-                        var statusCommand = new TryApplyStatusCommand(spellResult.CasterName, spellResult.TargetName, status, spellResult.Saving);
-                        Mediator.Execute(statusCommand);
-                        command.PushToInnerCommands(statusCommand);
+
+                        // TODO the fact that the saving is passed is not tested
+                        ApplyDamages(command, spellResult);
+
+                        foreach (var status in spellResult.AppliedStatusList)
+                        {
+                            var statusCommand = new TryApplyStatusCommand(spellResult.CasterName,
+                                spellResult.TargetName, status, spellResult.Saving);
+                            Mediator.Execute(statusCommand);
+                            command.PushToInnerCommands(statusCommand);
+                        }
                     }
                 }
                 return MediatorCommandStatii.Success;
@@ -48,6 +56,23 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
             return MediatorCommandStatii.Canceled;
         }
 
+        private void ApplyDamages(CastNonAttackSpellCommand command, NewNonAttackSpellResult spellResult)
+        {
+            if (spellResult != null)
+            {
+                command.AddLog("Saving: ");
+                command.AddLog($"{spellResult.Saving.Result}/{spellResult.Saving.Difficulty} => ", FontWeightProvider.Bold);
+                command.AddLog($"{(spellResult.Saving.IsSuccesful ? "succeeded" : "failed")}");
+            }
+
+
+            command.AddLog("\r\n");
+
+            var damageCommand = new ApplyDamageResultListCommand(spellResult.Target, spellResult.HitDamage, spellResult.Saving?.IsSuccesful ?? false);
+            Mediator.Execute(damageCommand);
+            command.PushToInnerCommands(damageCommand);
+
+        }
         private bool spellResultObtained(CastNonAttackSpellCommand command)
         {
             var template = command.Spell.GetNonAttackSpellResultTemplate(_fighterProvider.Value.GetFighterByDisplayName(command.CasterName), command.CastLevel);

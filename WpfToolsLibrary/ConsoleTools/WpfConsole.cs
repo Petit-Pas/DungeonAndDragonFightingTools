@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using BaseToolsLibrary.IO;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -57,6 +58,18 @@ namespace WpfToolsLibrary.ConsoleTools
             }
         }
 
+        private int _indentation = 0;
+
+        public void AddIndentation(int amount)
+        {
+            _indentation += amount;
+        }
+
+        public void RemoveIndentation(int amount)
+        {
+            _indentation -= amount;
+        }
+
         private FlowDocument _consoleContent = new FlowDocument();
         private Paragraph currentParagraph { get => ConsoleContent.Blocks.LastBlock as Paragraph; set { } }
 
@@ -104,6 +117,7 @@ namespace WpfToolsLibrary.ConsoleTools
 
         private int ActuallyAddEntry(string text, int previousHash, IFontWeight fontWeight, IFontColor fontColor, int fontSize)
         {
+            text = AddPrefixWhenRequired(text, previousHash);
             if (fontColor is WpfFontColor color && fontWeight is WpfFontWeight weight)
             {
                 if (currentParagraph != null)
@@ -123,6 +137,30 @@ namespace WpfToolsLibrary.ConsoleTools
             }
             Logger.Log($"WARNING: invalid type in WpfConsole.AddEntry(): {fontColor.GetType().ToString()} and {fontWeight.GetType().ToString()}");
             return -1;
+        }
+
+        private string AddPrefixWhenRequired(string text, int previousHash)
+        {
+            if (_indentation == 0 || currentParagraph.Inlines.Count == 0)
+            {
+                return text;
+            }
+
+            Inline inline = null;
+            inline = previousHash != -1 ? 
+                currentParagraph.Inlines.First(x => x.GetHashCode() == previousHash) : 
+                currentParagraph.Inlines.LastInline;
+            var previousText = new TextRange(inline.ContentStart, inline.ContentEnd).Text;
+
+            if (previousText.EndsWith("\n"))
+            {
+                for (var i = 0; i != _indentation; i += 1)
+                {
+                    text = " " + text;
+                }
+            }
+
+            return text;
         }
 
         #endregion AddEntry()

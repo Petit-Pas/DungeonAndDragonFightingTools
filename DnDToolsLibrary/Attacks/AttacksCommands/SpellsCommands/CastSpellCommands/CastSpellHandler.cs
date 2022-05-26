@@ -11,25 +11,30 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
 {
     public class CastSpellHandler : SuperDndCommandHandlerBase<CastSpellCommand, IMediatorCommandResponse>
     {
-        private static Lazy<IFightersProvider> _fighterProvider = new Lazy<IFightersProvider> (() => DIContainer.GetImplementation<IFightersProvider>());
-
         public override IMediatorCommandResponse Execute(CastSpellCommand command)
         {
             if (SpellLevelSelected(command) == false)
-                return MediatorCommandStatii.Canceled;
+                return command.Cancel();
             if (TargetsSelected(command) == false)
-                return MediatorCommandStatii.Canceled;
+                return command.Cancel();
 
-            ValidableResponse<MediatorCommandNoResponse> response;
             if (command.Spell.IsAnAttack)
             {
                 var castAttackSpellCommand = new CastAttackSpellCommand(command.CasterName, command.Spell, command.CastLevel, command.TargetNames);
-                response = Mediator.Execute(castAttackSpellCommand) as ValidableResponse<MediatorCommandNoResponse>;
+                if (Mediator.Execute(castAttackSpellCommand) == MediatorCommandStatii.Canceled)
+                {
+                    return command.Cancel();
+                }
+                command.PushToInnerCommands(castAttackSpellCommand);
             }
             else
             {
                 var castNonAttackSpellCommand = new CastNonAttackSpellCommand(command.CasterName, command.Spell, command.CastLevel, command.TargetNames);
-                response = Mediator.Execute(castNonAttackSpellCommand) as ValidableResponse<MediatorCommandNoResponse>;
+                if (Mediator.Execute(castNonAttackSpellCommand) == MediatorCommandStatii.Canceled)
+                {
+                    return command.Cancel();
+                }
+                command.PushToInnerCommands(castNonAttackSpellCommand);
             }
             return MediatorCommandStatii.Success;
         }
@@ -46,9 +51,10 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
             var response = Mediator.Execute(targetQuery) as ValidableResponse<SpellTargets>;
 
             if (response.IsValid)
+            {
                 command.TargetNames = response.Response.TargetNames;
-
-            command.AddLog($" on {response.Response.TargetNames?.Count} fighters.");
+                command.AddLog($" on {response.Response.TargetNames?.Count} fighters.\r\n");
+            }
 
             return response.IsValid;
         }
