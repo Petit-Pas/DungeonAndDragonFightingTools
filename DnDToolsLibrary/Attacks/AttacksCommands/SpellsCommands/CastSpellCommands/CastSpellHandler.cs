@@ -15,9 +15,9 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
 
         public override IMediatorCommandResponse Execute(CastSpellCommand command)
         {
-            if (spellLevelSelected(command) == false)
+            if (SpellLevelSelected(command) == false)
                 return MediatorCommandStatii.Canceled;
-            if (targetsSelected(command) == false)
+            if (TargetsSelected(command) == false)
                 return MediatorCommandStatii.Canceled;
 
             ValidableResponse<MediatorCommandNoResponse> response;
@@ -34,44 +34,55 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
             return MediatorCommandStatii.Success;
         }
 
-        private bool targetsSelected(CastSpellCommand command)
+        private static bool TargetsSelected(CastSpellCommand command)
         {
-            SpellTargetQuery target_command = new SpellTargetQuery(command.Spell.AmountTargets, command.Spell.CanSelectSameTargetTwice);
+            var targetQuery = new SpellTargetQuery(command.Spell.AmountTargets, command.Spell.CanSelectSameTargetTwice);
 
             if (command.CastLevel != command.Spell.BaseLevel && command.Spell.AdditionalTargetPerLevel != 0)
             {
-                target_command.AmountTargets += command.Spell.AdditionalTargetPerLevel * (command.CastLevel - command.Spell.BaseLevel);
+                targetQuery.AmountTargets += command.Spell.AdditionalTargetPerLevel * (command.CastLevel - command.Spell.BaseLevel);
             }
             
-            ValidableResponse<SpellTargets> response = Mediator.Execute(target_command) as ValidableResponse<SpellTargets>;
-            
+            var response = Mediator.Execute(targetQuery) as ValidableResponse<SpellTargets>;
+
             if (response.IsValid)
                 command.TargetNames = response.Response.TargetNames;
+
+            command.AddLog($" on {response.Response.TargetNames?.Count} fighters.");
+
             return response.IsValid;
         }
 
-        private bool spellLevelSelected(CastSpellCommand command)
+        private static bool SpellLevelSelected(CastSpellCommand command)
         {
-            if (command.Spell.IsCantrip)
-                return cantripLevelSelected(command);
-            return normalSpellLevelSelected(command);
+            command.AddLog(command.CasterName, FontWeightProvider.Bold);
+            var entry = command.AddLog(" casts ");
+            command.AddLog(command.Spell.DisplayName, FontWeightProvider.Bold);
+
+            var result = command.Spell.IsCantrip ? 
+                CantripLevelSelected(command) :
+                NormalSpellLevelSelected(command);
+
+            command.AddLogAfter(entry, $"a lvl {command.CastLevel} ");
+
+            return result;
         }
 
-        private bool normalSpellLevelSelected(CastSpellCommand command)
+        private static bool NormalSpellLevelSelected(CastSpellCommand command)
         {
-            ValidableResponse<SpellLevel> response = Mediator.Execute(new NormalSpellLevelQuery(command.Spell.BaseLevel)) as ValidableResponse<SpellLevel>;
+            var validableSpellLevel = Mediator.Execute(new NormalSpellLevelQuery(command.Spell.BaseLevel)) as ValidableResponse<SpellLevel>;
             
-            if (response.IsValid)
-                command.CastLevel = response.Response.Value;
-            return response.IsValid;
+            if (validableSpellLevel.IsValid)
+                command.CastLevel = validableSpellLevel.Response.Value;
+            return validableSpellLevel.IsValid;
         }
 
-        private bool cantripLevelSelected(CastSpellCommand command)
+        private static bool CantripLevelSelected(CastSpellCommand command)
         {
-            ValidableResponse<SpellLevel> response = Mediator.Execute(new CantripLevelQuery()) as ValidableResponse<SpellLevel>;
-            if (response.IsValid)
-                command.CastLevel = response.Response.Value;
-            return response.IsValid;
+            var validableSpellLevel = Mediator.Execute(new CantripLevelQuery()) as ValidableResponse<SpellLevel>;
+            if (validableSpellLevel.IsValid)
+                command.CastLevel = validableSpellLevel.Response.Value;
+            return validableSpellLevel.IsValid;
         }
     }
 }

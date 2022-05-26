@@ -34,7 +34,8 @@ namespace DnDToolsLibrary.BaseCommands
 
         public override void Undo(TCommand genericCommand)
         {
-            FightConsole.RemoveEntries(genericCommand.LogMessages);
+            FightConsole.RemoveEntries(genericCommand.GetLogHashes());
+            genericCommand.ClearLogs();
         }
     }
 }

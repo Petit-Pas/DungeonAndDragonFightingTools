@@ -20,24 +20,17 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.TakeDamage
             var remaining = command.Amount;
             var startingHPs = target.HpString;
 
-            command.LogMessages.Add(FightConsole
-                .AddEntry($"{remaining}", FontWeightProvider.Bold));
-            command.LogMessages.Add(FightConsole
-                .AddEntry(" total damages: ", FontWeightProvider.Normal));
-            command.LogMessages.Add(FightConsole
-                .AddEntry($"{startingHPs}", FontWeightProvider.Bold));
-            var entryHash = FightConsole
-                .AddEntry(" => ", FontWeightProvider.Bold);
-            command.LogMessages.Add(entryHash);
-            command.LogMessages.Add(FightConsole
-                .AddEntry("\r\n"));
+            command.AddLog($"{remaining}", FontWeightProvider.Bold);
+            command.AddLog(" total damages: ", FontWeightProvider.Normal);
+            command.AddLog($"{startingHPs}", FontWeightProvider.Bold);
+            var entryHash = command.AddLog(" => ", FontWeightProvider.Bold);
+            command.AddLog("\r\n");
 
             if (target.TempHp != 0)
                 remaining = HandleTempHp(command, target, remaining);
             HandleHp(command, target, remaining);
 
-            command.LogMessages.Add(FightConsole
-                .AddEntryAfter(entryHash, $"{target.HpString}", FontWeightProvider.Bold));
+            command.AddLogAfter(entryHash, $"{target.HpString}", FontWeightProvider.Bold);
 
             return MediatorCommandStatii.NoResponse;
         }

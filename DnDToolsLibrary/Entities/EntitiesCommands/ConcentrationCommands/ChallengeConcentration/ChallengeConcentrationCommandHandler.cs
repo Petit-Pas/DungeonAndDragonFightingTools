@@ -15,7 +15,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.Challe
 
             if (!entity.IsFocused)
             {
-                return MediatorCommandStatii.Canceled;
+                return command.Cancel();
             }
 
             var saving = GetConcentrationCheckResult(command);
@@ -23,8 +23,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.Challe
             if (saving == null)
             {
                 // clearing messages when command was canceled
-                FightConsole.RemoveEntries(command.LogMessages);
-                return MediatorCommandStatii.Canceled;
+                return command.Cancel();
             }
             
             if (saving.IsFailed)
@@ -41,16 +40,13 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.Challe
 
         private void KeepConcentration(ChallengeConcentrationCommand command)
         {
-            command.LogMessages.Add(
-                FightConsole.AddEntry("success.\r\n", FontWeightProvider.Bold));
+            command.AddLog("success.\r\n", FontWeightProvider.Bold);
         }
 
         private void CancelConcentration(ChallengeConcentrationCommand command)
         {
-            command.LogMessages.Add(FightConsole
-                .AddEntry("failed", FontWeightProvider.Bold));
-            command.LogMessages.Add(FightConsole
-                .AddEntry(", concentration lost.\r\n"));
+            command.AddLog("failed", FontWeightProvider.Bold);
+            command.AddLog(", concentration lost.\r\n");
 
             var loseConcentrationCommand = new LoseConcentrationCommand(command.GetEntityName());
             command.InnerCommands.Push(loseConcentrationCommand);
@@ -59,10 +55,8 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.Challe
 
         private static SavingThrow? GetConcentrationCheckResult(ChallengeConcentrationCommand command)
         {
-            command.LogMessages.Add(FightConsole
-                .AddEntry(command.GetEntityName(), FontWeightProvider.Bold));
-            command.LogMessages.Add(FightConsole
-                .AddEntry(" has taken damage and needs to pass a concentration check: "));
+            command.AddLog(command.GetEntityName(), FontWeightProvider.Bold);
+            command.AddLog(" has taken damage and needs to pass a concentration check: ");
 
             var concentrationCheckQuery = new ConcentrationCheckQuery(command.GetEntityName());
             var validableSaving = Mediator.Execute(concentrationCheckQuery) as ValidableResponse<SavingThrow>;

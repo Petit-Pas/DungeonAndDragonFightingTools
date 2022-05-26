@@ -48,7 +48,7 @@ namespace WpfToolsLibrary.ConsoleTools
             ConsoleContent.Blocks.Remove(currentParagraph);
         }
 
-        public void RemoveEntries(List<int> commandLogMessages)
+        public void RemoveEntries(IEnumerable<int> commandLogMessages)
         {
             var inlinesToRemove = currentParagraph.Inlines.Where(x => commandLogMessages.Contains(x.GetHashCode())).ToArray();
             foreach (var inline in inlinesToRemove)

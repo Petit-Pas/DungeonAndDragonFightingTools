@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using BaseToolsLibrary.Extensions;
 
 namespace BaseToolsLibrary.IO
 {
@@ -29,6 +30,6 @@ namespace BaseToolsLibrary.IO
         IFontColor DefaultFontColor { get; set; }
         int DefaultFontSize { get; set; }
         void RemoveLastParagraph();
-        void RemoveEntries(List<int> commandLogMessages);
+        void RemoveEntries(IEnumerable<int> commandLogMessages);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.IO;
 using BaseToolsLibrary.Mediator;
@@ -32,7 +33,8 @@ namespace DnDToolsLibrary.BaseCommands
         public override void Undo(TCommand command)
         {
             base.Undo(command);
-            FightConsole.RemoveEntries(command.LogMessages);
+            FightConsole.RemoveEntries(command.GetLogHashes());
+            command.ClearLogs();
         }
     }
 }
