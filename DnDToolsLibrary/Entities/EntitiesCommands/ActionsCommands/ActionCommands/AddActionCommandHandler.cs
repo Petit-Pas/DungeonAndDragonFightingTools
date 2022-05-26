@@ -26,6 +26,7 @@ public class AddActionCommandHandler : DndCommandHandlerBase<AddActionCommand, I
 
     public override void Undo(AddActionCommand command)
     {
+        base.Undo(command);
         if (command.CommandStatus == MediatorCommandStatii.Success)
         {
             command.GetEntity().HasAction = false;

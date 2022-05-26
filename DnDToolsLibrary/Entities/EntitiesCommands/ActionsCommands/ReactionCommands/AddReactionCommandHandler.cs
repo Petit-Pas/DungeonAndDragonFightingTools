@@ -26,6 +26,7 @@ public class AddReactionCommandHandler : DndCommandHandlerBase<AddReactionComman
 
     public override void Undo(AddReactionCommand command)
     {
+        base.Undo(command);
         if (command.CommandStatus == MediatorCommandStatii.Success)
         {
             command.GetEntity().HasReaction = false;

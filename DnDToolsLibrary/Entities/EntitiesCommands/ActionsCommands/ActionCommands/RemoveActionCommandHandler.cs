@@ -26,6 +26,7 @@ public class RemoveActionCommandHandler : DndCommandHandlerBase<RemoveActionComm
 
     public override void Undo(RemoveActionCommand command)
     {
+        base.Undo(command);
         if (command.CommandStatus == MediatorCommandStatii.Success)
         {
             command.GetEntity().HasAction = true;

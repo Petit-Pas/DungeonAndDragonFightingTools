@@ -50,7 +50,7 @@ namespace WpfToolsLibrary.ConsoleTools
 
         public void RemoveEntries(List<int> commandLogMessages)
         {
-            var inlinesToRemove = currentParagraph.Inlines.Where(x => commandLogMessages.Contains(x.GetHashCode()));
+            var inlinesToRemove = currentParagraph.Inlines.Where(x => commandLogMessages.Contains(x.GetHashCode())).ToArray();
             foreach (var inline in inlinesToRemove)
             {
                 currentParagraph.Inlines.Remove(inline);

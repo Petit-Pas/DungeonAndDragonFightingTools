@@ -32,7 +32,9 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.LoseCo
 
         public override void Undo(LoseConcentrationCommand command)
         {
-            PlayableEntity entity = command.GetEntity();
+            base.Undo(command);
+
+            var entity = command.GetEntity();
 
             entity.IsFocused = command.WasFocused;
         }

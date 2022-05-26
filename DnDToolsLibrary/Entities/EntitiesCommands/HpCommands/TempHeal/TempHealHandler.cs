@@ -28,13 +28,15 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.TempHeal
 
         public override void Undo(TempHealCommand command)
         {
+            base.Undo(command);
+
             if (false == command.To.HasValue || false == command.From.HasValue)
             {
                 Console.WriteLine($"ERROR : Trying to undo a {this.GetType()} genericCommand that was not executed first");
                 throw new NullReferenceException($"Trying to undo a {this.GetType()} genericCommand that was not executed first");
             }
 
-            PlayableEntity target = command.GetEntity();
+            var target = command.GetEntity();
             target.TempHp = command.From.Value;
         }
     }

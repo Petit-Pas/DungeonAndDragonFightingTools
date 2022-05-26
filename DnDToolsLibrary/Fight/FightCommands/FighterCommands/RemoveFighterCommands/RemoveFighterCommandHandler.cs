@@ -44,11 +44,13 @@ namespace DnDToolsLibrary.Fight.FightCommands.FighterCommands.RemoveFighterComma
 
         // TODO what if a monster with the same name was added since then ?
         // TODO what about the numbers they have in their display name ?
-        public override void Undo(RemoveFighterCommand genericCommand)
+        public override void Undo(RemoveFighterCommand command)
         {
-            FightersProvider.AddFighter(genericCommand.Entity);
+            base.Undo(command);
+
+            FightersProvider.AddFighter(command.Entity);
             TurnManager.SetTurnOrders();
-            base.Undo(genericCommand);
+            base.Undo(command);
         }
     }
 }

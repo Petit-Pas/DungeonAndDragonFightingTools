@@ -36,6 +36,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.Heal
 
         public override void Undo(HealCommand command)
         {
+            base.Undo(command);
             if (false == command.To.HasValue || false == command.From.HasValue)
             {
                 Console.WriteLine($"ERROR : Trying to undo a {this.GetType()} genericCommand that was not executed first");

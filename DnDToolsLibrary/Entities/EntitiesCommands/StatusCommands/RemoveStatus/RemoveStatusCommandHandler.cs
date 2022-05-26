@@ -20,7 +20,9 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.StatusCommands.RemoveStatus
 
         public override void Undo(RemoveStatusCommand command)
         {
-            PlayableEntity target = command.GetEntity();
+            base.Undo(command);
+
+            var target = command.GetEntity();
 
             StatusProvider.Add(command.Status);
             target.AffectingStatusList.Add(new StatusReference(command.Status));

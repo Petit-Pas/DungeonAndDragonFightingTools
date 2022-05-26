@@ -62,9 +62,11 @@ namespace DnDToolsLibrary.Fight.FightCommands.FighterCommands.AddFighterCommands
             return MediatorCommandStatii.Success;
         }
 
-        public override void Undo(AddFighterCommand genericCommand)
+        public override void Undo(AddFighterCommand command)
         {
-            FightersProvider.RemoveFighter(genericCommand.Entity);
+            base.Undo(command);
+
+            FightersProvider.RemoveFighter(command.Entity);
         }
     }
 }

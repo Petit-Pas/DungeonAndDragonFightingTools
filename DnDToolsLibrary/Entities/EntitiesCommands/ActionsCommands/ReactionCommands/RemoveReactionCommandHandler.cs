@@ -26,6 +26,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.ReactionComm
 
         public override void Undo(RemoveReactionCommand command)
         {
+            base.Undo(command);
             if (command.CommandStatus == MediatorCommandStatii.Success)
             {
                 command.GetEntity().HasReaction = true;

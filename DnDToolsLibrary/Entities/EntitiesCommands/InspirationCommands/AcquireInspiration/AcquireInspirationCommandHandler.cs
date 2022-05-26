@@ -26,6 +26,8 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.InspirationCommands.AcquireI
 
         public override void Undo(AcquireInspirationCommand command)
         {
+            base.Undo(command);
+
             if (command.GetEntity() is Character character && command.Status == MediatorCommandStatii.Success)
                 character.HasInspiration = false;
         }

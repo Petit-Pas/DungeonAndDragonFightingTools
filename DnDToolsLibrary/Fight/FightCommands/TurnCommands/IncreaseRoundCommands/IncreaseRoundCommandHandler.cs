@@ -16,8 +16,10 @@ namespace DnDToolsLibrary.Fight.FightCommands.TurnCommands.IncreaseRoundCommands
             return MediatorCommandStatii.Success;
         }
 
-        public override void Undo(IncreaseRoundCommand genericCommand)
+        public override void Undo(IncreaseRoundCommand command)
         {
+            base.Undo(command);
+
             TurnManager.TurnIndex = FightersProvider.FighterCount;
             TurnManager.RoundCount -= 1;
         }

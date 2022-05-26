@@ -33,7 +33,9 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.StatusCommands.AddStatus
 
         public override void Undo(AddStatusCommand command)
         {
-            PlayableEntity target = command.GetEntity();
+            base.Undo(command);
+
+            var target = command.GetEntity();
 
             _statusProvider.Value.Remove(command.Status);
             StatusReference statusReference = target.AffectingStatusList.First(x => x.ActualStatusReferenceId == command.Status.Id);

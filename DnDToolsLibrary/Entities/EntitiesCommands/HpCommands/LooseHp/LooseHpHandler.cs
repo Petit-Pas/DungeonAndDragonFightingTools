@@ -30,6 +30,8 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.LooseHp
 
         public override void Undo(LooseHpCommand command)
         {
+            base.Undo(command);
+
             if (!command.To.HasValue || 
                 !command.From.HasValue)
             {
@@ -37,7 +39,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.HpCommands.LooseHp
                 throw new NullReferenceException($"Trying to undo a {this.GetType()} genericCommand that was not executed first");
             }
 
-            PlayableEntity target = command.GetEntity();
+            var target = command.GetEntity();
             target.Hp = command.From.Value;
         }
     }

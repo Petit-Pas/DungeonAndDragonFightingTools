@@ -31,5 +31,10 @@ namespace DnDToolsLibrary.BaseCommands
         
         private static readonly Lazy<IStatusProvider> _statusProvider = new(DIContainer.GetImplementation<IStatusProvider>());
         protected static IStatusProvider StatusProvider => _statusProvider.Value;
+
+        public override void Undo(TCommand genericCommand)
+        {
+            FightConsole.RemoveEntries(genericCommand.LogMessages);
+        }
     }
 }

@@ -28,6 +28,8 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.InspirationCommands.LoseInsp
 
         public override void Undo(LoseInspirationCommand command)
         {
+            base.Undo(command);
+
             var character = command.GetEntity() as Character;
 
             if (command.Status == MediatorCommandStatii.Success)

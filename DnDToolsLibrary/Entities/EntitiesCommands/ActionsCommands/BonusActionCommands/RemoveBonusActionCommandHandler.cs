@@ -26,6 +26,7 @@ public class RemoveBonusActionCommandHandler : DndCommandHandlerBase<RemoveBonus
 
     public override void Undo(RemoveBonusActionCommand command)
     {
+        base.Undo(command);
         if (command.CommandStatus == MediatorCommandStatii.Success)
         {
             command.GetEntity().HasBonusAction = true;
