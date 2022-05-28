@@ -58,11 +58,15 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
 
         private void ApplyDamages(CastNonAttackSpellCommand command, NewNonAttackSpellResult spellResult)
         {
-            if (spellResult != null)
+            if (spellResult != null && spellResult.HasSavingThrow)
             {
                 command.AddLog("Saving: ");
                 command.AddLog($"{spellResult.Saving.Result}/{spellResult.Saving.Difficulty} => ", FontWeightProvider.Bold);
-                command.AddLog($"{(spellResult.Saving.IsSuccesful ? "succeeded" : "failed")}");
+                command.AddLog($"{(spellResult.Saving.IsSuccesful ? "succeeded" : "failed")}", 
+                    FontWeightProvider.SemiBold, 
+                    spellResult.Saving.IsSuccesful ? 
+                        FontColorProvider.Success : 
+                        FontColorProvider.Failure);
             }
 
 

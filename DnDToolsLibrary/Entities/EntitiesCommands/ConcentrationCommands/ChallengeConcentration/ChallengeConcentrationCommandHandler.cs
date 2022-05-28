@@ -45,8 +45,8 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.Challe
 
         private void CancelConcentration(ChallengeConcentrationCommand command)
         {
-            command.AddLog("failed", FontWeightProvider.Bold);
-            command.AddLog(", concentration lost.\r\n");
+            command.AddLog("failed\r\n", FontWeightProvider.Bold);
+            //command.AddLog(", concentration lost.\r\n");
 
             var loseConcentrationCommand = new LoseConcentrationCommand(command.GetEntityName());
             command.InnerCommands.Push(loseConcentrationCommand);

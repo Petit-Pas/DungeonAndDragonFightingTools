@@ -9,10 +9,16 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.StatusCommands.RemoveStatus
     {
         public override IMediatorCommandResponse Execute(RemoveStatusCommand command)
         {
-            PlayableEntity target = command.GetEntity();
+            var target = command.GetEntity();
+
+            command.AddLog("Status \'");
+            command.AddLog(command.Status.DisplayName, FontWeightProvider.Bold);
+            command.AddLog("\' of ");
+            command.AddLog(target.DisplayName, FontWeightProvider.Bold);
+            command.AddLog(" wears off.\r\n");
 
             StatusProvider.Remove(command.Status);
-            StatusReference statusReference = target.AffectingStatusList.First(x => x.ActualStatusReferenceId == command.Status.Id);
+            var statusReference = target.AffectingStatusList.First(x => x.ActualStatusReferenceId == command.Status.Id);
             target.AffectingStatusList.Remove(statusReference);
 
             return MediatorCommandStatii.Success;

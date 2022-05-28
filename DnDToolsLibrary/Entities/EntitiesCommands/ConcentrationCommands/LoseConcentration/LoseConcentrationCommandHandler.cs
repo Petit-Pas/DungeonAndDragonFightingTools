@@ -2,6 +2,7 @@
 using DnDToolsLibrary.Entities.EntitiesCommands.StatusCommands.RemoveStatus;
 using DnDToolsLibrary.Status;
 using System.Linq;
+using BaseToolsLibrary.IO;
 using DnDToolsLibrary.BaseCommands;
 
 namespace DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.LoseConcentration
@@ -19,14 +20,28 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.LoseCo
             command.WasFocused = true;
             entity.IsFocused = false;
 
+            command.AddLog(command.GetEntityName(), FontWeightProvider.Bold);
+            command.AddLog(" lost focus");
+
             // removes the statuses that were applied by entity AND required concentration
-            var statuses = StatusProvider.GetOnHitStatusesAppliedBy(entity.DisplayName).Where(x => x.EndsOnCasterLossOfConcentration).ToList();
-            foreach (OnHitStatus status in statuses)
+            var statusesToWearOff = StatusProvider.GetOnHitStatusesAppliedBy(entity.DisplayName).Where(x => x.EndsOnCasterLossOfConcentration).ToArray();
+
+            if (statusesToWearOff.Length != 0)
             {
-                RemoveStatusCommand innerCommand = new RemoveStatusCommand(status.Id, status.Target.DisplayName);
-                command.PushToInnerCommands(innerCommand);
-                Mediator.Execute(innerCommand);
+                command.AddLog(", so: \r\n");
+                using (new Indenter(2))
+                {
+                    foreach (var status in statusesToWearOff)
+                    {
+                        var removeStatusCommand = new RemoveStatusCommand(status.Id, status.Target.DisplayName);
+                        command.PushToInnerCommands(removeStatusCommand);
+                        Mediator.Execute(removeStatusCommand);
+                    }
+                }
             }
+
+            command.AddLog("\r\n");
+
             return MediatorCommandStatii.Success;
         }
 

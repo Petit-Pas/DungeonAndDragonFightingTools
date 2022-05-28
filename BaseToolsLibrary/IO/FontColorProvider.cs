@@ -27,5 +27,7 @@ namespace BaseToolsLibrary.IO
         public abstract void SetDefault(IFontColor color);
 
         public abstract IFontColor GetDefault();
+        public abstract IFontColor Success { get; }
+        public abstract IFontColor Failure { get; }
     }
 }
