@@ -25,29 +25,24 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.Challe
                 // clearing messages when command was canceled
                 return command.Cancel();
             }
-            
+
+            command.AddLog("Saving: ");
+            command.AddLog($"{saving.Result}/{saving.Difficulty} => ", FontWeightProvider.Bold);
+            command.AddLog($"{(saving.IsSuccesful ? "succeeded" : "failed")}\r\n", FontWeightProvider.SemiBold,
+                saving.IsSuccesful ?
+                    FontColorProvider.Success :
+                    FontColorProvider.Failure);
+
             if (saving.IsFailed)
             {
                 CancelConcentration(command);
             }
-            else
-            {
-                KeepConcentration(command);
-            }
-
+            
             return MediatorCommandStatii.Success;
-        }
-
-        private void KeepConcentration(ChallengeConcentrationCommand command)
-        {
-            command.AddLog("success.\r\n", FontWeightProvider.Bold);
         }
 
         private void CancelConcentration(ChallengeConcentrationCommand command)
         {
-            command.AddLog("failed\r\n", FontWeightProvider.Bold);
-            //command.AddLog(", concentration lost.\r\n");
-
             var loseConcentrationCommand = new LoseConcentrationCommand(command.GetEntityName());
             command.InnerCommands.Push(loseConcentrationCommand);
             Mediator.Execute(loseConcentrationCommand);
