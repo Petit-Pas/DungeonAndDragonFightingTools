@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Data;
 using WpfCustomControlLibrary.InputBoxes.BaseTextBoxes;

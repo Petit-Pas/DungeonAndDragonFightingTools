@@ -4,13 +4,15 @@ using System;
 using System.Windows;
 using BaseToolsLibrary.DependencyInjection;
 using WpfCustomControlLibrary.ComboBoxes;
+using System.Windows.Data;
+using WpfToolsLibrary.ValidationRules;
 
 namespace WpfDnDCustomControlLibrary.Fight
 {
     /// <summary>
     ///     Only selects one in a combobox
     /// </summary>
-    public class FightersSelectorComboboxControl : ComboBoxControl
+    public class FightersSelectorComboboxControl : ComboBoxControl, IValidable
     {
         private static readonly Lazy<IFightersProvider> _lazyFightManager = new(DIContainer.GetImplementation<IFightersProvider>);
         private static readonly IFightersProvider _fightersProvider = _lazyFightManager.Value;
@@ -19,20 +21,27 @@ namespace WpfDnDCustomControlLibrary.Fight
         {
             Initialized += FightersSelectorControl_Initialized;
             this.DisplayMemberPath = "DisplayName";
+
+            var binding = new Binding("Target");
+            binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+            binding.Source = this;
+            binding.ValidationRules.Clear();
+            //binding.ValidationRules.Add(this.GetValidationRule());
+            binding.NotifyOnValidationError = true;
+            binding.NotifyOnSourceUpdated = true;
+            binding.NotifyOnTargetUpdated = true;
+            this.SetBinding(SelectedItemProperty, binding).UpdateSource();
+
         }
 
         private void FightersSelectorControl_Initialized(object sender, EventArgs e)
         {
             this.ItemsSource = _fightersProvider.Fighters;
-            this.SelectionChanged += FightersSelectorControl_SelectionChanged;
         }
 
-        private void FightersSelectorControl_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        public bool IsValid()
         {
-            if (SelectedIndex != -1)
-                Target = (PlayableEntity)SelectedItem;
-            else
-                Target = null;
+            return Target != null;
         }
 
         public PlayableEntity Target

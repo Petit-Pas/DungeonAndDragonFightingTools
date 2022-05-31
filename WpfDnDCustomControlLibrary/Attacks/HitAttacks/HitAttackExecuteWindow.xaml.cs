@@ -1,11 +1,12 @@
 ﻿using BaseToolsLibrary.DependencyInjection;
 using BaseToolsLibrary.Mediator;
 using DnDToolsLibrary.Attacks.AttacksCommands.HitAttackCommands.ApplyHitAttackResult;
-using DnDToolsLibrary.Attacks.Damage;
 using DnDToolsLibrary.Attacks.HitAttacks;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using WpfToolsLibrary.Extensions;
 using WpfToolsLibrary.Navigation;
@@ -20,7 +21,6 @@ namespace WpfDnDCustomControlLibrary.Attacks.HitAttacks
         public HitAttackExecuteWindow()
         {
             DataContextChanged += HitAttacksExecuteWindow_DataContextChanged;
-            PropertyChanged += HitAttackExecuteWindow_PropertyChanged;
             InitializeComponent();
         }
 
@@ -40,46 +40,13 @@ namespace WpfDnDCustomControlLibrary.Attacks.HitAttacks
             AttackResult = AttackTemplate.GetResultTemplate();
         }
 
-        private void unregister()
-        {
-            if (AttackResult != null)
-            {
-                AttackResult.PropertyChanged -= Context_PropertyChanged;
-                AttackResult.RollResult.PropertyChanged -= Context_PropertyChanged;
-                foreach (DamageResult dmg in AttackResult.DamageList)
-                {
-                    dmg.PropertyChanged -= Context_PropertyChanged;
-                }
-            }
-        }
-
-        private void register()
-        {
-            if (AttackResult != null)
-            {
-                AttackResult.PropertyChanged += Context_PropertyChanged;
-                AttackResult.RollResult.PropertyChanged += Context_PropertyChanged;
-                foreach (DamageResult dmg in AttackResult.DamageList)
-                {
-                    dmg.PropertyChanged += Context_PropertyChanged;
-                }
-            }
-        }
-
-        private void Context_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            refreshButtons();
-        }
-
         public HitAttackResult AttackResult 
         {
             get => _attackResult;
             set
             {
-                unregister();
                 _attackResult = value;
                 NotifyPropertyChanged();
-                register();
             }
         }
         private HitAttackResult _attackResult;
@@ -137,18 +104,13 @@ namespace WpfDnDCustomControlLibrary.Attacks.HitAttacks
             ValidateResetButton.IsEnabled = false;
             ValidateExitButton.IsEnabled = false;
 
-            if (this.AreAllRollableChildrenRolled() == false)
+            if (!this.AreAllRollableChildrenRolled())
                 RollButton.IsEnabled = true;
-            else if (this.AreAllChildrenValid() && AttackResult.Target != null)
+            else if (this.AreAllChildrenValid())
             {
                 ValidateResetButton.IsEnabled = true;
                 ValidateExitButton.IsEnabled = true;
             }
-        }
-
-        private void HitAttackExecuteWindow_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            refreshButtons();
         }
 
         private static IMediator mediator = DIContainer.GetImplementation<IMediator>();
@@ -183,6 +145,21 @@ namespace WpfDnDCustomControlLibrary.Attacks.HitAttacks
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
+        }
+
+        private void HitAttackExecuteWindow_OnError(object sender, ValidationErrorEventArgs e)
+        {
+            refreshButtons();
+        }
+
+        private void HitAttackExecuteWindow_OnSourceUpdated(object sender, DataTransferEventArgs e)
+        {
+            refreshButtons();
+        }
+
+        private void HitAttackExecuteWindow_OnTargetUpdated(object sender, DataTransferEventArgs e)
+        {
+            refreshButtons();
         }
     }
 }

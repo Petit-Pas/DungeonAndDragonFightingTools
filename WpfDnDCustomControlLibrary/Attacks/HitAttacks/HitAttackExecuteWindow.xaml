@@ -13,7 +13,11 @@
         WindowState="Normal"
         ResizeMode="CanResize"
         WindowStyle="None"
-        AllowsTransparency="True">
+        AllowsTransparency="True"
+        Validation.Error="HitAttackExecuteWindow_OnError"
+        Binding.SourceUpdated="HitAttackExecuteWindow_OnSourceUpdated"
+        Binding.TargetUpdated="HitAttackExecuteWindow_OnTargetUpdated"
+>
     <Window.Resources>
         <Style TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlock}" />
     </Window.Resources>
