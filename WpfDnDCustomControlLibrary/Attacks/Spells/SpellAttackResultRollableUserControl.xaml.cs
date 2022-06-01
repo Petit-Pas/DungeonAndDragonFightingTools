@@ -22,9 +22,9 @@ namespace WpfDnDCustomControlLibrary.Attacks.Spells
             InitializeComponent();
         }
 
-        public NewAttackSpellResult SpellResult
+        public AttackSpellResult SpellResult
         {
-            get { return (NewAttackSpellResult)this.GetValue(SpellResultProperty); }
+            get { return (AttackSpellResult)this.GetValue(SpellResultProperty); }
             set 
             {
                 this.SetValue(SpellResultProperty, value);
@@ -33,7 +33,7 @@ namespace WpfDnDCustomControlLibrary.Attacks.Spells
         }
         public static readonly DependencyProperty SpellResultProperty = DependencyProperty.Register(
           nameof(SpellResult),
-          typeof(NewAttackSpellResult), 
+          typeof(AttackSpellResult), 
           typeof(SpellAttackResultRollableUserControl), 
           new PropertyMetadata(null));
 

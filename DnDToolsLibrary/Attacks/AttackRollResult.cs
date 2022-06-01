@@ -201,6 +201,11 @@ namespace DnDToolsLibrary.Attacks
             } 
         }
 
+        public override string ToString()
+        {
+            return this.TotalAttackScore.ToString() + "/" + this.TotalCAScore.ToString();
+        }
+
         #endregion Tools
 
         #region PropertyChanged

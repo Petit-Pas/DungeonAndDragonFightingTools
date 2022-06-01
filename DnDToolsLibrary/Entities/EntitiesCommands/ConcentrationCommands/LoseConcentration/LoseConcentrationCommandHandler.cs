@@ -29,7 +29,7 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.ConcentrationCommands.LoseCo
             if (statusesToWearOff.Length != 0)
             {
                 command.AddLog(", so: \r\n");
-                using (new Indenter(2))
+                using (new Indenter(3))
                 {
                     foreach (var status in statusesToWearOff)
                     {

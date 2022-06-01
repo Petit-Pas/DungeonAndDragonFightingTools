@@ -2,11 +2,12 @@
 using BaseToolsLibrary.Mediator;
 using DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.AttackSpellResultsQueries;
 using DnDToolsLibrary.Attacks.Spells;
-using DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageResultList;
 using DnDToolsLibrary.Fight;
 using DnDToolsLibrary.Status.StatusCommands.TryApplyStatusCommands;
 using System;
+using BaseToolsLibrary.IO;
 using DnDToolsLibrary.BaseCommands;
+using DnDToolsLibrary.Attacks.AttacksCommands.HitAttackCommands.ApplyHitAttackResult;
 
 namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellCommands
 {
@@ -21,15 +22,24 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
             {
                 foreach (var attackSpellResult in command.SpellResults)
                 {
-                    var damageCommand = new ApplyDamageResultListCommand(attackSpellResult.Target, attackSpellResult.HitDamage);
-                    Mediator.Execute(damageCommand);
-                    command.PushToInnerCommands(damageCommand);
+                    // TODO this will always hit => it is a problem!
+                    command.AddLog("- ");
+                    command.AddLog(attackSpellResult.TargetName, FontWeightProvider.Bold);
+                    command.AddLog(": ");
 
-                    foreach (var status in attackSpellResult.AppliedStatusList)
+                    using (new Indenter(3))
                     {
-                        var statusCommand = new TryApplyStatusCommand(command.CasterName, attackSpellResult.TargetName, status);
-                        Mediator.Execute(statusCommand);
-                        command.PushToInnerCommands(statusCommand);
+                        var hitCommand = new ApplyHitAttackResultCommand(attackSpellResult);
+                        Mediator.Execute(hitCommand);
+                        command.PushToInnerCommands(hitCommand);
+
+                        foreach (var status in attackSpellResult.OnHitStatuses)
+                        {
+                            var statusCommand = new TryApplyStatusCommand(command.CasterName,
+                                attackSpellResult.TargetName, status);
+                            Mediator.Execute(statusCommand);
+                            command.PushToInnerCommands(statusCommand);
+                        }
                     }
                 }
                 return MediatorCommandStatii.Success;
@@ -44,7 +54,7 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
 
             foreach (string name in command.TargetNames)
             {
-                var spellResult = template.Clone() as NewAttackSpellResult;
+                var spellResult = template.Clone() as AttackSpellResult;
                 spellResult.Target = _fighterProvider.Value.GetFighterByDisplayName(name);
                 spellResults.Add(spellResult);
             }

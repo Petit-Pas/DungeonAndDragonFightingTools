@@ -105,7 +105,7 @@ namespace CoreUnitTest.Commands.Attacks.Spells
             NonAttackSpellResults results = new NonAttackSpellResults();
             PlayableEntity warrior = _fightersProvider.GetFighterByDisplayName("Warrior1");
             PlayableEntity wizard = _fightersProvider.GetFighterByDisplayName("Wizard1");
-            results.Add(new NewNonAttackSpellResult()
+            results.Add(new NonAttackSpellResult()
             {
                 TargetName = "Warrior1",
                 CasterName = "Wizard1",
@@ -140,7 +140,7 @@ namespace CoreUnitTest.Commands.Attacks.Spells
             PlayableEntity warrior = _fightersProvider.GetFighterByDisplayName("Warrior1");
             PlayableEntity wizard = _fightersProvider.GetFighterByDisplayName("Wizard1");
 
-            results.Add(new NewNonAttackSpellResult()
+            results.Add(new NonAttackSpellResult()
             {
                 TargetName = "Warrior1",
                 CasterName = "Wizard1",

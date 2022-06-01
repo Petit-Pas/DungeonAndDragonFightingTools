@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.NonAttackSpellResultsQueries
 {
-    public class NonAttackSpellResults : List<NewNonAttackSpellResult>, IMediatorCommandResponse
+    public class NonAttackSpellResults : List<NonAttackSpellResult>, IMediatorCommandResponse
     {
     }
 }

@@ -36,7 +36,7 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
                     command.AddLog(spellResult.TargetName, FontWeightProvider.Bold);
                     command.AddLog(": ");
 
-                    using (new Indenter(2))
+                    using (new Indenter(3))
                     {
 
                         // TODO the fact that the saving is passed is not tested
@@ -56,7 +56,7 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
             return MediatorCommandStatii.Canceled;
         }
 
-        private void ApplyDamages(CastNonAttackSpellCommand command, NewNonAttackSpellResult spellResult)
+        private void ApplyDamages(CastNonAttackSpellCommand command, NonAttackSpellResult spellResult)
         {
             if (spellResult != null && spellResult.HasSavingThrow)
             {
@@ -84,7 +84,7 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
             
             foreach (string name in command.TargetNames)
             {
-                var spellResult = template.Clone() as NewNonAttackSpellResult;
+                var spellResult = template.Clone() as NonAttackSpellResult;
                 spellResult.Target = _fighterProvider.Value.GetFighterByDisplayName(name);
                 spellResults.Add(spellResult);
             }

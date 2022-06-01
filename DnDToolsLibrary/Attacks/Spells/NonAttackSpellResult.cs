@@ -1,17 +1,22 @@
-﻿using DnDToolsLibrary.Attacks.Damage;
-using DnDToolsLibrary.Characteristics;
+﻿using BaseToolsLibrary.DependencyInjection;
+using DnDToolsLibrary.Attacks.Damage;
+using DnDToolsLibrary.Dice;
 using DnDToolsLibrary.Entities;
+using DnDToolsLibrary.Fight;
 using DnDToolsLibrary.Status;
-using System.Collections.ObjectModel;
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Xml.Serialization;
 
 namespace DnDToolsLibrary.Attacks.Spells
 {
-    public class NonAttackSpellResult : INotifyPropertyChanged
+    public class NonAttackSpellResult : INotifyPropertyChanged, ICloneable
     {
+        public NonAttackSpellResult()
+        {
+        }
 
-        #region Properties
         public string Name
         {
             get => _name;
@@ -34,6 +39,76 @@ namespace DnDToolsLibrary.Attacks.Spells
         }
         private int _level = 0;
 
+        private static IFightersProvider _fightersProvider = DIContainer.GetImplementation<IFightersProvider>();
+
+        [XmlIgnore]
+        public PlayableEntity Caster
+        {
+            get
+            {
+                return _fightersProvider.GetFighterByDisplayName(CasterName);
+            }
+            set
+            {
+                if (value != null)
+                    CasterName = value.DisplayName;
+                else
+                    CasterName = null;
+
+                NotifyPropertyChanged();
+            }
+        }
+        [XmlAttribute]
+        public string CasterName
+        {
+            get
+            {
+                return _casterName;
+            }
+            set
+            {
+                _casterName = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private string _casterName = null;
+
+        [XmlIgnore]
+        public PlayableEntity Target
+        {
+            get
+            {
+                return _fightersProvider.GetFighterByDisplayName(TargetName);
+            }
+            set
+            {
+                if (this.HitDamage != null)
+                    HitDamage.RefreshDamageAffinityModifier(value);
+                if (Saving != null)
+                    Saving.Target = value;
+                if (value != null)
+                    TargetName = value.DisplayName;
+                else
+                    TargetName = null;
+                NotifyPropertyChanged();
+            }
+        }
+
+        [XmlAttribute]
+        public string TargetName
+        {
+            get
+            {
+                return _targetName;
+            }
+            set
+            {
+                _targetName = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private string _targetName = null;
+
         public DamageResultList HitDamage
         {
             get => _hitDamage;
@@ -44,6 +119,20 @@ namespace DnDToolsLibrary.Attacks.Spells
             }
         }
         private DamageResultList _hitDamage = new DamageResultList();
+
+        [XmlAttribute]
+        public bool HasSavingThrow
+        {
+            get => _hasSavingThrow;
+            set
+            {
+                _hasSavingThrow = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private bool _hasSavingThrow = false;
+
+        
 
         public OnHitStatusList AppliedStatusList
         {
@@ -56,70 +145,42 @@ namespace DnDToolsLibrary.Attacks.Spells
         }
         private OnHitStatusList _appliedStatusList = new OnHitStatusList();
 
-        public CharacteristicsEnum SavingCharacteristic
+        public SavingThrow Saving 
         {
-            get => _savingCharacteristic;
+            get => _saving;
             set
             {
-                _savingCharacteristic = value;
+                if (value != null)
+                {
+                    if (_saving != null)
+                    {
+                        _saving.PropertyChanged -= refreshLastSavingSuccesfulOfHitDamage;
+                    }
+                    value.PropertyChanged += refreshLastSavingSuccesfulOfHitDamage;
+                }
+                _saving = value;
                 NotifyPropertyChanged();
             }
         }
-        private CharacteristicsEnum _savingCharacteristic = CharacteristicsEnum.Dexterity;
+        private SavingThrow _saving = null;
 
-        public int SavingDifficulty
+        private void refreshLastSavingSuccesfulOfHitDamage(object sender, PropertyChangedEventArgs e)
         {
-            get => _savingDifficulty;
-            set
+            if (e.PropertyName == nameof(Saving.SavingRoll))
             {
-                _savingDifficulty = value;
-                NotifyPropertyChanged();
+                foreach (DamageResult result in HitDamage)
+                {
+                    result.LastSavingWasSuccesfull = Saving.IsSuccesful;
+                }
             }
         }
-        private int _savingDifficulty = 0;
 
+#region INotifyPropertyChanged
 
-        public bool HasSavingThrow
-        {
-            get => _hasSavingThrow;
-            set
-            {
-                _hasSavingThrow = value;
-                NotifyPropertyChanged();
-            }
-        }
-        private bool _hasSavingThrow = false;
-
-        public ObservableCollection<PlayableEntity> Targets
-        {
-            get => _targets;
-            set
-            {
-                _targets = value;
-                NotifyPropertyChanged();
-            }
-        }
-        private ObservableCollection<PlayableEntity> _targets = new ObservableCollection<PlayableEntity>();
-
-        public PlayableEntity Caster
-        {
-            get => _caster;
-            set
-            {
-                _caster = value;
-                NotifyPropertyChanged();
-            }
-        }
-        private PlayableEntity _caster = null;
-        
-        #endregion Properties
-
-        #region INotifyPropertyChanged
-
-        /// <summary>
-        ///     PropertyChanged EventHandler
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
+/// <summary>
+///     PropertyChanged EventHandler
+/// </summary>
+public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// 
@@ -133,5 +194,27 @@ namespace DnDToolsLibrary.Attacks.Spells
             }
         }
         #endregion
+
+        private void init_copy(NonAttackSpellResult to_copy)
+        {
+            this.AppliedStatusList = to_copy.AppliedStatusList.Clone() as OnHitStatusList;
+            this.CasterName = to_copy.CasterName;
+            this.HasSavingThrow = to_copy.HasSavingThrow;
+            this.HitDamage = to_copy.HitDamage.Clone() as DamageResultList;
+            this.Level = to_copy.Level;
+            this.Name = to_copy.Name;
+            this.TargetName = to_copy.TargetName;
+            this.Saving = to_copy.Saving?.Clone() as SavingThrow;
+        }
+
+        public NonAttackSpellResult(NonAttackSpellResult to_copy)
+        {
+            init_copy(to_copy);
+        }
+
+        public object Clone()
+        {
+            return new NonAttackSpellResult(this);
+        }
     }
 }

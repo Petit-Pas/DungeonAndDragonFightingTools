@@ -12,7 +12,9 @@ namespace DnDToolsLibrary.Attacks.HitAttacks
 {
     public class HitAttackResult : INotifyPropertyChanged, ICopyAssignable
     {
-        public HitAttackResult() { }
+        public HitAttackResult()
+        {
+        }
 
         public string Name 
         {
@@ -25,14 +27,14 @@ namespace DnDToolsLibrary.Attacks.HitAttacks
         }
         private string _name;
 
-        private static IFightersProvider _fightersProvider = DIContainer.GetImplementation<IFightersProvider>();
+        private static readonly IFightersProvider _fightersProvider = DIContainer.GetImplementation<IFightersProvider>();
 
         [XmlIgnore]
-        public PlayableEntity Owner
+        public PlayableEntity Caster
         {
             get
             {
-                return _fightersProvider.GetFighterByDisplayName(OwnerName);
+                return _fightersProvider.GetFighterByDisplayName(CasterName);
             }
             set
             {
@@ -42,27 +44,27 @@ namespace DnDToolsLibrary.Attacks.HitAttacks
                 }
 
                 if (value != null)
-                    OwnerName = value.DisplayName;
+                    CasterName = value.DisplayName;
                 else
-                    OwnerName = null;
+                    CasterName = null;
                 
                 NotifyPropertyChanged();
             }
         }
         [XmlAttribute]
-        public string OwnerName
+        public string CasterName
         {
             get
             {
-                return _ownerName;
+                return _casterName;
             }
             set
             {
-                _ownerName = value;
+                _casterName = value;
                 NotifyPropertyChanged();
             }
         }
-        private string _ownerName = null;
+        private string _casterName = null;
 
         [XmlIgnore]
         public PlayableEntity Target
@@ -113,7 +115,7 @@ namespace DnDToolsLibrary.Attacks.HitAttacks
                 NotifyPropertyChanged();
             }
         }
-        private DamageResultList _damageList = new DamageResultList();
+        private DamageResultList _damageList = new ();
 
         public OnHitStatusList OnHitStatuses
         {
@@ -124,7 +126,7 @@ namespace DnDToolsLibrary.Attacks.HitAttacks
                 NotifyPropertyChanged();
             }
         }
-        private OnHitStatusList _onHitStatuses = new OnHitStatusList();
+        private OnHitStatusList _onHitStatuses = new ();
 
         public AttackRollResult RollResult
         {
@@ -135,7 +137,7 @@ namespace DnDToolsLibrary.Attacks.HitAttacks
                 NotifyPropertyChanged();
             }
         }
-        private AttackRollResult _rollResult = new AttackRollResult();
+        private AttackRollResult _rollResult = new ();
 
         public bool AutomaticallyHits {
             get => _automaticallyHits;
@@ -185,12 +187,12 @@ namespace DnDToolsLibrary.Attacks.HitAttacks
 
         private void init_copy(HitAttackResult to_copy)
         {
-            this.DamageList = (DamageResultList)to_copy.DamageList.Clone();
-            this.RollResult = (AttackRollResult)to_copy.RollResult.Clone();
-            this.OnHitStatuses = (OnHitStatusList)to_copy.OnHitStatuses.Clone();
+            this.DamageList = to_copy.DamageList.Clone() as DamageResultList;
+            this.RollResult = to_copy.RollResult.Clone() as AttackRollResult;
+            this.OnHitStatuses = to_copy.OnHitStatuses.Clone() as OnHitStatusList;
             this.Name = to_copy.Name;
             this.TargetName = to_copy.TargetName;
-            this.OwnerName = to_copy.OwnerName;
+            this.CasterName = to_copy.CasterName;
             this.AutomaticallyHits = to_copy.AutomaticallyHits;
         }
 
@@ -204,7 +206,7 @@ namespace DnDToolsLibrary.Attacks.HitAttacks
             init_copy((HitAttackResult)to_copy);
         }
 
-        public object Clone()
+        public virtual object Clone()
         {
             return new HitAttackResult(this);
         }

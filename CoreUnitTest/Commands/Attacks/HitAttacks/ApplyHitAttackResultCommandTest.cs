@@ -55,7 +55,7 @@ namespace CoreUnitTest.Commands.Attacks.HitAttacks
                     new DamageResult("1d1+4", DamageTypeEnum.Cold),
                     new DamageResult("1d1+9", DamageTypeEnum.Poison),
                 },
-                OwnerName = _caster.Name,
+                CasterName = _caster.Name,
                 TargetName = _target.Name,
                 RollResult = new AttackRollResult()
                 {

@@ -28,7 +28,7 @@
             x:Name="AttackRollResultControl"
             Grid.Row="0"
             RollResult="{Binding SpellResult.RollResult, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:SpellAttackResultRollableUserControl}}}"
-            Visibility="{Binding SpellResult.AutomaticalyHits, 
+            Visibility="{Binding SpellResult.AutomaticallyHits , 
                         RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SpellAttackResultRollableUserControl}}, 
                         Converter={StaticResource BoolToReversedVisibilityConverter}}"
             />
@@ -36,7 +36,7 @@
         <damage:DamageResultListRollableControl
             Margin="0, 5"
             Grid.Row="1"
-            DataContext="{Binding SpellResult.HitDamage, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SpellAttackResultRollableUserControl}}}"
+            DataContext="{Binding SpellResult.DamageList, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SpellAttackResultRollableUserControl}}}"
             Crits="{Binding Crits, ElementName=AttackRollResultControl}"
             />
 

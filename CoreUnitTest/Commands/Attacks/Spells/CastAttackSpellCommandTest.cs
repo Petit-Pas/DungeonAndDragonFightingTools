@@ -52,16 +52,16 @@ namespace CoreUnitTest.Commands.Attacks.Spells
         {
             CastAttackSpellCommand command = new CastAttackSpellCommand(_character.DisplayName, new Mock<Spell>().Object, 1, new List<string>() {});
             AttackSpellResults results = new AttackSpellResults();
-            results.Add(new NewAttackSpellResult() { 
+            results.Add(new AttackSpellResult() { 
                 Target = _character,
-                HitDamage = new DamageResultList() {
+                DamageList = new DamageResultList() {
                     // using D1 to remove random factor
                     new DamageResult("1d1+9", DamageTypeEnum.Fire),
                     new DamageResult("1d1+4", DamageTypeEnum.Cold),
                     new DamageResult("1d1+9", DamageTypeEnum.Poison),
                 },
             });
-            foreach (DamageResult dmg in results[0].HitDamage)
+            foreach (DamageResult dmg in results[0].DamageList)
                 dmg.Damage.Roll();
             ValidableResponse<AttackSpellResults> response = new ValidableResponse<AttackSpellResults>(true, results);
             Mock<IMediatorHandler> mock = new Mock<IMediatorHandler>();
@@ -84,12 +84,12 @@ namespace CoreUnitTest.Commands.Attacks.Spells
             status.Caster = _character;
             status.Target = _character;
 
-            results.Add(new NewAttackSpellResult()
+            results.Add(new AttackSpellResult()
             {
                 Target = _character,
-                HitDamage = new DamageResultList() {
+                DamageList = new DamageResultList() {
                 },
-                AppliedStatusList = new OnHitStatusList() { status },
+                OnHitStatuses = new OnHitStatusList() { status },
                 Caster = _character,
             });
             ValidableResponse<AttackSpellResults> response = new ValidableResponse<AttackSpellResults>(true, results);

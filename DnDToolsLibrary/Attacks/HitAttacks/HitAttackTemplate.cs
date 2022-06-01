@@ -74,7 +74,7 @@ namespace DnDToolsLibrary.Attacks.HitAttacks
                     HitModifiers = new SituationalAttackRollModifiers(),
                     AdvantageModifiers = new SituationalAdvantageModifiers(),
                 },
-                Owner = this.Owner,
+                Caster = this.Owner,
                 OnHitStatuses = this.OnHitStatuses,
             };
         }

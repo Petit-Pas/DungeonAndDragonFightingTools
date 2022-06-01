@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WpfDnDCommandHandlers.AttackQueries.SpellQueries.AttackSpellResultsQueries"
         xmlns:shadowboxes="clr-namespace:WpfCustomControlLibrary.ShadowBoxes;assembly=WpfCustomControlLibrary" xmlns:spells="clr-namespace:WpfDnDCustomControlLibrary.Attacks.Spells;assembly=WpfDnDCustomControlLibrary" xmlns:converters="clr-namespace:WpfToolsLibrary.Converters.Visibilities;assembly=WpfToolsLibrary"
         mc:Ignorable="d"
-        Title="GetInputSpellAttackResultsWindow" Height="450" Width="800"
+        Title="AttackSpellResultsQueryHandler" Height="450" Width="800"
         Closing="Window_Closing"
         Style="{StaticResource WindowStyle}"
         KeyDown="Window_KeyDown"
@@ -60,19 +60,19 @@
             <WrapPanel
                 Grid.Row="1"
                 Margin="0, 10"
-                Visibility="{Binding SpellResults[0].AutomaticalyHits, Converter={StaticResource BoolToReversedVisibilityConverter}}">
+                Visibility="{Binding SpellResults[0].AutomaticallyHits, Converter={StaticResource BoolToReversedVisibilityConverter}}">
                 <TextBlock>
                     Hit Bonus:
                 </TextBlock>
                 <TextBlock 
                     FontWeight="SemiBold"
                     Margin="5, 0"
-                    Text="{Binding SpellResults[0].ToHitBonus, StringFormat='+ {0}'}" />
+                    Text="{Binding SpellResults[0].RollResult.BaseRollModifier, StringFormat='+ {0}'}" />
             </WrapPanel>
             <TextBlock
                 Grid.Row="1"
                 Margin="0, 10"
-                Visibility="{Binding SpellResults[0].AutomaticalyHits, Converter={StaticResource BooleanToVisibilityConverter}}">
+                Visibility="{Binding SpellResults[0].AutomaticallyHits, Converter={StaticResource BooleanToVisibilityConverter}}">
                 Will hit anyway
             </TextBlock>
 

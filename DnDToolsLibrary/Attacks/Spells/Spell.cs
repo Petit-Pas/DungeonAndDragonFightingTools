@@ -263,17 +263,16 @@ namespace DnDToolsLibrary.Attacks.Spells
 
         #endregion Properties
 
-        public NewAttackSpellResult GetAttackSpellResultTemplate(PlayableEntity caster, int castLevel)
+        public AttackSpellResult GetAttackSpellResultTemplate(PlayableEntity caster, int castLevel)
         {
-            NewAttackSpellResult template = new NewAttackSpellResult()
+            AttackSpellResult template = new AttackSpellResult()
             {
-                HitDamage = this.HitDamage.GetResultList(),
-                AppliedStatusList = this.AppliedStatus.Clone() as OnHitStatusList,
+                DamageList = this.HitDamage.GetResultList(),
+                OnHitStatuses = this.AppliedStatus.Clone() as OnHitStatusList,
                 Caster = caster,
                 Target = null,
                 Name = $"default name for {DisplayName}",
-                Level = castLevel,
-                AutomaticalyHits = this.AutomaticalyHits,
+                AutomaticallyHits = this.AutomaticalyHits,
                 RollResult = new AttackRollResult()
                 {
                     BaseRollModifier = this.HitRollBonus == 0 ? caster.SpellHitModifier : this.HitRollBonus,
@@ -284,64 +283,24 @@ namespace DnDToolsLibrary.Attacks.Spells
             {
                 foreach (DamageTemplate damageTemplate in AdditionalHitDamagePerLevel)
                 {
-                    DamageResult result = template.HitDamage.FirstOrDefault(x => x.IsSameKind(damageTemplate));
+                    DamageResult result = template.DamageList.FirstOrDefault(x => x.IsSameKind(damageTemplate));
                     if (result != null)
                         result.Add(damageTemplate);
                     else
-                        template.HitDamage.AddElementSilent(new DamageResult(damageTemplate));
+                        template.DamageList.AddElementSilent(new DamageResult(damageTemplate));
                 }
             }
 
-            foreach (DamageResult result in template.HitDamage)
+            foreach (DamageResult result in template.DamageList)
             {
                 result.LinkedToSaving = false;
             }
             return template;
         }
 
-        // TODO this one is old version, see upper for new one 
-        public AttackSpellResult GetAttackSpellResult(PlayableEntity caster, ObservableCollection<PlayableEntity> targets, int additional_levels)
+        public NonAttackSpellResult GetNonAttackSpellResultTemplate(PlayableEntity caster, int castLevel)
         {
-            AttackSpellResult template = new AttackSpellResult
-            {
-                HitDamage = this.HitDamage.GetResultList(),
-                AppliedStatusList = this.AppliedStatus,
-                Caster = caster,
-                Targets = targets,
-                Name = this.Name,
-                Level = this.BaseLevel + additional_levels,
-                AutomaticalyHits = this.AutomaticalyHits,
-                ToHitBonus = (this.HitRollBonus == 0 ? caster.SpellHitModifier : this.HitRollBonus),
-                RollResult = new AttackRollResult
-                {
-                    BaseRollModifier = (this.HitRollBonus == 0 ? caster.SpellHitModifier : this.HitRollBonus),
-                }
-            };
-
-            for (int i = additional_levels; i > 0; i -= 1)
-            {
-                foreach (DamageTemplate damageTemplate in AdditionalHitDamagePerLevel)
-                {
-                    bool added = false;
-                    foreach (DamageResult onHitTemplate in template.HitDamage)
-                    {
-                        if (onHitTemplate.IsSameKind(damageTemplate))
-                        {
-                            onHitTemplate.Add(damageTemplate);
-                            added = true;
-                            break;
-                        }
-                    }
-                    if (added == false)
-                        template.HitDamage.AddElementSilent(new DamageResult(damageTemplate));
-                }
-            }
-            return template;
-        }
-
-        public NewNonAttackSpellResult GetNonAttackSpellResultTemplate(PlayableEntity caster, int castLevel)
-        {
-            NewNonAttackSpellResult template = new NewNonAttackSpellResult()
+            NonAttackSpellResult template = new NonAttackSpellResult()
             {
                 HitDamage = this.HitDamage.GetResultList(),
                 AppliedStatusList = this.AppliedStatus.Clone() as OnHitStatusList,
@@ -377,42 +336,6 @@ namespace DnDToolsLibrary.Attacks.Spells
                     Difficulty = this.SavingDifficulty == 0 ? caster.SpellSave : this.SavingDifficulty,
                     Target = template.Target,
                 };
-            }
-            return template;
-        }
-
-        // TODO this one is old version, see upper for new one 
-        public NonAttackSpellResult GetNonAttackSpellResult(PlayableEntity caster, ObservableCollection<PlayableEntity> targets, int additional_levels)
-        {
-            NonAttackSpellResult template = new NonAttackSpellResult {
-                HitDamage = this.HitDamage.GetResultList(),
-                AppliedStatusList = this.AppliedStatus,
-                Caster = caster,
-                HasSavingThrow = this.HasSavingThrow,
-                SavingCharacteristic = this.SavingCharacteristic,
-                SavingDifficulty = (this.SavingDifficulty == 0 ? caster.SpellSave : this.SavingDifficulty),
-                Targets = targets,
-                Name = this.Name,
-                Level = this.BaseLevel + additional_levels,
-            };
-
-            for (int i = additional_levels; i > 0; i -= 1)
-            {
-                foreach (DamageTemplate damageTemplate in AdditionalHitDamagePerLevel)
-                {
-                    bool added = false;
-                    foreach (DamageResult onHitTemplate in template.HitDamage)
-                    {
-                        if (onHitTemplate.IsSameKind(damageTemplate))
-                        {
-                            onHitTemplate.Add(damageTemplate);
-                            added = true;
-                            break;
-                        }
-                    }
-                    if (added == false)
-                        template.HitDamage.AddElementSilent(new DamageResult(damageTemplate));
-                }
             }
             return template;
         }
