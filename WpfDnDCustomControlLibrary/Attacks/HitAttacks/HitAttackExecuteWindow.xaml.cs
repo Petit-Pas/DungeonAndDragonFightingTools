@@ -119,7 +119,7 @@ namespace WpfDnDCustomControlLibrary.Attacks.HitAttacks
         {
             if (this.AreAllChildrenValid())
             {
-                mediator.Execute(new ApplyHitAttackResultCommand(AttackResult));
+                mediator.Execute(new ApplyHitAttackResultCommand(AttackResult, false));
             }
         }
 

@@ -10,6 +10,14 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.HitAttackCommands.ApplyHitAtta
     {
         public override IMediatorCommandResponse Execute(ApplyHitAttackResultCommand command)
         {
+            if (!command.IsComingFromASpell)
+            {
+                command.AddLog(command.HitAttackResult.CasterName, FontWeightProvider.Bold);
+                command.AddLog(" attacks ");
+                command.AddLog(command.HitAttackResult.TargetName, FontWeightProvider.Bold);
+                command.AddLog($" with its {command.HitAttackResult.Name}\r\n");
+            }
+
             command.AddLog("Attack: ");
             command.AddLog($"{command.HitAttackResult.RollResult} => ", FontWeightProvider.Bold);
             if (command.HitAttackResult.RollResult.Hits || command.HitAttackResult.AutomaticallyHits)
