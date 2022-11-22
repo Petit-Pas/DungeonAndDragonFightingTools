@@ -7,6 +7,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using DDFight.Windows;
+using DnDToolsLibrary.Entities.EntitiesCommands.ActionsCommands.ActionCommands;
+using WpfToolsLibrary.Extensions;
 
 namespace DDFight.Controlers
 {
@@ -197,8 +200,29 @@ namespace DDFight.Controlers
 
         protected virtual void RemoveButtonControl_Click(object sender, RoutedEventArgs e)
         {
+            RemoveItem();
+        }
+
+        private void RemoveItem()
+        {
             if (EntityListControl.SelectedItem != null && IsEditable)
-                remove(EntityListControl.SelectedItem);
+            {
+                var nameable = EntityListControl.SelectedItem as INameable;
+                var context = new AskYesNoDataContext()
+                {
+                    Message = $"Are you sure you want to permanently delete {nameable?.DisplayName ?? "this item"}?"
+                };
+                var window = new AskYesNoWindow()
+                {
+                    DataContext = context
+                };
+
+                window.ShowCentered();
+                if (context.Yes)
+                {
+                    remove(EntityListControl.SelectedItem);
+                }
+            }
         }
 
         protected virtual void EntityList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -237,14 +261,9 @@ namespace DDFight.Controlers
         protected virtual void EntityListControl_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Delete)
-                if (EntityListControl.SelectedIndex != -1)
-                {
-                    if (IsEditable)
-                    {
-                        remove(EntityListControl.SelectedItem);
-                        e.Handled = true;
-                    }
-                }
+            {
+                RemoveItem();
+            }
         }
 
         private void EntityList_ContextMenuOpening(object sender, ContextMenuEventArgs e)

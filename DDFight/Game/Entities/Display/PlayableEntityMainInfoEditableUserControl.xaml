@@ -60,6 +60,8 @@
                         <RowDefinition Height="Auto"/>
                         <!-- Temporary HPs -->
                         <RowDefinition Height="Auto"/>
+                        <!-- Reduce Damage By -->
+                        <RowDefinition Height="Auto"/>
                         <!-- Inspiration -->
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
@@ -175,12 +177,21 @@
                         Integer="{Binding TempHp}"/>
 
                     <TextBlock
-                        Grid.Row="8"
+                        Grid.Row="8">
+                        Reduce ALL damage by
+                    </TextBlock>
+                    <inttextboxes:PositiveIntTextBoxControl
+                        Grid.Row="8" Grid.Column="1"
+                        Margin="0, 5, 10, 5"
+                        Integer="{Binding ReduceAllDamageBy}"/>
+
+                    <TextBlock
+                        Grid.Row="9"
                         Visibility="{Binding Converter={StaticResource VisibleIfCharacterConverter}}">
                         Has Inpiration
                     </TextBlock>
                     <checkboxes:CheckBoxControl
-                        Grid.Row="8" Grid.Column="1"
+                        Grid.Row="9" Grid.Column="1"
                         HorizontalAlignment="Left"
                         IsChecked="{Binding HasInspiration}"
                         Visibility="{Binding Converter={StaticResource VisibleIfCharacterConverter}}"/>
