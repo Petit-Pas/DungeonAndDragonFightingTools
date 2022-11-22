@@ -513,6 +513,17 @@ namespace DnDToolsLibrary.Entities
 
         #endregion Transformation
 
+        public int ReduceAllDamageBy 
+        {
+            get => _ReduceAllDamageBy;
+            set
+            {
+                _ReduceAllDamageBy = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private int _ReduceAllDamageBy = 0;
+
         [XmlIgnore]
         public string HpString
         {
@@ -626,6 +637,8 @@ namespace DnDToolsLibrary.Entities
                 return false;
             if (ShieldValue != toCompare.ShieldValue)
                 return false;
+            if (ReduceAllDamageBy != toCompare.ReduceAllDamageBy)
+                return false;
             return true;
         }
 
@@ -660,6 +673,7 @@ namespace DnDToolsLibrary.Entities
             AffectingStatusList = to_copy.AffectingStatusList.Clone() as StatusReferenceList;
             HasAShield = to_copy.HasAShield;
             ShieldValue = to_copy.ShieldValue;
+            ReduceAllDamageBy = to_copy.ReduceAllDamageBy;
         }
 
         /// <summary>

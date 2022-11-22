@@ -47,6 +47,15 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageRes
             }
         }
 
+        private void ApplyReduceDamageBy(ref int total, PlayableEntity entity, ApplyDamageResultListCommand command)
+        {
+            if (entity.ReduceAllDamageBy != 0)
+            {
+                total = Math.Max(0, total - entity.ReduceAllDamageBy);
+                command.AddLog($" , total reduced by {entity.ReduceAllDamageBy}");
+            }
+        }
+
         public override ApplyDamageResultListResponse Execute(ApplyDamageResultListCommand command)
         {
             if (command.DamageList.None())
@@ -88,7 +97,11 @@ namespace DnDToolsLibrary.Entities.EntitiesCommands.DamageCommand.ApplyDamageRes
 
                 i += 1;
             }
-            command.AddLog("\r\n");
+
+            // TODO never tested
+            ApplyReduceDamageBy(ref total, target, command);
+
+            command.AddLog(".\r\n");
 
             var takeDamageCommand = new TakeDamageCommand(target, total);
             Mediator.Execute(takeDamageCommand);
