@@ -76,6 +76,12 @@ namespace DnDToolsLibrary.Attacks.AttacksCommands.SpellsCommands.CastSpellComman
 
         private static bool NormalSpellLevelSelected(CastSpellCommand command)
         {
+            if (command.Spell.CanBeCastAtHigherLevel == false)
+            {
+                command.CastLevel = command.Spell.BaseLevel;
+                return true;
+            }
+
             var validableSpellLevel = Mediator.Execute(new NormalSpellLevelQuery(command.Spell.BaseLevel)) as ValidableResponse<SpellLevel>;
             
             if (validableSpellLevel.IsValid)
